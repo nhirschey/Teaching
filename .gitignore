@@ -1,0 +1,8 @@
+.fake
+.ionide
+.vs
+.fsdocs
+tmp
+output
+secrets.*
+data-cache

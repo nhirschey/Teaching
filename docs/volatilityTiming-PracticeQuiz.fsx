@@ -101,7 +101,9 @@ Given a the list below, use mapFold to return a tuple of
 - A new list in which each element of the original list is transformed by adding 1 to it and then converted into a string.
 - The final cumulative sums of the list elements.
 
+`
 [ 1; -4; 7; 2; -10]
+`
 
 *)
 
@@ -112,8 +114,10 @@ Given a the list below, use mapFold to return a tuple of
 (*** define: mapFold3 ***)
 (*
 Given a the list below, use mapFold to return a tuple of
+
 - The list of records with the Y field in each record updated to Y+1
 - The sum of the Y fields.
+
 type R1 = { X : string; Y : int }
 
 let r1xs =
@@ -141,7 +145,7 @@ let r1xs =
 (*
 Given a the list below, sum all the elements.
 
-[ 1; -4; 7; 2; -10]
+    [ 1; -4; 7; 2; -10]
 
 *)
 

@@ -1,3 +1,12 @@
+(**
+---
+title: Volatility Timing Part 2
+category: Practice Quizzes
+categoryindex: 1
+index: 7
+---
+*)
+
 
 (**
 We're going to use the following in the questions

@@ -1,75 +1,118 @@
 (**
+---
+title: Option Match Map
+category: Practice Quizzes
+categoryindex: 1
+index: 4
+---
+*)
+
+(*** hide,define-output:preDetails ***)
+"""
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+"""
+
+(*** hide,define-output:postDetails ***)
+"""
+
+</details>
+</span>
+</p>
+</div>
+"""
+
+(**
 This practice quiz emphasizes `Optional types`, `Match expressions`, and `Map Collections`. These are some features that we will use in building a portfolio.
 
 Here are some references to these topics. Please read the F# language reference links before proceeding with the questions. The other links (F# tour and F# for fun and profit) provide additional background and examples but are not necessary:
 
 - Option types
+
     - The F# language reference for [options](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/options)
     - The tour of F# section on [options](https://docs.microsoft.com/en-us/dotnet/fsharp/tour#optional-types)
     - If you want more a more in depth discussion, see F# for fun and profit's section on [options](https://fsharpforfunandprofit.com/posts/the-option-type/)
+
 - Pattern matching using match expressions.
+
     - [F# Language reference](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/match-expressions)
     - [Tour of F#](https://docs.microsoft.com/en-us/dotnet/fsharp/tour#pattern-matching)
     - [F# for fun and profit](https://fsharpforfunandprofit.com/posts/match-expression/)
+
 - Map collections.
+
     - [F# Wikibook](https://en.wikibooks.org/wiki/F_Sharp_Programming/Sets_and_Maps#Maps)
 
 *)
 
-(*** define:createOption ***)
-
-(*
-//////////////
-// Options
-//////////////
-
-1. Create a value named `a` and assign `Some 4` to it.
-
-2. Create a value name `b` and assign `None` to it.
-
-3. Create a tuple named `c` and assign `(Some 4, None)` to it.
-
-4. Write a function named d that takes `x: float` as an input and outputs
-`Some x` if x < 0 and `None` if x >= 0. Test it by mapping each element of
-`[0.0; 1.4; -7.0]` by function d.
-
-5. Consider this array of trading days for a stock and it's price and dividends:
-```fsharp
-type StockDays = { Day : int; Price : decimal; Dividend : decimal Option }
-let stockDays = 
-    [| for day = 0 to 5 do 
-        let dividend = if day % 2 = 0 then None else Some 1m
-        { Day = day
-          Price = 100m + decimal day
-          Dividend = dividend } |]                 
-``` 
-    - create a new array called `stockDaysWithDividends` that is a filtered
-      version of `stockDays` that only contains days with dividends. 
-    - Then create an array called `stockDaysWithoutDividends` that is a filtered
-      version of `stockDays` that only contains days that do not have dividends.
-
-6. Consider the value `let nestedOption = (Some (Some 4))`. Pipe
-it to `Option.flatten` so that you are left with `Some 4`.
-
-7. Consider this list `let listOfNestedOptions = [(Some (Some 4)); Some (None); None]`.
-Show how to transform it into [Some 4; None; None] by mapping a function to each
-element of the list. 
+(**
+### Options
 *)
 
-(*** define:createOption-ans ***)
+(**
+1 Create a value named `a` and assign `Some 4` to it.
+*)
 
+(*** include-it-raw:preDetails ***)
+(*** define: aSome4, define-output: aSome4 ***)
 
-// 1.
-//
 let a = Some 4
-// 2.
-//
+
+(*** condition:html, include:aSome4 ***)
+(*** condition:html, include-fsi-output:aSome4 ***)
+(*** include-it-raw:postDetails ***)
+
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+
+(**
+2 Create a value name `b` and assign `None` to it.
+*)
+
+(*** include-it-raw:preDetails ***)
+(*** define: bNone, define-output: bNone ***)
+
 let b = None
-// 3.
-// 
+
+(*** condition:html, include:bNone ***)
+(*** condition:html, include-fsi-output:bNone ***)
+(*** include-it-raw:postDetails ***)
+
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+
+(**
+3 Create a tuple named `c` and assign `(Some 4, None)` to it.
+*)
+
+(*** include-it-raw:preDetails ***)
+(*** define: cSome4None, define-output: cSome4None ***)
+
 let c = Some 4, None
-// 4.
-//
+
+(*** condition:html, include:cSome4None ***)
+(*** condition:html, include-fsi-output:cSome4None ***)
+(*** include-it-raw:postDetails ***)
+
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+
+(**
+4 Write a function named d that takes `x: float` as an input and outputs
+`Some x` if x < 0 and `None` if x >= 0. Test it by mapping each element of
+`[0.0; 1.4; -7.0]` by function d.
+*)
+
+(*** include-it-raw:preDetails ***)
+(*** define: dFunction, define-output: dFunction ***)
+
 let d (x: float) = if x < 0.0 then Some x else None
 [0.0; 1.4;-7.0] |> List.map d
 // or, we don't actually have to tell it that x is a float
@@ -78,15 +121,35 @@ let d (x: float) = if x < 0.0 then Some x else None
 let d2 x = if x < 0.0 then Some x else None
 [0.0; 1.4;-7.0] |> List.map d2
 
-// 5.
-//
+(*** condition:html, include:dFunction ***)
+(*** condition:html, include-fsi-output:dFunction ***)
+(*** include-it-raw:postDetails ***)
+
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+
+(**
+5 Consider this array of trading days for a stock and it's price and dividends:
+*)
+
 type StockDays = { Day : int; Price : decimal; Dividend : decimal Option }
 let stockDays = 
     [| for day = 0 to 5 do 
         let dividend = if day % 2 = 0 then None else Some 1m
         { Day = day
           Price = 100m + decimal day
-          Dividend = dividend } |]                 
+          Dividend = dividend } |]   
+
+(**
+- create a new array called `stockDaysWithDividends` that is a filtered
+  version of `stockDays` that only contains days with dividends. 
+- Then create an array called `stockDaysWithoutDividends` that is a filtered
+  version of `stockDays` that only contains days that do not have dividends.
+*)
+
+(*** include-it-raw:preDetails ***)
+(*** define: stockDayswithDividends, define-output: stockDayswithDividends ***)
 
 let stockDaysWithDivideds =
     stockDays
@@ -103,70 +166,71 @@ let stockDaysWithoutDividends =
         // less clear by looking at this code that x is a day.
         x.Dividend.IsNone)
 
-// 6.
-// 
+(*** condition:html, include:stockDayswithDividends ***)
+(*** condition:html, include-fsi-output:stockDayswithDividends ***)
+(*** include-it-raw:postDetails ***)
+
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+
+(**
+6 Consider the value `let nestedOption = (Some (Some 4))`. Pipe
+it to `Option.flatten` so that you are left with `Some 4`.
+*)
+
+(*** include-it-raw:preDetails ***)
+(*** define: nestedOption, define-output: nestedOption ***)
+
 let nestedOption = (Some (Some 4))
 nestedOption |> Option.flatten
 // this would also work, but doesn't use a pipe
 Option.flatten nestedOption
 
-// 7.
-//
+(*** condition:html, include:nestedOption ***)
+(*** condition:html, include-fsi-output:nestedOption ***)
+(*** include-it-raw:postDetails ***)
+
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+
+(**
+7 Consider this list `let listOfNestedOptions = [(Some (Some 4)); Some (None); None]`.
+Show how to transform it into `[Some 4; None; None]` by mapping a function to each
+element of the list. 
+*)
+
+(*** include-it-raw:preDetails ***)
+(*** define: listOfNestedOptions, define-output: listOfNestedOptions ***)
+
 let listOfNestedOptions = [(Some (Some 4)); Some (None); None]
 // map the function Option.flatten to each element of the list
 listOfNestedOptions |> List.map Option.flatten
 
-(*** define:matchExpression ***)
 
-(*
-//////////////
-// Match Expressions
-//////////////
+(*** condition:html, include:listOfNestedOptions ***)
+(*** condition:html, include-fsi-output:listOfNestedOptions ***)
+(*** include-it-raw:postDetails ***)
 
-1. Write a function named `ma` that takes `x: float Option` as an input.
-Use a match expression to output the float if x is something and
-0.0 if the float is nothing. Provide a test case for both cases to show
-that the function works.
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
 
-2. Write a function named `mb` that takes `x: float` as an input.
-Use a match expression to output 1.0 if x is 1.0, 4.0 if x is 2.0,
-and x^3.0 if x is anything else. Provide 3 tests for the 3 test cases 
-to show that the function works.
 
-3. Write a function named `mc` that takes a tuple pair of ints  `x: int * int`
-as an input. Handle these cases in the following order:
-    - if the first int is 7, return "a".
-    - if the second int is 7, return "b".
-    - For everything else, return "c"
-Finally, test the function on (7,6), (6,7), (7, 7), and (6,6).
-Make sure that you understand how those 4 examples are handled.
-
-4. Consider this array of trading days for a stock and it's price and dividends:
-```fsharp
-type StockDays2 = { Day : int; Price : decimal; Dividend : decimal Option }
-let stockDays2 = 
-    [| for day = 0 to 5 do 
-        let dividend = if day % 2 = 0 then None else Some 1m
-        { Day = day
-          Price = 100m + decimal day
-          Dividend = dividend } |]                 
-``` 
-    - create a new array called `daysWithDividends` that is a filtered
-      version of `stockDays` that only contains days with dividends. For
-      each day with a dividend, you should return a `(int * decimal)` tuple
-      where the int is the day  and the decimal is the dividend. 
-      Thus the result is an `(int * decimal) array`.
-    - Then create an array called `daysWithoutDividends` that is a filtered
-      version of `stockDays` that only contains days that do not have dividends.
-      For each day without a dividend, you should return the day as an `int`.
-      Thus the result is an `int array`.
-
+(**
+### Match Expressions
 *)
 
-(*** define:matchExpression-ans ***)
+(**
+1 Write a function named `ma` that takes `x: float Option` as an input.
+Use a match expression to output the `float` if `x` is something and
+`0.0` if the `float` is nothing. Provide a test case for both cases to show
+that the function works.
+*)
 
-// 1.
-// 
+(*** include-it-raw:preDetails ***)
+(*** define: maFunction, define-output: maFunction ***)
+
 let ma x = 
     match x with
     | None -> 0.0
@@ -185,8 +249,25 @@ let ma2 x =
 ma2 (Some 7.0) // returns y.0
 ma2 None // returns 0.0
 
-// 2.
-//
+
+(*** condition:html, include:maFunction ***)
+(*** condition:html, include-fsi-output:maFunction ***)
+(*** include-it-raw:postDetails ***)
+
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+
+(**
+2 Write a function named `mb` that takes `x: float` as an input.
+Use a match expression to output `1.0` if `x` is `1.0`, `4.0` if `x` is `2.0`,
+and `x^3.0` if `x` is anything else. Provide 3 tests for the 3 test cases 
+to show that the function works.
+*)
+
+(*** include-it-raw:preDetails ***)
+(*** define: mbFunction, define-output: mbFunction ***)
+
 let mb x = 
     match x with 
     | 1.0 -> 1.0
@@ -195,10 +276,33 @@ let mb x =
 
 mb 1.0 // evaluates to 1.0
 mb 2.0 // evaluates to 4.0
-mb 7.0 // evaluates to 343.0
+mb 7.0 // evaluates to 343.00
+ma2 None // returns 0.0
 
-// 3.
-//
+
+(*** condition:html, include:mbFunction ***)
+(*** condition:html, include-fsi-output:mbFunction ***)
+(*** include-it-raw:postDetails ***)
+
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+
+(**
+3 Write a function named `mc` that takes a tuple pair of ints  `x: int * int`
+as an input. Handle these cases in the following order:
+
+- if the first `int` is `7`, return `"a"`.
+- if the second int is `7`, return `"b"`.
+- For everything else, return `"c"`.
+
+Finally, test the function on `(7,6)`, `(6,7)`, `(7, 7)`, and `(6,6)`.
+Make sure that you understand how those 4 examples are handled.
+*)
+
+(*** include-it-raw:preDetails ***)
+(*** define: mcFunction, define-output: mcFunction ***)
+
 let mc x =
     match x with
     | (7, _) -> "a" // the _ in (7, _) indicates wildcard; it matches anything.
@@ -209,15 +313,42 @@ mc (6,7) // evaluates to "b" because it matches the second case and stops checki
 mc (7,7) // evaluates to "a" because it matches the first case and stops checking.
 mc (6,6) // evaluates to "c" because it matches the last wildcard.
 
-// 4.
-//
+(*** condition:html, include:mcFunction ***)
+(*** condition:html, include-fsi-output:mcFunction ***)
+(*** include-it-raw:postDetails ***)
+
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+
+(**
+4 Consider this array of trading days for a stock and it's price and dividends:
+*)
+
 type StockDays2 = { Day : int; Price : decimal; Dividend : decimal Option }
 let stockDays2 = 
     [| for day = 0 to 5 do 
         let dividend = if day % 2 = 0 then None else Some 1m
         { Day = day
           Price = 100m + decimal day
-          Dividend = dividend } |]                 
+          Dividend = dividend } |]   
+
+(**
+
+- create a new array called `daysWithDividends` that is a filtered
+  version of `stockDays` that only contains days with dividends. For
+  each day with a dividend, you should return a `(int * decimal)` tuple
+  where the int is the day  and the decimal is the dividend. 
+  Thus the result is an `(int * decimal) array`.
+- Then create an array called `daysWithoutDividends` that is a filtered
+  version of `stockDays` that only contains days that do not have dividends.
+  For each day without a dividend, you should return the day as an `int`.
+  Thus the result is an `int array`.
+
+*)
+
+(*** include-it-raw:preDetails ***)
+(*** define: daysWithAndWithoutDividends, define-output: daysWithAndWithoutDividends ***)           
 
 let daysWithDividends1 =
     // using filter and then a map
@@ -254,59 +385,30 @@ let daysWithoutDividends =
         | None -> Some day.Day
         | Some div -> None)
 
+(*** condition:html, include:daysWithAndWithoutDividends ***)
+(*** condition:html, include-fsi-output:daysWithAndWithoutDividends ***)
+(*** include-it-raw:postDetails ***)
 
-(*** define: createMapCollections ***)
-
-(*
-
-//////////////
-// Map Collections
-//////////////
-
-1. Create a Map collection named `mapA` 
-from the list [("a",1);("b",2)] where the first thing 
-in the tuple is the key and the second thing is the value.
-    - Use Map.tryFind to retrieve the value for key "a"
-    - Use Map.tryFind to retrieve the value for key "c"
-
-2. Create a Map collection named `mapB` 
-from the list [(1,"a");(2,"b")] where the first thing 
-in the tuple is the key and the second thing is the value.
-    - Use Map.tryFind to retrieve the value for key 1
-    - Use Map.tryFind to retrieve the value for key 3
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
 
 
-3. Use this array
-```fsharp
-type StockDays3 = { Day : int; Price : decimal; Dividend : decimal Option }
-let stockDays3 = 
-    [| for day = 0 to 5 do 
-        let dividend = if day % 2 = 0 then None else Some 1m
-        { Day = day
-          Price = 100m + decimal day
-          Dividend = dividend } |]     
-```
-    - Create a Map collection named `mapC`. The key should be the day field, 
-      and the value should be the full `StockDays3` record.
-    - Create a Map colleciton named `mapD`. The key should be the full
-      `StockDay3` record. The value should be the day field.
-
-4. Consider a the following Map collection:
-`let mapp = [("a", 1); ("d",7)] |> Map.ofList`
-Write a function named `lookFor` that takes `x: string` as an input and
-looks up the value in `mapp`. If it finds Some y, print
-"I found y" to standard output where y is the actual integer found. 
-If it finds None, print "I did not find x" to standard output
-where x is the actual key that was looked up. Test it by looking
-up "a","b","c","d"
-
-
+(**
+### Map Collections
 *)
 
-(*** define: createMapCollections-ans ***)
+(**
+1 Create a Map collection named `mapA` 
+from the list `[("a",1);("b",2)]` where the first thing 
+in the tuple is the key and the second thing is the value.
 
-// 1.
-//
+- Use `Map.tryFind` to retrieve the value for key `"a"`
+- Use `Map.tryFind` to retrieve the value for key `"c"`
+*)
+
+(*** include-it-raw:preDetails ***)
+(*** define: mapA, define-output: mapA ***)
+
 let mapA = Map [("a",1);("b",2)]
 // or
 let mapA2 = [("a",1);("b",2)] |> Map
@@ -317,16 +419,46 @@ Map.tryFind "a" mapA    // evaluates to Some 1
 // or
 mapA |> Map.tryFind "a" // evaluates to Some 1
 Map.tryFind "c" mapA    // evaluates to None
-mapA |> Map.tryFind "c" // evaluates to None 
+mapA |> Map.tryFind "c" // evaluates to None .0
 
-// 2.
-//
+
+(*** condition:html, include:mapA ***)
+(*** condition:html, include-fsi-output:mapA ***)
+(*** include-it-raw:postDetails ***)
+
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+
+(**
+2 Create a Map collection named `mapB` 
+from the list `[(1,"a");(2,"b")]` where the first thing 
+in the tuple is the key and the second thing is the value.
+
+- Use `Map.tryFind` to retrieve the value for key `1`
+- Use `Map.tryFind` to retrieve the value for key `3`
+*)
+
+(*** include-it-raw:preDetails ***)
+(*** define: mapB, define-output: mapB ***)
 
 let mapB = Map [(1,"a");(2,"b")]
 Map.tryFind 1 mapB
 Map.tryFind 3 mapB
 
-// 3.
+
+(*** condition:html, include:mapB ***)
+(*** condition:html, include-fsi-output:mapB ***)
+(*** include-it-raw:postDetails ***)
+
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+
+(**
+3 Use this array
+*)
+
 type StockDays3 = { Day : int; Price : decimal; Dividend : decimal Option }
 let stockDays3 = 
     [| for day = 0 to 5 do 
@@ -334,6 +466,16 @@ let stockDays3 =
         { Day = day
           Price = 100m + decimal day
           Dividend = dividend } |]     
+
+(**
+- Create a Map collection named `mapC`. The key should be the day field, 
+  and the value should be the full `StockDays3` record.
+- Create a Map colleciton named `mapD`. The key should be the full
+  `StockDay3` record. The value should be the day field.
+*)
+
+(*** include-it-raw:preDetails ***)
+(*** define: mapC, define-output: mapC ***)    
 
 let mapC =
     stockDays3
@@ -349,11 +491,31 @@ let mapD =
         // The key and value can be anything.
         day, day.Day)
     |> Map.ofArray
-    
-// 4.
-//
 
+(*** condition:html, include:mapC ***)
+(*** condition:html, include-fsi-output:mapC ***)
+(*** include-it-raw:postDetails ***)
+
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+
+(**
+4 Consider a the following Map collection:
+*)
 let mapp = [("a", 1); ("d",7)] |> Map.ofList
+
+(**
+Write a function named `lookFor` that takes `x: string` as an input and
+looks up the value in `mapp`. If it finds `Some y`, print
+`"I found y"` to standard output where `y` is the actual integer found. 
+If it finds `None`, print `"I did not find x"` to standard output
+where `x` is the actual key that was looked up. Test it by looking
+up `"a"`,`"b"`,"`c"`,`"d"`
+*)
+
+(*** include-it-raw:preDetails ***)
+(*** define: lookFor, define-output: lookFor ***)    
 
 let lookFor x =
     match Map.tryFind x mapp with
@@ -380,17 +542,19 @@ lookFor "d" // I found 7
 for letter in ["a"; "b"; "c"; "d"] do
     lookFor letter    
 
+(*** condition:html, include:lookFor ***)
+(*** condition:html, include-fsi-output:lookFor ***)
+(*** include-it-raw:postDetails ***)
 
-(*** define: joins ***)
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
 
-(*
 
-/////////
-// Joins
-/////////
+(**
+### Joins
 
 For the following questions use this data:
-```fsharp
+*)
 type StockPriceOb =
     { Stock : string 
       Time : int
@@ -405,49 +569,21 @@ let stockA =
 let stockB =     
     [{ Stock = "B"; Time = 2; Price = 5}
      { Stock = "B"; Time = 3; Price = 4}]
+
+(**
 Hint: remember that Map collections are useful for lookups.
-
-1. Create a `TwoStocksPriceOb list` named `tslA` that has prices for
-every observation of stockA. If there is a price for stockB
-at the same time as stockA, then include the stockB price. Otherwise,
-the stockB price should be None.
-
-2. Create a `TwoStocksPriceOb list` named `tslB` that has prices for
-every observation of stockB. If there is a price for stockA
-at the same time as stockB, then include the stock A price. Otherwise,
-the stockA price should be None.
-
-3. Create a `TwoStocksPriceOb list` named `tslC` that only includes times
-when there is a price for both stockA and stockB. The prices for stocks
-A and B should always be something.
-
-4. Create a `TwoStocksPriceOb list` named `tslD` that includes available
-stock prices for stockA and stockB at all possible times. If a price for
-one of the stocks is missing for a given time, it should be None.
-
-
-
-```
 *)
 
-(*** define: joins-ans ***)
-type StockPriceOb =
-    { Stock : string 
-      Time : int
-      Price : int }
-type TwoStocksPriceOb =
-    { Time : int 
-      PriceA : int option 
-      PriceB : int option }
-let stockA = 
-    [{ Stock = "A"; Time = 1; Price = 5}
-     { Stock = "A"; Time = 2; Price = 6}]
-let stockB =     
-    [{ Stock = "B"; Time = 2; Price = 5}
-     { Stock = "B"; Time = 3; Price = 4}]
 
-// 1.
-//      
+(**
+1 Create a `TwoStocksPriceOb list` named `tslA` that has prices for
+every observation of `stockA`. If there is a price for `stockB`
+at the same time as `stockA`, then include the `stockB` price. Otherwise,
+the `stockB` price should be `None`.
+*)
+
+(*** include-it-raw:preDetails ***)
+(*** define: TwoStockPriceOb, define-output: TwoStockPriceOb ***)    
 
 let stockbByTime = 
     stockB 
@@ -496,8 +632,24 @@ tryFindBforA stockA.[0]
 // do it
 let tslA3 = stockA |> List.map tryFindBforA                         
 
-// 2.
-//     
+(*** condition:html, include:TwoStockPriceOb ***)
+(*** condition:html, include-fsi-output:TwoStockPriceOb ***)
+(*** include-it-raw:postDetails ***)
+
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+
+(**
+2 Create a `TwoStocksPriceOb list` named `tslB` that has prices for
+every observation of stockB. If there is a price for `stockA`
+at the same time as `stockB`, then include the `stockA` price. Otherwise,
+the `stockA` price should be `None`.
+*)
+
+(*** include-it-raw:preDetails ***)
+(*** define: tslB, define-output: tslB ***)    
+
 let stockaByTime = 
     stockA 
     |> List.map(fun day -> day.Time, day)
@@ -514,10 +666,25 @@ let tslB =
         | Some da -> 
             { Time = dayB.Time
               PriceA = Some da.Price 
-              PriceB = Some dayB.Price })
+              PriceB = Some dayB.Price })                        
 
-//3.
-//
+(*** condition:html, include:tslB ***)
+(*** condition:html, include-fsi-output:tslB ***)
+(*** include-it-raw:postDetails ***)
+
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+
+(**
+3 Create a `TwoStocksPriceOb list` named `tslC` that only includes times
+when there is a price for both `stockA` and `stockB`. The prices for stocks
+A and B should always be something.
+*)
+
+(*** include-it-raw:preDetails ***)
+(*** define: tslC, define-output: tslC ***)    
+
 let stockaByTime2 = 
     stockA 
     |> List.map(fun day -> day.Time, day)
@@ -544,10 +711,25 @@ let tslC2 =
     |> List.map(fun time -> 
         { Time = time 
           PriceA = Some stockaByTime.[time].Price
-          PriceB = Some stockbByTime.[time].Price})
+          PriceB = Some stockbByTime.[time].Price})                      
 
-// 4.
-// 
+(*** condition:html, include:tslC ***)
+(*** condition:html, include-fsi-output:tslC ***)
+(*** include-it-raw:postDetails ***)
+
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+
+(**
+4 Create a `TwoStocksPriceOb list` named `tslD` that includes available
+stock prices for `stockA` and `stockB` at all possible times. If a price for
+one of the stocks is missing for a given time, it should be None.
+*)
+
+(*** include-it-raw:preDetails ***)
+(*** define: tslD, define-output: tslD ***)    
+
 let stockATimes = stockA |> List.map(fun x -> x.Time)
 let stockBTimes = stockB |> List.map(fun x -> x.Time)
 let allTimes = 
@@ -592,30 +774,14 @@ let getTheMatch time =
 getTheMatch 1
 getTheMatch 2
 // now do it for the whole list
-let tslD2 = allTimes |> List.map getTheMatch    
+let tslD2 = allTimes |> List.map getTheMatch                  
 
-(** 
-////////
-Questions 
-////////
-*)
+(*** condition:html, include:tslD ***)
+(*** condition:html, include-fsi-output:tslD ***)
+(*** include-it-raw:postDetails ***)
 
-(*** include:createOption ***)
-(*** include:matchExpression ***)
-(*** include: createMapCollections ***)
-(*** include: joins ***)
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
 
-(**
-////////
-Answers 
-////////
-*)
 
-(*** include:createOption ***)
-(*** include:createOption-ans ***)
-(*** include:matchExpression ***)
-(*** include:matchExpression-ans ***)
-(*** include: createMapCollections ***)
-(*** include: createMapCollections-ans ***)
-(*** include: joins ***)
-(*** include: joins-ans ***)
+

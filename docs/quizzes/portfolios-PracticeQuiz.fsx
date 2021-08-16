@@ -1,4 +1,32 @@
 (**
+---
+title: Portfolios
+category: Practice Quizzes
+categoryindex: 1
+index: 5
+---
+*)
+
+(*** hide,define-output:preDetails ***)
+"""
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+"""
+
+(*** hide,define-output:postDetails ***)
+"""
+
+</details>
+</span>
+</p>
+</div>
+"""
+
+(**
 # Some good things to reference
 
 [Anonymous Records](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/anonymous-records#syntax). You can read the above link for details, but the point of these is quite simple.
@@ -10,37 +38,19 @@ If you're using a particular record in only a few lines of code, then it can fee
 I rarely use anonymous records, but you might find them useful for exploratory data manipulation. They're also kind of nice for these short problems because I don't need to define a record for each problem.
 *)
 
-(*** define:anonymousRecord***)
-(* 
-# Anonymous records
-1. 
-- Create a *record* named `ExampleRec` that has an `X` field of type int and a `Y` field of type int. Create an example `ExampleRec` and assign it to a value named `r`.
-
-- Create an *anonymous record* that has an `X` field of type int and a `Y` field of type int. Create an example of the anonymous record and assign it to a value named `ar`.
-
-2. Imagine you have this array
-
-```fsharp
-open System
-type ArExample = { Date : DateTime; Value: float}
-let arr = [|{ Date = DateTime(1990,1,1); Value = 1.25}
-            { Date = DateTime(1990,1,2); Value = 2.25}
-            { Date = DateTime(1991,1,1); Value = 3.25} |]
-```
-- Group the observations by a tuple of (year,month) and find the 
-minimum value for each group. Report the result as a tuple of the group
-and the minimum value [so it will be ((year, month), minValue)].
-- Now, the same thing with anonymous records.
-Group the observations by an Anonymous Record {| Year = year; Month= month|} and find the 
-minimum value for each group. Report the result as an Anonymous record with a Group
-field for the group and a value field for the minimum value [so it will be
-{| Group = {| Year = year; Month= month|}; Value = minValue |}].
-
+(**
+### Anonymous records
 *)
 
-(*** define:anonymousRecord-ans***)
-// 1.
-//
+(**
+1 Do the following:
+
+- Create a *record* named `ExampleRec` that has an `X` field of type int and a `Y` field of type int. Create an example `ExampleRec` and assign it to a value named `r`.
+- Create an *anonymous record* that has an `X` field of type int and a `Y` field of type int. Create an example of the anonymous record and assign it to a value named `ar`.
+*)
+
+(*** include-it-raw:preDetails ***)
+(*** define: ExampleRec, define-output: ExampleRec ***)
 
 // a regular named record
 type ExampleRec = { X : int; Y : int }
@@ -55,13 +65,37 @@ let ar = {| X = 1; Y = 2|}
 // For example, running `r = ar` 
 // will give a compiler error
 
-// 2.
-//
+(*** condition:html, include:ExampleRec ***)
+(*** condition:html, include-fsi-output:ExampleRec ***)
+(*** include-it-raw:postDetails ***)
+
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+
+(**
+2 Imagine you have this array
+*)
+
 open System
 type ArExample = { Date : DateTime; Value: float}
 let arr = [|{ Date = DateTime(1990,1,1); Value = 1.25}
             { Date = DateTime(1990,1,2); Value = 2.25}
             { Date = DateTime(1991,1,1); Value = 3.25} |]
+
+(**
+- Group the observations by a tuple of `(year,month)` and find the 
+minimum value for each group. Report the result as a tuple of the group
+and the minimum value [so it will be `((year, month), minValue)]`.
+- Now, the same thing with anonymous records.
+Group the observations by an Anonymous Record `{| Year = year; Month= month|}` and find the 
+minimum value for each group. Report the result as an Anonymous record with a Group
+field for the group and a value field for the minimum value [so it will be
+`{| Group = {| Year = year; Month= month|}; Value = minValue |}`].
+*)
+
+(*** include-it-raw:preDetails ***)
+(*** define: RecordsAndTransformations, define-output: RecordsAndTransformations ***)
 
 // here I will explicitly put year and month in the final result
 arr 
@@ -110,20 +144,77 @@ arr
     let minValue = xs |> Array.map(fun x -> x.Value)|> Array.min
     {| Group = group; Value = minValue |})
 
+(*** condition:html, include:RecordsAndTransformations ***)
+(*** condition:html, include-fsi-output:RecordsAndTransformations ***)
+(*** include-it-raw:postDetails ***)
 
-(*** define: portfolioReturns ***)
-(*
-# Portfolio Returns
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
 
-1. Imagine that you have the following positions in your portfolio.
+
+(**
+### Portfolio Returns
+*)
+
+(**
+1 Imagine that you have the following positions in your portfolio.
 For each position you have a weight and a return.
 What is the return of the entire portfolio?
+*)
 
-```fsharp
 type PortReturnPos = { Id: string;  Weight: float; Return: float}
 let stockPos = { Id = "stock"; Weight = 0.25; Return = 0.1 }
 let bondPos = { Id = "bond"; Weight = 0.75; Return = 0.05}
-```
+
+(**
+- Group the observations by a tuple of `(year,month)` and find the 
+minimum value for each group. Report the result as a tuple of the group
+and the minimum value [so it will be `((year, month), minValue)]`.
+- Now, the same thing with anonymous records.
+Group the observations by an Anonymous Record `{| Year = year; Month= month|}` and find the 
+minimum value for each group. Report the result as an Anonymous record with a Group
+field for the group and a value field for the minimum value [so it will be
+`{| Group = {| Year = year; Month= month|}; Value = minValue |}`].
+*)
+
+(*** include-it-raw:preDetails ***)
+(*** define: PortfolioRet1, define-output: PortfolioRet1 ***)
+
+// Remember that portfolio returns are a weighted average
+// of the returns of the stocks in the portfolio. The weights
+// are the position weights.
+
+let stockAndBondPort = 
+    stockPos.Weight*stockPos.Return + bondPos.Weight*bondPos.Return
+// or, doing the multiplication and summation with collections
+let weightXreturn =
+    [|stockPos;bondPos|]
+    |> Array.map(fun pos -> pos.Weight*pos.Return)
+// look at it
+weightXreturn
+// now sum
+let stockAndBondPort2 = weightXreturn |> Array.sum
+// check
+stockAndBondPort = stockAndBondPort2 // evaluates to true
+
+(*** condition:html, include:PortfolioRet1 ***)
+(*** condition:html, include-fsi-output:PortfolioRet1 ***)
+(*** include-it-raw:postDetails ***)
+
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+
+
+
+
+
+(**
+# HERE
+*)
+
+(*
+
 
 2. Imagine that you have the following positions in your portfolio.
 For each position you have a weight and a return.
@@ -151,29 +242,6 @@ let positionsWithShort =
  
 *)
 
-(*** define: portfolioReturns-ans ***)
-// 1.
-//
-// Remember that portfolio returns are a weighted average
-// of the returns of the stocks in the portfolio. The weights
-// are the position weights.
-type PortReturnPos = { Id: string;  Weight: float; Return: float}
-
-let stockPos = { Id = "stock"; Weight = 0.25; Return = 0.1 }
-let bondPos = { Id = "bond"; Weight = 0.75; Return = 0.05}
-
-let stockAndBondPort = 
-    stockPos.Weight*stockPos.Return + bondPos.Weight*bondPos.Return
-// or, doing the multiplication and summation with collections
-let weightXreturn =
-    [|stockPos;bondPos|]
-    |> Array.map(fun pos -> pos.Weight*pos.Return)
-// look at it
-weightXreturn
-// now sum
-let stockAndBondPort2 = weightXreturn |> Array.sum
-// check
-stockAndBondPort = stockAndBondPort2 // evaluates to true
 
 // 2.
 //
@@ -316,21 +384,3 @@ let annualizedSharpeFromDaily2 =
 ///********************
 /// 
 
-(*** include:anonymousRecord***)
-(*** include: portfolioReturns ***)
-(*** include:sharpeRatio ***)
-
-
-///********************
-/// Answers
-///********************
-/// 
-
-(*** include:anonymousRecord***)
-(*** include:anonymousRecord-ans***)
-
-(*** include: portfolioReturns ***)
-(*** include: portfolioReturns-ans ***)
-
-(*** include:sharpeRatio ***)
-(*** include:sharpeRatio-ans ***)

@@ -1,14 +1,16 @@
 <Project>
-  <Description>
-    The package is a collection of of files that contain Data Analytics for Finance materials
-    and exercises which really on F# programming language. 
-  </Description>
-  <Authors>Nicholas Hirschey; Davide Costa</Authors>
-  <Copyright>Copyright 2021</Copyright>
-  <RepositoryUrl>https://github.com/nhirschey/Teaching</RepositoryUrl>
-  <PackageProjectUrl>https://nhirschey.github.io/Teaching/</PackageProjectUrl>
-  <PackageIconUrl></PackageIconUrl>
-  <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-  <RepositoryType>git</RepositoryType>
+  <PropertyGroup>
+    <Description>
+      The package is a collection of of files that contain Data Analytics for Finance materials
+      and exercises which really on F# programming language. 
+    </Description>
+    <Authors>Nicholas Hirschey; Davide Costa</Authors>
+    <Copyright>Copyright 2021</Copyright>
+    <RepositoryUrl>https://github.com/nhirschey/Teaching</RepositoryUrl>
+    <PackageProjectUrl>https://nhirschey.github.io/Teaching/</PackageProjectUrl>
+    <PackageIconUrl></PackageIconUrl>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
 </Project>
 

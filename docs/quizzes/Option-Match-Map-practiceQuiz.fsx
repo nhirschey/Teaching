@@ -561,10 +561,10 @@ lookFor "d" // I found 7
 ["a"; "b"; "c"; "d"] |> List.iter lookFor
 // or loop it
 for letter in ["a"; "b"; "c"; "d"] do
-    lookFor letter    
+    printfn $"{lookFor letter}"    
 
 (*** condition:html, include:lookFor ***)
-(*** condition:html, include-fsi-output:lookFor ***)
+(*** condition:html, include-fsi-merged-output:lookFor ***)
 (*** include-it-raw:postDetails ***)
 
 (*** condition:ipynb ***)

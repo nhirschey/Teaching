@@ -3,7 +3,7 @@
 title: Fundamentals
 category: Practice Quizzes
 categoryindex: 1
-index: 3
+index: 1
 ---
 *)
 

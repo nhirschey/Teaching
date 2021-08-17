@@ -3,7 +3,7 @@
 title: Dicriminated Union
 category: Practice Quizzes
 categoryindex: 1
-index: 1
+index: 5
 ---
 *)
 

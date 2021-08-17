@@ -3,7 +3,7 @@
 title: Volatility Timing Part 2
 category: Practice Quizzes
 categoryindex: 1
-index: 7
+index: 3
 ---
 *)
 
@@ -251,9 +251,9 @@ in the window.
 *)
 
 (*** include-it-raw:preDetails ***)
-(*** define: rollingStdDev, define-output: rollingStdDev ***)
 
 
+(***define:rollingStdDev1, define-output:rollingStdDev1 ***)
 returns
 |> Array.groupBy(fun x -> x.Symbol)
 |> Array.collect(fun (_symbol, xs) ->
@@ -265,14 +265,21 @@ returns
         { Symbol = last.Symbol
           Date = last.Date
           Value = ys |> stDevBy(fun x -> x.Return)}))
+(***condition:html,include:rollingStdDev1 ***)
+(***condition:html,include-fsi-output:rollingStdDev1 ***)
 
-// breaking this answer down,
-// If you're unsure, it's helpful to work through things step by step.
-// then build up from there.
+(**
+Breaking this answer down,
+If you're unsure, it's helpful to work through things step by step.
+then build up from there.
+*)
+(*** define: rollingStdDev, define-output: rollingStdDev ***)
+
 
 let groups = 
     returns
     |> Array.groupBy(fun x -> x.Symbol)
+
 
 let firstGroup = groups |> Array.item 0 // or groups |> Array.head
 let firstSymbol, firstObs = firstGroup // like let a,b = (1,2)

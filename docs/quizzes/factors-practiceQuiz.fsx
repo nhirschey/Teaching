@@ -3,7 +3,7 @@
 title: Factors
 category: Practice Quizzes
 categoryindex: 1
-index: 2
+index: 7
 ---
 *)
 

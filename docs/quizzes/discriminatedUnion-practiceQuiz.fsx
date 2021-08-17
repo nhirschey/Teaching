@@ -1,3 +1,40 @@
+(**
+---
+title: Dicriminated Union
+category: Practice Quizzes
+categoryindex: 1
+index: 5
+---
+*)
+
+(*** hide ***)
+/// example fast binder url: https://mybinder.org/v2/gh/fsprojects/fsharp.formatting/master?urlpath=git-pull?repo=https:/nhirschey.github.com/teaching/gh-pages/fundamentals.ipynb
+
+(**
+[![Binder](../images/badge-binder.svg)](https://mybinder.org/v2/gh/nhirschey/teaching/gh-pages?filepath={{fsdocs-source-basename}}.ipynb)&emsp;
+[![Script](../images/badge-script.svg)]({{root}}/{{fsdocs-source-basename}}.fsx)&emsp;
+[![Notebook](../images/badge-notebook.svg)]({{root}}/{{fsdocs-source-basename}}.ipynb)
+*)
+
+(*** hide,define-output:preDetails ***)
+"""
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+"""
+
+(*** hide,define-output:postDetails ***)
+"""
+
+</details>
+</span>
+</p>
+</div>
+"""
+
 (** 
 
 This practice quiz emphasizes `Discriminated Unions`. They are useful for times when the data that you're representing has multiple mutually exclusive cases. 
@@ -5,73 +42,104 @@ This practice quiz emphasizes `Discriminated Unions`. They are useful for times 
 Here is some good background reading for before you do these quesitions, particularly the F# for fun and profit link.
 
 - Discriminated Union types
+
     - The F# language reference for [discriminated unions](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/discriminated-unions)
     - If you want more a more in depth discussion, see F# for fun and profit's section on [discriminated unions](https://fsharpforfunandprofit.com/posts/discriminated-unions/)
     - The tour of F# section on [discriminated unions](https://docs.microsoft.com/en-us/dotnet/fsharp/tour#record-and-discriminated-union-types)
+
 *)
 
-(*** define:createBuySell ***)
-
-(*
+(**
+## Question 1
 Create a discriminated union named `Action` with two cases: Buy and Sell.
-  - Create a value named 'bAction' and assign `Buy` to it.
-  - Create a value named 'sAction' and assign `Sell` to it.
+
+1. Create a value named 'bAction' and assign `Buy` to it.
+2. Create a value named 'sAction' and assign `Sell` to it.
 *)
 
-(*** define:createBuySell-ans ***)
+(*** include-it-raw:preDetails ***)
+(*** define: createBuySell, define-output: createBuySell ***)
+
 type Action = 
     | Buy 
     | Sell
 let bAction = Buy
 let sAction = Sell
 
-(*** define:singleString ***)
+(*** condition:html, include:createBuySell ***)
+(*** condition:html, include-fsi-output:createBuySell ***)
+(*** include-it-raw:postDetails ***)
 
-(*
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+
+(**
+## Question 2
 Create a single case discriminated union to represent a particular kind of string:
-    - Create a discriminated union named Ticker with a single case Ticker of string. 
-    - Then wrap the string "ABC" in your Ticker type and assign it to a value named 'aTicker'.
-    - Then use pattern matching to unwrap the string in `aTicker` and assign it to a value named `aTickerString`.
+
+1. Create a discriminated union named Ticker with a single case Ticker of string. 
+2. Then wrap the string "ABC" in your Ticker type and assign it to a value named 'aTicker'.
+3. Then use pattern matching to unwrap the string in `aTicker` and assign it to a value named `aTickerString`.
+
+Discriminated unions like this are usful if you want to make 
+sure that you don't accidentally mix up two strings that represent
+different things.
+A function that takes an input with type `Ticker` will not accept any string,
+it will only accept inputs that have time Ticker.
 *)
 
-(*** define:singleString-ans ***)
+(*** include-it-raw:preDetails ***)
+(*** define: singleString, define-output: singleString ***)
 
-// 
-
-// Discriminated unions like this are usful if you want to make 
-// sure that you don't accidentally mix up two strings that represent
-// different things.
-// A function that takes an input with type `Ticker` will not accept any string,
-// it will only accept inputs that have time Ticker.
 type Ticker = Ticker of string
 let aTicker = Ticker "ABC"
 let (Ticker aTickerString) = aTicker
 
-(*** define:singleFloat ***)
+(*** condition:html, include:singleString ***)
+(*** condition:html, include-fsi-output:singleString ***)
+(*** include-it-raw:postDetails ***)
 
-(*
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+
+(**
+## Question 3
 Create a single case discriminated union to represent a particular kind of float:
-    - Create a discriminated union named Signal with a single case Signal of float. 
-    - Then wrap the string float `1.0` in your Signal type and assign it to a value named 'aSignal'.
-    - Then use pattern matching to unwrap the float in `aSignal` and assign it to a value named `aSignalFloat`.
+
+1. Create a discriminated union named Signal with a single case Signal of float. 
+2. Then wrap the string float `1.0` in your Signal type and assign it to a value named 'aSignal'.
+3. Then use pattern matching to unwrap the float in `aSignal` and assign it to a value named `aSignalFloat`.
 *)
 
-(*** define:singleFloat-ans ***)
+(*** include-it-raw:preDetails ***)
+(*** define: singleFloat, define-output: singleFloat ***)
 
-//
 type Signal = Signal of float
 let aSignal = Signal 1.2
 let (Signal aSignalFloat) = aSignal
 
-(*** define:twoCaseString ***)
+(*** condition:html, include:singleFloat ***)
+(*** condition:html, include-fsi-output:singleFloat ***)
+(*** include-it-raw:postDetails ***)
 
-(*
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+
+(**
+## Question 4
 Create a discriminated union called called `Funds` with two cases: MutualFund of string and HedgeFund of string.
-    - Create a MutualFund case of the Fund union with the string "Fidelity Magellan". Assign it to a value named "magellan".
-    - Create a HedgeFund case of the Fund union with the string "Renaissance Medallion". Assign it to a value named "renaissance".
-*)       
 
-(*** define:twoCaseString-ans ***)
+1. Create a MutualFund case of the Fund union with the string "Fidelity Magellan". Assign it to a value named "magellan".
+2. Create a HedgeFund case of the Fund union with the string "Renaissance Medallion". Assign it to a value named "renaissance".
+
+*)  
+
+(*** include-it-raw:preDetails ***)
+(*** define: twoCaseString, define-output: twoCaseString ***)
+
 type Funds =
     | MutualFund of string
     | HedgeFund of string
@@ -79,10 +147,18 @@ type Funds =
 let magellan = MutualFund "Fidelity Magellan"
 let renaissance = HedgeFund "Renaissance Medallion"
 
-(*** define: clarifyAmbiguity ***)
+(*** condition:html, include:twoCaseString ***)
+(*** condition:html, include-fsi-output:twoCaseString ***)
+(*** include-it-raw:postDetails ***)
 
-(*
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+
+(**
+## Question 5
 Define two types with the same cases.
+
 ```fsharp
 type Ambiguous1 = Up | Down
 type Ambiguous2 = Up | Down
@@ -98,16 +174,24 @@ a value named `ambiguous1` and the `Up` case from Ambiguous2 to a value named
 `ambiguous2`. 
 *)
 
-(*** define: clarifyAmbiguity-ans ***)
+(*** include-it-raw:preDetails ***)
+(*** define: clarifyAmbiguity, define-output: clarifyAmbiguity ***)
+
 type Ambiguous1 = Up | Down
 type Ambiguous2 = Up | Down
 let ambiguous1 = Ambiguous1.Up
 let ambiguous2 = Ambiguous2.Up
 
+(*** condition:html, include:clarifyAmbiguity ***)
+(*** condition:html, include-fsi-output:clarifyAmbiguity ***)
+(*** include-it-raw:postDetails ***)
 
-(*** define:funForSingleCase ***)
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
 
-(*
+
+(**
+## Question 6
 Imagine that analyst recommendations have the form
 ```fsharp
 type AnalystRec = Buy | Sell | Hold
@@ -132,9 +216,9 @@ actionOnGoldman goldmanRec // evaluates to "I am buying this!"
 actionOnGoldman barclaysRec // evaluates to "I am selling this!"
 ```
 
-- Create a single case union called `GoldmanRec` where the single case
+1. Create a single case union called `GoldmanRec` where the single case
 is GoldmanRec of AnalystRec. 
-- Create a modified `actionOnGoldman` function called `actionOnGoldmanOnly` so that it will only work on recommendations with the type `GoldmanRec`.
+2. Create a modified `actionOnGoldman` function called `actionOnGoldmanOnly` so that it will only work on recommendations with the type `GoldmanRec`.
 
 If `wrappedGoldmanRec` is buy `GoldmanRec`, the result should be
 ```
@@ -143,7 +227,9 @@ actionOnGoldmanOnly barclaysRec // compiler error.
 ```
 *)
 
-(*** define:funForSingleCase-ans ***)
+(*** include-it-raw:preDetails ***)
+(*** define: funForSingleCase, define-output: funForSingleCase ***)
+
 type AnalystRec = Buy | Sell | Hold
 type GoldmanRec = GoldmanRec of AnalystRec
 let goldmanRec = Buy
@@ -188,9 +274,16 @@ actionOnGoldmanOnly3 wrappedGoldmanRec
 //actionOnGoldmanOnly2 barclaysRec
 //actionOnGoldmanOnly3 barclaysRec
 
-(*** define:funForTwoCases ***)
+(*** condition:html, include:funForSingleCase ***)
+(*** condition:html, include-fsi-output:funForSingleCase ***)
+(*** include-it-raw:postDetails ***)
 
-(*
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+
+(**
+## Question 7
 Imagine that stock tips have the form
 ```fsharp
 type StockTip = Buy | Sell | Hold
@@ -210,13 +303,15 @@ let actionOnProfessor (x: StockTip) =
     | Sell -> StockTip.Buy
 ```
 
-- Create a two case union called `FriendOrFoe` where the two cases are Friend of StockTip and Professor of StockTip.
-- Create a function called `actionFriendOrFoe` that will properly handle tips from friends and tips from professors.
+1. Create a two case union called `FriendOrFoe` where the two cases are Friend of StockTip and Professor of StockTip.
+2. Create a function called `actionFriendOrFoe` that will properly handle tips from friends and tips from professors.
 
 Show that `friendRec` and `professorRec` wrapped in the `FriendOrFoe` type are handled properly by `actionFriendOrFoe`.
 *)
 
-(*** define:funForTwoCases-ans ***)
+(*** include-it-raw:preDetails ***)
+(*** define: funForTwoCases, define-output: funForTwoCases ***)
+
 type StockTip = Buy | Sell | Hold
 let friendRec = Buy
 let professorRec = Sell
@@ -245,41 +340,9 @@ actionOnFriendOrFoe wrappedFriendRec // evaluates to Buy
 actionOnFriendOrFoe wrappedProfessorRec // evaluates to Buy
 actionOnFriendOrFoe (Professor Hold) // evaluates to Sell
 
-(**
-*)
+(*** condition:html, include:funForTwoCases ***)
+(*** condition:html, include-fsi-output:funForTwoCases ***)
+(*** include-it-raw:postDetails ***)
 
-/// *****************
-/// Questions
-/// *****************
-/// 
-
-(*** include:createBuySell ***)
-(*** include:singleString ***)
-(*** include:singleFloat ***)
-(*** include:twoCaseString ***)
-(*** include:funForSingleCase ***)
-(*** include:funForTwoCases ***)
-
-
-/// *****************
-/// Answers
-/// *****************
-/// 
-
-(*** include:createBuySell ***)
-(*** include:createBuySell-ans ***)
-
-(*** include:singleString ***)
-(*** include:singleString-ans ***)
-
-(*** include:singleFloat ***)
-(*** include:singleFloat-ans ***)
-
-(*** include:twoCaseString ***)
-(*** include:twoCaseString-ans ***)
-
-(*** include:funForSingleCase ***)
-(*** include:funForSingleCase-ans ***)
-
-(*** include:funForTwoCases ***)
-(*** include:funForTwoCases-ans ***)
+(*** condition:ipynb ***)
+// write your code here, see website for solution.

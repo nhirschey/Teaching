@@ -7,6 +7,24 @@ index: 7
 ---
 *)
 
+(*** hide,define-output:preDetails ***)
+"""
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+"""
+
+(*** hide,define-output:postDetails ***)
+"""
+
+</details>
+</span>
+</p>
+</div>
+"""
 
 (**
 We're going to use the following in the questions
@@ -36,15 +54,18 @@ let returns =
               Return = normal.Sample()}
     |]
 
-(*** define:collect ***)
-(*
-    Take this array of arrays, add 1.0 to each element of the "inner" arrays,
-    and then concatenate all the inner arrays together.
-    [| [| 1.0; 2.0|]
-       [| 3.0; 4.0|] |]
-*)
 
-(*** define:collect-ans ***)
+(**
+## Question 1
+Take this array of arrays, add `1.0` to each element of the "inner" arrays,
+and then concatenate all the inner arrays together.
+*)
+[| [| 1.0; 2.0|]
+   [| 3.0; 4.0|] |]
+
+(*** include-it-raw:preDetails ***)
+(*** define: arraysAdd1, define-output: arraysAdd1 ***)
+
 [| [| 1.0; 2.0|]
    [| 3.0; 4.0|] |]
 |> Array.collect(fun xs -> xs |> Array.map(fun x -> x + 1.0))
@@ -54,68 +75,98 @@ let returns =
 |> Array.map(fun xs -> xs |> Array.map(fun x -> x + 1.0))
 |> Array.concat
 
-(*** define:partialApplication ***)
+(*** condition:html, include:arraysAdd1 ***)
+(*** condition:html, include-fsi-output:arraysAdd1 ***)
+(*** include-it-raw:postDetails ***)
 
-(*
-    Take the following two-parameter function:
-    ```
-        let add x y = x + y
-    ```
-    Use the above function and [partial application](https://fsharpforfunandprofit.com/posts/partial-application/)
-    to define a new function called 
-    `add2` that adds 2 
-    to it's input.
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+
+(**
+## Question 2
+Take the following two-parameter function:
 *)
 
-(*** define:partialApplication-ans ***)
 let add x y = x + y
+
+(**
+Use the above function and [partial application](https://fsharpforfunandprofit.com/posts/partial-application/)
+to define a new function called 
+`add2` that adds 2 
+to it's input.
+*)
+
+(*** include-it-raw:preDetails ***)
+(*** define: twoParaFunction, define-output: twoParaFunction ***)
+
 let add2 = add 2
 
-(*** define:printfnStructuredObject ***)
-(*
-    Given `returns : ReturnOb []`, use printfn to print the whole
-    array to standard output using the [structured plaintext formatter](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/plaintext-formatting). 
+(*** condition:html, include:twoParaFunction ***)
+(*** condition:html, include-fsi-output:twoParaFunction ***)
+(*** include-it-raw:postDetails ***)
+
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+
+(**
+## Question 3
+Given `returns : ReturnOb []`, use `printfn` to print the whole
+array to standard output using the [structured plaintext formatter](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/plaintext-formatting). 
 *)
 
-(*** define:printfnStructuredObject-ans ***)
+(*** include-it-raw:preDetails ***)
+(*** define: printfnStructuredObject, define-output: printfnStructuredObject ***)
+
 returns |> (printfn "%A")
 
-(*** define:printfnStructuredRecord ***)
-(*
-    Given `returns : ReturnOb []`, use printfn to print each record
-    to standard output using the [structured plaintext formatter](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/plaintext-formatting). 
+(*** condition:html, include:printfnStructuredObject ***)
+(*** condition:html, include-output:printfnStructuredObject ***)
+(*** include-it-raw:postDetails ***)
+
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+
+(**
+## Question 4
+Given the tuple `("hi", false, 20.321, 4)`,
+use `printfn` and the tuple to print the following string
+to standard output:
+`"hi teacher, my False knowledge implies that 4%=0020.1"`
+
+[String formatting](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/plaintext-formatting#format-specifiers-for-printf) documentation will be useful. 
 *)
 
-(*** define:printfnStructuredRecord-ans ***)
-returns |> Array.iter (printfn "%A")
+(*** include-it-raw:preDetails ***)
+(*** define: printfnStringInterpolation, define-output: printfnStringInterpolation ***)
 
-(*** define:printfnStringInterpolation ***)
-(*
-    Given the tuple ("hi", false, 20.321, 4),
-    use printfn and the tuple to print the following string
-    to standard output:
-
-    "hi teacher, my False knowledge implies that 4%=0020.1"
-
-    [String formatting](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/plaintext-formatting#format-specifiers-for-printf) documentation will be useful. 
-*)
-
-(*** define:printfnStringInterpolation-ans ***)
 let (xString, xBool, xFloat, xInt) = ("hi", false, 20.321, 4)
 // Using string interpolation
-printfn $"{xString} teacher, my {xBool} knowledge imples that {xInt}%%=%06.1f{xFloat}"
+printfn $"{xString} teacher, my {xBool} knowledge implies that {xInt}%%=%06.1f{xFloat}"
 // Using old-style printfn
-printfn "%s teacher, my %b knowledge imples that %i%%=%06.1f" xString xBool xInt xFloat
+printfn "%s teacher, my %b knowledge implies that %i%%=%06.1f" xString xBool xInt xFloat
 
-(*** define: arithmeticReturn ***)
-(*
-    Given `returns : ReturnOb []`, calculate the arithmetic average return 
-    for every symbol each month.
-    Give the result as a `ReturnOb []` where the date is the last date for the symbol
-    each month. 
+(*** condition:html, include:printfnStringInterpolation ***)
+(*** condition:html, include-output:printfnStringInterpolation ***)
+(*** include-it-raw:postDetails ***)
+
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+
+(**
+## Question 5
+Given `returns : ReturnOb []`, calculate the arithmetic average return 
+for every symbol each month.
+Give the result as a `ReturnOb []` where the date is the last date for the symbol
+each month.
 *)
 
-(*** define: arithmeticReturn-ans ***)
+(*** include-it-raw:preDetails ***)
+(*** define: arithmeticReturn, define-output: arithmeticReturn ***)
+
 returns
 |> Array.groupBy(fun x -> x.Symbol, x.Date.Year, x.Date.Month)
 |> Array.map(fun ((symbol, _year, _month), xs) ->
@@ -123,15 +174,25 @@ returns
       Date = xs |> Array.map(fun x -> x.Date) |> Array.max 
       Return = xs|> Array.averageBy(fun x -> x.Return) })
 
-(*** define: monthlyReturn ***)
-(*
-    Given `returns : ReturnOb []`, calculate the monthly return 
-    for every symbol each month.
-    Give the result as a `ReturnOb []` where the date is the last date for the symbol
-    each month. 
+(*** condition:html, include:arithmeticReturn ***)
+(*** condition:html, include-fsi-output:arithmeticReturn ***)
+(*** include-it-raw:postDetails ***)
+
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+
+(**
+## Question 6
+Given `returns : ReturnOb []`, calculate the monthly return 
+for every symbol each month.
+Give the result as a `ReturnOb []` where the date is the last date for the symbol
+each month. 
 *)
 
-(*** define: monthlyReturn-ans ***)
+(*** include-it-raw:preDetails ***)
+(*** define: monthlyReturn, define-output: monthlyReturn ***)
+
 returns
 |> Array.groupBy(fun x -> x.Symbol, x.Date.Year, x.Date.Month)
 |> Array.map(fun ((symbol, _year, _month), xs) ->
@@ -140,15 +201,25 @@ returns
       Date = xs |> Array.map(fun x -> x.Date) |> Array.max 
       Return =  monthReturnPlus1 - 1.0 })
 
-(*** define: monthlyStdDev ***)
-(*
-    Given `returns : ReturnOb []`, calculate the standard deviation of daily returns
-    for every symbol each month.
-    Give the result as a `ValueOb []` where the date in each `ValueOb` is the last date for the symbol
-    each month. 
+(*** condition:html, include:monthlyReturn ***)
+(*** condition:html, include-fsi-output:monthlyReturn ***)
+(*** include-it-raw:postDetails ***)
+
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+
+(**
+## Question 7
+Given `returns : ReturnOb []`, calculate the standard deviation of daily returns
+for every symbol each month.
+Give the result as a `ValueOb []` where the date in each `ValueOb` is the last date for the symbol
+each month. 
 *)
 
-(*** define: monthlyStdDev-ans ***)
+(*** include-it-raw:preDetails ***)
+(*** define: monthlyStdDev, define-output: monthlyStdDev ***)
+
 returns
 |> Array.groupBy(fun x -> x.Symbol, x.Date.Year, x.Date.Month)
 |> Array.map(fun ((symbol, _year, _month), xs) ->
@@ -157,15 +228,26 @@ returns
       Date = xs |> Array.map(fun x -> x.Date) |> Array.max 
       Value =  sd })
 
-(*** define: rollingStdDev ***)
-(*
-    Given `returns : ReturnOb []`, calculate the standard deviation of daily returns
-    for every symbol using rolling 3 day windows.
-    Give the result as a `ValueOb []` where the date in each `ValueOb` is the last date for the symbol
-    in the window. 
+(*** condition:html, include:monthlyStdDev ***)
+(*** condition:html, include-fsi-output:monthlyStdDev ***)
+(*** include-it-raw:postDetails ***)
+
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+
+(**
+## Question 8
+Given `returns : ReturnOb []`, calculate the standard deviation of daily returns
+for every symbol using rolling 3 day windows.
+Give the result as a `ValueOb []` where the date in each `ValueOb` is the last date for the symbol
+in the window. 
 *)
 
-(*** define: rollingStdDev-ans ***)
+(*** include-it-raw:preDetails ***)
+(*** define: rollingStdDev, define-output: rollingStdDev ***)
+
+
 returns
 |> Array.groupBy(fun x -> x.Symbol)
 |> Array.collect(fun (_symbol, xs) ->
@@ -315,55 +397,10 @@ let m2Result =
           Date = lastDay.Date
           Value = window |> stDevBy(fun x -> x.Return )})
 
-(**
-## Questions 
-*)
 
-(*** include: collect ***)
+(*** condition:html, include:rollingStdDev ***)
+(*** condition:html, include-fsi-output:rollingStdDev ***)
+(*** include-it-raw:postDetails ***)
 
-(*** include: partialApplication ***)
-
-(*** include: printfnStructuredObject ***)
-
-(*** include: printfnStructuredRecord ***)
-
-(*** include:printfnStringInterpolation ***)
-
-(*** include: arithmeticReturn ***)
-
-(*** include: monthlyReturn ***)
-
-(*** include: monthlyStdDev ***)
-
-(*** include: rollingStdDev ***)
-
-(**
-## Answers 
-*)
-
-(*** include:collect ***)
-(*** include: collect-ans ***)
-
-(*** include: partialApplication ***)
-(*** include: partialApplication-ans ***)
-
-(*** include: printfnStructuredObject ***)
-(*** include: printfnStructuredObject-ans ***)
-
-(*** include: printfnStructuredRecord ***)
-(*** include: printfnStructuredRecord-ans ***)
-
-(*** include:printfnStringInterpolation ***)
-(*** include:printfnStringInterpolation-ans ***)
-
-(*** include: arithmeticReturn ***)
-(*** include: arithmeticReturn-ans ***)
-
-(*** include: monthlyReturn ***)
-(*** include: monthlyReturn-ans ***)
-
-(*** include: monthlyStdDev ***)
-(*** include: monthlyStdDev-ans ***)
-
-(*** include: rollingStdDev ***)
-(*** include: rollingStdDev-ans ***)
+(*** condition:ipynb ***)
+// write your code here, see website for solution.

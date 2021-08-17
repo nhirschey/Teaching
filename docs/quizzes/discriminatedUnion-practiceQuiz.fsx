@@ -41,14 +41,11 @@ Here is some good background reading for before you do these quesitions, particu
 *)
 
 (**
-### Questions
-*)
-
-(**
+## Question 1
 Create a discriminated union named `Action` with two cases: Buy and Sell.
 
-- Create a value named 'bAction' and assign `Buy` to it.
-- Create a value named 'sAction' and assign `Sell` to it.
+1. Create a value named 'bAction' and assign `Buy` to it.
+2. Create a value named 'sAction' and assign `Sell` to it.
 *)
 
 (*** include-it-raw:preDetails ***)
@@ -69,11 +66,12 @@ let sAction = Sell
 
 
 (**
+## Question 2
 Create a single case discriminated union to represent a particular kind of string:
 
-- Create a discriminated union named Ticker with a single case Ticker of string. 
-- Then wrap the string "ABC" in your Ticker type and assign it to a value named 'aTicker'.
-- Then use pattern matching to unwrap the string in `aTicker` and assign it to a value named `aTickerString`.
+1. Create a discriminated union named Ticker with a single case Ticker of string. 
+2. Then wrap the string "ABC" in your Ticker type and assign it to a value named 'aTicker'.
+3. Then use pattern matching to unwrap the string in `aTicker` and assign it to a value named `aTickerString`.
 
 Discriminated unions like this are usful if you want to make 
 sure that you don't accidentally mix up two strings that represent
@@ -98,11 +96,12 @@ let (Ticker aTickerString) = aTicker
 
 
 (**
+## Question 3
 Create a single case discriminated union to represent a particular kind of float:
 
-- Create a discriminated union named Signal with a single case Signal of float. 
-- Then wrap the string float `1.0` in your Signal type and assign it to a value named 'aSignal'.
-- Then use pattern matching to unwrap the float in `aSignal` and assign it to a value named `aSignalFloat`.
+1. Create a discriminated union named Signal with a single case Signal of float. 
+2. Then wrap the string float `1.0` in your Signal type and assign it to a value named 'aSignal'.
+3. Then use pattern matching to unwrap the float in `aSignal` and assign it to a value named `aSignalFloat`.
 *)
 
 (*** include-it-raw:preDetails ***)
@@ -121,10 +120,11 @@ let (Signal aSignalFloat) = aSignal
 
 
 (**
+## Question 4
 Create a discriminated union called called `Funds` with two cases: MutualFund of string and HedgeFund of string.
 
-- Create a MutualFund case of the Fund union with the string "Fidelity Magellan". Assign it to a value named "magellan".
-- Create a HedgeFund case of the Fund union with the string "Renaissance Medallion". Assign it to a value named "renaissance".
+1. Create a MutualFund case of the Fund union with the string "Fidelity Magellan". Assign it to a value named "magellan".
+2. Create a HedgeFund case of the Fund union with the string "Renaissance Medallion". Assign it to a value named "renaissance".
 
 *)  
 
@@ -147,6 +147,7 @@ let renaissance = HedgeFund "Renaissance Medallion"
 
 
 (**
+## Question 5
 Define two types with the same cases.
 
 ```fsharp
@@ -181,6 +182,7 @@ let ambiguous2 = Ambiguous2.Up
 
 
 (**
+## Question 6
 Imagine that analyst recommendations have the form
 ```fsharp
 type AnalystRec = Buy | Sell | Hold
@@ -205,9 +207,9 @@ actionOnGoldman goldmanRec // evaluates to "I am buying this!"
 actionOnGoldman barclaysRec // evaluates to "I am selling this!"
 ```
 
-- Create a single case union called `GoldmanRec` where the single case
+1. Create a single case union called `GoldmanRec` where the single case
 is GoldmanRec of AnalystRec. 
-- Create a modified `actionOnGoldman` function called `actionOnGoldmanOnly` so that it will only work on recommendations with the type `GoldmanRec`.
+2. Create a modified `actionOnGoldman` function called `actionOnGoldmanOnly` so that it will only work on recommendations with the type `GoldmanRec`.
 
 If `wrappedGoldmanRec` is buy `GoldmanRec`, the result should be
 ```
@@ -272,6 +274,7 @@ actionOnGoldmanOnly3 wrappedGoldmanRec
 
 
 (**
+## Question 7
 Imagine that stock tips have the form
 ```fsharp
 type StockTip = Buy | Sell | Hold
@@ -291,8 +294,8 @@ let actionOnProfessor (x: StockTip) =
     | Sell -> StockTip.Buy
 ```
 
-- Create a two case union called `FriendOrFoe` where the two cases are Friend of StockTip and Professor of StockTip.
-- Create a function called `actionFriendOrFoe` that will properly handle tips from friends and tips from professors.
+1. Create a two case union called `FriendOrFoe` where the two cases are Friend of StockTip and Professor of StockTip.
+2. Create a function called `actionFriendOrFoe` that will properly handle tips from friends and tips from professors.
 
 Show that `friendRec` and `professorRec` wrapped in the `FriendOrFoe` type are handled properly by `actionFriendOrFoe`.
 *)

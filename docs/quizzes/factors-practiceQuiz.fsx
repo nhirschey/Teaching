@@ -64,19 +64,18 @@ let ibmBetaOnSpy = 1.2
 
 
 (**
-1 What are the weights on the risk-free asset and
+## Question 1
+What are the weights on the risk-free asset and
 SPY in the portfolio that hedges IBM's exposure to
 SPY? 
 
-- Report the weight on the risk-free asset as a value named `wRf` of type `float`. 
-- Report the weight on the SPY portfolio as a value named `wSpy` of type `float`.
+1. Report the weight on the risk-free asset as a value named `wRf` of type `float`. 
+2. Report the weight on the SPY portfolio as a value named `wSpy` of type `float`.
 *)
 
 (*** include-it-raw:preDetails ***)
 (*** define: WeightsHedgePort, define-output: WeightsHedgePort ***)
 
-// 1. weights in the hedge portfolio 
-//
 let wSpy = ibmBetaOnSpy
 let wRf = 1.0-wSpy
 
@@ -89,17 +88,16 @@ let wRf = 1.0-wSpy
 
 
 (**
-2 What are the returns for Times [0;1;2] on the portfolio 
+## Question 2
+What are the returns for Times [0;1;2] on the portfolio 
 that hedges IBM's factor exposure to SPY? 
 
-- Report results as a value named `hedgePortReturns` of type `ReturnOb array`.
+1. Report results as a value named `hedgePortReturns` of type `ReturnOb array`.
 *)
 
 (*** include-it-raw:preDetails ***)
 (*** define: ReturnsHedgePort, define-output: ReturnsHedgePort ***)
 
-// 2. returns of the hedge portfolio
-//
 let hedgePortReturns =
     spy
     |> Array.map(fun spy ->
@@ -115,11 +113,12 @@ let hedgePortReturns =
 
 
 (**
-3 Call the portfolio that hedges IBM's factor exposure to SPY
+## Question 3
+Call the portfolio that hedges IBM's factor exposure to SPY
 the hedge portfolio. What is the hedge portfolio's factor beta
 on SPY? 
 
-- Report the answer as a value named `hedgePortBetaOnSpy` of type float.
+1. Report the answer as a value named `hedgePortBetaOnSpy` of type float.
 *)
 
 (*** include-it-raw:preDetails ***)
@@ -146,18 +145,16 @@ let hedgePortBetaOnSpy = ibmBetaOnSpy
 
 
 (**
-4 What are the returns for Times [0;1;2] on the portfolio
+## Question 4
+What are the returns for Times [0;1;2] on the portfolio
 that is long IBM and short the portfolio that hedges
 IBM's factor exposre to SPY?
 
--  Report results as a value named `longShortPortReturns` of type `ReturnOb array`.
+1. Report results as a value named `longShortPortReturns` of type `ReturnOb array`.
 *)
 
 (*** include-it-raw:preDetails ***)
 (*** define: LongShortIBMRet, define-output: LongShortIBMRet ***)
-
-// 4. Returns on portfolio that is long IBM and short
-// the portfolio that tracks its exposure to SPY.
 
 let hedgePortMap =
     // using map because it's efficient for lookups.
@@ -196,18 +193,15 @@ let longShortPortReturns =
 
 
 (**
-5 What is the alpha of IBM from the perspective of 
+## Question 5
+What is the alpha of IBM from the perspective of 
 a factor model that uses SPY as the only risk factor? 
 
--  Report the result as a value named `alpha` of type float.
+1. Report the result as a value named `alpha` of type float.
 *)
 
 (*** include-it-raw:preDetails ***)
 (*** define: Alpha, define-output: Alpha ***)
-
-
-// 5. Alpha in this factor model
-//
 
 let alpha = 
     longShortPortReturns 
@@ -222,17 +216,16 @@ let alpha =
 
 
 (**
-6 What is the information ratio of IBM from the perspective
+## Question 6
+What is the information ratio of IBM from the perspective
 of a factor model that uses SPY as the only risk factor?
 
--  Report the result as a value named `io` of type float.
+1. Report the result as a value named `io` of type float.
 *)
 
 (*** include-it-raw:preDetails ***)
-(*** define: Alpha, define-output: Alpha ***)
+(*** define: IO, define-output: IO ***)
 
-// 6. Information ratio
-//
 #r "nuget: FSharp.Stats"
 open FSharp.Stats
 
@@ -247,8 +240,8 @@ let sdHedgeReturns =
 
 let io = alpha / sdHedgeReturns
 
-(*** condition:html, include:Alpha ***)
-(*** condition:html, include-fsi-output:Alpha ***)
+(*** condition:html, include:IO ***)
+(*** condition:html, include-fsi-output:IO ***)
 (*** include-it-raw:postDetails ***)
 
 (*** condition:ipynb ***)

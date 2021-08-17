@@ -39,14 +39,14 @@ I rarely use anonymous records, but you might find them useful for exploratory d
 *)
 
 (**
-### Anonymous records
+# Anonymous records
 *)
 
 (**
-1 Do the following:
+## Question 1
 
-- Create a *record* named `ExampleRec` that has an `X` field of type int and a `Y` field of type int. Create an example `ExampleRec` and assign it to a value named `r`.
-- Create an *anonymous record* that has an `X` field of type int and a `Y` field of type int. Create an example of the anonymous record and assign it to a value named `ar`.
+1. Create a *record* named `ExampleRec` that has an `X` field of type int and a `Y` field of type int. Create an example `ExampleRec` and assign it to a value named `r`.
+2. Create an *anonymous record* that has an `X` field of type int and a `Y` field of type int. Create an example of the anonymous record and assign it to a value named `ar`.
 *)
 
 (*** include-it-raw:preDetails ***)
@@ -74,7 +74,8 @@ let ar = {| X = 1; Y = 2|}
 
 
 (**
-2 Imagine you have this array
+## Question 2
+Imagine you have this array
 *)
 
 open System
@@ -84,10 +85,10 @@ let arr = [|{ Date = DateTime(1990,1,1); Value = 1.25}
             { Date = DateTime(1991,1,1); Value = 3.25} |]
 
 (**
-- Group the observations by a tuple of `(year,month)` and find the 
+1. Group the observations by a tuple of `(year,month)` and find the 
 minimum value for each group. Report the result as a tuple of the group
-and the minimum value [so it will be `((year, month), minValue)]`.
-- Now, the same thing with anonymous records.
+and the minimum value [so it will be `((year, month), minValue)`].
+2. Now, the same thing with anonymous records.
 Group the observations by an Anonymous Record `{| Year = year; Month= month|}` and find the 
 minimum value for each group. Report the result as an Anonymous record with a Group
 field for the group and a value field for the minimum value [so it will be
@@ -153,11 +154,12 @@ arr
 
 
 (**
-### Portfolio Returns
+# Portfolio Returns
 *)
 
 (**
-1 Imagine that you have the following positions in your portfolio.
+## Question 1
+Imagine that you have the following positions in your portfolio.
 For each position you have a weight and a return.
 What is the return of the entire portfolio?
 *)
@@ -167,10 +169,10 @@ let stockPos = { Id = "stock"; Weight = 0.25; Return = 0.1 }
 let bondPos = { Id = "bond"; Weight = 0.75; Return = 0.05}
 
 (**
-- Group the observations by a tuple of `(year,month)` and find the 
+1. Group the observations by a tuple of `(year,month)` and find the 
 minimum value for each group. Report the result as a tuple of the group
-and the minimum value [so it will be `((year, month), minValue)]`.
-- Now, the same thing with anonymous records.
+and the minimum value [so it will be `((year, month), minValue)`].
+2. Now, the same thing with anonymous records.
 Group the observations by an Anonymous Record `{| Year = year; Month= month|}` and find the 
 minimum value for each group. Report the result as an Anonymous record with a Group
 field for the group and a value field for the minimum value [so it will be
@@ -205,111 +207,82 @@ stockAndBondPort = stockAndBondPort2 // evaluates to true
 // write your code here, see website for solution.
 
 
-
-
-
-
 (**
-# HERE
-*)
-
-(*
-
-
-2. Imagine that you have the following positions in your portfolio.
+## Question 2
+Imagine that you have the following positions in your portfolio.
 For each position you have a weight and a return.
 What is the return of the entire portfolio?
+*)
 
-```fsharp
-type PortReturnPos = { Id: string;  Weight: float; Return: float}
 let positions =
     [|{ Id = "stock"; Weight = 0.25; Return = 0.12 }
       { Id = "bond"; Weight = 0.25; Return = 0.22 }
       { Id = "real-estate"; Weight = 0.5; Return = -0.15 } |]
-```
 
-3. Imagine that you have the following positions in your portfolio.
-For each position you have a weight and a return.
-What is the return of the entire portfolio?
+(*** include-it-raw:preDetails ***)
+(*** define: EntirePortRet, define-output: EntirePortRet ***)
 
-```fsharp
-type PortReturnPos = { Id: string;  Weight: float; Return: float}
-let positionsWithShort =
-    [|{ Id = "stock"; Weight = 0.25; Return = 0.12 }
-      { Id = "bond"; Weight = -0.25; Return = 0.22 }
-      { Id = "real-estate"; Weight = 1.0; Return = -0.15 } |]
-```
- 
-*)
-
-
-// 2.
-//
-let positions =
-    [|{ Id = "stock"; Weight = 0.25; Return = 0.12 }
-      { Id = "bond"; Weight = 0.25; Return = 0.22 }
-      { Id = "real-estate"; Weight = 0.5; Return = -0.15 } |]
 let threeAssetPortfolioReturn =
     positions
     |> Array.map(fun pos -> pos.Weight*pos.Return)
     |> Array.sum
 
-// 3.
-//
+(*** condition:html, include:EntirePortRet ***)
+(*** condition:html, include-fsi-output:EntirePortRet ***)
+(*** include-it-raw:postDetails ***)
+
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+
+(**
+## Question 3
+Imagine that you have the following positions in your portfolio.
+For each position you have a weight and a return.
+What is the return of the entire portfolio?
+*)
+
 let positionsWithShort =
     [|{ Id = "stock"; Weight = 0.25; Return = 0.12 }
       { Id = "bond"; Weight = -0.25; Return = 0.22 }
       { Id = "real-estate"; Weight = 1.0; Return = -0.15 } |]
+
+(*** include-it-raw:preDetails ***)
+(*** define: EntirePortRetWithShort, define-output: EntirePortRetWithShort ***)
+
 let positionsWithShortReturn =
     positionsWithShort
     |> Array.map(fun pos -> pos.Weight*pos.Return)
     |> Array.sum
 
 
-(*** define:sharpeRatio ***)
+(*** condition:html, include:EntirePortRetWithShort ***)
+(*** condition:html, include-fsi-output:EntirePortRetWithShort ***)
+(*** include-it-raw:postDetails ***)
 
-(*
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+
+(**
 # Sharpe Ratios
-
-1. Imagine that you have the following array of *annual* returns in
-    excess of the risk-free rate. What is the *annualized* Sharpe ratio?
-
-Note that the units are such that 0.1 is 10%.
-```fsharp
-#r "nuget: FSharp.Stats"
-open FSharp.Stats
-[| 0.1; -0.4; 0.2; 0.15; -0.03 |]
-```
-
-2. Imagine that you have the following array of *monthly* returns in
-    excess of the risk-free rate. What is the *annualized* Sharpe ratio?
-
-Note that the units are such that 0.1 is 10%.
-```fsharp
-#r "nuget: FSharp.Stats"
-open FSharp.Stats
-[| 0.1; -0.4; 0.2; 0.15; -0.03 |]
-```
-
-3. Imagine that you have the following array of *daily* returns in
-    excess of the risk-free rate. What is the *annualized* Sharpe ratio?
-
-Note that the units are such that 0.1 is 10%.
-```fsharp
-#r "nuget: FSharp.Stats"
-open FSharp.Stats
-[| 0.1; -0.4; 0.2; 0.15; -0.03 |]
-```
-  
 *)
 
-(*** define:sharpeRatio-ans ***)
-// 1.
-//
+(**
+## Question 1
+Imagine that you have the following array of *annual* returns in
+excess of the risk-free rate. What is the *annualized* Sharpe ratio?
+*)
+
+let rets = [| 0.1; -0.4; 0.2; 0.15; -0.03 |]
+//Note that the units are such that 0.1 is 10%.
+
+(*** include-it-raw:preDetails ***)
+(*** define: AnnualizedSR, define-output: AnnualizedSR ***)
+
 #r "nuget: FSharp.Stats"
 open FSharp.Stats
 
-let rets = [| 0.1; -0.4; 0.2; 0.15; -0.03 |]
 let retsAvg = rets |> Array.average
 // we get stDev from FSharp.Stats
 // there is only a Seq.stDev, not Array.stDev.
@@ -318,7 +291,28 @@ let retsAvg = rets |> Array.average
 let retsStdDev = rets |> Seq.stDev 
 let retsSharpeRatio = retsAvg/retsStdDev
 
-// 2.
+(*** condition:html, include:AnnualizedSR ***)
+(*** condition:html, include-fsi-output:AnnualizedSR ***)
+(*** include-it-raw:postDetails ***)
+
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+
+(**
+## Question 2
+Imagine that you have the following array of *monthly* returns in
+excess of the risk-free rate. What is the *annualized* Sharpe ratio?
+
+```fsharp
+let rets = [| 0.1; -0.4; 0.2; 0.15; -0.03 |]
+//Note that the units are such that 0.1 is 10%.
+```
+*)
+
+(*** include-it-raw:preDetails ***)
+(*** define: MonthlyRetAnnualSR, define-output: MonthlyRetAnnualSR ***)
+
 // remember that to annualize an arithmetic return,
 // we do return * (# compounding periods per year)
 // to annualize a standard deviation, 
@@ -362,8 +356,28 @@ let annualizedSharpeFromMonthly2 =
 // recall from the fundamentals lecture how floating point math is inexact.
 Math.Round(annualizedSharpeFromMonthly,6) = Math.Round(annualizedSharpeFromMonthly2,6) // true
 
-// 3.
-//
+(*** condition:html, include:MonthlyRetAnnualSR ***)
+(*** condition:html, include-fsi-output:MonthlyRetAnnualSR ***)
+(*** include-it-raw:postDetails ***)
+
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+
+(**
+## Question 3
+Imagine that you have the following array of *daily* returns in
+excess of the risk-free rate. What is the *annualized* Sharpe ratio?
+
+```fsharp
+let rets = [| 0.1; -0.4; 0.2; 0.15; -0.03 |]
+//Note that the units are such that 0.1 is 10%.
+```
+*)
+
+(*** include-it-raw:preDetails ***)
+(*** define: dailyRetAnnualSR, define-output: dailyRetAnnualSR ***)
+
 // Convention for daily is 252 trading days per year.
 // so annualize daily by multiplying by sqrt(252.0)
 let annualizedSharpeFromDaily =
@@ -376,11 +390,13 @@ let dailyStDevRet = rets |> Seq.stDev
 let annualizedSharpeFromDaily2 =
     sqrt(252.0) * (dailyAvgRet/dailyStDevRet)
 
-(**
-*)
+(*** condition:html, include:dailyRetAnnualSR ***)
+(*** condition:html, include-fsi-output:dailyRetAnnualSR ***)
+(*** include-it-raw:postDetails ***)
 
-///********************
-/// Questions
-///********************
-/// 
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+
+
 

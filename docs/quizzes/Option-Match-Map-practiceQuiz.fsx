@@ -50,11 +50,12 @@ Here are some references to these topics. Please read the F# language reference 
 *)
 
 (**
-### Options
+# Options
 *)
 
 (**
-1 Create a value named `a` and assign `Some 4` to it.
+## Question 1
+Create a value named `a` and assign `Some 4` to it.
 *)
 
 (*** include-it-raw:preDetails ***)
@@ -71,7 +72,8 @@ let a = Some 4
 
 
 (**
-2 Create a value name `b` and assign `None` to it.
+## Question 2
+Create a value name `b` and assign `None` to it.
 *)
 
 (*** include-it-raw:preDetails ***)
@@ -88,7 +90,8 @@ let b = None
 
 
 (**
-3 Create a tuple named `c` and assign `(Some 4, None)` to it.
+## Question 3
+Create a tuple named `c` and assign `(Some 4, None)` to it.
 *)
 
 (*** include-it-raw:preDetails ***)
@@ -105,7 +108,8 @@ let c = Some 4, None
 
 
 (**
-4 Write a function named d that takes `x: float` as an input and outputs
+## Question 4
+Write a function named d that takes `x: float` as an input and outputs
 `Some x` if x < 0 and `None` if x >= 0. Test it by mapping each element of
 `[0.0; 1.4; -7.0]` by function d.
 *)
@@ -130,7 +134,8 @@ let d2 x = if x < 0.0 then Some x else None
 
 
 (**
-5 Consider this array of trading days for a stock and it's price and dividends:
+## Question 5
+Consider this array of trading days for a stock and it's price and dividends:
 *)
 
 type StockDays = { Day : int; Price : decimal; Dividend : decimal Option }
@@ -142,9 +147,9 @@ let stockDays =
           Dividend = dividend } |]   
 
 (**
-- create a new array called `stockDaysWithDividends` that is a filtered
+1. create a new array called `stockDaysWithDividends` that is a filtered
   version of `stockDays` that only contains days with dividends. 
-- Then create an array called `stockDaysWithoutDividends` that is a filtered
+2. Then create an array called `stockDaysWithoutDividends` that is a filtered
   version of `stockDays` that only contains days that do not have dividends.
 *)
 
@@ -175,7 +180,8 @@ let stockDaysWithoutDividends =
 
 
 (**
-6 Consider the value `let nestedOption = (Some (Some 4))`. Pipe
+## Question 6
+Consider the value `let nestedOption = (Some (Some 4))`. Pipe
 it to `Option.flatten` so that you are left with `Some 4`.
 *)
 
@@ -196,7 +202,8 @@ Option.flatten nestedOption
 
 
 (**
-7 Consider this list `let listOfNestedOptions = [(Some (Some 4)); Some (None); None]`.
+## Question 7
+Consider this list `let listOfNestedOptions = [(Some (Some 4)); Some (None); None]`.
 Show how to transform it into `[Some 4; None; None]` by mapping a function to each
 element of the list. 
 *)
@@ -218,11 +225,12 @@ listOfNestedOptions |> List.map Option.flatten
 
 
 (**
-### Match Expressions
+# Match Expressions
 *)
 
 (**
-1 Write a function named `ma` that takes `x: float Option` as an input.
+## Question 1
+Write a function named `ma` that takes `x: float Option` as an input.
 Use a match expression to output the `float` if `x` is something and
 `0.0` if the `float` is nothing. Provide a test case for both cases to show
 that the function works.
@@ -259,7 +267,8 @@ ma2 None // returns 0.0
 
 
 (**
-2 Write a function named `mb` that takes `x: float` as an input.
+## Question 2
+Write a function named `mb` that takes `x: float` as an input.
 Use a match expression to output `1.0` if `x` is `1.0`, `4.0` if `x` is `2.0`,
 and `x^3.0` if `x` is anything else. Provide 3 tests for the 3 test cases 
 to show that the function works.
@@ -289,12 +298,13 @@ ma2 None // returns 0.0
 
 
 (**
-3 Write a function named `mc` that takes a tuple pair of ints  `x: int * int`
+## Question 3
+Write a function named `mc` that takes a tuple pair of ints  `x: int * int`
 as an input. Handle these cases in the following order:
 
-- if the first `int` is `7`, return `"a"`.
-- if the second int is `7`, return `"b"`.
-- For everything else, return `"c"`.
+1. if the first `int` is `7`, return `"a"`.
+2. if the second int is `7`, return `"b"`.
+3. For everything else, return `"c"`.
 
 Finally, test the function on `(7,6)`, `(6,7)`, `(7, 7)`, and `(6,6)`.
 Make sure that you understand how those 4 examples are handled.
@@ -322,7 +332,8 @@ mc (6,6) // evaluates to "c" because it matches the last wildcard.
 
 
 (**
-4 Consider this array of trading days for a stock and it's price and dividends:
+## Question 4
+Consider this array of trading days for a stock and it's price and dividends:
 *)
 
 type StockDays2 = { Day : int; Price : decimal; Dividend : decimal Option }
@@ -335,12 +346,12 @@ let stockDays2 =
 
 (**
 
-- create a new array called `daysWithDividends` that is a filtered
+1. create a new array called `daysWithDividends` that is a filtered
   version of `stockDays` that only contains days with dividends. For
   each day with a dividend, you should return a `(int * decimal)` tuple
   where the int is the day  and the decimal is the dividend. 
   Thus the result is an `(int * decimal) array`.
-- Then create an array called `daysWithoutDividends` that is a filtered
+2. Then create an array called `daysWithoutDividends` that is a filtered
   version of `stockDays` that only contains days that do not have dividends.
   For each day without a dividend, you should return the day as an `int`.
   Thus the result is an `int array`.
@@ -394,16 +405,17 @@ let daysWithoutDividends =
 
 
 (**
-### Map Collections
+# Map Collections
 *)
 
 (**
-1 Create a Map collection named `mapA` 
+## Question 1
+Create a Map collection named `mapA` 
 from the list `[("a",1);("b",2)]` where the first thing 
 in the tuple is the key and the second thing is the value.
 
-- Use `Map.tryFind` to retrieve the value for key `"a"`
-- Use `Map.tryFind` to retrieve the value for key `"c"`
+1. Use `Map.tryFind` to retrieve the value for key `"a"`
+2. Use `Map.tryFind` to retrieve the value for key `"c"`
 *)
 
 (*** include-it-raw:preDetails ***)
@@ -419,7 +431,7 @@ Map.tryFind "a" mapA    // evaluates to Some 1
 // or
 mapA |> Map.tryFind "a" // evaluates to Some 1
 Map.tryFind "c" mapA    // evaluates to None
-mapA |> Map.tryFind "c" // evaluates to None .0
+mapA |> Map.tryFind "c" // evaluates to None 
 
 
 (*** condition:html, include:mapA ***)
@@ -431,12 +443,13 @@ mapA |> Map.tryFind "c" // evaluates to None .0
 
 
 (**
-2 Create a Map collection named `mapB` 
-from the list `[(1,"a");(2,"b")]` where the first thing 
+## Question 2
+Create a Map collection named `mapB`
+from the list `[(1,"a");(2,"b")]` where the first thing
 in the tuple is the key and the second thing is the value.
 
-- Use `Map.tryFind` to retrieve the value for key `1`
-- Use `Map.tryFind` to retrieve the value for key `3`
+1. Use `Map.tryFind` to retrieve the value for key `1`
+2. Use `Map.tryFind` to retrieve the value for key `3`
 *)
 
 (*** include-it-raw:preDetails ***)
@@ -456,7 +469,8 @@ Map.tryFind 3 mapB
 
 
 (**
-3 Use this array
+## Question 3
+Use this array
 *)
 
 type StockDays3 = { Day : int; Price : decimal; Dividend : decimal Option }
@@ -468,9 +482,9 @@ let stockDays3 =
           Dividend = dividend } |]     
 
 (**
-- Create a Map collection named `mapC`. The key should be the day field, 
+1. Create a Map collection named `mapC`. The key should be the day field, 
   and the value should be the full `StockDays3` record.
-- Create a Map colleciton named `mapD`. The key should be the full
+2. Create a Map collection named `mapD`. The key should be the full
   `StockDay3` record. The value should be the day field.
 *)
 
@@ -501,7 +515,8 @@ let mapD =
 
 
 (**
-4 Consider a the following Map collection:
+## Question 4
+Consider a the following Map collection:
 *)
 let mapp = [("a", 1); ("d",7)] |> Map.ofList
 
@@ -551,7 +566,7 @@ for letter in ["a"; "b"; "c"; "d"] do
 
 
 (**
-### Joins
+# Joins
 
 For the following questions use this data:
 *)
@@ -576,7 +591,8 @@ Hint: remember that Map collections are useful for lookups.
 
 
 (**
-1 Create a `TwoStocksPriceOb list` named `tslA` that has prices for
+## Question 1
+Create a `TwoStocksPriceOb list` named `tslA` that has prices for
 every observation of `stockA`. If there is a price for `stockB`
 at the same time as `stockA`, then include the `stockB` price. Otherwise,
 the `stockB` price should be `None`.
@@ -641,7 +657,8 @@ let tslA3 = stockA |> List.map tryFindBforA
 
 
 (**
-2 Create a `TwoStocksPriceOb list` named `tslB` that has prices for
+## Question 2
+Create a `TwoStocksPriceOb list` named `tslB` that has prices for
 every observation of stockB. If there is a price for `stockA`
 at the same time as `stockB`, then include the `stockA` price. Otherwise,
 the `stockA` price should be `None`.
@@ -677,7 +694,8 @@ let tslB =
 
 
 (**
-3 Create a `TwoStocksPriceOb list` named `tslC` that only includes times
+## Question 3
+Create a `TwoStocksPriceOb list` named `tslC` that only includes times
 when there is a price for both `stockA` and `stockB`. The prices for stocks
 A and B should always be something.
 *)
@@ -722,9 +740,12 @@ let tslC2 =
 
 
 (**
-4 Create a `TwoStocksPriceOb list` named `tslD` that includes available
+## Question 4
+Create a `TwoStocksPriceOb list` named `tslD` that includes available
 stock prices for `stockA` and `stockB` at all possible times. If a price for
 one of the stocks is missing for a given time, it should be None.
+
+
 *)
 
 (*** include-it-raw:preDetails ***)

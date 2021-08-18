@@ -344,20 +344,26 @@ Given the list below, convert each element to a `decimal` and then calculate the
 *)
 
 (*** include-it-raw:preDetails ***)
-(*** define: averageBy, define-output: averageBy ***)
 
+(*** define: averageBy, define-output: averageBy ***)
 [ 1.0; -4.0; 7.0; 2.0; -10.0]
 |> List.averageBy(fun x -> decimal x)
+(*** condition:html, include: averageBy ***)
+(*** condition:html, include-fsi-output: averageBy ***)
 
-// Since decimal is a function that converts to
-// the decimal type, you could also do.
-// The FSharp linter shouLd show you a blue squiggly
-// in the above code telling you this.
+(**
+Since `decimal` is a function that converts to
+the `decimal` type, you could also do.
+The FSharp linter shouLd show you a blue squiggly
+in the above code telling you this.
+*)
+
+(*** define: averageBy1, define-output: averageBy1 ***)
 [ 1.0; -4.0; 7.0; 2.0; -10.0]
 |> List.averageBy decimal
+(*** condition:html, include: averageBy1 ***)
+(*** condition:html, include-fsi-output: averageBy1 ***)
 
-(*** condition:html, include:averageBy ***)
-(*** condition:html, include-fsi-output:averageBy ***)
 (*** include-it-raw:postDetails ***)
 
 (*** condition:ipynb ***)

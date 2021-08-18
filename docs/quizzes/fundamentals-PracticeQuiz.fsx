@@ -92,14 +92,21 @@ Given a tuple `(1.0,2.0)`, assign the second element to a value named `b`.
 *)
 
 (*** include-it-raw:preDetails ***)
+
 (*** define: assignSndTob, define-output: assignSndTob ***)
-
 let b = snd (1.0, 2.0)
-// or
-// let (_, b) = (1.0, 2.0)
+(*** condition:html, include: assignSndTob ***)
+(*** condition:html, include-fsi-output: assignSndTob ***)
 
-(*** condition:html, include:assignSndTob ***)
-(*** condition:html, include-fsi-output:assignSndTob ***)
+(**
+or
+*)
+
+(*** define: assignSndTob1, define-output: assignSndTob1 ***)
+let (_, b1) = (1.0, 2.0)
+(*** condition:html, include: assignSndTob1 ***)
+(*** condition:html, include-fsi-output: assignSndTob1 ***)
+
 (*** include-it-raw:postDetails ***)
 
 (*** condition:ipynb ***)
@@ -203,14 +210,30 @@ Create an `array` where the elements are `1`, `2`, and `3`.
 *)
 
 (*** include-it-raw:preDetails ***)
-(*** define: Array1, define-output: Array1 ***)
 
+(*** define: array, define-output: array ***)
 [| 1; 2; 3 |]
-// or [| 1 .. 3 |]
-// or [| for i = 1 to 3 do i |]
+(*** condition:html, include: array ***)
+(*** condition:html, include-fsi-output: array ***)
 
-(*** condition:html, include:Array1 ***)
-(*** condition:html, include-fsi-output:Array1 ***)
+(**
+or
+*)
+
+(*** define: array1, define-output: array1 ***)
+[| 1 .. 3 |]
+(*** condition:html, include: array1 ***)
+(*** condition:html, include-fsi-output: array1 ***)
+
+(**
+or
+*)
+
+(*** define: array2, define-output: array2 ***)
+[| for i = 1 to 3 do i |]
+(*** condition:html, include: array2 ***)
+(*** condition:html, include-fsi-output: array2 ***)
+
 (*** include-it-raw:postDetails ***)
 
 (*** condition:ipynb ***)

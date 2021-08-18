@@ -121,18 +121,25 @@ Write a function named d that takes `x: float` as an input and outputs
 *)
 
 (*** include-it-raw:preDetails ***)
-(*** define: dFunction, define-output: dFunction ***)
 
+(*** define: dFunction, define-output: dFunction ***)
 let d (x: float) = if x < 0.0 then Some x else None
 [0.0; 1.4;-7.0] |> List.map d
-// or, we don't actually have to tell it that x is a float
-// because type inference can tell that x must be a float
-// because the function does `x < 0.0` and 0.0 is a float.
-let d2 x = if x < 0.0 then Some x else None
-[0.0; 1.4;-7.0] |> List.map d2
-
 (*** condition:html, include:dFunction ***)
 (*** condition:html, include-fsi-output:dFunction ***)
+
+(**
+or, we don't actually have to tell it that `x` is a `float`
+because type inference can tell that `x` must be a `float`
+because the function does `x < 0.0` and `0.0` is a `float`.
+*)
+
+(*** define: dFunction1, define-output: dFunction1 ***)
+let d2 x = if x < 0.0 then Some x else None
+[0.0; 1.4;-7.0] |> List.map d2
+(*** condition:html, include:dFunction1 ***)
+(*** condition:html, include-fsi-output:dFunction1 ***)
+
 (*** include-it-raw:postDetails ***)
 
 (*** condition:ipynb ***)
@@ -160,8 +167,8 @@ let stockDays =
 *)
 
 (*** include-it-raw:preDetails ***)
-(*** define: stockDayswithDividends, define-output: stockDayswithDividends ***)
 
+(*** define: stockDayswithDividends, define-output: stockDayswithDividends ***)
 let stockDaysWithDivideds =
     stockDays
     |> Array.filter(fun day -> 
@@ -170,15 +177,19 @@ let stockDaysWithDivideds =
         // function is operating on represents a day.
         // using a variable named day to represent the day record
         day.Dividend.IsSome)
+(*** condition:html, include:stockDayswithDividends ***)
+(*** condition:html, include-fsi-output:stockDayswithDividends ***)
+
+(*** define: stockDayswithDividends1, define-output: stockDayswithDividends1 ***)
 let stockDaysWithoutDividends =
     stockDays
     |> Array.filter(fun x -> 
         // using a variable named x to represent the day record.
         // less clear by looking at this code that x is a day.
         x.Dividend.IsNone)
+(*** condition:html, include:stockDayswithDividends1 ***)
+(*** condition:html, include-fsi-output:stockDayswithDividends1 ***)
 
-(*** condition:html, include:stockDayswithDividends ***)
-(*** condition:html, include-fsi-output:stockDayswithDividends ***)
 (*** include-it-raw:postDetails ***)
 
 (*** condition:ipynb ***)
@@ -243,29 +254,36 @@ that the function works.
 *)
 
 (*** include-it-raw:preDetails ***)
-(*** define: maFunction, define-output: maFunction ***)
 
+(*** define: maFunction, define-output: maFunction ***)
 let ma x = 
     match x with
     | None -> 0.0
     | Some y -> y
 
-ma (Some 7.0) // returns y.0
-ma None // returns 0.0
-// or, see the x in the (Some x) part of the match expression
-// is the float, not the original (x: float Option)
-// To see this, hover your cursor over the first two xs. it says x is float Option.
-// Then hover over the second two xs. It says x is float. Two different xs!
+let ma2Some7 = ma (Some 7.0) // returns 7.0
+let ma2None = ma None // returns 0.0
+(*** condition:html, include:maFunction ***)
+(*** condition:html, include-fsi-output:maFunction ***)
+
+(**
+or, see the `x` in the (`Some x`) part of the match expression
+is the `float`, not the original (`x: float Option`)
+To see this, hover your cursor over the first two xs. it says `x is float Option`.
+Then hover over the second two xs. It says `x is float`. Two different xs!
+*)
+
+(*** define: maFunction1, define-output: maFunction1 ***)
 let ma2 x = 
     match x with
     | None -> 0.0
     | Some x -> x
-ma2 (Some 7.0) // returns y.0
-ma2 None // returns 0.0
 
+let ma2Some7Other = ma2 (Some 7.0) // returns 7.0
+let ma2NoneOther = ma2 None // returns 0.0
+(*** condition:html, include:maFunction1 ***)
+(*** condition:html, include-fsi-output:maFunction1 ***)
 
-(*** condition:html, include:maFunction ***)
-(*** condition:html, include-fsi-output:maFunction ***)
 (*** include-it-raw:postDetails ***)
 
 (*** condition:ipynb ***)
@@ -289,11 +307,9 @@ let mb x =
     | 2.0 -> 4.0
     | x -> x**3.0
 
-mb 1.0 // evaluates to 1.0
-mb 2.0 // evaluates to 4.0
-mb 7.0 // evaluates to 343.00
-ma2 None // returns 0.0
-
+let mb1 = mb 1.0 // evaluates to 1.0
+let mb2 = mb 2.0 // evaluates to 4.0
+let mb7 = mb 7.0 // evaluates to 343.00
 
 (*** condition:html, include:mbFunction ***)
 (*** condition:html, include-fsi-output:mbFunction ***)
@@ -324,10 +340,11 @@ let mc x =
     | (7, _) -> "a" // the _ in (7, _) indicates wildcard; it matches anything.
     | (_, 7) -> "b" 
     | _ -> "c" // wild card at the end catches anything remaining.
-mc (7,6) // evaluates to "a" because it matches the first case and stops checking.
-mc (6,7) // evaluates to "b" because it matches the second case and stops checking.
-mc (7,7) // evaluates to "a" because it matches the first case and stops checking.
-mc (6,6) // evaluates to "c" because it matches the last wildcard.
+
+let mc76 = mc (7,6) // evaluates to "a" because it matches the first case and stops checking.
+let mc67 = mc (6,7) // evaluates to "b" because it matches the second case and stops checking.
+let mc77 = mc (7,7) // evaluates to "a" because it matches the first case and stops checking.
+let mc66 = mc (6,6) // evaluates to "c" because it matches the last wildcard.
 
 (*** condition:html, include:mcFunction ***)
 (*** condition:html, include-fsi-output:mcFunction ***)
@@ -365,8 +382,12 @@ let stockDays2 =
 *)
 
 (*** include-it-raw:preDetails ***)
-(*** define: daysWithAndWithoutDividends, define-output: daysWithAndWithoutDividends ***)           
 
+(**
+Days With Dividends: 
+*)
+
+(*** define: daysWithAndWithoutDividends, define-output: daysWithAndWithoutDividends ***)           
 let daysWithDividends1 =
     // using filter and then a map
     stockDays2
@@ -375,7 +396,14 @@ let daysWithDividends1 =
         match day.Dividend with
         | None -> failwith "shouldn't happen because I filtered on IsSome"
         | Some div -> day.Day, div)
+(*** condition:html, include:daysWithAndWithoutDividends ***)
+(*** condition:html, include-fsi-output:daysWithAndWithoutDividends ***)
 
+(**
+or
+*)
+
+(*** define: daysWithAndWithoutDividends1, define-output: daysWithAndWithoutDividends1 ***)           
 let daysWithDividends2 =
     // using choose, this is better. Think of choose
     // as a filter on IsSome and a map combined. Choose applies
@@ -394,16 +422,23 @@ let daysWithDividends2 =
         match day.Dividend with 
         | None -> None
         | Some div -> Some (day.Day, div))
+(*** condition:html, include:daysWithAndWithoutDividends1 ***)
+(*** condition:html, include-fsi-output:daysWithAndWithoutDividends1 ***)
 
+(**
+Days Without Dividends: 
+*)
+
+(*** define: daysWithAndWithoutDividends2, define-output: daysWithAndWithoutDividends2 ***)           
 let daysWithoutDividends =
     stockDays2
     |> Array.choose(fun day -> 
         match day.Dividend with
         | None -> Some day.Day
         | Some div -> None)
+(*** condition:html, include:daysWithAndWithoutDividends2 ***)
+(*** condition:html, include-fsi-output:daysWithAndWithoutDividends2 ***)
 
-(*** condition:html, include:daysWithAndWithoutDividends ***)
-(*** condition:html, include-fsi-output:daysWithAndWithoutDividends ***)
 (*** include-it-raw:postDetails ***)
 
 (*** condition:ipynb ***)
@@ -425,23 +460,70 @@ in the tuple is the key and the second thing is the value.
 *)
 
 (*** include-it-raw:preDetails ***)
+
+(**
+Create Map Collection:
+*)
+
 (*** define: mapA, define-output: mapA ***)
-
 let mapA = Map [("a",1);("b",2)]
-// or
-let mapA2 = [("a",1);("b",2)] |> Map
-// or
-let mapA3 = [("a",1);("b",2)] |> Map.ofList
-
-Map.tryFind "a" mapA    // evaluates to Some 1
-// or
-mapA |> Map.tryFind "a" // evaluates to Some 1
-Map.tryFind "c" mapA    // evaluates to None
-mapA |> Map.tryFind "c" // evaluates to None 
-
-
 (*** condition:html, include:mapA ***)
 (*** condition:html, include-fsi-output:mapA ***)
+
+(**
+or
+*)
+
+(*** define: mapA2, define-output: mapA2 ***)
+let mapA2 = [("a",1);("b",2)] |> Map
+(*** condition:html, include:mapA2 ***)
+(*** condition:html, include-fsi-output:mapA2 ***)
+
+(**
+or
+*)
+
+(*** define: mapA3, define-output: mapA3 ***)
+let mapA3 = [("a",1);("b",2)] |> Map.ofList
+(*** condition:html, include:mapA3 ***)
+(*** condition:html, include-fsi-output:mapA3 ***)
+
+(**
+Use `Map.tryFind` to retrieve the value for key `"a"`:
+*)
+
+(*** define: tryFindA, define-output: tryFindA ***)
+Map.tryFind "a" mapA    // evaluates to Some 1
+(*** condition:html, include:tryFindA ***)
+(*** condition:html, include-fsi-output:tryFindA ***)
+
+(**
+or
+*)
+
+(*** define: tryFindA1, define-output: tryFindA1 ***)
+mapA |> Map.tryFind "a" // evaluates to Some 1
+(*** condition:html, include:tryFindA1 ***)
+(*** condition:html, include-fsi-output:tryFindA1 ***)
+
+(**
+Use `Map.tryFind` to retrieve the value for key `"c"`:
+*)
+
+(*** define: tryFindC, define-output: tryFindC ***)
+Map.tryFind "c" mapA    // evaluates to None
+(*** condition:html, include:tryFindC ***)
+(*** condition:html, include-fsi-output:tryFindC ***)
+
+(**
+or
+*)
+
+(*** define: tryFindC1, define-output: tryFindC1 ***)
+mapA |> Map.tryFind "c" // evaluates to None
+(*** condition:html, include:tryFindC1 ***)
+(*** condition:html, include-fsi-output:tryFindC1 ***)
+
 (*** include-it-raw:postDetails ***)
 
 (*** condition:ipynb ***)
@@ -462,9 +544,8 @@ in the tuple is the key and the second thing is the value.
 (*** define: mapB, define-output: mapB ***)
 
 let mapB = Map [(1,"a");(2,"b")]
-Map.tryFind 1 mapB
-Map.tryFind 3 mapB
-
+let tryFindMapB1 = Map.tryFind 1 mapB
+let tryFindMapB3 =Map.tryFind 3 mapB
 
 (*** condition:html, include:mapB ***)
 (*** condition:html, include-fsi-output:mapB ***)
@@ -495,8 +576,8 @@ let stockDays3 =
 *)
 
 (*** include-it-raw:preDetails ***)
-(*** define: mapC, define-output: mapC ***)    
 
+(*** define: mapC, define-output: mapC ***)    
 let mapC =
     stockDays3
     |> Array.map(fun day ->
@@ -504,6 +585,10 @@ let mapC =
         // The key and value can be anything.
         day.Day, day)
     |> Map.ofArray
+(*** condition:html, include:mapC ***)
+(*** condition:html, include-fsi-output:mapC ***)
+
+(*** define: mapD, define-output: mapD ***)    
 let mapD =
     stockDays3
     |> Array.map(fun day ->
@@ -512,8 +597,9 @@ let mapD =
         day, day.Day)
     |> Map.ofArray
 
-(*** condition:html, include:mapC ***)
-(*** condition:html, include-fsi-output:mapC ***)
+(*** condition:html, include:mapD ***)
+(*** condition:html, include-fsi-output:mapD ***)
+
 (*** include-it-raw:postDetails ***)
 
 (*** condition:ipynb ***)
@@ -536,8 +622,8 @@ up `"a"`,`"b"`,"`c"`,`"d"`
 *)
 
 (*** include-it-raw:preDetails ***)
-(*** define: lookFor, define-output: lookFor ***)    
 
+(*** define: lookFor, define-output: lookFor ***)    
 let lookFor x =
     match Map.tryFind x mapp with
     | Some y -> printfn $"I found {y}"
@@ -547,24 +633,37 @@ lookFor "a" // I found 1
 lookFor "b" // I did not find b
 lookFor "c" // I did not find c
 lookFor "d" // I found 7
-// or iterate it
-// we use iter instead of map
-// because the result of iter has type `unit`,
-// and iter is for when your function has type `unit`.
-// Basically, unit type means the function did something
-// (in this case, printed to standard output) but
-// it doesn't actually return any output.
-// 
-// You could use map, but then we get `unit list` which
-// isn't really what we want. We just want to iterate
-// through the list and print to output.
-["a"; "b"; "c"; "d"] |> List.iter lookFor
-// or loop it
-for letter in ["a"; "b"; "c"; "d"] do
-    printfn $"{lookFor letter}"    
-
 (*** condition:html, include:lookFor ***)
 (*** condition:html, include-fsi-merged-output:lookFor ***)
+
+(**
+or iterate it
+we use iter instead of map
+because the result of iter has type `unit`,
+and iter is for when your function has type `unit`.
+Basically, unit type means the function did something
+(in this case, printed to standard output) but
+it doesn't actually return any output.  
+You could use map, but then we get `unit list` which
+isn't really what we want. We just want to iterate
+through the list and print to output.
+*)
+
+(*** define: lookFor1, define-output: lookFor1 ***)    
+["a"; "b"; "c"; "d"] |> List.iter lookFor
+(*** condition:html, include:lookFor1 ***)
+(*** condition:html, include-fsi-merged-output:lookFor1 ***)
+
+(**
+or loop it
+*)
+
+(*** define: lookFor2, define-output: lookFor2 ***)    
+for letter in ["a"; "b"; "c"; "d"] do
+    printfn $"{lookFor letter}"    
+(*** condition:html, include:lookFor2 ***)
+(*** condition:html, include-fsi-merged-output:lookFor2 ***)
+
 (*** include-it-raw:postDetails ***)
 
 (*** condition:ipynb ***)

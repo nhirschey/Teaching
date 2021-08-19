@@ -323,7 +323,7 @@ We can load this in our interactive session as follows, assuming that `secrets.f
 
 *)
 
-#load "../secrets.fsx"
+#load "secrets.fsx"
 
 (** and we can access the value by typing 
 ```
@@ -422,15 +422,18 @@ arr
 We're now going to process our downloaded data using the **FSharp.Data** [Csv Type Provider](http://fsprojects.github.io/FSharp.Data/library/CsvProvider.html). This is code that automatically defines the types of input data based on a sample. We have already reference the nuget packaged and opened the namespace, so we can just use it now.
 *)
 
-let [<Literal>] tiingoSampleFileFullPath = __SOURCE_DIRECTORY__ + "/../data-cache/tiingo-sample.csv"
-type TiingoCsv = CsvProvider<tiingoSampleFileFullPath>
-let tiingoSample = TiingoCsv.GetSample()
+#load "Common.fsx"
+open Common
 
-tiingoSample.Rows
-|> Seq.map(fun x -> x.Date.ToShortDateString(), x.Close)
-|> Seq.take 5
-|> Seq.toList
-(***include-fsi-output***)
+
+let aapl = 
+    "AAPL"
+    |> Tiingo.request
+    |> Tiingo.get  
+
+aapl
+|> Array.take 5
+(***include-it***)
 
 
 (**
@@ -443,7 +446,7 @@ open Plotly.NET
 
 
 let sampleChart =
-    tiingoSample.Rows
+    aapl
     |> Seq.map(fun x -> x.Date, x.AdjClose)
     |> Chart.Line
 
@@ -460,7 +463,7 @@ Let's calculate returns for this data. Typically we calculate close-close return
 
 // Returns
 let returns = 
-    tiingoSample.Rows
+    aapl
     |> Seq.sortBy(fun x -> x.Date)
     |> Seq.pairwise
     |> Seq.map(fun (a,b) -> b.Date, calcReturn (float a.AdjClose) (float b.AdjClose))

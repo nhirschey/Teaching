@@ -1,5 +1,4 @@
 #r "nuget: FSharp.Data"
-#load "secrets.fsx"
 
 open System
 open System.IO
@@ -10,6 +9,7 @@ Environment.CurrentDirectory <- __SOURCE_DIRECTORY__
 module Secrets =
     let envVars = System.Environment.GetEnvironmentVariables() 
     let localPath = "../secrets.fsx"
+    let localPath2 = "secrets.fsx"
     let tiingoKey = 
         let var = "TIINGO_KEY"
         if envVars.Contains var then 
@@ -18,7 +18,10 @@ module Secrets =
             File.ReadAllText(localPath)
                 .Replace("let tiingoKey = ","")
                 .Replace("\"","")
-        else Secrets.tiingoKey
+        else 
+            File.ReadAllText(localPath2)
+                .Replace("let tiingoKey = ","")
+                .Replace("\"","")
     
 
 

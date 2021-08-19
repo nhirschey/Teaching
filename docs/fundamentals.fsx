@@ -282,84 +282,7 @@ simpleReturnRecord2 x
 simpleReturnRecord3 x
 (*** include-fsi-output ***)
 
-(**
-## Working with data
 
-With this foundation, let's now try loading some data. We are going to obtain and process the data using an external F# library called [FSharp.Data](https://github.com/fsprojects/FSharp.Data) that makes the processing easier. 
-
-### Namespaces
-First, let's create a file directory to hold data. We are going to use built-in dotnet IO (input-output) libraries to do so.
-
-*)
-// Set working directory to the this code file's directory
-System.IO.Directory.SetCurrentDirectory(__SOURCE_DIRECTORY__)
-// Now create cache directory one level above the working directory
-let cacheDirectory = "../data-cache"
-if not (System.IO.Directory.Exists(cacheDirectory))
-then System.IO.Directory.CreateDirectory(cacheDirectory) |> ignore
-
-(** This illustrates the library namespace hierarchy. If we want to access the function within the hierarchy without typing the full namespace repetitively, we can open it. The following code is equivalent.
-
-```
-open System.IO
-Directory.SetCurrentDirectory(__SOURCE_DIRECTORY__)
-let cacheDirectory = "../data-cache"
-if not (Directory.Exists(cacheDirectory))
-then Directory.CreateDirectory(cacheDirectory) |> ignore
-```
-*)
-
-(**
-### API keys
-We are going to request the data from the provider [tiingo](https://api.tiingo.com/). Make sure that you are signed up and have your [API token](https://api.tiingo.com/documentation/general/connecting). An [API](https://en.wikipedia.org/wiki/API) (application programming interface) allows you to write code to communicate with another program. In this case we are goig to write code that requests stock price data from tiingo's web servers.
-
-Once you have your api key, create a file called `secrets.fsx` and save it at the root/top level of your project folder. In `secrets.fsx`, assign your key to a value named `tiingoKey`. If you are using git, make sure to add `secrets.fsx` to your `.gitignore` file.
-
-```fsharp
-let tiingoKey = "yourSuperSecretApiKey"
-```
-
-We can load this in our interactive session as follows, assuming that `secrets.fsx` is located one folder above the current one in the file system.
-
-*)
-
-#load "secrets.fsx"
-
-(** and we can access the value by typing 
-```
-Secrets.tiingoKey
-```
-*)
-
-(**
-### Using external libraries
-We are now going to use **FSharp.Data** to create a web request to [tiingo's](https://api.tiingo.com/) API . The documentation for the request format is [here](https://api.tiingo.com/documentation/end-of-day) and we can find the documentation for making the web request using **FSharp.Data** [here](http://fsprojects.github.io/FSharp.Data/library/Http.html).
-
-**FSharp.Data** is an external library, so we need to download the library from the [nuget package manager](https://www.nuget.org/packages/FSharp.Data/), which is the primary package manager for the dotnet ecosystem. We can see on the "F# Interactive" tabe on the nuget page for the library what code to use to download it and reference it in once step from an F# interactive session:
-
-*)
-
-#r "nuget: FSharp.Data" // To use a specific version such as 3.3.3 we'd use "nuget: FSharp.Data, 3.3.3" 
-
-(** Now we are ready to create the web request and cache the results.*)
-
-open System
-open System.IO
-open FSharp.Data
-
-
-let tiingoSampleFile = Path.Combine(cacheDirectory,"tiingo-sample.csv")
-// Only do the request if the file doesn't exist.
-if not (File.Exists(tiingoSampleFile)) then
-    Http.RequestString
-            ( "https://api.tiingo.com/tiingo/daily/gme/prices", 
-                httpMethod = "GET",
-                query   = [ "token", Secrets.tiingoKey; 
-                            "startDate", "2020-10-01";
-                            "endDate", "2021-02-03";
-                            "format","csv"],
-                headers = [HttpRequestHeaders.Accept HttpContentTypes.Csv])
-    |> fun x -> File.WriteAllText(tiingoSampleFile, x)            
 
 (**
 ### Pipelines and lambda expressions
@@ -374,19 +297,21 @@ This download code used pipelining and lambda functions, which are two important
 ### Collections: Arrays, Lists, Sequences
 
 *)
-(** To see the data returned by tiingo we can read the file.*)
-let lines = File.ReadAllLines(tiingoSampleFile) 
+
+(** A simple int array.*)
+
+let ar = [| 0 .. 10 |] 
 (** *)
-lines |> Array.take 5
+ar |> Array.take 5
 (*** include-fsi-output ***)
 
 (**
-When we look at the type signature of the lines from the file `val lines : string []`, it tells us that we have a string array, meaning an array in which each element of the array is a line from the file. Arrays are "zero indexed", meaning the 0th item is the first in the array. We can access the elements individually or use a range to access multiple together.
+When we look at the type signature of the elements in the array `val ar : int []`, it tells us that we have a integer array, meaning an array in which each element of the array is an integer. Arrays are "zero indexed", meaning the 0th item is the first in the array. We can access the elements individually or use a range to access multiple together.
 *)
 
-lines.[0]
+ar.[0]
 (*** include-fsi-output ***)
-lines.[0 .. 2]
+ar.[0 .. 2]
 (*** include-fsi-output ***)
 
 (** A simple float array.*)
@@ -416,6 +341,56 @@ arr
 |> Array.groupBy(fun x -> x < 5.0)
 |> Array.map(fun (group, xs) -> Array.min xs, Array.max xs)
 (*** include-fsi-output ***)
+
+(**
+## Working with data
+
+With this foundation, let's now try loading some data. We are going to obtain and process the data using an external F# library called [FSharp.Data](https://github.com/fsprojects/FSharp.Data) that makes the processing easier. 
+
+### Namespaces
+First, let's create a file directory to hold data. We are going to use built-in dotnet IO (input-output) libraries to do so.
+
+*)
+// Set working directory to the this code file's directory
+System.IO.Directory.SetCurrentDirectory(__SOURCE_DIRECTORY__)
+// Now create cache directory one level above the working directory
+System.IO.File.WriteAllLines("test.txt",["first";"second"]) 
+
+(** This illustrates the library namespace hierarchy. If we want to access the function within the hierarchy without typing the full namespace repetitively, we can open it. The following code is equivalent.
+
+```
+open System.IO
+Directory.SetCurrentDirectory(__SOURCE_DIRECTORY__)
+File.WriteAllLines("test.txt",["first";"second"]) 
+```
+
+It is common to open the System namespace
+*)
+
+open System
+
+(**
+### API keys
+We are going to request the data from the provider [tiingo](https://api.tiingo.com/). Make sure that you are signed up and have your [API token](https://api.tiingo.com/documentation/general/connecting). An [API](https://en.wikipedia.org/wiki/API) (application programming interface) allows you to write code to communicate with another program. In this case we are goig to write code that requests stock price data from tiingo's web servers.
+
+Once you have your api key, create a file called `secrets.fsx` and save it at the root/top level of your project folder. In `secrets.fsx`, assign your key to a value named `tiingoKey`. If you are using git, make sure to add `secrets.fsx` to your `.gitignore` file.
+
+```fsharp
+let tiingoKey = "yourSuperSecretApiKey"
+```
+
+We can load this in our interactive session as follows, assuming that `secrets.fsx` is located one folder above the current one in the file system.
+
+*)
+
+(***do-not-eval***)
+#load "secrets.fsx"
+
+(** and we can access the value by typing 
+```
+Secrets.tiingoKey
+```
+*)
 
 (**
 ### FSharp.Data Csv Type Provider

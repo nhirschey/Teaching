@@ -7,6 +7,12 @@
 [![Script](images/badge-script.svg)]({{root}}/{{fsdocs-source-basename}}.fsx)&emsp;
 [![Notebook](images/badge-notebook.svg)]({{root}}/{{fsdocs-source-basename}}.ipynb)
 
+---
+title: Fundamentals
+category: Lectures
+categoryindex: 0
+index: 1
+---
 
 # Fundamentals
 A good place to start is to define a one-period return calculation.

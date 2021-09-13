@@ -8,6 +8,9 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    
+    env: 
+      TIINGO_KEY: ${{ secrets.TIINGO_KEY }} 
 
     steps:
     - uses: actions/checkout@v2

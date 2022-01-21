@@ -6,9 +6,9 @@ categoryindex: 0
 index: 1
 ---
 
-[![Binder](images/badge-binder.svg)](https://mybinder.org/v2/gh/nhirschey/teaching/gh-pages?filepath={{fsdocs-source-basename}}.ipynb)&emsp;
-[![Script](images/badge-script.svg)]({{root}}/{{fsdocs-source-basename}}.fsx)&emsp;
-[![Notebook](images/badge-notebook.svg)]({{root}}/{{fsdocs-source-basename}}.ipynb)
+[![Binder](img/badge-binder.svg)](https://mybinder.org/v2/gh/nhirschey/teaching/gh-pages?filepath={{fsdocs-source-basename}}.ipynb)&emsp;
+[![Script](img/badge-script.svg)]({{root}}/{{fsdocs-source-basename}}.fsx)&emsp;
+[![Notebook](img/badge-notebook.svg)]({{root}}/{{fsdocs-source-basename}}.ipynb)
 
 # Fundamentals
 A good place to start is to define a one-period return calculation.
@@ -38,7 +38,7 @@ The most basic way that you can run interactive code is at the command line usin
 
 Once fsi is open, we can type a code snippet in the prompt followed by ";;" to terminate it and it will run.
 
-![fsi](images/fsi.png)
+![fsi](img/fsi.png)
 
 
 It is fine to run code this way, but we can do better using an IDE (Integrated development environment) that incorportes syntax highlighting, intellisense tooltips, and execution.
@@ -93,7 +93,7 @@ Static tying can slow you down a bit writing simple small programs, but as progr
 - helps you ensure that the code is correct (i.e., the type of the input data matches what the function expects). In the words of Yaron Minksy at Janestreet, you can ["make illegal states unrepresentable"](https://blog.janestreet.com/effective-ml-revisited/) (see [here](https://fsharpforfunandprofit.com/posts/designing-with-types-making-illegal-states-unrepresentable/) for F# examples).
 - it also facilitates editor tooling that can check your code without running it and give tooltip errors (you should have seen a tooltip error in your editor if you type `(120.0 / 100) - 1.0` in your program file). It's like clippy on steriods (you are too young, but your parents might get this reference).
 
-![clippy](images/intellisense-example.png)
+![clippy](img/intellisense-example.png)
 
 [Image source](https://blog.codinghorror.com/it-looks-like-youre-writing-a-for-loop/)
 

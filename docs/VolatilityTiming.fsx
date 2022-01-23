@@ -41,8 +41,10 @@ ff3 |> Seq.take 5
 ## Observing time-varying volatility
 One thing that can help us manage volatility is the fact that volatility tends to be somewhat persistent. By this we mean that if our risky asset is volatile today, then it is likely to be volatile tomorrow. We can observe this by plotting monthly volatility as we do below. It also means that we can use past volatility to form estimates of future volatility.
 *)
+
 #r "nuget: FSharp.Stats, 0.4.0"
-#r "nuget: Plotly.NET, 2.0.0-beta5"
+#r "nuget: Plotly.NET, 2.0.0-preview.16"
+
 open FSharp.Stats
 open Plotly.NET
 
@@ -64,9 +66,10 @@ let volChart vols =
     let minYear = getYear Seq.min
     let maxYear = getYear Seq.max
     vols
-    |> Chart.Column    
-    |> Chart.withX_AxisStyle(title = $"Time-varying Volatility ({minYear}-{maxYear})")
-    |> Chart.withY_AxisStyle(title = "Annualized Volatility (%)")
+    |> Chart.Column
+    |> Chart.withMarkerStyle  (Outline = Line.init(Color = Color.fromKeyword ColorKeyword.Blue))  
+    |> Chart.withXAxisStyle(title = $"Time-varying Volatility ({minYear}-{maxYear})")
+    |> Chart.withYAxisStyle(title = "Annualized Volatility (%)")
 
 let allVolsChart = volChart monthlyVol
 let since2019VolChart = 
@@ -75,12 +78,14 @@ let since2019VolChart =
     |> volChart
 
 (***do-not-eval***)
-allVolsChart |> Chart.Show
-since2019VolChart |> Chart.Show
+allVolsChart |> Chart.show
+since2019VolChart |> Chart.show
+
 
 (***hide***)
 allVolsChart |> GenericChart.toChartHTML
 (*** include-it-raw ***)
+
 (***hide***)
 since2019VolChart |> GenericChart.toChartHTML
 (*** include-it-raw ***)
@@ -92,6 +97,7 @@ We are going to look at various portfolios, so it is good to review portfolio we
 - Portfolio weight is $(\text{position value})/(\text{portfolio value})$. 
 - A long portfolio has portfolio weights that sum to 1.0 (or 100%). 
 - A zero-cost portfolio has portfolio weights that sum to 0.0.
+
 *)
 
 type Position = { Id: string; Position: int; Price : decimal }
@@ -185,10 +191,10 @@ let exampleLeveragesChart =
         leveragedVols
         |> Chart.Line
         |> Chart.withTraceName $"Levarage of {leverage}")
-    |> Chart.Combine
+    |> Chart.combine
 
 (***do-not-eval***)
-exampleLeveragesChart |> Chart.Show
+exampleLeveragesChart |> Chart.show
 
 (***hide***)
 exampleLeveragesChart |> GenericChart.toChartHTML
@@ -391,7 +397,7 @@ let cumulativeReturnExPlot =
     |> Chart.Line
 
 (***do-not-eval***)
-cumulativeReturnExPlot |> Chart.Show
+cumulativeReturnExPlot |> Chart.show
 
 (***hide***)
 cumulativeReturnExPlot |> GenericChart.toChartHTML
@@ -416,10 +422,10 @@ let exampleLeveragedReturnChart =
         getLeveragedReturn lev
         |> Chart.Line
         |> Chart.withTraceName $"Leverage of {lev}") 
-    |> Chart.Combine
+    |> Chart.combine
 
 (***do-not-eval***)
-exampleLeveragedReturnChart |> Chart.Show
+exampleLeveragedReturnChart |> Chart.show
 
 (***hide***)
 exampleLeveragedReturnChart |> GenericChart.toChartHTML
@@ -466,7 +472,7 @@ let trainVsTestChart =
    
 
 (***do-not-eval***)
-trainVsTestChart |> Chart.Show
+trainVsTestChart |> Chart.show
 
 (***hide***)
 trainVsTestChart |> GenericChart.toChartHTML
@@ -559,16 +565,15 @@ let weightsSince2019 =
 
 let volComparison = 
     [ targettedSince2019; rawSince2019]
-    |> Chart.Combine
+    |> Chart.combine
 
 let volComparisonWithWeights =
-    Chart.Grid([[volComparison]
-                [weightsSince2019 ]],
-                sharedAxes = true)
+    [volComparison; weightsSince2019 ]
+    |> Chart.SingleStack()
 
 
 (***do-not-eval***)
-volComparisonWithWeights |> Chart.Show
+volComparisonWithWeights |> Chart.show
 
 (***hide***)
 volComparisonWithWeights |> GenericChart.toChartHTML
@@ -633,7 +638,7 @@ let portChart name port  =
     |> Seq.map(fun x -> x.Date, x.Return)
     |> Chart.Line
     |> Chart.withTraceName name
-    |> Chart.withY_Axis (Axis.LinearAxis.init(AxisType = StyleParam.AxisType.Log))
+    |> Chart.withYAxis (LayoutObjects.LinearAxis.init(AxisType = StyleParam.AxisType.Log))
 
     
 let buyHoldMktPort = getManaged buyHoldWeight 
@@ -641,14 +646,14 @@ let managedMktPort = getManaged inverseStdDevWeight
 let managedMktPortNoLimit = getManaged inverseStdDevNoLeverageLimit 
 
 let bhVsManagedChart =
-    Chart.Combine(
+    Chart.combine(
         [ buyHoldMktPort |> accVolPortReturn |> (portChart "Buy-Hold")
           managedMktPort |> accVolPortReturn |> (portChart "Managed Vol")
           managedMktPortNoLimit |> accVolPortReturn |> (portChart "Managed Vol No Limit")
           ])
 
 (***do-not-eval***)
-bhVsManagedChart |> Chart.Show
+bhVsManagedChart |> Chart.show
 
 (***hide***)
 bhVsManagedChart |> GenericChart.toChartHTML

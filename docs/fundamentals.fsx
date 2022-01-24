@@ -34,7 +34,7 @@ Interactive programming typically involves a [REPL](https://en.wikipedia.org/wik
 
 ### The terminal
 
-The most basic way that you can run interactive code is at the command line using an interpreter. We can star the F# interactive interpreter by opening a terminal (e.g., terminal.app, cmd, powershell) and running `dotnet fsi`.
+The most basic way that you can run interactive code is at the command line using an interpreter. We can start the F# interactive interpreter by opening a terminal (e.g., terminal.app, cmd, powershell) and running `dotnet fsi`.
 
 Once fsi is open, we can type a code snippet in the prompt followed by ";;" to terminate it and it will run.
 
@@ -455,7 +455,11 @@ avgReturnEachMonth |> Seq.take 3 |> Seq.toList
 (***include-fsi-output***)
 
 (** The default DateTime printing is too verbose if we don't care about time. We can simplify the printing:*)
-fsi.AddPrinter<DateTime>(fun dt -> dt.ToString("s"))    
+
+(***do-not-eval***)
+fsi.AddPrinter<DateTime>(fun dt -> dt.ToString("s"))
+(** *)
+
 avgReturnEachMonth |> Seq.take 3 |> Seq.toList
 (***include-fsi-output***)
 

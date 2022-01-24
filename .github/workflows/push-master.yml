@@ -21,7 +21,7 @@ jobs:
     - name: Restore tools
       run: dotnet tool restore
     - name: Run fsdocs
-      run: dotnet fsdocs build --eval --strict --properties Configuration=Release
+      run: dotnet fsdocs build --eval --strict --properties Configuration=Release --parameters fsdocs-list-of-namespaces " "
     - name: Deploy docs
       uses: peaceiris/actions-gh-pages@v3
       with:

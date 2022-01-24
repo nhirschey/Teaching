@@ -8,8 +8,10 @@
     <Copyright>Copyright 2021</Copyright>
     <RepositoryUrl>https://github.com/nhirschey/Teaching</RepositoryUrl>
     <PackageProjectUrl>https://nhirschey.github.io/Teaching/</PackageProjectUrl>
+    <FsDocsLicenseLink>"https://github.com/nhirschey/Teaching/blob/main/LICENSE.md"</FsDocsLicenseLink>
+    <FsDocsRepositoryLink>"https://github.com/nhirschey/Teaching"</FsDocsRepositoryLink>
     <PackageIconUrl></PackageIconUrl>
-    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 </Project>

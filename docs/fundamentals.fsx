@@ -353,6 +353,8 @@ With this foundation, let's now try loading some data. We are going to obtain an
 First, let's create a file directory to hold data. We are going to use built-in dotnet IO (input-output) libraries to do so.
 
 *)
+
+(***do-not-eval***)
 // Set working directory to the this code file's directory
 System.IO.Directory.SetCurrentDirectory(__SOURCE_DIRECTORY__)
 // Now create cache directory one level above the working directory

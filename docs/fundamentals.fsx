@@ -41,7 +41,7 @@ Once fsi is open, we can type a code snippet in the prompt followed by ";;" to t
 ![fsi](img/fsi.png)
 
 
-It is fine to run code this way, but we can do better using an IDE (Integrated development environment) that incorportes syntax highlighting, intellisense tooltips, and execution.
+It is fine to run code this way, but we can do better using an IDE (Integrated development environment) that incorportes syntax highlighting, intellisense tooltips, and execution. We will use two common IDE's: Visual Studio Code with the Ionide extension and Jupyter Notebooks.
 *)
 
 
@@ -61,16 +61,16 @@ Let's assume that you have \$120.00 today and that you had \$100.00 a year ago. 
 (**
 ### Basic numerical types: float, int, and decimal
 
-Notice that I included zeros after the decimal point. This is important. The decimal point makes it a [floating point](https://en.wikipedia.org/wiki/Floating-point_arithmetic) number. Floating point numbers (floats) are the most commonly used numerical type for mathematical calculations. 
+Notice that I included a decimal point "." in the numbers. The decimal point makes it a [floating point](https://en.wikipedia.org/wiki/Floating-point_arithmetic) number. Floating point numbers (floats) are the most commonly used numerical type for mathematical calculations. 
 
-If we left the decimal off it would be an integer and we would get the wrong answer because integers cannot represent fractions.
+If we left the decimal point off and wrote "120" without the ".0" at the end it would be an integer and we would get the wrong answer because integers cannot represent fractions.
 *)
 
 (120/100) - 1
 
 (*** include-fsi-output ***)
 
-(** The other numerical data type is [decimal](https://en.wikipedia.org/wiki/Decimal_data_type). *)
+(** The other main numerical data type is [decimal](https://en.wikipedia.org/wiki/Decimal_data_type). *)
 
 (120m/100m) - 1m
 

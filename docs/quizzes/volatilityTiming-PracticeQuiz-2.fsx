@@ -41,9 +41,6 @@ We're going to use the following in the questions
 open System
 open FSharp.Stats
 
-(***do-not-eval***)
-fsi.AddPrinter<DateTime>(fun dt -> dt.ToString("s"))
-(** *)
 type ReturnOb = { Symbol : string; Date : DateTime; Return : float }
 type ValueOb = { Symbol : string; Date : DateTime; Value : float }
 

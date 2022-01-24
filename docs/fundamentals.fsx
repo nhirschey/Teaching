@@ -383,15 +383,13 @@ let tiingoKey = "yourSuperSecretApiKey"
 
 We can load this in our interactive session as follows, assuming that `secrets.fsx` is located one folder above the current one in the file system.
 
-*)
 
-(***do-not-eval***)
-#load "secrets.fsx"
+    #load "secrets.fsx"
 
-(** and we can access the value by typing 
-```
-Secrets.tiingoKey
-```
+and we can access the value by typing 
+
+    Secrets.tiingoKey
+
 *)
 
 (**
@@ -454,11 +452,10 @@ let avgReturnEachMonth =
 avgReturnEachMonth |> Seq.take 3 |> Seq.toList
 (***include-fsi-output***)
 
-(** The default DateTime printing is too verbose if we don't care about time. We can simplify the printing:*)
+(** The default DateTime printing is too verbose if we don't care about time. We can simplify the printing:
 
-(***do-not-eval***)
-fsi.AddPrinter<DateTime>(fun dt -> dt.ToString("s"))
-(** *)
+    fsi.AddPrinter<DateTime>(fun dt -> dt.ToString("s"))
+ *)
 
 avgReturnEachMonth |> Seq.take 3 |> Seq.toList
 (***include-fsi-output***)

@@ -34,14 +34,14 @@ Interactive programming typically involves a [REPL](https://en.wikipedia.org/wik
 
 ### The terminal
 
-The most basic way that you can run interactive code is at the command line using an interpreter. We can star the F# interactive interpreter by opening a terminal (e.g., terminal.app, cmd, powershell) and running `dotnet fsi`.
+The most basic way that you can run interactive code is at the command line using an interpreter. We can start the F# interactive interpreter by opening a terminal (e.g., terminal.app, cmd, powershell) and running `dotnet fsi`.
 
 Once fsi is open, we can type a code snippet in the prompt followed by ";;" to terminate it and it will run.
 
 ![fsi](img/fsi.png)
 
 
-It is fine to run code this way, but we can do better using an IDE (Integrated development environment) that incorportes syntax highlighting, intellisense tooltips, and execution.
+It is fine to run code this way, but we can do better using an IDE (Integrated development environment) that incorportes syntax highlighting, intellisense tooltips, and execution. We will use two common IDE's: Visual Studio Code with the Ionide extension and Jupyter Notebooks.
 *)
 
 
@@ -61,16 +61,16 @@ Let's assume that you have \$120.00 today and that you had \$100.00 a year ago. 
 (**
 ### Basic numerical types: float, int, and decimal
 
-Notice that I included zeros after the decimal point. This is important. The decimal point makes it a [floating point](https://en.wikipedia.org/wiki/Floating-point_arithmetic) number. Floating point numbers (floats) are the most commonly used numerical type for mathematical calculations. 
+Notice that I included a decimal point "." in the numbers. The decimal point makes it a [floating point](https://en.wikipedia.org/wiki/Floating-point_arithmetic) number. Floating point numbers (floats) are the most commonly used numerical type for mathematical calculations. 
 
-If we left the decimal off it would be an integer and we would get the wrong answer because integers cannot represent fractions.
+If we left the decimal point off and wrote "120" without the ".0" at the end it would be an integer and we would get the wrong answer because integers cannot represent fractions.
 *)
 
 (120/100) - 1
 
 (*** include-fsi-output ***)
 
-(** The other numerical data type is [decimal](https://en.wikipedia.org/wiki/Decimal_data_type). *)
+(** The other main numerical data type is [decimal](https://en.wikipedia.org/wiki/Decimal_data_type). *)
 
 (120m/100m) - 1m
 
@@ -353,6 +353,8 @@ With this foundation, let's now try loading some data. We are going to obtain an
 First, let's create a file directory to hold data. We are going to use built-in dotnet IO (input-output) libraries to do so.
 
 *)
+
+(***do-not-eval***)
 // Set working directory to the this code file's directory
 System.IO.Directory.SetCurrentDirectory(__SOURCE_DIRECTORY__)
 // Now create cache directory one level above the working directory
@@ -383,15 +385,13 @@ let tiingoKey = "yourSuperSecretApiKey"
 
 We can load this in our interactive session as follows, assuming that `secrets.fsx` is located one folder above the current one in the file system.
 
-*)
 
-(***do-not-eval***)
-#load "secrets.fsx"
+    #load "secrets.fsx"
 
-(** and we can access the value by typing 
-```
-Secrets.tiingoKey
-```
+and we can access the value by typing 
+
+    Secrets.tiingoKey
+
 *)
 
 (**
@@ -454,8 +454,11 @@ let avgReturnEachMonth =
 avgReturnEachMonth |> Seq.take 3 |> Seq.toList
 (***include-fsi-output***)
 
-(** The default DateTime printing is too verbose if we don't care about time. We can simplify the printing:*)
-fsi.AddPrinter<DateTime>(fun dt -> dt.ToString("s"))    
+(** The default DateTime printing is too verbose if we don't care about time. We can simplify the printing:
+
+    fsi.AddPrinter<DateTime>(fun dt -> dt.ToString("s"))
+ *)
+
 avgReturnEachMonth |> Seq.take 3 |> Seq.toList
 (***include-fsi-output***)
 

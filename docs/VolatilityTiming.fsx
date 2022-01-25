@@ -32,8 +32,10 @@ open Common
 
 let ff3 = French.getFF3 Frequency.Daily
         
+(** 
+    fsi.AddPrinter<DateTime>(fun dt -> dt.ToString("s"))
 
-fsi.AddPrinter<DateTime>(fun dt -> dt.ToString("s"))
+*)
 
 ff3 |> Seq.take 5
 

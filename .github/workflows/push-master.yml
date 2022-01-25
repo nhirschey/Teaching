@@ -7,7 +7,8 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
+    timeout-minutes: 15
     
     env: 
       TIINGO_KEY: ${{ secrets.TIINGO_KEY }} 
@@ -17,11 +18,11 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.x
+        dotnet-version: 6.0.101
     - name: Restore tools
       run: dotnet tool restore
     - name: Run fsdocs
-      run: dotnet fsdocs build --eval --strict --properties Configuration=Release
+      run: dotnet fsdocs build --eval --strict --properties Configuration=Release --parameters fsdocs-list-of-namespaces " "
     - name: Deploy docs
       uses: peaceiris/actions-gh-pages@v3
       with:

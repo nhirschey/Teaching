@@ -2,7 +2,7 @@
 ---
 title: Volatility Timing Part 1
 category: Practice Quizzes
-categoryindex: 1
+categoryindex: 2
 index: 2
 ---
 *)

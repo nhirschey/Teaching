@@ -3,7 +3,7 @@
 ---
 title: Volatility Timing
 category: Lectures
-categoryindex: 0
+categoryindex: 1
 index: 2
 ---
 
@@ -49,7 +49,6 @@ One thing that can help us manage volatility is the fact that volatility tends t
 
 open FSharp.Stats
 open Plotly.NET
-
 
 let annualizeDaily x = x * sqrt(252.0) * 100. 
 

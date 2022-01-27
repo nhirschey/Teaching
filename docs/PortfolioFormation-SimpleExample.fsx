@@ -3,7 +3,7 @@
 ---
 title: Building a strategy
 category: Lectures
-categoryindex: 0
+categoryindex: 1
 index: 4
 ---
 

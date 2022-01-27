@@ -2,7 +2,7 @@
 ---
 title: Fundamentals
 category: Lectures
-categoryindex: 0
+categoryindex: 1
 index: 1
 ---
 
@@ -418,7 +418,7 @@ aapl
 Now let's plot the stock price using [Plotly.NET](https://plotly.github.io/Plotly.NET/).
 *)
 
-#r "nuget: Plotly.NET, 2.0.0-beta5"
+#r "nuget: Plotly.NET, 2.0.0-preview.16"
 open Plotly.NET
 
 
@@ -428,7 +428,7 @@ let sampleChart =
     |> Chart.Line
 
 (***do-not-eval***)
-sampleChart |> Chart.Show   
+sampleChart |> Chart.show   
 
 (***hide***)
 sampleChart |> GenericChart.toChartHTML
@@ -468,7 +468,7 @@ let monthlyReturnChart =
     |> Chart.Bar
 
 (***do-not-eval***)
-monthlyReturnChart |> Chart.Show
+monthlyReturnChart |> Chart.show
 (***hide***)
 monthlyReturnChart |> GenericChart.toChartHTML
 (*** include-it-raw ***) 
@@ -516,7 +516,7 @@ let volChart =
     |> Chart.Line
 
 (***do-not-eval***)
-volChart |> Chart.Show    
+volChart |> Chart.show    
 (***hide***)
 volChart |> GenericChart.toChartHTML
 (*** include-it-raw ***) 

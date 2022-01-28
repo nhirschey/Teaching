@@ -7,7 +7,7 @@ index: 1
 
 ## Quick start
 
-Instuctions for installing the software required to run the code on this site is below. Once the below software is installed, click the links at the top of the pages to download the page as a script or jupyter notebook. The code should run on your computer inside visual studio code as long as the below software is installed:
+Install the software below to run the code on this site. Once this software is installed, click the links at the top of the webpages to download the page as a script or jupyter notebook. The code should run on your computer inside visual studio code as long as the below software is installed:
 
 1. [.NET 6 SDK](https://dotnet.microsoft.com/en-us/download) for your operating system. 
     - This includes the F# language.

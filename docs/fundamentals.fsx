@@ -192,9 +192,7 @@ exp(log(2.0))
 ### Tuples 
 Looking at our return functions, we're starting to get several values that we're passing into the functions individaully. It can be useful to group these values together to make it easy to pass them around. Tuples are a simple way to group values.
 
-Further information:
-- [Tuples at F# Language reference.](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/tuples).
-- [Tuples at F# for Fun and Profit.](https://fsharpforfunandprofit.com/posts/tuples/)
+Further information about tuples can be found in the [F# Language reference](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/tuples) and the [F# for Fun and Profit](https://fsharpforfunandprofit.com/posts/tuples/) websites.
 *)
 
 (1,2)
@@ -231,9 +229,7 @@ simpleReturnTuple xx
 ### Records
 If we want more structure than a tuple, then we can define a record.
 
-For more information on records see:
-- [F# language reference.](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/records)
-- [F# for Fun and Profit.](https://fsharpforfunandprofit.com/posts/records/)
+For more information on records see the relevant sections of the [F# language reference](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/records) or [F# for Fun and Profit](https://fsharpforfunandprofit.com/posts/records/) websites.
 
 You must first define the record type before you use it:
 *)
@@ -305,15 +301,15 @@ ar |> Array.take 5
 When we look at the type signature of the elements in the array `val ar : int []`, it tells us that we have a integer array, meaning an array in which each element of the array is an integer. Arrays are "zero indexed", meaning the 0th item is the first in the array. We can access the elements individually or use a range to access multiple together.
 *)
 
-ar[0]
+ar.[0] // or ar[0] in F# 6
 (*** include-fsi-output ***)
-ar[0 .. 2]
+ar.[0 .. 2] // or ar[0 .. 2] in F# 6
 (*** include-fsi-output ***)
 
 (** A simple float array.*)
 let arr = [| 1.0 .. 10.0 |]
-arr[0]
-arr[0 .. 5]
+arr.[0]
+arr.[0 .. 5]
 (*** include-fsi-output ***)
 
 (** Lists and sequences are similar. *)

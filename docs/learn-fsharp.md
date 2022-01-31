@@ -13,7 +13,7 @@ This makes it a good language for finance, where simplicity, speed, and correctn
 ## Resources for learning F#
 
 1. Microsoft's [Learn F# site](https://dotnet.microsoft.com/en-us/learn/fsharp). In particular:
-    - [Luis Quintanilla's F# for Beginners YouTube series.](https://youtube.com/playlist?list=PLdo4fOcmZ0oUFghYOp89baYFBTGxUkC7Z), with code samples in [this github repo.](https://github.com/luisquintanilla/fsharp-101-samples)
+    - [Luis Quintanilla's F# for Beginners YouTube series](https://youtube.com/playlist?list=PLdo4fOcmZ0oUFghYOp89baYFBTGxUkC7Z), with code samples in [this github repo.](https://github.com/luisquintanilla/fsharp-101-samples)
     - [Self-guided F# tutorials](https://docs.microsoft.com/en-us/learn/paths/fsharp-first-steps/)
     - The [What is F#?](https://docs.microsoft.com/en-us/dotnet/fsharp/what-is-fsharp?) page.
 2. Exorcism.org is a great site for learning languages. This [link](https://exercism.org/tracks/fsharp) takes you to the F# learning track.

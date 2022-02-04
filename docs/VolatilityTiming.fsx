@@ -1,4 +1,4 @@
-(**
+﻿(**
 
 ---
 title: Volatility Timing
@@ -91,64 +91,6 @@ allVolsChart |> GenericChart.toChartHTML
 since2019VolChart |> GenericChart.toChartHTML
 (*** include-it-raw ***)
 
-(**
-## Review of calculating portfolio weights
-We are going to look at various portfolios, so it is good to review portfolio weights.
-
-- Portfolio weight is $(\text{position value})/(\text{portfolio value})$. 
-- A long portfolio has portfolio weights that sum to 1.0 (or 100%). 
-- A zero-cost portfolio has portfolio weights that sum to 0.0.
-
-*)
-
-type Position = { Id: string; Position: int; Price : decimal }
-
-let portfolio =
-    [| { Id = "AAPL"; Position = 100; Price = 22.20m }
-       { Id = "AMZN"; Position = 20; Price = 40.75m }
-       { Id = "TSLA"; Position = 50; Price = 30.6m } |]
-
-// We can do it on the fly
-portfolio
-|> Array.map(fun pos -> // getting position value
-       pos.Id,
-       (float pos.Position)*(float pos.Price))
-|> fun ps -> // calculating weights
-    let portfolioValue = 
-        ps 
-        |> Array.sumBy(fun (id, value) -> value)
-    ps
-    |> Array.map(fun (id, value) -> id, value / portfolioValue)
-
-
-// We can also define a bit more structure to get the same thing.
-// Proper functions with defined types are good for reusable code.
-type PositionValue = { Id : string; Value : float }
-type PositionWeight = { Id : string; Weight : float }
-
-let calcValue (x:Position) = 
-    { Id = x.Id
-      Value = (float x.Position) * (float x.Price)}
-
-let calcWeights xs =
-    let portfolioValue = xs |> Array.sumBy(fun x -> x.Value)
-    xs
-    |> Array.map(fun pos -> 
-        { Id = pos.Id
-          Weight = pos.Value / portfolioValue })
-
-portfolio
-|> Array.map calcValue
-|> calcWeights
-
-let portfolioWithShorts =
-    [| { Id = "AAPL"; Position = 100; Price = 22.20m }
-       { Id = "AMZN"; Position = -20; Price = 40.75m }
-       { Id = "TSLA"; Position = 50; Price = 30.6m } |]
-
-portfolioWithShorts
-|> Array.map calcValue
-|> calcWeights
 
 (**
 ## Effect of leverage on volatility

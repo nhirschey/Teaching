@@ -76,11 +76,12 @@ aaplWeight + googWeight + tslaWeight
 
 (**
 This portfolio is a net long portfolio, 
-meaning that it requires a positive investment to purchase it. 
+meaning that it costs you money to purchase it. 
 Net long portfolios such as this one must 
 have portfolio weights that add up to one.
 Due to margin requirements, real-world
-portfolios are generally net long.
+portfolios are generally net long--you must
+put up capital to acquire the portfolio.
 
 The other type of portfolio is a zero-cost portfolio. 
 As the name implies, zero-cost portfolios do not require any investment to purchase.
@@ -91,7 +92,43 @@ To see how this works we need to examine how short positions work.
 
 When an investor buys a long position, 
 they pay for the position now and hope to sell it later at a higher price.
-A short sale reverses this. The investor sells the position now and hopes
+A short sale reverses this.
+The investor sells the position now and hopes to buy it back later at a lower price.
+To see how this works, it is helpful to compare the cash flows
+from a long purchase to those from a short sale.
+
+First, a long purchase.
+
+- At time 0: investor has \$100 cash and no shares.
+- At time 1: investor takes their \$100 of cash and buys 4 shares 
+  of stock at a price of \$25 per share. They have no cash and are long 4 shares.
+- At time 2: the stock has risen to \$27, the investor sells their 4 shares.
+  They have \$108 of cash and no shares.
+
+The investor's cash and stock balances at the end of each period will look something like 
+
+| Time | Cash Balance | Shares | Share Price | Stock Position Value | Account Value |
+--------------------------------------------------------------------------------------
+| 0   | \$100.       | 0       | \$25.       | \$0                  |\$100.   |
+| 1   | \$0.         | 4       | \$25.       | \$100                |\$100.   |
+| 2   | \$108.       | 0       | \$27.       | \$0.                 |\$108.   |
+
+Now, a short position.
+
+- At time 0: investor has \$100 cash and no shares.
+- At time 1: investor borrows 4 shares of stock and sells them
+  for a price of \$25 per share. They have \$200 cash and are short 4 shares.
+- At time 2: the stock has risen to \$27, the investor buys back the
+  4 shares that they sold short and returns them to the person that
+  they borrowed them from. They have $92 of cash and 0 shares.
+
+The investor's cash and stock balances at the end of each period will look something like 
+
+| Time | Cash Balance | Shares | Share Price | Stock Position Value | Account Value |
+--------------------------------------------------------------------------------------
+| 0   | \$100.       | 0       | \$25.       | \$0                  |\$100.   |
+| 1   | \$200        | -4      | \$25.       | -\$100               |\$100.   |
+| 2   | \$92         | 0       | \$27.       | \$0.                 |\$92     |
 
 Imagine that an investor holding PortfolioA decides that 
 they want to short \$250 worth of Meta.

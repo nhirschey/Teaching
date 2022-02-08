@@ -1,4 +1,4 @@
-﻿(**
+(**
 
 ---
 title: Basic Portfolio Statistics
@@ -82,7 +82,9 @@ You can make names with spaces using `` before and after.
 *)
 let ``expected account at t1`` = { Time = 1; Cash = 0.0; Shares = 4.0}
 let ``actual account at t1`` = updateAccount tradeAt1 accountAt0 
-(***include-fsi-output***)
+
+``actual account at t1``
+(***include-it***)
 
 
 if ``actual account at t1`` <> ``expected account at t1`` then
@@ -93,11 +95,15 @@ Now we can calculate how the account value changes over time.
 *)
 
 let accountAt1 = updateAccount tradeAt1 accountAt0
-(***include-fsi-output***)
+
+accountAt1
+(***include-it***)
 
 let tradeAt2 = { Shares = -4.0; Price = 27.0 }
 let accountAt2 = updateAccount tradeAt2 accountAt1
-(***include-fsi-output***)
+
+accountAt2
+(***include-it***)
 
 (**
 We could have also written this code using the pipe operator.
@@ -105,6 +111,11 @@ We could have also written this code using the pipe operator.
 
 let accountAt1' = accountAt0 |> updateAccount tradeAt1 // same as "updateAccount tradeAt1 accountAt0"
 let accountAt2' = accountAt1 |> updateAccount tradeAt2 // same as "updateAccount tradeAt2 accountAt1"
+
+accountAt1'
+(***include-it***)
+accountAt2'
+(***include-it***)
 
 (**
 The pipe operator does not look very useful above because 
@@ -120,7 +131,8 @@ let accountAt2'' =
     |> updateAccount tradeAt1
     |> updateAccount tradeAt2
 
-(***include-fsi-output***)
+accountAt2''
+(***include-it***)
 
 (**
 This code is closer to how you would describe it in English:
@@ -164,20 +176,27 @@ let tslaPositionValue = 500.0
 
 let portfolioValueA = aaplPositionValue + googPositionValue + tslaPositionValue
 
-(***include-fsi-output***)
+portfolioValueA
+(***include-it***)
 
 (**
 The portfolio weights are then
 *)
 
 let aaplWeight = aaplPositionValue / portfolioValueA
-(***include-fsi-output***)
+
+aaplWeight
+(***include-it***)
 
 let googWeight = googPositionValue / portfolioValueA
-(***include-fsi-output***)
+
+googWeight
+(***include-it***)
 
 let tslaWeight = tslaPositionValue / portfolioValueA
-(***include-fsi-output***)
+
+tslaWeight
+(***include-it***)
 
 (**
 These weights for AAPL, GOOG, and TSLA are all positive.
@@ -225,18 +244,17 @@ The investor's cash and stock balances at the end of each period will look somet
 
 let shortAt1 = { Shares = -4.0; Price = 25.0 }
 let shortCoverAt2 = { Shares = 4.0; Price = 27.0 }
-(***include-fsi-output***)
 
 // positions at t1
 accountAt0 
 |> updateAccount shortAt1
-(***include-fsi-output***)
+(***include-it***)
 
 // positions at t2
 accountAt0 
 |> updateAccount shortAt1 
 |> updateAccount shortCoverAt2
-(***include-fsi-output***)
+(***include-it***)
 
 (**
 
@@ -257,7 +275,9 @@ let portfolioValueB =
     aaplPositionValueB +
     googPositionValueB +
     tslaPositionValueB
-(***include-fsi-output***)
+
+portfolioValueB
+(***include-it***)
 
 (** Compare to *Portfolio A* *)
 portfolioValueA = portfolioValueB 
@@ -268,16 +288,24 @@ The weights in *Portfolio B*:
 *)
 
 let amznWeightB = amznPositionValueB / portfolioValueB
-(***include-fsi-output***)
+
+amznWeightB
+(***include-it***)
 
 let aaplWeightB = aaplPositionValueB / portfolioValueB
-(***include-fsi-output***)
+
+aaplWeightB
+(***include-it***)
 
 let googWeightB = googPositionValueB / portfolioValueB
-(***include-fsi-output***)
+
+googWeightB
+(***include-it***)
 
 let tslaWeightB = tslaPositionValueB / portfolioValueB
-(***include-fsi-output***)
+
+tslaWeightB
+(***include-it***)
 
 (**
 The weights of *Portfolio B* also add up to one.
@@ -307,9 +335,13 @@ let koWeight = koPositionValue / dollarsLong
 let hogWeight = hogPositionValue / dollarsLong
 let yumWeight = yumPositionValue / dollarsLong
 
-koWeight + hogWeight + yumWeight
-(***include-fsi-output***)
+printfn $"koWeight = {koWeight}"
+printfn $"hogWeight= {hogWeight}"
+printfn $"yumWeight= {yumWeight}"
+(***include-output***)
 
+koWeight + hogWeight + yumWeight
+(***include-it***)
 
 (**
 ### Calculating weights using a list of positions

@@ -114,29 +114,29 @@ let today = 120.0
 (**
 ### Defining functions 
 Functions map (or transform) inputs into outputs.
+
+Here is a simple function named `addOne`.
+It takes an input x and then it adds 1 to whatever x is.
 *)
 
-// Here is a simple function.
-// It takes an input as an input x and then it adds
-// 1 to whatever x is.
-let f(x) = x + 1
+let addOne x = x + 1
 
-f(1) // here x is 1
-f(2) // here x is 2
-f(3) // here x is 3
+addOne 0 // here x is 1
+addOne 1 // here x is 2
+addOne 2 // here x is 3
 
 // We can also chain them
-f(f(f(1))) // = (1 + (1 + (1 + 1)))
+addOne (addOne (addOne 0)) // = (1 + (1 + (1 + 0)))
 
-// The parentheses are optional, and it's more standard leave them off.
-let f2 x = x + 1
+(**
+We can define a function to calcuate a return. 
+*)
 
-// We can easily define a function to calcuate this return. 
 let calcReturn pv fv = (fv / pv) - 1.0
 
 (** The type signature tells us that `calcReturn` is a function with two float inputs (pv and fv) and it maps those two inputs into a float output. The program was able to infer that `pv` and `fv` are floats because of the `1.0` float in the calculation.*)
 
-(** Se can execute it on simple floats:*)
+(** We can execute it on simple floats:*)
 // here pv = 100., fv = 110.0
 calcReturn 100.0 110.0
 (*** include-fsi-output ***)
@@ -150,20 +150,6 @@ calcReturn 80.0 60.0
 calcReturn yearAgo today
 (*** include-fsi-output ***)
 
-(** However, if we try to get it to execute on decimals, we will get an error because we defined the function to only operate on floats. This is another (simple) example of the compiler using type checking.
-
-```
-calcReturn 100.0m 120.0m
-```
-```output
-fundamentals.fsx(23,14): error FS0001: This expression was expected to have type
-    'float'    
-but here has type
-    'decimal'    
-```
-
-*)
-
 (**
 ### Handling dividends
 Our prior return calculation did not handle cash distributions such as dividends. We can incorporate dividends with a small modificaton:
@@ -175,7 +161,7 @@ let simpleReturn beginningPrice endingPrice dividend =
     (endingPrice + dividend) / beginningPrice - 1.0
 
 (**
-The examples thus far have used simple (per period) compounding. We can also calculate continuously compounded returns, sldo known as log returns.
+The examples thus far have used simple (per period) compounding. We can also calculate continuously compounded returns, also known as log returns.
 *)
 
 let logReturn beginningPrice endingPrice dividend =
@@ -206,6 +192,7 @@ exp(log(2.0))
 ### Tuples 
 Looking at our return functions, we're starting to get several values that we're passing into the functions individaully. It can be useful to group these values together to make it easy to pass them around. Tuples are a simple way to group values.
 
+Further information about tuples can be found in the [F# Language reference](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/tuples) and the [F# for Fun and Profit](https://fsharpforfunandprofit.com/posts/tuples/) websites.
 *)
 
 (1,2)
@@ -242,6 +229,9 @@ simpleReturnTuple xx
 ### Records
 If we want more structure than a tuple, then we can define a record.
 
+For more information on records see the relevant sections of the [F# language reference](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/records) or [F# for Fun and Profit](https://fsharpforfunandprofit.com/posts/records/) websites.
+
+You must first define the record type before you use it:
 *)
 
 type RecordExample = 
@@ -311,9 +301,9 @@ ar |> Array.take 5
 When we look at the type signature of the elements in the array `val ar : int []`, it tells us that we have a integer array, meaning an array in which each element of the array is an integer. Arrays are "zero indexed", meaning the 0th item is the first in the array. We can access the elements individually or use a range to access multiple together.
 *)
 
-ar.[0]
+ar.[0] // or ar[0] in F# 6
 (*** include-fsi-output ***)
-ar.[0 .. 2]
+ar.[0 .. 2] // or ar[0 .. 2] in F# 6
 (*** include-fsi-output ***)
 
 (** A simple float array.*)

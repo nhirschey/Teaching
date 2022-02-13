@@ -493,6 +493,40 @@ type YahooFinance =
               Volume = x.Volume })
         |> Seq.toList
 
-let bnd = YahooFinance.PriceHistory("BND",startDate=DateTime(2000,1,1),endDate=DateTime(2022,1,1))
-let vti = YahooFinance.PriceHistory("VTI",startDate=DateTime(2000,1,1),endDate=DateTime(2022,1,1))
+let bnd = YahooFinance.PriceHistory("BND",startDate=DateTime(2010,1,1),endDate=DateTime(2022,1,1))
+let vti = YahooFinance.PriceHistory("VTI",startDate=DateTime(2010,1,1),endDate=DateTime(2022,1,1))
+
+let sortedBnd = bnd |> List.sortBy (fun x -> x.Date)
+sortedBnd[0..3]
+sortedBnd[(sortedBnd.Length-4)..]
+
+let sequentialBnd = bnd |> List.pairwise
+sequentialBnd[0]
+sequentialBnd[1]
+
+let firstBndPair = sequentialBnd[0]
+let (bndA, bndB) = firstBndPair
+(log bndB.AdjustedClose) - (log bndA.AdjustedClose)
+
+let bndReturn = 
+    bnd
+    |> List.sortBy (fun x -> x.Date)
+    |> List.pairwise
+    |> List.map (fun (a, b) -> (log b.AdjustedClose) - (log a.AdjustedClose))
+
+let vtiReturn =
+    vti
+    |> List.sortBy (fun x -> x.Date)
+    |> List.pairwise
+    |> List.map (fun (a, b) -> (log b.AdjustedClose) - (log a.AdjustedClose))
+
+#r "nuget: FSharp.Stats"
+
+open FSharp.Stats
+open FSharp.Stats.Correlation
+
+vti.Length
+Seq.pearson bndReturn vtiReturn
+bndReturn |> List.mean
+vtiReturn |> List.mean
 

@@ -26,7 +26,7 @@ samplePeriod
 Now let's dig in. This is a *relatively* basic version of a strategy to build intuition with what we're doing. It is simpler than working with real data. But we will next move to real data.
 *)
 
-#r "nuget: FSharp.Stats,0.4.0"
+#r "nuget: FSharp.Stats"
 open FSharp.Stats
 
 (**
@@ -72,21 +72,21 @@ printfn "%i" deconPermnoExample
 
 // Now we can define our investment universe.
 let investmentUniverse =
-    [| "AAPL"; "KO"; "GOOG";"DIS";"GME"|]
-    |> Array.map Ticker
+    [for tick in [ "AAPL"; "KO"; "GOOG";"DIS";"GME"] -> 
+        Ticker tick ]
 
 (**
 ## 2. Signals
 *)
 
 let signals =
-    [| Ticker "AAPL", 2.0
-       Ticker "KO", -1.4
-       Ticker "GOOG", 0.4 
-       Ticker "DIS", 1.1 |]
-    |> Map.ofArray
+    [ Ticker "AAPL", 2.0
+      Ticker "KO", -1.4
+      Ticker "GOOG", 0.4 
+      Ticker "DIS", 1.1 ]
+    |> Map.ofList
 
-signals.[Ticker "AAPL"]
+signals[Ticker "AAPL"]
 Map.find (Ticker "AAPL") signals
 Map.tryFind (Ticker "AAPL") signals
 Map.tryFind (Ticker "GME") signals
@@ -101,12 +101,12 @@ getSignal (Ticker "GOOG")
 We can call this function on all signals in our investment universe.
 *)
 // using a loop.
-[| for security in investmentUniverse do
-    security, getSignal security |]
+[ for security in investmentUniverse do
+    security, getSignal security ]
 
 // same thing with Array.map
 investmentUniverse
-|> Array.map(fun security -> security, getSignal security)
+|> List.map(fun security -> security, getSignal security)
 
 (** Let's create a type to hold a security identifier and its signal.*)
 type SecuritySignal = 
@@ -135,9 +135,13 @@ getSecuritySignal (Ticker "GME")
 getSecuritySignal (Ticker "GOOG")
 (*** include-fsi-output ***)
 
+for security in investmentUniverse do
+    let securitySignal = getSecuritySignal security
+    printfn $"{securitySignal}"
+
 investmentUniverse
-|> Array.map getSecuritySignal
-|> Array.iter (printfn "%A")
+|> List.map getSecuritySignal
+|> List.iter (printfn "%A")
 (*** include-output ***)
 
 (**
@@ -145,16 +149,16 @@ If we do choose instead of map, then we will
 end up with only the results when there was something.
 *)
 investmentUniverse
-|> Array.choose getSecuritySignal
-|> Array.iter (printfn "%A") 
+|> List.choose getSecuritySignal
+|> List.iter (printfn "%A") 
 (*** include-output***)
 
 let securitySignals = 
     investmentUniverse
-    |> Array.choose getSecuritySignal
+    |> List.choose getSecuritySignal
 
 securitySignals
-|> Array.iter (printfn "%A")
+|> List.iter (printfn "%A")
 (*** include-output***)
 
 (**
@@ -199,30 +203,30 @@ type AssignedPortfolio =
 
 let medianSignal = 
     securitySignals 
-    |> Array.map(fun x -> x.Signal)
-    |> Array.median
+    |> List.map(fun x -> x.Signal)
+    |> Seq.median
 (** The median signal is *)
 (***include-value:medianSignal***)
 
 
 let aboveMedian =
     securitySignals
-    |> Array.filter(fun x -> x.Signal >= medianSignal)
+    |> List.filter(fun x -> x.Signal >= medianSignal)
 (** the above-median securities: *)
 (***include-value:aboveMedian***)
 
 let belowMedian =
     securitySignals
-    |> Array.filter(fun x -> x.Signal < medianSignal)
+    |> List.filter(fun x -> x.Signal < medianSignal)
 (** the below-median securities: *)
 (***include-value:belowMedian***)
 
 
 let assigned =
-    [| { PortfolioId = Named("Above Median")
-         Signals = aboveMedian }
-       { PortfolioId = Named("Below Median")
-         Signals = belowMedian} |]
+    [ { PortfolioId = Named("Above Median")
+        Signals = aboveMedian }
+      { PortfolioId = Named("Below Median")
+        Signals = belowMedian} ]
 (** assigned to portfolios: *)
 (***include-value:assigned***)
 

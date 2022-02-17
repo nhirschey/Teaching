@@ -408,7 +408,8 @@ aapl
 Now let's plot the stock price using [Plotly.NET](https://plotly.github.io/Plotly.NET/).
 *)
 
-#r "nuget: Plotly.NET, 2.0.0-preview.16"
+#r "nuget: Plotly.NET, 2.0.0-preview.17"
+#r "nuget: Plotly.NET.Interactive, 2.0.0-preview.17"
 open Plotly.NET
 
 
@@ -481,7 +482,7 @@ let stddev xs =
 But it is also convenient to use the [FSharp.Stats](https://fslab.org/FSharp.Stats/)
 *)
 
-#r "nuget: FSharp.Stats, 0.4.0"
+#r "nuget: FSharp.Stats, 0.4.3"
 
 open FSharp.Stats
 [1.0 .. 10.0 ] |> Seq.stDev

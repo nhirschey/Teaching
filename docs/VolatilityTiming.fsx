@@ -44,8 +44,9 @@ ff3 |> Seq.take 5
 One thing that can help us manage volatility is the fact that volatility tends to be somewhat persistent. By this we mean that if our risky asset is volatile today, then it is likely to be volatile tomorrow. We can observe this by plotting monthly volatility as we do below. It also means that we can use past volatility to form estimates of future volatility.
 *)
 
-#r "nuget: FSharp.Stats, 0.4.0"
-#r "nuget: Plotly.NET, 2.0.0-preview.16"
+#r "nuget: FSharp.Stats, 0.4.3"
+#r "nuget: Plotly.NET, 2.0.0-preview.17"
+#r "nuget: Plotly.NET.Interactive, 2.0.0-preview.17"
 
 open FSharp.Stats
 open Plotly.NET
@@ -69,8 +70,8 @@ let volChart vols =
     vols
     |> Chart.Column
     |> Chart.withMarkerStyle  (Outline = Line.init(Color = Color.fromKeyword ColorKeyword.Blue))  
-    |> Chart.withXAxisStyle(title = $"Time-varying Volatility ({minYear}-{maxYear})")
-    |> Chart.withYAxisStyle(title = "Annualized Volatility (%)")
+    |> Chart.withXAxisStyle(TitleText = $"Time-varying Volatility ({minYear}-{maxYear})")
+    |> Chart.withYAxisStyle(TitleText = "Annualized Volatility (%)")
 
 let allVolsChart = volChart monthlyVol
 let since2019VolChart = 
@@ -131,9 +132,7 @@ let exampleLeveragedVols =
 let exampleLeveragesChart =
     exampleLeveragedVols
     |> Seq.map(fun (leverage, leveragedVols) ->
-        leveragedVols
-        |> Chart.Line
-        |> Chart.withTraceName $"Levarage of {leverage}")
+        Chart.Line(leveragedVols,Name= $"Levarage of {leverage}"))
     |> Chart.combine
 
 (***do-not-eval***)
@@ -312,7 +311,7 @@ let mapFoldExampleRecords =
 ||> List.mapFold mapfoldfun
 |> fst
 (*** include-it ***)
-List.scan (fun acc x -> {x with Return = (1.0+acc.Return) * (1.0+x.Return)-1.0}) mapFoldExampleRecords.Head mapFoldExampleRecords.Tail
+List.scan (fun acc (x: MapFoldInputRecord) -> {x with Return = (1.0+acc.Return) * (1.0+x.Return)-1.0}) mapFoldExampleRecords.Head mapFoldExampleRecords.Tail
 // Same thing, but using an anonymous function instead of mapfoldfun
 (1.0, mapFoldExampleRecords)
 ||> List.mapFold(fun acc input -> 
@@ -362,9 +361,8 @@ let getLeveragedReturn leverage =
 let exampleLeveragedReturnChart = 
     exampleLeverages
     |> Seq.map(fun lev ->
-        getLeveragedReturn lev
-        |> Chart.Line
-        |> Chart.withTraceName $"Leverage of {lev}") 
+        let levReturn = getLeveragedReturn lev
+        Chart.Line(levReturn, Name= $"Leverage of {lev}")) 
     |> Chart.combine
 
 (***do-not-eval***)
@@ -421,7 +419,10 @@ trainVsTestChart |> Chart.show
 trainVsTestChart |> GenericChart.toChartHTML
 (***include-it-raw***)
 
-let trainPdSd, testPdSd = trainVsTest |> Seq.unzip
+let trainPdSd, testPdSd = 
+    trainVsTest 
+    |> Seq.toList
+    |> List.unzip
 Seq.pearson trainPdSd testPdSd
 
 (*** include-it ***)
@@ -487,14 +488,13 @@ let targettedSince2019 =
     |> Seq.map(fun (_, xs) -> 
         xs |> Seq.map(fun x -> x.Date) |> Seq.max,
         xs |> stDevBy(fun x -> x.Return) |> annualizeDaily) 
-    |> volChart
-    |> Chart.withTraceName "Managed"
-
+    |> volChart 
+    |> Chart.withTraceInfo(Name="Managed")
 let rawSince2019 =
     monthlyVol
     |> Seq.filter(fun (dt,_) -> dt >= DateTime(2019,1,1))
     |> volChart
-    |> Chart.withTraceName "Unmangaged"
+    |> Chart.withTraceInfo(Name="Unmangaged")
 
 let weightsSince2019 = 
     targetted
@@ -504,7 +504,7 @@ let weightsSince2019 =
         xs |> Seq.map(fun x -> x.Date) |> Seq.max,
         xs |> Seq.averageBy(fun x -> x.Weight))
     |> Chart.Line 
-    |> Chart.withTraceName "weight on the Market"
+    |> Chart.withTraceInfo(Name="weight on the Market")
 
 let volComparison = 
     [ targettedSince2019; rawSince2019]
@@ -580,7 +580,7 @@ let portChart name port  =
     port 
     |> Seq.map(fun x -> x.Date, x.Return)
     |> Chart.Line
-    |> Chart.withTraceName name
+    |> Chart.withTraceInfo(Name=name)
     |> Chart.withYAxis (LayoutObjects.LinearAxis.init(AxisType = StyleParam.AxisType.Log))
 
     

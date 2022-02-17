@@ -78,8 +78,6 @@ We'll use [FSharp.Data CsvProvider](https://fsprojects.github.io/FSharp.Data/lib
 We define the type from the csv sample file.
 *)
 
-//type FootballPlayersCsv = CsvProvider<"FootballPlayers.csv",ResolutionFolder = __SOURCE_DIRECTORY__>
-
 let [<Literal>] CsvPath = __SOURCE_DIRECTORY__ + "/FootballPlayers.csv"
 type FootballPlayersCsv = CsvProvider<CsvPath>
 

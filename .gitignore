@@ -6,3 +6,4 @@ tmp
 output
 secrets.*
 data-cache
+*/*FootballPlayers.csv

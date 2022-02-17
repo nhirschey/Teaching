@@ -1,22 +1,29 @@
 (**
 ---
 title: Webscraping HTML to CSV
-category: Webscraping Assignment
-categoryindex: 1
+category: Assignments
+categoryindex: 2
 index: 1
 ---
 *)
 
 (***hide***)
-// original link:
+// specific link:
 // https://fbref.com/en/comps/Big5/2019-2020/stats/players/2019-2020-Big-5-European-Leagues-Stats
 
+// most recent link:
+// "https://fbref.com/en/comps/Big5/stats/players/Big-5-European-Leagues-Stats"
+
 (**
+[![Binder](img/badge-binder.svg)](https://mybinder.org/v2/gh/nhirschey/teaching/gh-pages?filepath={{fsdocs-source-basename}}.ipynb)&emsp;
+[![Script](img/badge-script.svg)]({{root}}/{{fsdocs-source-basename}}.fsx)&emsp;
+[![Notebook](img/badge-notebook.svg)]({{root}}/{{fsdocs-source-basename}}.ipynb)
+
 # Webscraping HTML to CSV
 
-> Originally developed by [Davide Costa](https://github.com/DavideGCosta)
+> Developed with [Davide Costa](https://github.com/DavideGCosta)
 
-For the **Football Players' Exercises** we are trying to scrape data from [Sports Reference's](https://www.sports-reference.com/) [Football Reference](https://fbref.com/en/) website. The particular data that we want to scrap is player data from the [Big 5 European Leauges table](https://fbref.com/en/comps/Big5/stats/players/Big-5-European-Leagues-Stats). This data consists on the stats of the players that played in the big 5 football european leagues in the most recent season. Since we need to scrape the data from a webpage and store it in a csv file we will need to use 2 type providers from [FSharp.Data](https://fsharp.github.io/FSharp.Data/):
+For the **Football Players' Exercises** we are trying to scrape data from [Sports Reference's](https://www.sports-reference.com/) [Football Reference](https://fbref.com/en/) website. The particular data that we want to scrape is player data from the [Big 5 European Leauges table](https://fbref.com/en/comps/Big5/stats/players/Big-5-European-Leagues-Stats). This data consists on the stats of the players that played in the big 5 football european leagues in the most recent season. Since we need to scrape the data from a webpage and store it in a csv file we will need to use 2 type providers from [FSharp.Data](https://fsharp.github.io/FSharp.Data/):
 
 - We'll use the [HTML Type Provider](https://fsprojects.github.io/FSharp.Data/library/HtmlProvider.html) to scrape the html from the webpage and access the players' table.  
 - We'll use the [CSV Type Provider](https://fsprojects.github.io/FSharp.Data/library/CsvProvider.html) to save the data to a csv file.  
@@ -35,7 +42,7 @@ The type provider uses the sample to generate code to read data with that format
 *)
 
 type Big5EuropeanLeagues = 
-    HtmlProvider<"https://fbref.com/en/comps/Big5/stats/players/Big-5-European-Leagues-Stats">
+    HtmlProvider<"https://fbref.com/en/comps/Big5/2021-2022/stats/players/2021-2022-Big-5-European-Leagues-Stats">
 
 (**
 The type `Big5EuropeanLeagues` contains information about the structure of the web page. It knows what the html is, it knows what the html tables are, etc.
@@ -57,10 +64,10 @@ big5.Html.ToString()[..200]
 big5.Html.ToString().[..200]
 (*** include-it ***)
 (**
-From the tables available in the webpage, let's assign the `Player Standard Stats 2019-2020 Big 5 European Leagues` to a variable called `footballers`.
+From the tables available in the webpage, let's assign the player stats table to a variable called `footballers`.
 *)
 
-let footballers = big5.Tables.``Player Standard Stats 2019-2020 Big 5 European Leagues``
+let footballers = big5.Tables.``Player Standard Stats 2021-2022 Big 5 European Leagues``
 
 (**
 Now let's observe the first 3 table rows. The `Rows` property gives us an array of rows.
@@ -86,29 +93,93 @@ Let´s look at the first 5 rows of fields `Player` and `Age`.
 (*** include-it ***)
 
 (**
- The table data is not exactly what we need. To work with it, we need to clean it up.
+## Clean the data
 
-- **Repeated Headers.**
-    - If we run `footballers.Rows[25]` we can see that it corresponds to the headers and not to a player row. This means that the header is in line 0 and then repeats after every 25 players.  
-    - We remove those lines by using `Array.filter(fun x -> x.Player <> "Player")`. This code filters the data set to include only rows where the player's name is not equal to the string `"Player"`.  
-- **Age and Goals Scored with empty strings.**    
-    - In order to make some arithmetic operations with age and goals scored, we need to convert the data into integers or floats/decimals.  
-    - But some players' age and goals scored is missing, and converting empty strings ("") into these types returns an error.  
-    - We remove those lines by using `Array.filter(fun x -> x.Age <> "" and x.Performance - Gls <> "")`.  
+The table data is not exactly what we need. To work with it, we need to clean it up.
+
+### Repeated headers
+
+The table header line repeats after every 25 players.
+We can see this if we look at the 26th row of the table.
+
 *)
 
-let footballersParsed =
+(***do-not-eval***)
+footballers.Rows[25]
+(***hide***)
+footballers.Rows.[25]
+(***include-it***)
+
+(**
+We can remove these lines by using [Array.filter](https://fsharp.github.io/fsharp-core-docs/reference/fsharp-collections-arraymodule.html#filter). `Array.filter` applies a function to each element of the array and
+returns only those elements where the function evaluates to `true`.
+We'll create a function that evaluates to `true` if the player's name *does not* equal `"Player"`
+*)
+
+let footballersNoHeaders = 
     footballers.Rows
-    // Array.filter 
-    |> Array.filter (fun x -> 
-        //
-        x.Player <> "Player" && 
-        x.Age <> "" && 
-        x.``Performance - Gls`` <> "")
-    |> Array.sortByDescending(fun x -> 
-        x.``Performance - Gls``,
-        x.Player,
-        x.Squad)
+    // 1. Rows where row.Player does not equal "Player"
+    |> Array.filter (fun row -> row.Player <> "Player") 
+
+(**
+### Removing missing values
+
+In order to make some arithmetic operations with age and goals scored, we need to convert the data into integers or floats/decimals. But some players' age and goals scored is missing, and converting empty strings ("") into these types returns an error.  
+We remove those lines by removing filtering to rows where age and goals are not "".
+*)
+
+let footballersClean =
+    footballersNoHeaders
+    |> Array.filter (fun row -> 
+        row.Age <> "" && 
+        row.``Performance - Gls`` <> "")
+
+(**
+Now we have the data we need, but
+there are more than 2500 rows.  
+*)
+
+footballersClean.Length
+
+(**
+For our exercises we don't need so many observations,
+so let's transform it to get the best players by position!
+*)
+
+let playersByPosition =
+    footballersClean
+    // 1. filter out odd positions with few players
+    |> Array.filter(fun x -> x.Pos <> "GK,FW" && x.Pos <> "FW,DF" && x.Pos <> "DF,FW" )
+    // 2. group players by position
+    |> Array.groupBy(fun x -> x.Pos)
+    // 3. sort positions.
+    |> Array.sortBy (fun (position, _players) -> position)
+
+
+let bestPlayersByPosition =
+    // This will get top 25 players for each position
+    // We create a new list by looping through each position group.
+    [| for (position, playersInPosition) in playersByPosition do
+        // 4. Sort best to worst (and convert to list at the end)
+        let bestToWorst =
+            playersInPosition
+            |> Array.sortByDescending (fun player ->
+                int player.``Performance - Gls``, player.Matches)
+        // 5. Truncate to top 25
+        let top25 = bestToWorst |> Array.truncate 25         
+        top25 |]
+    // 6. concatenate to a single big array
+    |> Array.concat
+    
+let bestPlayers = 
+    // sort best by position to overall top goal scorers,
+    // with ties broken by alphabetical sorting on 
+    // the players name and squad.
+    bestPlayersByPosition
+    |> Array.sortByDescending (fun player -> 
+        int player.``Performance - Gls``,
+        player.Player,
+        player.Squad)
 
 (**
 ## Create a Csv and store the Data using Csv Provider.  
@@ -117,7 +188,7 @@ We need to save the data to a Csv file in order to use it in the Exercises.
 *)
 
 (**
-First we need to construct a sample of the data that will be stored in the Csv File.
+First we need to construct a sample of the data that will be stored in the comma separated (csv) File.
 By running `footballers.Headers` as done previously, we can easily observe that the table has fields that will not be used.  
 The csv file doesn't need to contain all those fields, we only need: 
 
@@ -130,106 +201,88 @@ The csv file doesn't need to contain all those fields, we only need:
 - `Playing Time - MP` (Players' Matches Played)  
 - `Performance - Gls` (Players' Goals Scored)  
 
-For the sample provider we provide the header and 2 example rows. The header gives the field names. The example rows give example data that lets the type provider figure out the type of the fields.
+The csv type provider will infer csv field types from a sample that you give it.
+It can infer the types from rows of the sample or from explicitly defined types
+added in parentheses after column names.
+We'll use explicit column type definitions in our sample.
 
-- The only point of `player1` and `aardvark` is to point out that the player field contains `strings`. You could use any string in place of `player1` or `aardvark`. The same is true for the `Nation`, `Position`, `Team` and `League` fields.  
-- For `Age`, `MatchesPlayed` and `GoalsScored`, we use `00` to represent that the field contains `integers`.  You could use any other `integer` for the sample.  
 *)
 
 [<Literal>]
 let FootballPlayersCsvSample = 
-    " Player, Nation, Position, Team, League, Age, MatchesPlayed, GoalsScored
-      player1, nation1, pos1, team1, league1, 00, 00, 00
-      aardvark, nation2, pos2, team2, league2, 00, 00, 00"
+    "Player (string)," +
+    "Nation (string)," +
+    "Position (string)," +
+    "Team (string)," +
+    "League (string)," +
+    "Age (int)," +
+    "MatchesPlayed (int)," +
+    "GoalsScored (int)"
+
+// the sample csv file that we've created:
+FootballPlayersCsvSample
+(***include-it***)
+
 
 (**
 With the sample created, now we define the type from the sample.
 *)
 
-type FootballPlayersCsv = CsvProvider<FootballPlayersCsvSample>
+type FootballPlayersCsv = CsvProvider<FootballPlayersCsvSample,ResolutionFolder = __SOURCE_DIRECTORY__>
 
 (**
-Now that we have the data and the Csv sample let's create an "array of CSV rows". First we'll show the code and then explain it.  
+Now that we have the data and the Csv sample let's create a "list of CSV rows".
 *)
 
-let FootballPlayersCsvRows = 
-    footballersParsed
-    |> Array.map(fun htmlRow -> 
-        FootballPlayersCsv.Row
-            ( player = htmlRow.Player,
-              nation = htmlRow.Nation,
-              position = htmlRow.Pos,
-              team = htmlRow.Squad,
-              league = htmlRow.Comp,
-              age = int htmlRow.Age,
-              matchesPlayed = int htmlRow.``Playing Time - MP``,
-              goalsScored = int htmlRow.``Performance - Gls`` ))
+let bestPlayersCsvRows = 
+    [ for player in bestPlayers do
+        FootballPlayersCsv.Row( 
+            player = player.Player,
+            nation = player.Nation,
+            position = player.Pos,
+            team = player.Squad,
+            league = player.Comp,
+            // For the age variable just take the year (first two digits).
+            // Sometimes 29 and 185 days old is given as "29-185" and we
+            // want to throw away the days part.
+            age = int player.Age.[0..1], 
+            matchesPlayed = int player.``Playing Time - MP``,
+            goalsScored = int player.``Performance - Gls`` ) ]
 
 (**
-The steps are:
-1. We start with the array that contains the data (`footballersParsed`).  
-2. Then we use `Array.map` to iterate through the rows of the html table and convert each row of the html table into a `FootballPlayersCsv.Row`.  
-    - We don't want all the fields from the html table. We only want the ones specified in the `FootballPlayersCsv` type.  
-    - So for each field in a `FootballPlayersCsv` row we assign the corresponding field from the html table row.  
-3. Note that we use `int` to convert `age`, `matchesPlayed` and `goalsScored` because those fields' values are `strings` in the html table and we want `integers` instead.  
+Note that we use `int` to convert `age`, `matchesPlayed` and `goalsScored` because those fields' values are `strings` in the html table and we want `integers` instead.  
 *)
 
 (**
-Let's look at the first 5 rows of `FootballPlayersCsvRows` using the `Array.truncate` property. We don't need to use `FootballPlayersCsvRows.Rows` because the variable is already an array of csv rows.  
+Let's look at the first 5 csv rows. We don't need to use `bestPlayersCsvRows.Rows` because the variable is already a list of csv rows.  
 *)
-FootballPlayersCsvRows[0..4]
+
+(***do-not-eval***)
+bestPlayersCsvRows[0..4]
+(***hide***)
+bestPlayersCsvRows.[0..4]
 (*** include-it ***)
 (**
-Now we have the data we need, but
-using `FootballPlayersCsvRows.Length`
-you can observe that there are more than 2500 rows! 
+Rather than a "list of Csv rows", we want a "Csv file".  Here's how we do that.
 *)
-
-FootballPlayersCsvRows.Length
-
-(**
-For our exercises we don't need such a heavy dataset,
-so let's transform it to get the best players by position!
-Steps: 
-1. `Array.filter`, we filter the dataset by position, in order to remove odd positions
-with few players as "GK,FW", "FW,DF" and "DF,FW".
-2. `Array.sortByDescending`, we want the best players so we want to sort the data from highest goals scored
-and highest matches played, to lowest goals scored and lowest matches played.
-3. `Array.groupBy`, we want to get the top players by position we need to group the data by 
-positions.
-4. `Array.truncate`, we only want to keep the 25 best players by position (groups).
-5. `Array.collect`, concatenate the top players by position and return the combined array.
-*)
-
-let top200PlayersByPosition =
-    FootballPlayersCsvRows
-    |> Array.filter(fun x -> x.Position <> "GK,FW" && x.Position <> "FW,DF" && x.Position <> "DF,FW" )
-    |> Array.sortByDescending(fun x -> x.GoalsScored, x.MatchesPlayed)
-    |> Array.groupBy(fun x -> x.Position)
-    |> Array.collect(fun (_, y) ->  y |> Array.truncate 25)
-    |> Array.sortByDescending(fun x -> x.GoalsScored, x.Player,x.Team)
-
-(**
-Rather than an "array of Csv rows", we want a "Csv file".  Here's how we do that.
-*)
-let FootballPlayersCsvFile = new FootballPlayersCsv(top200PlayersByPosition)
+let bestPlayersCsvFile = new FootballPlayersCsv(bestPlayersCsvRows)
 
 (**
 Ok, let's write the file. Remember that `__SOURCE_DIRECTORY__` is a magic variable that points 
-to whatever folder this script file (aka the source code file) is contained in.
-So this will write a csv file in the current directory.
+to whatever folder this code file (aka the source code file) is contained in.
+So this will write the data to a csv file named "FootballPlayers.csv" in the current directory.
 *)
 
-let filePath = __SOURCE_DIRECTORY__ + "/" + "FootballPlayers.csv"
-FootballPlayersCsvFile.Save(filePath)
+let filePath = System.IO.Path.Combine(__SOURCE_DIRECTORY__,"FootballPlayers.csv")
+bestPlayersCsvFile.Save(filePath)
 
 (**
-and if you want to read the data back in from the file to see that it works:
+And if you want to read the data back in from the file to see that it works:
 *)
 let backIn = FootballPlayersCsv.Load(filePath)
 
 backIn.Rows
-|> Seq.take 5
+|> Seq.truncate 5
 |> Seq.iter (printfn "%A")
 (*** include-output ***)
 

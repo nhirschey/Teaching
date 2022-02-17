@@ -56,7 +56,8 @@ fsi.AddPrinter(fun (H3 text) -> makeNumberedHeading "h3" text)
 
 #r "nuget:FSharp.Data"
 #r "nuget: FSharp.Stats"
-#r "nuget: Plotly.NET, 2.0.0-preview.16"
+#r "nuget: Plotly.NET, 2.0.0-preview.17"
+#r "nuget: Plotly.NET.Interactive, 2.0.0-preview.17"
 
 open FSharp.Data
 open FSharp.Stats
@@ -92,7 +93,7 @@ let playerStatsTable =
 
 Now that you know how to work with the dataset using the most common List functions, we still need to practice how to create usefull plots with the data.  
 
-For plotting in F# we load `Plotly.NET 2.0.0-beta9` nugget and open the `Plotly.NET` namespace.  
+For plotting in F# we load `Plotly.NET` nuget and open the `Plotly.NET` namespace.  
 Documentation links:  
 
 - [Plotly.NET General Documentation](https://plotly.net/)  

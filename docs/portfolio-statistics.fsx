@@ -531,7 +531,9 @@ or `install.packages` in R.
 
 *)
 
-#r "nuget: Plotly.NET, 2.0.0-preview.16"
+#r "nuget: Plotly.NET, 2.0.0-preview.17"
+#r "nuget: Plotly.NET.Interactive, 2.0.0-preview.17"
+
 
 open Plotly.NET
 

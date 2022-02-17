@@ -120,10 +120,6 @@ let sumGoalsScoredByLeagueChart =
     |> Chart.withYAxisStyle("Sum of Goals Scored")
     |> Chart.withXAxisStyle("Top 5 Football Leagues")
     |> Chart.withTitle("Sum of Goals Scored by League")
-    //not a part of the exercise, just for formatting purposes.
-    //|> GenericChart.mapLayout(fun layout -> 
-    //    layout?width <- 1000.0
-    //    layout)
 
 (*** do-not-eval ***) 
 sumGoalsScoredByLeagueChart
@@ -166,10 +162,6 @@ let sumGoalsByAgeChart =
     |> Chart.withYAxisStyle("Sum of Goals Scored")
     |> Chart.withXAxisStyle("Age")
     |> Chart.withTitle("Sum of Goals Scored by Age")
-    //not a part of the exercise, just for formatting purposes.
-    //|> GenericChart.mapLayout(fun layout -> 
-    //    layout?width <- 1000.0
-    //    layout)
 
 (*** do-not-eval, define: SumGoalsByAgeChartShow ***) 
 sumGoalsByAgeChart
@@ -205,10 +197,7 @@ let averageGoalsScoredByLeagueChart =
     |> Chart.withYAxisStyle("Average of Goals Scored")
     |> Chart.withXAxisStyle("Top 5 Football Leagues")
     |> Chart.withTitle("Average of Goals Scored by League")
-    //not a part of the exercise, just for formatting purposes.
-    //|> GenericChart.mapLayout(fun layout -> 
-    //    layout?width <- 1000.0
-    //    layout)
+
 (*** do-not-eval ***) 
 averageGoalsScoredByLeagueChart
 
@@ -264,10 +253,6 @@ let averageGoalsPerMatchByAgeFWChart =
     |> Chart.withYAxisStyle("Average of Goals Scored Per Match")
     |> Chart.withXAxisStyle("Age")
     |> Chart.withTitle("Average of Forward Position (FW) Goals Scored per Match By Age")
-    //not a part of the exercise, just for formatting purposes.
-    //|> GenericChart.mapLayout(fun layout -> 
-    //    layout?width <- 1000.0
-    //    layout)
 
 (*** do-not-eval, define: averageGoalsPerMatchByAgeFWChartShow ***) 
 averageGoalsPerMatchByAgeFWChart

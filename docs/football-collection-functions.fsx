@@ -17,6 +17,17 @@ index: 2
 
 > Developed with [Davide Costa](https://github.com/DavideGCosta)
 
+
+You should now feel comfortable with the footballer dataset and how to work with
+tuples, records, anonymous records. You should also know how to perform simple transformations.
+With a large and heterogeneous dataset, it's useful to understand how to sort, group, 
+and filter the data, and also many other interesting List functions.  
+
+It is a good idea to browse the documentation for lists at the [F# language reference](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/Lists)
+and [F# core library] documentation sites before you start. 
+For further discussion of collection functions, the related [F# for fun and profit](https://fsharpforfunandprofit.com/posts/list-module-functions/)
+page is also useful.
+
 *)
 
 (*** condition:prepare ***)
@@ -111,13 +122,6 @@ let playerStatsTable =
 (**
 ## List Functions.
 
-By completing Part 1; you should now feel comfortable about the dataset and how to work with
-tuples, records, anonymous records, and also to perform some transformations.
-With a large and heterogeneous dataset, it's useful to understand how to sort, group, 
-and filter the data, and also many other interesting List functions.  
-
-It's a good idea to browse the [List documentation](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/Lists)
-before you start.
 *)
 
 

@@ -111,7 +111,7 @@ let playerStatsTable =
 (**
 ## List Functions.
 
-By completing Part 1, you should now feel comfortable about the dataset and how to work with
+By completing Part 1; you should now feel comfortable about the dataset and how to work with
 tuples, records, anonymous records, and also to perform some transformations.
 With a large and heterogeneous dataset, it's useful to understand how to sort, group, 
 and filter the data, and also many other interesting List functions.  
@@ -197,7 +197,7 @@ playerStatsTable
 ### 3 List.distinct
 
 `List.distinct` returns the unique elements from the List.  
-`[|"hello", "world", "hello", "hi"|] |> List.distinct` returns `[|"hello", "world", "hi"|]`
+`["hello"; "world"; "hello"; "hi"] |> List.distinct` returns `["hello"; "world"; "hi"]`
 *)
 
 (**
@@ -299,8 +299,8 @@ playerStatsTable
 (**
 ### 6 List.sort and List.sortDescending
 
-- `[|1, 4, 5, 3, 6|] |> List.sort` returns `[|1, 3, 4, 5, 6|]` (ascending sort).
-- `[|1, 4, 5, 3, 6|] |> List.sortDescending` returns `[|6, 5, 4, 3, 1|]` (descending sort).
+- `[1; 4; 5; 3; 6] |> List.sort` returns `[1; 3; 4; 5; 6]` (ascending sort).
+- `[1; 4; 5; 3; 6] |> List.sortDescending` returns `[6; 5; 4; 3; 1]` (descending sort).
 *)
 
 (**
@@ -528,7 +528,7 @@ playerStatsTable
 (**
 ### 1 List.max
 
-`[|1, 4, 5, 3, 6|] |> List.max` returns `6` (the highest value in the List).
+`[1; 4; 5; 3; 6] |> List.max` returns `6` (the highest value in the List).
 *)
 
 (**
@@ -562,7 +562,7 @@ playerStatsTable
 (**
 ### 2 List.min
 
-`[|1, 4, 5, 3, 6|] |> List.min` returns `1` (the lowest value in the List).
+`[1; 4; 5; 3; 6] |> List.min` returns `1` (the lowest value in the List).
 *)
 
 (**
@@ -660,7 +660,7 @@ playerStatsTable
 (**
 ### 5 List.sum
 
-`[|1, 4, 5, 3, 6|] |> List.sum` returns `19` (sum of the List elements).
+`[1; 4; 5; 3; 6] |> List.sum` returns `19` (sum of the List elements).
 *)
 
 (**
@@ -728,7 +728,7 @@ playerStatsTable
 
 ### 7 List.average
 
-`[|1.0; 2.0; 5.0; 2.0|] |> List.average` returns `2.5` (the average of all the List elements).
+`[1.0; 2.0; 5.0; 2.0] |> List.average` returns `2.5` (the average of all the List elements).
 *)
 
 (**

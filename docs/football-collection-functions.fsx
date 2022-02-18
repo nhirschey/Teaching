@@ -17,6 +17,17 @@ index: 2
 
 > Developed with [Davide Costa](https://github.com/DavideGCosta)
 
+
+You should now feel comfortable with the footballer dataset and how to work with
+tuples, records, anonymous records. You should also know how to perform simple transformations.
+With a large and heterogeneous dataset, it's useful to understand how to sort, group, 
+and filter the data, and also many other interesting List functions.  
+
+It is a good idea to browse the documentation for lists at the [F# language reference](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/Lists)
+and [F# core library] documentation sites before you start. 
+For further discussion of collection functions, the related [F# for fun and profit](https://fsharpforfunandprofit.com/posts/list-module-functions/)
+page is also useful.
+
 *)
 
 (*** condition:prepare ***)
@@ -111,13 +122,6 @@ let playerStatsTable =
 (**
 ## List Functions.
 
-By completing Part 1, you should now feel comfortable about the dataset and how to work with
-tuples, records, anonymous records, and also to perform some transformations.
-With a large and heterogeneous dataset, it's useful to understand how to sort, group, 
-and filter the data, and also many other interesting List functions.  
-
-It's a good idea to browse the [List documentation](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/Lists)
-before you start.
 *)
 
 
@@ -197,7 +201,7 @@ playerStatsTable
 ### 3 List.distinct
 
 `List.distinct` returns the unique elements from the List.  
-`[|"hello", "world", "hello", "hi"|] |> List.distinct` returns `[|"hello", "world", "hi"|]`
+`["hello"; "world"; "hello"; "hi"] |> List.distinct` returns `["hello"; "world"; "hi"]`
 *)
 
 (**
@@ -299,8 +303,8 @@ playerStatsTable
 (**
 ### 6 List.sort and List.sortDescending
 
-- `[|1, 4, 5, 3, 6|] |> List.sort` returns `[|1, 3, 4, 5, 6|]` (ascending sort).
-- `[|1, 4, 5, 3, 6|] |> List.sortDescending` returns `[|6, 5, 4, 3, 1|]` (descending sort).
+- `[1; 4; 5; 3; 6] |> List.sort` returns `[1; 3; 4; 5; 6]` (ascending sort).
+- `[1; 4; 5; 3; 6] |> List.sortDescending` returns `[6; 5; 4; 3; 1]` (descending sort).
 *)
 
 (**
@@ -528,7 +532,7 @@ playerStatsTable
 (**
 ### 1 List.max
 
-`[|1, 4, 5, 3, 6|] |> List.max` returns `6` (the highest value in the List).
+`[1; 4; 5; 3; 6] |> List.max` returns `6` (the highest value in the List).
 *)
 
 (**
@@ -562,7 +566,7 @@ playerStatsTable
 (**
 ### 2 List.min
 
-`[|1, 4, 5, 3, 6|] |> List.min` returns `1` (the lowest value in the List).
+`[1; 4; 5; 3; 6] |> List.min` returns `1` (the lowest value in the List).
 *)
 
 (**
@@ -660,7 +664,7 @@ playerStatsTable
 (**
 ### 5 List.sum
 
-`[|1, 4, 5, 3, 6|] |> List.sum` returns `19` (sum of the List elements).
+`[1; 4; 5; 3; 6] |> List.sum` returns `19` (sum of the List elements).
 *)
 
 (**
@@ -728,7 +732,7 @@ playerStatsTable
 
 ### 7 List.average
 
-`[|1.0; 2.0; 5.0; 2.0|] |> List.average` returns `2.5` (the average of all the List elements).
+`[1.0; 2.0; 5.0; 2.0] |> List.average` returns `2.5` (the average of all the List elements).
 *)
 
 (**

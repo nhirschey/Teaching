@@ -30,7 +30,23 @@ type PriceObs =
       Volume : float }
 
 type private PriceObsCsv = CsvProvider<Sample="Date (date),Open (float),High (float),Low (float), Close (float),AdjClose (float),Volume (float)">
+let private parseYahooPriceHistory symbol result = 
+    PriceObsCsv.Parse(result).Rows
+    |> Seq.map (fun x -> 
+        { Symbol = symbol 
+          Date = x.Date
+          Open = x.Open
+          High = x.High
+          Low = x.Low
+          Close = x.Close 
+          AdjustedClose = x.AdjClose
+          Volume = x.Volume })
+    |> Seq.toArray
+
+
 let private cc = System.Net.CookieContainer()
+let private retryCount = 5
+let private parallelSymbols = 5
 
 type YahooFinance =
     static member PriceHistory(symbol: string,?startDate: DateTime,?endDate: DateTime,?interval: Interval) =
@@ -45,21 +61,33 @@ type YahooFinance =
             $"&events=history&includeAdjustedClose=true"
         
         let url = generateYahooUrl symbol startDate endDate interval
-        let req = Http.RequestString(
-                        url = url, 
-                        httpMethod = "GET",
-                        query = ["format","csv"],
-                        headers = [HttpRequestHeaders.Accept HttpContentTypes.Csv],
-                        silentHttpErrors = false,
-                        cookieContainer = cc)
-        PriceObsCsv.Parse(req).Rows
-        |> Seq.map (fun x -> 
-            { Symbol = symbol 
-              Date = x.Date
-              Open = x.Open
-              High = x.High
-              Low = x.Low
-              Close = x.Close 
-              AdjustedClose = x.AdjClose
-              Volume = x.Volume })
-        |> Seq.toList
+        let rec yahooRequest attempt symbol =
+            async {
+                let url = generateYahooUrl symbol startDate endDate interval
+                try
+                    let! result = 
+                        Http.AsyncRequestString(
+                            url = url, 
+                            httpMethod = "GET",
+                            query = ["format","csv"],
+                            headers = [HttpRequestHeaders.Accept HttpContentTypes.Csv],
+                            cookieContainer = cc)
+                    return parseYahooPriceHistory symbol result
+                with e ->
+                    if attempt > 0 then
+                        return! yahooRequest (attempt - 1) symbol
+                    else return! failwith $"Failed to request {symbol}, Error: {e}"
+            }
+        let rec getSymbols symbols parallelSymbols =
+            if symbols.Length > parallelSymbols then
+                let thisDownload, remaining = symbols |> List.splitAt parallelSymbols
+                let result = 
+                    [| for symbol in thisDownload do 
+                        yahooRequest retryCount symbol |]
+                    |> Async.Parallel
+                    |> Async.RunSynchronously
+                    |> Array.collect id
+                    |> Array.toList
+
+
+

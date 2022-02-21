@@ -673,18 +673,23 @@ Chart.Line(differentReturns)
 
 ## Portfolio Variance
 
-Recall the formula for variance of a portfolio consisting of stocks $x$ and $y$:
+For a portfolio of $N$ assets, the portfolio variance $\sigma_p^2$ is 
 
-$$ \sigma^2 = w_x^2 \sigma^2_x + w_y^2 \sigma^2_y + 2 w_x w_y cov(r_x,r_y), $$
+$$ \sigma_p^2 = \Sigma^N_{i=1} \Sigma^N_{j=1} w_i w_j cov(r_i,r_j) = \Sigma^N_{i=1} w^2_i\sigma^2_i + 2\Sigma_{j<i} w_i w_j cov(r_i,r_j)$$
 
-where $w_x$ and $w_y$ are the weights in stocks $x$ and $y$, $r_x$ and $r_y$ are the stock returns, $\sigma^2$ is variance, and $cov(.,.)$ is covariance. 
+where $i$ and $j$ index assets, $\sigma^2_i$ is asset $i$'s variance, 
+and $cov(r_i,r_j)$ is the covariance between the returns of assets $i$ and $j$.
 
+For a portfolio of two assets $x$ and $y$ this simplifies to:
 
+$$ \sigma^2_p = w_x^2 \sigma^2_x + w_y^2 \sigma^2_y + 2 w_x w_y cov(r_x,r_y).$$
 
+this.
 For next time: Portfolio Variance and Leverage
 ## Leverage
 *)
 
+#r "nuget: FSharp.Stats"
 
 open FSharp.Stats
 open FSharp.Stats.Correlation

@@ -482,7 +482,7 @@ let stddev xs =
 But it is also convenient to use the [FSharp.Stats](https://fslab.org/FSharp.Stats/)
 *)
 
-#r "nuget: FSharp.Stats, 0.4.3"
+#r "nuget: FSharp.Stats"
 
 open FSharp.Stats
 [1.0 .. 10.0 ] |> Seq.stDev

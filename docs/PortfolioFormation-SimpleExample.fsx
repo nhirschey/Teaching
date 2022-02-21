@@ -72,7 +72,7 @@ printfn "%i" deconPermnoExample
 
 // Now we can define our investment universe.
 let investmentUniverse =
-    [for tick in [ "AAPL"; "KO"; "GOOG";"DIS";"GME"] -> 
+    [for tick in [ "AAPL"; "KO"; "GOOG";"DIS";"GME"] do 
         Ticker tick ]
 
 (**
@@ -84,12 +84,18 @@ let signals =
       Ticker "KO", -1.4
       Ticker "GOOG", 0.4 
       Ticker "DIS", 1.1 ]
-    |> Map.ofList
+    |> Map
 
+(***do-not-eval***)
 signals[Ticker "AAPL"]
+(** *)
+
 Map.find (Ticker "AAPL") signals
+(***include-it***)
 Map.tryFind (Ticker "AAPL") signals
+(***include-it***)
 Map.tryFind (Ticker "GME") signals
+(***include-fsi-output***)
 
 (** Now a function that gets the signal given a security id.*)
 let getSignal id = Map.tryFind id signals
@@ -104,7 +110,7 @@ We can call this function on all signals in our investment universe.
 [ for security in investmentUniverse do
     security, getSignal security ]
 
-// same thing with Array.map
+// same thing with List.map
 investmentUniverse
 |> List.map(fun security -> security, getSignal security)
 
@@ -138,7 +144,9 @@ getSecuritySignal (Ticker "GOOG")
 for security in investmentUniverse do
     let securitySignal = getSecuritySignal security
     printfn $"{securitySignal}"
+(***include-output***)
 
+(** This is equivalent but using a pipeline. *)
 investmentUniverse
 |> List.map getSecuritySignal
 |> List.iter (printfn "%A")
@@ -182,15 +190,23 @@ Here, `Indexed` is a tuple where the first element is a string and the second is
 
 type PortfolioId = 
     | Named of string
-    | Indexed of name:string * index:int
+    | Indexed of {| Name: string; Index: int |}// name:string * index:int
 
 // Example portfolio IDs
-let portolioId1 = Named "Market"
-let portfolioId2 = Indexed ("Size",1)
-let portfolioId3 = Indexed (index=2,name="Size")    
+let portfolioId1 = Named "Market"
+let portfolioId2 = Indexed {| Name = "Size"; Index = 1 |} 
+let portfolioId3 = Indexed {| Name = "Size" ; Index = 2 |}    
 
-// Example deconstructing
-let (Indexed(deconPortName,deconPortIndex)) = portfolioId3
+let getPortfolioIdString port =
+    match port with
+    | Named name -> name
+    | Indexed p -> $"{p.Name}: {p.Index}"
+
+
+getPortfolioIdString portfolioId1
+(***include-it***)
+getPortfolioIdString portfolioId3
+(***include-it***)
 
 (**
 Let's assign securities to portolios based on whether their signal is above or below the median.
@@ -199,7 +215,7 @@ Let's assign securities to portolios based on whether their signal is above or b
 // Model for an assigned portfolio
 type AssignedPortfolio =
     { PortfolioId : PortfolioId 
-      Signals : SecuritySignal array }
+      Signals : list<SecuritySignal> }
 
 let medianSignal = 
     securitySignals 
@@ -233,24 +249,25 @@ let assigned =
 (**
 Or create a reusable function to do the same thing
 *)
+
 let assignAboveBelowMedian securitySignals =
     let medianSignal = 
         securitySignals 
-        |> Array.map(fun x -> x.Signal)
-        |> Array.median
+        |> List.map(fun x -> x.Signal)
+        |> Seq.median
 
     let aboveMedian =
         securitySignals
-        |> Array.filter(fun x -> x.Signal >= medianSignal)
+        |> List.filter(fun x -> x.Signal >= medianSignal)
 
     let belowMedian =
         securitySignals
-        |> Array.filter(fun x -> x.Signal < medianSignal)
+        |> List.filter(fun x -> x.Signal < medianSignal)
 
-    [| { PortfolioId = Named("Above Median")
-         Signals = aboveMedian }
-       { PortfolioId = Named("Below Median")
-         Signals = belowMedian} |]
+    [ { PortfolioId = Named("Above Median")
+        Signals = aboveMedian }
+      { PortfolioId = Named("Below Median")
+        Signals = belowMedian} ]
 
 
 (**
@@ -272,11 +289,11 @@ let permnoPosition = { SecurityId = Permno 1001; Weight = 0.75 }
 And once we have multiple positions, then we can group them into a portfolio.
 *)
 
-(** And a portfolio can consist of a Portfolio Id and an array of positions*)
+(** And a portfolio can consist of a Portfolio Id and an List of positions*)
 
 type Portfolio = 
     { PortfolioId: PortfolioId
-      Positions : Position array }
+      Positions : list<Position> }
 
 (**
 An example constructing a portfolio
@@ -284,7 +301,7 @@ An example constructing a portfolio
 
 let portfolioExample1 =
     { PortfolioId = Named "Example 1"
-      Positions = [| koPosition; permnoPosition |]}
+      Positions = [ koPosition; permnoPosition ] }
 
 (**
 ## Defining portfolio position weights
@@ -299,23 +316,21 @@ Value-weight means that you weight securities proportional to their market value
 Equal-weight is easy:
 *)
 let weightTestPort = 
-    assigned |> Array.find(fun x -> x.PortfolioId = Named("Above Median"))
+    assigned |> List.find (fun x -> x.PortfolioId = Named("Above Median"))
 
 let nSecurities = weightTestPort.Signals.Length
 
 let ewTestWeights =
-    weightTestPort.Signals
-    |> Array.map(fun signal ->
+    [ for signal in weightTestPort.Signals do 
         { SecurityId = signal.SecurityId
-          Weight = 1.0 / (float nSecurities) })
+          Weight = 1.0 / (float nSecurities) } ]
 
 let giveEqualWeights x =
     let n = x.Signals.Length
     let pos =
-        x.Signals
-        |> Array.map(fun signal ->
+        [ for signal in x.Signals do 
             { Position.SecurityId = signal.SecurityId
-              Weight = 1.0 / (float n) })
+              Weight = 1.0 / (float n) } ]
     { PortfolioId = x.PortfolioId 
       Positions = pos }
 
@@ -324,8 +339,11 @@ giveEqualWeights weightTestPort
 (***include-fsi-output***)
 
 (** For all portfolios:*)
-assigned
-|> Array.map giveEqualWeights
+[ for portfolio in assigned do giveEqualWeights portfolio ]
+(***include-fsi-output***)
+
+(** or equivalently:*)
+assigned |> List.map giveEqualWeights
 (***include-fsi-output***)
 
 (** 
@@ -333,26 +351,24 @@ For value weights, we need the securities' market values
 split into above/below median and for portfolios with those.
 *)
 let marketCapitalizations =
-    [| Ticker "AAPL", 10.0
-       Ticker "KO", 4.0
-       Ticker "GOOG", 7.0 
-       Ticker "DIS", 5.0 |]
-    |> Map.ofArray
+    [ Ticker "AAPL", 10.0
+      Ticker "KO", 4.0
+      Ticker "GOOG", 7.0 
+      Ticker "DIS", 5.0 ]
+    |> Map
 
 let mktCaps =
-    weightTestPort.Signals
-    |> Array.map(fun signal ->
-            let mktcap = Map.find signal.SecurityId marketCapitalizations
-            signal.SecurityId, mktcap)
+    [ for signal in weightTestPort.Signals do 
+        let mktcap = Map.find signal.SecurityId marketCapitalizations
+        signal.SecurityId, mktcap ]
 
 (***include-fsi-output***)
 
 let vwTestWeights =
-    let totMktCap = mktCaps |> Array.sumBy snd
-    mktCaps
-    |> Array.map(fun (id, mktCap) ->
+    let totMktCap = mktCaps |> List.sumBy snd
+    [ for (id, mktCap) in mktCaps do 
         { SecurityId = id 
-          Weight = mktCap / totMktCap })
+          Weight = mktCap / totMktCap } ]
 (***include-fsi-output***)
 
 (**
@@ -360,34 +376,35 @@ Now a function to do the same as above.
 *)
 let giveValueWeights x =
     let mktCaps =
-        x.Signals
-        |> Array.map(fun signal ->
+        [ for signal in x.Signals do 
             let mktcap = Map.find signal.SecurityId marketCapitalizations
-            signal.SecurityId, mktcap)
-
-    let totMktCap = mktCaps |> Array.sumBy snd
-
+            signal.SecurityId, mktcap ]
+    let totMktCap = mktCaps |> List.sumBy snd
     let pos =
-        mktCaps
-        |> Array.map(fun (id, mktCap) ->
+        [ for (id, mktCap) in mktCaps do 
             { SecurityId = id 
-              Weight = mktCap / totMktCap })
+              Weight = mktCap / totMktCap } ]
     { PortfolioId = x.PortfolioId; Positions = pos }
 
 (**
 We can map our function to both of our assigned portfolios.
 *)
-assigned
-|> Array.map giveValueWeights  
+
+[ for x in assigned do giveValueWeights x ]
+(***include-it***)
+
+(** or equivalently *)
+assigned |> List.map giveValueWeights  
+(***include-it***)
 
 (**
 All together now. This is our workflow.
 *)
 let strategyWeights =
     investmentUniverse
-    |> Array.choose getSecuritySignal
+    |> List.choose getSecuritySignal
     |> assignAboveBelowMedian
-    |> Array.map giveValueWeights
+    |> List.map giveValueWeights
 
 (*** include-fsi-output***)
 
@@ -398,11 +415,11 @@ let strategyWeights =
 Take these returns:
 *)
 let returnMap =
-    [| Ticker "AAPL", -0.4
-       Ticker "KO", -0.1
-       Ticker "GOOG", 0.15 
-       Ticker "DIS", 0.1 |]
-    |> Map.ofArray
+    [ Ticker "AAPL", -0.4
+      Ticker "KO", -0.1
+      Ticker "GOOG", 0.15 
+      Ticker "DIS", 0.1 ]
+    |> Map
 
 (**
 What is the return of the two portfolios?

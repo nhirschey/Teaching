@@ -44,7 +44,7 @@ ff3 |> Seq.take 5
 One thing that can help us manage volatility is the fact that volatility tends to be somewhat persistent. By this we mean that if our risky asset is volatile today, then it is likely to be volatile tomorrow. We can observe this by plotting monthly volatility as we do below. It also means that we can use past volatility to form estimates of future volatility.
 *)
 
-#r "nuget: FSharp.Stats, 0.4.3"
+#r "nuget: FSharp.Stats"
 #r "nuget: Plotly.NET, 2.0.0-preview.17"
 #r "nuget: Plotly.NET.Interactive, 2.0.0-preview.17"
 

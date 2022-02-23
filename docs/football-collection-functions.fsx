@@ -24,7 +24,7 @@ With a large and heterogeneous dataset, it's useful to understand how to sort, g
 and filter the data, and also many other interesting List functions.  
 
 It is a good idea to browse the documentation for lists at the [F# language reference](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/Lists)
-and [F# core library] documentation sites before you start. 
+and the [F# core library](https://fsharp.github.io/fsharp-core-docs/reference/fsharp-collections-listmodule.html) documentation sites before you start. 
 For further discussion of collection functions, the related [F# for fun and profit](https://fsharpforfunandprofit.com/posts/list-module-functions/)
 page is also useful.
 

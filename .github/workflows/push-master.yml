@@ -18,7 +18,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 6.0.X
+        dotnet-version: 6.0.x
     - name: Restore tools
       run: dotnet tool restore
     - name: Run fsdocs

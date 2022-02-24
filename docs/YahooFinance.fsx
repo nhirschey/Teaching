@@ -2,7 +2,7 @@
 [![Script](img/badge-script.svg)]({{root}}/{{fsdocs-source-basename}}.fsx)
 
 Based on code from https://github.com/aexsalomao/YahooFinance/
-*) 
+*)
 
 #r "nuget: FSharp.Data"
 
@@ -97,8 +97,5 @@ type YahooFinance =
                 result @ output
         getSymbols symbols [] parallelSymbols                
     static member PriceHistory(symbol: string,?startDate: DateTime,?endDate: DateTime,?interval: Interval) =
-        let startDate = defaultArg startDate (DateTime.Now.AddYears(-1))
-        let endDate = defaultArg endDate (DateTime.Now)
-        let interval = defaultArg interval Interval.Monthly
-        YahooFinance.PriceHistory(symbols=[symbol],startDate=startDate,endDate=endDate,interval=interval)
+        YahooFinance.PriceHistory(symbols=[symbol],?startDate=startDate,?endDate=endDate,?interval=interval)
 

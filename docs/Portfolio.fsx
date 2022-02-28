@@ -1,4 +1,7 @@
-// Last updated 2021-04-29 09:00
+(**
+[![Script](img/badge-script.svg)]({{root}}/{{fsdocs-source-basename}}.fsx)&emsp;
+*)
+
 module Portfolio
 
 #r "nuget: NodaTime"

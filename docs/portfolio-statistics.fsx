@@ -675,7 +675,7 @@ Chart.Line(differentReturns)
 
 For a portfolio of $N$ assets, the portfolio variance $\sigma_p^2$ is 
 
-$$ \sigma_p^2 = \sum^N_{i=1} \sum^N_{j=1} w_i w_j cov(r_i,r_j) = \sum^N_{i=1} w^2_i\sum^2_i + 2\sum_{j<i} w_i w_j cov(r_i,r_j)$$
+$$ \sigma_p^2 = \sum^N_{i=1} \sum^N_{j=1} w_i w_j cov(r_i,r_j) = \sum^N_{i=1} w^2_i\sigma^2_i + 2\sum_{j<i} w_i w_j cov(r_i,r_j)$$
 
 where $i$ and $j$ index assets, $r_i$ is the return of asset $i$, $\sigma^2_i$ is the variance of $r_i$, 
 and $cov(r_i,r_j)$ is the covariance between $r_i$ and $r_j$.

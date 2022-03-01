@@ -626,7 +626,7 @@ but if you google F# parallel processing
 you can find other options and also asynchronous coding and PSeq 
 (I mostly use PSeq for my parallel code).
 2. `Array.Parallel.collect` expects to operate on arrays, so 
-we need to mhave our portfolio returned as arrays instead of lists.
+we need to have our portfolio returned as arrays instead of lists.
 This is what we are doing with `formMomentumPortArray`.
 *)
 

@@ -32,31 +32,61 @@ let samplePeriod x =
     x >= YearMonth(2010, 1) &&
     x <= YearMonth(2020, 2)
 
+(*** condition: ipynb ***)
+#if IPYNB
+// Set dotnet interactive formatter to plaintext
+Formatter.Register(fun (x:obj) (writer: TextWriter) -> fprintfn writer "%120A" x )
+Formatter.SetPreferredMimeTypesFor(typeof<obj>, "text/plain")
+#endif // IPYNB
+
+
 (**
 # Price momentum
 Price momentum is one of the most common quant signals. It is (fairly)
 straight forward to calculate, and you only need returns to do it,
 so it is a good starting point and reference 'strategy'.
-*)
 
-// Now create a type that represents the file.
-// This figures out what the columns of the file are.
-//  - Sample is the path to our file. The "../" means we're
-//    doing relative paths, so we need to specify the 
-//  - ResolutionFolder to indicate what folder the relative paths
-//    are relative to.
+## Input data
+Create a type that represents the file.
+This code figures out what the columns of the csv file are.
+
+- `Sample` is the path to our file. We assume in our source
+directory there is a folder called `data`. Inside this data
+folder we have our csv file.  
+- `ResolutionFolder` to indicate what folder relative paths
+  are relative to.
+
+First, let's verify that the csv file exists where we think it will be.
+*)
 let [<Literal>] ResolutionFolder = __SOURCE_DIRECTORY__
-type MsfCsv = CsvProvider<Sample=".data/msf-momentum.csv",
-                          ResolutionFolder = ResolutionFolder>
+
+let [<Literal>] CsvFile = "data/msf-momentum.csv"
+
+if IO.File.Exists(ResolutionFolder + "/" + CsvFile) then 
+    printfn "Success!!"
+else
+    let filesThere = IO.Directory.EnumerateFiles(ResolutionFolder,
+                                                 searchPattern = "*",
+                                                 searchOption=IO.SearchOption.AllDirectories)
+    printfn "We did not find the file. Here are the files in your source directory.\n"
+    filesThere |> Seq.iteri (printfn "%i. %A")
+
+(**
+Assuming that you got "Success!!" above this code below will work.
+*)
+type MsfCsv = CsvProvider<Sample=CsvFile,
+                          ResolutionFolder=ResolutionFolder>
 
 // assign the content of the file to a value
 let msfCsv = MsfCsv.GetSample()
 
-// look at the file attributes
+(** look at the file attributes *)
 msfCsv
-// look at the headers
+
+(** look at the headers *)
 msfCsv.Headers
-// look at the first few rows
+
+(** look at the first few rows *)
 msfCsv.Rows |> Seq.truncate 3
 
 (**

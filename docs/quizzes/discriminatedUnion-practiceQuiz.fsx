@@ -135,7 +135,7 @@ Create a discriminated union called called `Funds` with two cases: MutualFund of
 1. Create a MutualFund case of the Fund union with the string "Fidelity Magellan". Assign it to a value named "magellan".
 2. Create a HedgeFund case of the Fund union with the string "Renaissance Medallion". Assign it to a value named "renaissance".
 
-*)  
+*)
 
 (*** include-it-raw:preDetails ***)
 (*** define: twoCaseString, define-output: twoCaseString ***)

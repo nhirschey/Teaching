@@ -90,6 +90,11 @@ msfCsv.Headers
 (** look at the first few rows *)
 msfCsv.Rows |> Seq.truncate 3
 
+(** Read them into a list. *)
+let msfRows = msfCsv.Rows |> Seq.toList
+
+msfRows[..3]
+
 (**
 ## Signal construction
 We want to create a momentum signal and see how it relates to future returns.
@@ -162,19 +167,15 @@ Let's focus on a single stock.
 *)
 
 let amznReturns = 
-    // we're filtering and then storing as a map.
-    // if we used a sequence instead of a map/arra/list, then
-    // every time we used amznReturns, the sequence
-    // would be recreated by filtering msfCsv.Rows.
-    // That's one difference between (lazy) seq and
-    // (eager) array/list/map.
-    msfCsv.Rows
-    |> Seq.filter(fun x -> x.Ticker = "AMZN")
-    |> Seq.map(fun x ->
+    // we're filtering and then storing as a Map collection
+    // that allows us to look up by a key of (permno, yearMonth)
+    msfRows
+    |> List.filter(fun x -> x.Ticker = "AMZN")
+    |> List.map(fun x ->
         let ym = YearMonth(x.Month.Year,x.Month.Month) 
         let key = Permno x.Permno, ym
         key, x)
-    |> Map.ofSeq
+    |> Map
 
 let getPastYearObs 
     (returns:Map<(SecurityId * YearMonth),MsfCsv.Row>)
@@ -242,36 +243,71 @@ For example we can create a map collection like we had for amzn, but for all sto
 *)
 
 let msfByPermnoMonth =
-    msfCsv.Rows
-    |> Seq.map(fun x ->
+    msfRows
+    |> List.map(fun x ->
         let ym = YearMonth(x.Month.Year,x.Month.Month) 
         let key = Permno x.Permno, ym
         key, x)
-    |> Map.ofSeq
+    |> Map
 
-// finding some permnos for notable tickers
+(**
+finding some permnos for notable tickers
 
-// don't use tickers. companies change tickers, so you might look up the wrong company
-// That's why I'm picking some tickers that I know haven't changed, but my function
-// is using PERMNO.
+don't use tickers. companies change tickers, so you might look up the wrong company
+That's why I'm picking some tickers that I know haven't changed, but my function
+is using PERMNO.
+*)
+
+let testTicker = "HOG"
+let firstTestTickerRow = 
+    msfRows
+    |> List.find (fun row -> row.Ticker = testTicker)
+
+firstTestTickerRow.Ticker, firstTestTickerRow.Permno
+
+(**
+Now do for a list of tickers
+*)
 
 let notableTicks =
-    ["MSFT";"AAPL";"HOG"]
-    |> Seq.map(fun tick -> 
-        msfCsv.Rows
-        // hover over 'find' in 'Seq.find' if you don't remember what it does. 
-        |> Seq.find(fun row -> row.Ticker = tick)
-        |> fun row -> row.Ticker, row.Permno)
-    |> Map.ofSeq
+    [ for ticker in ["MSFT";"AAPL";"HOG"] do
+        let firstTickerRow =
+            msfRows
+            |> List.find (fun row -> row.Ticker = ticker)
+        firstTickerRow.Ticker, firstTickerRow.Permno ]
+    |> Map
+
+notableTicks
+
+(** 
+wrap integer ticker in `Permno` tag 
+to make it have type `SecurityId`.
+*)
 
 let msftPermno = Permno notableTicks["MSFT"]
 let aaplPermno = Permno notableTicks["AAPL"]
 let hogPermno = Permno notableTicks["HOG"]
 
+msftPermno, aaplPermno, hogPermno
+
+(**
+Creating a tuple of (permno, yearMonth) that
+we can use for looking up things in that month
+for that ticker.
+*)
 let msftTestIndex = (msftPermno, YearMonth(2019,1))
 let aaplTestIndex = (aaplPermno, YearMonth(2019,1))  
 
+msftTestIndex, aaplTestIndex
+
+(**
+Microsoft momentum signal:
+*)
 getMomentumSignal msfByPermnoMonth msftTestIndex 
+
+(**
+Apple momentum signal:
+*)
 getMomentumSignal msfByPermnoMonth aaplTestIndex  
 
 (**
@@ -281,7 +317,14 @@ to "bake in" the msfByPermnoMonth parameter so that we don't keep having to pass
 
 let getMomentumSignalAny = getMomentumSignal msfByPermnoMonth
 
+(**
+Microsoft again:
+*)
 getMomentumSignalAny msftTestIndex 
+
+(**
+Apple again:
+*)
 getMomentumSignalAny aaplTestIndex  
 
 (**
@@ -292,14 +335,13 @@ Let's say we have a portfolio formation month. Can we look up securities availab
 *)
 
 let securitiesByFormationMonth =
-    msfCsv.Rows
-    |> Seq.groupBy(fun x -> YearMonth(x.Month.Year, x.Month.Month))
-    |> Seq.map(fun (ym, xs) -> 
-        ym, 
-        xs 
-        |> Seq.map(fun x -> Permno x.Permno) 
-        |> Seq.toList)
-    |> Map.ofSeq
+    let byYearMonth =
+        msfRows
+        |> List.groupBy (fun x -> YearMonth(x.Month.Year, x.Month.Month))
+    [ for (yearMonth, stocksThatMonth) in byYearMonth do 
+        let permnos = [ for stock in stocksThatMonth do Permno stock.Permno ]
+        yearMonth, permnos ]
+    |> Map
 
 let getInvestmentUniverse formationMonth =
     match Map.tryFind formationMonth securitiesByFormationMonth with
@@ -497,20 +539,53 @@ let getMarketCap (security, formationMonth) =
 Some examples.
 *)
 
-getMarketCap (amznPermno, YearMonth(2019,1)) // Some marketCap
-getMarketCap (amznPermno, YearMonth(2030,1)) // In the future, so None
+(**
+Amazon market cap:
+*)
+getMarketCap (amznPermno, YearMonth(2019,1))
 
+(**
+Amazon future market cap, returns none:
+*)
+getMarketCap (amznPermno, YearMonth(2030,1))
+
+(** 
+Now for a list of securities:
+*)
+[ getMarketCap (amznPermno, YearMonth(2019,1))
+  getMarketCap (hogPermno, YearMonth(2019,1)) ]
+
+(**
+Using List.choose will unwrap the option type.
+
+Compare this
+*)
+[ getMarketCap (amznPermno, YearMonth(2019,1))
+  None
+  getMarketCap (hogPermno, YearMonth(2019,1)) ]
+
+(** to this *)
+
+[ getMarketCap (amznPermno, YearMonth(2019,1))
+  None
+  getMarketCap (hogPermno, YearMonth(2019,1)) ]
+|> List.choose id // id is a special build-in function: `let id x = x`
+
+(**
+Assign our example capitalizations to a value
+*)
 let exampleCapitalizations =
-    [| getMarketCap (amznPermno, YearMonth(2019,1))
-       getMarketCap (hogPermno, YearMonth(2019,1)) |]
-    |> Array.choose id // to unwrap the options
+    [ getMarketCap (amznPermno, YearMonth(2019,1))
+      getMarketCap (hogPermno, YearMonth(2019,1)) ]
+    |> List.choose id 
 
 let exampleValueWeights =
-    let tot = exampleCapitalizations |> Array.sumBy snd
+    let tot = exampleCapitalizations |> List.sumBy snd
     exampleCapitalizations
-    |> Array.map(fun (_id, cap) -> cap / tot )
-    |> Array.sortDescending
-(*** include-fsi-output ***)
+    |> List.map(fun (_id, cap) -> cap / tot )
+    |> List.sortDescending
+
+exampleValueWeights
 
 (**
 Now imagining we have the same example in terms of an assigned portfolio
@@ -518,10 +593,12 @@ with made up signals.
 *)
 
 let mktCapExPort: AssignedPortfolio =
-    { PortfolioId = Named("Mkt Cap Example")
+    let signals =
+        [ { SecurityId = amznPermno; Signal = 1.0 }
+          { SecurityId = hogPermno; Signal = 1.0 } ]  
+    { PortfolioId = Named "Mkt Cap Example"
       FormationMonth = YearMonth(2019,1)
-      Signals = [ { SecurityId = amznPermno; Signal = 1.0 }
-                  { SecurityId = hogPermno; Signal = 1.0 } ] }
+      Signals = signals }
 
 (**
 The portfolio module has a function that can help us.
@@ -531,24 +608,33 @@ It has two inputs.
 - An assigned portfolio
 
 We should see that it gives the same value weights.
-*)                  
+*)
 
 let exampleValueWeights2 =
     giveValueWeights getMarketCap mktCapExPort
 
-(*** include-fsi-output ***)
+exampleValueWeights2
+
+(**
+It can be more convenient to "bake in" my function to get market caps:
+*)
+
+let myValueWeights = giveValueWeights getMarketCap
 
 (**
 So now we can construct our portfolios with value weights.
 *)
 
 let portfoliosWithWeights =
-    YearMonth(2015,7)
-    |> getInvestmentUniverse
-    |> restrictUniverse
-    |> getMomentumSignals
-    |> assignSignalSort "Momentum" 10
-    |> List.map (giveValueWeights getMarketCap)
+    let assignedPortfolios =
+        YearMonth(2015,7)
+        |> getInvestmentUniverse
+        |> restrictUniverse
+        |> getMomentumSignals
+        |> assignSignalSort "Momentum" 10
+
+    [ for portfolio in assignedPortfolios do
+        myValueWeights portfolio ]
 
 (**
 Note that because of the size distribution,
@@ -556,11 +642,17 @@ some of these portfolios are not very diversified.
 This is illustrated by inspecting maximum portfolio
 weights.
 *)
-portfoliosWithWeights
-|> List.map(fun port -> 
-    port.PortfolioId,
-    port.Positions |> List.map(fun pos -> pos.Weight) |> List.max,
-    port.Positions |> List.sumBy(fun pos -> pos.Weight))
+
+[ for port in portfoliosWithWeights do
+    let maxWeight = 
+        port.Positions 
+        |> List.map (fun pos -> pos.Weight) 
+        |> List.max
+    let totalWeights =
+        [ for position in port.Positions do 
+            position.Weight ]
+        |> List.sum    
+    port.PortfolioId, maxWeight, totalWeights ]
 
 
 (**
@@ -592,20 +684,45 @@ let portReturn =
 portfoliosWithWeights
 |> List.map (getPortfolioReturn getSecurityReturn)    
 
+(** baking in the getSecurityReturn function *)
+
+let myPortfolioReturns = getPortfolioReturn getSecurityReturn
+
+portfoliosWithWeights
+|> List.map myPortfolioReturns
+
 
 // Put it all together.
 let sampleMonths = getSampleMonths (YearMonth(2010,5), YearMonth(2020,2)) 
 
 sampleMonths |> List.rev |> List.take 3
 
-let formMomtenumPort ym =
+(**
+These two functions below are the same. The first uses loops, the second uses List.map.
+*)
+let formMomtenumPortWithLoops ym =
+    let portfolioAssignments =
+        ym
+        |> getInvestmentUniverse
+        |> restrictUniverse
+        |> getMomentumSignals
+        |> assignSignalSort "Momentum" 10
+    let portfoliosWithWeights =
+        [ for portfolio in portfolioAssignments do
+            myValueWeights portfolio ]
+    let portfolioReturns =
+        [ for portfolio in portfoliosWithWeights do
+            myPortfolioReturns portfolio ]
+    portfolioReturns
+
+let formMomentumPort ym =
     ym
     |> getInvestmentUniverse
     |> restrictUniverse
     |> getMomentumSignals
     |> assignSignalSort "Momentum" 10
-    |> List.map (giveValueWeights getMarketCap)
-    |> List.map (getPortfolioReturn getSecurityReturn)  
+    |> List.map myValueWeights
+    |> List.map myPortfolioReturns
 
 
 (**
@@ -614,7 +731,7 @@ We can process months sequentially.
 (*** do-not-eval ***)
 let momentumPortsSequential =
     sampleMonths
-    |> List.collect formMomtenumPort 
+    |> List.collect formMomentumPort 
 
 (**
 Or we can speed things up and process months in Parallel using
@@ -631,9 +748,10 @@ we need to have our portfolio returned as arrays instead of lists.
 This is what we are doing with `formMomentumPortArray`.
 *)
 
+(***do-not-eval***)
 let formMomentumPortArray ym =
     ym 
-    |> formMomtenumPort 
+    |> formMomentumPort 
     |> List.toArray
 
 let momentumPortsParallel =

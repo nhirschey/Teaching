@@ -65,9 +65,10 @@ let [<Literal>] CsvFile = "data/msf-momentum.csv"
 if IO.File.Exists(ResolutionFolder + "/" + CsvFile) then 
     printfn "Success!!"
 else
-    let filesThere = IO.Directory.EnumerateFiles(ResolutionFolder,
-                                                 searchPattern = "*",
-                                                 searchOption=IO.SearchOption.AllDirectories)
+    let filesThere = IO.Directory.EnumerateFiles(
+        ResolutionFolder,
+        searchPattern = "*",
+        searchOption=IO.SearchOption.AllDirectories)
     printfn "We did not find the file. Here are the files in your source directory.\n"
     filesThere |> Seq.iteri (printfn "%i. %A")
 
@@ -639,5 +640,3 @@ let momentumPortsParallel =
     sampleMonths
     |> List.toArray
     |> Array.Parallel.collect formMomentumPortArray 
-
-

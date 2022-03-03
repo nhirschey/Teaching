@@ -15,30 +15,31 @@ index: 5
 
 #r "nuget: FSharp.Data"
 #r "nuget: FSharp.Stats"
-#r "nuget: NodaTime"
+#r "nuget: Plotly.NET,2.0.0-preview.17"
+#r "nuget: Plotly.NET.Interactive,2.0.0-preview.17"
 
 #load "Portfolio.fsx"
 
 open System
 open FSharp.Data
-open NodaTime
 open FSharp.Stats
+open Plotly.NET
 
 open Portfolio
 
 Environment.CurrentDirectory <- __SOURCE_DIRECTORY__
 
 let samplePeriod x = 
-    x >= YearMonth(2010, 1) &&
-    x <= YearMonth(2020, 2)
+    x >= DateTime(2010, 1, 1) &&
+    x <= DateTime(2020, 2, 1)
 
 (*** condition: ipynb ***)
 #if IPYNB
 // Set dotnet interactive formatter to plaintext
 Formatter.Register(fun (x:obj) (writer: TextWriter) -> fprintfn writer "%120A" x )
 Formatter.SetPreferredMimeTypesFor(typeof<obj>, "text/plain")
+Formatter.SetPreferredMimeTypesFor(typeof<GenericChart.GenericChart>,"text/html")
 #endif // IPYNB
-
 
 (**
 # Price momentum
@@ -120,21 +121,14 @@ We will use this as a trading signal.
 
 type PriorReturnOb = 
     { SecurityId : SecurityId
-      FormationMonth : YearMonth 
+      FormationMonth : DateTime 
       Retm12m2 : float
       N : int }
 
 (**
-Note the `YearMonth` type for portfolio formation month.
-This type is from the library [NodaTime](https://nodatime.org/). 
-
-Why are we using it? Date math is hard and easy to mess up.
-
 We're dealing with monthly data.
-If we use `DateTime`, then we have to give the month a 
-day value. We could always use the first day of the month,
-but then month return goes all the way to the end of the month.
-And we might forget that information. 
+When we use `DateTime`, then we have to give the month a 
+day value. We will give it the first day of the month. Why?
 
 If we use the last day of the month,
 then what happens when we add months. For example,
@@ -142,53 +136,85 @@ we have to start doing things like.
 *)
 
 let endOfFebruary = DateTime(2020,2,28)
+let endOfMarch = DateTime(2020, 3, 31)
+
+(** What if we add one month to `endOfFebruary`? *)
 let endOfFebruaryPlus1Month = endOfFebruary.AddMonths(1)
-let endOfMarch = DateTime(endOfFebruary.Year,endOfFebruary.Month,1).AddMonths(2).AddDays(-1.0)
-endOfFebruaryPlus1Month = endOfMarch // evaluates to false
+endOfFebruaryPlus1Month
 
-(**
-That's kind of ugly. 
+(** Hmm. *)
 
-We also have to worry about things like what happens
-if we add a month but it overlapped with daylight savings time?
-What about timezones? If we're never dealing with times,
-it's nice to ignore all these things.
+(endOfMarch - endOfFebruaryPlus1Month).Days
 
-This is nicer way of doing it using nodatime's `YearMonth`:
+(** That's a problem. Instead, if we do it with the first day of the 
+month we're ok. 
 *)
 
-let february = YearMonth(2020,2) 
-let februaryPlus1Month = february.PlusMonths(1)
-let march = YearMonth(2020,3)
-februaryPlus1Month = march // true
+let beginningOfFebruary = DateTime(2020,2,1)
+let beginningOfMarch = DateTime(2020,3,1) 
+
+DateTime(2020,3,1) = (beginningOfFebruary.AddMonths(1)) 
+
+(**
+We just have to remember that 2000-01-01 is the
+return for the full month of January, from December 31, 1999, until
+January 31, 2000. 
+
+Note: the NodaTime library has a `YearMonth` to handle monthly data
+without having to specify a day. But we're using `DateTime` to 
+keep things slightly simpler.
+*)
 
 (**
 Let's focus on a single stock.
-*)
 
+First few rows
+*)
+msfRows
+|> List.filter(fun x -> x.Ticker = "AMZN")
+|> List.truncate 3
+
+(**
+Key by security and month
+*)
+msfRows
+|> List.filter(fun x -> x.Ticker = "AMZN")
+|> List.map(fun x ->
+    let ym = DateTime(x.Month.Year,x.Month.Month, 1) 
+    let key = Permno x.Permno, ym
+    key, x)
+|> List.truncate 3
+
+(**
+Assign those to a value and index with a Map collection.
+*)
 let amznReturns = 
     // we're filtering and then storing as a Map collection
     // that allows us to look up by a key of (permno, yearMonth)
     msfRows
     |> List.filter(fun x -> x.Ticker = "AMZN")
     |> List.map(fun x ->
-        let ym = YearMonth(x.Month.Year,x.Month.Month) 
+        let ym = DateTime(x.Month.Year,x.Month.Month, 1) 
         let key = Permno x.Permno, ym
         key, x)
     |> Map
 
-let getPastYearObs 
-    (returns:Map<(SecurityId * YearMonth),MsfCsv.Row>)
-    (security: SecurityId, formationMonth: YearMonth) =
+(** Amazon is Permno 84788 *)
+let amznPermno = Permno 84788
+amznReturns[amznPermno, DateTime(2019,1,1)]
+
+(** A function to get past year of returns. *)
+let getPastYearObs returns (security, formationMonth: DateTime) =
         [ -11 .. -1 ]
         |> List.choose(fun i -> 
-            let returnMonth = formationMonth.PlusMonths(i)
+            let returnMonth = formationMonth.AddMonths(i)
             Map.tryFind (security, returnMonth) returns)    
 
-// check Permno 84788 is Amzn
-let amznPermno = Permno 84788
-getPastYearObs amznReturns (amznPermno, YearMonth(2019,1))  
-getPastYearObs amznReturns (Permno -400, YearMonth(2019,1))  
+(** check Permno Amzn *)
+getPastYearObs amznReturns (amznPermno, DateTime(2019,1,1))  
+
+(** Check bad data, nothing is returned *)
+getPastYearObs amznReturns (Permno -400, DateTime(2019,1,1))  
 
 // making cumulative returns 
 let cumulativeReturn rets =
@@ -197,13 +223,16 @@ let cumulativeReturn rets =
         rets |> Seq.sumBy (fun r -> log (1.0 + r))
     exp(cumulativeLogReturn) - 1.0
 
-(** check *)
+(** check result with no data. *)
 cumulativeReturn []
+
+(** check up 100\% and then down 50\%.*)
 cumulativeReturn [1.0;-0.5]
 
 (** check *)
 cumulativeReturn [0.1; 0.1; 0.1; 0.1]
 
+(** compared to *)
 1.1 ** 4.0 - 1.0
 
 (**
@@ -215,11 +244,11 @@ We're now ready to create our Momentum signal function.
 
 let getMomentumSignal returns (security, formationMonth) =
     let priorObs = getPastYearObs  returns (security, formationMonth)
-    let priorRets = priorObs |> List.choose(fun x -> x.Ret)
+    let priorRets = priorObs |> List.choose(fun (x:MsfCsv.Row) -> x.Ret)
     // We should probably return None if there are no observations.
-    // If they are all missing, Array.choose will return an empty
+    // If they are all missing, List.choose will return an empty
     // array. See:
-    // ([| None; None |]: int option []) |> Array.choose id
+    // ([ None; None ]: int option list) |> List.choose id
     //
     // So we'll check for an empty array and return None in that case.
     if List.isEmpty priorRets then
@@ -231,8 +260,8 @@ let getMomentumSignal returns (security, formationMonth) =
                N = priorRets.Length }
 
 // Check
-getMomentumSignal amznReturns (amznPermno, YearMonth(2019,1)) 
-getMomentumSignal amznReturns (Permno -400, YearMonth(2019,1))  
+getMomentumSignal amznReturns (amznPermno, DateTime(2019,1,1)) 
+getMomentumSignal amznReturns (Permno -400, DateTime(2019,1,1))  
 
 (**
 One thing you may notice is that our momentum signal function gets everything from
@@ -245,7 +274,7 @@ For example we can create a map collection like we had for amzn, but for all sto
 let msfByPermnoMonth =
     msfRows
     |> List.map(fun x ->
-        let ym = YearMonth(x.Month.Year,x.Month.Month) 
+        let ym = DateTime(x.Month.Year,x.Month.Month,1) 
         let key = Permno x.Permno, ym
         key, x)
     |> Map
@@ -295,8 +324,8 @@ Creating a tuple of (permno, yearMonth) that
 we can use for looking up things in that month
 for that ticker.
 *)
-let msftTestIndex = (msftPermno, YearMonth(2019,1))
-let aaplTestIndex = (aaplPermno, YearMonth(2019,1))  
+let msftTestIndex = (msftPermno, DateTime(2019,1,1))
+let aaplTestIndex = (aaplPermno, DateTime(2019,1,1))  
 
 msftTestIndex, aaplTestIndex
 
@@ -337,7 +366,7 @@ Let's say we have a portfolio formation month. Can we look up securities availab
 let securitiesByFormationMonth =
     let byYearMonth =
         msfRows
-        |> List.groupBy (fun x -> YearMonth(x.Month.Year, x.Month.Month))
+        |> List.groupBy (fun x -> DateTime(x.Month.Year, x.Month.Month,1))
     [ for (yearMonth, stocksThatMonth) in byYearMonth do 
         let permnos = [ for stock in stocksThatMonth do Permno stock.Permno ]
         yearMonth, permnos ]
@@ -350,7 +379,7 @@ let getInvestmentUniverse formationMonth =
           Securities = securities }
     | None -> failwith $"{formationMonth} is not in the date range"      
 
-getInvestmentUniverse (YearMonth(2011,10))
+getInvestmentUniverse (DateTime(2011,10,1))
 // getInvestmentUniverse (YearMonth(1990,10))
 
 (**
@@ -368,15 +397,15 @@ let onNyseNasdaqAmex securityFormationMonth =
     | None -> false
     | Some x -> List.contains x.Exchcd [ 1; 2; 3]
 
-let hasPrice13mAgo (security, formationMonth:YearMonth) =
+let hasPrice13mAgo (security, formationMonth:DateTime) =
     //13m before the holding month, 12m before the formation month
-    match Map.tryFind (security, formationMonth.PlusMonths(-12)) msfByPermnoMonth with
+    match Map.tryFind (security, formationMonth.AddMonths(-12)) msfByPermnoMonth with
     | None -> false
     | Some m13 -> m13.Prc.IsSome
 
-let hasReturn2mAgo (security, formationMonth:YearMonth) =
+let hasReturn2mAgo (security, formationMonth:DateTime) =
     //2m before the holding month, 1m before the formation month
-    match Map.tryFind (security, formationMonth.PlusMonths(-1)) msfByPermnoMonth with
+    match Map.tryFind (security, formationMonth.AddMonths(-1)) msfByPermnoMonth with
     | None -> false
     | Some m2 -> m2.Ret.IsSome
 
@@ -411,12 +440,12 @@ let restrictUniverse (investmentUniverse: InvestmentUniverse) =
 Now we can see where we are.
 *)
 
-YearMonth(2011,10)
+DateTime(2011,10,1)
 |> getInvestmentUniverse
 |> restrictUniverse
 
 let investmentUniverse =
-    YearMonth(2011,10)
+    DateTime(2011,10,1)
     |> getInvestmentUniverse
 let restrictedInvestmentUniverse =
     investmentUniverse |> restrictUniverse
@@ -433,8 +462,7 @@ universe into an array with the signals.
 Recall that our momentum function returns a type of observation specific to momentum.
 *)
 
-getMomentumSignalAny (Permno 84788, YearMonth(2019,1)) 
-(*** include-fsi-output ***)
+getMomentumSignalAny (Permno 84788, DateTime(2019,1,1)) 
 
 (**
 This is fine, but if we want our code to work with any type of signal,
@@ -458,11 +486,10 @@ let getMomentumSecuritySignal (security, formationMonth ) =
         Some signal
 
 (** Now compare *)
-getMomentumSignalAny (Permno 84788, YearMonth(2019,1)) 
-(*** include-fsi-output ***)
+getMomentumSignalAny (Permno 84788, DateTime(2019,1,1)) 
 
-getMomentumSecuritySignal (Permno 84788, YearMonth(2019,1)) 
-(*** include-fsi-output ***)
+(** to *)
+getMomentumSecuritySignal (Permno 84788, DateTime(2019,1,1))
 
 (**
 Now a function that takes our investment universe and returns
@@ -474,7 +501,6 @@ let getMomentumSignals (investmentUniverse: InvestmentUniverse) =
         investmentUniverse.Securities
         |> List.choose(fun security -> 
             getMomentumSecuritySignal (security, investmentUniverse.FormationMonth))    
-    
     { FormationMonth = investmentUniverse.FormationMonth 
       Signals = arrayOfSecuritySignals }
 
@@ -482,8 +508,8 @@ restrictedInvestmentUniverse
 |> getMomentumSignals
 
 
-// or, if we want to look at the full pipeline
-YearMonth(2015,7)
+(** or, if we want to look at the full pipeline. *)
+DateTime(2015,7,1)
 |> getInvestmentUniverse
 |> restrictUniverse
 |> getMomentumSignals
@@ -512,12 +538,15 @@ The `Portfolio` module has a function named `assignSignalSorts`
 to form portfolios by sorting securities into `n` groups.
 *)
 
-YearMonth(2015,7)
-|> getInvestmentUniverse
-|> restrictUniverse
-|> getMomentumSignals
-|> assignSignalSort "Momentum" 10
+let mom201507 =
+    DateTime(2015,7,1)
+    |> getInvestmentUniverse
+    |> restrictUniverse
+    |> getMomentumSignals
+    |> assignSignalSort "Momentum" 10
 
+[ for port in mom201507 do 
+    $"My name is {port.PortfolioId} and I have {port.Signals.Length} stocks" ]
 (**
 ## Calculating Portfolio weights
 
@@ -542,43 +571,46 @@ Some examples.
 (**
 Amazon market cap:
 *)
-getMarketCap (amznPermno, YearMonth(2019,1))
+getMarketCap (amznPermno, DateTime(2019,1,1))
 
 (**
 Amazon future market cap, returns none:
 *)
-getMarketCap (amznPermno, YearMonth(2030,1))
+getMarketCap (amznPermno, DateTime(2030,1,1))
 
 (** 
 Now for a list of securities:
 *)
-[ getMarketCap (amznPermno, YearMonth(2019,1))
-  getMarketCap (hogPermno, YearMonth(2019,1)) ]
+[ getMarketCap (amznPermno, DateTime(2019,1,1))
+  getMarketCap (hogPermno, DateTime(2019,1,1)) ]
 
 (**
 Using List.choose will unwrap the option type.
 
 Compare this
 *)
-[ getMarketCap (amznPermno, YearMonth(2019,1))
+[ getMarketCap (amznPermno, DateTime(2019,1,1))
   None
-  getMarketCap (hogPermno, YearMonth(2019,1)) ]
+  getMarketCap (hogPermno, DateTime(2019,1,1)) ]
 
 (** to this *)
 
-[ getMarketCap (amznPermno, YearMonth(2019,1))
+[ getMarketCap (amznPermno, DateTime(2019,1,1))
   None
-  getMarketCap (hogPermno, YearMonth(2019,1)) ]
+  getMarketCap (hogPermno, DateTime(2019,1,1)) ]
 |> List.choose id // id is a special build-in function: `let id x = x`
 
 (**
 Assign our example capitalizations to a value
 *)
 let exampleCapitalizations =
-    [ getMarketCap (amznPermno, YearMonth(2019,1))
-      getMarketCap (hogPermno, YearMonth(2019,1)) ]
+    [ getMarketCap (amznPermno, DateTime(2019,1,1))
+      getMarketCap (hogPermno, DateTime(2019,1,1)) ]
     |> List.choose id 
 
+exampleCapitalizations
+
+(** Now the value weights *)
 let exampleValueWeights =
     let tot = exampleCapitalizations |> List.sumBy snd
     exampleCapitalizations
@@ -597,7 +629,7 @@ let mktCapExPort: AssignedPortfolio =
         [ { SecurityId = amznPermno; Signal = 1.0 }
           { SecurityId = hogPermno; Signal = 1.0 } ]  
     { PortfolioId = Named "Mkt Cap Example"
-      FormationMonth = YearMonth(2019,1)
+      FormationMonth = DateTime(2019,1,1)
       Signals = signals }
 
 (**
@@ -621,13 +653,15 @@ It can be more convenient to "bake in" my function to get market caps:
 
 let myValueWeights = giveValueWeights getMarketCap
 
+myValueWeights mktCapExPort
+
 (**
 So now we can construct our portfolios with value weights.
 *)
 
 let portfoliosWithWeights =
     let assignedPortfolios =
-        YearMonth(2015,7)
+        DateTime(2015,7,1)
         |> getInvestmentUniverse
         |> restrictUniverse
         |> getMomentumSignals
@@ -652,8 +686,8 @@ weights.
         [ for position in port.Positions do 
             position.Weight ]
         |> List.sum    
-    port.PortfolioId, maxWeight, totalWeights ]
-
+    port.PortfolioId.ToString() , maxWeight ]
+|> Chart.Bar
 
 (**
 ## Calculating Portfolio returns
@@ -676,7 +710,7 @@ let getSecurityReturn (security, formationMonth) =
         | None -> security, missingReturn
         | Some r -> security, r
 
-getSecurityReturn (amznPermno, YearMonth(2019,1))        
+getSecurityReturn (amznPermno, DateTime(2019,1,1))        
 
 let portReturn =
     getPortfolioReturn getSecurityReturn exampleValueWeights2
@@ -693,27 +727,30 @@ portfoliosWithWeights
 
 
 // Put it all together.
-let sampleMonths = getSampleMonths (YearMonth(2010,5), YearMonth(2020,2)) 
+let sampleMonths = getSampleMonths (DateTime(2010,5,1), DateTime(2020,2,1)) 
 
 sampleMonths |> List.rev |> List.take 3
 
 (**
-These two functions below are the same. The first uses loops, the second uses List.map.
+These two functions below produce the same result. The first assigns each function
+result to an intermediate value. The second uses a pipeline.
+Either style is fine, though while I may start with something like the first
+version while writing test code, I typically use the pipeline 
+style shown in in the second version.
 *)
-let formMomtenumPortWithLoops ym =
-    let portfolioAssignments =
-        ym
-        |> getInvestmentUniverse
-        |> restrictUniverse
-        |> getMomentumSignals
-        |> assignSignalSort "Momentum" 10
+let formMomtenumPortWithAssignments ym =
+    let universe = getInvestmentUniverse ym
+    let restricted = restrictUniverse universe
+    let signals = getMomentumSignals restricted
+    let assignedPortfolios = assignSignalSort "Momentum" 10 signals
     let portfoliosWithWeights =
-        [ for portfolio in portfolioAssignments do
+        [ for portfolio in assignedPortfolios do
             myValueWeights portfolio ]
     let portfolioReturns =
         [ for portfolio in portfoliosWithWeights do
             myPortfolioReturns portfolio ]
     portfolioReturns
+
 
 let formMomentumPort ym =
     ym

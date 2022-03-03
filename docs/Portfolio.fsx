@@ -4,23 +4,10 @@
 
 module Portfolio
 
-#r "nuget: NodaTime"
-
 open System
-open NodaTime
 
 /// Misc
 /// 
-
-// Type extension until NodaTime puts YearMonth.PlusMonths() in the nuget version.
-// taken from here in the NodaTime repo until it is accessible
-// https://github.com/carlosschults/nodatime/blob/43e9f24c2ba5a7ed0fd145c082d9e63cd50b1149/src/NodaTime/YearMonth.cs#L156
-// See https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/type-extensions
-// to understand type extensions.
-type YearMonth with
-    member this.PlusMonths(months:int) =
-                this.OnDayOfMonth(1).PlusMonths(months).ToYearMonth()
-///
 
 type SecurityId =
     | Ticker of string
@@ -30,7 +17,7 @@ type SecurityId =
     | Other of string
 
 type InvestmentUniverse = 
-    { FormationMonth : YearMonth 
+    { FormationMonth : DateTime 
       Securities : SecurityId list }
 
 type SecuritySignal = 
@@ -38,16 +25,20 @@ type SecuritySignal =
       Signal : float }
 
 type SecuritiesWithSignals =
-    { FormationMonth : YearMonth 
+    { FormationMonth : DateTime 
       Signals : SecuritySignal list }
 
 type PortfolioId = 
     | Named of string
-    | Indexed of name:string * index:int
+    | Indexed of {| Name: string; Index: int |}
+    override this.ToString() = 
+        match this with
+        | Named name -> name
+        | Indexed p -> $"{p.Name}: {p.Index}"
 
 type AssignedPortfolio =
     { PortfolioId : PortfolioId
-      FormationMonth : YearMonth 
+      FormationMonth : DateTime 
       Signals : SecuritySignal list }
 
 
@@ -58,7 +49,7 @@ let assignSignalSort name n (xs: SecuritiesWithSignals) =
     |> List.mapi(fun i ys -> 
         // because lists are 0-indexed and I want the minimum
         // portfolio index to be 1, I'm doing index = i+1.
-        { PortfolioId = Indexed(name=name,index=i+1)
+        { PortfolioId = Indexed {| Name = name; Index=i+1 |}
           FormationMonth = xs.FormationMonth
           Signals = ys })
 
@@ -68,19 +59,19 @@ type Position =
 
 type Portfolio = 
     { PortfolioId: PortfolioId
-      FormationMonth : YearMonth
+      FormationMonth : DateTime
       Positions : Position list }
 
 type PortfolioReturn =
     { PortfolioId: PortfolioId
-      YearMonth : YearMonth
+      YearMonth : DateTime
       Return : float }
 
 // This type alias defines the type of a function that has
 // a tuple input of SecurityId * YearMonth and outputs
 // a (SecurityId * float) Option. Think of it like
 // using types to write documentation of the functions.
-type GetsMarketCaps = SecurityId * YearMonth -> (SecurityId * float) Option
+type GetsMarketCaps = SecurityId * DateTime -> (SecurityId * float) Option
 
 // Defining this type alias makes it easier to read the type of the function that I want for
 // marketCapGetter in the function that I have below. Otherwise it might look something like
@@ -109,14 +100,14 @@ let giveValueWeights (marketCapGetter: GetsMarketCaps) (x: AssignedPortfolio) =
 // a tuple input of SecurityId * YearMonth and outputs
 // a (SecurityId * float). Think of it like
 // using types to write documentation of the functions.
-type GetsReturn = SecurityId * YearMonth -> (SecurityId * float)
+type GetsReturn = SecurityId * DateTime -> (SecurityId * float)
 
 // Defining this type alias makes it easier to read the type of the function that I want for
 // marketCapGetter in the function that I have below. Otherwise it might look something like
 // let giveValueWeights (marketCapGetter: (SecurityId * YearMonth -> (SecurityId * float) Option) ...
 // which is the same thing but not as clear what we're trying to do.
 let getPortfolioReturn (returnGetter: GetsReturn) (x: Portfolio) =
-    let returnMonth = x.FormationMonth.PlusMonths(1)
+    let returnMonth = x.FormationMonth.AddMonths(1)
     let portRet =
         x.Positions
         |> List.sumBy(fun pos -> 
@@ -133,14 +124,16 @@ let getPortfolioReturn (returnGetter: GetsReturn) (x: Portfolio) =
 /// The details are beyond the scope of the class, but if you're
 /// curious it's a recursive function:
 /// https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/functions/recursive-functions-the-rec-keyword
-let getSampleMonths (sampleStart:YearMonth, sampleEnd:YearMonth) =
+let getSampleMonths (sampleStart:DateTime, sampleEnd:DateTime) =
+    let sampleStart = DateTime(sampleStart.Year, sampleStart.Month,1)
+    let sampleEnd = DateTime(sampleEnd.Year, sampleEnd.Month,1)
     if sampleEnd <= sampleStart then failwith "sampleEnd should be after sampleStart"
-    let rec loop (sampleEnd:YearMonth) window = 
+    let rec loop (sampleEnd:DateTime) window = 
         match window with
         | [] -> failwith "Need a starting point"
         | lastMonth::_monthsBeforeThat ->
             if lastMonth < sampleEnd then 
-                loop sampleEnd (lastMonth.PlusMonths(1)::window)
+                loop sampleEnd (lastMonth.AddMonths(1)::window)
             else window
     loop sampleEnd [sampleStart]
     |> List.rev

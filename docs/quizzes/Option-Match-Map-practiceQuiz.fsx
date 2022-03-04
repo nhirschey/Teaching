@@ -50,14 +50,76 @@ Here are some references to these topics. Please read the F# language reference 
     - [F# for fun and profit](https://fsharpforfunandprofit.com/posts/match-expression/)
 
 - Map collections.
-
+    - [Map type documentation](https://fsharp.github.io/fsharp-core-docs/reference/fsharp-collections-fsharpmap-2.html)
+    - [Map module documentation](https://fsharp.github.io/fsharp-core-docs/reference/fsharp-collections-mapmodule.html)
     - [F# Wikibook](https://en.wikibooks.org/wiki/F_Sharp_Programming/Sets_and_Maps#Maps)
 
 *)
 
 (**
 # Options
+Sometimes something exists or doesn't exist. This can be useful to model explicitly. [FSharp For Fun And Profit](https://fsharpforfunandprofit.com/posts/the-option-type/) has a nice discussion of option types and how to use them. You can also find information on the [tour of F#](https://docs.microsoft.com/en-us/dotnet/fsharp/tour#optional-types) and the [F# language reference](https://fsharp.github.io/fsharp-core-docs/reference/fsharp-core-optionmodule.html).
+
+The main purpose is to model situations where you could have "something" or "nothing" explicitly.
+
+For example, this `exampleMap` does not contain a "c" key.
 *)
+
+let exampleMap = Map [("a", 1); ("b", 1)]
+
+(**
+ If we try to find the value indexed by "c" we will get an exception.
+ *)
+
+(***do-not-eval***)
+Map.find "c" exampleMap
+
+(**
+ The preferred way to do this is to try to get the key, and then if there is no value for that key return nothing. Options are either `Some x` or `None`, where `x` is the data that you want. This is what the "..try" functions are about.
+*)
+
+Map.tryFind "a" exampleMap
+
+(***do-not-eval***)
+Map.tryFind "c" exampleMap
+
+(** Other option examples *)
+let xx = Some 4.0
+let yy = None
+
+xx |> Option.map(fun x -> x + 1.0)
+(***include-it***)
+
+yy |> Option.map (fun x -> x + 1.0)
+(***include-it***)
+
+let add100ToOption x = x |> Option.map(fun x -> x + 100.0)
+let xxyy = [xx; yy; xx; yy; add100ToOption xx ] 
+xxyy
+(***include-it***)
+
+(**
+now add another 100 to every element
+*)
+xxyy |> List.map add100ToOption
+(***include-it***)
+
+let divideBy2 x = x / 2.0
+xxyy 
+|> List.map(fun x -> 
+    x |> Option.map divideBy2
+)
+(***include-it***)
+
+(**
+Choose is like *.map but it discards
+the `None` results and unwraps the `Some` results.
+*)
+xxyy 
+|> List.choose(fun x -> 
+    x |> Option.map divideBy2
+)
+(***include-it***)
 
 (**
 ## Question 1

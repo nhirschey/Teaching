@@ -194,8 +194,14 @@ Explain why this expression gives an error when you try to run it: `4 + 7.0`
 
 (**
 
-Because 4 is an integer and 7.0 is a float. Addition is defined on values with the same type.
+Because 4 is an integer and 7.0 is a float. 
+Addition is defined on values with the same type.
 The two values need to either both be integers or both be floats.
+
+Note: there are some cases where F# will convert (or "automatically widen")
+integers into floats when it can tell that the conversion
+is intended. But with simple addition like this, it cannot tell
+if you are intending to add integers or floats, so it gives an error.
 *)
 
 (*** include-it-raw:postDetails ***)
@@ -206,33 +212,33 @@ The two values need to either both be integers or both be floats.
 
 (**
 ## Question 10
-Create an `array` where the elements are `1`, `2`, and `3`.
+Create a `list` where the elements are `1`, `2`, and `3`.
 *)
 
 (*** include-it-raw:preDetails ***)
 
-(*** define: array, define-output: array ***)
-[| 1; 2; 3 |]
-(*** condition:html, include: array ***)
-(*** condition:html, include-fsi-output: array ***)
+(*** define: list, define-output: list ***)
+[ 1; 2; 3 ]
+(*** condition:html, include: list ***)
+(*** condition:html, include-fsi-output: list ***)
 
 (**
 or
 *)
 
-(*** define: array1, define-output: array1 ***)
-[| 1 .. 3 |]
-(*** condition:html, include: array1 ***)
-(*** condition:html, include-fsi-output: array1 ***)
+(*** define: list1, define-output: list1 ***)
+[ 1 .. 3 ]
+(*** condition:html, include: list1 ***)
+(*** condition:html, include-fsi-output: list1 ***)
 
 (**
 or
 *)
 
-(*** define: array2, define-output: array2 ***)
-[| for i = 1 to 3 do i |]
-(*** condition:html, include: array2 ***)
-(*** condition:html, include-fsi-output: array2 ***)
+(*** define: list2, define-output: list2 ***)
+[ for i = 1 to 3 do i ]
+(*** condition:html, include: list2 ***)
+(*** condition:html, include-fsi-output: list2 ***)
 
 (*** include-it-raw:postDetails ***)
 
@@ -305,10 +311,36 @@ Take a `list` containing floats `1.0 .. 10.0`. Use `List.groupBy` to group the e
 (*** include-it-raw:preDetails ***)
 (*** define: listGroupMaxAndMin, define-output: listGroupMaxAndMin ***)
 
+let groupedAboveBelow5 =
+    [ 1.0 .. 10.0]
+    |> List.groupBy(fun x -> x >= 5.0)
+
+// to see groups and observations
+[ for (gt5, xs) in groupedAboveBelow5 do (gt5, xs) ]
+
+// to see just groups
+[ for (gt5, xs) in groupedAboveBelow5 do gt5 ]
+// to see just observations in each group
+[ for (gt5, xs) in groupedAboveBelow5 do xs ]
+// to see first group
+groupedAboveBelow5[0]
+// to see second group
+groupedAboveBelow5[1]
+
+[ for (gt5, xs) in groupedAboveBelow5 do
+    if gt5 then 
+        xs |> List.min 
+    else
+        xs |> List.max ]
+
+// equivalently
 [ 1.0 .. 10.0]
 |> List.groupBy(fun x -> x >= 5.0)
-|> List.map(fun (gt5, xs) -> 
-    if gt5 then List.min xs else List.max xs)
+|> List.map (fun (gt5, xs) ->
+    if gt5 then 
+        xs |> List.min 
+    else 
+        xs |> List.max )
 
 (*** condition:html, include:listGroupMaxAndMin ***)
 (*** condition:html, include-fsi-output:listGroupMaxAndMin ***)
@@ -326,10 +358,14 @@ Take a `list` containing floats `1.0 .. 10.0`. Use functions from the List modul
 (*** include-it-raw:preDetails ***)
 (*** define: listSort, define-output: listSort ***)
 
-[1.0 .. 10.0]
-|> List.sortByDescending id
-|> List.item 2
-|> fun x -> x + 7.0
+let descendingList =
+    [1.0 .. 10.0]
+    |> List.sortByDescending id
+
+// index 2 = 3rd item because it is 0-indexed
+let thirdItem = descendingList[2]
+
+thirdItem + 7.0
 
 
 (*** condition:html, include:listSort ***)

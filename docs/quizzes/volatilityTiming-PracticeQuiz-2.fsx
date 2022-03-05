@@ -49,46 +49,64 @@ Random.SetSampleGenerator(Random.RandBasic(seed))
 let normal = Distributions.Continuous.normal 0.0 0.1
 
 let returns =
-    [| 
+    [ 
         for symbol in ["AAPL"; "TSLA"] do
         for month in [1..2] do
         for day in [1..3] do
             { Symbol = symbol 
               Date = DateTime(2021, month, day)
               Return = normal.Sample()}
-    |]
+    ]
 
 
 (**
 ## Question 1
-Take this array of arrays, add `1.0` to each element of the "inner" arrays,
-and then concatenate all the inner arrays together.
+Take this list of lists, add `1.0` to each element of the "inner" lists,
+and then concatenate all the inner lists together.
 *)
-[| [| 1.0; 2.0|]
-   [| 3.0; 4.0|] |]
+[ [ 1.0; 2.0]
+  [ 3.0; 4.0] ]
 
 (*** include-it-raw:preDetails ***)
 
-(*** define: arraysAdd1, define-output: arraysAdd1 ***)
-[| [| 1.0; 2.0|]
-   [| 3.0; 4.0|] |]
-|> Array.collect(fun xs -> xs |> Array.map(fun x -> x + 1.0))
-(*** condition:html, include:arraysAdd1 ***)
-(*** condition:html, include-fsi-output:arraysAdd1 ***)
+(*** define: listsAdd11, define-output: listsAdd11 ***)
+let listsToAdd = 
+    [ [ 1.0; 2.0]
+      [ 3.0; 4.0] ]
+
+// Compare the output of these
+
+// v1
+[ for list in listsToAdd do
+    for x in list do x + 1.0 ]
+
+// v2, this is not a correct answer.
+// it has not concatenated the inner lists
+// into one big list
+[ for xs in listsToAdd do
+    [ for x in xs do x + 1.0] ]
+
+// v3, this is correct, same output as v1
+[ for xs in listsToAdd do
+    [ for x in xs do x + 1.0] ]
+|> List.concat    
+
+(*** condition:html, include:listsAdd11 ***)
+(*** condition:html, include-fsi-output:listsAdd11 ***)
+(*** include-it-raw:postDetails ***)
 
 (**
 or
 *)
 
-(*** define: arraysAdd11, define-output: arraysAdd11 ***)
-[| [| 1.0; 2.0|]
-   [| 3.0; 4.0|] |]
-|> Array.map(fun xs -> xs |> Array.map(fun x -> x + 1.0))
-|> Array.concat
+(*** define: listsAdd1, define-output: listsAdd1 ***)
+// same as v1 output
+listsToAdd
+|> List.collect(fun xs -> 
+    [ for x in xs do x + 1.0 ])
 
-(*** condition:html, include:arraysAdd11 ***)
-(*** condition:html, include-fsi-output:arraysAdd11 ***)
-(*** include-it-raw:postDetails ***)
+(*** condition:html, include:listsAdd1 ***)
+(*** condition:html, include-fsi-output:listsAdd1 ***)
 
 (*** condition:ipynb ***)
 // write your code here, see website for solution.
@@ -123,8 +141,8 @@ let add2 = add 2
 
 (**
 ## Question 3
-Given `returns : ReturnOb []`, use `printfn` to print the whole
-array to standard output using the [structured plaintext formatter](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/plaintext-formatting). 
+Given `returns : ReturnOb list`, use `printfn` to print the whole
+list to standard output using the [structured plaintext formatter](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/plaintext-formatting). 
 *)
 
 (*** include-it-raw:preDetails ***)
@@ -183,9 +201,9 @@ printfn "%s teacher, my %b knowledge implies that %i%%=%06.1f" xString xBool xIn
 
 (**
 ## Question 5
-Given `returns : ReturnOb []`, calculate the arithmetic average return 
+Given `returns : ReturnOb list`, calculate the arithmetic average return 
 for every symbol each month.
-Give the result as a `ReturnOb []` where the date is the last date for the symbol
+Give the result as a `ReturnOb list` where the date is the last date for the symbol
 each month.
 *)
 
@@ -193,11 +211,11 @@ each month.
 (*** define: arithmeticReturn, define-output: arithmeticReturn ***)
 
 returns
-|> Array.groupBy(fun x -> x.Symbol, x.Date.Year, x.Date.Month)
-|> Array.map(fun ((symbol, _year, _month), xs) ->
+|> List.groupBy(fun x -> x.Symbol, x.Date.Year, x.Date.Month)
+|> List.map(fun ((symbol, _year, _month), xs) ->
     { Symbol = symbol 
-      Date = xs |> Array.map(fun x -> x.Date) |> Array.max 
-      Return = xs|> Array.averageBy(fun x -> x.Return) })
+      Date = xs |> List.map(fun x -> x.Date) |> List.max 
+      Return = xs |> List.averageBy(fun x -> x.Return) })
 
 (*** condition:html, include:arithmeticReturn ***)
 (*** condition:html, include-fsi-output:arithmeticReturn ***)
@@ -209,22 +227,77 @@ returns
 
 (**
 ## Question 6
-Given `returns : ReturnOb []`, calculate the monthly return 
+Given `returns : ReturnOb list`, calculate the monthly return 
 for every symbol each month.
-Give the result as a `ReturnOb []` where the date is the last date for the symbol
+Give the result as a `ReturnOb list` where the date is the last date for the symbol
 each month. 
 *)
 
 (*** include-it-raw:preDetails ***)
 (*** define: monthlyReturn, define-output: monthlyReturn ***)
 
+let groupsForMonthlyReturn =
+    returns
+    |> List.groupBy(fun x -> x.Symbol, x.Date.Year, x.Date.Month)
+
+// look at the groups
+[ for (group, obs) in groupsForMonthlyReturn do group ]
+
+// look at the first observation for each group
+// This works:
+[ for (group, obs) in groupsForMonthlyReturn do obs ]
+
+// but some custom printing makes it more clear
+for (group, obs) in groupsForMonthlyReturn do 
+    printfn $"-------"
+    printfn $"group: {group}"
+    printfn $"Observations:"
+    obs |> List.iter (printfn "%A") 
+    printfn $"-------\n"
+
+
+// remember how we can calculate cumulative returns
+let exampleSimpleReturns = 
+    [ 0.1; -0.2; 0.3 ]
+let exampleLogReturns =
+    [ for ret in exampleSimpleReturns do log(1.0 + ret) ]
+let cumulativeLogReturns = exampleLogReturns |> List.sum
+let cumulativeSimpleReturns = exp(cumulativeLogReturns) - 1.0 
+// compare cumulativeSimpleReturns to
+(1.0 + 0.1)*(1.0+ -0.2)*(1.0 + 0.3)-1.0   
+
+// now the returns
+[ for ((symbol, year, month), obs) in groupsForMonthlyReturn do
+    let cumulativeLogReturn =
+        obs
+        |> List.sumBy (fun ob -> log(1.0 + ob.Return))
+    let cumulativeSimpleReturn = exp(cumulativeLogReturn) - 1.0
+    let maxDate = 
+        obs 
+        |> List.map (fun ob -> ob.Date)
+        |> List.max
+    { Symbol = symbol
+      Date = maxDate 
+      Return = cumulativeSimpleReturn } ]
+
+// The above code assigned intermediate values
+// to make each of the steps easy to see.
+// It is good to see intermediate values when you are learning.
+// But when you have more experience, you can tell from the types
+// what is going on and it becomes less necessary to assign
+// intermediate values.
+//
+// Thus it would also be possible to do the same thing
+// without assigning intermediate values using the code below.
+//
+// use whichever style is easiest for you.
 returns
-|> Array.groupBy(fun x -> x.Symbol, x.Date.Year, x.Date.Month)
-|> Array.map(fun ((symbol, _year, _month), xs) ->
-    let monthReturnPlus1 = (1.0, xs) ||> Array.fold(fun acc x -> acc * (1.0 + x.Return))
+|> List.groupBy(fun x -> x.Symbol, x.Date.Year, x.Date.Month)
+|> List.map(fun ((symbol, year, month), obs) ->
+    let cumulativeLogReturn = obs |> List.sumBy (fun ob -> log (1.0+ ob.Return))
     { Symbol = symbol 
-      Date = xs |> Array.map(fun x -> x.Date) |> Array.max 
-      Return =  monthReturnPlus1 - 1.0 })
+      Date = obs |> List.map(fun ob -> ob.Date) |> List.max 
+      Return =  exp(cumulativeLogReturn) - 1.0 })
 
 (*** condition:html, include:monthlyReturn ***)
 (*** condition:html, include-fsi-output:monthlyReturn ***)
@@ -236,9 +309,9 @@ returns
 
 (**
 ## Question 7
-Given `returns : ReturnOb []`, calculate the standard deviation of daily returns
+Given `returns : ReturnOb list`, calculate the standard deviation of daily returns
 for every symbol each month.
-Give the result as a `ValueOb []` where the date in each `ValueOb` is the last date for the symbol
+Give the result as a `ValueOb list` where the date in each `ValueOb` is the last date for the symbol
 each month. 
 *)
 
@@ -246,11 +319,11 @@ each month.
 (*** define: monthlyStdDev, define-output: monthlyStdDev ***)
 
 returns
-|> Array.groupBy(fun x -> x.Symbol, x.Date.Year, x.Date.Month)
-|> Array.map(fun ((symbol, _year, _month), xs) ->
+|> List.groupBy(fun x -> x.Symbol, x.Date.Year, x.Date.Month)
+|> List.map(fun ((symbol, _year, _month), xs) ->
     let sd = xs |> stDevBy(fun x -> x.Return)
     { Symbol = symbol 
-      Date = xs |> Array.map(fun x -> x.Date) |> Array.max 
+      Date = xs |> List.map(fun x -> x.Date) |> List.max 
       Value =  sd })
 
 (*** condition:html, include:monthlyStdDev ***)
@@ -263,9 +336,9 @@ returns
 
 (**
 ## Question 8
-Given `returns : ReturnOb []`, calculate the standard deviation of daily returns
+Given `returns : ReturnOb list`, calculate the standard deviation of daily returns
 for every symbol using rolling 3 day windows.
-Give the result as a `ValueOb []` where the date in each `ValueOb` is the last date for the symbol
+Give the result as a `ValueOb list` where the date in each `ValueOb` is the last date for the symbol
 in the window. 
 *)
 
@@ -273,13 +346,13 @@ in the window.
 
 (***define:rollingStdDev, define-output:rollingStdDev ***)
 returns
-|> Array.groupBy(fun x -> x.Symbol)
-|> Array.collect(fun (_symbol, xs) ->
+|> List.groupBy(fun x -> x.Symbol)
+|> List.collect(fun (_symbol, xs) ->
     xs
-    |> Array.sortBy(fun x -> x.Date)
-    |> Array.windowed 3
-    |> Array.map(fun ys -> 
-        let last = ys |> Array.last 
+    |> List.sortBy(fun x -> x.Date)
+    |> List.windowed 3
+    |> List.map(fun ys -> 
+        let last = ys |> List.last 
         { Symbol = last.Symbol
           Date = last.Date
           Value = ys |> stDevBy(fun x -> x.Return)}))
@@ -295,19 +368,19 @@ then build up from there.
 (*** define: rollingStdDev1, define-output: rollingStdDev1 ***)
 let groups = 
     returns
-    |> Array.groupBy(fun x -> x.Symbol)
+    |> List.groupBy(fun x -> x.Symbol)
 (***condition:html,include:rollingStdDev1 ***)
 (***condition:html,include-fsi-output:rollingStdDev1 ***)
 
 (*** define: rollingStdDev2, define-output: rollingStdDev2 ***)
-let firstGroup = groups |> Array.item 0 // or groups |> Array.head
+let firstGroup = groups[0] // or groups |> List.head
 let firstSymbol, firstObs = firstGroup // like let a,b = (1,2)
 let windowedFirstObs = 
     firstObs
-    |> Array.sortBy(fun x -> x.Date)
-    |> Array.windowed 3
-let firstWindow = windowedFirstObs.[0]
-let lastDayOfFirstWindow = firstWindow |> Array.last
+    |> List.sortBy(fun x -> x.Date)
+    |> List.windowed 3
+let firstWindow = windowedFirstObs[0]
+let lastDayOfFirstWindow = firstWindow |> List.last
 let firstWindowReturnStdDev = firstWindow |> stDevBy(fun x -> x.Return)
 let firstWindowResult =
     { Symbol = lastDayOfFirstWindow.Symbol 
@@ -324,7 +397,7 @@ often using more general variable names
 
 (*** define: rollingStdDev3, define-output: rollingStdDev3 ***)
 let resultForWindow window =
-    let lastDay = window |> Array.last
+    let lastDay = window |> List.last
     let stddev = window |> stDevBy(fun x -> x.Return)
     { Symbol = lastDay.Symbol 
       Date = lastDay.Date
@@ -355,10 +428,10 @@ now a function to create the windows
 *)
 
 (*** define: rollingStdDev6, define-output: rollingStdDev6 ***)
-let createWindows (days: ReturnOb array) =
+let createWindows (days: ReturnOb list) =
     days
-    |> Array.sortBy(fun day -> day.Date)
-    |> Array.windowed 3
+    |> List.sortBy(fun day -> day.Date)
+    |> List.windowed 3
 (***condition:html,include:rollingStdDev6 ***)
 (***condition:html,include-fsi-output:rollingStdDev6 ***)
 
@@ -378,14 +451,14 @@ so now we can do
 (*** define: rollingStdDev8, define-output: rollingStdDev8 ***)
 firstObs
 |> createWindows
-|> Array.map resultForWindow
+|> List.map resultForWindow
 (***condition:html,include:rollingStdDev8 ***)
 (***condition:html,include-fsi-output:rollingStdDev8 ***)
 
 (**
 Cool, now first obs was the obs from the first group.
 we could do function to operate on a group.
-our group is a tuple of `(string,ReturnObs array)`.
+our group is a tuple of `(string,ReturnObs list)`.
 We're not going to use the `string` variable, so we'll preface it
 with _ to let the compiler know we're leaving it out o purpose.
 the _ is not necessary but it's good practice
@@ -395,7 +468,7 @@ the _ is not necessary but it's good practice
 let resultsForGroup (_symbol, xs) =
     xs
     |> createWindows
-    |> Array.map resultForWindow
+    |> List.map resultForWindow
 (***condition:html,include:rollingStdDev9 ***)
 (***condition:html,include-fsi-output:rollingStdDev9 ***)
 
@@ -416,19 +489,19 @@ group function to each group
 (*** define: rollingStdDev11, define-output: rollingStdDev11 ***)
 let resultsForEachGroup =
     returns
-    |> Array.groupBy(fun x -> x.Symbol)
-    |> Array.map resultsForGroup
+    |> List.groupBy(fun x -> x.Symbol)
+    |> List.map resultsForGroup
 (***condition:html,include:rollingStdDev11 ***)
 (***condition:html,include-fsi-output:rollingStdDev11 ***)
 
 (**
-Okay, but this is an array of `ValueOb arrays` (that's what `ValueOb [ ][ ]` means).
-What happened is that I had an array of groups, and then I transformed each group.
+Okay, but this is an list of `ValueOb list` (that's what `ValueOb list list` means).
+What happened is that I had an list of groups, and then I transformed each group.
 so it's still one result per group. For instance
 *)
 
 (*** define: rollingStdDev12, define-output: rollingStdDev12 ***)
-resultsForEachGroup.[0]
+resultsForEachGroup[0]
 (***condition:html,include:rollingStdDev12 ***)
 (***condition:html,include-fsi-output:rollingStdDev12 ***)
 
@@ -437,27 +510,27 @@ is the first group of results
 *)
 
 (*** define: rollingStdDev13, define-output: rollingStdDev13 ***)
-resultsForEachGroup.[1]
+resultsForEachGroup[1]
 (***condition:html,include:rollingStdDev13 ***)
 (***condition:html,include-fsi-output:rollingStdDev13 ***)
 
 (**
-is the second group. I don't want an array of arrays.
-I just want one array of value obs. So `concat` them.
+is the second group. I don't want an list of lists.
+I just want one list of value obs. So `concat` them.
 *)
 
 (*** define: rollingStdDev14, define-output: rollingStdDev14 ***)
 let resultsForEachGroupConcatenated =
-    resultsForEachGroup |> Array.concat
+    resultsForEachGroup |> List.concat
 (***condition:html,include:rollingStdDev14 ***)
 (***condition:html,include-fsi-output:rollingStdDev14 ***)
 
 (**
-what's the first thing in the array?
+what's the first thing in the list?
 *)
 
 (*** define: rollingStdDev15, define-output: rollingStdDev15 ***)
-resultsForEachGroupConcatenated.[0]  
+resultsForEachGroupConcatenated[0]  
 (***condition:html,include:rollingStdDev15 ***)
 (***condition:html,include-fsi-output:rollingStdDev15 ***)
 
@@ -468,8 +541,8 @@ resultsForEachGroupConcatenated.[0]
 (*** define: rollingStdDev16, define-output: rollingStdDev16 ***)
 let resultsForEachGroupCollected =
     returns
-    |> Array.groupBy(fun x -> x.Symbol)
-    |> Array.collect resultsForGroup 
+    |> List.groupBy(fun x -> x.Symbol)
+    |> List.collect resultsForGroup 
 (***condition:html,include:rollingStdDev16 ***)
 (***condition:html,include-fsi-output:rollingStdDev16 ***)
 
@@ -478,7 +551,7 @@ check, this should evaluate to `true`
 *)
 
 (*** define: rollingStdDev17, define-output: rollingStdDev17 ***)
-resultsForEachGroupConcatenated.[0] = resultsForEachGroupCollected.[0]
+resultsForEachGroupConcatenated[0] = resultsForEachGroupCollected[0]
 (***condition:html,include:rollingStdDev17 ***)
 (***condition:html,include-fsi-output:rollingStdDev17 ***)
 
@@ -493,21 +566,21 @@ however, starting out especially, I think you'll find it helpful
 to kinda break things down like I did here.  
 Another way you can do it, similar to the first answer using
 an anonymous lambda function, but now we'll do it with fewer
-nested arrays by concatenating/collecting the windows
-into the parent array before doing the standard deviations.
+nested lists by concatenating/collecting the windows
+into the parent list before doing the standard deviations.
 *)
 
 (*** define: rollingStdDev18, define-output: rollingStdDev18 ***)
 let m2Groups =
     returns
-    |> Array.groupBy(fun x -> x.Symbol)
+    |> List.groupBy(fun x -> x.Symbol)
 
 let m2GroupsOfWindows =
     m2Groups
-    |> Array.map(fun (symbol, xs) -> 
+    |> List.map(fun (symbol, xs) -> 
         xs
-        |> Array.sortBy(fun x -> x.Date)
-        |> Array.windowed 3
+        |> List.sortBy(fun x -> x.Date)
+        |> List.windowed 3
     )
 (***condition:html,include:rollingStdDev18 ***)
 (***condition:html,include-fsi-output:rollingStdDev18 ***)
@@ -517,7 +590,7 @@ first group of windows
 *)
 
 (*** define: rollingStdDev19, define-output: rollingStdDev19 ***)
-m2GroupsOfWindows.[0]    
+m2GroupsOfWindows[0]    
 (***condition:html,include:rollingStdDev19 ***)
 (***condition:html,include-fsi-output:rollingStdDev19 ***)
 
@@ -526,7 +599,7 @@ second group of windows
 *)
 
 (*** define: rollingStdDev20, define-output: rollingStdDev20 ***)
-m2GroupsOfWindows.[1]    
+m2GroupsOfWindows[1]    
 (***condition:html,include:rollingStdDev20 ***)
 (***condition:html,include-fsi-output:rollingStdDev20 ***)
 
@@ -535,7 +608,7 @@ m2GroupsOfWindows.[1]
 *)
 
 (*** define: rollingStdDev21, define-output: rollingStdDev21 ***)
-let m2GroupsOfWindowsConcatenated = m2GroupsOfWindows |> Array.concat  
+let m2GroupsOfWindowsConcatenated = m2GroupsOfWindows |> List.concat  
 (***condition:html,include:rollingStdDev21 ***)
 (***condition:html,include-fsi-output:rollingStdDev21 ***)
 
@@ -546,10 +619,10 @@ same as if I'd used collect instead of map and then concat
 (*** define: rollingStdDev22, define-output: rollingStdDev22 ***)
 let m2GroupsOfWindowsCollected =
     m2Groups
-    |> Array.collect(fun (symbol, xs) -> 
+    |> List.collect(fun (symbol, xs) -> 
         xs
-        |> Array.sortBy(fun x -> x.Date)
-        |> Array.windowed 3 
+        |> List.sortBy(fun x -> x.Date)
+        |> List.windowed 3 
     )
 (***condition:html,include:rollingStdDev22 ***)
 (***condition:html,include-fsi-output:rollingStdDev22 ***)
@@ -559,8 +632,8 @@ compare them
 *)
 
 (*** define: rollingStdDev23, define-output: rollingStdDev23 ***)
-let m2FirstConcatenated = m2GroupsOfWindowsConcatenated.[0]    
-let m2FirstCollected = m2GroupsOfWindowsCollected.[0]
+let m2FirstConcatenated = m2GroupsOfWindowsConcatenated[0]    
+let m2FirstCollected = m2GroupsOfWindowsCollected[0]
 m2FirstCollected = m2FirstConcatenated // true. 
 
 (***condition:html,include:rollingStdDev23 ***)
@@ -577,8 +650,8 @@ Now, standard deviations of the windows' returns
 (*** define: rollingStdDev24, define-output: rollingStdDev24 ***)
 let m2Result =
     m2GroupsOfWindowsCollected
-    |> Array.map(fun window -> 
-        let lastDay = window |> Array.last 
+    |> List.map(fun window -> 
+        let lastDay = window |> List.last 
         { Symbol = lastDay.Symbol
           Date = lastDay.Date
           Value = window |> stDevBy(fun x -> x.Return )})

@@ -210,21 +210,27 @@ let d2 x = if x < 0.0 then Some x else None
 
 (**
 ## Question 5
-Consider this array of trading days for a stock and it's price and dividends:
+Consider this list of trading days for a stock and it's price and dividends:
 *)
 
-type StockDays = { Day : int; Price : decimal; Dividend : decimal Option }
+type StockDays = 
+    { 
+        Day : int 
+        Price : decimal
+        Dividend : decimal Option 
+    }
+
 let stockDays = 
-    [| for day = 0 to 5 do 
+    [ for day = 0 to 5 do 
         let dividend = if day % 2 = 0 then None else Some 1m
         { Day = day
           Price = 100m + decimal day
-          Dividend = dividend } |]   
+          Dividend = dividend } ]   
 
 (**
-1. create a new array called `stockDaysWithDividends` that is a filtered
+1. create a new list called `stockDaysWithDividends` that is a filtered
   version of `stockDays` that only contains days with dividends. 
-2. Then create an array called `stockDaysWithoutDividends` that is a filtered
+2. Then create an list called `stockDaysWithoutDividends` that is a filtered
   version of `stockDays` that only contains days that do not have dividends.
 *)
 
@@ -233,11 +239,12 @@ let stockDays =
 (*** define: stockDayswithDividends, define-output: stockDayswithDividends ***)
 let stockDaysWithDivideds =
     stockDays
-    |> Array.filter(fun day -> 
-        // variable names are arbitrary, but it's helpful to use
+    |> List.filter(fun day -> 
+        // variable names are arbitrary.
+        // We could have written `fun x` or `fun y` or ...
+        // But it's helpful to use
         // meaningful names like "day" if the record that our
         // function is operating on represents a day.
-        // using a variable named day to represent the day record
         day.Dividend.IsSome)
 (*** condition:html, include:stockDayswithDividends ***)
 (*** condition:html, include-fsi-output:stockDayswithDividends ***)
@@ -245,10 +252,8 @@ let stockDaysWithDivideds =
 (*** define: stockDayswithDividends1, define-output: stockDayswithDividends1 ***)
 let stockDaysWithoutDividends =
     stockDays
-    |> Array.filter(fun x -> 
-        // using a variable named x to represent the day record.
-        // less clear by looking at this code that x is a day.
-        x.Dividend.IsNone)
+    |> List.filter(fun day -> 
+        day.Dividend.IsNone)
 (*** condition:html, include:stockDayswithDividends1 ***)
 (*** condition:html, include-fsi-output:stockDayswithDividends1 ***)
 
@@ -435,28 +440,28 @@ let mc66 = mc (6,6) // evaluates to "c" because it matches the last wildcard.
 
 (**
 ## Question 4
-Consider this array of trading days for a stock and it's price and dividends:
+Consider this list of trading days for a stock and it's price and dividends:
 *)
 
 type StockDays2 = { Day : int; Price : decimal; Dividend : decimal Option }
 let stockDays2 = 
-    [| for day = 0 to 5 do 
+    [ for day = 0 to 5 do 
         let dividend = if day % 2 = 0 then None else Some 1m
         { Day = day
           Price = 100m + decimal day
-          Dividend = dividend } |]   
+          Dividend = dividend } ]   
 
 (**
 
-1. create a new array called `daysWithDividends` that is a filtered
+1. create a new list called `daysWithDividends` that is a filtered
   version of `stockDays` that only contains days with dividends. For
   each day with a dividend, you should return a `(int * decimal)` tuple
   where the int is the day  and the decimal is the dividend. 
-  Thus the result is an `(int * decimal) array`.
-2. Then create an array called `daysWithoutDividends` that is a filtered
+  Thus the result is an `(int * decimal) list`.
+2. Then create a list called `daysWithoutDividends` that is a filtered
   version of `stockDays` that only contains days that do not have dividends.
   For each day without a dividend, you should return the day as an `int`.
-  Thus the result is an `int array`.
+  Thus the result is an `int list`.
 
 *)
 
@@ -470,8 +475,8 @@ Days With Dividends:
 let daysWithDividends1 =
     // using filter and then a map
     stockDays2
-    |> Array.filter (fun day -> day.Dividend.IsSome)
-    |> Array.map(fun day ->
+    |> List.filter (fun day -> day.Dividend.IsSome)
+    |> List.map(fun day ->
         match day.Dividend with
         | None -> failwith "shouldn't happen because I filtered on IsSome"
         | Some div -> day.Day, div)
@@ -494,7 +499,7 @@ let daysWithDividends2 =
     // because it literally cannot happen in this version.
     // This is an example of making illegal states unrepresentable.
     stockDays2
-    |> Array.choose (fun day -> 
+    |> List.choose (fun day -> 
         // our function takes a day as an input and outputs
         // a `(int * decimal) option`. That is,
         // an optional tuple.
@@ -511,7 +516,7 @@ Days Without Dividends:
 (*** define: daysWithAndWithoutDividends2, define-output: daysWithAndWithoutDividends2 ***)           
 let daysWithoutDividends =
     stockDays2
-    |> Array.choose(fun day -> 
+    |> List.choose(fun day -> 
         match day.Dividend with
         | None -> Some day.Day
         | Some div -> None)
@@ -540,28 +545,37 @@ exampleMap.["a"]
 Map.find "a" exampleMap
 exampleMap2 |> Map.find 10
 
-// Comparing performance of array vs. Map lookups.
+// Comparing performance of list vs. Map lookups.
 
-(***do-not-eval***)
 #time "on"
 let isOdd x = if x % 2 = 0 then false else true
-let arr = [| for i = 1 to 100_000 do (i, isOdd i)|]
+let arr = [ for i = 1 to 100_000 do (i, isOdd i) ]
 let arrMap = arr |> Map
 
-arr |> Array.find (fun (a,b) -> a = 100)
+arr |> List.find (fun (a,b) -> a = 100)
+(***include-it***)
 arrMap |> Map.find 101
+(***include-it***)
 
-// Compare performance to find something at the beginning of an array.
+(**
+Compare performance to find something at the beginning of an list.
+*)
+(***do-not-eval***)
 for i = 1 to 100 do 
-    arr |> Array.find(fun (a,b) -> a = 1_000) |> ignore
+    arr |> List.find(fun (a,b) -> a = 1_000) |> ignore
 
+(***do-not-eval***)
 for i = 1 to 100 do
     arrMap |> Map.find 1_000 |> ignore
 
-// Compare performance to find something that is towards the end of the array.
+(**
+Compare performance to find something that is towards the end of the list.
+*)
+(***do-not-eval***)
 for i = 1 to 100 do 
-    arr |> Array.find(fun (a,b) -> a = 99_000) |> ignore
+    arr |> List.find(fun (a,b) -> a = 99_000) |> ignore
 
+(***do-not-eval***)
 for i = 1 to 100 do
     arrMap |> Map.find 99_000 |> ignore
 
@@ -674,16 +688,21 @@ let tryFindMapB3 =Map.tryFind 3 mapB
 
 (**
 ## Question 3
-Use this array
+Use this list
 *)
 
-type StockDays3 = { Day : int; Price : decimal; Dividend : decimal Option }
+type StockDays3 = 
+    {
+        Day: int
+        Price: decimal
+        Dividend: decimal Option 
+    }
 let stockDays3 = 
-    [| for day = 0 to 5 do 
+    [ for day = 0 to 5 do 
         let dividend = if day % 2 = 0 then None else Some 1m
         { Day = day
           Price = 100m + decimal day
-          Dividend = dividend } |]     
+          Dividend = dividend } ]     
 
 (**
 1. Create a Map collection named `mapC`. The key should be the day field, 
@@ -697,22 +716,22 @@ let stockDays3 =
 (*** define: mapC, define-output: mapC ***)    
 let mapC =
     stockDays3
-    |> Array.map(fun day ->
+    |> List.map(fun day ->
         // we just want to create a tuple of the (key,value).
         // The key and value can be anything.
         day.Day, day)
-    |> Map.ofArray
+    |> Map
 (*** condition:html, include:mapC ***)
 (*** condition:html, include-fsi-output:mapC ***)
 
 (*** define: mapD, define-output: mapD ***)    
 let mapD =
     stockDays3
-    |> Array.map(fun day ->
+    |> List.map(fun day ->
         // we just want to create a tuple of the (key,value).
         // The key and value can be anything.
         day, day.Day)
-    |> Map.ofArray
+    |> Map
 
 (*** condition:html, include:mapD ***)
 (*** condition:html, include-fsi-output:mapD ***)
@@ -826,7 +845,7 @@ the `stockB` price should be `None`.
 let stockbByTime = 
     stockB 
     |> List.map(fun day -> day.Time, day)
-    |> Map.ofList
+    |> Map
 let tslA1 =
     stockA
     |> List.map(fun dayA ->
@@ -868,7 +887,7 @@ let tryFindBforA (dayA: StockPriceOb) =
 // checkit
 tryFindBforA stockA.[0]
 // do it
-let tslA3 = stockA |> List.map tryFindBforA                         
+let tslA3 = stockA |> List.map tryFindBforA
 
 (*** condition:html, include:TwoStockPriceOb ***)
 (*** condition:html, include-fsi-output:TwoStockPriceOb ***)
@@ -892,7 +911,7 @@ the `stockA` price should be `None`.
 let stockaByTime = 
     stockA 
     |> List.map(fun day -> day.Time, day)
-    |> Map.ofList
+    |> Map
 let tslB =
     stockB
     |> List.map(fun dayB ->
@@ -928,7 +947,7 @@ A and B should always be something.
 let stockaByTime2 = 
     stockA 
     |> List.map(fun day -> day.Time, day)
-    |> Map.ofList
+    |> Map
 let tslC1 =
     stockB
     |> List.choose(fun dayB ->
@@ -993,10 +1012,12 @@ let tslD =
             // and returning None for the None case,
             // a Option.map can be nice.
             Map.tryFind time stockbByTime
-            |> Option.map(fun b -> b.Price)
-        { Time = time; PriceA = a; PriceB = b })       
+            |> Option.map (fun b -> b.Price)
+        { Time = time; PriceA = a; PriceB = b }) 
+
 // or, using a function. This is the same thing as in the above
-// anonymous lambda function, but I'm going to use different 
+// anonymous function that begins with `(fun time -> `, 
+// but I'm going to use different 
 // code to achieve the same goal just to show you different options.
 // again, it's just personal preference.
 // check how to write the function using time = 1 as a test

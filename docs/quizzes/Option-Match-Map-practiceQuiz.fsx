@@ -305,7 +305,24 @@ listOfNestedOptions |> List.map Option.flatten
 
 (**
 # Match Expressions
+There is a very good discussion of match expressions with examples on [FSharp For Fun and Profit](https://fsharpforfunandprofit.com/posts/match-expression/).
+
+The idea is that you give the match expression a value to match, the things it can match to, and then what you want to return for each of those matches.
+
+Simple match expressions such as the one below are 
+similar to if/then/else statements. However, as shown in the linked
+F# for fun and profit article, pattern matching is can do much
+more than if/then/else.
 *)
+
+let f1 x =
+    match x with // x is the thing that I am matching
+    | 1.0 -> 1.0 // when x matches 1.0 then return 1.0
+    | 2.0 -> 1.0 // when x matches with 2.0 then return 1.0
+    | 3.0 -> 7.0 + 7.0 // when x matches with 3.0 return 7.0+7.0
+    | z -> z ** 2.0 // everything else matches an arbitrary y, and let's return y**2.0
+    
+[ 1.0 .. 10.0] |> List.map f1
 
 (**
 ## Question 1

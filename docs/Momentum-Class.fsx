@@ -679,8 +679,8 @@ weights.
 
 [ for port in portfoliosWithWeights do
     let maxWeight = 
-        port.Positions 
-        |> List.map (fun pos -> pos.Weight) 
+        [ for position in port.Positions do 
+            position.Weight ] 
         |> List.max
     let totalWeights =
         [ for position in port.Positions do 

@@ -1,9 +1,9 @@
 (**
 ---
-title: Volatility Timing Part 2
+title: List module functions
 category: Practice Quizzes
 categoryindex: 2
-index: 3
+index: 2
 ---
 *)
 
@@ -33,7 +33,14 @@ index: 3
 """
 
 (**
-We're going to use the following in the questions
+
+These exercises work with functions from the `List` module.
+You can find examples of using them [F# core docs](https://fsharp.github.io/fsharp-core-docs/reference/fsharp-collections-listmodule.html).
+
+There are similar functions for [arrays](https://fsharp.github.io/fsharp-core-docs/reference/fsharp-collections-arraymodule.html) and
+[sequences](https://fsharp.github.io/fsharp-core-docs/reference/fsharp-collections-seqmodule.html).
+
+We're going to use the following data in the questions
 *)
 
 #r "nuget: FSharp.Stats"
@@ -61,52 +68,21 @@ let returns =
 
 (**
 ## Question 1
-Take this list of lists, add `1.0` to each element of the "inner" lists,
-and then concatenate all the inner lists together.
+Given the list below, filter the list so that only numbers greater than `2` remain.
+```fsharp
+[ 1; -4; 7; 2; -10]
+```
 *)
-[ [ 1.0; 2.0]
-  [ 3.0; 4.0] ]
 
 (*** include-it-raw:preDetails ***)
+(*** define: filter, define-output: filter ***)
 
-(*** define: listsAdd11, define-output: listsAdd11 ***)
-let listsToAdd = 
-    [ [ 1.0; 2.0]
-      [ 3.0; 4.0] ]
+[ 1; -4; 7; 2; -10]
+|> List.filter(fun x -> x > 2)
 
-// Compare the output of these
-
-// v1
-[ for list in listsToAdd do
-    for x in list do x + 1.0 ]
-
-// v2, this is not a correct answer.
-// it has not concatenated the inner lists
-// into one big list
-[ for xs in listsToAdd do
-    [ for x in xs do x + 1.0] ]
-
-// v3, this is correct, same output as v1
-[ for xs in listsToAdd do
-    [ for x in xs do x + 1.0] ]
-|> List.concat    
-
-(*** condition:html, include:listsAdd11 ***)
-(*** condition:html, include-fsi-output:listsAdd11 ***)
+(*** condition:html, include:filter ***)
+(*** condition:html, include-fsi-output:filter ***)
 (*** include-it-raw:postDetails ***)
-
-(**
-or
-*)
-
-(*** define: listsAdd1, define-output: listsAdd1 ***)
-// same as v1 output
-listsToAdd
-|> List.collect(fun xs -> 
-    [ for x in xs do x + 1.0 ])
-
-(*** condition:html, include:listsAdd1 ***)
-(*** condition:html, include-fsi-output:listsAdd1 ***)
 
 (*** condition:ipynb ***)
 // write your code here, see website for solution.
@@ -114,25 +90,20 @@ listsToAdd
 
 (**
 ## Question 2
-Take the following two-parameter function:
-*)
-
-let add x y = x + y
-
-(**
-Use the above function and [partial application](https://fsharpforfunandprofit.com/posts/partial-application/)
-to define a new function called 
-`add2` that adds 2 
-to it's input.
+Given the list below, take elements until you find one that is greater than `4`.
+```fsharp
+[ 1; -4; 7; 2; -10]
+```
 *)
 
 (*** include-it-raw:preDetails ***)
-(*** define: twoParaFunction, define-output: twoParaFunction ***)
+(*** define: takeWhile, define-output: takeWhile ***)
 
-let add2 = add 2
+[ 1; -4; 7; 2; -10]
+|> List.takeWhile(fun x -> x <= 4)
 
-(*** condition:html, include:twoParaFunction ***)
-(*** condition:html, include-fsi-output:twoParaFunction ***)
+(*** condition:html, include:takeWhile ***)
+(*** condition:html, include-fsi-output:takeWhile ***)
 (*** include-it-raw:postDetails ***)
 
 (*** condition:ipynb ***)
@@ -141,17 +112,20 @@ let add2 = add 2
 
 (**
 ## Question 3
-Given `returns : ReturnOb list`, use `printfn` to print the whole
-list to standard output using the [structured plaintext formatter](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/plaintext-formatting). 
+Given the list below, take elements until you find one that is greater than `4`.
+```fsharp
+[ 1; -4; 7; 2; -10]
+```
 *)
 
 (*** include-it-raw:preDetails ***)
-(*** define: printfnStructuredObject, define-output: printfnStructuredObject ***)
+(*** define: skipWhile, define-output: skipWhile ***)
 
-returns |> (printfn "%A")
+[ 1; -4; 7; 2; -10]
+|> List.skipWhile(fun x -> x <= 4)
 
-(*** condition:html, include:printfnStructuredObject ***)
-(*** condition:html, include-output:printfnStructuredObject ***)
+(*** condition:html, include:skipWhile ***)
+(*** condition:html, include-fsi-output:skipWhile ***)
 (*** include-it-raw:postDetails ***)
 
 (*** condition:ipynb ***)
@@ -160,39 +134,24 @@ returns |> (printfn "%A")
 
 (**
 ## Question 4
-Given the tuple `("hi", false, 20.321, 4)`,
-use `printfn` and the tuple to print the following string
-to standard output:
-`"hi teacher, my False knowledge implies that 4%=0020.1"`
-
-[String formatting](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/plaintext-formatting#format-specifiers-for-printf) documentation will be useful. 
+Take a `list` containing floats `1.0 .. 10.0`. Create a new list
+that contains each number in the original list divided by `3.0`.
 *)
 
 (*** include-it-raw:preDetails ***)
+(*** define: List1, define-output: List1 ***)
 
-(*** define: printfnStringInterpolation, define-output: printfnStringInterpolation ***)
-let (xString, xBool, xFloat, xInt) = ("hi", false, 20.321, 4)
-(*** condition:html, include:printfnStringInterpolation ***)
-(*** condition:html, include-fsi-output:printfnStringInterpolation ***)
+// either of these is correct
 
-(**
-Using string interpolation
-*)
+// Option 1:
+[ for x in [1.0 .. 10.0] do x / 3.0 ]
 
-(*** define: printfnStringInterpolation1, define-output: printfnStringInterpolation1 ***)
-printfn $"{xString} teacher, my {xBool} knowledge implies that {xInt}%%=%06.1f{xFloat}"
-(*** condition:html, include:printfnStringInterpolation1 ***)
-(*** condition:html, include-output:printfnStringInterpolation1 ***)
+// Option 2: 
+[ 1.0 .. 10.0]
+|> List.map (fun x -> x / 3.0)
 
-(**
-Using old-style printfn
-*)
-
-(*** define: printfnStringInterpolation2, define-output: printfnStringInterpolation2 ***)
-printfn "%s teacher, my %b knowledge implies that %i%%=%06.1f" xString xBool xInt xFloat
-(*** condition:html, include:printfnStringInterpolation2 ***)
-(*** condition:html, include-output:printfnStringInterpolation2 ***)
-
+(*** condition:html, include:List1 ***)
+(*** condition:html, include-fsi-output:List1 ***)
 (*** include-it-raw:postDetails ***)
 
 (*** condition:ipynb ***)
@@ -201,6 +160,326 @@ printfn "%s teacher, my %b knowledge implies that %i%%=%06.1f" xString xBool xIn
 
 (**
 ## Question 5
+Take a `list` containing floats `1.0 .. 10.0`. Group the elements based on whether the elements are greater than or equal to `4.0`.
+*)
+
+(*** include-it-raw:preDetails ***)
+(*** define: listGroupBy, define-output: listGroupBy ***)
+
+[ 1.0 .. 10.0]
+|> List.groupBy (fun x -> x >= 4.0)
+
+(*** condition:html, include:listGroupBy ***)
+(*** condition:html, include-fsi-output:listGroupBy ***)
+(*** include-it-raw:postDetails ***)
+
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+
+(**
+## Question 6
+Take a `list` containing floats `1.0 .. 10.0`. Filter it so that you are left with the elements `> 5.0`.
+*)
+
+(*** include-it-raw:preDetails ***)
+(*** define: listFilter, define-output: listFilter ***)
+
+[ 1.0 .. 10.0]
+|> List.filter (fun x -> x > 5.0)
+
+(*** condition:html, include:listFilter ***)
+(*** condition:html, include-fsi-output:listFilter ***)
+(*** include-it-raw:postDetails ***)
+
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+
+
+(**
+## Question 7
+Given the list below, return tuples of all consecutive pairs.
+```fsharp
+[ 1; -4; 7; 2; -10]
+```
+*)
+
+(*** include-it-raw:preDetails ***)
+(*** define: pairwise, define-output: pairwise ***)
+
+[ 1; -4; 7; 2; -10]
+|> List.pairwise
+
+(*** condition:html, include:pairwise ***)
+(*** condition:html, include-fsi-output:pairwise ***)
+(*** include-it-raw:postDetails ***)
+
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+
+(**
+## Question 8
+Given the list below, return sliding windows of 3 consecutive observations.
+```fsharp
+[ 1; -4; 7; 2; -10]
+```
+*)
+
+(*** include-it-raw:preDetails ***)
+(*** define: windowed, define-output: windowed ***)
+
+[ 1; -4; 7; 2; -10]
+|> List.windowed 3
+
+(*** condition:html, include:windowed ***)
+(*** condition:html, include-fsi-output:windowed ***)
+(*** include-it-raw:postDetails ***)
+
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+
+
+(**
+## Question 9
+Given the list below, sum all the elements.
+```fsharp
+[ 1; -4; 7; 2; -10]
+```
+*)
+
+(*** include-it-raw:preDetails ***)
+(*** define: sum, define-output: sum ***)
+
+[ 1; -4; 7; 2; -10]
+|> List.sum
+
+(*** condition:html, include:sum ***)
+(*** condition:html, include-fsi-output:sum ***)
+(*** include-it-raw:postDetails ***)
+
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+
+(**
+## Question 10
+Given the list below, add `1` to all the elements and then calculate the sum.
+```fsharp
+[ 1; -4; 7; 2; -10]
+```
+*)
+
+(*** include-it-raw:preDetails ***)
+(*** define: sumBy, define-output: sumBy ***)
+
+[ 1; -4; 7; 2; -10]
+|> List.sumBy(fun x -> x + 1)
+
+(*** condition:html, include:sumBy ***)
+(*** condition:html, include-fsi-output:sumBy ***)
+(*** include-it-raw:postDetails ***)
+
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+
+(**
+## Question 11
+Given the list below, calculate the `average` of the elements in the list.
+```fsharp
+[ 1.0; -4.0; 7.0; 2.0; -10.0]
+```
+*)
+
+(*** include-it-raw:preDetails ***)
+(*** define: average, define-output: average ***)
+
+[ 1.0; -4.0; 7.0; 2.0; -10.0]
+|> List.average
+
+(*** condition:html, include:average ***)
+(*** condition:html, include-fsi-output:average ***)
+(*** include-it-raw:postDetails ***)
+
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+
+
+(**
+## Question 12
+Given the list below, convert each element to a `decimal` and then calculate the `average` of the elements in the list.
+
+```fsharp
+[ 1.0; -4.0; 7.0; 2.0; -10.0]
+```
+*)
+
+(*** include-it-raw:preDetails ***)
+
+(*** define: averageBy, define-output: averageBy ***)
+[ 1.0; -4.0; 7.0; 2.0; -10.0]
+|> List.averageBy(fun x -> decimal x)
+(*** condition:html, include: averageBy ***)
+(*** condition:html, include-fsi-output: averageBy ***)
+
+(**
+Since `decimal` is a function that converts to
+the `decimal` type, you could also do.
+The FSharp linter shouLd show you a blue squiggly
+in the above code telling you this.
+*)
+
+(*** define: averageBy1, define-output: averageBy1 ***)
+[ 1.0; -4.0; 7.0; 2.0; -10.0]
+|> List.averageBy decimal
+(*** condition:html, include: averageBy1 ***)
+(*** condition:html, include-fsi-output: averageBy1 ***)
+
+(*** include-it-raw:postDetails ***)
+
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+(**
+## Question 13
+Take a `list` containing floats `1.0 .. 10.0`. Use `List.groupBy` to group the elements based on if they're `>= 5.0`. Then use `List.map` to get the maxiumum element that is `< 5.0` and the minimum value that is `>= 5.0`.
+*)
+
+(*** include-it-raw:preDetails ***)
+(*** define: listGroupMaxAndMin, define-output: listGroupMaxAndMin ***)
+
+let groupedAboveBelow5 =
+    [ 1.0 .. 10.0]
+    |> List.groupBy(fun x -> x >= 5.0)
+
+// to see groups and observations
+[ for (gt5, xs) in groupedAboveBelow5 do (gt5, xs) ]
+
+// to see just groups
+[ for (gt5, xs) in groupedAboveBelow5 do gt5 ]
+// to see just observations in each group
+[ for (gt5, xs) in groupedAboveBelow5 do xs ]
+// to see first group
+groupedAboveBelow5[0]
+// to see second group
+groupedAboveBelow5[1]
+
+[ for (gt5, xs) in groupedAboveBelow5 do
+    if gt5 then 
+        xs |> List.min 
+    else
+        xs |> List.max ]
+
+// equivalently
+[ 1.0 .. 10.0]
+|> List.groupBy(fun x -> x >= 5.0)
+|> List.map (fun (gt5, xs) ->
+    if gt5 then 
+        xs |> List.min 
+    else 
+        xs |> List.max )
+
+(*** condition:html, include:listGroupMaxAndMin ***)
+(*** condition:html, include-fsi-output:listGroupMaxAndMin ***)
+(*** include-it-raw:postDetails ***)
+
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+
+(**
+## Question 14
+Take a `list` containing floats `1.0 .. 10.0`. Use functions from the List module to sort it in descending order. Then take the 3rd element of the reversed list and add `7.0` to it.
+*)
+
+(*** include-it-raw:preDetails ***)
+(*** define: listSort, define-output: listSort ***)
+
+let descendingList =
+    [1.0 .. 10.0]
+    |> List.sortByDescending id
+
+// index 2 = 3rd item because it is 0-indexed
+let thirdItem = descendingList[2]
+
+thirdItem + 7.0
+
+
+(*** condition:html, include:listSort ***)
+(*** condition:html, include-fsi-output:listSort ***)
+(*** include-it-raw:postDetails ***)
+
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+(**
+## Question 15
+Take this list of lists, add `1.0` to each element of the "inner" lists,
+and then concatenate all the inner lists together.
+
+```fsharp
+[ [ 1.0; 2.0]
+  [ 3.0; 4.0] ]  
+```
+*)
+
+(*** include-it-raw:preDetails ***)
+
+(*** define: listsAdd1, define-output: listsAdd1 ***)
+let listsToAdd = 
+    [ [ 1.0; 2.0]
+      [ 3.0; 4.0] ]
+
+// Compare the output of these different versions. 
+
+//v1
+[ for list in listsToAdd do
+    for x in list do x + 1.0 ]
+(*** condition:html, include:listsAdd1 ***)
+(*** condition:html, include-fsi-output:listsAdd1 ***)
+
+(** 
+v2, this is not a correct answer.
+it has not concatenated the inner lists
+into one big list
+*)
+
+(*** define: listsAdd2, define-output: listsAdd2 ***)
+[ for xs in listsToAdd do
+    [ for x in xs do x + 1.0] ]
+(*** condition:html, include:listsAdd2 ***)
+(*** condition:html, include-fsi-output:listsAdd2 ***)
+
+(**
+v3 and v4 below are correct, the same output as v1
+*)
+
+(*** define: listsAdd3, define-output: listsAdd3 ***)
+//v3
+[ for xs in listsToAdd do
+    [ for x in xs do x + 1.0] ]
+|> List.concat    
+
+// v4
+listsToAdd
+|> List.collect(fun xs -> 
+    [ for x in xs do x + 1.0 ])
+(*** condition:html, include:listsAdd3 ***)
+(*** condition:html, include-fsi-output:listsAdd3 ***)
+
+
+(*** include-it-raw:postDetails ***)
+
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+
+(**
+## Question 16
 Given `returns : ReturnOb list`, calculate the arithmetic average return 
 for every symbol each month.
 Give the result as a `ReturnOb list` where the date is the last date for the symbol
@@ -226,7 +505,7 @@ returns
 
 
 (**
-## Question 6
+## Question 17
 Given `returns : ReturnOb list`, calculate the monthly return 
 for every symbol each month.
 Give the result as a `ReturnOb list` where the date is the last date for the symbol
@@ -308,7 +587,7 @@ returns
 
 
 (**
-## Question 7
+## Question 18
 Given `returns : ReturnOb list`, calculate the standard deviation of daily returns
 for every symbol each month.
 Give the result as a `ValueOb list` where the date in each `ValueOb` is the last date for the symbol
@@ -335,7 +614,7 @@ returns
 
 
 (**
-## Question 8
+## Question 19
 Given `returns : ReturnOb list`, calculate the standard deviation of daily returns
 for every symbol using rolling 3 day windows.
 Give the result as a `ValueOb list` where the date in each `ValueOb` is the last date for the symbol

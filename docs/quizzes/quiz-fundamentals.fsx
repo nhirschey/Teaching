@@ -85,9 +85,36 @@ let add3 x = x + 3.0
 (*** condition:ipynb ***)
 // write your code here, see website for solution.
 
-
 (**
 ## Question 4
+Take the following two-parameter function:
+*)
+
+let multiply (x:float) (y:float) = x * y
+
+(**
+Use the above function and [partial application](https://fsharpforfunandprofit.com/posts/partial-application/)
+to define a new function called 
+`multiply2` that multiplies its input by `2.0`.
+*)
+
+(*** include-it-raw:preDetails ***)
+(*** define: twoParaFunction, define-output: twoParaFunction ***)
+
+let multiply2 = multiply 2.0
+
+(*** condition:html, include:twoParaFunction ***)
+(*** condition:html, include-fsi-output:twoParaFunction ***)
+(*** include-it-raw:postDetails ***)
+
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
+
+
+
+
+(**
+## Question 5
 Given a tuple `(1.0,2.0)`, assign the second element to a value named `b`.
 *)
 
@@ -114,7 +141,7 @@ let (_, b1) = (1.0, 2.0)
 
 
 (**
-## Question 5
+## Question 6
 Create a tuple where the first, second, and third elements are `"a"`, `1`, and `2.0`.
 *)
 
@@ -132,7 +159,7 @@ Create a tuple where the first, second, and third elements are `"a"`, `1`, and `
 
 
 (**
-## Question 6
+## Question 7
 Define a record type named `Record1` that has a `string` `Id` field and a `float Y` field.
 *)
 
@@ -150,7 +177,7 @@ type Record1 = { Id : string; Y : float }
 
 
 (**
-## Question 7
+## Question 8
 Given the type signature `val a : float = 2.0`, what is the type of value a? 
 *)
 
@@ -167,7 +194,7 @@ float
 
 
 (**
-## Question 8
+## Question 9
 Create a record type named `Record2`. It should have two integer fields `X` and `Y`. Create an instance of the record where `X = 4` and `Y = 2`.
 *)
 
@@ -186,7 +213,7 @@ type Record2 = { X : int; Y : int }
 
 
 (**
-## Question 9
+## Question 10
 Explain why this expression gives an error when you try to run it: `4 + 7.0` 
 *)
 
@@ -211,7 +238,7 @@ if you are intending to add integers or floats, so it gives an error.
 
 
 (**
-## Question 10
+## Question 11
 Create a `list` where the elements are `1`, `2`, and `3`.
 *)
 
@@ -247,37 +274,22 @@ or
 
 
 (**
-## Question 11
-Take a `list` containing floats `1.0 .. 10.0`. Pass it to `List.map` and use an anonymous function to divide each number by `3.0`.
-*)
-
-(*** include-it-raw:preDetails ***)
-(*** define: List1, define-output: List1 ***)
-
-[ 1.0 .. 10.0]
-|> List.map (fun x -> x / 3.0)
-
-(*** condition:html, include:List1 ***)
-(*** condition:html, include-fsi-output:List1 ***)
-(*** include-it-raw:postDetails ***)
-
-(*** condition:ipynb ***)
-// write your code here, see website for solution.
-
-
-(**
 ## Question 12
-Take a `list` containing floats `1.0 .. 10.0`. Group the elements based on whether the elements are greater than or equal to `4.0`.
+Given the below list, use `printfn` to print the whole
+list to standard output using the [structured plaintext formatter](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/plaintext-formatting). 
+
+The list to print:
 *)
 
+[1; 2; 3]
+
 (*** include-it-raw:preDetails ***)
-(*** define: listGroupBy, define-output: listGroupBy ***)
+(*** define: printfnStructuredObject, define-output: printfnStructuredObject ***)
 
-[ 1.0 .. 10.0]
-|> List.groupBy (fun x -> x >= 4.0)
+[1; 2; 3] |> (printfn "%A")
 
-(*** condition:html, include:listGroupBy ***)
-(*** condition:html, include-fsi-output:listGroupBy ***)
+(*** condition:html, include:printfnStructuredObject ***)
+(*** condition:html, include-output:printfnStructuredObject ***)
 (*** include-it-raw:postDetails ***)
 
 (*** condition:ipynb ***)
@@ -286,92 +298,43 @@ Take a `list` containing floats `1.0 .. 10.0`. Group the elements based on wheth
 
 (**
 ## Question 13
-Take a `list` containing floats `1.0 .. 10.0`. Filter it so that you are left with the elements `> 5.0`.
+Given the tuple `("hi", false, 20.321, 4)`,
+use `printfn` and the tuple to print the following string
+to standard output:
+`"hi teacher, my False knowledge implies that 4%=0020.1"`
+
+[String formatting](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/plaintext-formatting#format-specifiers-for-printf) documentation will be useful. 
 *)
 
 (*** include-it-raw:preDetails ***)
-(*** define: listFilter, define-output: listFilter ***)
 
-[ 1.0 .. 10.0]
-|> List.filter (fun x -> x > 5.0)
-
-(*** condition:html, include:listFilter ***)
-(*** condition:html, include-fsi-output:listFilter ***)
-(*** include-it-raw:postDetails ***)
-
-(*** condition:ipynb ***)
-// write your code here, see website for solution.
-
+(*** define: printfnStringInterpolation, define-output: printfnStringInterpolation ***)
+let (xString, xBool, xFloat, xInt) = ("hi", false, 20.321, 4)
+(*** condition:html, include:printfnStringInterpolation ***)
+(*** condition:html, include-fsi-output:printfnStringInterpolation ***)
 
 (**
-## Question 14
-Take a `list` containing floats `1.0 .. 10.0`. Use `List.groupBy` to group the elements based on if they're `>= 5.0`. Then use `List.map` to get the maxiumum element that is `< 5.0` and the minimum value that is `>= 5.0`.
+Using string interpolation
 *)
 
-(*** include-it-raw:preDetails ***)
-(*** define: listGroupMaxAndMin, define-output: listGroupMaxAndMin ***)
-
-let groupedAboveBelow5 =
-    [ 1.0 .. 10.0]
-    |> List.groupBy(fun x -> x >= 5.0)
-
-// to see groups and observations
-[ for (gt5, xs) in groupedAboveBelow5 do (gt5, xs) ]
-
-// to see just groups
-[ for (gt5, xs) in groupedAboveBelow5 do gt5 ]
-// to see just observations in each group
-[ for (gt5, xs) in groupedAboveBelow5 do xs ]
-// to see first group
-groupedAboveBelow5[0]
-// to see second group
-groupedAboveBelow5[1]
-
-[ for (gt5, xs) in groupedAboveBelow5 do
-    if gt5 then 
-        xs |> List.min 
-    else
-        xs |> List.max ]
-
-// equivalently
-[ 1.0 .. 10.0]
-|> List.groupBy(fun x -> x >= 5.0)
-|> List.map (fun (gt5, xs) ->
-    if gt5 then 
-        xs |> List.min 
-    else 
-        xs |> List.max )
-
-(*** condition:html, include:listGroupMaxAndMin ***)
-(*** condition:html, include-fsi-output:listGroupMaxAndMin ***)
-(*** include-it-raw:postDetails ***)
-
-(*** condition:ipynb ***)
-// write your code here, see website for solution.
-
+(*** define: printfnStringInterpolation1, define-output: printfnStringInterpolation1 ***)
+printfn $"{xString} teacher, my {xBool} knowledge implies that {xInt}%%=%06.1f{xFloat}"
+(*** condition:html, include:printfnStringInterpolation1 ***)
+(*** condition:html, include-output:printfnStringInterpolation1 ***)
 
 (**
-## Question 15
-Take a `list` containing floats `1.0 .. 10.0`. Use functions from the List module to sort it in descending order. Then take the 3rd element of the reversed list and add `7.0` to it.
+Using old-style printfn
 *)
 
-(*** include-it-raw:preDetails ***)
-(*** define: listSort, define-output: listSort ***)
+(*** define: printfnStringInterpolation2, define-output: printfnStringInterpolation2 ***)
+printfn "%s teacher, my %b knowledge implies that %i%%=%06.1f" xString xBool xInt xFloat
+(*** condition:html, include:printfnStringInterpolation2 ***)
+(*** condition:html, include-output:printfnStringInterpolation2 ***)
 
-let descendingList =
-    [1.0 .. 10.0]
-    |> List.sortByDescending id
-
-// index 2 = 3rd item because it is 0-indexed
-let thirdItem = descendingList[2]
-
-thirdItem + 7.0
-
-
-(*** condition:html, include:listSort ***)
-(*** condition:html, include-fsi-output:listSort ***)
 (*** include-it-raw:postDetails ***)
 
 (*** condition:ipynb ***)
 // write your code here, see website for solution.
+
+
 

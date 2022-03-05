@@ -62,26 +62,26 @@ Sometimes something exists or doesn't exist. This can be useful to model explici
 
 The main purpose is to model situations where you could have "something" or "nothing" explicitly.
 
-For example, this `exampleMap` does not contain a "c" key.
+For example, this `testMap` does not contain a "c" key.
 *)
 
-let exampleMap = Map [("a", 1); ("b", 1)]
+let testMap = Map [("a", 1); ("b", 1)]
 
 (**
  If we try to find the value indexed by "c" we will get an exception.
  *)
 
 (***do-not-eval***)
-Map.find "c" exampleMap
+Map.find "c" testMap
 
 (**
  The preferred way to do this is to try to get the key, and then if there is no value for that key return nothing. Options are either `Some x` or `None`, where `x` is the data that you want. This is what the "..try" functions are about.
 *)
 
-Map.tryFind "a" exampleMap
+Map.tryFind "a" testMap
 
 (***do-not-eval***)
-Map.tryFind "c" exampleMap
+Map.tryFind "c" testMap
 
 (** Other option examples *)
 let xx = Some 4.0
@@ -526,7 +526,45 @@ let daysWithoutDividends =
 
 (**
 # Map Collections
+If we're doing lookups, then a good data structure 
+for that is a Map collection. Maps consist of key and value pairs. 
+If you look up the key, you get the value.
+
+If you need to do lookups on a key, maps are much more efficient than trying to do the same thing
+with a list or array. Some more info [here](https://fsharp.github.io/fsharp-core-docs/reference/fsharp-collections-mapmodule.html).
 *)
+
+let exampleMap = Map [("a", "hey"); ("b","ho")]
+let exampleMap2 = [(4,"apple"); (10,"pizza")] |> Map
+exampleMap.["a"]
+Map.find "a" exampleMap
+exampleMap2 |> Map.find 10
+
+// Comparing performance of array vs. Map lookups.
+
+(***do-not-eval***)
+#time "on"
+let isOdd x = if x % 2 = 0 then false else true
+let arr = [| for i = 1 to 100_000 do (i, isOdd i)|]
+let arrMap = arr |> Map
+
+arr |> Array.find (fun (a,b) -> a = 100)
+arrMap |> Map.find 101
+
+// Compare performance to find something at the beginning of an array.
+for i = 1 to 100 do 
+    arr |> Array.find(fun (a,b) -> a = 1_000) |> ignore
+
+for i = 1 to 100 do
+    arrMap |> Map.find 1_000 |> ignore
+
+// Compare performance to find something that is towards the end of the array.
+for i = 1 to 100 do 
+    arr |> Array.find(fun (a,b) -> a = 99_000) |> ignore
+
+for i = 1 to 100 do
+    arrMap |> Map.find 99_000 |> ignore
+
 
 (**
 ## Question 1

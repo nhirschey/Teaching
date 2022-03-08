@@ -768,7 +768,7 @@ We can process months sequentially.
 (*** do-not-eval ***)
 let momentumPortsSequential =
     sampleMonths
-    |> List.collect formMomentumPort 
+    |> List.collect formMomentumPort
 
 (**
 Or we can speed things up and process months in Parallel using
@@ -795,3 +795,142 @@ let momentumPortsParallel =
     sampleMonths
     |> List.toArray
     |> Array.Parallel.collect formMomentumPortArray 
+
+(**
+## Plotting returns
+
+Let's look at the cumulative returns of the portfolios.
+
+To start, get the top momentum portfolio.
+*)
+
+let mom10 = 
+    momentumPortsSequential
+    |> List.filter (fun p -> 
+        p.PortfolioId = Indexed {| Index = 10; Name = "Momentum" |})
+    |> List.sortBy (fun p -> p.YearMonth )
+
+// first few months
+mom10[0..3]
+
+(** for easier accumulation make log returns. *)
+let mom10LogReturns = 
+    [ for monthObs in mom10 do 
+        {  monthObs with Return = log(1.0 + monthObs.Return) }]
+
+mom10LogReturns[..3]
+
+(**
+Now calculate cumulative log returns using a sum.
+
+We're going to use [scan](https://fsharp.github.io/fsharp-core-docs/reference/fsharp-collections-listmodule.html#scan). The idea with `List.scan` is that you write a function that takes two inputs: 1) the prior state, 2) the current observation. With those two inputs the function returns a new state.
+
+For example, for a running total of observations, the prior state is the prior total, the current observation is what you're going to add to the prior total to get the new total. For example: 
+*)      
+
+let itemsToAdd = [0; 1; -7; 4; 10]
+
+(** The first item, or "head" of the list. *)
+itemsToAdd[0]
+
+(** The items after the first, the "tail" of the list. *)
+
+itemsToAdd[1..]
+
+(** The running total, aka cumulative sum: *)
+
+(itemsToAdd[0],itemsToAdd[1..])
+||> List.scan (fun acc x -> acc + x)
+
+(** One nice things bout lists is that they are efficient to add/remove things from the front of the list, and there's a special [`::` (cons) operator](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/lists#operators-for-working-with-lists) for doing this. It works for construction and deconstruction. 
+
+Construction:
+*)
+0::itemsToAdd[1..]
+
+(**
+Deconstruction using pattern matching:
+*)
+
+let headOfList::tailOfList = itemsToAdd
+
+(** the head *)
+headOfList
+
+(** the tail*)
+tailOfList
+
+(** So this would also work: *)
+(headOfList, tailOfList)
+||> List.scan (fun acc x -> acc + x)
+
+(**
+We can use this to calculate cumulative returns.
+*)
+
+let mom10CumulativeLogReturns =
+    let h::t = mom10LogReturns
+    (h, t)
+    ||> List.scan (fun priorMonth thisMonth -> 
+        { thisMonth with Return = thisMonth.Return + priorMonth.Return })
+
+(**
+The first cumulative return is just the first return:
+*)
+
+printfn $"The first return is:            %.4f{mom10LogReturns[0].Return}"
+printfn $"The first cumulative return is: %.4f{mom10CumulativeLogReturns[0].Return}"
+
+
+(**
+But subsequently the cumulative returns reflect the running total:
+*)
+
+[ for month in mom10CumulativeLogReturns do
+    month.YearMonth, month.Return ]
+|> Chart.Line
+|> Chart.withTitle "Momentum Portfolio 10"
+
+(**
+We can also plot all 10 portfolios.
+*)
+
+let makeCumulativeLogReturn portfolioObs =
+    let headLogReturn::tailLogReturns = 
+        portfolioObs
+        |> List.sortBy (fun p -> p.YearMonth )
+        |> List.map (fun p -> 
+            { p with Return = log(1.0 + p.Return) })
+    
+    let cumulativeLogReturn =
+        (headLogReturn, tailLogReturns)
+        ||> List.scan (fun acc thisMonth -> 
+            { thisMonth with Return = thisMonth.Return + acc.Return })
+    cumulativeLogReturn
+
+// test it
+let testMom10 = makeCumulativeLogReturn mom10
+
+testMom10 = mom10CumulativeLogReturns // should evaluate to true
+
+(** Now let's use that function to do it for all 10 portfolios.*)
+
+let byPortfolioId =
+    momentumPortsSequential
+    |> List.groupBy (fun p -> p.PortfolioId)
+
+let listOfCharts =
+    [ for (portId, portObs) in byPortfolioId do
+        let cumulativeLogReturn = makeCumulativeLogReturn portObs
+        let plotData =
+            [ for month in cumulativeLogReturn do
+                month.YearMonth, month.Return ]
+        Chart.Line(plotData, Name = portId.ToString()) ]
+
+(** Plot one of them.*)
+
+listOfCharts[0]
+
+(** Plot all of them. *)
+listOfCharts
+|> Chart.combine

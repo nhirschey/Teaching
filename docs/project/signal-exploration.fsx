@@ -457,7 +457,7 @@ let byStockMonthIdAndReturnMap: Map<string * DateTime, IdAndReturnsType.Row> =
 (**
 > **Task:** Create a [histogram](https://plotly.net/04_0_histograms.html) showing the distribution of the *winsorized signals* for only *small-cap stocks* in your dataset. Limit the data to 2015 to make it easier to plot.
 
-*Hint:* if you have a stock and it's signal in a particular month, the `byStockMondIdAndReturnMap` is useful for looking up thinks about the stock that month.)
+*Hint:* if you have a stock and it's signal in a particular month, the `byStockMonthIdAndReturnMap` is useful for looking up thinks about the stock that month.)
 *)
 // solution here
 

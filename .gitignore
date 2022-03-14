@@ -8,3 +8,4 @@ secrets.*
 data-cache
 */*FootballPlayers.csv
 docs/data
+docs/project/data

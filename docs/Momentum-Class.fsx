@@ -38,6 +38,7 @@ let samplePeriod x =
 // Set dotnet interactive formatter to plaintext
 Formatter.Register(fun (x:obj) (writer: TextWriter) -> fprintfn writer "%120A" x )
 Formatter.SetPreferredMimeTypesFor(typeof<obj>, "text/plain")
+// Make plotly graphs work with interactive plaintext formatter
 Formatter.SetPreferredMimeTypesFor(typeof<GenericChart.GenericChart>,"text/html")
 #endif // IPYNB
 

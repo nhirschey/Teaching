@@ -291,12 +291,14 @@ stockCountsAllSizes
     sizeGroup, xs |> List.truncate 3)
 
 (** A combined chart. *)
+
 stockCountsAllSizes
 |> List.map (fun (sizeGrp, toPlot) -> 
     Chart.Column(toPlot, Name = sizeGrp))
 |> Chart.combine
 
 (** Same, but stacking each chart on top of eachother. *)   
+
 stockCountsAllSizes
 |> List.map (fun (sizeGrp, toPlot) -> 
     Chart.Column(toPlot, Name = sizeGrp))

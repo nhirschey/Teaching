@@ -521,7 +521,7 @@ let quintiles: list<SortedPort> =
     failwith "I am not implemented yet"
 
 (**
-> **Task:** Filter `quintiles` to the quintile portfolio of stocks each month that has the lowest signal value. This should be stocks where `SortedPortfolio.Portfolio = 1`. Assign the filtered list to a value named `bottomQuintile`.
+> **Task:** Filter `quintiles` to the quintile portfolio of stocks each month that has the lowest signal value. This should be stocks where `SortedPort.Portfolio = 1`. Assign the filtered list to a value named `bottomQuintile`.
 *)
 
 // solution here
@@ -529,13 +529,22 @@ let bottomQuintile: list<SortedPort> =
     failwith "I am not implemented yet"
 
 (**
-> **Task:** Create a list named `bottomQuintileReturn` that contains the return of the bottom quintile portfolio each month. The portfolio return for a given month should be calculated using equal weights on every stock in the portfolio that month. The result should be given as a list of `SortedPortfolioReturn` records. 
+> **Task:** Create a list named `bottomQuintileReturn` that contains the return of the bottom quintile portfolio each month. The portfolio return for a given month should be calculated using equal weights on every stock in the portfolio that month. The result should be given as a list of `SortedPortfolioReturn` records. **Additionally,** the month of the return should be lagged one month relative to the portfolio formation month. That means that if you formed a portfolio based on a signal known as of the end of February 2022 (Eom = DateTime(2022,02,28)), the portfolio return during the first month that you hold it will be calculated using stock returns during March 2022 (MonthOfReturn = DateTime(2022,03,31)). 
+
+Quick example getting end of month additon:
 *)
+let endOfFebruary = DateTime(2022,02,28)
+
+let addOneEom eom =
+    DateTime(eom.Year, eom.Month, 1).AddMonths(2.0).AddDays(-1.0)
+
+addOneEom endOfFebruary
+(** That will give you the end of March. So in summary, if the signal that you are forming portfolios from comes from Eom = February 2022, make sure that you get returns from March 2022. *)
 
 type SortedPortfolioReturn =
     { 
         Portfolio: int
-        Eom: DateTime
+        MonthOfReturn: DateTime
         AvgReturn: float
     }
 

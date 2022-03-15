@@ -535,11 +535,11 @@ Quick example getting end of month additon:
 *)
 let endOfFebruary = DateTime(2022,02,28)
 
-let addOneEom eom =
-    DateTime(eom.Year, eom.Month, 1).AddMonths(2.0).AddDays(-1.0)
+let addOneEom (eom: DateTime) =
+    DateTime(eom.Year, eom.Month, 1).AddMonths(2).AddDays(-1.0)
 
 addOneEom endOfFebruary
-(** That will give you the end of March. So in summary, if the signal that you are forming portfolios from comes from Eom = February 2022, make sure that you get returns from March 2022. *)
+(** That will give you the end of March. So in summary, if the signal that you use to form portfolios comes from February 2022 (signal EOM = DateTime(2022,2,28)), make sure that you get returns from March 2022 (return EOM = DateTime(2022,3,31)). *)
 
 type SortedPortfolioReturn =
     { 

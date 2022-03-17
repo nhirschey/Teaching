@@ -383,15 +383,20 @@ let countMyNonMissingSignalRows (rows: list<NonMissingSignal>) =
 (**
 It can also be useful to compute percentiles of the signal. You can calculate percentils using `FSharp.Stats` quantile module.
 *)
-let quantileExample = [0.0 .. 20.0]
-// 10th, 50th, and 90th percentiles
-let pctlExample = [0.1; 0.5; 0.9]
 
-// you must have a sorted array of values
-quantileExample
-|> List.toArray // convert list to array
-|> Array.sort   // sort array of floats 
-|> Quantile.computePercentiles Quantile.OfSorted.compute pctlExample
+// 10th, 50th, and 90th percentiles
+let pctlExamples = [0.1; 0.5; 0.9]
+
+// you must have an array of values
+let pctlExamplesData = 
+    [ 10.0; -20.0; 0.1; -5.0; 7.0; 4.0]
+    |> List.toArray 
+
+(** Compute the percentiles. *)
+let pctlExamplesComputed =    
+    [ for pctl in pctlExamples do
+        Quantile.compute pctl pctlExamplesData ]
+pctlExamplesComputed
 
 (**
 > **Task:** Compute the 1st, 10th, 50th, 90th, and 99th percentiles of the non-missing signals in your dataset. Once these percentiles are calculated them, assign the signals to the values below. Explain what you learn about the distribution. Is it uniformly distributed, a skewed distribution, are there outliers, etc.?

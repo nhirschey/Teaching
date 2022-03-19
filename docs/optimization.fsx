@@ -1,0 +1,641 @@
+(**
+---
+title: Optimization
+category: Lectures
+categoryindex: 1
+index: 6
+---
+
+[![Binder](img/badge-binder.svg)](https://mybinder.org/v2/gh/nhirschey/teaching/gh-pages?filepath={{fsdocs-source-basename}}.ipynb)&emsp;
+[![Script](img/badge-script.svg)]({{root}}/{{fsdocs-source-basename}}.fsx)&emsp;
+[![Notebook](img/badge-notebook.svg)]({{root}}/{{fsdocs-source-basename}}.ipynb)
+*)
+
+#r "nuget: FSharp.Stats"
+#r "nuget: FSharp.Data"
+#r "nuget: DiffSharp-lite"
+
+#load "common.fsx"
+#load "YahooFinance.fsx"
+
+open System
+open FSharp.Data
+open Common
+open YahooFinance
+
+open FSharp.Stats
+
+
+Environment.CurrentDirectory <- __SOURCE_DIRECTORY__
+
+(*** condition: ipynb ***)
+#if IPYNB
+// Set dotnet interactive formatter to plaintext
+Formatter.Register(fun (x:obj) (writer: TextWriter) -> fprintfn writer "%120A" x )
+Formatter.SetPreferredMimeTypesFor(typeof<obj>, "text/plain")
+// Make plotly graphs work with interactive plaintext formatter
+Formatter.SetPreferredMimeTypesFor(typeof<GenericChart.GenericChart>,"text/html")
+#endif // IPYNB
+
+
+(**
+# Portfolio Optimization
+
+We're now going to see how to do mean-variance portfolio optimization.
+The objective is to find the portfolio with the greatest return per
+unit of standard deviation.
+
+In particular, we're going to identify the tangency portfolio. 
+The tangency portfolio is the portfolio fully invested 
+in risky assets that has the maximum achievable sharpe ratio. 
+When there is a risk-free rate, the efficient frontier 
+of optimal portfolios is some combination of
+the tangency portfolio and the risk-free asset. 
+Investors who want safe portfolios hold a lot 
+of bonds and very little of the tangency portfolio. 
+Investors who want riskier portfolios hold little risk-free bonds and
+a lot of the tangency portfolio (or even lever the tangency portoflio). 
+
+Now one thing to keep in mind is that often you think 
+of this as the optimal weight per security.
+But one well known problem is that trying to do this naively does not work well.
+And by naively I mean taking a stock's average return and covariances in the sample and using that to estimate optimal weights. 
+In large part, this is because it is hard to estimate a stock's future returns.
+I know. Big shock, right?
+
+However, there are ways to do portfolio optimization that works better.
+We can do it by creating large groups 
+of stocks with similar characteristics. 
+For example, a factor portfolio. 
+Then you estimate the expected return and covariance matrix using the factor.
+That tends to give you better portfolios 
+because the characteristics that you're using 
+to form the portfolios help you estimate 
+the return and covariances of the stocks in it.
+*)
+
+(**
+A type to hold our data.
+*)
+
+type StockData =
+    { Symbol : string 
+      Date : DateTime
+      Return : float }
+
+(**
+We get the Fama-French 3-Factor asset pricing model data.
+*)
+
+let ff3 = French.getFF3 Frequency.Monthly
+
+// Transform to a StockData record type.
+let ff3StockData =
+    [| 
+       ff3 |> Array.map(fun x -> {Symbol="HML";Date=x.Date;Return=x.Hml})
+       ff3 |> Array.map(fun x -> {Symbol="MktRf";Date=x.Date;Return=x.MktRf})
+       ff3 |> Array.map(fun x -> {Symbol="Smb";Date=x.Date;Return=x.Smb})
+    |] |> Array.concat
+
+(**
+Let's get our factor data.
+*)
+
+
+
+let tickers = 
+    [ 
+        "VBR" // Vanguard Small-cap Value ETF
+        "VUG" // Vanguard Growth ETF
+        "VTI" // Vanguard Total Stock Market ETF
+        "BND" // Vanguard Total Bond Market ETF
+    ]
+
+let tickPrices = 
+    YahooFinance.PriceHistory(
+        tickers,
+        startDate = DateTime(2010,1,1),
+        interval = Interval.Monthly)
+
+let pricesToReturns (symbol, adjPrices: list<PriceObs>) =
+    adjPrices
+    |> List.sortBy (fun x -> x.Date)
+    |> List.pairwise
+    |> List.map (fun (yesterday, today) ->
+        let r = (log today.AdjustedClose) - log (yesterday.AdjustedClose) 
+        { Symbol = symbol 
+          Date = today.Date 
+          Return = r })
+
+let tickReturns =
+    tickPrices
+    |> List.groupBy (fun x -> x.Symbol)
+    |> List.collect pricesToReturns
+
+(**
+And let's convert to excess returns
+*)
+let rf = ff3 |> Seq.map(fun x -> x.Date, x.Rf) |> Map
+
+let standardInvestmentsExcess =
+    let maxff3Date = ff3 |> Array.map(fun x -> x.Date) |> Array.max
+    tickReturns
+    |> List.filter(fun x -> x.Date <= maxff3Date)
+    |> List.map(fun x -> 
+        match Map.tryFind x.Date rf with 
+        | None -> failwith $"why isn't there a rf for {x.Date}"
+        | Some rf -> { x with Return = x.Return - rf })
+
+(**
+If we did it right, the `VTI` return should be pretty similar to the `MktRF`
+return from Ken French's website.
+*)
+
+standardInvestmentsExcess
+|> List.filter(fun x -> x.Symbol = "VTI" && x.Date.Year = 2021)
+|> List.map(fun x -> x.Date.Month, round 4 x.Return)
+|> List.take 3
+(*** include-fsi-output***)
+
+ff3 
+|> Array.filter(fun x -> x.Date.Year = 2021)
+|> Array.map(fun x -> x.Date.Month, round 4 x.MktRf)
+(*** include-fsi-output***)
+
+(**
+Let's put our stocks in a map keyed by symbol
+*)
+
+let stockData =
+    standardInvestmentsExcess
+    |> List.groupBy(fun x -> x.Symbol)
+    |> Map
+
+(**
+Let's create a function that calculates covariances
+for two securities.
+*)
+
+let getCov x y stockData =
+    let innerJoin xId yId =
+        let xRet = Map.find xId stockData
+        let yRet = 
+            Map.find yId stockData 
+            |> List.map(fun x -> x.Date, x) 
+            |> Map
+        xRet
+        |> List.choose(fun x ->
+            match Map.tryFind x.Date yRet with
+            | None -> None
+            | Some y -> Some (x.Return, y.Return))
+    let x, y = innerJoin x y |> List.unzip
+    Seq.cov x y
+
+let covariances =
+    [ for rowTick in tickers do 
+        [ for colTick in tickers do
+            getCov rowTick colTick stockData ]]
+    |> matrix
+let means = 
+    stockData
+    |> Map.toList
+    |> List.map(fun (sym, xs) ->
+        sym,
+        xs |> List.averageBy(fun x -> x.Return))
+    |> List.sortBy fst
+    |> List.map snd
+    |> vector
+
+
+(**
+This solution method for finding the tangency portfolio comes from Hilliar, Grinblatt, and Titman 2nd European Edition, Example 5.3. 
+
+Since it has the greatest possible Sharpe ratio, that means that you cannot rebalance the portfolio and increase the return per unit of standard deviation.
+
+The solution method relies on the fact that covariance is like marginal variance. At the tangency portfolio, it must be the case that the ratio of each asset's risk premium to it's covariance with the tangency portfolio, $(r_i-r_f)/cov(r_i,r_p)$, is the same. Because that ratio is the return per unit of "marginal variance" and if it was not equal for all assets, then you could rebalance and increase the portfolio's return while holding the portfolio variance constant.
+
+In the below algebra, we solve for the portfolio that has covariances with each asset equal to the asset's risk premium. Then we relever to have a portfolio weight equal to 1.0 (we can relever like this because everything is in excess returns) and then we are left with the tangency portfolio.
+*)
+
+// solve A * x = b for x
+let w' = Algebra.LinearAlgebra.SolveLinearSystem covariances means
+let w = w' |> Vector.map(fun x -> x /  Vector.sum w')
+w
+(*** include-it ***)
+
+(**
+Portfolio variance
+*)
+let portVariance = w.Transpose * covariances * w
+
+(**
+Portfolio standard deviation
+*)
+let portStDev = sqrt(portVariance)
+
+(** Portfolio mean *)
+let portMean = w.Transpose * means
+
+(** Annualized Sharpe ratio *)
+sqrt(12.0)*(portMean/portStDev)
+(*** include-it ***)
+
+(**
+## Comparing mean-variance efficient to 60/40.
+
+Now let's form the mean-variance efficient portfolios
+based on the above optimal weights and compare them to
+a 60/40 portfolio over our sample. A 60% stock and 40%
+bond portfolio is a common investment portfolio.
+
+Our weights are sorted by `symbols`. Let's put them into a
+Map collection for easier referencing.
+*)
+
+let weights =
+    Seq.zip tickers w
+    |> Map.ofSeq
+
+(**
+Next, we'd like to get the symbol data grouped by date.
+*)
+
+let stockDataByDate =
+    stockData
+    |> Map.toList // Convert to array of (symbol, StockData)
+    |> List.map snd // grab only the stockData from (symbol, StockData)
+    |> List.collect id // combine all different StockData symbols into one array.
+    |> List.groupBy(fun x -> x.Date) // group all symbols on the same date together.
+    |> List.sortBy fst // sort by the grouping variable, which here is Date.
+
+(**
+Now if we look we do not have all the symbols on all the dates.
+This is because our ETFs (VTI, BND) did not start trading until later in our sample
+and our strategy ended at the end of the year, while we have stock quotes
+for VTI and BND trading recently.
+
+Compare the first month of data
+*)
+
+let firstMonth =
+    stockDataByDate 
+    |> List.head // first date group
+    |> snd // convert (date, StockData array) -> StockData array
+// look at it
+firstMonth
+(*** include-it ***)
+// How many stocks?
+firstMonth.Length
+(*** include-it ***)
+
+(**
+to the last month of data
+*)
+// Last item
+let lastMonth =
+    stockDataByDate 
+    |> List.last // last date group
+    |> snd // convert (date, StockData array) -> StockData array
+// look at it
+lastMonth
+(*** include-it ***)
+// How many stocks?
+lastMonth.Length
+(*** include-it ***)
+
+(**
+What's the first month when you have all 3 assets?
+*)
+
+let allAssetsStart =
+    stockDataByDate
+    // find the first array element where there are as many stocks as you have symbols
+    |> List.find(fun (month, stocks) -> stocks.Length = tickers.Length)
+    |> fst // convert (month, stocks) to month
+
+let allAssetsEnd =
+    stockDataByDate
+    // find the last array element where there are as many stocks as you have symbols
+    |> List.findBack(fun (month, stocks) -> stocks.Length = tickers.Length)
+    |> fst // convert (month, stocks) to month
+
+(**
+Ok, let's filter our data between those dates.
+*)
+
+let stockDataByDateComplete =
+    stockDataByDate
+    |> List.filter(fun (date, stocks) -> 
+        date >= allAssetsStart &&
+        date <= allAssetsEnd)
+
+(**
+Double check that we have all assets in all months for this data.
+*)
+
+stockDataByDateComplete
+|> List.map snd
+|> List.filter(fun x -> x.Length <> tickers.Length) // discard rows where we have all symbols.
+|> fun filteredResult -> 
+    if not (List.isEmpty filteredResult) then 
+        failwith "stockDataByDateComplete has months with missing stocks"
+
+(**
+Now let's make my mve and 60/40 ports
+
+To start, let's take a test month so that it is easy to see
+what we are doing.
+*)
+
+let testMonth =
+    stockDataByDateComplete
+    |> List.find(fun (date, stocks) -> date = allAssetsStart)
+    |> snd
+
+let testBnd = testMonth |> List.find(fun x -> x.Symbol = "BND")
+let testVti = testMonth |> List.find(fun x -> x.Symbol = "VTI")
+let testLong = testMonth |> List.find(fun x -> x.Symbol = "Long")
+
+testBnd.Return*weights.["BND"] +
+testVti.Return*weights.["VTI"] +
+testLong.Return*weights.["Long"]
+(*** include-it ***)
+
+// Or, same thing but via iterating through the weights.
+weights
+|> Map.toArray
+|> Array.map(fun (symbol, weight) ->
+    let symbolData = testMonth |> List.find(fun x -> x.Symbol = symbol)
+    symbolData.Return*weight)
+|> Array.sum    
+(*** include-it ***)
+
+(**
+Now in a function that takes weights and monthData as input
+*)
+let portfolioMonthReturn weights monthData =
+    weights
+    |> Map.toList
+    |> List.map(fun (symbol, weight) ->
+        let symbolData = 
+            // we're going to be more safe and use tryFind here so
+            // that our function is more reusable
+            match monthData |> List.tryFind(fun x -> x.Symbol = symbol) with
+            | None -> failwith $"You tried to find {symbol} in the data but it was not there"
+            | Some data -> data
+        symbolData.Return*weight)
+    |> List.sum    
+    
+portfolioMonthReturn weights testMonth
+
+(**
+Here's a thought. We just made a function that takes
+weights and a month as input. That means that it should
+work if we give it different weights.
+
+Let's try to give it 60/40 weights.
+*)
+
+let weights6040 = Map [("VTI",0.6);("BND",0.4)]
+
+weights6040.["VTI"]*testVti.Return +
+weights6040.["BND"]*testBnd.Return
+
+(*** include-it ***)
+
+(**
+Now compare to
+*)
+portfolioMonthReturn weights6040 testMonth
+(*** include-it ***)
+
+(**
+Now we're ready to make our mve and 60/40 portfolios.
+*)
+
+let portMve =
+    stockDataByDateComplete
+    |> List.map(fun (date, data) -> 
+        { Symbol = "MVE"
+          Date = date
+          Return = portfolioMonthReturn weights data })
+
+let port6040 = 
+    stockDataByDateComplete
+    |> List.map(fun (date, data) -> 
+        { Symbol = "60/40"
+          Date = date 
+          Return = portfolioMonthReturn weights6040 data} )
+
+
+(**
+It is nice to plot cumulative returns.
+*)
+
+#r "nuget: Plotly.NET, 2.0.0-beta9"
+(*** condition: ipynb ***)
+#r "nuget: Plotly.NET.Interactive, 2.0.0-beta9"
+
+(** *)
+open Plotly.NET
+
+(** 
+A function to accumulate returns.
+*)
+
+
+let cumulateReturns xs =
+    let folder prev current =
+        let newReturn = prev.Return * (1.0+current.Return)
+        { current with Return = newReturn}
+    
+    match xs with
+    | [] -> []
+    | h::t ->
+        (h, t) 
+        ||> List.scan folder
+    
+
+(**
+Ok, cumulative returns.
+*)
+let portMveCumulative = 
+    portMve
+    |> cumulateReturns
+
+let port6040Cumulative = 
+    port6040
+    |> cumulateReturns
+
+
+let chartMVE = 
+    portMveCumulative
+    |> List.map(fun x -> x.Date, x.Return)
+    |> Chart.Line
+    |> Chart.withTraceName "MVE"
+
+let chart6040 = 
+    port6040Cumulative
+    |> List.map(fun x -> x.Date, x.Return)
+    |> Chart.Line
+    |> Chart.withTraceName "60/40"
+
+let chartCombined =
+    [| chartMVE; chart6040 |]
+    |> Chart.Combine
+
+(*** condition: fsx ***)
+#if FSX
+chartCombined |> Chart.Show
+#endif // FSX
+
+(*** condition: ipynb ***)
+#if IPYNB
+chartCombined
+#endif // IPYNB
+
+(*** hide ***)
+chartCombined |> GenericChart.toChartHTML
+(*** include-it-raw ***)
+
+(**
+Those are partly going to differ because they have different volatilities.
+It we want to have a sense for which is better per unit of volatility,
+then it can make sense to normalize volatilities.
+*)
+
+(**
+First compare the MVE vol
+*)
+
+portMve
+|> List.map(fun x -> x.Return)
+|> Seq.stDev
+|> fun vol -> sqrt(12.0) * vol
+
+(*** include-it ***)
+
+(**
+To the 60/40 vol.
+*)
+
+port6040
+|> List.map(fun x -> x.Return)
+|> Seq.stDev
+|> fun vol -> sqrt(12.0)*vol
+
+(*** include-it ***)
+
+(**
+Ok, cumulative returns of the normalized vol returns.
+*)
+
+let normalize10pctVol xs =
+    let vol = xs |> List.map(fun x -> x.Return) |> Seq.stDev
+    let annualizedVol = vol * sqrt(12.0)
+    xs 
+    |> List.map(fun x -> { x with Return = x.Return * (0.1/annualizedVol)})
+
+let portMveCumulativeNormlizedVol = 
+    portMve
+    |> normalize10pctVol
+    |> cumulateReturns
+
+let port6040CumulativeNormlizedVol = 
+    port6040
+    |> normalize10pctVol 
+    |> cumulateReturns
+
+
+let chartMVENormlizedVol = 
+    portMveCumulativeNormlizedVol
+    |> List.map(fun x -> x.Date, x.Return)
+    |> Chart.Line
+    |> Chart.withTraceName "MVE"
+
+let chart6040NormlizedVol = 
+    port6040CumulativeNormlizedVol
+    |> List.map(fun x -> x.Date, x.Return)
+    |> Chart.Line
+    |> Chart.withTraceName "60/40"
+
+let chartCombinedNormlizedVol =
+    [| chartMVENormlizedVol; chart6040NormlizedVol |]
+    |> Chart.Combine
+
+(*** condition: fsx ***)
+#if FSX
+chartCombinedNormlizedVol |> Chart.Show
+#endif // FSX
+
+(*** condition: ipynb ***)
+#if IPYNB
+chartCombinedNormlizedVol
+#endif // IPYNB
+
+(*** hide ***)
+chartCombinedNormlizedVol |> GenericChart.toChartHTML
+(*** include-it-raw ***)
+
+(**
+## Key points to keep in mind.
+The mean-variance efficient portfolio will always look best in the sample period in which you estimated the weights. This is because we found it by literally looking for the portfolio with the highest sharpe ratio in that sample.
+
+A more meaningful comparison would be to estimate mean-variance efficient weights based on past data and see how those weights perform in future data. For instance, estimate weights 2000-2010, and use those weights to determine the portfolio that you're going to hold in 2011. Finally, compare it to 60/40 in 2011. That is an "out of sample" test because your test period (2011) is different from the period when the weights were estimated (2000-2010). Then repeat, always using data *before* the holding period as your training period to estimate the weights for the test holding period. 
+
+It is also important to remember that 10-20 years is not long enough to get a good estimate of a portfolio's expected return. 
+
+One way to see this is to compare equity returns 2000-2010 and 2010-2020.
+*)
+
+ff3
+|> Seq.filter(fun x -> 
+    x.Date >= DateTime(2000,1,1) &&
+    x.Date <= DateTime(2009,12,31))
+|> Seq.averageBy(fun x ->
+    12.0*x.MktRf)
+
+(*** include-it ***)
+
+ff3
+|> Seq.filter(fun x -> 
+    x.Date >= DateTime(2010,1,1) &&
+    x.Date <= DateTime(2019,12,31))
+|> Seq.averageBy(fun x ->
+    12.0*x.MktRf)
+
+(*** include-it ***)
+
+(**
+Neither of those 10-year periods is a good estimate of expected market returns.Thus it does not make sense to try forming a mean-variance efficient portfolio using the trailing 10-year period for estimating forward-looking returns.
+
+If we look at US returns 1900-2012, the data indicates that equity excess returns were about 5.5%, and bond excess returns were about 1%. Covariances over shorter periods are more reasonable, so we can use the recent sample to estimate covariances and the long sample for means.
+*)
+
+let symStockBond = [|"VTI";"BND"|]
+let covStockBond =
+    symStockBond
+    |> Array.map(fun x ->
+        symStockBond
+        |> Array.map(fun y -> getCov x y stockData))
+    |> matrix
+let meansStockBond = Vector.ofArray [| 0.055/12.0; 0.01/12.0|]
+
+let wStockBond =
+    let w' = Algebra.LinearAlgebra.SolveLinearSystem covStockBond meansStockBond
+    w' |> Vector.map(fun x -> x /  Vector.sum w')
+
+wStockBond
+(*** include-it ***)
+
+let stockBondSharpeAndSD (weights:float Vector) =
+    let sbVar = weights.Transpose * covStockBond * weights
+    let sbStDev = sqrt(12.0)*sqrt(sbVar)
+    let sbMean = 12.0 * (weights.Transpose * meansStockBond)
+    sbMean/sbStDev, sbStDev
+
+stockBondSharpeAndSD wStockBond
+(*** include-it ***)
+
+stockBondSharpeAndSD (Vector.ofArray [|0.6;0.4|])
+(*** include-it ***)

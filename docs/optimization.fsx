@@ -56,7 +56,7 @@ of bonds and very little of the tangency portfolio.
 Investors who want riskier portfolios hold little risk-free bonds and
 a lot of the tangency portfolio (or even lever the tangency portoflio). 
 
-Now one thing to keep in mind is that often you think 
+One thing to keep in mind is that often you think 
 of this as the optimal weight per security.
 But one well known problem is that trying to do this naively does not work well.
 And by naively I mean taking a stock's average return and covariances in the sample and using that to estimate optimal weights. 
@@ -115,7 +115,7 @@ let tickPrices =
     YahooFinance.PriceHistory(
         tickers,
         startDate = DateTime(2010,1,1),
-        interval = Interval.Monthly)
+        interval = Monthly)
 
 let pricesToReturns (symbol, adjPrices: list<PriceObs>) =
     adjPrices
@@ -127,6 +127,22 @@ let pricesToReturns (symbol, adjPrices: list<PriceObs>) =
           Date = today.Date 
           Return = r })
 
+let testPriceObs = 
+    tickPrices
+    |> List.filter (fun x -> x.Symbol = tickers[0])
+    |> List.truncate 4
+
+(** Looking at the results of grouping test prices by symbol. *)
+testPriceObs
+|> List.groupBy (fun x -> x.Symbol)
+
+
+(** Same but calculating return observations. *)
+testPriceObs
+|> List.groupBy (fun x -> x.Symbol)
+|> List.collect pricesToReturns
+
+(** Now for all of the price data.*)
 let tickReturns =
     tickPrices
     |> List.groupBy (fun x -> x.Symbol)
@@ -197,15 +213,10 @@ let covariances =
             getCov rowTick colTick stockData ]]
     |> matrix
 let means = 
-    stockData
-    |> Map.toList
-    |> List.map(fun (sym, xs) ->
-        sym,
-        xs |> List.averageBy(fun x -> x.Return))
-    |> List.sortBy fst
-    |> List.map snd
+    [ for ticker in tickers do 
+        stockData[ticker]
+        |> List.averageBy (fun x -> x.Return)]
     |> vector
-
 
 (**
 This solution method for finding the tangency portfolio comes from Hilliar, Grinblatt, and Titman 2nd European Edition, Example 5.3. 
@@ -220,7 +231,8 @@ In the below algebra, we solve for the portfolio that has covariances with each 
 // solve A * x = b for x
 let w' = Algebra.LinearAlgebra.SolveLinearSystem covariances means
 let w = w' |> Vector.map(fun x -> x /  Vector.sum w')
-w
+
+
 (*** include-it ***)
 
 (**

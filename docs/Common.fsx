@@ -18,11 +18,11 @@ module Secrets =
             File.ReadAllText(localPath)
                 .Replace("let tiingoKey = ","")
                 .Replace("\"","")
-        else 
+        elif File.Exists(localPath2) then
             File.ReadAllText(localPath2)
                 .Replace("let tiingoKey = ","")
                 .Replace("\"","")
-    
+        else "you don't have a key"
 
 
 type Frequency = Daily | Monthly

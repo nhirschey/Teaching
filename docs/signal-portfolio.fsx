@@ -42,6 +42,31 @@ Formatter.SetPreferredMimeTypesFor(typeof<GenericChart.GenericChart>,"text/html"
 
 
 (**
+## Load Data
+
+First, make sure that you're referencing the correct files.
+
+Here I'm assuming that you have a class folder with this `signal-exploration.ipynb` notebook and a `data` folder inside of it. The folder hierarchy would look like below where you
+have the below files and folders accessible:
+
+```code
+/class
+    Portfolio.fsx
+    Common.fsx
+    signal-portfolio.ipynb
+    /data
+        id_and_return_data.csv
+        zero_trades_252d.csv
+    
+```
+
+First, make sure that our working directory is the source file directory.
+*)
+
+let [<Literal>] ResolutionFolder = __SOURCE_DIRECTORY__
+Environment.CurrentDirectory <- ResolutionFolder
+
+(**
 ### We will use the portfolio module
 Make sure that you load this code
 *)
@@ -57,35 +82,15 @@ Make sure that this loads correctly.
 #load "Common.fsx"
 open Common
 
-(**
-## Load Data
-
-First, make sure that you're referencing the correct files.
-
-Here I'm assuming that you have a class folder with this `signal-exploration.ipynb` notebook and a `data` folder inside of it. The folder hierarchy would look like below where you
-have the below files and folders accessible:
-
-```code
-/class
-    signal-exploration.ipynb
-    /data
-        id_and_return_data.csv
-        zero_trades_252d.csv
-    
-```
-
-First, make sure that our working directory is the source file directory.
-*)
-
-let [<Literal>] ResolutionFolder = __SOURCE_DIRECTORY__
-Environment.CurrentDirectory <- ResolutionFolder
 
 (**
+### Data files
 We assume the `id_and_return_data.csv` file and the signal csv file  are in the `data` folder. In this example the signal file is `zero_trades_252d.csv`. You should replace that file name with your signal file name.
 *)
 
 let [<Literal>] IdAndReturnsFilePath = "data/id_and_return_data.csv"
 let [<Literal>] MySignalFilePath = "data/zero_trades_252d.csv"
+let strategyName = "Zero-trades"
 
 (**
 If my paths are correct, then this code should read the first few lines of the files.
@@ -352,12 +357,13 @@ let sampleMonths = getSampleMonths (startSample, endSample)
 Strategy function
 *)
 
+
 let formStrategy ym =
     ym
     |> getInvestmentUniverse
     |> doMyFilters
     |> getMySignals
-    |> assignSignalSort "Mine" 3
+    |> assignSignalSort strategyName 3
     |> List.map (giveValueWeights getMarketCap)
     |> List.map (getPortfolioReturn getSecurityReturn)  
 
@@ -376,7 +382,34 @@ let portfolios =
         sampleMonths
         |> List.collect formStrategy
 
+(** A few of the portfolio return observations.*)
+portfolios[..2]
+
+(** These portfolios were value-weighted. Can you do a version that is equal-weighted?.*)
+let giveEqualWeights (port: AssignedPortfolio): Portfolio =
+    let makePosition securityId weight : Position =
+        { SecurityId = securityId; Weight = weight }
+    
+    { FormationMonth = failwith "unimplemented"
+      PortfolioId = failwith "unimplemented"
+      Positions = failwith "unimplemented" }
+
+(** Now make the equal-weight strategy.*)
+(***do-not-eval***)
+let formEqualWeightStrategy ym =
+    ym
+    |> getInvestmentUniverse
+    |> doMyFilters
+    |> getMySignals
+    |> assignSignalSort strategyName 3
+    |> List.map giveEqualWeights
+    |> List.map (getPortfolioReturn getSecurityReturn)  
+
+let portfoliosEW = sampleMonths |> List.collect formEqualWeightStrategy
+
 (**
+## Plotting returns
+
 Common.fsx has some easy to use code to get Fama-French factors.
 We're going to use the French data to get monthly risk-free rates.
 *)
@@ -400,23 +433,25 @@ let portfolioExcessReturns =
         | Some rf -> { x with Return = x.Return - rf })
 
 (**
+### Single portfolio plot
 Let's plot the top portfolio, calling it long.
 *)
 
 let long = 
     portfolioExcessReturns 
     |> List.filter(fun x -> 
-        x.PortfolioId = Indexed {| Name = "Mine"; Index = 3 |})
+        x.PortfolioId = Indexed {| Name = strategyName; Index = 3 |})
     
 let cumulateSimpleReturn (xs: PortfolioReturn list) =
     let accumulator (priorObs:PortfolioReturn) (thisObs:PortfolioReturn) =
         let asOfNow = (1.0 + priorObs.Return)*(1.0 + thisObs.Return) - 1.0
         { thisObs with Return = asOfNow}
     // remember to make sure that your sort order is correct.
-    let head::tail = xs |> List.sortBy(fun x -> x.YearMonth)
-
-    (head, tail) 
-    ||> List.scan accumulator
+    match xs |> List.sortBy(fun x -> x.YearMonth) with
+    | [] -> []      // return empty list if the input list is empty
+    | head::tail -> // if there are observations do the calculation
+        (head, tail) 
+        ||> List.scan accumulator
 
 let longCumulative = long |> cumulateSimpleReturn
 
@@ -437,87 +472,34 @@ longCumulativeChart |> GenericChart.toChartHTML
 #endif // HTML
 (*** include-it-raw ***)
 
-(**
-We could create one normalized to have 10\% annualized volatility
-for the entire period. This isn't dynamic rebalancing. We're
-just making the whole time-series have 10% vol.
-*)
-
-let long10PctVol =
-    let longAnnualizedVol = sqrt(12.0) * (long |> Seq.stDevBy(fun x -> x.Return))
-    // now lever to have 10% vol.
-    // It works so long
-    // as we have excess returns.
-    [ for x in long do  
-        let normalizedRet = (0.1/longAnnualizedVol) * x.Return 
-        { x with Return =  normalizedRet } ]
-
-(** Check to make sure it's 10\% vol. *)
-sqrt(12.0) * (long10PctVol |> Seq.stDevBy(fun x -> x.Return)) 
-
-(** Now do the plot *)
-let longNormalizedPlot =
-    long10PctVol
-    |> cumulateSimpleReturn
-    |> List.map(fun x -> DateTime(x.YearMonth.Year,x.YearMonth.Month,1), x.Return)
-    |> Chart.Line 
-    |> Chart.withTitle "Growth of 1 Euro"
-
-(*** condition: ipynb ***)
-#if IPYNB
-longNormalizedPlot
-#endif // IPYNB
-
-(*** hide ***)
-#if HTML
-longNormalizedPlot |> GenericChart.toChartHTML
-#endif // HTML
-(*** include-it-raw ***)
-
-(** We could write a function to do the vol normalization. *)
-let normalizeToTenPct (xs:PortfolioReturn list) =
-    let annualizedVol = sqrt(12.0) * (xs |> Seq.stDevBy(fun x -> x.Return))
-    [ for monthObs in xs do 
-        let normalizedReturn = (0.1/annualizedVol) * monthObs.Return
-        { monthObs with Return = normalizedReturn } ]
-
-
-(** Check that it does all ports correctly: *)
-portfolioExcessReturns
-|> List.groupBy(fun port -> port.PortfolioId)
-|> List.map(fun (portId, xs) ->
-    let normalized = xs |> normalizeToTenPct  
-    portId,
-    sqrt(12.0)*(normalized |> Seq.stDevBy(fun x -> x.Return)))
-
-
 (** And function to do the plot *)
 let portfolioReturnPlot (xs:PortfolioReturn list) =
     xs
-    |> List.map(fun x -> DateTime(x.YearMonth.Year,x.YearMonth.Month,1), x.Return)
+    |> List.map(fun x -> x.YearMonth, x.Return)
     |> Chart.Line 
     |> Chart.withTitle "Growth of 1 Euro"
 
-(** Using the functions: *)
-let topWithFunctionsPlot =
+(** Using the function: *)
+let longWithFunctionsPlot =
     long
-    |> normalizeToTenPct
     |> cumulateSimpleReturn
     |> portfolioReturnPlot
 
 
 (*** condition: ipynb ***)
 #if IPYNB
-topWithFunctionsPlot
+longWithFunctionsPlot
 #endif // IPYNB
 
 (*** hide ***)
 #if HTML
-topWithFunctionsPlot |> GenericChart.toChartHTML
+longWithFunctionsPlot |> GenericChart.toChartHTML
 #endif // HTML
 (*** include-it-raw ***)
 
 (** 
+### Multiple portfolio plot
+
 Now let's use the functions to do a bunch of portfolios at once. 
 
 First, let's add a version of value-weighted market portfolio that
@@ -545,7 +527,7 @@ Let's also create a long-short portfolio.
 let short = 
     portfolioExcessReturns 
     |> List.filter(fun x -> 
-        x.PortfolioId = Indexed {| Name = "Mine"; Index = 1 |})
+        x.PortfolioId = Indexed {| Name = strategyName; Index = 1 |})
 
 let longShort = 
     // We'll loop through the long portfolio observations,
@@ -571,7 +553,6 @@ let combinedChart =
     |> List.groupBy(fun x -> x.PortfolioId)
     |> List.map(fun (portId, xs) ->
         xs
-        |> normalizeToTenPct
         |> cumulateSimpleReturn
         |> portfolioReturnPlot
         |> Chart.withTraceInfo (Name=portId.ToString()))

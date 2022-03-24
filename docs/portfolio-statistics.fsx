@@ -547,6 +547,7 @@ let vtiAdjPrices = [ for period in vti -> period.Date, period.AdjustedClose ]
 
 (***do-not-eval***)
 Chart.Line(vtiAdjPrices)
+
 (***hide***)
 Chart.Line(vtiAdjPrices)
 |> GenericChart.toChartHTML
@@ -567,17 +568,12 @@ from the oldest to the newest data. We can do this with `List.Sort`.
 let sortedBnd = bnd |> List.sortBy (fun x -> x.Date)
 
 (** The first three observations. *)
-(***do-not-eval***)
+
 sortedBnd[0..2]
-(***hide***)
-sortedBnd.[0..2]
 (***include-it***)
 
 (** The last 3 observations. *)
-(***do-not-eval***)
 sortedBnd[(sortedBnd.Length-3)..]
-(***hide***)
-sortedBnd.[(sortedBnd.Length-3)..]
 (***include-it***)
 
 (** 
@@ -589,33 +585,23 @@ Great, they are properly sorted. Now I want sequential pairs of data.
 (***include-it***)
 
 let sequentialBnd = bnd |> List.pairwise
-(***do-not-eval***)
+
 sequentialBnd[0]
-(***hide***)
-sequentialBnd.[0]
 (***include-it***)
-(***do-not-eval***)
+
 sequentialBnd[1]
-(***hide***)
-sequentialBnd.[1]
 (***include-it***)
 
 (**
 Take the first pair to see how to calculate returns.
 
-Extract the first and second elements of the tuple using pattern matching. *)
+Extract the first and second elements of the tuple using pattern matching.
+*)
 
-(***do-not-eval***)
 let (bndA, bndB) = sequentialBnd[0]
 bndA
-(***hide***)
-let (bndA', bndB') = sequentialBnd.[0]
-bndA'
 (***include-it***)
-(***do-not-eval***)
 bndB
-(***hide***)
-bndB'
 (***include-it***)
 
 (**
@@ -632,6 +618,7 @@ So to find the log return between two periods we can take the
 difference of the log prices (where the prices are adjusted for dividends).
 
 *)
+
 (log bndB.AdjustedClose) - (log bndA.AdjustedClose)
 (***include-it***)
 

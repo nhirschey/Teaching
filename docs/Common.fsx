@@ -1,3 +1,6 @@
+(**
+[![Script](img/badge-script.svg)]({{root}}/{{fsdocs-source-basename}}.fsx)&emsp;
+*)
 #r "nuget: FSharp.Data"
 
 open System

@@ -4,7 +4,7 @@
 title: Volatility Timing
 category: Lectures
 categoryindex: 1
-index: 2
+index: 7
 ---
 
 [![Binder](img/badge-binder.svg)](https://mybinder.org/v2/gh/nhirschey/teaching/gh-pages?filepath={{fsdocs-source-basename}}.ipynb)&emsp;
@@ -41,7 +41,7 @@ ff3 |> Seq.take 5
 
 (**
 ## Observing time-varying volatility
-One thing that can help us manage volatility is the fact that volatility tends to be somewhat persistent. By this we mean that if our risky asset is volatile today, then it is likely to be volatile tomorrow. We can observe this by plotting monthly volatility as we do below. It also means that we can use past volatility to form estimates of future volatility.
+One thing that can help us manage volatility is the fact that volatility tends to be somewhat persistent. By this we mean that if our risky asset is volatile today, then it is likely to be volatile tomorrow. We can observe this by plotting monthly volatility as we do below. It also means that we can use recent past volatility to form estimates of future volatility.
 *)
 
 #r "nuget: FSharp.Stats"
@@ -51,6 +51,13 @@ One thing that can help us manage volatility is the fact that volatility tends t
 open FSharp.Stats
 open Plotly.NET
 
+(** If returns are indepedent and identially distributed, then 
+volatitlity (standard deviation) will grow at the square root of t.
+So annual volatility is $\sqrt{252}\sigma_{daily}$.
+
+$$ \sigma^2_{[1,T]} = var(T\tilde{r})=Tvar(\tilde{r})=T\sigma^2 \rightarrow$$
+$$ \sigma_{[1,T]} = \sqrt{T}\sigma $$ 
+*)
 let annualizeDaily x = x * sqrt(252.0) * 100. 
 
 let monthlyVol =
@@ -64,9 +71,9 @@ let monthlyVol =
     |> Seq.toArray
 
 let volChart vols =
-    let getYear f = vols |> Seq.map(fun (dt:DateTime,_vol) -> dt.Year ) |> f 
-    let minYear = getYear Seq.min
-    let maxYear = getYear Seq.max
+    let years = vols |> Seq.map(fun (dt:DateTime,_vol) -> dt.Year ) 
+    let minYear = years |> Seq.min
+    let maxYear = years |> Seq.max
     vols
     |> Chart.Column
     |> Chart.withMarkerStyle  (Outline = Line.init(Color = Color.fromKeyword ColorKeyword.Blue))  
@@ -79,15 +86,16 @@ let since2019VolChart =
     |> Seq.filter(fun (dt,_) -> dt >= DateTime(2019,1,1))
     |> volChart
 
+(** the full time series *)
 (***do-not-eval***)
-allVolsChart |> Chart.show
-since2019VolChart |> Chart.show
-
-
+allVolsChart
 (***hide***)
 allVolsChart |> GenericChart.toChartHTML
 (*** include-it-raw ***)
 
+(** since 2019 *)
+(***do-not-eval***)
+since2019VolChart
 (***hide***)
 since2019VolChart |> GenericChart.toChartHTML
 (*** include-it-raw ***)
@@ -108,7 +116,7 @@ $$ \sigma^2 = w_x^2 \sigma^2_x \rightarrow \sigma = w_x \sigma_x$$
 
 let leveragedVol (weight, vol) = weight * vol
 
-/// We're doing leverage in terms of weigh on the risky asset.
+/// We're doing leverage in terms of weight on the risky asset.
 /// 1 = 100%, 1.25 = 125%, etc.
 let exampleLeverages =
     [ 1.0; 1.5; 2.0 ]

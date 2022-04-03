@@ -15,7 +15,7 @@ index: 6
 #r "nuget: FSharp.Data"
 #r "nuget: DiffSharp-lite"
 
-#load "common.fsx"
+#load "Common.fsx"
 #load "YahooFinance.fsx"
 
 open System
@@ -251,6 +251,12 @@ let portMean = w.Transpose * means
 (** Annualized Sharpe ratio *)
 sqrt(12.0)*(portMean/portStDev)
 (*** include-it ***)
+
+(**
+You can use other methods for constrained optimization.
+
+https://github.com/mathnet/mathnet-numerics/blob/ab1ac92ccab575d51f6967cd785254a46210b4dd/src/Numerics.Tests/OptimizationTests/NonLinearCurveFittingTests.cs#L361
+*)
 
 (**
 ## Comparing mean-variance efficient to 60/40.

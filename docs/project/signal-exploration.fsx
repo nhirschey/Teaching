@@ -48,11 +48,14 @@ Load libraries.
 #r "nuget: FSharp.Stats"
 #r "nuget: Plotly.NET,2.0.0-preview.17"
 #r "nuget: Plotly.NET.Interactive,2.0.0-preview.17"
+#r "nuget: MathNet.Numerics"
+#r "nuget: MathNet.Numerics.FSharp"
 
 open System
 open FSharp.Data
 open FSharp.Stats
 open Plotly.NET
+open MathNet.Numerics.Statistics
 
 (*** condition: ipynb ***)
 #if IPYNB
@@ -381,7 +384,7 @@ let countMyNonMissingSignalRows (rows: list<NonMissingSignal>) =
 
 
 (**
-It can also be useful to compute percentiles of the signal. You can calculate percentils using `FSharp.Stats` quantile module.
+It can also be useful to compute percentiles of the signal. You can calculate percentils using `MathNet.Numerics.Statistics` quantile function.
 *)
 
 // 10th, 50th, and 90th percentiles
@@ -395,7 +398,7 @@ let pctlExamplesData =
 (** Compute the percentiles. *)
 let pctlExamplesComputed =    
     [ for pctl in pctlExamples do
-        Quantile.compute pctl pctlExamplesData ]
+        Statistics.quantileFunc pctlExamplesData pctl ]
 pctlExamplesComputed
 
 (**

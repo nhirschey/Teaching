@@ -1,4 +1,16 @@
 (**
+---
+title: Performance Evaluation
+category: Lectures
+categoryindex: 1
+index: 7
+---
+
+[![Binder](img/badge-binder.svg)](https://mybinder.org/v2/gh/nhirschey/teaching/gh-pages?filepath={{fsdocs-source-basename}}.ipynb)&emsp;
+[![Script](img/badge-script.svg)]({{root}}/{{fsdocs-source-basename}}.fsx)&emsp;
+[![Notebook](img/badge-notebook.svg)]({{root}}/{{fsdocs-source-basename}}.ipynb)
+
+
 # Performance evaluation
 
 We're going to evaluate portfolio performance. The common way to do this is to estimate a portfolio's return adjusted for risk using a factor model with tradeable risk factors. 
@@ -26,10 +38,12 @@ The APT way of thinking is less restrictive than economically motivated equilibr
 #r "nuget: FSharp.Data"
 
 #load "Common.fsx"
+#load "YahooFinance.fsx"
 
 open System
 open FSharp.Data
 open Common
+open YahooFinance
 
 open FSharp.Stats
 
@@ -44,31 +58,9 @@ let ff3 = French.getFF3 Frequency.Monthly
 (**
 Let's get a portfolio to analyze.
 *)
-let myFactorPorts = CsvProvider<"myExcessReturnPortfolios.csv",
-                                ResolutionFolder = __SOURCE_DIRECTORY__>.GetSample()
-
-
-(**
-Let's start with our long-short portfolio.
-*)
-
-let long = myFactorPorts.Rows |> Seq.filter(fun row -> row.PortfolioName = "Mine" && row.Index = Some 3)
-let short = myFactorPorts.Rows |> Seq.filter(fun row -> row.PortfolioName = "Mine" && row.Index = Some 1)
 
 type Return = { YearMonth : DateTime; Return : float }
-let longShort =
-    // this is joining long to short by YearMonth:DateTime
-    let shortMap = short |> Seq.map(fun row -> row.YearMonth, row) |> Map
-    long
-    |> Seq.map(fun longObs -> 
-        match Map.tryFind longObs.YearMonth shortMap with
-        | None -> failwith "probably your date variables are not aligned"
-        | Some shortObs -> { YearMonth = longObs.YearMonth; Return = longObs.Ret - shortObs.Ret })
-    |> Seq.toArray    
         
-#load "YahooFinance.fsx"
-
-open YahooFinance
 
 let vbr = 
     YahooFinance.PriceHistory("VBR",

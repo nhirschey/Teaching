@@ -7,5 +7,6 @@ output
 secrets.*
 data-cache
 */*FootballPlayers.csv
+docs/*.csv
 docs/data
 docs/project/data

@@ -386,6 +386,7 @@ let portfolios =
 portfolios[..2]
 
 (** These portfolios were value-weighted. Can you do a version that is equal-weighted?.*)
+
 let giveEqualWeights (port: AssignedPortfolio): Portfolio =
     let makePosition securityId weight : Position =
         { SecurityId = securityId; Weight = weight }
@@ -405,7 +406,8 @@ let formEqualWeightStrategy ym =
     |> List.map giveEqualWeights
     |> List.map (getPortfolioReturn getSecurityReturn)  
 
-let portfoliosEW = sampleMonths |> List.collect formEqualWeightStrategy
+
+///let portfoliosEW = sampleMonths |> List.collect formEqualWeightStrategy
 
 (**
 ## Plotting returns

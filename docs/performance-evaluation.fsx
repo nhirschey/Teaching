@@ -49,6 +49,23 @@ open FSharp.Stats
 
 Environment.CurrentDirectory <- __SOURCE_DIRECTORY__
 
+
+(*** condition: fsx ***)
+#if FSX
+fsi.AddPrinter<DateTime>(fun dt -> dt.ToString("s"))
+fsi.AddPrinter<YearMonth>(fun ym -> $"{ym.Year}-{ym.Month}")
+#endif // FSX
+
+(*** condition: ipynb ***)
+#if IPYNB
+// Set dotnet interactive formatter to plaintext
+Formatter.Register(fun (x:obj) (writer: TextWriter) -> fprintfn writer "%120A" x )
+Formatter.SetPreferredMimeTypesFor(typeof<obj>, "text/plain")
+// Make plotly graphs work with interactive plaintext formatter
+Formatter.SetPreferredMimeTypesFor(typeof<GenericChart.GenericChart>,"text/html")
+#endif // IPYNB
+
+
 (**
 We get the Fama-French 3-Factor asset pricing model data.
 *)
@@ -93,7 +110,7 @@ let ff3ByMonth =
     |> Array.map(fun x -> DateTime(x.Date.Year, x.Date.Month,1), x)
     |> Map
 
-let longShortRegData =
+let regData =
     vbr 
     |> Array.map(fun port ->
         let monthToFind = DateTime(port.YearMonth.Year,port.YearMonth.Month,1)
@@ -101,7 +118,7 @@ let longShortRegData =
         | None -> failwith "probably you messed up your days of months"
         | Some ff3 -> 
             { Date = monthToFind
-              Portfolio = port.Return
+              Portfolio = port.Return - ff3.Rf
               MktRf = ff3.MktRf 
               Hml = ff3.Hml 
               Smb = ff3.Smb })
@@ -116,20 +133,20 @@ let annualizeMonthlySharpe monthlySharpe = sqrt(12.0) * monthlySharpe
     
 
 (** Our portfolio. *)
-longShortRegData
+regData
 |> Array.map (fun x -> x.Portfolio)
 |> sharpe
 |> annualizeMonthlySharpe
 
 
 (** The market. *)
-longShortRegData
+regData
 |> Array.map (fun x -> x.MktRf)
 |> sharpe
 |> annualizeMonthlySharpe
 
 (** The HML factor. *)
-longShortRegData
+regData
 |> Array.map (fun x -> x.Hml)
 |> sharpe
 |> annualizeMonthlySharpe
@@ -177,12 +194,12 @@ let fitModel (x: (float array) array, y: float array) =
       R2 = r2 }
 
 let capmModelData = 
-    longShortRegData
+    regData
     |> Array.map(fun obs -> [|obs.MktRf|], obs.Portfolio)
     |> Array.unzip 
 
 let ff3ModelData = 
-    longShortRegData
+    regData
     |> Array.map(fun obs -> [|obs.MktRf; obs.Hml; obs.Smb |], obs.Portfolio)
     |> Array.unzip
 

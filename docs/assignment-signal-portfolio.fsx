@@ -1,6 +1,6 @@
 (**
 ---
-title: Signal Portfolio Assignment
+title: Signal Portfolio
 category: Assignments
 categoryindex: 1
 index: 6

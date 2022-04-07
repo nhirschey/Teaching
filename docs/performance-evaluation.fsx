@@ -137,19 +137,21 @@ regData
 |> Array.map (fun x -> x.Portfolio)
 |> sharpe
 |> annualizeMonthlySharpe
-
+(***include-output***)
 
 (** The market. *)
 regData
 |> Array.map (fun x -> x.MktRf)
 |> sharpe
 |> annualizeMonthlySharpe
+(***include-output***)
 
 (** The HML factor. *)
 regData
 |> Array.map (fun x -> x.Hml)
 |> sharpe
 |> annualizeMonthlySharpe
+(***include-output***)
 
 (**
 [Accord.NET](http://accord-framework.net/) is a .NET (C#/F#/VB.NET) machine learning library. 

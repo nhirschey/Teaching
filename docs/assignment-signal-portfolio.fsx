@@ -107,6 +107,7 @@ IO.File.ReadLines(MySignalFilePath) |> Seq.truncate 5
 I will put all this prep code in one block so that it is easy to run.
 *)
 
+(***do-not-eval***)
 /// Type for Id and returns csv data
 type IdAndReturnsType = 
     CsvProvider<Sample=IdAndReturnsFilePath,

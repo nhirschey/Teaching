@@ -406,8 +406,21 @@ let formEqualWeightStrategy ym =
     |> List.map giveEqualWeights
     |> List.map (getPortfolioReturn getSecurityReturn)  
 
+(**
+If you have defined `giveEqualWeights` above then 
+you can calculate equal weight portfolios with
 
-///let portfoliosEW = sampleMonths |> List.collect formEqualWeightStrategy
+```fsharp
+let portfoliosEW = sampleMonths |> List.collect formEqualWeightStrategy
+```
+*)
+
+(***hide***)
+let portfoliosEW =
+    try  
+        sampleMonths |> List.collect formEqualWeightStrategy
+    with 
+        | _ -> printfn "Error: you probably need to define giveEqualWeights"; []
 
 (**
 ## Plotting returns
@@ -598,4 +611,4 @@ let csvRows =
     |> List.map makePortfolioReturnCsvRow
 
 let csv = new PortfolioReturnCsv(csvRows)
-csv.Save("myExcessReturnPortfolios.csv")
+csv.Save("data/myExcessReturnPortfolios.csv")

@@ -118,7 +118,8 @@ vbrChart
 
 (***condition:html,hide***)
 vbrChart
-|> GenericChart.toChartHtml
+|> GenericChart.toChartHTML
+(*** include-it-raw ***)
 
 (**
 For regression, it is helpful to have the portfolio

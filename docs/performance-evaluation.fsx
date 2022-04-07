@@ -116,7 +116,12 @@ let vbrChart =
 vbrChart
 #endif // IPYNB
 
-(***condition:html,hide***)
+(***condition:fsx***)
+#if FSX
+vbrChart |> Chart.show
+#endif // FSX
+
+(***hide***)
 vbrChart
 |> GenericChart.toChartHTML
 (*** include-it-raw ***)

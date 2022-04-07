@@ -96,13 +96,16 @@ let vbr =
 
 (** A function to accumulate simple returns. *)
 let cumulativeReturn (xs: seq<DateTime * float>) =
-    let h::t = xs |> Seq.sortBy fst |> Seq.toList
     /// cr0 is a cumulative return through dt0.
     /// r1 is the return only for period dt1.
     let accumulate (dt0, cr0) (dt1, r1) =
         let cr1 = (1.0 + cr0) * (1.0 + r1) - 1.0
         (dt1, cr1)
-    (h, t) ||> List.scan accumulate    
+    let l = xs |> Seq.sortBy fst |> Seq.toList
+    match l with
+    | [] -> []
+    | h::t ->
+        (h, t) ||> List.scan accumulate    
 
 (** Plot of vbr cumulative return. *)
 let vbrChart =

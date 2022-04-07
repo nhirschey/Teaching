@@ -36,6 +36,8 @@ The APT way of thinking is less restrictive than economically motivated equilibr
 
 #r "nuget: FSharp.Stats"
 #r "nuget: FSharp.Data"
+#r "nuget: Plotly.NET, 2.0.0-preview.17"
+#r "nuget: Plotly.NET, 2.0.0-preview.17"
 
 #load "Common.fsx"
 #load "YahooFinance.fsx"
@@ -46,6 +48,7 @@ open Common
 open YahooFinance
 
 open FSharp.Stats
+open Plotly.NET
 
 Environment.CurrentDirectory <- __SOURCE_DIRECTORY__
 
@@ -90,6 +93,32 @@ let vbr =
         { YearMonth = DateTime(today.Date.Year,today.Date.Month,1)
           Return = today.AdjustedClose/yesterday.AdjustedClose - 1.0 })
     |> List.toArray
+
+(** A function to accumulate simple returns. *)
+let cumulativeReturn (xs: seq<DateTime * float>) =
+    let h::t = xs |> Seq.sortBy fst |> Seq.toList
+    /// cr0 is a cumulative return through dt0.
+    /// r1 is the return only for period dt1.
+    let accumulate (dt0, cr0) (dt1, r1) =
+        let cr1 = (1.0 + cr0) * (1.0 + r1) - 1.0
+        (dt1, cr1)
+    (h, t) ||> List.scan accumulate    
+
+(** Plot of vbr cumulative return. *)
+let vbrChart =
+    vbr
+    |> Array.map (fun x -> x.YearMonth, x.Return)
+    |> cumulativeReturn
+    |> Chart.Line
+
+(***condition:ipynb***)
+#if IPYNB
+vbrChart
+#endif // IPYNB
+
+(***condition:html,hide***)
+vbrChart
+|> GenericChart.toChartHtml
 
 (**
 For regression, it is helpful to have the portfolio

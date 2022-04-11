@@ -29,16 +29,18 @@ As a start, let's acquire a long daily time series on aggregate US market return
 open System
 open FSharp.Data
 open Common
+open Common.French
 
-let ff3 = French.getFF3 Frequency.Daily
+let ff3 = 
+    French.getFF3 Frequency.Daily 
+    |> Array.toList
         
 (***condition:FSX***)
 #if FSX
 fsi.AddPrinter<DateTime>(fun dt -> dt.ToString("s"))
 #endif // FSX
 
-(** Look at a few observations. *)
-ff3 |> Seq.take 5
+ff3 |> List.take 5
 
 (**
 ## Observing time-varying volatility
@@ -63,18 +65,17 @@ let annualizeDaily x = x * sqrt(252.0) * 100.
 
 let monthlyVol =
     ff3
-    |> Seq.sortBy(fun x -> x.Date)
-    |> Seq.groupBy(fun x -> x.Date.Year, x.Date.Month)
-    |> Seq.map(fun (_ym, xs) -> 
-        let dt = xs |> Seq.last |> fun x -> x.Date
+    |> List.sortBy(fun x -> x.Date)
+    |> List.groupBy(fun x -> x.Date.Year, x.Date.Month)
+    |> List.map(fun (_ym, xs) -> 
+        let dt = xs |> List.last |> fun x -> x.Date
         let annualizedVolPct = xs |> stDevBy(fun x -> x.MktRf) |> annualizeDaily
         dt, annualizedVolPct)
-    |> Seq.toArray
 
 let volChart vols =
-    let years = vols |> Seq.map(fun (dt:DateTime,_vol) -> dt.Year ) 
-    let minYear = years |> Seq.min
-    let maxYear = years |> Seq.max
+    let years = vols |> List.map(fun (dt:DateTime,_vol) -> dt.Year ) 
+    let minYear = years |> List.min
+    let maxYear = years |> List.max
     vols
     |> Chart.Column
     |> Chart.withMarkerStyle  (Outline = Line.init(Color = Color.fromKeyword ColorKeyword.Blue))  
@@ -84,7 +85,7 @@ let volChart vols =
 let allVolsChart = volChart monthlyVol
 let since2019VolChart = 
     monthlyVol 
-    |> Seq.filter(fun (dt,_) -> dt >= DateTime(2019,1,1))
+    |> List.filter(fun (dt,_) -> dt >= DateTime(2019,1,1))
     |> volChart
 
 (** the full time series *)
@@ -115,7 +116,7 @@ If one asset is the risk free asset (borrowing a risk-free bond), then this asse
 $$ \sigma^2 = w_x^2 \sigma^2_x \rightarrow \sigma = w_x \sigma_x$$ 
 *)
 
-let leveragedVol (weight, vol) = weight * vol
+let leveragedVol (weight: float, vol: float) = weight * vol
 
 /// We're doing leverage in terms of weight on the risky asset.
 /// 1 = 100%, 1.25 = 125%, etc.
@@ -124,23 +125,23 @@ let exampleLeverages =
 
 let rollingVolSubset =
     monthlyVol
-    |> Seq.filter(fun (dt, vol) -> dt > DateTime(2020,1,1))
+    |> List.filter(fun (dt, vol) -> dt > DateTime(2020,1,1))
 
 // Let's take each of the leverages and map a function to them.
 // The function takes a leverage as input, and the output is
 // a tuple of (leverage, leveraged volatilities)
 let exampleLeveragedVols =
     exampleLeverages
-    |> Seq.map(fun leverage ->
+    |> List.map(fun leverage ->
         let leveragedVols =
             rollingVolSubset
-            |> Seq.map(fun (dt, vol) -> 
+            |> List.map(fun (dt, vol) -> 
                 dt, leveragedVol(leverage, vol))
         leverage, leveragedVols)
 
 let exampleLeveragesChart =
     exampleLeveragedVols
-    |> Seq.map(fun (leverage, leveragedVols) ->
+    |> List.map(fun (leverage, leveragedVols) ->
         Chart.Line(leveragedVols,Name= $"Levarage of {leverage}"))
     |> Chart.combine
 
@@ -174,9 +175,6 @@ let ret = 0.15m
 let result = (invest + borrow)*(1.0m+ret)-borrow
 result = 1.0m + ret * (invest + borrow)/invest
 
-let leveredReturn leverage (x : French.FF3Obs ) = leverage * x.MktRf
-
-
 (**
 ## Calculating cumulative returns
 We can illustrate this with cumulative return plots. Let's first show a simple example for how we can calculate cumulative returns.
@@ -184,11 +182,11 @@ We can illustrate this with cumulative return plots. Let's first show a simple e
 Imagine that you invest \$1 at a 10% return. What do you have after n years?
 *)
 
-[| 1.0 .. 5.0 |]
-|> Array.map(fun years -> 1.0*(1.1**years))
+[ 1.0 .. 5.0 ]
+|> List.map(fun years -> 1.0*(1.1**years))
 
 (** But what if we have the data like this?*)
-[| for i = 1 to 5 do 0.1 |]
+[ for i = 1 to 5 do 0.1 ]
 
 (** For this, we could use functions that operate by threading an accumulator through a collection: [fold](https://fsharp.github.io/fsharp-core-docs/reference/fsharp-collections-arraymodule.html#fold) and [scan](https://fsharp.github.io/fsharp-core-docs/reference/fsharp-collections-arraymodule.html#scan). The website [www.fsharpforfunandprofit.com](https://fsharpforfunandprofit.com/posts/list-module-functions/#14) has a good discussion of the various module functions. We could use `fold` to return a final cumulative return or `scan` to return intermediate and final cumulative returns.
 
@@ -331,20 +329,20 @@ List.scan (fun acc (x: MapFoldInputRecord) -> {x with Return = (1.0+acc.Return) 
 (** Now we know how to calculate cumulative returns on our real data.*)
 
 let since2020 = 
-    ff3 |> Seq.filter(fun x -> x.Date >= DateTime(2020,1,1))
+    ff3 |> List.filter(fun x -> x.Date >= DateTime(2020,1,1))
     
 let cumulativeReturnEx =
-    let mapping inCumRet (x: French.FF3Obs) = 
-        let outCumRet = inCumRet * (1.0 + x.MktRf)
-        { x with MktRf = outCumRet - 1.0}, outCumRet
-    
-    (1.0, since2020)
-    ||> Seq.mapFold mapping 
-    |> fst
+    let accReturn (priorObs: FF3Obs) (currentObs: FF3Obs) = 
+        let outCumRet = (1.0 + priorObs.MktRf) * (1.0 + currentObs.MktRf) - 1.0
+        { currentObs with MktRf = outCumRet }
+    match since2020 with
+    | [] -> []
+    | h::t ->
+        (h, t) ||> List.scan accReturn
 
 let cumulativeReturnExPlot =
     cumulativeReturnEx
-    |> Seq.map(fun x -> x.Date.Date, x.MktRf)
+    |> List.map(fun x -> x.Date.Date, x.MktRf)
     |> Chart.Line
 
 (***do-not-eval***)
@@ -357,15 +355,14 @@ cumulativeReturnExPlot |> GenericChart.toChartHTML
 (** Let's try leverage with daily rebalancing (each day we take leverage of X).*)
 
 let getLeveragedReturn leverage =
-    let mapping inCumRet x = 
-        let lr = leveredReturn leverage x
-        let outCumRet = inCumRet * (1.0 + lr)
-        { x with MktRf = outCumRet - 1.0}, outCumRet
-    
-    (1.0, since2020)
-    ||> Seq.mapFold mapping 
-    |> fst
-    |> Seq.map(fun x -> x.Date.Date, x.MktRf)
+    match since2020 |> List.map (fun x -> x.Date, x.MktRf) with
+    | [] -> []
+    | h::t ->
+        (h, t)
+        ||> List.scan (fun (dt0, cr0) (dt1, r1) ->
+            let lr = leverage * r1
+            let cr1 = (1.0 + cr0)*(1.0 + lr) - 1.0
+            dt1, cr1)
 
 let exampleLeveragedReturnChart = 
     exampleLeverages
@@ -390,11 +387,11 @@ Let's start by creating a dataset that has the past 22 days as a training period
 
 let dayWithTrailing =
     ff3 
-    |> Seq.sortBy(fun x -> x.Date)
-    |> Seq.windowed 23
-    |> Seq.map(fun xs ->
-        let train = xs |> Array.take (xs.Length-1)
-        let test = xs |> Array.last
+    |> List.sortBy(fun x -> x.Date)
+    |> List.windowed 23
+    |> List.map(fun xs ->
+        let train = xs |> List.take (xs.Length-1)
+        let test = xs |> List.last
         train, test)
 
 (*
@@ -407,8 +404,8 @@ open Correlation
 
 let trainVsTest =
     dayWithTrailing
-    |> Seq.map(fun (train, test) ->
-        let trainSd = train |> Seq.stDevBy(fun x -> x.MktRf)
+    |> List.map(fun (train, test) ->
+        let trainSd = train |> stDevBy(fun x -> x.MktRf)
         let testSd = abs(test.MktRf)
         annualizeDaily trainSd, annualizeDaily testSd)
 
@@ -416,8 +413,8 @@ let trainVsTest =
 // Plot a sample of 1_000 points
 let trainVsTestChart =
     trainVsTest
-    |> Seq.splitInto 1_000 // 1000 groups of train, test
-    |> Seq.map Seq.head // get the observation at the start of each group
+    |> List.splitInto 1_000 // 1000 groups of train, test
+    |> List.map Seq.head // get the observation at the start of each group
     |> Chart.Point
    
 
@@ -430,7 +427,6 @@ trainVsTestChart |> GenericChart.toChartHTML
 
 let trainPdSd, testPdSd = 
     trainVsTest 
-    |> Seq.toList
     |> List.unzip
 Seq.pearson trainPdSd testPdSd
 
@@ -442,18 +438,18 @@ Then we'll see if this sorts actual realized volatility. Think of this as splitt
 *)
 
 dayWithTrailing
-|> Seq.sortBy(fun (train, _test) -> train |> stDevBy(fun x -> x.MktRf))
-|> Seq.splitInto 5
-|> Seq.iter(fun xs ->
+|> List.sortBy(fun (train, _test) -> train |> stDevBy(fun x -> x.MktRf))
+|> List.splitInto 5
+|> List.iter(fun xs ->
     
     let predicted = 
         xs 
-        |> Array.collect fst
+        |> List.collect fst
         |> stDevBy (fun x -> x.MktRf)
         |> annualizeDaily
     let actual = 
         xs 
-        |> Array.map(fun (_train, test) -> test.MktRf)
+        |> List.map(fun (_train, test) -> test.MktRf)
         |> stDev 
         |> annualizeDaily
     printfn $"N: {xs.Length}, Predicted: %.1f{predicted}, Actual: %.1f{actual}")
@@ -483,7 +479,7 @@ type VolPosition =
 
 let targetted =
     dayWithTrailing
-    |> Seq.map(fun (train,test) -> 
+    |> List.map(fun (train,test) -> 
         let predicted = train |> stDevBy(fun x -> x.MktRf) |> annualizeDaily
         let w = (15.0/predicted)
         { Date = test.Date
@@ -492,16 +488,16 @@ let targetted =
 
 let targettedSince2019 = 
     targetted
-    |> Seq.filter(fun x -> x.Date >= DateTime(2019,1,1) )
-    |> Seq.groupBy(fun x -> x.Date.Year, x.Date.Month)
-    |> Seq.map(fun (_, xs) -> 
-        xs |> Seq.map(fun x -> x.Date) |> Seq.max,
+    |> List.filter(fun x -> x.Date >= DateTime(2019,1,1) )
+    |> List.groupBy(fun x -> x.Date.Year, x.Date.Month)
+    |> List.map(fun (_, xs) -> 
+        xs |> List.map(fun x -> x.Date) |> List.max,
         xs |> stDevBy(fun x -> x.Return) |> annualizeDaily) 
     |> volChart 
     |> Chart.withTraceInfo(Name="Managed")
 let rawSince2019 =
     monthlyVol
-    |> Seq.filter(fun (dt,_) -> dt >= DateTime(2019,1,1))
+    |> List.filter(fun (dt,_) -> dt >= DateTime(2019,1,1))
     |> volChart
     |> Chart.withTraceInfo(Name="Unmangaged")
 
@@ -551,7 +547,7 @@ let leverageLimit = 1.3
 
 let sampleStdDev = 
     dayWithTrailing 
-    |> Seq.stDevBy(fun (train, test) -> test.MktRf)
+    |> stDevBy(fun (train, test) -> test.MktRf)
     |> annualizeDaily
 
 let buyHoldWeight predictedStdDev = 1.0
@@ -565,7 +561,7 @@ let inverseStdDevNoLeverageLimit predictedStdDev =
 
 let getManaged weightFun =
     dayWithTrailing
-    |> Seq.map(fun (train,test) -> 
+    |> List.map(fun (train,test) -> 
         let predicted = train |> stDevBy(fun x -> x.MktRf) |> annualizeDaily
         let w = weightFun predicted
         { Date = test.Date

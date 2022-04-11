@@ -32,11 +32,12 @@ open Common
 
 let ff3 = French.getFF3 Frequency.Daily
         
-(** 
-    fsi.AddPrinter<DateTime>(fun dt -> dt.ToString("s"))
+(***condition:FSX***)
+#if FSX
+fsi.AddPrinter<DateTime>(fun dt -> dt.ToString("s"))
+#endif // FSX
 
-*)
-
+(** Look at a few observations. *)
 ff3 |> Seq.take 5
 
 (**

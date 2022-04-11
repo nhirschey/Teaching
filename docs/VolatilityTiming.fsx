@@ -326,23 +326,33 @@ List.scan (fun acc (x: MapFoldInputRecord) -> {x with Return = (1.0+acc.Return) 
     { Symbol = input.Symbol; CumulativeReturn = cumret}, cumret)
 |> fst
 
-(** Now we know how to calculate cumulative returns on our real data.*)
+(** Now we know how to calculate cumulative returns on our real data.
+
+## Managed Portfolios.
+*)
 
 let since2020 = 
     ff3 |> List.filter(fun x -> x.Date >= DateTime(2020,1,1))
-    
-let cumulativeReturnEx =
-    let accReturn (priorObs: FF3Obs) (currentObs: FF3Obs) = 
-        let outCumRet = (1.0 + priorObs.MktRf) * (1.0 + currentObs.MktRf) - 1.0
-        { currentObs with MktRf = outCumRet }
-    match since2020 with
+
+let cumulativeReturn (xs: seq<DateTime * float>) =
+    /// cr0 is a cumulative return through dt0.
+    /// r1 is the return only for period dt1.
+    let accumulate (_dt0, cr0) (dt1, r1) =
+        let cr1 = (1.0 + cr0) * (1.0 + r1) - 1.0
+        (dt1, cr1)
+    let l = xs |> Seq.sortBy fst |> Seq.toList
+    match l with
     | [] -> []
     | h::t ->
-        (h, t) ||> List.scan accReturn
+        (h, t) ||> List.scan accumulate
+        
+let cumulativeReturnEx =
+    since2020
+    |> List.map (fun x -> x.Date, x.MktRf)
+    |> cumulativeReturn
 
 let cumulativeReturnExPlot =
     cumulativeReturnEx
-    |> List.map(fun x -> x.Date.Date, x.MktRf)
     |> Chart.Line
 
 (***do-not-eval***)
@@ -355,18 +365,13 @@ cumulativeReturnExPlot |> GenericChart.toChartHTML
 (** Let's try leverage with daily rebalancing (each day we take leverage of X).*)
 
 let getLeveragedReturn leverage =
-    match since2020 |> List.map (fun x -> x.Date, x.MktRf) with
-    | [] -> []
-    | h::t ->
-        (h, t)
-        ||> List.scan (fun (dt0, cr0) (dt1, r1) ->
-            let lr = leverage * r1
-            let cr1 = (1.0 + cr0)*(1.0 + lr) - 1.0
-            dt1, cr1)
+    since2020 
+    |> List.map (fun x -> x.Date, leverage * x.MktRf)
+    |> cumulativeReturn
 
 let exampleLeveragedReturnChart = 
     exampleLeverages
-    |> Seq.map(fun lev ->
+    |> List.map(fun lev ->
         let levReturn = getLeveragedReturn lev
         Chart.Line(levReturn, Name= $"Leverage of {lev}")) 
     |> Chart.combine
@@ -380,7 +385,7 @@ exampleLeveragedReturnChart |> GenericChart.toChartHTML
 
 (**
 ## Predicting volatility
-To manage or target volatility, we need to be able to predict volatility. A simple model would be to use past volatility to predict future volatility. How well does this work?
+To manage or target volatility, we need to be able to predict volatility. A simple model would be to use past sample volatility to predict future volatility. How well does this work?
 
 Let's start by creating a dataset that has the past 22 days as a training period and the 23rd day as a test period. We'll look at how volatility the past 22 days predicts volatility on the 23rd day.
 *)
@@ -394,6 +399,18 @@ let dayWithTrailing =
         let test = xs |> List.last
         train, test)
 
+(**
+This is a list of tuples where the first thing is the 22-day training dataset and the second thing is the 23rd day that we use as the test data.
+
+*)
+let (exTrainData, exTestData) = dayWithTrailing[0]
+
+(** Look at the training data.*)
+exTrainData
+
+(** Look at the testData. *)
+exTestData
+
 (*
 One way to do this is to look at the correlation between volatilities. What is the correlation between volatility the past 22 days (training observations) and volatility on the 23rd day (test observation)? 
 
@@ -403,58 +420,43 @@ How do we measure volatility that last (23rd) day? You can't calculate a standar
 open Correlation
 
 let trainVsTest =
-    dayWithTrailing
-    |> List.map(fun (train, test) ->
+    [ for (train, test) in dayWithTrailing do 
         let trainSd = train |> stDevBy(fun x -> x.MktRf)
         let testSd = abs(test.MktRf)
-        annualizeDaily trainSd, annualizeDaily testSd)
+        annualizeDaily trainSd, annualizeDaily testSd ]
 
 
-// Plot a sample of 1_000 points
-let trainVsTestChart =
-    trainVsTest
-    |> List.splitInto 1_000 // 1000 groups of train, test
-    |> List.map Seq.head // get the observation at the start of each group
-    |> Chart.Point
-   
-
-(***do-not-eval***)
-trainVsTestChart |> Chart.show
-
-(***hide***)
-trainVsTestChart |> GenericChart.toChartHTML
-(***include-it-raw***)
-
-let trainPdSd, testPdSd = 
-    trainVsTest 
-    |> List.unzip
-Seq.pearson trainPdSd testPdSd
+trainVsTest 
+|> Seq.pearsonOfPairs
 
 (*** include-it ***)
 
 (*
-Another way is to try sorting days into 5 groups based on trailing 22-day volatility. 
-Then we'll see if this sorts actual realized volatility. Think of this as splitting the points in the above chart into 5 groups along the x-axis and comparing the typical x-axis value to the typical y-axis value.
+Another way is to try sorting days into 20 groups based on trailing 22-day volatility. 
+Then we'll see if this sorts actual realized volatility. Think of this as splitting days into 20 groups along the x-axis and comparing the typical x-axis value to the typical y-axis value.
 *)
 
-dayWithTrailing
-|> List.sortBy(fun (train, _test) -> train |> stDevBy(fun x -> x.MktRf))
-|> List.splitInto 5
-|> List.iter(fun xs ->
-    
-    let predicted = 
-        xs 
-        |> List.collect fst
-        |> stDevBy (fun x -> x.MktRf)
-        |> annualizeDaily
-    let actual = 
-        xs 
-        |> List.map(fun (_train, test) -> test.MktRf)
-        |> stDev 
-        |> annualizeDaily
-    printfn $"N: {xs.Length}, Predicted: %.1f{predicted}, Actual: %.1f{actual}")
+(** A bin-scatterplot. *)
 
-(***include-output***)
+let binScatterData =
+    trainVsTest
+    |> List.sortBy fst
+    |> List.splitInto 20
+    |> List.map (fun xs ->
+        let avgTrain = xs |> List.averageBy fst
+        let avgTest = xs |> List.averageBy snd
+        avgTrain, avgTest)
+
+let binScatterPlot = 
+    binScatterData
+    |> Chart.Point
+
+(***condition:fsx,do-not-eval***)
+binScatterPlot |> Chart.show
+
+(***hide***)
+binScatterPlot |> GenericChart.toChartHTML
+(***include-it-raw***)
 
 (** Even with this very simple volatility model, we seem to do a reasonable job predicting volatility. We get a decent spread.*)
 
@@ -503,11 +505,11 @@ let rawSince2019 =
 
 let weightsSince2019 = 
     targetted
-    |> Seq.filter(fun x -> x.Date >= DateTime(2019,1,1) )
-    |> Seq.groupBy(fun x -> x.Date.Year, x.Date.Month)
-    |> Seq.map(fun (_, xs) -> 
-        xs |> Seq.map(fun x -> x.Date) |> Seq.max,
-        xs |> Seq.averageBy(fun x -> x.Weight))
+    |> List.filter(fun x -> x.Date >= DateTime(2019,1,1) )
+    |> List.groupBy(fun x -> x.Date.Year, x.Date.Month)
+    |> List.map(fun (_, xs) -> 
+        xs |> List.map(fun x -> x.Date) |> Seq.max,
+        xs |> List.averageBy(fun x -> x.Weight))
     |> Chart.Line 
     |> Chart.withTraceInfo(Name="weight on the Market")
 
@@ -560,30 +562,34 @@ let inverseStdDevNoLeverageLimit predictedStdDev =
 
 
 let getManaged weightFun =
-    dayWithTrailing
-    |> List.map(fun (train,test) -> 
-        let predicted = train |> stDevBy(fun x -> x.MktRf) |> annualizeDaily
-        let w = weightFun predicted
-        { Date = test.Date
-          Return = test.MktRf * w 
-          Weight = w })
-    |> fun xs -> // Rescale to have same realized SD for
-                 // more interpretable graphs. 
-                 // Does not affect sharpe ratio
-        let sd = xs |> stDevBy(fun x -> x.Return) |> annualizeDaily
-        xs |> Seq.map(fun x -> { x with Return = x.Return * (sampleStdDev/sd)})
+    let managedReturn =
+        dayWithTrailing
+        |> List.map(fun (train,test) -> 
+            let predicted = train |> stDevBy(fun x -> x.MktRf) |> annualizeDaily
+            let w = weightFun predicted
+            { Date = test.Date
+              Return = test.MktRf * w 
+              Weight = w })
+    
+    // Rescale to have same realized SD for
+    // more interpretable graphs. 
+    // Does not affect sharpe ratio
+    let sd = managedReturn |> stDevBy(fun x -> x.Return) |> annualizeDaily
+    [ for x in managedReturn do 
+        { x with Return = x.Return * (sampleStdDev/sd)}]
 
-let accVolPortReturn (port: seq<VolPosition>) =
-    let mapper acc (x : VolPosition) =
-        let outAcc = acc * (1.0+x.Return)
-        { x with Return = outAcc }, outAcc
-    (1.0, port)
-    ||> Seq.mapFold mapper 
-    |> fst
+let accVolPortReturn (port: List<VolPosition>) =
+    port
+    |> List.map (fun x -> x.Date, x.Return)
+    |> cumulativeReturn
+    |> List.map (fun (dt, ret) ->
+        // because we will do log plot later,
+        // so return must be > 0. So make
+        // 1.0 = 0% cumulative return
+        dt, 1.0 + ret)
 
 let portChart name port  = 
     port 
-    |> Seq.map(fun x -> x.Date, x.Return)
     |> Chart.Line
     |> Chart.withTraceInfo(Name=name)
     |> Chart.withYAxis (LayoutObjects.LinearAxis.init(AxisType = StyleParam.AxisType.Log))
@@ -610,12 +616,12 @@ bhVsManagedChart |> GenericChart.toChartHTML
 [ buyHoldMktPort, "Buy-Hold Mkt"
   managedMktPort, "Managed Vol Mkt"
   managedMktPortNoLimit, "Manage Vol No Limit"]
-|> Seq.iter(fun (x, name) -> 
+|> List.iter(fun (x, name) -> 
     let mu = 
         x 
-        |> Seq.averageBy(fun x -> x.Return) 
+        |> List.averageBy(fun x -> x.Return) 
         |> fun x -> round 2 (100.0*252.0*x)
-    let sd = x |> Seq.stDevBy(fun x -> x.Return) |> annualizeDaily
+    let sd = x |> stDevBy(fun x -> x.Return) |> annualizeDaily
     printfn $"Name: %25s{name} Mean: %.2f{mu} SD: %.2f{sd} Sharpe: %.3f{round 3 (mu/sd)}")
 (***include-output***)
 

@@ -145,9 +145,10 @@ let exampleLeveragesChart =
         Chart.Line(leveragedVols,Name= $"Levarage of {leverage}"))
     |> Chart.combine
 
-(***do-not-eval***)
+(***condition:fsx,do-not-eval***)
+#if FSX
 exampleLeveragesChart |> Chart.show
-
+#endif // FSX
 (***hide***)
 exampleLeveragesChart |> GenericChart.toChartHTML
 (***include-it-raw***)
@@ -159,10 +160,10 @@ $$ r_p = \Sigma^N_{i=1} w_i r_i,$$
 where $r$ is return, $i$ indexes stocks, and $w$ is portfolio weights.
 
 So if we borrow 50% of our starting equity by getting a risk-free loan, then we have
-$$ r_{\text{levered}} = 150\% \times r_{\text{unlevevered}} - 50\% \times r_f$$
+$$ r_{\text{levered}} = 150\% \times r_{\text{unlevered}} - 50\% \times r_f$$
 
 If we put in terms of excess returns,
-$$ r_{\text{levered}} - r_f = 150\% \times (r_{\text{unlevevered}}-r_f) - 50\% \times (r_f-r_f)=150\% \times (r_{\text{unlevevered}}-r_f)$$
+$$ r_{\text{levered}} - r_f = 150\% \times (r_{\text{unlevered}}-r_f) - 50\% \times (r_f-r_f)=150\% \times (r_{\text{unlevered}}-r_f)$$
 
 So, if we work in excess returns we can just multiply unlevered excess returns by the weight. 
 
@@ -355,8 +356,15 @@ let cumulativeReturnExPlot =
     cumulativeReturnEx
     |> Chart.Line
 
-(***do-not-eval***)
+(***condition:fsx,do-not-eval***)
+#if FSX
 cumulativeReturnExPlot |> Chart.show
+#endif // FSX
+
+(***condition:ipynb***)
+#if IPYNB
+cumulativeReturnExPlot
+#endif // IPYNB
 
 (***hide***)
 cumulativeReturnExPlot |> GenericChart.toChartHTML
@@ -376,8 +384,15 @@ let exampleLeveragedReturnChart =
         Chart.Line(levReturn, Name= $"Leverage of {lev}")) 
     |> Chart.combine
 
-(***do-not-eval***)
+(***condition:fsx,do-not-eval***)
+#if FSX
 exampleLeveragedReturnChart |> Chart.show
+#endif //FSX
+
+(***condition:ipynb***)
+#if IPYNB
+exampleLeveragedReturnChart
+#endif // IPYNB
 
 (***hide***)
 exampleLeveragedReturnChart |> GenericChart.toChartHTML
@@ -411,7 +426,7 @@ exTrainData
 (** Look at the testData. *)
 exTestData
 
-(*
+(**
 One way to do this is to look at the correlation between volatilities. What is the correlation between volatility the past 22 days (training observations) and volatility on the 23rd day (test observation)? 
 
 How do we measure volatility that last (23rd) day? You can't calculate a standard deviation of returns when there is one day. You need multiple days. But we can create a pseudo 1-day standard deviation by using the absolute value of the return that last day. 
@@ -431,7 +446,7 @@ trainVsTest
 
 (*** include-it ***)
 
-(*
+(**
 Another way is to try sorting days into 20 groups based on trailing 22-day volatility. 
 Then we'll see if this sorts actual realized volatility. Think of this as splitting days into 20 groups along the x-axis and comparing the typical x-axis value to the typical y-axis value.
 *)
@@ -452,7 +467,14 @@ let binScatterPlot =
     |> Chart.Point
 
 (***condition:fsx,do-not-eval***)
+#if FSX
 binScatterPlot |> Chart.show
+#endif //FSX
+
+(***condition:ipynb***)
+#if IPYNB
+binScatterPlot
+#endif // IPYNB
 
 (***hide***)
 binScatterPlot |> GenericChart.toChartHTML
@@ -522,8 +544,15 @@ let volComparisonWithWeights =
     |> Chart.SingleStack()
 
 
-(***do-not-eval***)
+(***condition:fsx,do-not-eval***)
+#if FSX
 volComparisonWithWeights |> Chart.show
+#endif //FSX
+
+(***condition:ipynb***)
+#if IPYNB
+volComparisonWithWeights
+#endif // IPYNB
 
 (***hide***)
 volComparisonWithWeights |> GenericChart.toChartHTML
@@ -560,6 +589,40 @@ let inverseStdDevWeight predictedStdDev =
 let inverseStdDevNoLeverageLimit predictedStdDev = 
     sampleStdDev / predictedStdDev
 
+(** Some examples: *)
+let weightExampleLineChart weightFun name =
+    [ for sd in [ 5.0 .. 15.0 .. 65.0] do sd, weightFun sd ]
+    |> Chart.Line
+    |> Chart.withTraceInfo(Name=name)
+    |> Chart.withXAxisStyle(TitleText="Predicted volatility")
+    |> Chart.withYAxisStyle(TitleText="Portfolio weight")
+
+
+
+weightExampleLineChart buyHoldWeight "Buy-Hold"
+
+(** Combining: *)
+let combinedWeightChart =
+    [ weightExampleLineChart buyHoldWeight "Buy-Hold"
+      weightExampleLineChart inverseStdDevWeight "Inverse StdDev"
+      weightExampleLineChart inverseStdDevNoLeverageLimit "Inverse StdDev No Limit" ]
+    |> Chart.combine
+
+(***condition:fsx,do-not-eval***)
+#if FSX
+combinedWeightChart |> Chart.show
+#endif //FSX
+
+(***condition:ipynb***)
+#if IPYNB
+combinedWeightChart
+#endif // IPYNB
+
+(***hide***)
+combinedWeightChart |> GenericChart.toChartHTML
+(***include-it-raw***) 
+
+(** A function to construct the backtest given a weighting function. *)
 
 let getManaged weightFun =
     let managedReturn =
@@ -578,6 +641,7 @@ let getManaged weightFun =
     [ for x in managedReturn do 
         { x with Return = x.Return * (sampleStdDev/sd)}]
 
+(** Function to accumulate the returns. *)
 let accVolPortReturn (port: List<VolPosition>) =
     port
     |> List.map (fun x -> x.Date, x.Return)
@@ -588,13 +652,14 @@ let accVolPortReturn (port: List<VolPosition>) =
         // 1.0 = 0% cumulative return
         dt, 1.0 + ret)
 
+(** A function to make a chart. *)
 let portChart name port  = 
     port 
     |> Chart.Line
     |> Chart.withTraceInfo(Name=name)
     |> Chart.withYAxis (LayoutObjects.LinearAxis.init(AxisType = StyleParam.AxisType.Log))
 
-    
+(** Now making the 3 strategies. *)    
 let buyHoldMktPort = getManaged buyHoldWeight 
 let managedMktPort = getManaged inverseStdDevWeight
 let managedMktPortNoLimit = getManaged inverseStdDevNoLeverageLimit 
@@ -606,8 +671,15 @@ let bhVsManagedChart =
           managedMktPortNoLimit |> accVolPortReturn |> (portChart "Managed Vol No Limit")
           ])
 
-(***do-not-eval***)
+(***condition:fsx,do-not-eval***)
+#if FSX
 bhVsManagedChart |> Chart.show
+#endif //FSX
+
+(***condition:ipynb***)
+#if IPYNB
+bhVsManagedChart
+#endif // IPYNB
 
 (***hide***)
 bhVsManagedChart |> GenericChart.toChartHTML

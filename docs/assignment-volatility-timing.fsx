@@ -157,7 +157,7 @@ let stdDevHmlAnnualized =
 stdDevHmlAnnualized
 |> should (equalWithin 0.005) 0.098
 (**
-> **Task:** Assign the daily returns of the `Hml` factor to a value named `hml2x` that is a `list` of `ReturnObs`.
+> **Task:** Assign the daily returns of the `Hml` factor to a value named `hml` that is a `list` of `ReturnObs`.
 *)
 
 type ReturnObs = 

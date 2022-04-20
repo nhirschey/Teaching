@@ -121,7 +121,7 @@ myExcessReturnPortfolios.Rows
 type SignalPortfolioObs = 
     { Month: DateTime
       Name: string
-      Return: float }
+      ExcessReturn: float }
 let long =
     myExcessReturnPortfolios.Rows
     |> Seq.toList
@@ -129,7 +129,7 @@ let long =
     |> List.map (fun row -> 
         { Month = row.YearMonth
           Name = "Long"
-          Return = row.Ret })
+          ExcessReturn = row.Ret })
 
 let short =
     myExcessReturnPortfolios.Rows
@@ -138,7 +138,7 @@ let short =
     |> List.map (fun row -> 
         { Month = row.YearMonth
           Name = "Short"
-          Return = row.Ret })
+          ExcessReturn = row.Ret })
 
 let shortByMonth = 
     short 
@@ -154,7 +154,7 @@ let longShort =
         let s = shortByMonth[l.Month]
         { Month = l.Month
           Name = "Long-short"
-          Return = l.Return - s.Return }]
+          ExcessReturn = l.ExcessReturn - s.ExcessReturn }]
 
 (**
 ## Start of assignment

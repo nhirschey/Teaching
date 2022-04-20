@@ -130,36 +130,46 @@ vbrChart
 (*** include-it-raw ***)
 
 (**
-For regression, it is helpful to have the portfolio
-return data merged into our factor model data.
+You want to work with excess returns. If you have a zero-cost, long-short portfolio then it is already an excess return. But if you have a long portfolio such as we have with VBR, we need to convert it to an excess return.
 *)
-type RegData =
-    { Date : DateTime
-      Portfolio : float
-      MktRf : float 
-      Hml : float 
-      Smb : float }
+
+type ExcessReturn = { YearMonth: DateTime; ExcessReturn: float }
 
 // ff3 indexed by month
-// We're not doing date arithmetic, so I'll just
-// use DateTime on the 1st of the month to represent a month
 let ff3ByMonth = 
     ff3
     |> Array.map(fun x -> DateTime(x.Date.Year, x.Date.Month,1), x)
     |> Map
 
+let vbrExcess =
+    vbr
+    |> Array.map (fun x ->
+        { YearMonth = x.YearMonth
+          ExcessReturn = x.Return - ff3ByMonth[x.YearMonth].Rf } )
+
+(**
+For regression, it is helpful to have the portfolio
+return data merged into our factor model data.
+*)
+
+
+type RegData =
+    { Date : DateTime
+      /// Make sure Portfolio is an Excess Return
+      Portfolio : float
+      MktRf : float 
+      Hml : float 
+      Smb : float }
+
 let regData =
-    vbr 
-    |> Array.map(fun port ->
-        let monthToFind = DateTime(port.YearMonth.Year,port.YearMonth.Month,1)
-        match Map.tryFind monthToFind ff3ByMonth with
-        | None -> failwith "probably you messed up your days of months"
-        | Some ff3 -> 
-            { Date = monthToFind
-              Portfolio = port.Return - ff3.Rf
-              MktRf = ff3.MktRf 
-              Hml = ff3.Hml 
-              Smb = ff3.Smb })
+    vbrExcess
+    |> Array.map (fun x ->
+        let xff3 = ff3ByMonth[x.YearMonth]
+        { Date = x.YearMonth
+          Portfolio = x.ExcessReturn
+          MktRf = xff3.MktRf 
+          Hml = xff3.Hml 
+          Smb = xff3.Smb })
 
 (** One way to evaluate performance is Sharpe ratios. *)
 

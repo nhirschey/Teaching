@@ -2,7 +2,7 @@
 ---
 title: Performance Evaluation
 category: Assignments
-categoryindex: 1
+categoryindex: 2
 index: 7
 ---
 
@@ -11,10 +11,10 @@ index: 7
 [![Notebook](img/badge-notebook.svg)]({{root}}/{{fsdocs-source-basename}}.ipynb)
 
 
-|        | Student Name | Student Number  | 
-| ------ | -----------  | --------------  |
-| **1**  |              |                 |
-| **2**  |              |                 |
+| Student Name | Student Number  | 
+| -----------  | --------------  |
+| **1:**       |                 |
+| **2:**       |                 |
 
 
 **Signal Name (e.g., Book to Market):**

@@ -121,9 +121,9 @@ It takes an input x and then it adds 1 to whatever x is.
 
 let addOne x = x + 1
 
-addOne 0 // here x is 1
-addOne 1 // here x is 2
-addOne 2 // here x is 3
+addOne 0 // here x is 0
+addOne 1 // here x is 1
+addOne 2 // here x is 2
 
 // We can also chain them
 addOne (addOne (addOne 0)) // = (1 + (1 + (1 + 0)))

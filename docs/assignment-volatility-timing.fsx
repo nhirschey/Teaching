@@ -363,7 +363,7 @@ mktHmlChart |> Chart.show
 // Solution here
 
 (**
-> **Task:** Apply a constant levarage to the HML and market factors for the full sample such that the daily returns have a full-sample annualized standard deviation equal to 10%. Assign the results to values named `hml10` and `mkt10` that are lists of `ReturnObs`.
+> **Task:** Apply a constant levarage to the HML and market factors for the full sample such that the daily returns have a full-sample annualized standard deviation equal to 10%. Remember, *constant leverage* means that leverage is exactly the same every day. Assign the results to values named `hml10` and `mkt10` that are lists of `ReturnObs`.
 *)
 
 (***hide***)

@@ -190,7 +190,7 @@ hml
 |> should (equalWithin 0.0001) 0.00015
 
 (**
-> **Task:** Calculate the daily returns of the `Hml` factor with `2x` leverage applied to the portfolio every day. Assign it to a value named `hml2x` that is a `list` of `ReturnObs`.
+> **Task:** Calculate the daily returns of the `Hml` factor with a constant `2x` leverage applied to the portfolio every day. Assign it to a value named `hml2x` that is a `list` of `ReturnObs`.
 *)
 
 (***hide***)

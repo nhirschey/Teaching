@@ -52,7 +52,7 @@ When there is a risk-free rate, the efficient frontier
 of optimal portfolios is some combination of
 the tangency portfolio and the risk-free asset. 
 Investors who want safe portfolios hold a lot 
-of bonds and very little of the tangency portfolio. 
+of risk-free bonds and very little of the tangency portfolio. 
 Investors who want riskier portfolios hold little risk-free bonds and
 a lot of the tangency portfolio (or even lever the tangency portoflio). 
 
@@ -63,7 +63,7 @@ And by naively I mean taking a stock's average return and covariances in the sam
 In large part, this is because it is hard to estimate a stock's future returns.
 I know. Big shock, right?
 
-However, there are ways to do portfolio optimization that works better.
+However, there are ways to do portfolio optimization that work better.
 We can do it by creating large groups 
 of stocks with similar characteristics. 
 For example, a factor portfolio. 
@@ -597,7 +597,7 @@ chartCombinedNormlizedVol |> GenericChart.toChartHTML
 
 (**
 ## Key points to keep in mind.
-The mean-variance efficient portfolio will always look best in the sample period in which you estimated the weights. This is because we found it by literally looking for the portfolio with the highest sharpe ratio in that sample.
+The mean-variance efficient portfolio will always look like the best portfolio in the sample period in which you estimated the weights. This is because we found it by literally looking for the portfolio with the highest sharpe ratio in that sample period.
 
 A more meaningful comparison would be to estimate mean-variance efficient weights based on past data and see how those weights perform in future data. For instance, estimate weights 2000-2010, and use those weights to determine the portfolio that you're going to hold in 2011. Finally, compare it to 60/40 in 2011. That is an "out of sample" test because your test period (2011) is different from the period when the weights were estimated (2000-2010). Then repeat, always using data *before* the holding period as your training period to estimate the weights for the test holding period. 
 

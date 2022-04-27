@@ -15,6 +15,11 @@ index: 6
 #r "nuget: FSharp.Data"
 #r "nuget: DiffSharp-lite"
 
+#r "nuget: Plotly.NET, 2.0.0-preview.18"
+(*** condition: ipynb ***)
+#r "nuget: Plotly.NET.Interactive, 2.0.0-preview.18"
+
+(** *)
 #load "Common.fsx"
 #load "YahooFinance.fsx"
 
@@ -24,7 +29,8 @@ open Common
 open YahooFinance
 
 open FSharp.Stats
-
+open Plotly.NET
+open DiffSharp
 
 Environment.CurrentDirectory <- __SOURCE_DIRECTORY__
 
@@ -87,21 +93,19 @@ type StockData =
 We get the Fama-French 3-Factor asset pricing model data.
 *)
 
-let ff3 = French.getFF3 Frequency.Monthly
+let ff3 = French.getFF3 Frequency.Monthly |> Array.toList
 
 // Transform to a StockData record type.
 let ff3StockData =
     [| 
-       ff3 |> Array.map(fun x -> {Symbol="HML";Date=x.Date;Return=x.Hml})
-       ff3 |> Array.map(fun x -> {Symbol="MktRf";Date=x.Date;Return=x.MktRf})
-       ff3 |> Array.map(fun x -> {Symbol="Smb";Date=x.Date;Return=x.Smb})
-    |] |> Array.concat
+       ff3 |> List.map(fun x -> {Symbol="HML";Date=x.Date;Return=x.Hml})
+       ff3 |> List.map(fun x -> {Symbol="MktRf";Date=x.Date;Return=x.MktRf})
+       ff3 |> List.map(fun x -> {Symbol="Smb";Date=x.Date;Return=x.Smb})
+    |] |> List.concat
 
 (**
 Let's get our factor data.
 *)
-
-
 
 let tickers = 
     [ 
@@ -117,14 +121,19 @@ let tickPrices =
         startDate = DateTime(2010,1,1),
         interval = Monthly)
 
+tickPrices[..3]
+
+(**
+A function to calculate returns from Price observations
+*)
 let pricesToReturns (symbol, adjPrices: list<PriceObs>) =
     adjPrices
     |> List.sortBy (fun x -> x.Date)
     |> List.pairwise
-    |> List.map (fun (yesterday, today) ->
-        let r = (log today.AdjustedClose) - log (yesterday.AdjustedClose) 
+    |> List.map (fun (day0, day1) ->
+        let r = day1.AdjustedClose / day0.AdjustedClose - 1.0 
         { Symbol = symbol 
-          Date = today.Date 
+          Date = day1.Date 
           Return = r })
 
 let testPriceObs = 
@@ -154,7 +163,7 @@ And let's convert to excess returns
 let rf = ff3 |> Seq.map(fun x -> x.Date, x.Rf) |> Map
 
 let standardInvestmentsExcess =
-    let maxff3Date = ff3 |> Array.map(fun x -> x.Date) |> Array.max
+    let maxff3Date = ff3 |> List.map(fun x -> x.Date) |> List.max
     tickReturns
     |> List.filter(fun x -> x.Date <= maxff3Date)
     |> List.map(fun x -> 
@@ -174,8 +183,9 @@ standardInvestmentsExcess
 (*** include-fsi-output***)
 
 ff3 
-|> Array.filter(fun x -> x.Date.Year = 2021)
-|> Array.map(fun x -> x.Date.Month, round 4 x.MktRf)
+|> List.filter(fun x -> x.Date.Year = 2021)
+|> List.map(fun x -> x.Date.Month, round 4 x.MktRf)
+|> List.take 3
 (*** include-fsi-output***)
 
 (**
@@ -188,35 +198,70 @@ let stockData =
     |> Map
 
 (**
+Look at an one
+*)
+stockData["VBR"][..3]
+
+(**
 Let's create a function that calculates covariances
-for two securities.
+for two securities using mutually overlapping data.
 *)
 
-let getCov x y stockData =
-    let innerJoin xId yId =
-        let xRet = Map.find xId stockData
-        let yRet = 
-            Map.find yId stockData 
-            |> List.map(fun x -> x.Date, x) 
-            |> Map
-        xRet
-        |> List.choose(fun x ->
-            match Map.tryFind x.Date yRet with
-            | None -> None
-            | Some y -> Some (x.Return, y.Return))
-    let x, y = innerJoin x y |> List.unzip
-    Seq.cov x y
+let getCov xId yId (stockData: Map<string,StockData list>) =
+    let xRet = 
+        stockData[xId] 
+        |> List.map (fun x -> x.Date,x.Return) 
+        |> Map
+    let yRet = 
+        stockData[yId]
+        |> List.map (fun y -> y.Date, y.Return)
+        |> Map
+    let overlappingDates =
+        [ xRet.Keys |> set
+          yRet.Keys |> set]
+        |> Set.intersectMany
+    [ for date in overlappingDates do xRet[date], yRet[date]]
+    |> Seq.covOfPairs
 
+getCov "VBR" "VTI" stockData
+
+(**
+A covariance matrix.
+*)
+(***hide***)
+(*
 let covariances =
     [ for rowTick in tickers do 
         [ for colTick in tickers do
             getCov rowTick colTick stockData ]]
     |> matrix
+covariances
+*)
+
+(** *)
+let covariances =
+    [ for rowTick in tickers do 
+        [ for colTick in tickers do
+            getCov rowTick colTick stockData ]]
+    |> dsharp.tensor
+
+(**
+Mean/Average returns
+*)
+(***hide***)
+(*
 let means = 
     [ for ticker in tickers do 
         stockData[ticker]
         |> List.averageBy (fun x -> x.Return)]
     |> vector
+*)
+(** *)
+let means =
+    [ for ticker in tickers do 
+        stockData[ticker]
+        |> List.averageBy (fun x -> x.Return)]
+    |> dsharp.tensor
 
 (**
 This solution method for finding the tangency portfolio comes from Hilliar, Grinblatt, and Titman 2nd European Edition, Example 5.3. 
@@ -228,25 +273,40 @@ The solution method relies on the fact that covariance is like marginal variance
 In the below algebra, we solve for the portfolio that has covariances with each asset equal to the asset's risk premium. Then we relever to have a portfolio weight equal to 1.0 (we can relever like this because everything is in excess returns) and then we are left with the tangency portfolio.
 *)
 
+(***hide***)
+(*
 // solve A * x = b for x
 let w' = Algebra.LinearAlgebra.SolveLinearSystem covariances means
 let w = w' |> Vector.map(fun x -> x /  Vector.sum w')
+*)
 
+(** solve A * x = b for x *)
+let w' = dsharp.solve(covariances,means)
+let w = w' / w'.sum()
 
 (*** include-it ***)
 
 (**
 Portfolio variance
 *)
+(***hide***)
+(*
 let portVariance = w.Transpose * covariances * w
+*)
+(** *)
+
+let portVariance = w.matmul(covariances).matmul(w)
 
 (**
 Portfolio standard deviation
 *)
-let portStDev = sqrt(portVariance)
+let portStDev = portVariance.sqrt()
 
 (** Portfolio mean *)
-let portMean = w.Transpose * means
+let portMean = dsharp.matmul(w, means)
+
+// equivalent to
+(w * means).sum()
 
 (** Annualized Sharpe ratio *)
 sqrt(12.0)*(portMean/portStDev)
@@ -271,7 +331,7 @@ Map collection for easier referencing.
 *)
 
 let weights =
-    Seq.zip tickers w
+    Seq.zip tickers (w.toArray1D<float>())
     |> Map.ofSeq
 
 (**
@@ -279,10 +339,9 @@ Next, we'd like to get the symbol data grouped by date.
 *)
 
 let stockDataByDate =
-    stockData
-    |> Map.toList // Convert to array of (symbol, StockData)
-    |> List.map snd // grab only the stockData from (symbol, StockData)
-    |> List.collect id // combine all different StockData symbols into one array.
+    stockData.Values
+    |> Seq.toList
+    |> List.collect id // combine all different StockData symbols into one list.
     |> List.groupBy(fun x -> x.Date) // group all symbols on the same date together.
     |> List.sortBy fst // sort by the grouping variable, which here is Date.
 
@@ -298,7 +357,7 @@ Compare the first month of data
 let firstMonth =
     stockDataByDate 
     |> List.head // first date group
-    |> snd // convert (date, StockData array) -> StockData array
+    |> snd // convert (date, StockData list) -> StockData list
 // look at it
 firstMonth
 (*** include-it ***)
@@ -313,7 +372,7 @@ to the last month of data
 let lastMonth =
     stockDataByDate 
     |> List.last // last date group
-    |> snd // convert (date, StockData array) -> StockData array
+    |> snd // convert (date, StockData list) -> StockData list
 // look at it
 lastMonth
 (*** include-it ***)
@@ -351,11 +410,12 @@ let stockDataByDateComplete =
 Double check that we have all assets in all months for this data.
 *)
 
-stockDataByDateComplete
-|> List.map snd
-|> List.filter(fun x -> x.Length <> tickers.Length) // discard rows where we have all symbols.
-|> fun filteredResult -> 
-    if not (List.isEmpty filteredResult) then 
+let checkOfCompleteData =
+    stockDataByDateComplete
+    |> List.map snd
+    |> List.filter(fun x -> x.Length <> tickers.Length) // discard rows where we have all symbols.
+
+if not (List.isEmpty checkOfCompleteData) then 
         failwith "stockDataByDateComplete has months with missing stocks"
 
 (**
@@ -372,20 +432,27 @@ let testMonth =
 
 let testBnd = testMonth |> List.find(fun x -> x.Symbol = "BND")
 let testVti = testMonth |> List.find(fun x -> x.Symbol = "VTI")
-let testLong = testMonth |> List.find(fun x -> x.Symbol = "Long")
+let testVBR = testMonth |> List.find(fun x -> x.Symbol = "VBR")
 
 testBnd.Return*weights.["BND"] +
 testVti.Return*weights.["VTI"] +
-testLong.Return*weights.["Long"]
+testVBR.Return*weights.["VBR"]
 (*** include-it ***)
 
 // Or, same thing but via iterating through the weights.
 weights
-|> Map.toArray
-|> Array.map(fun (symbol, weight) ->
+|> Map.toList
+|> List.map(fun (symbol, weight) ->
     let symbolData = testMonth |> List.find(fun x -> x.Symbol = symbol)
     symbolData.Return*weight)
-|> Array.sum    
+|> List.sum
+(*** include-it ***)
+
+(** Equivalent code using an explicit loop ... *)
+[ for KeyValue(symbol, weight) in weights do
+    let symbolData = testMonth |> List.find(fun x -> x.Symbol = symbol)
+    symbolData.Return*weight]
+|> List.sum    
 (*** include-it ***)
 
 (**
@@ -450,13 +517,6 @@ let port6040 =
 It is nice to plot cumulative returns.
 *)
 
-#r "nuget: Plotly.NET, 2.0.0-beta9"
-(*** condition: ipynb ***)
-#r "nuget: Plotly.NET.Interactive, 2.0.0-beta9"
-
-(** *)
-open Plotly.NET
-
 (** 
 A function to accumulate returns.
 *)
@@ -467,10 +527,10 @@ let cumulateReturns xs =
         let newReturn = prev.Return * (1.0+current.Return)
         { current with Return = newReturn}
     
-    match xs with
+    match xs |> List.sortBy (fun x -> x.Date) with
     | [] -> []
     | h::t ->
-        (h, t) 
+        ({ h with Return = 1.0+h.Return}, t) 
         ||> List.scan folder
     
 
@@ -490,21 +550,21 @@ let chartMVE =
     portMveCumulative
     |> List.map(fun x -> x.Date, x.Return)
     |> Chart.Line
-    |> Chart.withTraceName "MVE"
+    |> Chart.withTraceInfo(Name="MVE")
 
 let chart6040 = 
     port6040Cumulative
     |> List.map(fun x -> x.Date, x.Return)
     |> Chart.Line
-    |> Chart.withTraceName "60/40"
+    |> Chart.withTraceInfo(Name="60/40")
 
 let chartCombined =
-    [| chartMVE; chart6040 |]
-    |> Chart.Combine
+    [ chartMVE; chart6040 ]
+    |> Chart.combine
 
 (*** condition: fsx ***)
 #if FSX
-chartCombined |> Chart.Show
+chartCombined |> Chart.show
 #endif // FSX
 
 (*** condition: ipynb ***)
@@ -569,21 +629,21 @@ let chartMVENormlizedVol =
     portMveCumulativeNormlizedVol
     |> List.map(fun x -> x.Date, x.Return)
     |> Chart.Line
-    |> Chart.withTraceName "MVE"
+    |> Chart.withTraceInfo(Name="MVE")
 
 let chart6040NormlizedVol = 
     port6040CumulativeNormlizedVol
     |> List.map(fun x -> x.Date, x.Return)
     |> Chart.Line
-    |> Chart.withTraceName "60/40"
+    |> Chart.withTraceInfo(Name="60/40")
 
 let chartCombinedNormlizedVol =
-    [| chartMVENormlizedVol; chart6040NormlizedVol |]
-    |> Chart.Combine
+    [ chartMVENormlizedVol; chart6040NormlizedVol ]
+    |> Chart.combine
 
 (*** condition: fsx ***)
 #if FSX
-chartCombinedNormlizedVol |> Chart.Show
+chartCombinedNormlizedVol |> Chart.show
 #endif // FSX
 
 (*** condition: ipynb ***)
@@ -630,30 +690,30 @@ Neither of those 10-year periods is a good estimate of expected market returns.T
 If we look at US returns 1900-2012, the data indicates that equity excess returns were about 5.5%, and bond excess returns were about 1%. Covariances over shorter periods are more reasonable, so we can use the recent sample to estimate covariances and the long sample for means.
 *)
 
-let symStockBond = [|"VTI";"BND"|]
+let symStockBond = ["VTI";"BND"]
 let covStockBond =
-    symStockBond
-    |> Array.map(fun x ->
-        symStockBond
-        |> Array.map(fun y -> getCov x y stockData))
-    |> matrix
-let meansStockBond = Vector.ofArray [| 0.055/12.0; 0.01/12.0|]
+    [ for x in symStockBond do
+        [ for y in symStockBond do
+            getCov x y stockData ]]
+    |> dsharp.tensor
+
+let meansStockBond = dsharp.tensor([ 0.055/12.0; 0.01/12.0])
 
 let wStockBond =
-    let w' = Algebra.LinearAlgebra.SolveLinearSystem covStockBond meansStockBond
-    w' |> Vector.map(fun x -> x /  Vector.sum w')
+    let w' = dsharp.solve(covStockBond, meansStockBond)
+    w' / w'.sum()
 
 wStockBond
 (*** include-it ***)
 
-let stockBondSharpeAndSD (weights:float Vector) =
-    let sbVar = weights.Transpose * covStockBond * weights
+let stockBondSharpeAndSD (weights:Tensor) =
+    let sbVar = weights.matmul(covStockBond).matmul(weights)
     let sbStDev = sqrt(12.0)*sqrt(sbVar)
-    let sbMean = 12.0 * (weights.Transpose * meansStockBond)
+    let sbMean = 12.0 * (weights.matmul(meansStockBond))
     sbMean/sbStDev, sbStDev
 
 stockBondSharpeAndSD wStockBond
 (*** include-it ***)
 
-stockBondSharpeAndSD (Vector.ofArray [|0.6;0.4|])
+stockBondSharpeAndSD (dsharp.tensor([0.6;0.4]))
 (*** include-it ***)

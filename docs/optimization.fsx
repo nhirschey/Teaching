@@ -97,11 +97,11 @@ let ff3 = French.getFF3 Frequency.Monthly |> Array.toList
 
 // Transform to a StockData record type.
 let ff3StockData =
-    [| 
+    [ 
        ff3 |> List.map(fun x -> {Symbol="HML";Date=x.Date;Return=x.Hml})
        ff3 |> List.map(fun x -> {Symbol="MktRf";Date=x.Date;Return=x.MktRf})
        ff3 |> List.map(fun x -> {Symbol="Smb";Date=x.Date;Return=x.Smb})
-    |] |> List.concat
+    ] |> List.concat
 
 (**
 Let's get our factor data.

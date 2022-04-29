@@ -6,10 +6,9 @@ open System
 open System.IO
 open Microsoft.ML
 open Microsoft.ML.Data
-open DiffSharp
 open DiffSharp.Data
 
-dsharp.config(device=Device.CPU)
+Environment.CurrentDirectory <- __SOURCE_DIRECTORY__
 
 /// Type representing the text to run sentiment analysis on.
 [<CLIMutable>]
@@ -106,8 +105,11 @@ let testDataView = ctx.Data.LoadFromEnumerable(imdbTestLabelled)
 // inspect
 trainingDataView.Preview(3).RowView
 
-let dataProcessPipeline = ctx.Transforms.Text.FeaturizeText("Features","Text")
+// https://docs.microsoft.com/en-us/dotnet/api/microsoft.ml.textcatalog.featurizetext?view=ml-dotnet
+let featurizerOptions = new Transforms.Text.TextFeaturizingEstimator.Options(OutputTokensColumnName = "OutputTokens")
+let dataProcessPipeline = ctx.Transforms.Text.FeaturizeText("Features",featurizerOptions,"Text")
 
+// Looking at some data
 dataProcessPipeline.Preview(trainingDataView,5).RowView
 |> Seq.iter
     (fun row ->
@@ -117,13 +119,15 @@ dataProcessPipeline.Preview(trainingDataView,5).RowView
         |> printfn "%s\n"
     )
 
-let sampleFeaturized = dataProcessPipeline.Fit(trainingDataView)
+let textTransformer = dataProcessPipeline.Fit(trainingDataView)
 
 [<CLIMutable>]
-type TransformedText = { Features: single [] }
-let samplePredictionEngine = ctx.Model.CreatePredictionEngine<Sentiment,TransformedText>(sampleFeaturized)
+type TransformedText = { Features: single []; OutputTokens : string [] }
+let textPredictionEngine = ctx.Model.CreatePredictionEngine<Sentiment,TransformedText>(textTransformer)
 
-samplePredictionEngine.Predict(imdbTrainLabelled[0])
+
+let exPrediction = textPredictionEngine.Predict(imdbTrainLabelled[0])
+exPrediction.OutputTokens
 
 dataProcessPipeline.Preview(trainingDataView,5).RowView
 |> Seq.collect (fun row ->
@@ -133,8 +137,13 @@ dataProcessPipeline.Preview(trainingDataView,5).RowView
 
 
 let trainer = 
-    ctx.BinaryClassification.Trainers
-        .FastTree(labelColumnName="Label",featureColumnName="Features")
+    ctx.BinaryClassification.Trainers.FastTree(labelColumnName="Label",featureColumnName="Features")
+    // 
+    // To do naive bayes would need to convert input data to format compatible with multi-class labels.
+    // using records like Below Datapoint instead of Sentiment
+    // type DataPoint = { Label: uint; Text: string }
+    // https://docs.microsoft.com/en-us/dotnet/api/microsoft.ml.standardtrainerscatalog.naivebayes?view=ml-dotnet
+    //ctx.MulticlassClassification.Trainers.NaiveBayes(labelColumnName="Label",featureColumnName="Features")   
 let trainingPipeline = dataProcessPipeline.Append(trainer)
 
 let trainedModel = trainingPipeline.Fit(trainingDataView)
@@ -169,4 +178,4 @@ printBinaryClassificationMetrics "IMDB-Test" metrics
 
 let options = Trainers.FastTree.FastTreeBinaryTrainer.Options()
 options.NumberOfTrees
-options.
+options.NumberOfLeaves

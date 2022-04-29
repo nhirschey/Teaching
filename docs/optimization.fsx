@@ -160,7 +160,7 @@ let tickReturns =
 (**
 And let's convert to excess returns
 *)
-let rf = ff3 |> Seq.map(fun x -> x.Date, x.Rf) |> Map
+let rf = Map [ for x in ff3 do x.Date, x.Rf ]
 
 let standardInvestmentsExcess =
     let maxff3Date = ff3 |> List.map(fun x -> x.Date) |> List.max
@@ -439,20 +439,12 @@ testVti.Return*weights.["VTI"] +
 testVBR.Return*weights.["VBR"]
 (*** include-it ***)
 
-// Or, same thing but via iterating through the weights.
-weights
-|> Map.toList
-|> List.map(fun (symbol, weight) ->
-    let symbolData = testMonth |> List.find(fun x -> x.Symbol = symbol)
-    symbolData.Return*weight)
-|> List.sum
-(*** include-it ***)
-
-(** Equivalent code using an explicit loop ... *)
+(** Or, same thing but via iterating through the weights.*)
 [ for KeyValue(symbol, weight) in weights do
     let symbolData = testMonth |> List.find(fun x -> x.Symbol = symbol)
     symbolData.Return*weight]
 |> List.sum    
+
 (*** include-it ***)
 
 (**

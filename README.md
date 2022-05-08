@@ -5,4 +5,5 @@ This site contains content used in courses taught by Nicholas Hirschey. Most mat
 
 
 [![GitHub Actions](https://github.com/nhirschey/Teaching/workflows/push-master%20main/badge.svg)](https://github.com/nhirschey/Teaching/actions?query=branch%3Amain)
+
 [![Build History](https://buildstats.info/github/chart/nhirschey/Teaching)](https://github.com/nhirschey/Teaching/actions?query=branch%3Amain)

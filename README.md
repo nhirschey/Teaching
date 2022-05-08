@@ -4,6 +4,6 @@ This site contains content used in courses taught by Nicholas Hirschey. Most mat
 # Builds
 
 
-[![GitHub Actions](https://github.com/nhirschey/Teaching/workflows/push-master%20main/badge.svg)](https://github.com/nhirschey/Teaching/actions?query=branch%3Amain)
+![GitHub Actions](https://github.com/nhirschey/Teaching/workflows/push-master/badge.svg/branch=main)
 
-[![Build History](https://buildstats.info/github/chart/nhirschey/Teaching)](https://github.com/nhirschey/Teaching/actions?query=branch%3Amain)
+![Build History](https://buildstats.info/github/chart/nhirschey/Teaching?brainch=main)(https://github.com/nhirschey/Teaching/actions?query=branch%3Amain)

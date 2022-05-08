@@ -1,7 +1,7 @@
 # Teaching
 This site contains content used in courses taught by Nicholas Hirschey. Most material is for the Data Analytics for Finance course in the masters degree program at Nova SBE.
 
-# Github Action
+# Builds
 
 GitHub Actions |
 :---: |

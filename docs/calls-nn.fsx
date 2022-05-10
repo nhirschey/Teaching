@@ -5,7 +5,19 @@ category: Lectures
 categoryindex: 1
 index: 11
 ---
+
+[![Binder](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nhirschey/teaching/blob/gh-pages/{{fsdocs-source-basename}}.ipynb)&emsp;
+[![Binder](img/badge-binder.svg)](https://mybinder.org/v2/gh/nhirschey/teaching/gh-pages?filepath={{fsdocs-source-basename}}.ipynb)&emsp;
+[![Script](img/badge-script.svg)]({{root}}/{{fsdocs-source-basename}}.fsx)&emsp;
+[![Notebook](img/badge-notebook.svg)]({{root}}/{{fsdocs-source-basename}}.ipynb)
+
 *)
+
+(*** condition: ipynb ***)
+#if IPYNB
+// Google Colab only: uncomment and run the following to install dotnet and the F# kernel
+// !bash <(curl -Ls https://raw.githubusercontent.com/gbaydin/scripts/main/colab_dotnet6.sh)
+#endif // IPYNB
 
 #r "nuget:FSharp.Stats"
 // Use lite if you're on Apple Silicon

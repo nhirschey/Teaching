@@ -35,7 +35,6 @@ open System.IO
 open System.IO.Compression
 open System.Text.Json
 open System.Net
-open System
 open FSharp.Data
 open FSharp.Stats
 open Plotly.NET
@@ -107,12 +106,6 @@ type CallFull =
     { CallId: CallId
       Header: string
       PreparedRemarks: string
-      QuestionsAndAnswers: string
-      Label: float }
-
-type CallOnlyQA =
-    { CallId: CallId
-      Header: string
       QuestionsAndAnswers: string
       Label: float }
 
@@ -329,6 +322,61 @@ cvResults
 (**
 That's actually pretty good.
 
+Let's see if there's much cost to simplifying the text feaurization pipeline. Currently we're using defaults, which uses all words and character n-grams. We have relatively few observations compared to our vocabulary size, so it might make sense to use fewer features.
+*)
+
+let textFeatureOptions =
+    // Set up word n-gram options
+    // https://docs.microsoft.com/en-us/dotnet/api/microsoft.ml.transforms.text.wordbagestimator.options?view=ml-dotnet
+    let wordOptions = new WordBagEstimator.Options()
+    wordOptions.NgramLength <- 2
+    wordOptions.MaximumNgramsCount <- [| for i = 0 to wordOptions.NgramLength-1 do 1_000 |]
+
+    // Set up stop word options
+    // https://docs.microsoft.com/en-us/dotnet/api/microsoft.ml.transforms.text.textfeaturizingestimator.options.stopwordsremoveroptions?view=ml-dotnet
+    let stopOptions = new StopWordsRemovingEstimator.Options()
+
+    // Set up char n-gram options
+    // https://docs.microsoft.com/en-us/dotnet/api/microsoft.ml.transforms.text.charbagestimator.options?view=ml-dotnet
+    let charOptions = null //new WordBagEstimator.Options()                                        
+    
+    // Set the text options
+    // https://docs.microsoft.com/en-us/dotnet/api/microsoft.ml.transforms.text.textfeaturizingestimator?view=ml-dotnet
+    let textOptions = new Transforms.Text.TextFeaturizingEstimator.Options()
+    textOptions.CharFeatureExtractor <- charOptions
+    textOptions.WordFeatureExtractor <- wordOptions
+    textOptions.StopWordsRemoverOptions <- stopOptions
+    
+    // return the text options
+    textOptions
+
+let featurizePipelineSimple = 
+    ctx.Transforms.Text
+        .FeaturizeText("Features",
+                       "Text", 
+                       options=textFeatureOptions)
+
+let treeSimple = featurizePipelineSimple.Append(treeTrainer)
+
+(**
+Now try cross-validation on the simpler example.
+*)
+let cvSimple = 
+    ctx.BinaryClassification
+        .CrossValidate(data = nq100FullSentiment, 
+                       estimator = downcastPipeline treeSimple,
+                       numberOfFolds=5,
+                       seed = 1) 
+
+cvSimple
+|> Seq.iteri (fun i x -> printfn $"Fold {i+1}: {x.Metrics.Accuracy}")
+
+cvSimple
+|> Seq.averageBy (fun  x -> x.Metrics.Accuracy)
+|> printfn "Average accuracy: %.2f%%"
+
+(* That's pretty good, and much faster that the default featurization pipeline. Let's use that going forward.
+
 Let's try a model on prepared remarks.
 *)
 
@@ -342,7 +390,7 @@ let nq100PreparedSentiment =
 let cvPreparedRemarks = 
     ctx.BinaryClassification
         .CrossValidate(data = nq100PreparedSentiment, 
-                       estimator = downcastPipeline treePipeline,
+                       estimator = downcastPipeline treeSimple,
                        numberOfFolds=5, 
                        seed = 1)
 
@@ -374,7 +422,7 @@ let nq100ExtremeSentiment =
 let cvExtreme = 
     ctx.BinaryClassification
         .CrossValidate(data = nq100ExtremeSentiment, 
-                       estimator = downcastPipeline treePipeline,
+                       estimator = downcastPipeline treeSimple,
                        numberOfFolds=5, 
                        seed = 1)
 
@@ -432,7 +480,7 @@ The finished pipeline.
 let multiPipeline =
     // Estimator chain seems to speed this up.
     EstimatorChain()
-        .Append(featurizePipeline)
+        .Append(featurizePipelineSimple)
         // for multiclass, you have to put the label in a keyvalue store
         .Append(ctx.Transforms.Conversion.MapValueToKey("Label"))
         .AppendCacheCheckpoint(ctx)
@@ -502,39 +550,3 @@ let samplePosCall: BinarySentimentInput = {
 binaryTreePredictions.Predict(samplePosCall)
 
 
-(**
-## Other areas for exploration
-
-Setting options on the text featurizer.
-*)
-
-let textFeatureOptions =
-    // Set up word n-gram options
-    // https://docs.microsoft.com/en-us/dotnet/api/microsoft.ml.transforms.text.wordbagestimator.options?view=ml-dotnet
-    let wordOptions = new WordBagEstimator.Options()
-    wordOptions.NgramLength <- 2
-    wordOptions.MaximumNgramsCount <- [| for i = 0 to wordOptions.NgramLength-1 do 1_000 |]
-
-    // Set up stop word options
-    // https://docs.microsoft.com/en-us/dotnet/api/microsoft.ml.transforms.text.textfeaturizingestimator.options.stopwordsremoveroptions?view=ml-dotnet
-    let stopOptions = new StopWordsRemovingEstimator.Options()
-
-    // Set up char n-gram options
-    // https://docs.microsoft.com/en-us/dotnet/api/microsoft.ml.transforms.text.charbagestimator.options?view=ml-dotnet
-    let charOptions = null                                        
-    
-    // Set the text options
-    // https://docs.microsoft.com/en-us/dotnet/api/microsoft.ml.transforms.text.textfeaturizingestimator.options?view=ml-dotnet
-    let textOptions = new Transforms.Text.TextFeaturizingEstimator.Options()
-    textOptions.CharFeatureExtractor <- charOptions
-    textOptions.WordFeatureExtractor <- wordOptions
-    textOptions.StopWordsRemoverOptions <- stopOptions
-    
-    // return the text options
-    textOptions
-
-let featurizePipelineCustom = 
-    ctx.Transforms.Text
-        .FeaturizeText("Features",
-                       "Text", 
-                       options=textFeatureOptions)

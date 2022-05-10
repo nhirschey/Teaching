@@ -20,14 +20,11 @@ index: 11
 #endif // IPYNB
 
 (***do-not-eval***)
-
 #r "nuget:FSharp.Stats"
 // Use lite if you're on Apple Silicon
-#r "nuget:DiffSharp-lite,1.0.7"
+//#r "nuget:DiffSharp-lite,1.0.7"
 // Use CPU if you're on Windows/Linux/Intel Mac
-//#r "nuget: DiffSharp-cpu,1.0.7"
-#r "nuget: Plotly.NET, 2.0.*"
-#r "nuget: Plotly.NET.Interactive, 2.0.*"
+#r "nuget: DiffSharp-cpu,1.0.7"
 
 open DiffSharp
 open DiffSharp.Compose
@@ -44,8 +41,6 @@ open System.Text.Json
 
 Environment.CurrentDirectory <- __SOURCE_DIRECTORY__
 
-//dsharp.config(backend=Backend.Reference,device=Device.CPU)
-dsharp.config(backend=Backend.Torch, device=Device.CPU)
 dsharp.seed(1)
 
 (*** condition: ipynb ***)
@@ -53,8 +48,6 @@ dsharp.seed(1)
 // Set dotnet interactive formatter to plaintext
 Formatter.Register(fun (x:obj) (writer: TextWriter) -> fprintfn writer "%120A" x )
 Formatter.SetPreferredMimeTypesFor(typeof<obj>, "text/plain")
-// Make plotly graphs work with interactive plaintext formatter
-Formatter.SetPreferredMimeTypesFor(typeof<GenericChart.GenericChart>,"text/html")
 #endif // IPYNB
 
 
@@ -137,21 +130,16 @@ let batchSize = 16
 let hiddenSize = 512
 let numLayers = 2
 
-(**
-By default, TextDataset uses characters in the corpus you give it.
-Just in case our train/valid texts have different characters, we'll
-make our own.
-*)
-let chars = 
-    corpus.ToCharArray() 
-    |> Array.distinct 
-    |> Array.map string 
-    |> String.concat ""
-let splitIndex = corpus.Length-2_000
-let dataset = TextDataset(corpus[..splitIndex], seqLen,chars=chars)
-let validDataset = TextDataset(corpus[splitIndex+1..], seqLen,chars=chars)
+
+(** Convert the text into tensor datasets.*)
+
+let dataset = TextDataset(corpus, seqLen)
 let loader = dataset.loader(batchSize=batchSize, shuffle=true)
-let validLoader = validDataset.loader(batchSize=batchSize, shuffle=false)
+
+(** the total number of characters in the dataset:*)
+dataset.numChars
+(** the unique characters are: *)
+dataset.chars
 
 (**
 Actual model definition
@@ -167,7 +155,9 @@ printfn "%s" (languageModel.summary())
 (***do-not-eval***)
 let modelFileName = "data/rnn_language_model_1.07.params"
 
-if false then // keep this false the first time to use a local  model.
+// You cannot load a model currently in .net notebooks.
+// You will need to use a script to load model state.
+if false then // keep this false to use a local  model.
     let modelUrl = "https://www.dropbox.com/s/zzm2lrzbwwigzc8/rnn_language_model_1.07.params?dl=1"
     download modelUrl modelFileName // downloads pre-trained model.
 
@@ -188,7 +178,7 @@ let predict (text:string) len =
     prediction
 
 (** Test a prediction.*)
-predict "Analyst Good morning. What do you see for gross margins?" 512
+predict "Analyst What do you expect for gross margins next quarter?" 512
 
 
 (**
@@ -214,30 +204,12 @@ for epoch = 1 to epochs do
         optimizer.step()
         losses.Add(float loss)
         printfn "%A Epoch: %A/%A minibatch: %A/%A loss: %A" (System.DateTime.Now - start) epoch epochs (i+1) loader.length (float loss)
-        GC.Collect()
 
         if i % validInterval = 0 then
             printfn "\nSample from language model:\n%A\n" (predict "Analyst Yes, I guess the first question," 512)
 
             languageModel.saveState2(modelFileName)
-(*
-            let validLoss =
-                let lossPerBatch =
-                    validLoader.epoch()
-                    |> Seq.map (fun (_, x, t) ->
-                        let input =  x[*,..seqLen-2]
-                        let target = t[*,1..]
-                        rnn.reset()
-                        let output = input --> languageModel
-                        let loss = dsharp.crossEntropyLoss(output, target.view(-1))
-                        loss)
-                    |> dsharp.stack
-                lossPerBatch.mean().toDouble()
-            let out = sprintf $"{System.DateTime.Now-start}, {epoch}, {i}, {float loss}\n"
-            let lossesFile = modelFileName.Replace(".params","_losses.txt")
-            if not (File.Exists(lossesFile)) then File.WriteAllText(lossesFile, "epoch,time,minibatch,loss\n")
-            File.AppendAllText(lossesFile,out) 
-            GC.Collect()
-*)
 
+        // free tensor memory, especially useful with GPU.
+        GC.Collect() 
 

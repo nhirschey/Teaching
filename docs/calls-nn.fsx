@@ -19,11 +19,13 @@ index: 11
 // !bash <(curl -Ls https://raw.githubusercontent.com/gbaydin/scripts/main/colab_dotnet6.sh)
 #endif // IPYNB
 
+(***do-not-eval***)
+
 #r "nuget:FSharp.Stats"
 // Use lite if you're on Apple Silicon
-//#r "nuget:DiffSharp-lite,1.0.7"
+#r "nuget:DiffSharp-lite,1.0.7"
 // Use CPU if you're on Windows/Linux/Intel Mac
-#r "nuget: DiffSharp-cpu,1.0.7"
+//#r "nuget: DiffSharp-cpu,1.0.7"
 #r "nuget: Plotly.NET, 2.0.*"
 #r "nuget: Plotly.NET.Interactive, 2.0.*"
 

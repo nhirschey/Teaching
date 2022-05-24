@@ -514,8 +514,8 @@ A function to accumulate returns.
 *)
 
 
-let cumulateReturns xs =
-    let folder prev current =
+let cumulateReturns (xs: list<StockData>) =
+    let folder (prev: StockData) (current: StockData) =
         let newReturn = prev.Return * (1.0+current.Return)
         { current with Return = newReturn}
     

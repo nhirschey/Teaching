@@ -1,0 +1,1556 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Tuples and Records (with solutions)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="">
+
+    <link rel="stylesheet" id="theme_link" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.6.0/materia/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    <link type="text/css" rel="stylesheet" href="/Teaching/content/navbar-fixed-left.css" />
+    <link type="text/css" rel="stylesheet" href="/Teaching/content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="/Teaching/content/fsdocs-custom.css" />
+    <script type="text/javascript" src="/Teaching/content/fsdocs-tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+    
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-light bg-secondary fixed-left" id="fsdocs-nav">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse navbar-nav-scroll" id="navbarsExampleDefault">
+            <a href="/Teaching/"><img id="fsdocs-logo" src="/Teaching/img/logo.png" /></a>
+            <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+            <div id="header">
+                <div class="searchbox" id="fsdocs-searchbox">
+                    <label for="search-by">
+                        <i class="fas fa-search"></i>
+                    </label>
+                    <input data-search-input="" id="search-by" type="search" placeholder="Search..." />
+                    <span data-search-clear="">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- END SEARCH BOX: this adds support for the search box -->
+            <ul class="navbar-nav">
+                <li class="nav-header">Links</li>
+                <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="https://github.com/nhirschey/Teaching/blob/main/LICENSE.md">License</a></li>
+                <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="https://github.com/nhirschey/Teaching">Source Repository</a></li>
+                <li class="nav-header">
+  Getting Started
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/install.html">
+    Install Software
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/learn-fsharp.html">
+    Learn F#
+  </a>
+</li>             
+<li class="nav-header">
+  Lectures
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/portfolio-statistics.html">
+    Basic Portfolio Statistics
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/portfolio-returns.html">
+    Portfolio Returns
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/PortfolioFormation-SimpleExample.html">
+    Building a strategy
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/Momentum-Class.html">
+    Momentum Signal
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/VolatilityTiming.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/optimization.html">
+    Optimization
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/sentiment-mlnet.html">
+    Sentiment classification
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/calls-nn.html">
+    Calls NN
+  </a>
+</li>             
+<li class="nav-header">
+  Assignments
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/football-1-download-data.html">
+    Webscraping HTML to CSV
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/football-tuples-and-records.html">
+    Tuples and Records (with solutions)
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/football-collection-functions.html">
+    Collection functions (with solutions)
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/football-plotting.html">
+    Plotting (with solutions)
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/select-project-signal.html">
+    Select Project Signals
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/assignment-signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/assignment-performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/assignment-volatility-timing.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-header">
+  Practice Quizzes
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-list-module.html">
+    List module functions
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-options.html">
+    Options
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-match-expressions.html">
+    Match expressions
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-map-collection.html">
+    Map collection
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-discriminated-union.html">
+    Dicriminated Union
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-portfolios.html">
+    Portfolios
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-factors.html">
+    Factors
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-folding.html">
+    Fold and Friends
+  </a>
+</li>             
+<li class="nav-header">
+  Project
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/project/signal-exploration.html">
+    Signal Exploration
+  </a>
+</li>             
+<li class="nav-header">
+  Other
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/Common.html">
+    Common
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/Portfolio.html">
+    Portfolio
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/YahooFinance.html">
+    YahooFinance
+  </a>
+</li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="masthead">
+            <h3 class="muted"><a href="/Teaching/">Teaching</a></h3>
+        </div>
+        <hr />
+        <div class="container" id="fsdocs-content">
+            
+<p><a href="https://mybinder.org/v2/gh/nhirschey/teaching/gh-pages?filepath=football-tuples-and-records.ipynb"><img src="img/badge-binder.svg" alt="Binder" /></a>&emsp;
+<a href="/Teaching//football-tuples-and-records.fsx"><img src="img/badge-script.svg" alt="Script" /></a>&emsp;
+<a href="/Teaching//football-tuples-and-records.ipynb"><img src="img/badge-notebook.svg" alt="Notebook" /></a></p>
+<h1><a name="Working-with-Tuples-and-Records" class="anchor" href="#Working-with-Tuples-and-Records">Working with Tuples and Records.</a></h1>
+<blockquote>
+<p>Developed with <a href="https://github.com/DavideGCosta">Davide Costa</a></p>
+</blockquote>
+<p>This set of exercises covers creating and manipulating tuples, records, and anonymous records.
+Before you start it is a good idea to review the relevant sections of
+the F# language reference (
+<a href="https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/tuples">tuples</a>,
+<a href="https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/records">records</a>,
+and <a href="https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/anonymous-records">anonymous records</a>
+) and
+F# for fun and profit (
+<a href="https://fsharpforfunandprofit.com/posts/tuples/">tuples</a> and
+<a href="https://fsharpforfunandprofit.com/posts/records/">records</a>)
+before you start.</p>
+<h2><a name="Import-the-Football-Players-Data-from-the-Csv-File" class="anchor" href="#Import-the-Football-Players-Data-from-the-Csv-File">Import the Football Players Data from the Csv File</a></h2>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="pp">#r</span> <span class="s">&quot;nuget:FSharp.Data&quot;</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs11', 23)" onmouseover="showTip(event, 'fs11', 23)" class="id">FSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs12', 24)" onmouseover="showTip(event, 'fs12', 24)" class="id">Data</span>
+</code></pre>
+<p>In order to import the data correctly we need to create the sample, define the type from the sample and then load the csv file.
+We'll use <a href="https://fsprojects.github.io/FSharp.Data/library/CsvProvider.html">FSharp.Data CsvProvider</a>.</p>
+<h3><a name="Load-the-Csv-file" class="anchor" href="#Load-the-Csv-file">Load the Csv file.</a></h3>
+<p>We define the type from the csv sample file.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="pn">[&lt;</span><span onmouseout="hideTip(event, 'fs13', 25)" onmouseover="showTip(event, 'fs13', 25)" class="rt">Literal</span><span class="pn">&gt;]</span> <span onmouseout="hideTip(event, 'fs14', 26)" onmouseover="showTip(event, 'fs14', 26)" class="prop">CsvPath</span> <span class="o">=</span> <span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">&quot;/FootballPlayers.csv&quot;</span>
+<span class="k">type</span> <span onmouseout="hideTip(event, 'fs15', 27)" onmouseover="showTip(event, 'fs15', 27)" class="d">FootballPlayersCsv</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs16', 28)" onmouseover="showTip(event, 'fs16', 28)" class="rt">CsvProvider</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs14', 29)" onmouseover="showTip(event, 'fs14', 29)" class="prop">CsvPath</span><span class="pn">&gt;</span>
+</code></pre>
+<p>This will load the sample csv file.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs17', 30)" onmouseover="showTip(event, 'fs17', 30)" class="id">playerStatsTable</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs15', 31)" onmouseover="showTip(event, 'fs15', 31)" class="d">FootballPlayersCsv</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs18', 32)" onmouseover="showTip(event, 'fs18', 32)" class="id">GetSample</span><span class="pn">(</span><span class="pn">)</span><span class="pn">.</span><span class="id">Rows</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs19', 33)" onmouseover="showTip(event, 'fs19', 33)" class="m">Seq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs20', 34)" onmouseover="showTip(event, 'fs20', 34)" class="id">toList</span>
+</code></pre>
+<p>Let's see the first 5 rows from the loaded Csv data, stored in <code>playerStatsTable</code>.
+Again, we do this by using the List <code>List.truncate</code> property.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs17', 35)" onmouseover="showTip(event, 'fs17', 35)" class="id">playerStatsTable</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 36)" onmouseover="showTip(event, 'fs21', 36)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 37)" onmouseover="showTip(event, 'fs22', 37)" class="id">truncate</span> <span class="n">5</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val it: CsvProvider&lt;...&gt;.Row list =
+  [("Robert Lewandowski", "pl POL", "FW", "Bayern Munich", "deBundesliga", 32,
+    34, 35);
+   ("Kylian Mbappé", "fr FRA", "FW", "Paris S-G", "frLigue 1", 22, 35, 28);
+   ("Karim Benzema", "fr FRA", "FW", "Real Madrid", "esLa Liga", 33, 32, 27);
+   ("Ciro Immobile", "it ITA", "FW", "Lazio", "itSerie A", 31, 31, 27);
+   ("Wissam Ben Yedder", "fr FRA", "FW", "Monaco", "frLigue 1", 30, 37, 25)]</code></pre></td></tr></table>
+<h2><a name="EXERCISES-PART-1" class="anchor" href="#EXERCISES-PART-1">EXERCISES - PART 1</a></h2>
+<ul>
+<li>
+<p><a href="#Transforming-collections">Transforming collection elements into new types.</a></p>
+<ol>
+<li><p><a href="#Creating-tuples">Creating tuples.</a></p></li>
+<li><p><a href="#Creating-records">Creating records.</a></p></li>
+<li><p><a href="#Creating-anonymous-records">Creating anonymous records.</a></p></li>
+</ol>
+</li>
+<li>
+<p><a href="#Simple-transformations">Simple data transformations.</a></p>
+<ol>
+<li><p><a href="#Transformations-using-tuples">Transformations using tuples.</a></p></li>
+<li><p><a href="#Transformations-using-records">Transformations using records.</a></p></li>
+<li><p><a href="#Transformations-using-anonymous-records">Transformations using anonymous records.</a></p></li>
+</ol>
+</li>
+<li><p><a href="#Creating-and-transforming-TeamRecord">Creating and transforming TeamRecord.</a></p></li>
+</ul>
+<h2 class=numbered><a name=Transforming-collections class=anchor href=#Transforming-collections>Transforming collections</a></h2>
+<h3 class=numbered><a name=Creating-tuples class=anchor href=#Creating-tuples>Creating tuples</a></h3>
+<p>Example: Transform each element of the <code>playerStatsTable</code> List into a tuple with the player and nation ( <code>Player</code>, <code>Nation</code>)</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs17', 40)" onmouseover="showTip(event, 'fs17', 40)" class="id">playerStatsTable</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 41)" onmouseover="showTip(event, 'fs21', 41)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 42)" onmouseover="showTip(event, 'fs23', 42)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs24', 43)" onmouseover="showTip(event, 'fs24', 43)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs24', 44)" onmouseover="showTip(event, 'fs24', 44)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 45)" onmouseover="showTip(event, 'fs25', 45)" class="id">Player</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs24', 46)" onmouseover="showTip(event, 'fs24', 46)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs26', 47)" onmouseover="showTip(event, 'fs26', 47)" class="id">Nation</span><span class="pn">)</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 48)" onmouseover="showTip(event, 'fs21', 48)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 49)" onmouseover="showTip(event, 'fs22', 49)" class="id">truncate</span> <span class="n">5</span> <span class="c">//just to observe the first 5 rows, not a part of the exercise.</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val it: (string * string) list =
+  [("Robert Lewandowski", "pl POL"); ("Kylian Mbappé", "fr FRA");
+   ("Karim Benzema", "fr FRA"); ("Ciro Immobile", "it ITA");
+   ("Wissam Ben Yedder", "fr FRA")]</code></pre></td></tr></table>
+<ul>
+<li>Transform each element of the <code>playerStatsTable</code> List into a tuple with the player and team ( <code>Player</code>, <code>Team</code>)</li>
+</ul>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs17', 50)" onmouseover="showTip(event, 'fs17', 50)" class="id">playerStatsTable</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 51)" onmouseover="showTip(event, 'fs21', 51)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 52)" onmouseover="showTip(event, 'fs23', 52)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs24', 53)" onmouseover="showTip(event, 'fs24', 53)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs24', 54)" onmouseover="showTip(event, 'fs24', 54)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 55)" onmouseover="showTip(event, 'fs25', 55)" class="id">Player</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs24', 56)" onmouseover="showTip(event, 'fs24', 56)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs27', 57)" onmouseover="showTip(event, 'fs27', 57)" class="id">Team</span><span class="pn">)</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 58)" onmouseover="showTip(event, 'fs21', 58)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 59)" onmouseover="showTip(event, 'fs22', 59)" class="id">truncate</span> <span class="n">5</span> <span class="c">//just to observe the first 5 rows, not a part of the exercise.</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val it: (string * string) list =
+  [("Robert Lewandowski", "Bayern Munich"); ("Kylian Mbappé", "Paris S-G");
+   ("Karim Benzema", "Real Madrid"); ("Ciro Immobile", "Lazio");
+   ("Wissam Ben Yedder", "Monaco")]</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<ul>
+<li>Transform each element of the <code>playerStatsTable</code> List into a tuple with the player and league/competiton ( <code>Player</code>, <code>League</code>)</li>
+</ul>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs17', 60)" onmouseover="showTip(event, 'fs17', 60)" class="id">playerStatsTable</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 61)" onmouseover="showTip(event, 'fs21', 61)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 62)" onmouseover="showTip(event, 'fs23', 62)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs24', 63)" onmouseover="showTip(event, 'fs24', 63)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs24', 64)" onmouseover="showTip(event, 'fs24', 64)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 65)" onmouseover="showTip(event, 'fs25', 65)" class="id">Player</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs24', 66)" onmouseover="showTip(event, 'fs24', 66)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs28', 67)" onmouseover="showTip(event, 'fs28', 67)" class="id">League</span><span class="pn">)</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 68)" onmouseover="showTip(event, 'fs21', 68)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 69)" onmouseover="showTip(event, 'fs22', 69)" class="id">truncate</span> <span class="n">5</span> <span class="c">//just to observe the first 5 rows, not a part of the exercise.</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val it: (string * string) list =
+  [("Robert Lewandowski", "deBundesliga"); ("Kylian Mbappé", "frLigue 1");
+   ("Karim Benzema", "esLa Liga"); ("Ciro Immobile", "itSerie A");
+   ("Wissam Ben Yedder", "frLigue 1")]</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<ul>
+<li>Transform each element of the <code>playerStatsTable</code> List into a tuple with the player and age ( <code>Player</code>, <code>Age</code>)</li>
+</ul>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs17', 70)" onmouseover="showTip(event, 'fs17', 70)" class="id">playerStatsTable</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 71)" onmouseover="showTip(event, 'fs21', 71)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 72)" onmouseover="showTip(event, 'fs23', 72)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs24', 73)" onmouseover="showTip(event, 'fs24', 73)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs24', 74)" onmouseover="showTip(event, 'fs24', 74)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 75)" onmouseover="showTip(event, 'fs25', 75)" class="id">Player</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs24', 76)" onmouseover="showTip(event, 'fs24', 76)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs29', 77)" onmouseover="showTip(event, 'fs29', 77)" class="id">Age</span><span class="pn">)</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 78)" onmouseover="showTip(event, 'fs21', 78)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 79)" onmouseover="showTip(event, 'fs22', 79)" class="id">truncate</span> <span class="n">5</span> <span class="c">//just to observe the first 5 rows, not a part of the exercise.</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val it: (string * int) list =
+  [("Robert Lewandowski", 32); ("Kylian Mbappé", 22); ("Karim Benzema", 33);
+   ("Ciro Immobile", 31); ("Wissam Ben Yedder", 30)]</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<ul>
+<li>Transform each element of the <code>playerStatsTable</code> List into a tuple with the player and matches played ( <code>Player</code>, <code>MatchesPlayed</code>)</li>
+</ul>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs17', 80)" onmouseover="showTip(event, 'fs17', 80)" class="id">playerStatsTable</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 81)" onmouseover="showTip(event, 'fs21', 81)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 82)" onmouseover="showTip(event, 'fs23', 82)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs24', 83)" onmouseover="showTip(event, 'fs24', 83)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs24', 84)" onmouseover="showTip(event, 'fs24', 84)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 85)" onmouseover="showTip(event, 'fs25', 85)" class="id">Player</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs24', 86)" onmouseover="showTip(event, 'fs24', 86)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs30', 87)" onmouseover="showTip(event, 'fs30', 87)" class="id">MatchesPlayed</span><span class="pn">)</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 88)" onmouseover="showTip(event, 'fs21', 88)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 89)" onmouseover="showTip(event, 'fs22', 89)" class="id">truncate</span> <span class="n">5</span> <span class="c">//just to observe the first 5 rows, not a part of the exercise.</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val it: (string * int) list =
+  [("Robert Lewandowski", 34); ("Kylian Mbappé", 35); ("Karim Benzema", 32);
+   ("Ciro Immobile", 31); ("Wissam Ben Yedder", 37)]</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<ul>
+<li>Transform each element of the <code>playerStatsTable</code> List into a tuple with the player and goals scored ( <code>Player</code>, <code>GoalsScored</code>)</li>
+</ul>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs17', 90)" onmouseover="showTip(event, 'fs17', 90)" class="id">playerStatsTable</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 91)" onmouseover="showTip(event, 'fs21', 91)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 92)" onmouseover="showTip(event, 'fs23', 92)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs24', 93)" onmouseover="showTip(event, 'fs24', 93)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs24', 94)" onmouseover="showTip(event, 'fs24', 94)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 95)" onmouseover="showTip(event, 'fs25', 95)" class="id">Player</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs24', 96)" onmouseover="showTip(event, 'fs24', 96)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 97)" onmouseover="showTip(event, 'fs31', 97)" class="id">GoalsScored</span><span class="pn">)</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 98)" onmouseover="showTip(event, 'fs21', 98)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 99)" onmouseover="showTip(event, 'fs22', 99)" class="id">truncate</span> <span class="n">5</span> <span class="c">//just to observe the first 5 rows, not a part of the exercise.</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val it: (string * int) list =
+  [("Robert Lewandowski", 35); ("Kylian Mbappé", 28); ("Karim Benzema", 27);
+   ("Ciro Immobile", 27); ("Wissam Ben Yedder", 25)]</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<h3 class=numbered><a name=Creating-records class=anchor href=#Creating-records>Creating records</a></h3>
+<p>Example: Define a record named <code>PlayerAndNation</code> with a field named <code>Player</code> that is a <code>string</code> and <code>Nation</code> that is a <code>string</code>.
+Then transform each element of the <code>playerStatsTable</code> List into a <code>PlayerAndNation</code> record.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">type</span> <span onmouseout="hideTip(event, 'fs32', 101)" onmouseover="showTip(event, 'fs32', 101)" class="rt">PlayerAndNation</span> <span class="o">=</span>
+    <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs33', 102)" onmouseover="showTip(event, 'fs33', 102)" class="prop">Player</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs2', 103)" onmouseover="showTip(event, 'fs2', 103)" class="rt">string</span> 
+      <span onmouseout="hideTip(event, 'fs34', 104)" onmouseover="showTip(event, 'fs34', 104)" class="prop">Nation</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs2', 105)" onmouseover="showTip(event, 'fs2', 105)" class="rt">string</span> <span class="pn">}</span>
+</code></pre>
+<p>The above code creates a record type called <code>PlayerAndNation</code>.
+This record contains two fields: <code>Player</code> of <code>string</code> type and <code>Nation</code> of <code>string</code> type.
+Remember, if the types from the csv file are different an error will occur when creating an instance of the record.</p>
+<p>Common types:</p>
+<ul>
+<li><code>string</code>, example: <code>"hello world"</code></li>
+<li><code>int</code>, example: <code>2</code></li>
+<li><code>float</code>, example: <code>2.0</code></li>
+<li><code>decimal</code>, example: <code>2.0m</code></li>
+</ul>
+<p>Check <a href="https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/basic-types">basic types documentation</a>
+to learn about F# basic types.</p>
+<p>Now by having the record type created we can <code>map</code> the <code>playerStatsTable</code> rows to the record <code>PlayerAndNation</code>.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs17', 106)" onmouseover="showTip(event, 'fs17', 106)" class="id">playerStatsTable</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 107)" onmouseover="showTip(event, 'fs21', 107)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 108)" onmouseover="showTip(event, 'fs23', 108)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs24', 109)" onmouseover="showTip(event, 'fs24', 109)" class="fn">x</span> <span class="k">-&gt;</span> 
+    <span class="pn">{</span> <span class="prop">Player</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 110)" onmouseover="showTip(event, 'fs24', 110)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 111)" onmouseover="showTip(event, 'fs25', 111)" class="id">Player</span>
+      <span class="prop">Nation</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 112)" onmouseover="showTip(event, 'fs24', 112)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs26', 113)" onmouseover="showTip(event, 'fs26', 113)" class="id">Nation</span> <span class="pn">}</span><span class="pn">)</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 114)" onmouseover="showTip(event, 'fs21', 114)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 115)" onmouseover="showTip(event, 'fs22', 115)" class="id">truncate</span> <span class="n">5</span> <span class="c">//just to observe the first 5 rows, not a part of the exercise.</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val it: PlayerAndNation list =
+  [{ Player = "Robert Lewandowski"
+     Nation = "pl POL" }; { Player = "Kylian Mbappé"
+                            Nation = "fr FRA" }; { Player = "Karim Benzema"
+                                                   Nation = "fr FRA" };
+   { Player = "Ciro Immobile"
+     Nation = "it ITA" }; { Player = "Wissam Ben Yedder"
+                            Nation = "fr FRA" }]</code></pre></td></tr></table>
+<p>Note that you choose the name of the fields in the record. Instead of <code>Player</code> it could be anything.
+The following code block for example would have also worked,
+but the field name for the player is <code>PlayerName</code> instead of <code>Player</code> and <code>Nationality</code> instead of <code>Nation</code>:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">type</span> <span onmouseout="hideTip(event, 'fs35', 116)" onmouseover="showTip(event, 'fs35', 116)" class="rt">PlayerAndNation2</span> <span class="o">=</span>
+    <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs36', 117)" onmouseover="showTip(event, 'fs36', 117)" class="prop">PlayerName</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs2', 118)" onmouseover="showTip(event, 'fs2', 118)" class="rt">string</span> 
+      <span onmouseout="hideTip(event, 'fs37', 119)" onmouseover="showTip(event, 'fs37', 119)" class="prop">Nationality</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs2', 120)" onmouseover="showTip(event, 'fs2', 120)" class="rt">string</span> <span class="pn">}</span>
+
+<span onmouseout="hideTip(event, 'fs17', 121)" onmouseover="showTip(event, 'fs17', 121)" class="id">playerStatsTable</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 122)" onmouseover="showTip(event, 'fs21', 122)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 123)" onmouseover="showTip(event, 'fs23', 123)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs24', 124)" onmouseover="showTip(event, 'fs24', 124)" class="fn">x</span> <span class="k">-&gt;</span> 
+    <span class="pn">{</span> <span class="prop">PlayerName</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 125)" onmouseover="showTip(event, 'fs24', 125)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 126)" onmouseover="showTip(event, 'fs25', 126)" class="id">Player</span>
+      <span class="prop">Nationality</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 127)" onmouseover="showTip(event, 'fs24', 127)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs26', 128)" onmouseover="showTip(event, 'fs26', 128)" class="id">Nation</span> <span class="pn">}</span><span class="pn">)</span>
+</code></pre>
+<ul>
+<li>
+Define a record named <code>PlayerAndTeam</code> with a field named <code>Player</code> that is a <code>string</code> and <code>Team</code> that is a <code>string</code>. 
+Then transform each element of the <code>playerStatsTable</code> List into a <code>PlayerAndTeam</code> record.
+</li>
+</ul>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">type</span> <span onmouseout="hideTip(event, 'fs38', 129)" onmouseover="showTip(event, 'fs38', 129)" class="rt">PlayerAndTeam</span> <span class="o">=</span>
+    <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs39', 130)" onmouseover="showTip(event, 'fs39', 130)" class="prop">Player</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs2', 131)" onmouseover="showTip(event, 'fs2', 131)" class="rt">string</span>
+      <span onmouseout="hideTip(event, 'fs40', 132)" onmouseover="showTip(event, 'fs40', 132)" class="prop">Team</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs2', 133)" onmouseover="showTip(event, 'fs2', 133)" class="rt">string</span> <span class="pn">}</span>
+   
+<span onmouseout="hideTip(event, 'fs17', 134)" onmouseover="showTip(event, 'fs17', 134)" class="id">playerStatsTable</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 135)" onmouseover="showTip(event, 'fs21', 135)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 136)" onmouseover="showTip(event, 'fs23', 136)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs24', 137)" onmouseover="showTip(event, 'fs24', 137)" class="fn">x</span> <span class="k">-&gt;</span> 
+    <span class="pn">{</span> <span class="prop">Player</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 138)" onmouseover="showTip(event, 'fs24', 138)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 139)" onmouseover="showTip(event, 'fs25', 139)" class="id">Player</span> 
+      <span class="prop">Team</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 140)" onmouseover="showTip(event, 'fs24', 140)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs27', 141)" onmouseover="showTip(event, 'fs27', 141)" class="id">Team</span> <span class="pn">}</span><span class="pn">)</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 142)" onmouseover="showTip(event, 'fs21', 142)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 143)" onmouseover="showTip(event, 'fs22', 143)" class="id">truncate</span> <span class="n">5</span> <span class="c">//just to observe the first 5 rows, not a part of the exercise.</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>type PlayerAndTeam =
+  {
+    Player: string
+    Team: string
+  }
+val it: PlayerAndTeam list =
+  [{ Player = "Robert Lewandowski"
+     Team = "Bayern Munich" }; { Player = "Kylian Mbappé"
+                                 Team = "Paris S-G" };
+   { Player = "Karim Benzema"
+     Team = "Real Madrid" }; { Player = "Ciro Immobile"
+                               Team = "Lazio" };
+   { Player = "Wissam Ben Yedder"
+     Team = "Monaco" }]</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<ul>
+<li>
+Define a record named <code>PlayerAndLeague</code> with a field named <code>Player</code> that is a <code>string</code> and <code>League</code> that is a <code>string</code>. 
+Then transform each element of the <code>playerStatsTable</code> List into a <code>PlayerAndLeague</code> record.
+</li>
+</ul>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">type</span> <span onmouseout="hideTip(event, 'fs41', 144)" onmouseover="showTip(event, 'fs41', 144)" class="rt">PlayerAndLeague</span> <span class="o">=</span>
+    <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs42', 145)" onmouseover="showTip(event, 'fs42', 145)" class="prop">Player</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs2', 146)" onmouseover="showTip(event, 'fs2', 146)" class="rt">string</span>
+      <span onmouseout="hideTip(event, 'fs43', 147)" onmouseover="showTip(event, 'fs43', 147)" class="prop">League</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs2', 148)" onmouseover="showTip(event, 'fs2', 148)" class="rt">string</span> <span class="pn">}</span>
+
+<span onmouseout="hideTip(event, 'fs17', 149)" onmouseover="showTip(event, 'fs17', 149)" class="id">playerStatsTable</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 150)" onmouseover="showTip(event, 'fs21', 150)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 151)" onmouseover="showTip(event, 'fs23', 151)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs24', 152)" onmouseover="showTip(event, 'fs24', 152)" class="fn">x</span> <span class="k">-&gt;</span> 
+    <span class="pn">{</span> <span class="prop">Player</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 153)" onmouseover="showTip(event, 'fs24', 153)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 154)" onmouseover="showTip(event, 'fs25', 154)" class="id">Player</span>
+      <span class="prop">League</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 155)" onmouseover="showTip(event, 'fs24', 155)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs28', 156)" onmouseover="showTip(event, 'fs28', 156)" class="id">League</span> <span class="pn">}</span><span class="pn">)</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 157)" onmouseover="showTip(event, 'fs21', 157)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 158)" onmouseover="showTip(event, 'fs22', 158)" class="id">truncate</span> <span class="n">5</span> <span class="c">//just to observe the first 5 rows, not a part of the exercise.</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>type PlayerAndLeague =
+  {
+    Player: string
+    League: string
+  }
+val it: PlayerAndLeague list =
+  [{ Player = "Robert Lewandowski"
+     League = "deBundesliga" }; { Player = "Kylian Mbappé"
+                                  League = "frLigue 1" };
+   { Player = "Karim Benzema"
+     League = "esLa Liga" }; { Player = "Ciro Immobile"
+                               League = "itSerie A" };
+   { Player = "Wissam Ben Yedder"
+     League = "frLigue 1" }]</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<ul>
+<li>
+Define a record named <code>PlayerAndAge</code> with a field named <code>Player</code> that is a <code>string</code> and <code>Age</code> that is a integer(<code>int</code>). 
+Then transform each element of the <code>playerStatsTable</code> List into a <code>PlayerAndAge</code> record.
+</li>
+</ul>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">type</span> <span onmouseout="hideTip(event, 'fs44', 159)" onmouseover="showTip(event, 'fs44', 159)" class="rt">PlayerAndAge</span> <span class="o">=</span>
+    <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs45', 160)" onmouseover="showTip(event, 'fs45', 160)" class="prop">Player</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs2', 161)" onmouseover="showTip(event, 'fs2', 161)" class="rt">string</span>
+      <span onmouseout="hideTip(event, 'fs46', 162)" onmouseover="showTip(event, 'fs46', 162)" class="prop">Age</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs47', 163)" onmouseover="showTip(event, 'fs47', 163)" class="vt">int</span> <span class="pn">}</span>
+
+<span onmouseout="hideTip(event, 'fs17', 164)" onmouseover="showTip(event, 'fs17', 164)" class="id">playerStatsTable</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 165)" onmouseover="showTip(event, 'fs21', 165)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 166)" onmouseover="showTip(event, 'fs23', 166)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs24', 167)" onmouseover="showTip(event, 'fs24', 167)" class="fn">x</span> <span class="k">-&gt;</span> 
+    <span class="pn">{</span> <span class="prop">Player</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 168)" onmouseover="showTip(event, 'fs24', 168)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 169)" onmouseover="showTip(event, 'fs25', 169)" class="id">Player</span>
+      <span class="prop">Age</span> <span class="o">=</span>  <span onmouseout="hideTip(event, 'fs24', 170)" onmouseover="showTip(event, 'fs24', 170)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs29', 171)" onmouseover="showTip(event, 'fs29', 171)" class="id">Age</span> <span class="pn">}</span><span class="pn">)</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 172)" onmouseover="showTip(event, 'fs21', 172)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 173)" onmouseover="showTip(event, 'fs22', 173)" class="id">truncate</span> <span class="n">5</span> <span class="c">//just to observe the first 5 rows, not a part of the exercise.</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>type PlayerAndAge =
+  {
+    Player: string
+    Age: int
+  }
+val it: PlayerAndAge list =
+  [{ Player = "Robert Lewandowski"
+     Age = 32 }; { Player = "Kylian Mbappé"
+                   Age = 22 }; { Player = "Karim Benzema"
+                                 Age = 33 }; { Player = "Ciro Immobile"
+                                               Age = 31 };
+   { Player = "Wissam Ben Yedder"
+     Age = 30 }]</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<ul>
+<li>
+Define a record named <code>PlayerAndMatchesPlayed</code> with a field named <code>Player</code> that is a <code>string</code> and <code>MatchesPlayed</code> that is a integer(<code>int</code>). 
+Then transform each element of the <code>playerStatsTable</code> List into a <code>PlayerAndMatchesPlayed</code> record.
+</li>
+</ul>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">type</span> <span onmouseout="hideTip(event, 'fs48', 174)" onmouseover="showTip(event, 'fs48', 174)" class="rt">PlayerAndMatchesPlayed</span> <span class="o">=</span>
+    <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs49', 175)" onmouseover="showTip(event, 'fs49', 175)" class="prop">Player</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs2', 176)" onmouseover="showTip(event, 'fs2', 176)" class="rt">string</span>
+      <span onmouseout="hideTip(event, 'fs50', 177)" onmouseover="showTip(event, 'fs50', 177)" class="prop">MatchesPlayed</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs47', 178)" onmouseover="showTip(event, 'fs47', 178)" class="vt">int</span> <span class="pn">}</span>
+
+<span onmouseout="hideTip(event, 'fs17', 179)" onmouseover="showTip(event, 'fs17', 179)" class="id">playerStatsTable</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 180)" onmouseover="showTip(event, 'fs21', 180)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 181)" onmouseover="showTip(event, 'fs23', 181)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs24', 182)" onmouseover="showTip(event, 'fs24', 182)" class="fn">x</span> <span class="k">-&gt;</span> 
+    <span class="pn">{</span> <span class="prop">Player</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 183)" onmouseover="showTip(event, 'fs24', 183)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 184)" onmouseover="showTip(event, 'fs25', 184)" class="id">Player</span> 
+      <span class="prop">MatchesPlayed</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 185)" onmouseover="showTip(event, 'fs24', 185)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs30', 186)" onmouseover="showTip(event, 'fs30', 186)" class="id">MatchesPlayed</span><span class="pn">}</span><span class="pn">)</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 187)" onmouseover="showTip(event, 'fs21', 187)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 188)" onmouseover="showTip(event, 'fs22', 188)" class="id">truncate</span> <span class="n">5</span> <span class="c">//just to observe the first 5 rows, not a part of the exercise.</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>type PlayerAndMatchesPlayed =
+  {
+    Player: string
+    MatchesPlayed: int
+  }
+val it: PlayerAndMatchesPlayed list =
+  [{ Player = "Robert Lewandowski"
+     MatchesPlayed = 34 }; { Player = "Kylian Mbappé"
+                             MatchesPlayed = 35 }; { Player = "Karim Benzema"
+                                                     MatchesPlayed = 32 };
+   { Player = "Ciro Immobile"
+     MatchesPlayed = 31 }; { Player = "Wissam Ben Yedder"
+                             MatchesPlayed = 37 }]</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<ul>
+<li>
+Define a record named <code>PlayerAndGoalsScored</code> with a field named <code>Player</code> that is a <code>string</code> and <code>GoalsScored</code> that is a integer(<code>int</code>). 
+Then transform each element of the <code>playerStatsTable</code> List into a <code>PlayerAndGoalsScored</code> record.
+</li>
+</ul>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">type</span> <span onmouseout="hideTip(event, 'fs51', 189)" onmouseover="showTip(event, 'fs51', 189)" class="rt">PlayerAndGoalsScored</span> <span class="o">=</span> 
+    <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs52', 190)" onmouseover="showTip(event, 'fs52', 190)" class="prop">Player</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs2', 191)" onmouseover="showTip(event, 'fs2', 191)" class="rt">string</span>
+      <span onmouseout="hideTip(event, 'fs53', 192)" onmouseover="showTip(event, 'fs53', 192)" class="prop">GoalsScored</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs47', 193)" onmouseover="showTip(event, 'fs47', 193)" class="vt">int</span> <span class="pn">}</span>
+
+<span onmouseout="hideTip(event, 'fs17', 194)" onmouseover="showTip(event, 'fs17', 194)" class="id">playerStatsTable</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 195)" onmouseover="showTip(event, 'fs21', 195)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 196)" onmouseover="showTip(event, 'fs23', 196)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs24', 197)" onmouseover="showTip(event, 'fs24', 197)" class="fn">x</span> <span class="k">-&gt;</span> 
+    <span class="pn">{</span> <span class="prop">Player</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 198)" onmouseover="showTip(event, 'fs24', 198)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 199)" onmouseover="showTip(event, 'fs25', 199)" class="id">Player</span> 
+      <span class="prop">GoalsScored</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 200)" onmouseover="showTip(event, 'fs24', 200)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 201)" onmouseover="showTip(event, 'fs31', 201)" class="id">GoalsScored</span> <span class="pn">}</span><span class="pn">)</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 202)" onmouseover="showTip(event, 'fs21', 202)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 203)" onmouseover="showTip(event, 'fs22', 203)" class="id">truncate</span> <span class="n">5</span> <span class="c">//just to observe the first 5 rows, not a part of the exercise.</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>type PlayerAndGoalsScored =
+  {
+    Player: string
+    GoalsScored: int
+  }
+val it: PlayerAndGoalsScored list =
+  [{ Player = "Robert Lewandowski"
+     GoalsScored = 35 }; { Player = "Kylian Mbappé"
+                           GoalsScored = 28 }; { Player = "Karim Benzema"
+                                                 GoalsScored = 27 };
+   { Player = "Ciro Immobile"
+     GoalsScored = 27 }; { Player = "Wissam Ben Yedder"
+                           GoalsScored = 25 }]</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<h3 class=numbered><a name=Creating-anonymous-records class=anchor href=#Creating-anonymous-records>Creating anonymous records</a></h3>
+<p>Example: Transform each element of the <code>playerStatsTable</code> List into an anonymous record with a <code>Player</code> field that is a <code>string</code> and a <code>Nation</code> field that is a <code>string</code>.</p>
+<p>With <code>Anonymous records</code> we don't need to define the record type beforehand and we don't need to specify the type of each field.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs17', 205)" onmouseover="showTip(event, 'fs17', 205)" class="id">playerStatsTable</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 206)" onmouseover="showTip(event, 'fs21', 206)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 207)" onmouseover="showTip(event, 'fs23', 207)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs24', 208)" onmouseover="showTip(event, 'fs24', 208)" class="fn">x</span> <span class="k">-&gt;</span> 
+    <span class="pn">{|</span> <span class="prop">Player</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 209)" onmouseover="showTip(event, 'fs24', 209)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 210)" onmouseover="showTip(event, 'fs25', 210)" class="id">Player</span>
+       <span class="prop">Nation</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 211)" onmouseover="showTip(event, 'fs24', 211)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs26', 212)" onmouseover="showTip(event, 'fs26', 212)" class="id">Nation</span> <span class="pn">|}</span><span class="pn">)</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 213)" onmouseover="showTip(event, 'fs21', 213)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 214)" onmouseover="showTip(event, 'fs22', 214)" class="id">truncate</span> <span class="n">5</span> <span class="c">//just to observe the first 5 rows, not a part of the exercise.</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val it: {| Nation: string; Player: string |} list =
+  [{ Nation = "pl POL"
+     Player = "Robert Lewandowski" }; { Nation = "fr FRA"
+                                        Player = "Kylian Mbappé" };
+   { Nation = "fr FRA"
+     Player = "Karim Benzema" }; { Nation = "it ITA"
+                                   Player = "Ciro Immobile" };
+   { Nation = "fr FRA"
+     Player = "Wissam Ben Yedder" }]</code></pre></td></tr></table>
+<ul>
+<li>Transform each element of the <code>playerStatsTable</code> List into an anonymous record with a <code>Player</code> field that is a <code>string</code> and a <code>Team</code> field that is a <code>string</code>.</li>
+</ul>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs17', 215)" onmouseover="showTip(event, 'fs17', 215)" class="id">playerStatsTable</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 216)" onmouseover="showTip(event, 'fs21', 216)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 217)" onmouseover="showTip(event, 'fs23', 217)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs24', 218)" onmouseover="showTip(event, 'fs24', 218)" class="fn">x</span> <span class="k">-&gt;</span> 
+    <span class="pn">{|</span> <span class="prop">Player</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 219)" onmouseover="showTip(event, 'fs24', 219)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 220)" onmouseover="showTip(event, 'fs25', 220)" class="id">Player</span> 
+       <span class="prop">Team</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 221)" onmouseover="showTip(event, 'fs24', 221)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs27', 222)" onmouseover="showTip(event, 'fs27', 222)" class="id">Team</span> <span class="pn">|}</span><span class="pn">)</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 223)" onmouseover="showTip(event, 'fs21', 223)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 224)" onmouseover="showTip(event, 'fs22', 224)" class="id">truncate</span> <span class="n">5</span> <span class="c">//just to observe the first 5 rows, not a part of the exercise.</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val it: {| Player: string; Team: string |} list =
+  [{ Player = "Robert Lewandowski"
+     Team = "Bayern Munich" }; { Player = "Kylian Mbappé"
+                                 Team = "Paris S-G" };
+   { Player = "Karim Benzema"
+     Team = "Real Madrid" }; { Player = "Ciro Immobile"
+                               Team = "Lazio" };
+   { Player = "Wissam Ben Yedder"
+     Team = "Monaco" }]</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<ul>
+<li>Transform each element of the <code>playerStatsTable</code> List into an anonymous record with a <code>Player</code> field that is a <code>string</code> and a <code>League</code> field that is a <code>string</code>.</li>
+</ul>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs17', 225)" onmouseover="showTip(event, 'fs17', 225)" class="id">playerStatsTable</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 226)" onmouseover="showTip(event, 'fs21', 226)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 227)" onmouseover="showTip(event, 'fs23', 227)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs24', 228)" onmouseover="showTip(event, 'fs24', 228)" class="fn">x</span> <span class="k">-&gt;</span> 
+    <span class="pn">{|</span> <span class="prop">Player</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 229)" onmouseover="showTip(event, 'fs24', 229)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 230)" onmouseover="showTip(event, 'fs25', 230)" class="id">Player</span>
+       <span class="prop">League</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 231)" onmouseover="showTip(event, 'fs24', 231)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs28', 232)" onmouseover="showTip(event, 'fs28', 232)" class="id">League</span> <span class="pn">|}</span><span class="pn">)</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 233)" onmouseover="showTip(event, 'fs21', 233)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 234)" onmouseover="showTip(event, 'fs22', 234)" class="id">truncate</span> <span class="n">5</span> <span class="c">//just to observe the first 5 rows, not a part of the exercise.</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val it: {| League: string; Player: string |} list =
+  [{ League = "deBundesliga"
+     Player = "Robert Lewandowski" }; { League = "frLigue 1"
+                                        Player = "Kylian Mbappé" };
+   { League = "esLa Liga"
+     Player = "Karim Benzema" }; { League = "itSerie A"
+                                   Player = "Ciro Immobile" };
+   { League = "frLigue 1"
+     Player = "Wissam Ben Yedder" }]</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<ul>
+<li>Transform each element of the <code>playerStatsTable</code> List into an anonymous record with a <code>Player</code> field that is a <code>string</code> and a <code>Age</code> field that is a integer(<code>int</code>).</li>
+</ul>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs17', 235)" onmouseover="showTip(event, 'fs17', 235)" class="id">playerStatsTable</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 236)" onmouseover="showTip(event, 'fs21', 236)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 237)" onmouseover="showTip(event, 'fs23', 237)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs24', 238)" onmouseover="showTip(event, 'fs24', 238)" class="fn">x</span> <span class="k">-&gt;</span> 
+    <span class="pn">{|</span> <span class="prop">Player</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 239)" onmouseover="showTip(event, 'fs24', 239)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 240)" onmouseover="showTip(event, 'fs25', 240)" class="id">Player</span>
+       <span class="prop">Age</span> <span class="o">=</span>  <span onmouseout="hideTip(event, 'fs24', 241)" onmouseover="showTip(event, 'fs24', 241)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs29', 242)" onmouseover="showTip(event, 'fs29', 242)" class="id">Age</span> <span class="pn">|}</span><span class="pn">)</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 243)" onmouseover="showTip(event, 'fs21', 243)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 244)" onmouseover="showTip(event, 'fs22', 244)" class="id">truncate</span> <span class="n">5</span> <span class="c">//just to observe the first 5 rows, not a part of the exercise.</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val it: {| Age: int; Player: string |} list =
+  [{ Age = 32
+     Player = "Robert Lewandowski" }; { Age = 22
+                                        Player = "Kylian Mbappé" };
+   { Age = 33
+     Player = "Karim Benzema" }; { Age = 31
+                                   Player = "Ciro Immobile" };
+   { Age = 30
+     Player = "Wissam Ben Yedder" }]</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<ul>
+<li>Transform each element of the <code>playerStatsTable</code> List into an anonymous record with a <code>Player</code> field that is a <code>string</code> and a <code>MatchesPlayed</code> field that is a integer(<code>int</code>).</li>
+</ul>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs17', 245)" onmouseover="showTip(event, 'fs17', 245)" class="id">playerStatsTable</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 246)" onmouseover="showTip(event, 'fs21', 246)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 247)" onmouseover="showTip(event, 'fs23', 247)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs24', 248)" onmouseover="showTip(event, 'fs24', 248)" class="fn">x</span> <span class="k">-&gt;</span> 
+    <span class="pn">{|</span> <span class="prop">Player</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 249)" onmouseover="showTip(event, 'fs24', 249)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 250)" onmouseover="showTip(event, 'fs25', 250)" class="id">Player</span> 
+       <span class="prop">MatchesPlayed</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 251)" onmouseover="showTip(event, 'fs24', 251)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs30', 252)" onmouseover="showTip(event, 'fs30', 252)" class="id">MatchesPlayed</span> <span class="pn">|}</span><span class="pn">)</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 253)" onmouseover="showTip(event, 'fs21', 253)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 254)" onmouseover="showTip(event, 'fs22', 254)" class="id">truncate</span> <span class="n">5</span> <span class="c">//just to observe the first 5 rows, not a part of the exercise.</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val it: {| MatchesPlayed: int; Player: string |} list =
+  [{ MatchesPlayed = 34
+     Player = "Robert Lewandowski" }; { MatchesPlayed = 35
+                                        Player = "Kylian Mbappé" };
+   { MatchesPlayed = 32
+     Player = "Karim Benzema" }; { MatchesPlayed = 31
+                                   Player = "Ciro Immobile" };
+   { MatchesPlayed = 37
+     Player = "Wissam Ben Yedder" }]</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<ul>
+<li>Transform each element of the <code>playerStatsTable</code> List into an anonymous record with a <code>Player</code> field that is a <code>string</code> and a <code>GoalsScored</code> field that is a integer(<code>int</code>).</li>
+</ul>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs17', 255)" onmouseover="showTip(event, 'fs17', 255)" class="id">playerStatsTable</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 256)" onmouseover="showTip(event, 'fs21', 256)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 257)" onmouseover="showTip(event, 'fs23', 257)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs24', 258)" onmouseover="showTip(event, 'fs24', 258)" class="fn">x</span> <span class="k">-&gt;</span> 
+    <span class="pn">{|</span> <span class="prop">Player</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 259)" onmouseover="showTip(event, 'fs24', 259)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 260)" onmouseover="showTip(event, 'fs25', 260)" class="id">Player</span> 
+       <span class="prop">GoalsScored</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 261)" onmouseover="showTip(event, 'fs24', 261)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 262)" onmouseover="showTip(event, 'fs31', 262)" class="id">GoalsScored</span> <span class="pn">|}</span><span class="pn">)</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 263)" onmouseover="showTip(event, 'fs21', 263)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 264)" onmouseover="showTip(event, 'fs22', 264)" class="id">truncate</span> <span class="n">5</span> <span class="c">//just to observe the first 5 rows, not a part of the exercise.</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val it: {| GoalsScored: int; Player: string |} list =
+  [{ GoalsScored = 35
+     Player = "Robert Lewandowski" }; { GoalsScored = 28
+                                        Player = "Kylian Mbappé" };
+   { GoalsScored = 27
+     Player = "Karim Benzema" }; { GoalsScored = 27
+                                   Player = "Ciro Immobile" };
+   { GoalsScored = 25
+     Player = "Wissam Ben Yedder" }]</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<h2 class=numbered><a name=Simple-transformations class=anchor href=#Simple-transformations>Simple transformations</a></h2>
+<p>Now that you are used to work with <code>List.map</code> to organize the data into tuples, records and anonymous records.
+Let's try to do it while applying some simple transformations as sum, multiplication, type transformations and so on.</p>
+<h3 class=numbered><a name=Transformations-using-tuples class=anchor href=#Transformations-using-tuples>Transformations using tuples</a></h3>
+<p>Example: map the <code>playerStatsTable</code> to a tuple of player and age, but add 1 to age. ( <code>Player</code>, <code>Age + 1</code>)</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs17', 267)" onmouseover="showTip(event, 'fs17', 267)" class="id">playerStatsTable</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 268)" onmouseover="showTip(event, 'fs21', 268)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 269)" onmouseover="showTip(event, 'fs23', 269)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs24', 270)" onmouseover="showTip(event, 'fs24', 270)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs24', 271)" onmouseover="showTip(event, 'fs24', 271)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs29', 272)" onmouseover="showTip(event, 'fs29', 272)" class="id">Age</span> <span class="o">+</span> <span class="n">1</span><span class="pn">)</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 273)" onmouseover="showTip(event, 'fs21', 273)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 274)" onmouseover="showTip(event, 'fs22', 274)" class="id">truncate</span> <span class="n">5</span> <span class="c">//just to observe the first 5 rows, not a part of the exercise.</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val it: int list = [33; 23; 34; 32; 31]</code></pre></td></tr></table>
+<p>When to use integers or floats/decimals:</p>
+<ol>
+<li>Use integers if the results of the calculations should be integers (1, 2, 3, 4, ...).</li>
+<li>Use floats or decimals if the results of the calculations may be floats or decimals (1.1, 2.1324, ...).</li>
+</ol>
+<ul>
+<li>map the <code>playerStatsTable</code> to a tuple of player and goals scored, but multiply goals scored by 10. ( <code>Player</code>, <code>GoalsScored * 10</code>)</li>
+</ul>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs17', 275)" onmouseover="showTip(event, 'fs17', 275)" class="id">playerStatsTable</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 276)" onmouseover="showTip(event, 'fs21', 276)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 277)" onmouseover="showTip(event, 'fs23', 277)" class="id">map</span><span class="pn">(</span><span class="k">fun</span>  <span onmouseout="hideTip(event, 'fs24', 278)" onmouseover="showTip(event, 'fs24', 278)" class="fn">x</span><span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs24', 279)" onmouseover="showTip(event, 'fs24', 279)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 280)" onmouseover="showTip(event, 'fs25', 280)" class="id">Player</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs24', 281)" onmouseover="showTip(event, 'fs24', 281)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 282)" onmouseover="showTip(event, 'fs31', 282)" class="id">GoalsScored</span> <span class="o">*</span> <span class="n">10</span><span class="pn">)</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 283)" onmouseover="showTip(event, 'fs21', 283)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 284)" onmouseover="showTip(event, 'fs22', 284)" class="id">truncate</span> <span class="n">5</span> <span class="c">//just to observe the first 5 rows, not a part of the exercise.</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val it: (string * int) list =
+  [("Robert Lewandowski", 350); ("Kylian Mbappé", 280); ("Karim Benzema", 270);
+   ("Ciro Immobile", 270); ("Wissam Ben Yedder", 250)]</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<ul>
+<li>map the <code>playerStatsTable</code> to a tuple of player and goals scored, but divide GoalsScored by 2. ( <code>Player</code>, <code>GoalsScored / 2</code>)</li>
+</ul>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs17', 317)" onmouseover="showTip(event, 'fs17', 317)" class="id">playerStatsTable</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 318)" onmouseover="showTip(event, 'fs21', 318)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 319)" onmouseover="showTip(event, 'fs23', 319)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs24', 320)" onmouseover="showTip(event, 'fs24', 320)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs24', 321)" onmouseover="showTip(event, 'fs24', 321)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 322)" onmouseover="showTip(event, 'fs25', 322)" class="id">Player</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs54', 323)" onmouseover="showTip(event, 'fs54', 323)" class="fn">float</span> <span onmouseout="hideTip(event, 'fs24', 324)" onmouseover="showTip(event, 'fs24', 324)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 325)" onmouseover="showTip(event, 'fs31', 325)" class="id">GoalsScored</span> <span class="o">/</span> <span class="n">2.0</span><span class="pn">)</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 326)" onmouseover="showTip(event, 'fs21', 326)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 327)" onmouseover="showTip(event, 'fs22', 327)" class="id">truncate</span> <span class="n">5</span> <span class="c">//just to observe the first 5 rows, not a part of the exercise.</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val it: (string * int) list =
+  [("Robert Lewandowski", 17); ("Kylian Mbappé", 14); ("Karim Benzema", 13);
+   ("Ciro Immobile", 13); ("Wissam Ben Yedder", 12)]</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<p>In this case, look how dividing using integers rounds the results to the nearest integers.
+If the results are decimals you might prefer to get exact results.
+For that you can use floats or decimals types.
+In order to convert a variable to float you have to use the syntax: <code>float variable</code>.</p>
+<p>Example: map the <code>playerStatsTable</code> to a tuple of player and age, but convert age to float. ( <code>Player</code>, <code>float Age</code>)</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs17', 295)" onmouseover="showTip(event, 'fs17', 295)" class="id">playerStatsTable</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 296)" onmouseover="showTip(event, 'fs21', 296)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 297)" onmouseover="showTip(event, 'fs23', 297)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs24', 298)" onmouseover="showTip(event, 'fs24', 298)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs24', 299)" onmouseover="showTip(event, 'fs24', 299)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 300)" onmouseover="showTip(event, 'fs25', 300)" class="id">Player</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs54', 301)" onmouseover="showTip(event, 'fs54', 301)" class="fn">float</span> <span onmouseout="hideTip(event, 'fs24', 302)" onmouseover="showTip(event, 'fs24', 302)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs29', 303)" onmouseover="showTip(event, 'fs29', 303)" class="id">Age</span><span class="pn">)</span> 
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 304)" onmouseover="showTip(event, 'fs21', 304)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 305)" onmouseover="showTip(event, 'fs22', 305)" class="id">truncate</span> <span class="n">5</span> <span class="c">//just to observe the first 5 rows, not a part of the exercise.</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val it: (string * float) list =
+  [("Robert Lewandowski", 32.0); ("Kylian Mbappé", 22.0);
+   ("Karim Benzema", 33.0); ("Ciro Immobile", 31.0);
+   ("Wissam Ben Yedder", 30.0)]</code></pre></td></tr></table>
+<ul>
+<li>map the <code>playerStatsTable</code> to a tuple of player and goals scored, but convert goalsScored to float. ( <code>Player</code>, <code>float GoalsScored</code>)</li>
+</ul>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs17', 306)" onmouseover="showTip(event, 'fs17', 306)" class="id">playerStatsTable</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 307)" onmouseover="showTip(event, 'fs21', 307)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 308)" onmouseover="showTip(event, 'fs23', 308)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs24', 309)" onmouseover="showTip(event, 'fs24', 309)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs24', 310)" onmouseover="showTip(event, 'fs24', 310)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 311)" onmouseover="showTip(event, 'fs25', 311)" class="id">Player</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs54', 312)" onmouseover="showTip(event, 'fs54', 312)" class="fn">float</span> <span onmouseout="hideTip(event, 'fs24', 313)" onmouseover="showTip(event, 'fs24', 313)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 314)" onmouseover="showTip(event, 'fs31', 314)" class="id">GoalsScored</span><span class="pn">)</span> 
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 315)" onmouseover="showTip(event, 'fs21', 315)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 316)" onmouseover="showTip(event, 'fs22', 316)" class="id">truncate</span> <span class="n">5</span> <span class="c">//just to observe the first 5 rows, not a part of the exercise.</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val it: (string * float) list =
+  [("Robert Lewandowski", 35.0); ("Kylian Mbappé", 28.0);
+   ("Karim Benzema", 27.0); ("Ciro Immobile", 27.0);
+   ("Wissam Ben Yedder", 25.0)]</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<ul>
+<li>
+map the <code>playerStatsTable</code> to a tuple of player and goals scored, but divide goalsScored by 2.0. ( <code>Player</code>, <code>GoalsScored / 2.0</code>)
+Hint: convert goals scored to float and divide by 2.0 (you can't divide by 2 because if you perform math operations with different types, you'll get an error).
+</li>
+</ul>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs17', 317)" onmouseover="showTip(event, 'fs17', 317)" class="id">playerStatsTable</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 318)" onmouseover="showTip(event, 'fs21', 318)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 319)" onmouseover="showTip(event, 'fs23', 319)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs24', 320)" onmouseover="showTip(event, 'fs24', 320)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs24', 321)" onmouseover="showTip(event, 'fs24', 321)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 322)" onmouseover="showTip(event, 'fs25', 322)" class="id">Player</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs54', 323)" onmouseover="showTip(event, 'fs54', 323)" class="fn">float</span> <span onmouseout="hideTip(event, 'fs24', 324)" onmouseover="showTip(event, 'fs24', 324)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 325)" onmouseover="showTip(event, 'fs31', 325)" class="id">GoalsScored</span> <span class="o">/</span> <span class="n">2.0</span><span class="pn">)</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 326)" onmouseover="showTip(event, 'fs21', 326)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 327)" onmouseover="showTip(event, 'fs22', 327)" class="id">truncate</span> <span class="n">5</span> <span class="c">//just to observe the first 5 rows, not a part of the exercise.</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val it: (string * int) list =
+  [("Robert Lewandowski", 17); ("Kylian Mbappé", 14); ("Karim Benzema", 13);
+   ("Ciro Immobile", 13); ("Wissam Ben Yedder", 12)]</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<h3 class=numbered><a name=Transformations-using-records class=anchor href=#Transformations-using-records>Transformations using records</a></h3>
+<p>Example: map the <code>playerStatsTable</code> to a record of player and age, but add 1 to age. ( <code>Player</code>, <code>Age + 1</code>)</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">type</span> <span onmouseout="hideTip(event, 'fs55', 329)" onmouseover="showTip(event, 'fs55', 329)" class="rt">PlayerAndAgePlus1Int</span> <span class="o">=</span>
+    <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs56', 330)" onmouseover="showTip(event, 'fs56', 330)" class="prop">Player</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs2', 331)" onmouseover="showTip(event, 'fs2', 331)" class="rt">string</span>
+      <span onmouseout="hideTip(event, 'fs57', 332)" onmouseover="showTip(event, 'fs57', 332)" class="prop">AgePlus1Int</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs47', 333)" onmouseover="showTip(event, 'fs47', 333)" class="vt">int</span> <span class="pn">}</span>
+
+<span onmouseout="hideTip(event, 'fs17', 334)" onmouseover="showTip(event, 'fs17', 334)" class="id">playerStatsTable</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 335)" onmouseover="showTip(event, 'fs21', 335)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 336)" onmouseover="showTip(event, 'fs23', 336)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs24', 337)" onmouseover="showTip(event, 'fs24', 337)" class="fn">x</span> <span class="k">-&gt;</span>
+    <span class="pn">{</span> <span class="prop">Player</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 338)" onmouseover="showTip(event, 'fs24', 338)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 339)" onmouseover="showTip(event, 'fs25', 339)" class="id">Player</span> 
+      <span class="prop">AgePlus1Int</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 340)" onmouseover="showTip(event, 'fs24', 340)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs29', 341)" onmouseover="showTip(event, 'fs29', 341)" class="id">Age</span> <span class="o">+</span> <span class="n">1</span><span class="pn">}</span><span class="pn">)</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 342)" onmouseover="showTip(event, 'fs21', 342)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 343)" onmouseover="showTip(event, 'fs22', 343)" class="id">truncate</span> <span class="n">5</span> <span class="c">//just to observe the first 5 rows, not a part of the exercise.</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>type PlayerAndAgePlus1Int =
+  {
+    Player: string
+    AgePlus1Int: int
+  }
+val it: PlayerAndAgePlus1Int list =
+  [{ Player = "Robert Lewandowski"
+     AgePlus1Int = 33 }; { Player = "Kylian Mbappé"
+                           AgePlus1Int = 23 }; { Player = "Karim Benzema"
+                                                 AgePlus1Int = 34 };
+   { Player = "Ciro Immobile"
+     AgePlus1Int = 32 }; { Player = "Wissam Ben Yedder"
+                           AgePlus1Int = 31 }]</code></pre></td></tr></table>
+<ul>
+<li>
+map the <code>playerStatsTable</code> to a record of player and goals scored, but multiply goals scored by 10. ( <code>Player</code>, <code>GoalsScored * 10</code>)
+Hint: You have to create a new type record.
+</li>
+</ul>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">type</span> <span onmouseout="hideTip(event, 'fs58', 344)" onmouseover="showTip(event, 'fs58', 344)" class="rt">PlayerAndGls</span> <span class="o">=</span> 
+    <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs59', 345)" onmouseover="showTip(event, 'fs59', 345)" class="prop">Player</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs2', 346)" onmouseover="showTip(event, 'fs2', 346)" class="rt">string</span> 
+      <span onmouseout="hideTip(event, 'fs60', 347)" onmouseover="showTip(event, 'fs60', 347)" class="prop">GoalsScored</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs47', 348)" onmouseover="showTip(event, 'fs47', 348)" class="vt">int</span><span class="pn">}</span>
+
+<span onmouseout="hideTip(event, 'fs17', 349)" onmouseover="showTip(event, 'fs17', 349)" class="id">playerStatsTable</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 350)" onmouseover="showTip(event, 'fs21', 350)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 351)" onmouseover="showTip(event, 'fs23', 351)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs24', 352)" onmouseover="showTip(event, 'fs24', 352)" class="fn">x</span> <span class="k">-&gt;</span> 
+    <span class="pn">{</span> <span class="prop">Player</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 353)" onmouseover="showTip(event, 'fs24', 353)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 354)" onmouseover="showTip(event, 'fs25', 354)" class="id">Player</span> 
+      <span class="prop">GoalsScored</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 355)" onmouseover="showTip(event, 'fs24', 355)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 356)" onmouseover="showTip(event, 'fs31', 356)" class="id">GoalsScored</span> <span class="o">*</span> <span class="n">10</span> <span class="pn">}</span><span class="pn">)</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 357)" onmouseover="showTip(event, 'fs21', 357)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 358)" onmouseover="showTip(event, 'fs22', 358)" class="id">truncate</span> <span class="n">5</span> <span class="c">//just to observe the first 5 rows, not a part of the exercise.</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>type PlayerAndGls =
+  {
+    Player: string
+    GoalsScored: int
+  }
+val it: PlayerAndGls list =
+  [{ Player = "Robert Lewandowski"
+     GoalsScored = 350 }; { Player = "Kylian Mbappé"
+                            GoalsScored = 280 }; { Player = "Karim Benzema"
+                                                   GoalsScored = 270 };
+   { Player = "Ciro Immobile"
+     GoalsScored = 270 }; { Player = "Wissam Ben Yedder"
+                            GoalsScored = 250 }]</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<ul>
+<li>
+map the <code>playerStatsTable</code> to a record of player and goals scored, but divide goals scored by 2.0. ( <code>Player</code>, <code>float GoalsScored  / 2.0</code>)<br />
+Hint: You have to create a new type record, because previous type has goals scored as integers but you want floats.
+</li>
+</ul>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">type</span> <span onmouseout="hideTip(event, 'fs61', 359)" onmouseover="showTip(event, 'fs61', 359)" class="rt">PlayerAndGlsFloat</span> <span class="o">=</span> 
+    <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs62', 360)" onmouseover="showTip(event, 'fs62', 360)" class="prop">Player</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs2', 361)" onmouseover="showTip(event, 'fs2', 361)" class="rt">string</span> 
+      <span onmouseout="hideTip(event, 'fs63', 362)" onmouseover="showTip(event, 'fs63', 362)" class="prop">GoalsScoredFloat</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs54', 363)" onmouseover="showTip(event, 'fs54', 363)" class="vt">float</span><span class="pn">}</span>
+
+<span onmouseout="hideTip(event, 'fs17', 364)" onmouseover="showTip(event, 'fs17', 364)" class="id">playerStatsTable</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 365)" onmouseover="showTip(event, 'fs21', 365)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 366)" onmouseover="showTip(event, 'fs23', 366)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs24', 367)" onmouseover="showTip(event, 'fs24', 367)" class="fn">x</span> <span class="k">-&gt;</span> 
+    <span class="pn">{</span> <span class="prop">Player</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 368)" onmouseover="showTip(event, 'fs24', 368)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 369)" onmouseover="showTip(event, 'fs25', 369)" class="id">Player</span> 
+      <span class="prop">GoalsScoredFloat</span> <span class="o">=</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs54', 370)" onmouseover="showTip(event, 'fs54', 370)" class="fn">float</span> <span onmouseout="hideTip(event, 'fs24', 371)" onmouseover="showTip(event, 'fs24', 371)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 372)" onmouseover="showTip(event, 'fs31', 372)" class="id">GoalsScored</span><span class="pn">)</span> <span class="o">/</span> <span class="n">2.0</span> <span class="pn">}</span><span class="pn">)</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 373)" onmouseover="showTip(event, 'fs21', 373)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 374)" onmouseover="showTip(event, 'fs22', 374)" class="id">truncate</span> <span class="n">5</span> <span class="c">//just to observe the first 5 rows, not a part of the exercise.</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>type PlayerAndGlsFloat =
+  {
+    Player: string
+    GoalsScoredFloat: float
+  }
+val it: PlayerAndGlsFloat list =
+  [{ Player = "Robert Lewandowski"
+     GoalsScoredFloat = 17.5 }; { Player = "Kylian Mbappé"
+                                  GoalsScoredFloat = 14.0 };
+   { Player = "Karim Benzema"
+     GoalsScoredFloat = 13.5 }; { Player = "Ciro Immobile"
+                                  GoalsScoredFloat = 13.5 };
+   { Player = "Wissam Ben Yedder"
+     GoalsScoredFloat = 12.5 }]</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<h3 class=numbered><a name=Transformations-using-anonymous-records class=anchor href=#Transformations-using-anonymous-records>Transformations using anonymous records</a></h3>
+<p>Example: map the <code>playerStatsTable</code> to an anonymoys record of player and age, but add 1 to age. ( <code>Player</code>, <code>Age + 1</code>)</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs17', 376)" onmouseover="showTip(event, 'fs17', 376)" class="id">playerStatsTable</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 377)" onmouseover="showTip(event, 'fs21', 377)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 378)" onmouseover="showTip(event, 'fs23', 378)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs24', 379)" onmouseover="showTip(event, 'fs24', 379)" class="fn">x</span> <span class="k">-&gt;</span> 
+    <span class="pn">{|</span> <span class="prop">Player</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 380)" onmouseover="showTip(event, 'fs24', 380)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 381)" onmouseover="showTip(event, 'fs25', 381)" class="id">Player</span>
+       <span class="prop">AgePlus1</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 382)" onmouseover="showTip(event, 'fs24', 382)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs29', 383)" onmouseover="showTip(event, 'fs29', 383)" class="id">Age</span> <span class="o">+</span> <span class="n">1</span> <span class="pn">|}</span><span class="pn">)</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 384)" onmouseover="showTip(event, 'fs21', 384)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 385)" onmouseover="showTip(event, 'fs22', 385)" class="id">truncate</span> <span class="n">5</span> <span class="c">//just to observe the first 5 rows, not a part of the exercise.</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val it: {| AgePlus1: int; Player: string |} list =
+  [{ AgePlus1 = 33
+     Player = "Robert Lewandowski" }; { AgePlus1 = 23
+                                        Player = "Kylian Mbappé" };
+   { AgePlus1 = 34
+     Player = "Karim Benzema" }; { AgePlus1 = 32
+                                   Player = "Ciro Immobile" };
+   { AgePlus1 = 31
+     Player = "Wissam Ben Yedder" }]</code></pre></td></tr></table>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// or </span>
+
+<span onmouseout="hideTip(event, 'fs17', 386)" onmouseover="showTip(event, 'fs17', 386)" class="id">playerStatsTable</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 387)" onmouseover="showTip(event, 'fs21', 387)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 388)" onmouseover="showTip(event, 'fs23', 388)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs24', 389)" onmouseover="showTip(event, 'fs24', 389)" class="fn">x</span> <span class="k">-&gt;</span>
+    <span class="pn">{|</span> <span class="prop">Player</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 390)" onmouseover="showTip(event, 'fs24', 390)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 391)" onmouseover="showTip(event, 'fs25', 391)" class="id">Player</span> 
+       <span class="prop">AgePlus1Float</span> <span class="o">=</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs54', 392)" onmouseover="showTip(event, 'fs54', 392)" class="fn">float</span> <span onmouseout="hideTip(event, 'fs24', 393)" onmouseover="showTip(event, 'fs24', 393)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs29', 394)" onmouseover="showTip(event, 'fs29', 394)" class="id">Age</span><span class="pn">)</span> <span class="o">+</span> <span class="n">1.0</span> <span class="pn">|}</span><span class="pn">)</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 395)" onmouseover="showTip(event, 'fs21', 395)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 396)" onmouseover="showTip(event, 'fs22', 396)" class="id">truncate</span> <span class="n">5</span> <span class="c">//just to observe the first 5 rows, not a part of the exercise.</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val it: {| AgePlus1Float: float; Player: string |} list =
+  [{ AgePlus1Float = 33.0
+     Player = "Robert Lewandowski" }; { AgePlus1Float = 23.0
+                                        Player = "Kylian Mbappé" };
+   { AgePlus1Float = 34.0
+     Player = "Karim Benzema" }; { AgePlus1Float = 32.0
+                                   Player = "Ciro Immobile" };
+   { AgePlus1Float = 31.0
+     Player = "Wissam Ben Yedder" }]</code></pre></td></tr></table>
+<ul>
+<li>map the <code>playerStatsTable</code> to an anonymous record of player and goals scored, but multiply goals scored by 10. ( <code>Player</code>, <code>GoalsScored * 10</code>)</li>
+</ul>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs17', 397)" onmouseover="showTip(event, 'fs17', 397)" class="id">playerStatsTable</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 398)" onmouseover="showTip(event, 'fs21', 398)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 399)" onmouseover="showTip(event, 'fs23', 399)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs24', 400)" onmouseover="showTip(event, 'fs24', 400)" class="fn">x</span> <span class="k">-&gt;</span> 
+    <span class="pn">{|</span> <span class="prop">Player</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 401)" onmouseover="showTip(event, 'fs24', 401)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 402)" onmouseover="showTip(event, 'fs25', 402)" class="id">Player</span> 
+       <span class="prop">GoalsScoredFloat</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 403)" onmouseover="showTip(event, 'fs24', 403)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 404)" onmouseover="showTip(event, 'fs31', 404)" class="id">GoalsScored</span> <span class="o">*</span> <span class="n">10</span> <span class="pn">|}</span><span class="pn">)</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 405)" onmouseover="showTip(event, 'fs21', 405)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 406)" onmouseover="showTip(event, 'fs22', 406)" class="id">truncate</span> <span class="n">5</span> <span class="c">//just to observe the first 5 rows, not a part of the exercise.</span>
+
+<span class="c">// or </span>
+
+<span onmouseout="hideTip(event, 'fs17', 407)" onmouseover="showTip(event, 'fs17', 407)" class="id">playerStatsTable</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 408)" onmouseover="showTip(event, 'fs21', 408)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 409)" onmouseover="showTip(event, 'fs23', 409)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs24', 410)" onmouseover="showTip(event, 'fs24', 410)" class="fn">x</span> <span class="k">-&gt;</span>
+    <span class="pn">{|</span> <span class="prop">Player</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 411)" onmouseover="showTip(event, 'fs24', 411)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 412)" onmouseover="showTip(event, 'fs25', 412)" class="id">Player</span> 
+       <span class="prop">AgePlus1Float</span> <span class="o">=</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs54', 413)" onmouseover="showTip(event, 'fs54', 413)" class="fn">float</span> <span onmouseout="hideTip(event, 'fs24', 414)" onmouseover="showTip(event, 'fs24', 414)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 415)" onmouseover="showTip(event, 'fs31', 415)" class="id">GoalsScored</span><span class="pn">)</span> <span class="o">*</span> <span class="n">10.0</span> <span class="pn">|}</span><span class="pn">)</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 416)" onmouseover="showTip(event, 'fs21', 416)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 417)" onmouseover="showTip(event, 'fs22', 417)" class="id">truncate</span> <span class="n">5</span> <span class="c">//just to observe the first 5 rows, not a part of the exercise.</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val it: {| AgePlus1Float: float; Player: string |} list =
+  [{ AgePlus1Float = 350.0
+     Player = "Robert Lewandowski" }; { AgePlus1Float = 280.0
+                                        Player = "Kylian Mbappé" };
+   { AgePlus1Float = 270.0
+     Player = "Karim Benzema" }; { AgePlus1Float = 270.0
+                                   Player = "Ciro Immobile" };
+   { AgePlus1Float = 250.0
+     Player = "Wissam Ben Yedder" }]</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<ul>
+<li>
+map the <code>playerStatsTable</code> to an anonymous record of player and goals scored, but divide goals scored by 2.0. ( <code>Player</code>, <code>float GoalsScored  / 2.0</code>)<br />
+Hint: Remember that you have to transform GoalsScored to float.
+</li>
+</ul>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs17', 418)" onmouseover="showTip(event, 'fs17', 418)" class="id">playerStatsTable</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 419)" onmouseover="showTip(event, 'fs21', 419)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 420)" onmouseover="showTip(event, 'fs23', 420)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs24', 421)" onmouseover="showTip(event, 'fs24', 421)" class="fn">x</span> <span class="k">-&gt;</span> 
+    <span class="pn">{|</span> <span class="prop">Player</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 422)" onmouseover="showTip(event, 'fs24', 422)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 423)" onmouseover="showTip(event, 'fs25', 423)" class="id">Player</span> 
+       <span class="prop">GoalsScoredFloat</span> <span class="o">=</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs54', 424)" onmouseover="showTip(event, 'fs54', 424)" class="fn">float</span> <span onmouseout="hideTip(event, 'fs24', 425)" onmouseover="showTip(event, 'fs24', 425)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 426)" onmouseover="showTip(event, 'fs31', 426)" class="id">GoalsScored</span><span class="pn">)</span> <span class="o">/</span> <span class="n">2.0</span> <span class="pn">|}</span><span class="pn">)</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 427)" onmouseover="showTip(event, 'fs21', 427)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 428)" onmouseover="showTip(event, 'fs22', 428)" class="id">truncate</span> <span class="n">5</span> <span class="c">//just to observe the first 5 rows, not a part of the exercise.</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val it: {| GoalsScoredFloat: float; Player: string |} list =
+  [{ GoalsScoredFloat = 17.5
+     Player = "Robert Lewandowski" }; { GoalsScoredFloat = 14.0
+                                        Player = "Kylian Mbappé" };
+   { GoalsScoredFloat = 13.5
+     Player = "Karim Benzema" }; { GoalsScoredFloat = 13.5
+                                   Player = "Ciro Immobile" };
+   { GoalsScoredFloat = 12.5
+     Player = "Wissam Ben Yedder" }]</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<h2 class=numbered><a name=Creating-and-transforming-TeamRecord class=anchor href=#Creating-and-transforming-TeamRecord>Creating and transforming TeamRecord</a></h2>
+<p>Now that you are used to work with records and perform simple Transformations, map <code>playerStatsTable</code> to a record type that includes:</p>
+<ul>
+<li>Player (<code>Player</code>) - type <code>string</code></li>
+<li>Nation (<code>Nation</code>) - type <code>string</code></li>
+<li>League (<code>League</code>) - type <code>string</code></li>
+<li>AgeNextYear (<code>Age + 1</code>) - type <code>int</code></li>
+<li>HalfGoalsScored (<code>GoalsScored / 2.0</code>) - type <code>float</code></li>
+</ul>
+<p>Hint: Create a new type.</p>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">type</span> <span onmouseout="hideTip(event, 'fs64', 430)" onmouseover="showTip(event, 'fs64', 430)" class="rt">TeamRecord</span> <span class="o">=</span> 
+    <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs65', 431)" onmouseover="showTip(event, 'fs65', 431)" class="prop">Player</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs2', 432)" onmouseover="showTip(event, 'fs2', 432)" class="rt">string</span>
+      <span onmouseout="hideTip(event, 'fs66', 433)" onmouseover="showTip(event, 'fs66', 433)" class="prop">Nation</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs2', 434)" onmouseover="showTip(event, 'fs2', 434)" class="rt">string</span>
+      <span onmouseout="hideTip(event, 'fs67', 435)" onmouseover="showTip(event, 'fs67', 435)" class="prop">League</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs2', 436)" onmouseover="showTip(event, 'fs2', 436)" class="rt">string</span>
+      <span onmouseout="hideTip(event, 'fs68', 437)" onmouseover="showTip(event, 'fs68', 437)" class="prop">AgeNextYear</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs47', 438)" onmouseover="showTip(event, 'fs47', 438)" class="vt">int</span>
+      <span onmouseout="hideTip(event, 'fs69', 439)" onmouseover="showTip(event, 'fs69', 439)" class="prop">HalfGoalsScored</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs54', 440)" onmouseover="showTip(event, 'fs54', 440)" class="vt">float</span> <span class="pn">}</span>
+
+<span onmouseout="hideTip(event, 'fs17', 441)" onmouseover="showTip(event, 'fs17', 441)" class="id">playerStatsTable</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 442)" onmouseover="showTip(event, 'fs21', 442)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 443)" onmouseover="showTip(event, 'fs23', 443)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs24', 444)" onmouseover="showTip(event, 'fs24', 444)" class="fn">x</span> <span class="k">-&gt;</span>
+    <span class="pn">{</span> <span class="prop">Player</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 445)" onmouseover="showTip(event, 'fs24', 445)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 446)" onmouseover="showTip(event, 'fs25', 446)" class="id">Player</span>
+      <span class="prop">Nation</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 447)" onmouseover="showTip(event, 'fs24', 447)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs26', 448)" onmouseover="showTip(event, 'fs26', 448)" class="id">Nation</span>
+      <span class="prop">League</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 449)" onmouseover="showTip(event, 'fs24', 449)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs28', 450)" onmouseover="showTip(event, 'fs28', 450)" class="id">League</span>
+      <span class="prop">AgeNextYear</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 451)" onmouseover="showTip(event, 'fs24', 451)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs29', 452)" onmouseover="showTip(event, 'fs29', 452)" class="id">Age</span> <span class="o">+</span> <span class="n">1</span>
+      <span class="prop">HalfGoalsScored</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs54', 453)" onmouseover="showTip(event, 'fs54', 453)" class="fn">float</span> <span onmouseout="hideTip(event, 'fs24', 454)" onmouseover="showTip(event, 'fs24', 454)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 455)" onmouseover="showTip(event, 'fs31', 455)" class="id">GoalsScored</span> <span class="o">/</span> <span class="n">2.0</span><span class="pn">}</span><span class="pn">)</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 456)" onmouseover="showTip(event, 'fs21', 456)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 457)" onmouseover="showTip(event, 'fs22', 457)" class="id">truncate</span> <span class="n">5</span> <span class="c">//just to observe the first 5 rows, not a part of the exercise.</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>type TeamRecord =
+  {
+    Player: string
+    Nation: string
+    League: string
+    AgeNextYear: int
+    HalfGoalsScored: float
+  }
+val it: TeamRecord list =
+  [{ Player = "Robert Lewandowski"
+     Nation = "pl POL"
+     League = "deBundesliga"
+     AgeNextYear = 33
+     HalfGoalsScored = 17.5 }; { Player = "Kylian Mbappé"
+                                 Nation = "fr FRA"
+                                 League = "frLigue 1"
+                                 AgeNextYear = 23
+                                 HalfGoalsScored = 14.0 };
+   { Player = "Karim Benzema"
+     Nation = "fr FRA"
+     League = "esLa Liga"
+     AgeNextYear = 34
+     HalfGoalsScored = 13.5 }; { Player = "Ciro Immobile"
+                                 Nation = "it ITA"
+                                 League = "itSerie A"
+                                 AgeNextYear = 32
+                                 HalfGoalsScored = 13.5 };
+   { Player = "Wissam Ben Yedder"
+     Nation = "fr FRA"
+     League = "frLigue 1"
+     AgeNextYear = 31
+     HalfGoalsScored = 12.5 }]</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+
+            <div class="fsdocs-tip" id="fs1">Multiple items<br />union case H2.H2: string -&gt; H2<br /><br />--------------------<br />type H2 = | H2 of string</div>
+<div class="fsdocs-tip" id="fs2">Multiple items<br />val string: value: &#39;T -&gt; string<br /><em>&lt;summary&gt;Converts the argument to a string using &lt;c&gt;ToString&lt;/c&gt;.&lt;/summary&gt;<br />&lt;remarks&gt;For standard integer and floating point values the and any type that implements &lt;c&gt;IFormattable&lt;/c&gt;&lt;c&gt;ToString&lt;/c&gt; conversion uses &lt;c&gt;CultureInfo.InvariantCulture&lt;/c&gt;. &lt;/remarks&gt;<br />&lt;param name=&quot;value&quot;&gt;The input value.&lt;/param&gt;<br />&lt;returns&gt;The converted string.&lt;/returns&gt;<br />&lt;example id=&quot;string-example&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;&lt;/code&gt;&lt;/example&gt;</em><br /><br />--------------------<br />type string = System.String<br /><em>&lt;summary&gt;An abbreviation for the CLI type &lt;see cref=&quot;T:System.String&quot; /&gt;.&lt;/summary&gt;<br />&lt;category&gt;Basic Types&lt;/category&gt;</em></div>
+<div class="fsdocs-tip" id="fs3">Multiple items<br />union case H3.H3: string -&gt; H3<br /><br />--------------------<br />type H3 = | H3 of string</div>
+<div class="fsdocs-tip" id="fs4">val makeNumberedHeading: htmlTag: string -&gt; text: string -&gt; string</div>
+<div class="fsdocs-tip" id="fs5">val htmlTag: string</div>
+<div class="fsdocs-tip" id="fs6">val text: string</div>
+<div class="fsdocs-tip" id="fs7">val name: string</div>
+<div class="fsdocs-tip" id="fs8">System.String.Replace(oldValue: string, newValue: string) : string<br />System.String.Replace(oldChar: char, newChar: char) : string<br />System.String.Replace(oldValue: string, newValue: string, comparisonType: System.StringComparison) : string<br />System.String.Replace(oldValue: string, newValue: string, ignoreCase: bool, culture: System.Globalization.CultureInfo) : string</div>
+<div class="fsdocs-tip" id="fs9">val snippet: string</div>
+<div class="fsdocs-tip" id="fs10">val sprintf: format: Printf.StringFormat&lt;&#39;T&gt; -&gt; &#39;T<br /><em>&lt;summary&gt;Print to a string using the given format.&lt;/summary&gt;<br />&lt;param name=&quot;format&quot;&gt;The formatter.&lt;/param&gt;<br />&lt;returns&gt;The formatted result.&lt;/returns&gt;<br />&lt;example&gt;See &lt;c&gt;Printf.sprintf&lt;/c&gt; (link: &lt;see cref=&quot;M:Microsoft.FSharp.Core.PrintfModule.PrintFormatToStringThen``1&quot; /&gt;) for examples.&lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs11">Multiple items<br />namespace FSharp<br /><br />--------------------<br />namespace Microsoft.FSharp</div>
+<div class="fsdocs-tip" id="fs12">Multiple items<br />namespace FSharp.Data<br /><br />--------------------<br />namespace Microsoft.FSharp.Data</div>
+<div class="fsdocs-tip" id="fs13">Multiple items<br />type LiteralAttribute =
+  inherit Attribute
+  new: unit -&gt; LiteralAttribute<br /><em>&lt;summary&gt;Adding this attribute to a value causes it to be compiled as a CLI constant literal.&lt;/summary&gt;<br />&lt;category&gt;Attributes&lt;/category&gt;</em><br /><br />--------------------<br />new: unit -&gt; LiteralAttribute</div>
+<div class="fsdocs-tip" id="fs14">[&lt;Literal&gt;]
+val CsvPath: string = &quot;D:\a\Teaching\Teaching\docs/FootballPlayers.csv&quot;</div>
+<div class="fsdocs-tip" id="fs15">type FootballPlayersCsv = CsvProvider&lt;...&gt;</div>
+<div class="fsdocs-tip" id="fs16">type CsvProvider<br /><em>&lt;summary&gt;Typed representation of a CSV file.&lt;/summary&gt;
+           &lt;param name=&#39;Sample&#39;&gt;Location of a CSV sample file or a string containing a sample CSV document.&lt;/param&gt;
+           &lt;param name=&#39;Separators&#39;&gt;Column delimiter(s). Defaults to &lt;c&gt;,&lt;/c&gt;.&lt;/param&gt;
+           &lt;param name=&#39;InferRows&#39;&gt;Number of rows to use for inference. Defaults to &lt;c&gt;1000&lt;/c&gt;. If this is zero, all rows are used.&lt;/param&gt;
+           &lt;param name=&#39;Schema&#39;&gt;Optional column types, in a comma separated list. Valid types are &lt;c&gt;int&lt;/c&gt;, &lt;c&gt;int64&lt;/c&gt;, &lt;c&gt;bool&lt;/c&gt;, &lt;c&gt;float&lt;/c&gt;, &lt;c&gt;decimal&lt;/c&gt;, &lt;c&gt;date&lt;/c&gt;, &lt;c&gt;guid&lt;/c&gt;, &lt;c&gt;string&lt;/c&gt;, &lt;c&gt;int?&lt;/c&gt;, &lt;c&gt;int64?&lt;/c&gt;, &lt;c&gt;bool?&lt;/c&gt;, &lt;c&gt;float?&lt;/c&gt;, &lt;c&gt;decimal?&lt;/c&gt;, &lt;c&gt;date?&lt;/c&gt;, &lt;c&gt;guid?&lt;/c&gt;, &lt;c&gt;int option&lt;/c&gt;, &lt;c&gt;int64 option&lt;/c&gt;, &lt;c&gt;bool option&lt;/c&gt;, &lt;c&gt;float option&lt;/c&gt;, &lt;c&gt;decimal option&lt;/c&gt;, &lt;c&gt;date option&lt;/c&gt;, &lt;c&gt;guid option&lt;/c&gt; and &lt;c&gt;string option&lt;/c&gt;.
+           You can also specify a unit and the name of the column like this: &lt;c&gt;Name (type&amp;lt;unit&amp;gt;)&lt;/c&gt;, or you can override only the name. If you don&#39;t want to specify all the columns, you can reference the columns by name like this: &lt;c&gt;ColumnName=type&lt;/c&gt;.&lt;/param&gt;
+           &lt;param name=&#39;HasHeaders&#39;&gt;Whether the sample contains the names of the columns as its first line.&lt;/param&gt;
+           &lt;param name=&#39;IgnoreErrors&#39;&gt;Whether to ignore rows that have the wrong number of columns or which can&#39;t be parsed using the inferred or specified schema. Otherwise an exception is thrown when these rows are encountered.&lt;/param&gt;
+           &lt;param name=&#39;SkipRows&#39;&gt;Skips the first n rows of the CSV file.&lt;/param&gt;
+           &lt;param name=&#39;AssumeMissingValues&#39;&gt;When set to true, the type provider will assume all columns can have missing values, even if in the provided sample all values are present. Defaults to false.&lt;/param&gt;
+           &lt;param name=&#39;PreferOptionals&#39;&gt;When set to true, inference will prefer to use the option type instead of nullable types, &lt;c&gt;double.NaN&lt;/c&gt; or &lt;c&gt;&quot;&quot;&lt;/c&gt; for missing values. Defaults to false.&lt;/param&gt;
+           &lt;param name=&#39;Quote&#39;&gt;The quotation mark (for surrounding values containing the delimiter). Defaults to &lt;c&gt;&quot;&lt;/c&gt;.&lt;/param&gt;
+           &lt;param name=&#39;MissingValues&#39;&gt;The set of strings recogized as missing values specified as a comma-separated string (e.g., &quot;NA,N/A&quot;). Defaults to &lt;c&gt;NaN,NA,N/A,#N/A,:,-,TBA,TBD&lt;/c&gt;.&lt;/param&gt;
+           &lt;param name=&#39;CacheRows&#39;&gt;Whether the rows should be caches so they can be iterated multiple times. Defaults to true. Disable for large datasets.&lt;/param&gt;
+           &lt;param name=&#39;Culture&#39;&gt;The culture used for parsing numbers and dates. Defaults to the invariant culture.&lt;/param&gt;
+           &lt;param name=&#39;Encoding&#39;&gt;The encoding used to read the sample. You can specify either the character set name or the codepage number. Defaults to UTF8 for files, and to ISO-8859-1 the for HTTP requests, unless &lt;c&gt;charset&lt;/c&gt; is specified in the &lt;c&gt;Content-Type&lt;/c&gt; response header.&lt;/param&gt;
+           &lt;param name=&#39;ResolutionFolder&#39;&gt;A directory that is used when resolving relative file references (at design time and in hosted execution).&lt;/param&gt;
+           &lt;param name=&#39;EmbeddedResource&#39;&gt;When specified, the type provider first attempts to load the sample from the specified resource 
+              (e.g. &#39;MyCompany.MyAssembly, resource_name.csv&#39;). This is useful when exposing types generated by the type provider.&lt;/param&gt;</em></div>
+<div class="fsdocs-tip" id="fs17">val playerStatsTable: CsvProvider&lt;...&gt;.Row list</div>
+<div class="fsdocs-tip" id="fs18">CsvProvider&lt;...&gt;.GetSample() : CsvProvider&lt;...&gt;</div>
+<div class="fsdocs-tip" id="fs19">module Seq
+
+from Microsoft.FSharp.Collections<br /><em>&lt;summary&gt;Contains operations for working with values of type &lt;see cref=&quot;T:Microsoft.FSharp.Collections.seq`1&quot; /&gt;.&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs20">val toList: source: seq&lt;&#39;T&gt; -&gt; &#39;T list<br /><em>&lt;summary&gt;Builds a list from the given collection.&lt;/summary&gt;<br />&lt;param name=&quot;source&quot;&gt;The input sequence.&lt;/param&gt;<br />&lt;returns&gt;The result list.&lt;/returns&gt;<br />&lt;exception cref=&quot;T:System.ArgumentNullException&quot;&gt;Thrown when the input sequence is null.&lt;/exception&gt;<br />&lt;example id=&quot;tolist-1&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let inputs = seq { 1; 2; 5 }
+
+ inputs |&amp;gt; Seq.toList
+ &lt;/code&gt;
+ Evaluates to &lt;c&gt;[ 1; 2; 5 ]&lt;/c&gt;.
+ &lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs21">Multiple items<br />module List
+
+from Microsoft.FSharp.Collections<br /><em>&lt;summary&gt;Contains operations for working with values of type &lt;see cref=&quot;T:Microsoft.FSharp.Collections.list`1&quot; /&gt;.&lt;/summary&gt;<br />&lt;namespacedoc&gt;&lt;summary&gt;Operations for collections such as lists, arrays, sets, maps and sequences. See also 
+    &lt;a href=&quot;https://docs.microsoft.com/dotnet/fsharp/language-reference/fsharp-collection-types&quot;&gt;F# Collection Types&lt;/a&gt; in the F# Language Guide.
+ &lt;/summary&gt;&lt;/namespacedoc&gt;</em><br /><br />--------------------<br />type List&lt;&#39;T&gt; =
+  | op_Nil
+  | op_ColonColon of Head: &#39;T * Tail: &#39;T list
+  interface IReadOnlyList&lt;&#39;T&gt;
+  interface IReadOnlyCollection&lt;&#39;T&gt;
+  interface IEnumerable
+  interface IEnumerable&lt;&#39;T&gt;
+  member GetReverseIndex: rank: int * offset: int -&gt; int
+  member GetSlice: startIndex: int option * endIndex: int option -&gt; &#39;T list
+  static member Cons: head: &#39;T * tail: &#39;T list -&gt; &#39;T list
+  member Head: &#39;T
+  member IsEmpty: bool
+  member Item: index: int -&gt; &#39;T with get
+  ...<br /><em>&lt;summary&gt;The type of immutable singly-linked lists.&lt;/summary&gt;<br />&lt;remarks&gt;Use the constructors &lt;c&gt;[]&lt;/c&gt; and &lt;c&gt;::&lt;/c&gt; (infix) to create values of this type, or
+ the notation &lt;c&gt;[1;2;3]&lt;/c&gt;. Use the values in the &lt;c&gt;List&lt;/c&gt; module to manipulate 
+ values of this type, or pattern match against the values directly.
+ &lt;/remarks&gt;<br />&lt;exclude /&gt;</em></div>
+<div class="fsdocs-tip" id="fs22">val truncate: count: int -&gt; list: &#39;T list -&gt; &#39;T list<br /><em>&lt;summary&gt;Returns at most N elements in a new list.&lt;/summary&gt;<br />&lt;param name=&quot;count&quot;&gt;The maximum number of items to return.&lt;/param&gt;<br />&lt;param name=&quot;list&quot;&gt;The input list.&lt;/param&gt;<br />&lt;returns&gt;The result list.&lt;/returns&gt;<br />&lt;example id=&quot;truncate-1&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let inputs = [&quot;a&quot;; &quot;b&quot;; &quot;c&quot;; &quot;d&quot;]
+
+ inputs |&amp;gt; List.truncate 2
+ &lt;/code&gt;
+ Evaluates to &lt;c&gt;[&quot;a&quot;; &quot;b&quot;]&lt;/c&gt;&lt;/example&gt;<br />&lt;example id=&quot;truncate-2&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let inputs = [&quot;a&quot;; &quot;b&quot;; &quot;c&quot;; &quot;d&quot;]
+
+ inputs |&amp;gt; List.truncate 6
+ &lt;/code&gt;
+ Evaluates to &lt;c&gt;[&quot;a&quot;; &quot;b&quot;; &quot;c&quot;; &quot;d&quot;]&lt;/c&gt;&lt;/example&gt;<br />&lt;example id=&quot;truncate-3&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let inputs = [&quot;a&quot;; &quot;b&quot;; &quot;c&quot;; &quot;d&quot;]
+
+ inputs |&amp;gt; List.truncate 0
+ &lt;/code&gt;
+ Evaluates to the empty list.
+ &lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs23">val map: mapping: (&#39;T -&gt; &#39;U) -&gt; list: &#39;T list -&gt; &#39;U list<br /><em>&lt;summary&gt;Builds a new collection whose elements are the results of applying the given function
+ to each of the elements of the collection.&lt;/summary&gt;<br />&lt;param name=&quot;mapping&quot;&gt;The function to transform elements from the input list.&lt;/param&gt;<br />&lt;param name=&quot;list&quot;&gt;The input list.&lt;/param&gt;<br />&lt;returns&gt;The list of transformed elements.&lt;/returns&gt;<br />&lt;example id=&quot;map-1&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let inputs = [ &quot;a&quot;; &quot;bbb&quot;; &quot;cc&quot; ]
+
+ inputs |&amp;gt; List.map (fun x -&amp;gt; x.Length)
+ &lt;/code&gt;
+ Evaluates to &lt;c&gt;[ 1; 3; 2 ]&lt;/c&gt;&lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs24">val x: CsvProvider&lt;...&gt;.Row</div>
+<div class="fsdocs-tip" id="fs25">property CsvProvider&lt;...&gt;.Row.Player: string with get</div>
+<div class="fsdocs-tip" id="fs26">property CsvProvider&lt;...&gt;.Row.Nation: string with get</div>
+<div class="fsdocs-tip" id="fs27">property CsvProvider&lt;...&gt;.Row.Team: string with get</div>
+<div class="fsdocs-tip" id="fs28">property CsvProvider&lt;...&gt;.Row.League: string with get</div>
+<div class="fsdocs-tip" id="fs29">property CsvProvider&lt;...&gt;.Row.Age: int with get</div>
+<div class="fsdocs-tip" id="fs30">property CsvProvider&lt;...&gt;.Row.MatchesPlayed: int with get</div>
+<div class="fsdocs-tip" id="fs31">property CsvProvider&lt;...&gt;.Row.GoalsScored: int with get</div>
+<div class="fsdocs-tip" id="fs32">type PlayerAndNation =
+  {
+    Player: string
+    Nation: string
+  }</div>
+<div class="fsdocs-tip" id="fs33">PlayerAndNation.Player: string</div>
+<div class="fsdocs-tip" id="fs34">PlayerAndNation.Nation: string</div>
+<div class="fsdocs-tip" id="fs35">type PlayerAndNation2 =
+  {
+    PlayerName: string
+    Nationality: string
+  }</div>
+<div class="fsdocs-tip" id="fs36">PlayerAndNation2.PlayerName: string</div>
+<div class="fsdocs-tip" id="fs37">PlayerAndNation2.Nationality: string</div>
+<div class="fsdocs-tip" id="fs38">type PlayerAndTeam =
+  {
+    Player: string
+    Team: string
+  }</div>
+<div class="fsdocs-tip" id="fs39">PlayerAndTeam.Player: string</div>
+<div class="fsdocs-tip" id="fs40">PlayerAndTeam.Team: string</div>
+<div class="fsdocs-tip" id="fs41">type PlayerAndLeague =
+  {
+    Player: string
+    League: string
+  }</div>
+<div class="fsdocs-tip" id="fs42">PlayerAndLeague.Player: string</div>
+<div class="fsdocs-tip" id="fs43">PlayerAndLeague.League: string</div>
+<div class="fsdocs-tip" id="fs44">type PlayerAndAge =
+  {
+    Player: string
+    Age: int
+  }</div>
+<div class="fsdocs-tip" id="fs45">PlayerAndAge.Player: string</div>
+<div class="fsdocs-tip" id="fs46">PlayerAndAge.Age: int</div>
+<div class="fsdocs-tip" id="fs47">Multiple items<br />val int: value: &#39;T -&gt; int (requires member op_Explicit)<br /><em>&lt;summary&gt;Converts the argument to signed 32-bit integer. This is a direct conversion for all 
+ primitive numeric types. For strings, the input is converted using &lt;c&gt;Int32.Parse()&lt;/c&gt;  
+ with InvariantCulture settings. Otherwise the operation requires an appropriate
+ static conversion method on the input type.&lt;/summary&gt;<br />&lt;param name=&quot;value&quot;&gt;The input value.&lt;/param&gt;<br />&lt;returns&gt;The converted int&lt;/returns&gt;<br />&lt;example id=&quot;int-example&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;&lt;/code&gt;&lt;/example&gt;</em><br /><br />--------------------<br />[&lt;Struct&gt;]
+type int = int32<br /><em>&lt;summary&gt;An abbreviation for the CLI type &lt;see cref=&quot;T:System.Int32&quot; /&gt;.&lt;/summary&gt;<br />&lt;category&gt;Basic Types&lt;/category&gt;</em><br /><br />--------------------<br />type int&lt;&#39;Measure&gt; =
+  int<br /><em>&lt;summary&gt;The type of 32-bit signed integer numbers, annotated with a unit of measure. The unit
+ of measure is erased in compiled code and when values of this type
+ are analyzed using reflection. The type is representationally equivalent to
+ &lt;see cref=&quot;T:System.Int32&quot; /&gt;.&lt;/summary&gt;<br />&lt;category&gt;Basic Types with Units of Measure&lt;/category&gt;</em></div>
+<div class="fsdocs-tip" id="fs48">type PlayerAndMatchesPlayed =
+  {
+    Player: string
+    MatchesPlayed: int
+  }</div>
+<div class="fsdocs-tip" id="fs49">PlayerAndMatchesPlayed.Player: string</div>
+<div class="fsdocs-tip" id="fs50">PlayerAndMatchesPlayed.MatchesPlayed: int</div>
+<div class="fsdocs-tip" id="fs51">type PlayerAndGoalsScored =
+  {
+    Player: string
+    GoalsScored: int
+  }</div>
+<div class="fsdocs-tip" id="fs52">PlayerAndGoalsScored.Player: string</div>
+<div class="fsdocs-tip" id="fs53">PlayerAndGoalsScored.GoalsScored: int</div>
+<div class="fsdocs-tip" id="fs54">Multiple items<br />val float: value: &#39;T -&gt; float (requires member op_Explicit)<br /><em>&lt;summary&gt;Converts the argument to 64-bit float. This is a direct conversion for all 
+ primitive numeric types. For strings, the input is converted using &lt;c&gt;Double.Parse()&lt;/c&gt;  
+ with InvariantCulture settings. Otherwise the operation requires an appropriate
+ static conversion method on the input type.&lt;/summary&gt;<br />&lt;param name=&quot;value&quot;&gt;The input value.&lt;/param&gt;<br />&lt;returns&gt;The converted float&lt;/returns&gt;<br />&lt;example id=&quot;float-example&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;&lt;/code&gt;&lt;/example&gt;</em><br /><br />--------------------<br />[&lt;Struct&gt;]
+type float = System.Double<br /><em>&lt;summary&gt;An abbreviation for the CLI type &lt;see cref=&quot;T:System.Double&quot; /&gt;.&lt;/summary&gt;<br />&lt;category&gt;Basic Types&lt;/category&gt;</em><br /><br />--------------------<br />type float&lt;&#39;Measure&gt; =
+  float<br /><em>&lt;summary&gt;The type of double-precision floating point numbers, annotated with a unit of measure.
+ The unit of measure is erased in compiled code and when values of this type
+ are analyzed using reflection. The type is representationally equivalent to
+ &lt;see cref=&quot;T:System.Double&quot; /&gt;.&lt;/summary&gt;<br />&lt;category index=&quot;6&quot;&gt;Basic Types with Units of Measure&lt;/category&gt;</em></div>
+<div class="fsdocs-tip" id="fs55">type PlayerAndAgePlus1Int =
+  {
+    Player: string
+    AgePlus1Int: int
+  }</div>
+<div class="fsdocs-tip" id="fs56">PlayerAndAgePlus1Int.Player: string</div>
+<div class="fsdocs-tip" id="fs57">PlayerAndAgePlus1Int.AgePlus1Int: int</div>
+<div class="fsdocs-tip" id="fs58">type PlayerAndGls =
+  {
+    Player: string
+    GoalsScored: int
+  }</div>
+<div class="fsdocs-tip" id="fs59">PlayerAndGls.Player: string</div>
+<div class="fsdocs-tip" id="fs60">PlayerAndGls.GoalsScored: int</div>
+<div class="fsdocs-tip" id="fs61">type PlayerAndGlsFloat =
+  {
+    Player: string
+    GoalsScoredFloat: float
+  }</div>
+<div class="fsdocs-tip" id="fs62">PlayerAndGlsFloat.Player: string</div>
+<div class="fsdocs-tip" id="fs63">PlayerAndGlsFloat.GoalsScoredFloat: float</div>
+<div class="fsdocs-tip" id="fs64">type TeamRecord =
+  {
+    Player: string
+    Nation: string
+    League: string
+    AgeNextYear: int
+    HalfGoalsScored: float
+  }</div>
+<div class="fsdocs-tip" id="fs65">TeamRecord.Player: string</div>
+<div class="fsdocs-tip" id="fs66">TeamRecord.Nation: string</div>
+<div class="fsdocs-tip" id="fs67">TeamRecord.League: string</div>
+<div class="fsdocs-tip" id="fs68">TeamRecord.AgeNextYear: int</div>
+<div class="fsdocs-tip" id="fs69">TeamRecord.HalfGoalsScored: float</div>
+
+        </div>
+
+        <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+        <script type="text/javascript">var fsdocs_search_baseurl = '/Teaching/';</script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+        <script type="text/javascript" src="/Teaching/content/fsdocs-search.js"></script>
+        <!-- END SEARCH BOX: this adds support for the search box -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    </div>
+</body>
+
+</html>

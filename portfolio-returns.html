@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Portfolio Returns</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="">
+
+    <link rel="stylesheet" id="theme_link" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.6.0/materia/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    <link type="text/css" rel="stylesheet" href="/Teaching/content/navbar-fixed-left.css" />
+    <link type="text/css" rel="stylesheet" href="/Teaching/content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="/Teaching/content/fsdocs-custom.css" />
+    <script type="text/javascript" src="/Teaching/content/fsdocs-tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+    
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-light bg-secondary fixed-left" id="fsdocs-nav">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse navbar-nav-scroll" id="navbarsExampleDefault">
+            <a href="/Teaching/"><img id="fsdocs-logo" src="/Teaching/img/logo.png" /></a>
+            <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+            <div id="header">
+                <div class="searchbox" id="fsdocs-searchbox">
+                    <label for="search-by">
+                        <i class="fas fa-search"></i>
+                    </label>
+                    <input data-search-input="" id="search-by" type="search" placeholder="Search..." />
+                    <span data-search-clear="">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- END SEARCH BOX: this adds support for the search box -->
+            <ul class="navbar-nav">
+                <li class="nav-header">Links</li>
+                <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="https://github.com/nhirschey/Teaching/blob/main/LICENSE.md">License</a></li>
+                <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="https://github.com/nhirschey/Teaching">Source Repository</a></li>
+                <li class="nav-header">
+  Getting Started
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/install.html">
+    Install Software
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/learn-fsharp.html">
+    Learn F#
+  </a>
+</li>             
+<li class="nav-header">
+  Lectures
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/portfolio-statistics.html">
+    Basic Portfolio Statistics
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/portfolio-returns.html">
+    Portfolio Returns
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/PortfolioFormation-SimpleExample.html">
+    Building a strategy
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/Momentum-Class.html">
+    Momentum Signal
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/VolatilityTiming.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/optimization.html">
+    Optimization
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/sentiment-mlnet.html">
+    Sentiment classification
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/calls-nn.html">
+    Calls NN
+  </a>
+</li>             
+<li class="nav-header">
+  Assignments
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/football-1-download-data.html">
+    Webscraping HTML to CSV
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/football-tuples-and-records.html">
+    Tuples and Records (with solutions)
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/football-collection-functions.html">
+    Collection functions (with solutions)
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/football-plotting.html">
+    Plotting (with solutions)
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/select-project-signal.html">
+    Select Project Signals
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/assignment-signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/assignment-performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/assignment-volatility-timing.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-header">
+  Practice Quizzes
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-list-module.html">
+    List module functions
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-options.html">
+    Options
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-match-expressions.html">
+    Match expressions
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-map-collection.html">
+    Map collection
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-discriminated-union.html">
+    Dicriminated Union
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-portfolios.html">
+    Portfolios
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-factors.html">
+    Factors
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-folding.html">
+    Fold and Friends
+  </a>
+</li>             
+<li class="nav-header">
+  Project
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/project/signal-exploration.html">
+    Signal Exploration
+  </a>
+</li>             
+<li class="nav-header">
+  Other
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/Common.html">
+    Common
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/Portfolio.html">
+    Portfolio
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/YahooFinance.html">
+    YahooFinance
+  </a>
+</li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="masthead">
+            <h3 class="muted"><a href="/Teaching/">Teaching</a></h3>
+        </div>
+        <hr />
+        <div class="container" id="fsdocs-content">
+            
+<p><a href="https://mybinder.org/v2/gh/nhirschey/teaching/gh-pages?filepath=portfolio-returns.ipynb"><img src="img/badge-binder.svg" alt="Binder" /></a>&emsp;
+<a href="/Teaching//portfolio-returns.fsx"><img src="img/badge-script.svg" alt="Script" /></a>&emsp;
+<a href="/Teaching//portfolio-returns.ipynb"><img src="img/badge-notebook.svg" alt="Notebook" /></a></p>
+<h2><a name="A-portfolio-s-return" class="anchor" href="#A-portfolio-s-return">A portfolio's return.</a></h2>
+<p>A portfolio's return is the weighted average return of the portfolio's positions.</p>
+<p><span class="math">\[ r_p = \Sigma^N_{i=1} w_i r_i,\]</span></p>
+<p>where <span class="math">\(r\)</span> is return, <span class="math">\(i\)</span> indexes stocks, and <span class="math">\(w\)</span> is portfolio weights.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">type</span> <span class="rt">PositionsWithReturn</span> <span class="o">=</span>
+    <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="prop">Id</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="rt">string</span> 
+      <span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="prop">Weight</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="vt">float</span> 
+      <span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="prop">Return</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs4', 6)" onmouseover="showTip(event, 'fs4', 6)" class="vt">float</span> <span class="pn">}</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs6', 7)" onmouseover="showTip(event, 'fs6', 7)" class="id">exPortfolio</span> <span class="o">=</span>
+    <span class="pn">[</span> <span class="pn">{</span> <span class="prop">Id</span> <span class="o">=</span> <span class="s">&quot;A&quot;</span><span class="pn">;</span> <span class="prop">Weight</span> <span class="o">=</span> <span class="n">0.25</span><span class="pn">;</span> <span class="prop">Return</span> <span class="o">=</span> <span class="n">0.1</span> <span class="pn">}</span>
+      <span class="pn">{</span> <span class="prop">Id</span> <span class="o">=</span> <span class="s">&quot;B&quot;</span><span class="pn">;</span> <span class="prop">Weight</span> <span class="o">=</span> <span class="n">0.75</span><span class="pn">;</span> <span class="prop">Return</span> <span class="o">=</span> <span class="n">0.2</span> <span class="pn">}</span> <span class="pn">]</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs7', 8)" onmouseover="showTip(event, 'fs7', 8)" class="id">weightsXreturn</span> <span class="o">=</span> <span class="pn">[</span> <span class="k">for</span> <span onmouseout="hideTip(event, 'fs8', 9)" onmouseover="showTip(event, 'fs8', 9)" class="fn">pos</span> <span class="k">in</span> <span onmouseout="hideTip(event, 'fs6', 10)" onmouseover="showTip(event, 'fs6', 10)" class="id">exPortfolio</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs8', 11)" onmouseover="showTip(event, 'fs8', 11)" class="fn">pos</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs3', 12)" onmouseover="showTip(event, 'fs3', 12)" class="id">Weight</span> <span class="o">*</span> <span onmouseout="hideTip(event, 'fs8', 13)" onmouseover="showTip(event, 'fs8', 13)" class="fn">pos</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs5', 14)" onmouseover="showTip(event, 'fs5', 14)" class="id">Return</span> <span class="pn">]</span>
+<span onmouseout="hideTip(event, 'fs7', 15)" onmouseover="showTip(event, 'fs7', 15)" class="id">weightsXreturn</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>[0.025; 0.15]</code></pre></td></tr></table>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs9', 16)" onmouseover="showTip(event, 'fs9', 16)" class="id">exPortfolioReturn</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs7', 17)" onmouseover="showTip(event, 'fs7', 17)" class="id">weightsXreturn</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 18)" onmouseover="showTip(event, 'fs10', 18)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs11', 19)" onmouseover="showTip(event, 'fs11', 19)" class="id">sum</span> 
+<span onmouseout="hideTip(event, 'fs9', 20)" onmouseover="showTip(event, 'fs9', 20)" class="id">exPortfolioReturn</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>0.175</code></pre></td></tr></table>
+<p>We are now going to look at returns of actual stock and bond portfolios.
+The two portfolios are <a href="https://investor.vanguard.com/etf/profile/VTI">VTI</a> and
+<a href="https://investor.vanguard.com/etf/profile/BND">BND</a>.
+These are value-weighted exchange traded funds (ETFs).
+VTI tracks a stock market index and BND tracks a bond market index.
+They are good proxies for the return of the overall US stock and bond markets.</p>
+<p>We are going to load some helper code that allows us to download and plot this data.
+This will introduce using <code>#load</code> to load scripts with external code,
+the <code>nuget</code> package manager for loading external libraries,
+and how to open namespaces.</p>
+<p>When you type <code>#load "Script.fsx"</code> in the REPL,
+F# interactive compiles the code in <code>Script.fsx</code> and puts it into
+a code module with the same name as the script.</p>
+<p>We are going to use a helper script called <code>YahooFinance.fsx</code> that includes
+code for requesting price histories from yahoo. To download it,
+go to the <a href="YahooFinance.html">YahooFinance</a> page and click the "download script"
+button at the top. Make sure that you have saved it in
+the same directory as this file.</p>
+<p>If you have downloaded it correctly then the following code will evaluate to <code>true</code>.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs12', 21)" onmouseover="showTip(event, 'fs12', 21)" class="id">System</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs13', 22)" onmouseover="showTip(event, 'fs13', 22)" class="id">IO</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs14', 23)" onmouseover="showTip(event, 'fs14', 23)" class="rt">File</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs15', 24)" onmouseover="showTip(event, 'fs15', 24)" class="id">Exists</span><span class="pn">(</span><span class="s">&quot;YahooFinance.fsx&quot;</span><span class="pn">)</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>true</code></pre></td></tr></table>
+<p>Assuming that the above code evaluated to <code>true</code> we can now load it into our session.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="pp">#load</span> <span class="s">&quot;YahooFinance.fsx&quot;</span>
+</code></pre>
+<p>Namespaces are a hierarchical way of organizing code.
+In the above checking for the existence of a file we have a hierarchy of
+<code>System.IO</code> where the period <code>.</code> separates the <code>System</code> and <code>IO</code> namespaces.
+If we <code>open</code> a namespace, then we have access to the code inside the namespace directly.</p>
+<p>It is common to open the <code>System</code> namespace.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs12', 25)" onmouseover="showTip(event, 'fs12', 25)" class="id">System</span>
+</code></pre>
+<p>Now we can leave <code>System</code> off when accessing code in the <code>System</code> namespace.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs13', 26)" onmouseover="showTip(event, 'fs13', 26)" class="id">IO</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs14', 27)" onmouseover="showTip(event, 'fs14', 27)" class="rt">File</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs16', 28)" onmouseover="showTip(event, 'fs16', 28)" class="id">Exists</span><span class="pn">(</span><span class="s">&quot;YahooFinance.fsx&quot;</span><span class="pn">)</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>true</code></pre></td></tr></table>
+<p>We also want to open the <code>YahooFinance</code> module from <code>YahooFinance.fsx</code>,
+which is similar to a namespace.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs17', 29)" onmouseover="showTip(event, 'fs17', 29)" class="m">YahooFinance</span>
+</code></pre>
+<p>We are ready to request some data. Let's define our start and end dates.
+<code>DateTime</code> is a type in the <code>System</code> namespace.
+We have opened that namespace so we can access the type directly.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs18', 30)" onmouseover="showTip(event, 'fs18', 30)" class="id">myStart</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs19', 31)" onmouseover="showTip(event, 'fs19', 31)" class="fn">DateTime</span><span class="pn">(</span><span class="n">2010</span><span class="pn">,</span><span class="n">1</span><span class="pn">,</span><span class="n">1</span><span class="pn">)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs20', 32)" onmouseover="showTip(event, 'fs20', 32)" class="id">myEnd</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs19', 33)" onmouseover="showTip(event, 'fs19', 33)" class="vt">DateTime</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs21', 34)" onmouseover="showTip(event, 'fs21', 34)" class="id">UtcNow</span>
+<span onmouseout="hideTip(event, 'fs20', 35)" onmouseover="showTip(event, 'fs20', 35)" class="id">myEnd</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>6/14/2022 6:15:02 PM</code></pre></td></tr></table>
+<p>Our <code>YahooFinance</code> module has code for requesting price histories of stocks.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs22', 36)" onmouseover="showTip(event, 'fs22', 36)" class="id">bnd</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs23', 37)" onmouseover="showTip(event, 'fs23', 37)" class="m">YahooFinance</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs24', 38)" onmouseover="showTip(event, 'fs24', 38)" class="id">PriceHistory</span><span class="pn">(</span><span class="s">&quot;BND&quot;</span><span class="pn">,</span><span class="fn">startDate</span><span class="o">=</span><span onmouseout="hideTip(event, 'fs18', 39)" onmouseover="showTip(event, 'fs18', 39)" class="id">myStart</span><span class="pn">,</span><span class="fn">endDate</span><span class="o">=</span><span onmouseout="hideTip(event, 'fs20', 40)" onmouseover="showTip(event, 'fs20', 40)" class="id">myEnd</span><span class="pn">,</span><span class="fn">interval</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs25', 41)" onmouseover="showTip(event, 'fs25', 41)" class="rt">Interval</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs26', 42)" onmouseover="showTip(event, 'fs26', 42)" class="id">Daily</span><span class="pn">)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs27', 43)" onmouseover="showTip(event, 'fs27', 43)" class="id">vti</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs23', 44)" onmouseover="showTip(event, 'fs23', 44)" class="m">YahooFinance</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs24', 45)" onmouseover="showTip(event, 'fs24', 45)" class="id">PriceHistory</span><span class="pn">(</span><span class="s">&quot;VTI&quot;</span><span class="pn">,</span><span class="fn">startDate</span><span class="o">=</span><span onmouseout="hideTip(event, 'fs18', 46)" onmouseover="showTip(event, 'fs18', 46)" class="id">myStart</span><span class="pn">,</span><span class="fn">endDate</span><span class="o">=</span><span onmouseout="hideTip(event, 'fs20', 47)" onmouseover="showTip(event, 'fs20', 47)" class="id">myEnd</span><span class="pn">,</span><span class="fn">interval</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs25', 48)" onmouseover="showTip(event, 'fs25', 48)" class="rt">Interval</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs26', 49)" onmouseover="showTip(event, 'fs26', 49)" class="id">Daily</span><span class="pn">)</span>
+</code></pre>
+<p>This returns several data items for each point in time.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs27', 50)" onmouseover="showTip(event, 'fs27', 50)" class="id">vti</span><span class="pn">[</span><span class="n">0..</span><span class="n">3</span><span class="pn">]</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>[{ Symbol = "VTI"
+   Date = 1/4/2010 12:00:00 AM
+   Open = 56.860001
+   High = 57.380001
+   Low = 56.84
+   Close = 57.310001
+   AdjustedClose = 45.630638
+   Volume = 2251500.0 }; { Symbol = "VTI"
+                           Date = 1/5/2010 12:00:00 AM
+                           Open = 57.34
+                           High = 57.540001
+                           Low = 57.110001
+                           Close = 57.529999
+                           AdjustedClose = 45.805782
+                           Volume = 1597700.0 }; { Symbol = "VTI"
+                                                   Date = 1/6/2010 12:00:00 AM
+                                                   Open = 57.5
+                                                   High = 57.720001
+                                                   Low = 57.41
+                                                   Close = 57.610001
+                                                   AdjustedClose = 45.869495
+                                                   Volume = 2120300.0 };
+ { Symbol = "VTI"
+   Date = 1/7/2010 12:00:00 AM
+   Open = 57.549999
+   High = 57.889999
+   Low = 57.290001
+   Close = 57.849998
+   AdjustedClose = 46.060566
+   Volume = 1656700.0 }]</code></pre></td></tr></table>
+<p>The adjusted close is adjusted for stock splits and dividends.
+This adjustment is done so that you can calculate returns from the price changes.</p>
+<p>Let's see what it looks like to plot it.
+We're going to use the <a href="https://plotly.net">plotly.NET</a> library for this.
+We download the code from the <a href="http://www.nuget.org">nuget.org</a> package manager.</p>
+<p>This is equivalent to loading libraries with <code>pip</code> or <code>conda</code> in python
+or <code>install.packages</code> in R.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="pp">#r</span> <span class="s">&quot;nuget: Plotly.NET, 2.0.0-preview.17&quot;</span>
+<span class="pp">#r</span> <span class="s">&quot;nuget: Plotly.NET.Interactive, 2.0.0-preview.17&quot;</span>
+
+
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs28', 52)" onmouseover="showTip(event, 'fs28', 52)" class="id">Plotly</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs29', 53)" onmouseover="showTip(event, 'fs29', 53)" class="id">NET</span>
+</code></pre>
+<p>Above we are loading an exact version by using a "," and version number.</p>
+<p>Plot prices as a line chart.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs30', 54)" onmouseover="showTip(event, 'fs30', 54)" class="id">vtiAdjPrices</span> <span class="o">=</span> <span class="pn">[</span> <span class="k">for</span> <span onmouseout="hideTip(event, 'fs31', 55)" onmouseover="showTip(event, 'fs31', 55)" class="fn">period</span> <span class="k">in</span> <span onmouseout="hideTip(event, 'fs27', 56)" onmouseover="showTip(event, 'fs27', 56)" class="id">vti</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs31', 57)" onmouseover="showTip(event, 'fs31', 57)" class="fn">period</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs32', 58)" onmouseover="showTip(event, 'fs32', 58)" class="id">Date</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs31', 59)" onmouseover="showTip(event, 'fs31', 59)" class="fn">period</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs33', 60)" onmouseover="showTip(event, 'fs33', 60)" class="id">AdjustedClose</span> <span class="pn">]</span>
+</code></pre>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs34', 61)" onmouseover="showTip(event, 'fs34', 61)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs35', 62)" onmouseover="showTip(event, 'fs35', 62)" class="id">Line</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs30', 63)" onmouseover="showTip(event, 'fs30', 63)" class="id">vtiAdjPrices</span><span class="pn">)</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>No value returned by any evaluator</code></pre></td></tr></table>
+<p>Ok, back to the main objective. We need to calculate returns.
+We calculate returns from sequential days,
+so we need to make sure that our data is sorted correctly
+from the oldest to the newest data. We can do this with <code>List.Sort</code>.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="pn">[</span><span class="n">1</span><span class="pn">;</span> <span class="n">7</span><span class="pn">;</span> <span class="n">10</span><span class="pn">;</span> <span class="n">2</span><span class="pn">;</span> <span class="o">-</span><span class="n">1</span><span class="pn">]</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 69)" onmouseover="showTip(event, 'fs10', 69)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs38', 70)" onmouseover="showTip(event, 'fs38', 70)" class="id">sort</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>[-1; 1; 2; 7; 10]</code></pre></td></tr></table>
+<p>Sort it by the date field.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs39', 71)" onmouseover="showTip(event, 'fs39', 71)" class="id">sortedBnd</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs22', 72)" onmouseover="showTip(event, 'fs22', 72)" class="id">bnd</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 73)" onmouseover="showTip(event, 'fs10', 73)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs40', 74)" onmouseover="showTip(event, 'fs40', 74)" class="id">sortBy</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs41', 75)" onmouseover="showTip(event, 'fs41', 75)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs41', 76)" onmouseover="showTip(event, 'fs41', 76)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs32', 77)" onmouseover="showTip(event, 'fs32', 77)" class="id">Date</span><span class="pn">)</span>
+</code></pre>
+<p>The first three observations.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs39', 78)" onmouseover="showTip(event, 'fs39', 78)" class="id">sortedBnd</span><span class="pn">[</span><span class="n">0..</span><span class="n">2</span><span class="pn">]</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>No value returned by any evaluator</code></pre></td></tr></table>
+<p>The last 3 observations.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs39', 80)" onmouseover="showTip(event, 'fs39', 80)" class="id">sortedBnd</span><span class="pn">[</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs39', 81)" onmouseover="showTip(event, 'fs39', 81)" class="id">sortedBnd</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs42', 82)" onmouseover="showTip(event, 'fs42', 82)" class="id">Length</span><span class="o">-</span><span class="n">3</span><span class="pn">)</span><span class="o">..</span><span class="pn">]</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>No value returned by any evaluator</code></pre></td></tr></table>
+<p>Great, they are properly sorted. Now I want sequential pairs of data.
+<code>List.pairwise</code> is good for this.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="pn">[</span><span class="n">1</span> <span class="o">..</span> <span class="n">5</span><span class="pn">]</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 86)" onmouseover="showTip(event, 'fs10', 86)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs43', 87)" onmouseover="showTip(event, 'fs43', 87)" class="id">pairwise</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>[(1, 2); (2, 3); (3, 4); (4, 5)]</code></pre></td></tr></table>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs44', 88)" onmouseover="showTip(event, 'fs44', 88)" class="id">sequentialBnd</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs22', 89)" onmouseover="showTip(event, 'fs22', 89)" class="id">bnd</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 90)" onmouseover="showTip(event, 'fs10', 90)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs43', 91)" onmouseover="showTip(event, 'fs43', 91)" class="id">pairwise</span>
+</code></pre>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs44', 92)" onmouseover="showTip(event, 'fs44', 92)" class="id">sequentialBnd</span><span class="pn">[</span><span class="n">0</span><span class="pn">]</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>({ Symbol = "BND"
+   Date = 1/4/2010 12:00:00 AM
+   Open = 78.599998
+   High = 78.730003
+   Low = 78.540001
+   Close = 78.68
+   AdjustedClose = 55.680191
+   Volume = 1098100.0 }, { Symbol = "BND"
+                           Date = 1/5/2010 12:00:00 AM
+                           Open = 78.889999
+                           High = 79.0
+                           Low = 78.790001
+                           Close = 78.910004
+                           AdjustedClose = 55.842949
+                           Volume = 814600.0 })</code></pre></td></tr></table>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs44', 94)" onmouseover="showTip(event, 'fs44', 94)" class="id">sequentialBnd</span><span class="pn">[</span><span class="n">1</span><span class="pn">]</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>({ Symbol = "BND"
+   Date = 1/5/2010 12:00:00 AM
+   Open = 78.889999
+   High = 79.0
+   Low = 78.790001
+   Close = 78.910004
+   AdjustedClose = 55.842949
+   Volume = 814600.0 }, { Symbol = "BND"
+                          Date = 1/6/2010 12:00:00 AM
+                          Open = 78.970001
+                          High = 78.980003
+                          Low = 78.699997
+                          Close = 78.879997
+                          AdjustedClose = 55.821724
+                          Volume = 981300.0 })</code></pre></td></tr></table>
+<p>Take the first pair to see how to calculate returns.</p>
+<p>Extract the first and second elements of the tuple using pattern matching.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs45', 96)" onmouseover="showTip(event, 'fs45', 96)" class="id">bndA</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs46', 97)" onmouseover="showTip(event, 'fs46', 97)" class="id">bndB</span><span class="pn">)</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs44', 98)" onmouseover="showTip(event, 'fs44', 98)" class="id">sequentialBnd</span><span class="pn">[</span><span class="n">0</span><span class="pn">]</span>
+<span onmouseout="hideTip(event, 'fs45', 99)" onmouseover="showTip(event, 'fs45', 99)" class="id">bndA</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>{ Symbol = "BND"
+  Date = 1/4/2010 12:00:00 AM
+  Open = 78.599998
+  High = 78.730003
+  Low = 78.540001
+  Close = 78.68
+  AdjustedClose = 55.680191
+  Volume = 1098100.0 }</code></pre></td></tr></table>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs46', 104)" onmouseover="showTip(event, 'fs46', 104)" class="id">bndB</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>{ Symbol = "BND"
+  Date = 1/5/2010 12:00:00 AM
+  Open = 78.889999
+  High = 79.0
+  Low = 78.790001
+  Close = 78.910004
+  AdjustedClose = 55.842949
+  Volume = 814600.0 }</code></pre></td></tr></table>
+<p>Remember that with continuous compounding, <span class="math">\(FV_T = PV_t \times e^{r}\)</span>
+where <span class="math">\(FV\)</span> is the future value, <span class="math">\(PV\)</span> is the present value, <span class="math">\(r\)</span> is return
+between period <span class="math">\(t\)</span> and <span class="math">\(T\)</span>.</p>
+<p>If we take the log of both sides of the equation, we get</p>
+<p><span class="math">\[ log(FV) = log(PV) + r \rightarrow log(FV) - log (PV) = r\]</span></p>
+<p>This <span class="math">\(r\)</span> is known as the log return.
+So to find the log return between two periods we can take the
+difference of the log prices (where the prices are adjusted for dividends).</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="pn">(</span><span onmouseout="hideTip(event, 'fs49', 106)" onmouseover="showTip(event, 'fs49', 106)" class="fn">log</span> <span onmouseout="hideTip(event, 'fs46', 107)" onmouseover="showTip(event, 'fs46', 107)" class="id">bndB</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs33', 108)" onmouseover="showTip(event, 'fs33', 108)" class="id">AdjustedClose</span><span class="pn">)</span> <span class="o">-</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs49', 109)" onmouseover="showTip(event, 'fs49', 109)" class="fn">log</span> <span onmouseout="hideTip(event, 'fs45', 110)" onmouseover="showTip(event, 'fs45', 110)" class="id">bndA</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs33', 111)" onmouseover="showTip(event, 'fs33', 111)" class="id">AdjustedClose</span><span class="pn">)</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>No value returned by any evaluator</code></pre></td></tr></table>
+<p>Putting it all together.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs50', 112)" onmouseover="showTip(event, 'fs50', 112)" class="id">bndReturn</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs22', 113)" onmouseover="showTip(event, 'fs22', 113)" class="id">bnd</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 114)" onmouseover="showTip(event, 'fs10', 114)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs40', 115)" onmouseover="showTip(event, 'fs40', 115)" class="id">sortBy</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs41', 116)" onmouseover="showTip(event, 'fs41', 116)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs41', 117)" onmouseover="showTip(event, 'fs41', 117)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs32', 118)" onmouseover="showTip(event, 'fs32', 118)" class="id">Date</span><span class="pn">)</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 119)" onmouseover="showTip(event, 'fs10', 119)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs43', 120)" onmouseover="showTip(event, 'fs43', 120)" class="id">pairwise</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 121)" onmouseover="showTip(event, 'fs10', 121)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs51', 122)" onmouseover="showTip(event, 'fs51', 122)" class="id">map</span> <span class="pn">(</span><span class="k">fun</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs52', 123)" onmouseover="showTip(event, 'fs52', 123)" class="fn">a</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs53', 124)" onmouseover="showTip(event, 'fs53', 124)" class="fn">b</span><span class="pn">)</span> <span class="k">-&gt;</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs49', 125)" onmouseover="showTip(event, 'fs49', 125)" class="fn">log</span> <span onmouseout="hideTip(event, 'fs53', 126)" onmouseover="showTip(event, 'fs53', 126)" class="fn">b</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs33', 127)" onmouseover="showTip(event, 'fs33', 127)" class="id">AdjustedClose</span><span class="pn">)</span> <span class="o">-</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs49', 128)" onmouseover="showTip(event, 'fs49', 128)" class="fn">log</span> <span onmouseout="hideTip(event, 'fs52', 129)" onmouseover="showTip(event, 'fs52', 129)" class="fn">a</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs33', 130)" onmouseover="showTip(event, 'fs33', 130)" class="id">AdjustedClose</span><span class="pn">)</span><span class="pn">)</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs54', 131)" onmouseover="showTip(event, 'fs54', 131)" class="id">vtiReturn</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs27', 132)" onmouseover="showTip(event, 'fs27', 132)" class="id">vti</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 133)" onmouseover="showTip(event, 'fs10', 133)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs40', 134)" onmouseover="showTip(event, 'fs40', 134)" class="id">sortBy</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs41', 135)" onmouseover="showTip(event, 'fs41', 135)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs41', 136)" onmouseover="showTip(event, 'fs41', 136)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs32', 137)" onmouseover="showTip(event, 'fs32', 137)" class="id">Date</span><span class="pn">)</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 138)" onmouseover="showTip(event, 'fs10', 138)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs43', 139)" onmouseover="showTip(event, 'fs43', 139)" class="id">pairwise</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 140)" onmouseover="showTip(event, 'fs10', 140)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs51', 141)" onmouseover="showTip(event, 'fs51', 141)" class="id">map</span> <span class="pn">(</span><span class="k">fun</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs52', 142)" onmouseover="showTip(event, 'fs52', 142)" class="fn">a</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs53', 143)" onmouseover="showTip(event, 'fs53', 143)" class="fn">b</span><span class="pn">)</span> <span class="k">-&gt;</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs49', 144)" onmouseover="showTip(event, 'fs49', 144)" class="fn">log</span> <span onmouseout="hideTip(event, 'fs53', 145)" onmouseover="showTip(event, 'fs53', 145)" class="fn">b</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs33', 146)" onmouseover="showTip(event, 'fs33', 146)" class="id">AdjustedClose</span><span class="pn">)</span> <span class="o">-</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs49', 147)" onmouseover="showTip(event, 'fs49', 147)" class="fn">log</span> <span onmouseout="hideTip(event, 'fs52', 148)" onmouseover="showTip(event, 'fs52', 148)" class="fn">a</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs33', 149)" onmouseover="showTip(event, 'fs33', 149)" class="id">AdjustedClose</span><span class="pn">)</span><span class="pn">)</span>
+
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs55', 150)" onmouseover="showTip(event, 'fs55', 150)" class="id">bndAvgReturn</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs50', 151)" onmouseover="showTip(event, 'fs50', 151)" class="id">bndReturn</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 152)" onmouseover="showTip(event, 'fs10', 152)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs56', 153)" onmouseover="showTip(event, 'fs56', 153)" class="id">average</span>
+<span onmouseout="hideTip(event, 'fs55', 154)" onmouseover="showTip(event, 'fs55', 154)" class="id">bndAvgReturn</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>No value returned by any evaluator</code></pre></td></tr></table>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs57', 155)" onmouseover="showTip(event, 'fs57', 155)" class="id">vtiAvgReturn</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs54', 156)" onmouseover="showTip(event, 'fs54', 156)" class="id">vtiReturn</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 157)" onmouseover="showTip(event, 'fs10', 157)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs56', 158)" onmouseover="showTip(event, 'fs56', 158)" class="id">average</span>
+<span onmouseout="hideTip(event, 'fs57', 159)" onmouseover="showTip(event, 'fs57', 159)" class="id">vtiAvgReturn</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>No value returned by any evaluator</code></pre></td></tr></table>
+<ul>
+<li>Portfolio returns for different weights.</li>
+</ul>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs58', 160)" onmouseover="showTip(event, 'fs58', 160)" class="id">differentReturns</span> <span class="o">=</span>
+  <span class="pn">[</span> <span class="k">for</span> <span onmouseout="hideTip(event, 'fs59', 161)" onmouseover="showTip(event, 'fs59', 161)" class="fn">w</span> <span class="k">in</span> <span class="pn">[</span><span class="o">0.0</span> <span class="o">..</span> <span class="n">0.2</span> <span class="o">..</span> <span class="n">1.0</span><span class="pn">]</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs59', 162)" onmouseover="showTip(event, 'fs59', 162)" class="fn">w</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs59', 163)" onmouseover="showTip(event, 'fs59', 163)" class="fn">w</span><span class="o">*</span><span onmouseout="hideTip(event, 'fs55', 164)" onmouseover="showTip(event, 'fs55', 164)" class="id">bndAvgReturn</span> <span class="o">+</span> <span class="pn">(</span><span class="n">1.0</span><span class="o">-</span><span onmouseout="hideTip(event, 'fs59', 165)" onmouseover="showTip(event, 'fs59', 165)" class="fn">w</span><span class="pn">)</span><span class="o">*</span><span onmouseout="hideTip(event, 'fs57', 166)" onmouseover="showTip(event, 'fs57', 166)" class="id">vtiAvgReturn</span> <span class="pn">]</span>
+
+<span onmouseout="hideTip(event, 'fs58', 167)" onmouseover="showTip(event, 'fs58', 167)" class="id">differentReturns</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>No value returned by any evaluator</code></pre></td></tr></table>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs34', 168)" onmouseover="showTip(event, 'fs34', 168)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs35', 169)" onmouseover="showTip(event, 'fs35', 169)" class="id">Line</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs58', 170)" onmouseover="showTip(event, 'fs58', 170)" class="id">differentReturns</span><span class="pn">)</span>
+</code></pre>
+
+            <div class="fsdocs-tip" id="fs1">PositionsWithReturn.Id: string</div>
+<div class="fsdocs-tip" id="fs2">Multiple items<br />val string: value: &#39;T -&gt; string<br /><em>&lt;summary&gt;Converts the argument to a string using &lt;c&gt;ToString&lt;/c&gt;.&lt;/summary&gt;<br />&lt;remarks&gt;For standard integer and floating point values the and any type that implements &lt;c&gt;IFormattable&lt;/c&gt;&lt;c&gt;ToString&lt;/c&gt; conversion uses &lt;c&gt;CultureInfo.InvariantCulture&lt;/c&gt;. &lt;/remarks&gt;<br />&lt;param name=&quot;value&quot;&gt;The input value.&lt;/param&gt;<br />&lt;returns&gt;The converted string.&lt;/returns&gt;<br />&lt;example id=&quot;string-example&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;&lt;/code&gt;&lt;/example&gt;</em><br /><br />--------------------<br />type string = System.String<br /><em>&lt;summary&gt;An abbreviation for the CLI type &lt;see cref=&quot;T:System.String&quot; /&gt;.&lt;/summary&gt;<br />&lt;category&gt;Basic Types&lt;/category&gt;</em></div>
+<div class="fsdocs-tip" id="fs3">PositionsWithReturn.Weight: float</div>
+<div class="fsdocs-tip" id="fs4">Multiple items<br />val float: value: &#39;T -&gt; float (requires member op_Explicit)<br /><em>&lt;summary&gt;Converts the argument to 64-bit float. This is a direct conversion for all 
+ primitive numeric types. For strings, the input is converted using &lt;c&gt;Double.Parse()&lt;/c&gt;  
+ with InvariantCulture settings. Otherwise the operation requires an appropriate
+ static conversion method on the input type.&lt;/summary&gt;<br />&lt;param name=&quot;value&quot;&gt;The input value.&lt;/param&gt;<br />&lt;returns&gt;The converted float&lt;/returns&gt;<br />&lt;example id=&quot;float-example&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;&lt;/code&gt;&lt;/example&gt;</em><br /><br />--------------------<br />[&lt;Struct&gt;]
+type float = System.Double<br /><em>&lt;summary&gt;An abbreviation for the CLI type &lt;see cref=&quot;T:System.Double&quot; /&gt;.&lt;/summary&gt;<br />&lt;category&gt;Basic Types&lt;/category&gt;</em><br /><br />--------------------<br />type float&lt;&#39;Measure&gt; =
+  float<br /><em>&lt;summary&gt;The type of double-precision floating point numbers, annotated with a unit of measure.
+ The unit of measure is erased in compiled code and when values of this type
+ are analyzed using reflection. The type is representationally equivalent to
+ &lt;see cref=&quot;T:System.Double&quot; /&gt;.&lt;/summary&gt;<br />&lt;category index=&quot;6&quot;&gt;Basic Types with Units of Measure&lt;/category&gt;</em></div>
+<div class="fsdocs-tip" id="fs5">PositionsWithReturn.Return: float</div>
+<div class="fsdocs-tip" id="fs6">val exPortfolio: PositionsWithReturn list</div>
+<div class="fsdocs-tip" id="fs7">val weightsXreturn: float list</div>
+<div class="fsdocs-tip" id="fs8">val pos: PositionsWithReturn</div>
+<div class="fsdocs-tip" id="fs9">val exPortfolioReturn: float</div>
+<div class="fsdocs-tip" id="fs10">Multiple items<br />module List
+
+from Microsoft.FSharp.Collections<br /><em>&lt;summary&gt;Contains operations for working with values of type &lt;see cref=&quot;T:Microsoft.FSharp.Collections.list`1&quot; /&gt;.&lt;/summary&gt;<br />&lt;namespacedoc&gt;&lt;summary&gt;Operations for collections such as lists, arrays, sets, maps and sequences. See also 
+    &lt;a href=&quot;https://docs.microsoft.com/dotnet/fsharp/language-reference/fsharp-collection-types&quot;&gt;F# Collection Types&lt;/a&gt; in the F# Language Guide.
+ &lt;/summary&gt;&lt;/namespacedoc&gt;</em><br /><br />--------------------<br />type List&lt;&#39;T&gt; =
+  | op_Nil
+  | op_ColonColon of Head: &#39;T * Tail: &#39;T list
+  interface IReadOnlyList&lt;&#39;T&gt;
+  interface IReadOnlyCollection&lt;&#39;T&gt;
+  interface IEnumerable
+  interface IEnumerable&lt;&#39;T&gt;
+  member GetReverseIndex: rank: int * offset: int -&gt; int
+  member GetSlice: startIndex: int option * endIndex: int option -&gt; &#39;T list
+  static member Cons: head: &#39;T * tail: &#39;T list -&gt; &#39;T list
+  member Head: &#39;T
+  member IsEmpty: bool
+  member Item: index: int -&gt; &#39;T with get
+  ...<br /><em>&lt;summary&gt;The type of immutable singly-linked lists.&lt;/summary&gt;<br />&lt;remarks&gt;Use the constructors &lt;c&gt;[]&lt;/c&gt; and &lt;c&gt;::&lt;/c&gt; (infix) to create values of this type, or
+ the notation &lt;c&gt;[1;2;3]&lt;/c&gt;. Use the values in the &lt;c&gt;List&lt;/c&gt; module to manipulate 
+ values of this type, or pattern match against the values directly.
+ &lt;/remarks&gt;<br />&lt;exclude /&gt;</em></div>
+<div class="fsdocs-tip" id="fs11">val sum: list: &#39;T list -&gt; &#39;T (requires member (+) and member get_Zero)<br /><em>&lt;summary&gt;Returns the sum of the elements in the list.&lt;/summary&gt;<br />&lt;param name=&quot;list&quot;&gt;The input list.&lt;/param&gt;<br />&lt;returns&gt;The resulting sum.&lt;/returns&gt;<br />&lt;example id=&quot;sum-1&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let input = [ 1; 5; 3; 2 ]
+
+ input |&amp;gt; List.sum
+ &lt;/code&gt;
+ Evaluates to &lt;c&gt;11&lt;/c&gt;.
+ &lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs12">namespace System</div>
+<div class="fsdocs-tip" id="fs13">namespace System.IO</div>
+<div class="fsdocs-tip" id="fs14">type File =
+  static member AppendAllLines: path: string * contents: IEnumerable&lt;string&gt; -&gt; unit + 1 overload
+  static member AppendAllLinesAsync: path: string * contents: IEnumerable&lt;string&gt; * encoding: Encoding * ?cancellationToken: CancellationToken -&gt; Task + 1 overload
+  static member AppendAllText: path: string * contents: string -&gt; unit + 1 overload
+  static member AppendAllTextAsync: path: string * contents: string * encoding: Encoding * ?cancellationToken: CancellationToken -&gt; Task + 1 overload
+  static member AppendText: path: string -&gt; StreamWriter
+  static member Copy: sourceFileName: string * destFileName: string -&gt; unit + 1 overload
+  static member Create: path: string -&gt; FileStream + 2 overloads
+  static member CreateSymbolicLink: path: string * pathToTarget: string -&gt; FileSystemInfo
+  static member CreateText: path: string -&gt; StreamWriter
+  static member Decrypt: path: string -&gt; unit
+  ...<br /><em>&lt;summary&gt;Provides static methods for the creation, copying, deletion, moving, and opening of a single file, and aids in the creation of &lt;see cref=&quot;T:System.IO.FileStream&quot; /&gt; objects.&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs15">System.IO.File.Exists(path: string) : bool</div>
+<div class="fsdocs-tip" id="fs16">IO.File.Exists(path: string) : bool</div>
+<div class="fsdocs-tip" id="fs17">module YahooFinance</div>
+<div class="fsdocs-tip" id="fs18">val myStart: DateTime</div>
+<div class="fsdocs-tip" id="fs19">Multiple items<br />[&lt;Struct&gt;]
+type DateTime =
+  new: year: int * month: int * day: int -&gt; unit + 10 overloads
+  member Add: value: TimeSpan -&gt; DateTime
+  member AddDays: value: float -&gt; DateTime
+  member AddHours: value: float -&gt; DateTime
+  member AddMilliseconds: value: float -&gt; DateTime
+  member AddMinutes: value: float -&gt; DateTime
+  member AddMonths: months: int -&gt; DateTime
+  member AddSeconds: value: float -&gt; DateTime
+  member AddTicks: value: int64 -&gt; DateTime
+  member AddYears: value: int -&gt; DateTime
+  ...<br /><em>&lt;summary&gt;Represents an instant in time, typically expressed as a date and time of day.&lt;/summary&gt;</em><br /><br />--------------------<br />DateTime ()<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(ticks: int64) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(ticks: int64, kind: DateTimeKind) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, calendar: Globalization.Calendar) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int, kind: DateTimeKind) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int, calendar: Globalization.Calendar) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int, millisecond: int) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int, millisecond: int, kind: DateTimeKind) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em></div>
+<div class="fsdocs-tip" id="fs20">val myEnd: DateTime</div>
+<div class="fsdocs-tip" id="fs21">property DateTime.UtcNow: DateTime with get<br /><em>&lt;summary&gt;Gets a &lt;see cref=&quot;T:System.DateTime&quot; /&gt; object that is set to the current date and time on this computer, expressed as the Coordinated Universal Time (UTC).&lt;/summary&gt;<br />&lt;returns&gt;An object whose value is the current UTC date and time.&lt;/returns&gt;</em></div>
+<div class="fsdocs-tip" id="fs22">val bnd: PriceObs list</div>
+<div class="fsdocs-tip" id="fs23">Multiple items<br />module YahooFinance<br /><br />--------------------<br />type YahooFinance =
+  static member PriceHistory: symbol: string * ?startDate: DateTime * ?endDate: DateTime * ?interval: Interval -&gt; PriceObs list + 1 overload</div>
+<div class="fsdocs-tip" id="fs24">static member YahooFinance.PriceHistory: symbols: seq&lt;string&gt; * ?startDate: DateTime * ?endDate: DateTime * ?interval: Interval -&gt; PriceObs list<br />static member YahooFinance.PriceHistory: symbol: string * ?startDate: DateTime * ?endDate: DateTime * ?interval: Interval -&gt; PriceObs list</div>
+<div class="fsdocs-tip" id="fs25">type Interval =
+  | Daily
+  | Weekly
+  | Monthly
+  override ToString: unit -&gt; string</div>
+<div class="fsdocs-tip" id="fs26">union case Interval.Daily: Interval</div>
+<div class="fsdocs-tip" id="fs27">val vti: PriceObs list</div>
+<div class="fsdocs-tip" id="fs28">namespace Plotly</div>
+<div class="fsdocs-tip" id="fs29">namespace Plotly.NET</div>
+<div class="fsdocs-tip" id="fs30">val vtiAdjPrices: (DateTime * float) list</div>
+<div class="fsdocs-tip" id="fs31">val period: PriceObs</div>
+<div class="fsdocs-tip" id="fs32">PriceObs.Date: DateTime</div>
+<div class="fsdocs-tip" id="fs33">PriceObs.AdjustedClose: float</div>
+<div class="fsdocs-tip" id="fs34">type Chart =
+  static member AnnotatedHeatmap: zData: seq&lt;#seq&lt;&#39;a1&gt;&gt; * annotationText: seq&lt;#seq&lt;string&gt;&gt; * ?Name: string * ?ShowLegend: bool * ?Opacity: float * ?X: seq&lt;#IConvertible&gt; * ?XGap: int * ?Y: seq&lt;#IConvertible&gt; * ?YGap: int * ?Text: &#39;a5 * ?MultiText: seq&lt;&#39;a5&gt; * ?ColorBar: ColorBar * ?ColorScale: Colorscale * ?ShowScale: bool * ?ReverseScale: bool * ?ZSmooth: SmoothAlg * ?Transpose: bool * ?UseWebGL: bool * ?ReverseYAxis: bool * ?UseDefaults: bool -&gt; GenericChart (requires &#39;a1 :&gt; IConvertible and &#39;a5 :&gt; IConvertible) + 1 overload
+  static member Area: x: seq&lt;#IConvertible&gt; * y: seq&lt;#IConvertible&gt; * ?ShowMarkers: bool * ?Name: string * ?ShowLegend: bool * ?Opacity: float * ?MultiOpacity: seq&lt;float&gt; * ?Text: &#39;a2 * ?MultiText: seq&lt;&#39;a2&gt; * ?TextPosition: TextPosition * ?MultiTextPosition: seq&lt;TextPosition&gt; * ?MarkerColor: Color * ?MarkerColorScale: Colorscale * ?MarkerOutline: Line * ?MarkerSymbol: MarkerSymbol * ?MultiMarkerSymbol: seq&lt;MarkerSymbol&gt; * ?Marker: Marker * ?LineColor: Color * ?LineColorScale: Colorscale * ?LineWidth: float * ?LineDash: DrawingStyle * ?Line: Line * ?StackGroup: string * ?Orientation: Orientation * ?GroupNorm: GroupNorm * ?FillColor: Color * ?UseWebGL: bool * ?UseDefaults: bool -&gt; GenericChart (requires &#39;a2 :&gt; IConvertible) + 1 overload
+  static member Bar: values: seq&lt;#IConvertible&gt; * ?Keys: seq&lt;#IConvertible&gt; * ?Name: string * ?ShowLegend: bool * ?Opacity: float * ?MultiOpacity: seq&lt;float&gt; * ?Text: &#39;a2 * ?MultiText: seq&lt;&#39;a2&gt; * ?MarkerColor: Color * ?MarkerColorScale: Colorscale * ?MarkerOutline: Line * ?MarkerPatternShape: PatternShape * ?MultiMarkerPatternShape: seq&lt;PatternShape&gt; * ?MarkerPattern: Pattern * ?Marker: Marker * ?Base: #IConvertible * ?Width: &#39;a4 * ?MultiWidth: seq&lt;&#39;a4&gt; * ?TextPosition: TextPosition * ?MultiTextPosition: seq&lt;TextPosition&gt; * ?UseDefaults: bool -&gt; GenericChart (requires &#39;a2 :&gt; IConvertible and &#39;a4 :&gt; IConvertible) + 1 overload
+  static member BoxPlot: ?X: seq&lt;#IConvertible&gt; * ?Y: seq&lt;#IConvertible&gt; * ?Name: string * ?ShowLegend: bool * ?Text: &#39;a2 * ?MultiText: seq&lt;&#39;a2&gt; * ?FillColor: Color * ?MarkerColor: Color * ?Marker: Marker * ?Opacity: float * ?WhiskerWidth: float * ?BoxPoints: BoxPoints * ?BoxMean: BoxMean * ?Jitter: float * ?PointPos: float * ?Orientation: Orientation * ?OutlineColor: Color * ?OutlineWidth: float * ?Outline: Line * ?AlignmentGroup: string * ?OffsetGroup: string * ?Notched: bool * ?NotchWidth: float * ?QuartileMethod: QuartileMethod * ?UseDefaults: bool -&gt; GenericChart (requires &#39;a2 :&gt; IConvertible) + 2 overloads
+  static member Bubble: x: seq&lt;#IConvertible&gt; * y: seq&lt;#IConvertible&gt; * sizes: seq&lt;int&gt; * ?Name: string * ?ShowLegend: bool * ?Opacity: float * ?MultiOpacity: seq&lt;float&gt; * ?Text: &#39;a2 * ?MultiText: seq&lt;&#39;a2&gt; * ?TextPosition: TextPosition * ?MultiTextPosition: seq&lt;TextPosition&gt; * ?MarkerColor: Color * ?MarkerColorScale: Colorscale * ?MarkerOutline: Line * ?MarkerSymbol: MarkerSymbol * ?MultiMarkerSymbol: seq&lt;MarkerSymbol&gt; * ?Marker: Marker * ?LineColor: Color * ?LineColorScale: Colorscale * ?LineWidth: float * ?LineDash: DrawingStyle * ?Line: Line * ?StackGroup: string * ?Orientation: Orientation * ?GroupNorm: GroupNorm * ?UseWebGL: bool * ?UseDefaults: bool -&gt; GenericChart (requires &#39;a2 :&gt; IConvertible) + 1 overload
+  static member Candlestick: ``open`` : seq&lt;#IConvertible&gt; * high: seq&lt;#IConvertible&gt; * low: seq&lt;#IConvertible&gt; * close: seq&lt;#IConvertible&gt; * x: seq&lt;#IConvertible&gt; * ?Name: string * ?ShowLegend: bool * ?Opacity: float * ?Text: &#39;a5 * ?MultiText: seq&lt;&#39;a5&gt; * ?Line: Line * ?IncreasingColor: Color * ?Increasing: FinanceMarker * ?DecreasingColor: Color * ?Decreasing: FinanceMarker * ?WhiskerWidth: float * ?UseDefaults: bool -&gt; GenericChart (requires &#39;a5 :&gt; IConvertible) + 1 overload
+  static member Column: values: seq&lt;#IConvertible&gt; * ?Keys: seq&lt;#IConvertible&gt; * ?Name: string * ?ShowLegend: bool * ?Opacity: float * ?MultiOpacity: seq&lt;float&gt; * ?Text: &#39;a2 * ?MultiText: seq&lt;&#39;a2&gt; * ?MarkerColor: Color * ?MarkerColorScale: Colorscale * ?MarkerOutline: Line * ?MarkerPatternShape: PatternShape * ?MultiMarkerPatternShape: seq&lt;PatternShape&gt; * ?MarkerPattern: Pattern * ?Marker: Marker * ?Base: #IConvertible * ?Width: &#39;a4 * ?MultiWidth: seq&lt;&#39;a4&gt; * ?TextPosition: TextPosition * ?MultiTextPosition: seq&lt;TextPosition&gt; * ?UseDefaults: bool -&gt; GenericChart (requires &#39;a2 :&gt; IConvertible and &#39;a4 :&gt; IConvertible) + 1 overload
+  static member Contour: zData: seq&lt;#seq&lt;&#39;a1&gt;&gt; * ?Name: string * ?ShowLegend: bool * ?Opacity: float * ?X: seq&lt;#IConvertible&gt; * ?Y: seq&lt;#IConvertible&gt; * ?Text: &#39;a4 * ?MultiText: seq&lt;&#39;a4&gt; * ?ColorBar: ColorBar * ?ColorScale: Colorscale * ?ShowScale: bool * ?ReverseScale: bool * ?Transpose: bool * ?ContourLineColor: Color * ?ContourLineDash: DrawingStyle * ?ContourLineSmoothing: float * ?ContourLine: Line * ?ContoursColoring: ContourColoring * ?ContoursOperation: ConstraintOperation * ?ContoursType: ContourType * ?ShowContourLabels: bool * ?ContourLabelFont: Font * ?Contours: Contours * ?FillColor: Color * ?NContours: int * ?UseDefaults: bool -&gt; GenericChart (requires &#39;a1 :&gt; IConvertible and &#39;a4 :&gt; IConvertible)
+  static member Funnel: x: seq&lt;#IConvertible&gt; * y: seq&lt;#IConvertible&gt; * ?Name: string * ?ShowLegend: bool * ?Opacity: float * ?Width: float * ?Offset: float * ?Text: &#39;a2 * ?MultiText: seq&lt;&#39;a2&gt; * ?TextPosition: TextPosition * ?MultiTextPosition: seq&lt;TextPosition&gt; * ?Orientation: Orientation * ?AlignmentGroup: string * ?OffsetGroup: string * ?MarkerColor: Color * ?MarkerOutline: Line * ?Marker: Marker * ?TextInfo: TextInfo * ?ConnectorLineColor: Color * ?ConnectorLineStyle: DrawingStyle * ?ConnectorFillColor: Color * ?ConnectorLine: Line * ?Connector: FunnelConnector * ?InsideTextFont: Font * ?OutsideTextFont: Font * ?UseDefaults: bool -&gt; GenericChart (requires &#39;a2 :&gt; IConvertible)
+  static member Heatmap: zData: seq&lt;#seq&lt;&#39;a1&gt;&gt; * ?Name: string * ?ShowLegend: bool * ?Opacity: float * ?X: seq&lt;#IConvertible&gt; * ?XGap: int * ?Y: seq&lt;#IConvertible&gt; * ?YGap: int * ?Text: &#39;a4 * ?MultiText: seq&lt;&#39;a4&gt; * ?ColorBar: ColorBar * ?ColorScale: Colorscale * ?ShowScale: bool * ?ReverseScale: bool * ?ZSmooth: SmoothAlg * ?Transpose: bool * ?UseWebGL: bool * ?ReverseYAxis: bool * ?UseDefaults: bool -&gt; GenericChart (requires &#39;a1 :&gt; IConvertible and &#39;a4 :&gt; IConvertible) + 1 overload
+  ...</div>
+<div class="fsdocs-tip" id="fs35">static member Chart.Line: xy: seq&lt;#IConvertible * #IConvertible&gt; * ?ShowMarkers: bool * ?Name: string * ?ShowLegend: bool * ?Opacity: float * ?MultiOpacity: seq&lt;float&gt; * ?Text: &#39;c * ?MultiText: seq&lt;&#39;c&gt; * ?TextPosition: StyleParam.TextPosition * ?MultiTextPosition: seq&lt;StyleParam.TextPosition&gt; * ?MarkerColor: Color * ?MarkerColorScale: StyleParam.Colorscale * ?MarkerOutline: Line * ?MarkerSymbol: StyleParam.MarkerSymbol * ?MultiMarkerSymbol: seq&lt;StyleParam.MarkerSymbol&gt; * ?Marker: TraceObjects.Marker * ?LineColor: Color * ?LineColorScale: StyleParam.Colorscale * ?LineWidth: float * ?LineDash: StyleParam.DrawingStyle * ?Line: Line * ?StackGroup: string * ?Orientation: StyleParam.Orientation * ?GroupNorm: StyleParam.GroupNorm * ?Fill: StyleParam.Fill * ?FillColor: Color * ?UseWebGL: bool * ?UseDefaults: bool -&gt; GenericChart.GenericChart (requires &#39;c :&gt; IConvertible)<br />static member Chart.Line: x: seq&lt;#IConvertible&gt; * y: seq&lt;#IConvertible&gt; * ?ShowMarkers: bool * ?Name: string * ?ShowLegend: bool * ?Opacity: float * ?MultiOpacity: seq&lt;float&gt; * ?Text: &#39;a2 * ?MultiText: seq&lt;&#39;a2&gt; * ?TextPosition: StyleParam.TextPosition * ?MultiTextPosition: seq&lt;StyleParam.TextPosition&gt; * ?MarkerColor: Color * ?MarkerColorScale: StyleParam.Colorscale * ?MarkerOutline: Line * ?MarkerSymbol: StyleParam.MarkerSymbol * ?MultiMarkerSymbol: seq&lt;StyleParam.MarkerSymbol&gt; * ?Marker: TraceObjects.Marker * ?LineColor: Color * ?LineColorScale: StyleParam.Colorscale * ?LineWidth: float * ?LineDash: StyleParam.DrawingStyle * ?Line: Line * ?StackGroup: string * ?Orientation: StyleParam.Orientation * ?GroupNorm: StyleParam.GroupNorm * ?Fill: StyleParam.Fill * ?FillColor: Color * ?UseWebGL: bool * ?UseDefaults: bool -&gt; GenericChart.GenericChart (requires &#39;a2 :&gt; IConvertible)</div>
+<div class="fsdocs-tip" id="fs36">module GenericChart
+
+from Plotly.NET<br /><em>&lt;summary&gt;
+ Module to represent a GenericChart
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs37">val toChartHTML: gChart: GenericChart.GenericChart -&gt; string<br /><em>&lt;summary&gt;
+ Converts a GenericChart to it HTML representation. The div layer has a default size of 600 if not specified otherwise.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs38">val sort: list: &#39;T list -&gt; &#39;T list (requires comparison)<br /><em>&lt;summary&gt;Sorts the given list using &lt;see cref=&quot;M:Microsoft.FSharp.Core.Operators.compare&quot; /&gt;.&lt;/summary&gt;<br />&lt;remarks&gt;This is a stable sort, i.e. the original order of equal elements is preserved.&lt;/remarks&gt;<br />&lt;param name=&quot;list&quot;&gt;The input list.&lt;/param&gt;<br />&lt;returns&gt;The sorted list.&lt;/returns&gt;<br />&lt;example id=&quot;sort-1&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let input = [8; 4; 3; 1; 6; 1]
+
+ List.sort input
+ &lt;/code&gt;
+ Evaluates to &lt;c&gt;[1; 1 3; 4; 6; 8]&lt;/c&gt;.
+ &lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs39">val sortedBnd: PriceObs list</div>
+<div class="fsdocs-tip" id="fs40">val sortBy: projection: (&#39;T -&gt; &#39;Key) -&gt; list: &#39;T list -&gt; &#39;T list (requires comparison)<br /><em>&lt;summary&gt;Sorts the given list using keys given by the given projection. Keys are compared using &lt;see cref=&quot;M:Microsoft.FSharp.Core.Operators.compare&quot; /&gt;.&lt;/summary&gt;<br />&lt;remarks&gt;This is a stable sort, i.e. the original order of equal elements is preserved.&lt;/remarks&gt;<br />&lt;param name=&quot;projection&quot;&gt;The function to transform the list elements into the type to be compared.&lt;/param&gt;<br />&lt;param name=&quot;list&quot;&gt;The input list.&lt;/param&gt;<br />&lt;returns&gt;The sorted list.&lt;/returns&gt;<br />&lt;example id=&quot;sortby-1&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let input = [ &quot;a&quot;; &quot;bbb&quot;; &quot;cccc&quot;; &quot;dd&quot; ]
+
+ input |&amp;gt; List.sortBy (fun s -&amp;gt; s.Length)
+ &lt;/code&gt;
+ Evaluates to &lt;c&gt;[&quot;a&quot;; &quot;dd&quot;; &quot;bbb&quot;; &quot;cccc&quot;]&lt;/c&gt;.
+ &lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs41">val x: PriceObs</div>
+<div class="fsdocs-tip" id="fs42">property List.Length: int with get<br /><em>&lt;summary&gt;Gets the number of items contained in the list&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs43">val pairwise: list: &#39;T list -&gt; (&#39;T * &#39;T) list<br /><em>&lt;summary&gt;Returns a list of each element in the input list and its predecessor, with the
+ exception of the first element which is only returned as the predecessor of the second element.&lt;/summary&gt;<br />&lt;param name=&quot;list&quot;&gt;The input list.&lt;/param&gt;<br />&lt;returns&gt;The result list.&lt;/returns&gt;<br />&lt;example id=&quot;pairwise-1&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let inputs = [1; 2; 3; 4]
+
+ inputs |&amp;gt; List.pairwise
+ &lt;/code&gt;
+ Evaluates to &lt;c&gt;[(1, 2); (2, 3); (3, 4)]&lt;/c&gt;.
+ &lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs44">val sequentialBnd: (PriceObs * PriceObs) list</div>
+<div class="fsdocs-tip" id="fs45">val bndA: PriceObs</div>
+<div class="fsdocs-tip" id="fs46">val bndB: PriceObs</div>
+<div class="fsdocs-tip" id="fs47">val bndA&#39;: PriceObs</div>
+<div class="fsdocs-tip" id="fs48">val bndB&#39;: PriceObs</div>
+<div class="fsdocs-tip" id="fs49">val log: value: &#39;T -&gt; &#39;T (requires member Log)<br /><em>&lt;summary&gt;Natural logarithm of the given number&lt;/summary&gt;<br />&lt;param name=&quot;value&quot;&gt;The input value.&lt;/param&gt;<br />&lt;returns&gt;The natural logarithm of the input.&lt;/returns&gt;<br />&lt;example id=&quot;log-example&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let logBase baseNumber value = (log value) / (log baseNumber)
+ logBase 2.0 32.0      //  Evaluates to 5.0
+ logBase 10.0 1000.0   //  Evaluates to 3.0
+ &lt;/code&gt;&lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs50">val bndReturn: float list</div>
+<div class="fsdocs-tip" id="fs51">val map: mapping: (&#39;T -&gt; &#39;U) -&gt; list: &#39;T list -&gt; &#39;U list<br /><em>&lt;summary&gt;Builds a new collection whose elements are the results of applying the given function
+ to each of the elements of the collection.&lt;/summary&gt;<br />&lt;param name=&quot;mapping&quot;&gt;The function to transform elements from the input list.&lt;/param&gt;<br />&lt;param name=&quot;list&quot;&gt;The input list.&lt;/param&gt;<br />&lt;returns&gt;The list of transformed elements.&lt;/returns&gt;<br />&lt;example id=&quot;map-1&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let inputs = [ &quot;a&quot;; &quot;bbb&quot;; &quot;cc&quot; ]
+
+ inputs |&amp;gt; List.map (fun x -&amp;gt; x.Length)
+ &lt;/code&gt;
+ Evaluates to &lt;c&gt;[ 1; 3; 2 ]&lt;/c&gt;&lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs52">val a: PriceObs</div>
+<div class="fsdocs-tip" id="fs53">val b: PriceObs</div>
+<div class="fsdocs-tip" id="fs54">val vtiReturn: float list</div>
+<div class="fsdocs-tip" id="fs55">val bndAvgReturn: float</div>
+<div class="fsdocs-tip" id="fs56">val average: list: &#39;T list -&gt; &#39;T (requires member (+) and member DivideByInt and member get_Zero)<br /><em>&lt;summary&gt;Returns the average of the elements in the list.&lt;/summary&gt;<br />&lt;remarks&gt;Raises &lt;see cref=&quot;T:System.ArgumentException&quot; /&gt; if &lt;c&gt;list&lt;/c&gt; is empty.&lt;/remarks&gt;<br />&lt;param name=&quot;list&quot;&gt;The input list.&lt;/param&gt;<br />&lt;exception cref=&quot;T:System.ArgumentException&quot;&gt;Thrown when the list is empty.&lt;/exception&gt;<br />&lt;returns&gt;The resulting average.&lt;/returns&gt;<br />&lt;example id=&quot;average-1&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ [1.0 .. 9.0] |&amp;gt; List.average  // evaluates 5.0
+ &lt;/code&gt;&lt;/example&gt;<br />&lt;example id=&quot;average-2&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ [1 .. 9] |&amp;gt; List.average
+ &lt;/code&gt;
+ The sample does not compile because &lt;c&gt;The type &#39;int&#39; does not support the operator &#39;DivideByInt&#39;&lt;/c&gt;
+ (see &lt;c&gt;averageBy&lt;/c&gt; examples for a solution)
+ &lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs57">val vtiAvgReturn: float</div>
+<div class="fsdocs-tip" id="fs58">val differentReturns: (float * float) list</div>
+<div class="fsdocs-tip" id="fs59">val w: float</div>
+
+        </div>
+
+        <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+        <script type="text/javascript">var fsdocs_search_baseurl = '/Teaching/';</script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+        <script type="text/javascript" src="/Teaching/content/fsdocs-search.js"></script>
+        <!-- END SEARCH BOX: this adds support for the search box -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    </div>
+</body>
+
+</html>

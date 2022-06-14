@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Common</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="">
+
+    <link rel="stylesheet" id="theme_link" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.6.0/materia/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    <link type="text/css" rel="stylesheet" href="/Teaching/content/navbar-fixed-left.css" />
+    <link type="text/css" rel="stylesheet" href="/Teaching/content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="/Teaching/content/fsdocs-custom.css" />
+    <script type="text/javascript" src="/Teaching/content/fsdocs-tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+    
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-light bg-secondary fixed-left" id="fsdocs-nav">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse navbar-nav-scroll" id="navbarsExampleDefault">
+            <a href="/Teaching/"><img id="fsdocs-logo" src="/Teaching/img/logo.png" /></a>
+            <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+            <div id="header">
+                <div class="searchbox" id="fsdocs-searchbox">
+                    <label for="search-by">
+                        <i class="fas fa-search"></i>
+                    </label>
+                    <input data-search-input="" id="search-by" type="search" placeholder="Search..." />
+                    <span data-search-clear="">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- END SEARCH BOX: this adds support for the search box -->
+            <ul class="navbar-nav">
+                <li class="nav-header">Links</li>
+                <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="https://github.com/nhirschey/Teaching/blob/main/LICENSE.md">License</a></li>
+                <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="https://github.com/nhirschey/Teaching">Source Repository</a></li>
+                <li class="nav-header">
+  Getting Started
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/install.html">
+    Install Software
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/learn-fsharp.html">
+    Learn F#
+  </a>
+</li>             
+<li class="nav-header">
+  Lectures
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/portfolio-statistics.html">
+    Basic Portfolio Statistics
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/portfolio-returns.html">
+    Portfolio Returns
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/PortfolioFormation-SimpleExample.html">
+    Building a strategy
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/Momentum-Class.html">
+    Momentum Signal
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/VolatilityTiming.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/optimization.html">
+    Optimization
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/sentiment-mlnet.html">
+    Sentiment classification
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/calls-nn.html">
+    Calls NN
+  </a>
+</li>             
+<li class="nav-header">
+  Assignments
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/football-1-download-data.html">
+    Webscraping HTML to CSV
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/football-tuples-and-records.html">
+    Tuples and Records (with solutions)
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/football-collection-functions.html">
+    Collection functions (with solutions)
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/football-plotting.html">
+    Plotting (with solutions)
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/select-project-signal.html">
+    Select Project Signals
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/assignment-signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/assignment-performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/assignment-volatility-timing.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-header">
+  Practice Quizzes
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-list-module.html">
+    List module functions
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-options.html">
+    Options
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-match-expressions.html">
+    Match expressions
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-map-collection.html">
+    Map collection
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-discriminated-union.html">
+    Dicriminated Union
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-portfolios.html">
+    Portfolios
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-factors.html">
+    Factors
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-folding.html">
+    Fold and Friends
+  </a>
+</li>             
+<li class="nav-header">
+  Project
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/project/signal-exploration.html">
+    Signal Exploration
+  </a>
+</li>             
+<li class="nav-header">
+  Other
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/Common.html">
+    Common
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/Portfolio.html">
+    Portfolio
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/YahooFinance.html">
+    YahooFinance
+  </a>
+</li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="masthead">
+            <h3 class="muted"><a href="/Teaching/">Teaching</a></h3>
+        </div>
+        <hr />
+        <div class="container" id="fsdocs-content">
+            <p><a href="/Teaching//Common.fsx"><img src="img/badge-script.svg" alt="Script" /></a>&emsp;</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="pp">#r</span> <span class="s">&quot;nuget: FSharp.Data&quot;</span>
+
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="id">System</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 2)" onmouseover="showTip(event, 'fs1', 2)" class="id">System</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs2', 3)" onmouseover="showTip(event, 'fs2', 3)" class="id">IO</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs3', 4)" onmouseover="showTip(event, 'fs3', 4)" class="id">FSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs4', 5)" onmouseover="showTip(event, 'fs4', 5)" class="id">Data</span>
+
+<span onmouseout="hideTip(event, 'fs5', 6)" onmouseover="showTip(event, 'fs5', 6)" class="rt">Environment</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs6', 7)" onmouseover="showTip(event, 'fs6', 7)" class="id">CurrentDirectory</span> <span class="k">&lt;-</span> <span class="k">__SOURCE_DIRECTORY__</span>
+
+<span class="k">module</span> <span class="m">Secrets</span> <span class="o">=</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs7', 8)" onmouseover="showTip(event, 'fs7', 8)" class="id">envVars</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs1', 9)" onmouseover="showTip(event, 'fs1', 9)" class="id">System</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs5', 10)" onmouseover="showTip(event, 'fs5', 10)" class="rt">Environment</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs8', 11)" onmouseover="showTip(event, 'fs8', 11)" class="id">GetEnvironmentVariables</span><span class="pn">(</span><span class="pn">)</span> 
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs9', 12)" onmouseover="showTip(event, 'fs9', 12)" class="id">localPath</span> <span class="o">=</span> <span class="s">&quot;../secrets.fsx&quot;</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs10', 13)" onmouseover="showTip(event, 'fs10', 13)" class="id">localPath2</span> <span class="o">=</span> <span class="s">&quot;secrets.fsx&quot;</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs11', 14)" onmouseover="showTip(event, 'fs11', 14)" class="id">tiingoKey</span> <span class="o">=</span> 
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs12', 15)" onmouseover="showTip(event, 'fs12', 15)" class="fn">var</span> <span class="o">=</span> <span class="s">&quot;TIINGO_KEY&quot;</span>
+        <span class="k">if</span> <span onmouseout="hideTip(event, 'fs7', 16)" onmouseover="showTip(event, 'fs7', 16)" class="id">envVars</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs13', 17)" onmouseover="showTip(event, 'fs13', 17)" class="id">Contains</span> <span onmouseout="hideTip(event, 'fs12', 18)" onmouseover="showTip(event, 'fs12', 18)" class="fn">var</span> <span class="k">then</span> 
+            <span onmouseout="hideTip(event, 'fs7', 19)" onmouseover="showTip(event, 'fs7', 19)" class="id">envVars</span><span class="pn">.</span><span class="pn">[</span><span onmouseout="hideTip(event, 'fs12', 20)" onmouseover="showTip(event, 'fs12', 20)" class="fn">var</span><span class="pn">]</span> <span class="o">:?&gt;</span> <span onmouseout="hideTip(event, 'fs14', 21)" onmouseover="showTip(event, 'fs14', 21)" class="rt">string</span>
+        <span class="k">elif</span> <span onmouseout="hideTip(event, 'fs15', 22)" onmouseover="showTip(event, 'fs15', 22)" class="rt">File</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs16', 23)" onmouseover="showTip(event, 'fs16', 23)" class="id">Exists</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs9', 24)" onmouseover="showTip(event, 'fs9', 24)" class="id">localPath</span><span class="pn">)</span> <span class="k">then</span> 
+            <span onmouseout="hideTip(event, 'fs15', 25)" onmouseover="showTip(event, 'fs15', 25)" class="rt">File</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs17', 26)" onmouseover="showTip(event, 'fs17', 26)" class="id">ReadAllText</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs9', 27)" onmouseover="showTip(event, 'fs9', 27)" class="id">localPath</span><span class="pn">)</span>
+                <span class="pn">.</span><span class="id">Replace</span><span class="pn">(</span><span class="s">&quot;let tiingoKey = &quot;</span><span class="pn">,</span><span class="s">&quot;&quot;</span><span class="pn">)</span>
+                <span class="pn">.</span><span class="id">Replace</span><span class="pn">(</span><span class="s">&quot;\&quot;&quot;</span><span class="pn">,</span><span class="s">&quot;&quot;</span><span class="pn">)</span>
+        <span class="k">elif</span> <span onmouseout="hideTip(event, 'fs15', 28)" onmouseover="showTip(event, 'fs15', 28)" class="rt">File</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs16', 29)" onmouseover="showTip(event, 'fs16', 29)" class="id">Exists</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs10', 30)" onmouseover="showTip(event, 'fs10', 30)" class="id">localPath2</span><span class="pn">)</span> <span class="k">then</span>
+            <span onmouseout="hideTip(event, 'fs15', 31)" onmouseover="showTip(event, 'fs15', 31)" class="rt">File</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs17', 32)" onmouseover="showTip(event, 'fs17', 32)" class="id">ReadAllText</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs10', 33)" onmouseover="showTip(event, 'fs10', 33)" class="id">localPath2</span><span class="pn">)</span>
+                <span class="pn">.</span><span class="id">Replace</span><span class="pn">(</span><span class="s">&quot;let tiingoKey = &quot;</span><span class="pn">,</span><span class="s">&quot;&quot;</span><span class="pn">)</span>
+                <span class="pn">.</span><span class="id">Replace</span><span class="pn">(</span><span class="s">&quot;\&quot;&quot;</span><span class="pn">,</span><span class="s">&quot;&quot;</span><span class="pn">)</span>
+        <span class="k">else</span> <span class="s">&quot;you don&#39;t have a key&quot;</span>
+
+
+<span class="k">type</span> <span onmouseout="hideTip(event, 'fs18', 34)" onmouseover="showTip(event, 'fs18', 34)" class="rt">Frequency</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs19', 35)" onmouseover="showTip(event, 'fs19', 35)" class="uc">Daily</span> <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs20', 36)" onmouseover="showTip(event, 'fs20', 36)" class="uc">Monthly</span>
+<span class="k">type</span> <span onmouseout="hideTip(event, 'fs21', 37)" onmouseover="showTip(event, 'fs21', 37)" class="rt">ReturnObs</span> <span class="o">=</span> <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs22', 38)" onmouseover="showTip(event, 'fs22', 38)" class="prop">Symbol</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs14', 39)" onmouseover="showTip(event, 'fs14', 39)" class="rt">string</span><span class="pn">;</span> <span onmouseout="hideTip(event, 'fs23', 40)" onmouseover="showTip(event, 'fs23', 40)" class="prop">Date</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs24', 41)" onmouseover="showTip(event, 'fs24', 41)" class="vt">DateTime</span><span class="pn">;</span> <span onmouseout="hideTip(event, 'fs25', 42)" onmouseover="showTip(event, 'fs25', 42)" class="prop">Return</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs26', 43)" onmouseover="showTip(event, 'fs26', 43)" class="vt">float</span> <span class="pn">}</span>
+
+<span class="k">module</span> <span class="m">Tiingo</span> <span class="o">=</span>
+
+    <span class="k">type</span> <span onmouseout="hideTip(event, 'fs27', 44)" onmouseover="showTip(event, 'fs27', 44)" class="d">TiingoCsv</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs28', 45)" onmouseover="showTip(event, 'fs28', 45)" class="rt">CsvProvider</span><span class="pn">&lt;</span><span class="s">&quot;date,close,high,low,open,volume,adjClose,adjHigh,adjLow,adjOpen,adjVolume,divCash,splitFactor</span>
+<span class="s">2020-10-01,9.77,10.25,9.69,10.09,4554055,9.77,10.25,9.69,10.09,4554055.0,0.0,1.0&quot;</span><span class="pn">&gt;</span>
+
+    <span class="k">type</span> <span onmouseout="hideTip(event, 'fs29', 46)" onmouseover="showTip(event, 'fs29', 46)" class="rt">TiingoRequest</span> <span class="o">=</span> <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs30', 47)" onmouseover="showTip(event, 'fs30', 47)" class="prop">Symbol</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs14', 48)" onmouseover="showTip(event, 'fs14', 48)" class="rt">string</span><span class="pn">;</span> <span onmouseout="hideTip(event, 'fs31', 49)" onmouseover="showTip(event, 'fs31', 49)" class="prop">Start</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs24', 50)" onmouseover="showTip(event, 'fs24', 50)" class="vt">DateTime</span><span class="pn">;</span> <span onmouseout="hideTip(event, 'fs32', 51)" onmouseover="showTip(event, 'fs32', 51)" class="prop">End</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs24', 52)" onmouseover="showTip(event, 'fs24', 52)" class="vt">DateTime</span> <span class="pn">}</span>
+
+    <span class="k">type</span> <span onmouseout="hideTip(event, 'fs33', 53)" onmouseover="showTip(event, 'fs33', 53)" class="rt">TiingoObs</span> <span class="o">=</span>
+        <span class="pn">{</span>
+            <span onmouseout="hideTip(event, 'fs34', 54)" onmouseover="showTip(event, 'fs34', 54)" class="prop">Date</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs24', 55)" onmouseover="showTip(event, 'fs24', 55)" class="vt">DateTime</span>
+            <span onmouseout="hideTip(event, 'fs35', 56)" onmouseover="showTip(event, 'fs35', 56)" class="prop">Close</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs36', 57)" onmouseover="showTip(event, 'fs36', 57)" class="vt">decimal</span>
+            <span onmouseout="hideTip(event, 'fs37', 58)" onmouseover="showTip(event, 'fs37', 58)" class="prop">High</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs36', 59)" onmouseover="showTip(event, 'fs36', 59)" class="vt">decimal</span>
+            <span onmouseout="hideTip(event, 'fs38', 60)" onmouseover="showTip(event, 'fs38', 60)" class="prop">Low</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs36', 61)" onmouseover="showTip(event, 'fs36', 61)" class="vt">decimal</span>
+            <span onmouseout="hideTip(event, 'fs39', 62)" onmouseover="showTip(event, 'fs39', 62)" class="prop">Open</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs36', 63)" onmouseover="showTip(event, 'fs36', 63)" class="vt">decimal</span> 
+            <span onmouseout="hideTip(event, 'fs40', 64)" onmouseover="showTip(event, 'fs40', 64)" class="prop">Volume</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs41', 65)" onmouseover="showTip(event, 'fs41', 65)" class="vt">int</span>
+            <span onmouseout="hideTip(event, 'fs42', 66)" onmouseover="showTip(event, 'fs42', 66)" class="prop">AdjClose</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs36', 67)" onmouseover="showTip(event, 'fs36', 67)" class="vt">decimal</span>
+            <span onmouseout="hideTip(event, 'fs43', 68)" onmouseover="showTip(event, 'fs43', 68)" class="prop">AdjHigh</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs36', 69)" onmouseover="showTip(event, 'fs36', 69)" class="vt">decimal</span>
+            <span onmouseout="hideTip(event, 'fs44', 70)" onmouseover="showTip(event, 'fs44', 70)" class="prop">AdjLow</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs36', 71)" onmouseover="showTip(event, 'fs36', 71)" class="vt">decimal</span>
+            <span onmouseout="hideTip(event, 'fs45', 72)" onmouseover="showTip(event, 'fs45', 72)" class="prop">AdjOpen</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs36', 73)" onmouseover="showTip(event, 'fs36', 73)" class="vt">decimal</span>
+            <span onmouseout="hideTip(event, 'fs46', 74)" onmouseover="showTip(event, 'fs46', 74)" class="prop">AdjVolume</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs36', 75)" onmouseover="showTip(event, 'fs36', 75)" class="vt">decimal</span>
+            <span onmouseout="hideTip(event, 'fs47', 76)" onmouseover="showTip(event, 'fs47', 76)" class="prop">DivCash</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs36', 77)" onmouseover="showTip(event, 'fs36', 77)" class="vt">decimal</span>
+            <span onmouseout="hideTip(event, 'fs48', 78)" onmouseover="showTip(event, 'fs48', 78)" class="prop">SplitFactor</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs36', 79)" onmouseover="showTip(event, 'fs36', 79)" class="vt">decimal</span>
+        <span class="pn">}</span>
+
+    <span class="c">///&lt;summary&gt;Constructs a Tiingo request. By default is to get the past year of data.&lt;/summary&gt;</span>
+        <span class="c">/// &lt;param name=&quot;symbol&quot;&gt;The ticker symbol such as &quot;AAPL&quot;,&quot;MSFT&quot; etc.&lt;/param&gt;</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs49', 80)" onmouseover="showTip(event, 'fs49', 80)" class="fn">request</span> <span onmouseout="hideTip(event, 'fs50', 81)" onmouseover="showTip(event, 'fs50', 81)" class="fn">symbol</span> <span class="o">=</span> <span class="pn">{</span> <span class="prop">Symbol</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs50', 82)" onmouseover="showTip(event, 'fs50', 82)" class="fn">symbol</span><span class="pn">;</span> <span class="prop">Start</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 83)" onmouseover="showTip(event, 'fs24', 83)" class="vt">DateTime</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs51', 84)" onmouseover="showTip(event, 'fs51', 84)" class="id">Now</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs52', 85)" onmouseover="showTip(event, 'fs52', 85)" class="id">AddYears</span><span class="pn">(</span><span class="o">-</span><span class="n">1</span><span class="pn">)</span><span class="pn">;</span> <span class="prop">End</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 86)" onmouseover="showTip(event, 'fs24', 86)" class="vt">DateTime</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs51', 87)" onmouseover="showTip(event, 'fs51', 87)" class="id">Now</span><span class="pn">}</span>
+    <span class="c">///&lt;summary&gt;Sets the Tiingo request start date.&lt;/summary&gt;</span>
+        <span class="c">/// &lt;param name=&quot;startOn&quot;&gt;Request start date&lt;/param&gt;</span>
+        <span class="c">/// &lt;param name=&quot;request&quot;&gt;The Tiingo request to update.&lt;/param&gt;</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs53', 88)" onmouseover="showTip(event, 'fs53', 88)" class="fn">startOn</span> <span onmouseout="hideTip(event, 'fs54', 89)" onmouseover="showTip(event, 'fs54', 89)" class="fn">startOn</span> <span onmouseout="hideTip(event, 'fs55', 90)" onmouseover="showTip(event, 'fs55', 90)" class="fn">request</span> <span class="o">=</span> <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs55', 91)" onmouseover="showTip(event, 'fs55', 91)" class="fn">request</span> <span class="k">with</span> <span class="prop">Start</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs54', 92)" onmouseover="showTip(event, 'fs54', 92)" class="fn">startOn</span> <span class="pn">}</span>
+    <span class="c">///&lt;summary&gt;Sets the Tiingo request end date.&lt;/summary&gt;</span>
+        <span class="c">/// &lt;param name=&quot;endOn&quot;&gt;Request start date&lt;/param&gt;</span>
+        <span class="c">/// &lt;param name=&quot;request&quot;&gt;The Tiingo request to update.&lt;/param&gt;</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs56', 93)" onmouseover="showTip(event, 'fs56', 93)" class="fn">endOn</span> <span onmouseout="hideTip(event, 'fs57', 94)" onmouseover="showTip(event, 'fs57', 94)" class="fn">endOn</span> <span onmouseout="hideTip(event, 'fs55', 95)" onmouseover="showTip(event, 'fs55', 95)" class="fn">request</span> <span class="o">=</span> <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs55', 96)" onmouseover="showTip(event, 'fs55', 96)" class="fn">request</span> <span class="k">with</span> <span class="prop">End</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs57', 97)" onmouseover="showTip(event, 'fs57', 97)" class="fn">endOn</span> <span class="pn">}</span>
+
+    <span class="k">let</span> <span class="k">private</span> <span onmouseout="hideTip(event, 'fs58', 98)" onmouseover="showTip(event, 'fs58', 98)" class="id">cache</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs59', 99)" onmouseover="showTip(event, 'fs59', 99)" class="id">Runtime</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs60', 100)" onmouseover="showTip(event, 'fs60', 100)" class="m">Caching</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs61', 101)" onmouseover="showTip(event, 'fs61', 101)" class="id">createInMemoryCache</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs62', 102)" onmouseover="showTip(event, 'fs62', 102)" class="fn">TimeSpan</span><span class="pn">(</span><span class="fn">hours</span><span class="o">=</span><span class="n">12</span><span class="pn">,</span><span class="fn">minutes</span><span class="o">=</span><span class="n">0</span><span class="pn">,</span><span class="fn">seconds</span><span class="o">=</span><span class="n">0</span><span class="pn">)</span><span class="pn">)</span>
+
+    <span class="c">///&lt;summary&gt;Downloads Tiingo data.&lt;/summary&gt;</span>
+        <span class="c">/// &lt;param name=&quot;request&quot;&gt;The Tiingo request to download.&lt;/param&gt;</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs63', 103)" onmouseover="showTip(event, 'fs63', 103)" class="fn">get</span> <span onmouseout="hideTip(event, 'fs55', 104)" onmouseover="showTip(event, 'fs55', 104)" class="fn">request</span> <span class="o">=</span>
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs64', 105)" onmouseover="showTip(event, 'fs64', 105)" class="fn">dtStr</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs65', 106)" onmouseover="showTip(event, 'fs65', 106)" class="fn">x</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs24', 107)" onmouseover="showTip(event, 'fs24', 107)" class="vt">DateTime</span><span class="pn">)</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs65', 108)" onmouseover="showTip(event, 'fs65', 108)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs66', 109)" onmouseover="showTip(event, 'fs66', 109)" class="prop">Date</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs67', 110)" onmouseover="showTip(event, 'fs67', 110)" class="id">ToString</span><span class="pn">(</span><span class="s">&quot;yyyy-MM-dd&quot;</span><span class="pn">)</span>
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs55', 111)" onmouseover="showTip(event, 'fs55', 111)" class="fn">request</span> <span class="o">=</span> <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs55', 112)" onmouseover="showTip(event, 'fs55', 112)" class="fn">request</span> <span class="k">with</span> <span class="prop">Start</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs55', 113)" onmouseover="showTip(event, 'fs55', 113)" class="fn">request</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 114)" onmouseover="showTip(event, 'fs31', 114)" class="prop">Start</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs66', 115)" onmouseover="showTip(event, 'fs66', 115)" class="id">Date</span><span class="pn">;</span> <span class="prop">End</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs55', 116)" onmouseover="showTip(event, 'fs55', 116)" class="fn">request</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs32', 117)" onmouseover="showTip(event, 'fs32', 117)" class="prop">End</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs66', 118)" onmouseover="showTip(event, 'fs66', 118)" class="id">Date</span> <span class="pn">}</span>
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs68', 119)" onmouseover="showTip(event, 'fs68', 119)" class="fn">key</span> <span class="o">=</span> <span class="s">$&quot;{</span><span onmouseout="hideTip(event, 'fs55', 120)" onmouseover="showTip(event, 'fs55', 120)" class="fn">request</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs30', 121)" onmouseover="showTip(event, 'fs30', 121)" class="id">Symbol</span><span class="s">}-{</span><span class="fn">dtStr</span> <span onmouseout="hideTip(event, 'fs55', 122)" onmouseover="showTip(event, 'fs55', 122)" class="fn">request</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 123)" onmouseover="showTip(event, 'fs31', 123)" class="id">Start</span><span class="s">}-{</span><span class="fn">dtStr</span> <span onmouseout="hideTip(event, 'fs55', 124)" onmouseover="showTip(event, 'fs55', 124)" class="fn">request</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs32', 125)" onmouseover="showTip(event, 'fs32', 125)" class="id">End</span><span class="s">}.csv&quot;</span>
+        <span class="k">match</span> <span onmouseout="hideTip(event, 'fs58', 126)" onmouseover="showTip(event, 'fs58', 126)" class="id">cache</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs69', 127)" onmouseover="showTip(event, 'fs69', 127)" class="id">TryRetrieve</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs68', 128)" onmouseover="showTip(event, 'fs68', 128)" class="fn">key</span><span class="pn">)</span> <span class="k">with</span>
+        <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs70', 129)" onmouseover="showTip(event, 'fs70', 129)" class="uc">Some</span> <span onmouseout="hideTip(event, 'fs71', 130)" onmouseover="showTip(event, 'fs71', 130)" class="fn">res</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs71', 131)" onmouseover="showTip(event, 'fs71', 131)" class="fn">res</span>
+        <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs72', 132)" onmouseover="showTip(event, 'fs72', 132)" class="uc">None</span> <span class="k">-&gt;</span>
+            <span class="k">let</span> <span onmouseout="hideTip(event, 'fs73', 133)" onmouseover="showTip(event, 'fs73', 133)" class="fn">result</span> <span class="o">=</span> 
+                <span onmouseout="hideTip(event, 'fs74', 134)" onmouseover="showTip(event, 'fs74', 134)" class="rt">Http</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs75', 135)" onmouseover="showTip(event, 'fs75', 135)" class="id">RequestString</span>
+                            <span class="pn">(</span> <span class="s">$&quot;https://api.tiingo.com/tiingo/daily/{</span><span onmouseout="hideTip(event, 'fs55', 136)" onmouseover="showTip(event, 'fs55', 136)" class="fn">request</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs30', 137)" onmouseover="showTip(event, 'fs30', 137)" class="id">Symbol</span><span class="s">}/prices&quot;</span><span class="pn">,</span> 
+                                <span class="fn">httpMethod</span> <span class="o">=</span> <span class="s">&quot;GET&quot;</span><span class="pn">,</span>
+                                <span onmouseout="hideTip(event, 'fs76', 138)" onmouseover="showTip(event, 'fs76', 138)" class="fn">query</span>   <span class="o">=</span> <span class="pn">[</span> <span class="s">&quot;token&quot;</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs77', 139)" onmouseover="showTip(event, 'fs77', 139)" class="m">Secrets</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs11', 140)" onmouseover="showTip(event, 'fs11', 140)" class="id">tiingoKey</span><span class="pn">;</span> 
+                                            <span class="s">&quot;startDate&quot;</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs55', 141)" onmouseover="showTip(event, 'fs55', 141)" class="fn">request</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 142)" onmouseover="showTip(event, 'fs31', 142)" class="prop">Start</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs67', 143)" onmouseover="showTip(event, 'fs67', 143)" class="id">ToString</span><span class="pn">(</span><span class="s">&quot;yyyy-MM-dd&quot;</span><span class="pn">)</span><span class="pn">;</span>
+                                            <span class="s">&quot;endDate&quot;</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs55', 144)" onmouseover="showTip(event, 'fs55', 144)" class="fn">request</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs32', 145)" onmouseover="showTip(event, 'fs32', 145)" class="prop">End</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs67', 146)" onmouseover="showTip(event, 'fs67', 146)" class="id">ToString</span><span class="pn">(</span><span class="s">&quot;yyyy-MM-dd&quot;</span><span class="pn">)</span><span class="pn">;</span>
+                                            <span class="s">&quot;format&quot;</span><span class="pn">,</span><span class="s">&quot;csv&quot;</span><span class="pn">]</span><span class="pn">,</span>
+                                <span class="fn">headers</span> <span class="o">=</span> <span class="pn">[</span><span onmouseout="hideTip(event, 'fs78', 147)" onmouseover="showTip(event, 'fs78', 147)" class="m">HttpRequestHeaders</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs79', 148)" onmouseover="showTip(event, 'fs79', 148)" class="id">Accept</span> <span onmouseout="hideTip(event, 'fs80', 149)" onmouseover="showTip(event, 'fs80', 149)" class="m">HttpContentTypes</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs81', 150)" onmouseover="showTip(event, 'fs81', 150)" class="id">Csv</span><span class="pn">]</span><span class="pn">)</span>
+            <span onmouseout="hideTip(event, 'fs58', 151)" onmouseover="showTip(event, 'fs58', 151)" class="id">cache</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs82', 152)" onmouseover="showTip(event, 'fs82', 152)" class="id">Set</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs68', 153)" onmouseover="showTip(event, 'fs68', 153)" class="fn">key</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs73', 154)" onmouseover="showTip(event, 'fs73', 154)" class="fn">result</span><span class="pn">)</span>
+            <span onmouseout="hideTip(event, 'fs73', 155)" onmouseover="showTip(event, 'fs73', 155)" class="fn">result</span>
+        <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs27', 156)" onmouseover="showTip(event, 'fs27', 156)" class="d">TiingoCsv</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs83', 157)" onmouseover="showTip(event, 'fs83', 157)" class="id">Parse</span>
+        <span class="o">|&gt;</span> <span class="k">fun</span> <span onmouseout="hideTip(event, 'fs84', 158)" onmouseover="showTip(event, 'fs84', 158)" class="d">parsed</span> <span class="k">-&gt;</span>
+            <span onmouseout="hideTip(event, 'fs84', 159)" onmouseover="showTip(event, 'fs84', 159)" class="d">parsed</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs85', 160)" onmouseover="showTip(event, 'fs85', 160)" class="id">Rows</span>
+            <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs86', 161)" onmouseover="showTip(event, 'fs86', 161)" class="m">Seq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs87', 162)" onmouseover="showTip(event, 'fs87', 162)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs88', 163)" onmouseover="showTip(event, 'fs88', 163)" class="fn">row</span> <span class="k">-&gt;</span>
+                <span class="pn">{</span> <span class="prop">Date</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs88', 164)" onmouseover="showTip(event, 'fs88', 164)" class="fn">row</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs89', 165)" onmouseover="showTip(event, 'fs89', 165)" class="id">Date</span>
+                  <span class="prop">Close</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs88', 166)" onmouseover="showTip(event, 'fs88', 166)" class="fn">row</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs90', 167)" onmouseover="showTip(event, 'fs90', 167)" class="id">Close</span>
+                  <span class="prop">High</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs88', 168)" onmouseover="showTip(event, 'fs88', 168)" class="fn">row</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs91', 169)" onmouseover="showTip(event, 'fs91', 169)" class="id">High</span>
+                  <span class="prop">Low</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs88', 170)" onmouseover="showTip(event, 'fs88', 170)" class="fn">row</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs92', 171)" onmouseover="showTip(event, 'fs92', 171)" class="id">Low</span>
+                  <span class="prop">Open</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs88', 172)" onmouseover="showTip(event, 'fs88', 172)" class="fn">row</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs93', 173)" onmouseover="showTip(event, 'fs93', 173)" class="id">Open</span>
+                  <span class="prop">Volume</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs88', 174)" onmouseover="showTip(event, 'fs88', 174)" class="fn">row</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs94', 175)" onmouseover="showTip(event, 'fs94', 175)" class="id">Volume</span>
+                  <span class="prop">AdjClose</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs88', 176)" onmouseover="showTip(event, 'fs88', 176)" class="fn">row</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs95', 177)" onmouseover="showTip(event, 'fs95', 177)" class="id">AdjClose</span>
+                  <span class="prop">AdjHigh</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs88', 178)" onmouseover="showTip(event, 'fs88', 178)" class="fn">row</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs96', 179)" onmouseover="showTip(event, 'fs96', 179)" class="id">AdjHigh</span>
+                  <span class="prop">AdjLow</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs88', 180)" onmouseover="showTip(event, 'fs88', 180)" class="fn">row</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs97', 181)" onmouseover="showTip(event, 'fs97', 181)" class="id">AdjLow</span>
+                  <span class="prop">AdjOpen</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs88', 182)" onmouseover="showTip(event, 'fs88', 182)" class="fn">row</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs98', 183)" onmouseover="showTip(event, 'fs98', 183)" class="id">AdjOpen</span>
+                  <span class="prop">AdjVolume</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs88', 184)" onmouseover="showTip(event, 'fs88', 184)" class="fn">row</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs99', 185)" onmouseover="showTip(event, 'fs99', 185)" class="id">AdjVolume</span>
+                  <span class="prop">DivCash</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs88', 186)" onmouseover="showTip(event, 'fs88', 186)" class="fn">row</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs100', 187)" onmouseover="showTip(event, 'fs100', 187)" class="id">DivCash</span>
+                  <span class="prop">SplitFactor</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs88', 188)" onmouseover="showTip(event, 'fs88', 188)" class="fn">row</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs101', 189)" onmouseover="showTip(event, 'fs101', 189)" class="id">SplitFactor</span> 
+                  <span class="pn">}</span><span class="pn">)</span>
+            <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs86', 190)" onmouseover="showTip(event, 'fs86', 190)" class="m">Seq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs102', 191)" onmouseover="showTip(event, 'fs102', 191)" class="id">toArray</span>      
+    
+    <span class="c">// using a class, keeping private for now.</span>
+    <span class="k">type</span> <span class="k">private</span> <span onmouseout="hideTip(event, 'fs103', 192)" onmouseover="showTip(event, 'fs103', 192)" class="rt">Download</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs50', 193)" onmouseover="showTip(event, 'fs50', 193)" class="fn">symbol</span><span class="pn">:</span><span onmouseout="hideTip(event, 'fs14', 194)" onmouseover="showTip(event, 'fs14', 194)" class="rt">string</span><span class="pn">,</span><span class="o">?</span><span onmouseout="hideTip(event, 'fs104', 195)" onmouseover="showTip(event, 'fs104', 195)" class="fn">startOn</span><span class="pn">:</span><span onmouseout="hideTip(event, 'fs24', 196)" onmouseover="showTip(event, 'fs24', 196)" class="vt">DateTime</span><span class="pn">,</span><span class="o">?</span><span onmouseout="hideTip(event, 'fs105', 197)" onmouseover="showTip(event, 'fs105', 197)" class="fn">endOn</span><span class="pn">:</span><span onmouseout="hideTip(event, 'fs24', 198)" onmouseover="showTip(event, 'fs24', 198)" class="vt">DateTime</span><span class="pn">)</span> <span class="o">=</span>
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs54', 199)" onmouseover="showTip(event, 'fs54', 199)" class="fn">startOn</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs106', 200)" onmouseover="showTip(event, 'fs106', 200)" class="fn">defaultArg</span> <span onmouseout="hideTip(event, 'fs54', 201)" onmouseover="showTip(event, 'fs54', 201)" class="fn">startOn</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs24', 202)" onmouseover="showTip(event, 'fs24', 202)" class="vt">DateTime</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs51', 203)" onmouseover="showTip(event, 'fs51', 203)" class="id">Now</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs52', 204)" onmouseover="showTip(event, 'fs52', 204)" class="id">AddYears</span><span class="pn">(</span><span class="o">-</span><span class="n">1</span><span class="pn">)</span><span class="pn">)</span>
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs57', 205)" onmouseover="showTip(event, 'fs57', 205)" class="fn">endOn</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs106', 206)" onmouseover="showTip(event, 'fs106', 206)" class="fn">defaultArg</span> <span onmouseout="hideTip(event, 'fs57', 207)" onmouseover="showTip(event, 'fs57', 207)" class="fn">endOn</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs24', 208)" onmouseover="showTip(event, 'fs24', 208)" class="vt">DateTime</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs51', 209)" onmouseover="showTip(event, 'fs51', 209)" class="id">Now</span><span class="pn">)</span>
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs107', 210)" onmouseover="showTip(event, 'fs107', 210)" class="fn">data</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs63', 211)" onmouseover="showTip(event, 'fs63', 211)" class="fn">get</span> <span class="pn">{</span> <span class="prop">Symbol</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs50', 212)" onmouseover="showTip(event, 'fs50', 212)" class="fn">symbol</span><span class="pn">;</span> <span class="prop">Start</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs54', 213)" onmouseover="showTip(event, 'fs54', 213)" class="fn">startOn</span><span class="pn">;</span> <span class="prop">End</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs57', 214)" onmouseover="showTip(event, 'fs57', 214)" class="fn">endOn</span> <span class="pn">}</span>
+        <span class="k">member</span> <span onmouseout="hideTip(event, 'fs108', 215)" onmouseover="showTip(event, 'fs108', 215)" class="fn">this</span><span class="pn">.</span><span class="prop">Rows</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs107', 216)" onmouseover="showTip(event, 'fs107', 216)" class="fn">data</span>
+ 
+    <span class="c">// Probably deprecated</span>
+    <span class="k">let</span> <span class="k">private</span> <span onmouseout="hideTip(event, 'fs109', 217)" onmouseover="showTip(event, 'fs109', 217)" class="fn">getFromCacheDirectory</span> <span onmouseout="hideTip(event, 'fs110', 218)" onmouseover="showTip(event, 'fs110', 218)" class="fn">cacheDirectory</span> <span onmouseout="hideTip(event, 'fs55', 219)" onmouseover="showTip(event, 'fs55', 219)" class="fn">request</span> <span class="o">=</span>
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs64', 220)" onmouseover="showTip(event, 'fs64', 220)" class="fn">dtStr</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs65', 221)" onmouseover="showTip(event, 'fs65', 221)" class="fn">x</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs24', 222)" onmouseover="showTip(event, 'fs24', 222)" class="vt">DateTime</span><span class="pn">)</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs65', 223)" onmouseover="showTip(event, 'fs65', 223)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs66', 224)" onmouseover="showTip(event, 'fs66', 224)" class="prop">Date</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs67', 225)" onmouseover="showTip(event, 'fs67', 225)" class="id">ToString</span><span class="pn">(</span><span class="s">&quot;yyyy-MM-dd&quot;</span><span class="pn">)</span>
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs55', 226)" onmouseover="showTip(event, 'fs55', 226)" class="fn">request</span> <span class="o">=</span> <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs55', 227)" onmouseover="showTip(event, 'fs55', 227)" class="fn">request</span> <span class="k">with</span> <span class="prop">Start</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs55', 228)" onmouseover="showTip(event, 'fs55', 228)" class="fn">request</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 229)" onmouseover="showTip(event, 'fs31', 229)" class="prop">Start</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs66', 230)" onmouseover="showTip(event, 'fs66', 230)" class="id">Date</span><span class="pn">;</span> <span class="prop">End</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs55', 231)" onmouseover="showTip(event, 'fs55', 231)" class="fn">request</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs32', 232)" onmouseover="showTip(event, 'fs32', 232)" class="prop">End</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs66', 233)" onmouseover="showTip(event, 'fs66', 233)" class="id">Date</span> <span class="pn">}</span>
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs68', 234)" onmouseover="showTip(event, 'fs68', 234)" class="fn">key</span> <span class="o">=</span> <span class="s">$&quot;{</span><span onmouseout="hideTip(event, 'fs55', 235)" onmouseover="showTip(event, 'fs55', 235)" class="fn">request</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs30', 236)" onmouseover="showTip(event, 'fs30', 236)" class="id">Symbol</span><span class="s">}-{</span><span class="fn">dtStr</span> <span onmouseout="hideTip(event, 'fs55', 237)" onmouseover="showTip(event, 'fs55', 237)" class="fn">request</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 238)" onmouseover="showTip(event, 'fs31', 238)" class="id">Start</span><span class="s">}-{</span><span class="fn">dtStr</span> <span onmouseout="hideTip(event, 'fs55', 239)" onmouseover="showTip(event, 'fs55', 239)" class="fn">request</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs32', 240)" onmouseover="showTip(event, 'fs32', 240)" class="id">End</span><span class="s">}.csv&quot;</span>
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs111', 241)" onmouseover="showTip(event, 'fs111', 241)" class="fn">cacheFile</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs110', 242)" onmouseover="showTip(event, 'fs110', 242)" class="fn">cacheDirectory</span> <span class="o">+</span> <span onmouseout="hideTip(event, 'fs68', 243)" onmouseover="showTip(event, 'fs68', 243)" class="fn">key</span>
+        <span class="k">if</span> <span onmouseout="hideTip(event, 'fs15', 244)" onmouseover="showTip(event, 'fs15', 244)" class="rt">File</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs16', 245)" onmouseover="showTip(event, 'fs16', 245)" class="id">Exists</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs111', 246)" onmouseover="showTip(event, 'fs111', 246)" class="fn">cacheFile</span><span class="pn">)</span> <span class="k">then</span>
+            <span onmouseout="hideTip(event, 'fs15', 247)" onmouseover="showTip(event, 'fs15', 247)" class="rt">File</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs17', 248)" onmouseover="showTip(event, 'fs17', 248)" class="id">ReadAllText</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs111', 249)" onmouseover="showTip(event, 'fs111', 249)" class="fn">cacheFile</span><span class="pn">)</span>
+        <span class="k">else</span>    
+            <span class="k">let</span> <span onmouseout="hideTip(event, 'fs73', 250)" onmouseover="showTip(event, 'fs73', 250)" class="fn">result</span> <span class="o">=</span> 
+                <span onmouseout="hideTip(event, 'fs74', 251)" onmouseover="showTip(event, 'fs74', 251)" class="rt">Http</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs75', 252)" onmouseover="showTip(event, 'fs75', 252)" class="id">RequestString</span>
+                            <span class="pn">(</span> <span class="s">$&quot;https://api.tiingo.com/tiingo/daily/{</span><span onmouseout="hideTip(event, 'fs55', 253)" onmouseover="showTip(event, 'fs55', 253)" class="fn">request</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs30', 254)" onmouseover="showTip(event, 'fs30', 254)" class="id">Symbol</span><span class="s">}/prices&quot;</span><span class="pn">,</span> 
+                                <span class="fn">httpMethod</span> <span class="o">=</span> <span class="s">&quot;GET&quot;</span><span class="pn">,</span>
+                                <span onmouseout="hideTip(event, 'fs76', 255)" onmouseover="showTip(event, 'fs76', 255)" class="fn">query</span>   <span class="o">=</span> <span class="pn">[</span> <span class="s">&quot;token&quot;</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs77', 256)" onmouseover="showTip(event, 'fs77', 256)" class="m">Secrets</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs11', 257)" onmouseover="showTip(event, 'fs11', 257)" class="id">tiingoKey</span><span class="pn">;</span> 
+                                            <span class="s">&quot;startDate&quot;</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs55', 258)" onmouseover="showTip(event, 'fs55', 258)" class="fn">request</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 259)" onmouseover="showTip(event, 'fs31', 259)" class="prop">Start</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs67', 260)" onmouseover="showTip(event, 'fs67', 260)" class="id">ToString</span><span class="pn">(</span><span class="s">&quot;yyyy-MM-dd&quot;</span><span class="pn">)</span><span class="pn">;</span>
+                                            <span class="s">&quot;endDate&quot;</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs55', 261)" onmouseover="showTip(event, 'fs55', 261)" class="fn">request</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs32', 262)" onmouseover="showTip(event, 'fs32', 262)" class="prop">End</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs67', 263)" onmouseover="showTip(event, 'fs67', 263)" class="id">ToString</span><span class="pn">(</span><span class="s">&quot;yyyy-MM-dd&quot;</span><span class="pn">)</span><span class="pn">;</span>
+                                            <span class="s">&quot;format&quot;</span><span class="pn">,</span><span class="s">&quot;csv&quot;</span><span class="pn">]</span><span class="pn">,</span>
+                                <span class="fn">headers</span> <span class="o">=</span> <span class="pn">[</span><span onmouseout="hideTip(event, 'fs78', 264)" onmouseover="showTip(event, 'fs78', 264)" class="m">HttpRequestHeaders</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs79', 265)" onmouseover="showTip(event, 'fs79', 265)" class="id">Accept</span> <span onmouseout="hideTip(event, 'fs80', 266)" onmouseover="showTip(event, 'fs80', 266)" class="m">HttpContentTypes</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs81', 267)" onmouseover="showTip(event, 'fs81', 267)" class="id">Csv</span><span class="pn">]</span><span class="pn">)</span>
+            <span onmouseout="hideTip(event, 'fs15', 268)" onmouseover="showTip(event, 'fs15', 268)" class="rt">File</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs112', 269)" onmouseover="showTip(event, 'fs112', 269)" class="id">WriteAllText</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs111', 270)" onmouseover="showTip(event, 'fs111', 270)" class="fn">cacheFile</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs73', 271)" onmouseover="showTip(event, 'fs73', 271)" class="fn">result</span><span class="pn">)</span>
+            <span onmouseout="hideTip(event, 'fs73', 272)" onmouseover="showTip(event, 'fs73', 272)" class="fn">result</span>
+        <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs27', 273)" onmouseover="showTip(event, 'fs27', 273)" class="d">TiingoCsv</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs83', 274)" onmouseover="showTip(event, 'fs83', 274)" class="id">Parse</span>
+    
+    <span class="k">let</span> <span class="k">private</span> <span onmouseout="hideTip(event, 'fs113', 275)" onmouseover="showTip(event, 'fs113', 275)" class="fn">returnHelper</span> <span onmouseout="hideTip(event, 'fs50', 276)" onmouseover="showTip(event, 'fs50', 276)" class="fn">symbol</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs114', 277)" onmouseover="showTip(event, 'fs114', 277)" class="fn">xs</span><span class="pn">:</span><span onmouseout="hideTip(event, 'fs33', 278)" onmouseover="showTip(event, 'fs33', 278)" class="rt">TiingoObs</span> <span onmouseout="hideTip(event, 'fs115', 279)" onmouseover="showTip(event, 'fs115', 279)" class="if">seq</span><span class="pn">)</span> <span class="o">=</span>
+        <span onmouseout="hideTip(event, 'fs114', 280)" onmouseover="showTip(event, 'fs114', 280)" class="fn">xs</span>
+        <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs86', 281)" onmouseover="showTip(event, 'fs86', 281)" class="m">Seq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs116', 282)" onmouseover="showTip(event, 'fs116', 282)" class="id">sortBy</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs117', 283)" onmouseover="showTip(event, 'fs117', 283)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs117', 284)" onmouseover="showTip(event, 'fs117', 284)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs34', 285)" onmouseover="showTip(event, 'fs34', 285)" class="id">Date</span><span class="pn">)</span>
+        <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs86', 286)" onmouseover="showTip(event, 'fs86', 286)" class="m">Seq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs118', 287)" onmouseover="showTip(event, 'fs118', 287)" class="id">pairwise</span>
+        <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs86', 288)" onmouseover="showTip(event, 'fs86', 288)" class="m">Seq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs87', 289)" onmouseover="showTip(event, 'fs87', 289)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs119', 290)" onmouseover="showTip(event, 'fs119', 290)" class="fn">yesterday</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs120', 291)" onmouseover="showTip(event, 'fs120', 291)" class="fn">today</span><span class="pn">)</span> <span class="k">-&gt;</span>
+            <span class="pn">{</span> <span class="prop">Symbol</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs50', 292)" onmouseover="showTip(event, 'fs50', 292)" class="fn">symbol</span> 
+              <span class="prop">Date</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs120', 293)" onmouseover="showTip(event, 'fs120', 293)" class="fn">today</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs34', 294)" onmouseover="showTip(event, 'fs34', 294)" class="id">Date</span>
+              <span class="prop">Return</span> <span class="o">=</span>  <span onmouseout="hideTip(event, 'fs26', 295)" onmouseover="showTip(event, 'fs26', 295)" class="fn">float</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs120', 296)" onmouseover="showTip(event, 'fs120', 296)" class="fn">today</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs42', 297)" onmouseover="showTip(event, 'fs42', 297)" class="id">AdjClose</span> <span class="o">/</span> <span onmouseout="hideTip(event, 'fs119', 298)" onmouseover="showTip(event, 'fs119', 298)" class="fn">yesterday</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs42', 299)" onmouseover="showTip(event, 'fs42', 299)" class="id">AdjClose</span><span class="pn">)</span> <span class="o">-</span> <span class="n">1.0</span><span class="pn">}</span><span class="pn">)</span>
+        <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs86', 300)" onmouseover="showTip(event, 'fs86', 300)" class="m">Seq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs102', 301)" onmouseover="showTip(event, 'fs102', 301)" class="id">toArray</span>      
+
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs121', 302)" onmouseover="showTip(event, 'fs121', 302)" class="fn">getReturns</span> <span onmouseout="hideTip(event, 'fs55', 303)" onmouseover="showTip(event, 'fs55', 303)" class="fn">request</span> <span class="o">=</span>
+        <span onmouseout="hideTip(event, 'fs63', 304)" onmouseover="showTip(event, 'fs63', 304)" class="fn">get</span> <span onmouseout="hideTip(event, 'fs55', 305)" onmouseover="showTip(event, 'fs55', 305)" class="fn">request</span>
+        <span class="o">|&gt;</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs113', 306)" onmouseover="showTip(event, 'fs113', 306)" class="fn">returnHelper</span> <span onmouseout="hideTip(event, 'fs55', 307)" onmouseover="showTip(event, 'fs55', 307)" class="fn">request</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs30', 308)" onmouseover="showTip(event, 'fs30', 308)" class="id">Symbol</span><span class="pn">)</span>
+
+    <span class="c">// Marking as private so people don&#39;t use it by accident</span>
+    <span class="k">let</span> <span class="k">private</span> <span onmouseout="hideTip(event, 'fs122', 309)" onmouseover="showTip(event, 'fs122', 309)" class="fn">getInternetFileCache</span> <span onmouseout="hideTip(event, 'fs55', 310)" onmouseover="showTip(event, 'fs55', 310)" class="fn">request</span> <span class="o">=</span>
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs123', 311)" onmouseover="showTip(event, 'fs123', 311)" class="fn">cache</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs59', 312)" onmouseover="showTip(event, 'fs59', 312)" class="id">Runtime</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs60', 313)" onmouseover="showTip(event, 'fs60', 313)" class="m">Caching</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs124', 314)" onmouseover="showTip(event, 'fs124', 314)" class="id">createInternetFileCache</span> <span class="s">&quot;tiingo&quot;</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs62', 315)" onmouseover="showTip(event, 'fs62', 315)" class="vt">TimeSpan</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs125', 316)" onmouseover="showTip(event, 'fs125', 316)" class="id">FromDays</span> <span class="n">30.0</span><span class="pn">)</span>
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs55', 317)" onmouseover="showTip(event, 'fs55', 317)" class="fn">request</span> <span class="o">=</span> <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs55', 318)" onmouseover="showTip(event, 'fs55', 318)" class="fn">request</span> <span class="k">with</span> <span class="prop">Start</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs55', 319)" onmouseover="showTip(event, 'fs55', 319)" class="fn">request</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 320)" onmouseover="showTip(event, 'fs31', 320)" class="prop">Start</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs66', 321)" onmouseover="showTip(event, 'fs66', 321)" class="id">Date</span><span class="pn">;</span> <span class="prop">End</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs55', 322)" onmouseover="showTip(event, 'fs55', 322)" class="fn">request</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs32', 323)" onmouseover="showTip(event, 'fs32', 323)" class="prop">End</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs66', 324)" onmouseover="showTip(event, 'fs66', 324)" class="id">Date</span> <span class="pn">}</span>
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs68', 325)" onmouseover="showTip(event, 'fs68', 325)" class="fn">key</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs55', 326)" onmouseover="showTip(event, 'fs55', 326)" class="fn">request</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs126', 327)" onmouseover="showTip(event, 'fs126', 327)" class="id">ToString</span><span class="pn">(</span><span class="pn">)</span>
+        <span class="k">match</span> <span onmouseout="hideTip(event, 'fs123', 328)" onmouseover="showTip(event, 'fs123', 328)" class="fn">cache</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs69', 329)" onmouseover="showTip(event, 'fs69', 329)" class="id">TryRetrieve</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs68', 330)" onmouseover="showTip(event, 'fs68', 330)" class="fn">key</span><span class="pn">)</span> <span class="k">with</span>
+        <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs70', 331)" onmouseover="showTip(event, 'fs70', 331)" class="uc">Some</span> <span onmouseout="hideTip(event, 'fs71', 332)" onmouseover="showTip(event, 'fs71', 332)" class="fn">res</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs71', 333)" onmouseover="showTip(event, 'fs71', 333)" class="fn">res</span>
+        <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs72', 334)" onmouseover="showTip(event, 'fs72', 334)" class="uc">None</span> <span class="k">-&gt;</span>
+            <span class="k">let</span> <span onmouseout="hideTip(event, 'fs71', 335)" onmouseover="showTip(event, 'fs71', 335)" class="fn">res</span> <span class="o">=</span>
+                <span onmouseout="hideTip(event, 'fs74', 336)" onmouseover="showTip(event, 'fs74', 336)" class="rt">Http</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs75', 337)" onmouseover="showTip(event, 'fs75', 337)" class="id">RequestString</span>
+                        <span class="pn">(</span> <span class="s">$&quot;https://api.tiingo.com/tiingo/daily/{</span><span onmouseout="hideTip(event, 'fs55', 338)" onmouseover="showTip(event, 'fs55', 338)" class="fn">request</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs30', 339)" onmouseover="showTip(event, 'fs30', 339)" class="id">Symbol</span><span class="s">}/prices&quot;</span><span class="pn">,</span> 
+                            <span class="fn">httpMethod</span> <span class="o">=</span> <span class="s">&quot;GET&quot;</span><span class="pn">,</span>
+                            <span onmouseout="hideTip(event, 'fs76', 340)" onmouseover="showTip(event, 'fs76', 340)" class="fn">query</span>   <span class="o">=</span> <span class="pn">[</span> <span class="s">&quot;token&quot;</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs77', 341)" onmouseover="showTip(event, 'fs77', 341)" class="m">Secrets</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs11', 342)" onmouseover="showTip(event, 'fs11', 342)" class="id">tiingoKey</span><span class="pn">;</span> 
+                                        <span class="s">&quot;startDate&quot;</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs55', 343)" onmouseover="showTip(event, 'fs55', 343)" class="fn">request</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 344)" onmouseover="showTip(event, 'fs31', 344)" class="prop">Start</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs67', 345)" onmouseover="showTip(event, 'fs67', 345)" class="id">ToString</span><span class="pn">(</span><span class="s">&quot;yyyy-MM-dd&quot;</span><span class="pn">)</span><span class="pn">;</span>
+                                        <span class="s">&quot;endDate&quot;</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs55', 346)" onmouseover="showTip(event, 'fs55', 346)" class="fn">request</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs32', 347)" onmouseover="showTip(event, 'fs32', 347)" class="prop">End</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs67', 348)" onmouseover="showTip(event, 'fs67', 348)" class="id">ToString</span><span class="pn">(</span><span class="s">&quot;yyyy-MM-dd&quot;</span><span class="pn">)</span><span class="pn">;</span>
+                                        <span class="s">&quot;format&quot;</span><span class="pn">,</span><span class="s">&quot;csv&quot;</span><span class="pn">]</span><span class="pn">,</span>
+                            <span class="fn">headers</span> <span class="o">=</span> <span class="pn">[</span><span onmouseout="hideTip(event, 'fs78', 349)" onmouseover="showTip(event, 'fs78', 349)" class="m">HttpRequestHeaders</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs79', 350)" onmouseover="showTip(event, 'fs79', 350)" class="id">Accept</span> <span onmouseout="hideTip(event, 'fs80', 351)" onmouseover="showTip(event, 'fs80', 351)" class="m">HttpContentTypes</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs81', 352)" onmouseover="showTip(event, 'fs81', 352)" class="id">Csv</span> <span class="pn">]</span><span class="pn">)</span>
+            <span onmouseout="hideTip(event, 'fs123', 353)" onmouseover="showTip(event, 'fs123', 353)" class="fn">cache</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs82', 354)" onmouseover="showTip(event, 'fs82', 354)" class="id">Set</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs68', 355)" onmouseover="showTip(event, 'fs68', 355)" class="fn">key</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs71', 356)" onmouseover="showTip(event, 'fs71', 356)" class="fn">res</span><span class="pn">)</span>
+            <span onmouseout="hideTip(event, 'fs71', 357)" onmouseover="showTip(event, 'fs71', 357)" class="fn">res</span>
+        <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs27', 358)" onmouseover="showTip(event, 'fs27', 358)" class="d">TiingoCsv</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs83', 359)" onmouseover="showTip(event, 'fs83', 359)" class="id">Parse</span>
+
+<span class="k">module</span> <span class="m">French</span> <span class="o">=</span>
+    <span class="c">//open System.Net</span>
+    <span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 360)" onmouseover="showTip(event, 'fs1', 360)" class="id">System</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs2', 361)" onmouseover="showTip(event, 'fs2', 361)" class="id">IO</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs127', 362)" onmouseover="showTip(event, 'fs127', 362)" class="id">Compression</span>
+
+    <span class="k">type</span> <span class="k">private</span> <span onmouseout="hideTip(event, 'fs128', 363)" onmouseover="showTip(event, 'fs128', 363)" class="d">FF3Csv</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs28', 364)" onmouseover="showTip(event, 'fs28', 364)" class="rt">CsvProvider</span><span class="pn">&lt;</span><span class="s">&quot;Date (string),Mkt-RF,SMB,HML,RF</span>
+<span class="s">        19260701,    0.10,   -0.24,   -0.28,   0.009&quot;</span><span class="pn">&gt;</span>
+    <span class="k">type</span> <span onmouseout="hideTip(event, 'fs129', 365)" onmouseover="showTip(event, 'fs129', 365)" class="rt">FF3Obs</span> <span class="o">=</span> 
+        <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs130', 366)" onmouseover="showTip(event, 'fs130', 366)" class="prop">Date</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs24', 367)" onmouseover="showTip(event, 'fs24', 367)" class="vt">DateTime</span> 
+          <span onmouseout="hideTip(event, 'fs131', 368)" onmouseover="showTip(event, 'fs131', 368)" class="prop">MktRf</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs26', 369)" onmouseover="showTip(event, 'fs26', 369)" class="vt">float</span>
+          <span onmouseout="hideTip(event, 'fs132', 370)" onmouseover="showTip(event, 'fs132', 370)" class="prop">Smb</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs26', 371)" onmouseover="showTip(event, 'fs26', 371)" class="vt">float</span> 
+          <span onmouseout="hideTip(event, 'fs133', 372)" onmouseover="showTip(event, 'fs133', 372)" class="prop">Hml</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs26', 373)" onmouseover="showTip(event, 'fs26', 373)" class="vt">float</span>
+          <span onmouseout="hideTip(event, 'fs134', 374)" onmouseover="showTip(event, 'fs134', 374)" class="prop">Rf</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs26', 375)" onmouseover="showTip(event, 'fs26', 375)" class="vt">float</span> 
+          <span onmouseout="hideTip(event, 'fs135', 376)" onmouseover="showTip(event, 'fs135', 376)" class="prop">Frequency</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs18', 377)" onmouseover="showTip(event, 'fs18', 377)" class="rt">Frequency</span> <span class="pn">}</span> 
+
+    <span class="k">type</span> <span class="k">private</span> <span onmouseout="hideTip(event, 'fs136', 378)" onmouseover="showTip(event, 'fs136', 378)" class="d">FF5Csv</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs28', 379)" onmouseover="showTip(event, 'fs28', 379)" class="rt">CsvProvider</span><span class="pn">&lt;</span><span class="s">&quot;Date (string),Mkt-RF,SMB,HML,RMW,CMA,RF</span>
+<span class="s">        19260701,    0.10,   -0.24,   -0.28,0.0,1.2,  0.009&quot;</span><span class="pn">&gt;</span>
+
+    <span class="k">type</span> <span onmouseout="hideTip(event, 'fs137', 380)" onmouseover="showTip(event, 'fs137', 380)" class="rt">FF5Obs</span> <span class="o">=</span> 
+        <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs138', 381)" onmouseover="showTip(event, 'fs138', 381)" class="prop">Date</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs24', 382)" onmouseover="showTip(event, 'fs24', 382)" class="vt">DateTime</span> 
+          <span onmouseout="hideTip(event, 'fs139', 383)" onmouseover="showTip(event, 'fs139', 383)" class="prop">MktRf</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs26', 384)" onmouseover="showTip(event, 'fs26', 384)" class="vt">float</span>
+          <span onmouseout="hideTip(event, 'fs140', 385)" onmouseover="showTip(event, 'fs140', 385)" class="prop">Smb</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs26', 386)" onmouseover="showTip(event, 'fs26', 386)" class="vt">float</span> 
+          <span onmouseout="hideTip(event, 'fs141', 387)" onmouseover="showTip(event, 'fs141', 387)" class="prop">Hml</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs26', 388)" onmouseover="showTip(event, 'fs26', 388)" class="vt">float</span>
+          <span onmouseout="hideTip(event, 'fs142', 389)" onmouseover="showTip(event, 'fs142', 389)" class="prop">Rmw</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs26', 390)" onmouseover="showTip(event, 'fs26', 390)" class="vt">float</span>
+          <span onmouseout="hideTip(event, 'fs143', 391)" onmouseover="showTip(event, 'fs143', 391)" class="prop">Cma</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs26', 392)" onmouseover="showTip(event, 'fs26', 392)" class="vt">float</span>
+          <span onmouseout="hideTip(event, 'fs144', 393)" onmouseover="showTip(event, 'fs144', 393)" class="prop">Rf</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs26', 394)" onmouseover="showTip(event, 'fs26', 394)" class="vt">float</span> 
+          <span onmouseout="hideTip(event, 'fs145', 395)" onmouseover="showTip(event, 'fs145', 395)" class="prop">Frequency</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs18', 396)" onmouseover="showTip(event, 'fs18', 396)" class="rt">Frequency</span> <span class="pn">}</span> 
+
+    <span class="k">let</span> <span class="k">private</span> <span onmouseout="hideTip(event, 'fs146', 397)" onmouseover="showTip(event, 'fs146', 397)" class="fn">frenchDay</span> <span onmouseout="hideTip(event, 'fs147', 398)" onmouseover="showTip(event, 'fs147', 398)" class="fn">x</span> <span class="o">=</span> 
+        <span onmouseout="hideTip(event, 'fs24', 399)" onmouseover="showTip(event, 'fs24', 399)" class="vt">DateTime</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs148', 400)" onmouseover="showTip(event, 'fs148', 400)" class="id">ParseExact</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs147', 401)" onmouseover="showTip(event, 'fs147', 401)" class="fn">x</span><span class="pn">,</span>
+            <span class="s">&quot;yyyyMMdd&quot;</span><span class="pn">,</span>
+            <span onmouseout="hideTip(event, 'fs149', 402)" onmouseover="showTip(event, 'fs149', 402)" class="id">Globalization</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs150', 403)" onmouseover="showTip(event, 'fs150', 403)" class="rt">CultureInfo</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs151', 404)" onmouseover="showTip(event, 'fs151', 404)" class="id">InvariantCulture</span><span class="pn">)</span>
+    <span class="k">let</span> <span class="k">private</span> <span onmouseout="hideTip(event, 'fs152', 405)" onmouseover="showTip(event, 'fs152', 405)" class="fn">frenchMonth</span> <span onmouseout="hideTip(event, 'fs147', 406)" onmouseover="showTip(event, 'fs147', 406)" class="fn">x</span> <span class="o">=</span> 
+        <span onmouseout="hideTip(event, 'fs24', 407)" onmouseover="showTip(event, 'fs24', 407)" class="vt">DateTime</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs148', 408)" onmouseover="showTip(event, 'fs148', 408)" class="id">ParseExact</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs147', 409)" onmouseover="showTip(event, 'fs147', 409)" class="fn">x</span><span class="pn">,</span>
+            <span class="s">&quot;yyyyMM&quot;</span><span class="pn">,</span>
+            <span onmouseout="hideTip(event, 'fs149', 410)" onmouseover="showTip(event, 'fs149', 410)" class="id">Globalization</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs150', 411)" onmouseover="showTip(event, 'fs150', 411)" class="rt">CultureInfo</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs151', 412)" onmouseover="showTip(event, 'fs151', 412)" class="id">InvariantCulture</span><span class="pn">)</span>
+
+    <span class="k">let</span> <span class="k">private</span> <span onmouseout="hideTip(event, 'fs58', 413)" onmouseover="showTip(event, 'fs58', 413)" class="id">cache</span> <span class="o">=</span> 
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs153', 414)" onmouseover="showTip(event, 'fs153', 414)" class="fn">today</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 415)" onmouseover="showTip(event, 'fs24', 415)" class="vt">DateTime</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs51', 416)" onmouseover="showTip(event, 'fs51', 416)" class="id">Now</span>
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs154', 417)" onmouseover="showTip(event, 'fs154', 417)" class="fn">nextMonth</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs153', 418)" onmouseover="showTip(event, 'fs153', 418)" class="fn">today</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs155', 419)" onmouseover="showTip(event, 'fs155', 419)" class="id">AddMonths</span><span class="pn">(</span><span class="n">1</span><span class="pn">)</span>
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs156', 420)" onmouseover="showTip(event, 'fs156', 420)" class="fn">eom</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 421)" onmouseover="showTip(event, 'fs24', 421)" class="fn">DateTime</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs154', 422)" onmouseover="showTip(event, 'fs154', 422)" class="fn">nextMonth</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs157', 423)" onmouseover="showTip(event, 'fs157', 423)" class="id">Year</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs154', 424)" onmouseover="showTip(event, 'fs154', 424)" class="fn">nextMonth</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs158', 425)" onmouseover="showTip(event, 'fs158', 425)" class="id">Month</span><span class="pn">,</span> <span class="n">1</span><span class="pn">)</span><span class="pn">.</span><span class="id">AddSeconds</span><span class="pn">(</span><span class="o">-</span><span class="n">1.0</span><span class="pn">)</span> 
+        <span onmouseout="hideTip(event, 'fs59', 426)" onmouseover="showTip(event, 'fs59', 426)" class="id">Runtime</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs60', 427)" onmouseover="showTip(event, 'fs60', 427)" class="m">Caching</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs124', 428)" onmouseover="showTip(event, 'fs124', 428)" class="id">createInternetFileCache</span> <span class="s">&quot;French&quot;</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs156', 429)" onmouseover="showTip(event, 'fs156', 429)" class="fn">eom</span> <span class="o">-</span> <span onmouseout="hideTip(event, 'fs153', 430)" onmouseover="showTip(event, 'fs153', 430)" class="fn">today</span><span class="pn">)</span>
+
+    <span class="k">let</span> <span class="k">private</span> <span onmouseout="hideTip(event, 'fs159', 431)" onmouseover="showTip(event, 'fs159', 431)" class="fn">getData</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs160', 432)" onmouseover="showTip(event, 'fs160', 432)" class="fn">dataset</span><span class="pn">:</span><span onmouseout="hideTip(event, 'fs14', 433)" onmouseover="showTip(event, 'fs14', 433)" class="rt">string</span><span class="pn">)</span> <span class="o">=</span>
+        <span class="k">match</span> <span onmouseout="hideTip(event, 'fs58', 434)" onmouseover="showTip(event, 'fs58', 434)" class="id">cache</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs69', 435)" onmouseover="showTip(event, 'fs69', 435)" class="id">TryRetrieve</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs160', 436)" onmouseover="showTip(event, 'fs160', 436)" class="fn">dataset</span><span class="pn">)</span> <span class="k">with</span>
+        <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs70', 437)" onmouseover="showTip(event, 'fs70', 437)" class="uc">Some</span> <span onmouseout="hideTip(event, 'fs161', 438)" onmouseover="showTip(event, 'fs161', 438)" class="fn">data</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs161', 439)" onmouseover="showTip(event, 'fs161', 439)" class="fn">data</span>
+        <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs72', 440)" onmouseover="showTip(event, 'fs72', 440)" class="uc">None</span> <span class="k">-&gt;</span>
+            <span class="c">//let dataset = &quot;F-F_Research_Data_Factors_CSV&quot;</span>
+            <span class="k">let</span> <span onmouseout="hideTip(event, 'fs162', 441)" onmouseover="showTip(event, 'fs162', 441)" class="fn">urlString</span> <span class="o">=</span> <span class="s">$&quot;http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/{</span><span onmouseout="hideTip(event, 'fs160', 442)" onmouseover="showTip(event, 'fs160', 442)" class="fn">dataset</span><span class="s">}.zip&quot;</span>
+            <span class="k">let</span> <span onmouseout="hideTip(event, 'fs163', 443)" onmouseover="showTip(event, 'fs163', 443)" class="fn">request</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs74', 444)" onmouseover="showTip(event, 'fs74', 444)" class="rt">Http</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs164', 445)" onmouseover="showTip(event, 'fs164', 445)" class="id">RequestStream</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs162', 446)" onmouseover="showTip(event, 'fs162', 446)" class="fn">urlString</span><span class="pn">,</span> <span class="fn">httpMethod</span> <span class="o">=</span> <span class="s">&quot;GET&quot;</span><span class="pn">,</span><span class="fn">headers</span> <span class="o">=</span> <span class="pn">[</span><span onmouseout="hideTip(event, 'fs78', 447)" onmouseover="showTip(event, 'fs78', 447)" class="m">HttpRequestHeaders</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs79', 448)" onmouseover="showTip(event, 'fs79', 448)" class="id">Accept</span> <span onmouseout="hideTip(event, 'fs80', 449)" onmouseover="showTip(event, 'fs80', 449)" class="m">HttpContentTypes</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs165', 450)" onmouseover="showTip(event, 'fs165', 450)" class="id">Any</span><span class="pn">]</span><span class="pn">)</span>
+            <span class="k">use</span> <span onmouseout="hideTip(event, 'fs166', 451)" onmouseover="showTip(event, 'fs166', 451)" class="d">archive</span> <span class="o">=</span> <span class="k">new</span> <span onmouseout="hideTip(event, 'fs167', 452)" onmouseover="showTip(event, 'fs167', 452)" class="d">ZipArchive</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs163', 453)" onmouseover="showTip(event, 'fs163', 453)" class="fn">request</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs168', 454)" onmouseover="showTip(event, 'fs168', 454)" class="id">ResponseStream</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs169', 455)" onmouseover="showTip(event, 'fs169', 455)" class="en">ZipArchiveMode</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs170', 456)" onmouseover="showTip(event, 'fs170', 456)" class="id">Read</span><span class="pn">)</span>
+            <span class="k">let</span> <span onmouseout="hideTip(event, 'fs171', 457)" onmouseover="showTip(event, 'fs171', 457)" class="fn">file</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs166', 458)" onmouseover="showTip(event, 'fs166', 458)" class="d">archive</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs172', 459)" onmouseover="showTip(event, 'fs172', 459)" class="id">GetEntry</span><span class="pn">(</span><span class="s">$&quot;{</span><span onmouseout="hideTip(event, 'fs160', 460)" onmouseover="showTip(event, 'fs160', 460)" class="fn">dataset</span><span class="s">}&quot;</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs173', 461)" onmouseover="showTip(event, 'fs173', 461)" class="id">Replace</span><span class="pn">(</span><span class="s">&quot;_CSV&quot;</span><span class="pn">,</span><span class="s">&quot;.CSV&quot;</span><span class="pn">)</span><span class="pn">)</span>
+            <span class="k">use</span> <span onmouseout="hideTip(event, 'fs174', 462)" onmouseover="showTip(event, 'fs174', 462)" class="d">reader</span> <span class="o">=</span> <span class="k">new</span> <span onmouseout="hideTip(event, 'fs175', 463)" onmouseover="showTip(event, 'fs175', 463)" class="d">StreamReader</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs171', 464)" onmouseover="showTip(event, 'fs171', 464)" class="fn">file</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs176', 465)" onmouseover="showTip(event, 'fs176', 465)" class="id">Open</span><span class="pn">(</span><span class="pn">)</span><span class="pn">)</span>
+            <span class="k">let</span> <span onmouseout="hideTip(event, 'fs161', 466)" onmouseover="showTip(event, 'fs161', 466)" class="fn">data</span>  <span class="o">=</span> <span onmouseout="hideTip(event, 'fs174', 467)" onmouseover="showTip(event, 'fs174', 467)" class="d">reader</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs177', 468)" onmouseover="showTip(event, 'fs177', 468)" class="id">ReadToEnd</span><span class="pn">(</span><span class="pn">)</span>
+            <span onmouseout="hideTip(event, 'fs58', 469)" onmouseover="showTip(event, 'fs58', 469)" class="id">cache</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs82', 470)" onmouseover="showTip(event, 'fs82', 470)" class="id">Set</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs160', 471)" onmouseover="showTip(event, 'fs160', 471)" class="fn">dataset</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs161', 472)" onmouseover="showTip(event, 'fs161', 472)" class="fn">data</span><span class="pn">)</span>
+            <span onmouseout="hideTip(event, 'fs161', 473)" onmouseover="showTip(event, 'fs161', 473)" class="fn">data</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs178', 474)" onmouseover="showTip(event, 'fs178', 474)" class="fn">getFF3</span> <span onmouseout="hideTip(event, 'fs179', 475)" onmouseover="showTip(event, 'fs179', 475)" class="fn">frequency</span> <span class="o">=</span>
+            <span class="k">let</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs160', 476)" onmouseover="showTip(event, 'fs160', 476)" class="fn">dataset</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs180', 477)" onmouseover="showTip(event, 'fs180', 477)" class="fn">dateParser</span><span class="pn">)</span> <span class="o">=</span>
+                <span class="k">match</span> <span onmouseout="hideTip(event, 'fs179', 478)" onmouseover="showTip(event, 'fs179', 478)" class="fn">frequency</span> <span class="k">with</span>
+                <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs20', 479)" onmouseover="showTip(event, 'fs20', 479)" class="uc">Monthly</span> <span class="k">-&gt;</span> <span class="s">&quot;F-F_Research_Data_Factors_CSV&quot;</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs152', 480)" onmouseover="showTip(event, 'fs152', 480)" class="fn">frenchMonth</span>
+                <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs19', 481)" onmouseover="showTip(event, 'fs19', 481)" class="uc">Daily</span> <span class="k">-&gt;</span> <span class="s">&quot;F-F_Research_Data_Factors_daily_CSV&quot;</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs146', 482)" onmouseover="showTip(event, 'fs146', 482)" class="fn">frenchDay</span>
+            <span class="k">let</span> <span onmouseout="hideTip(event, 'fs181', 483)" onmouseover="showTip(event, 'fs181', 483)" class="d">data</span> <span class="o">=</span> <span class="k">new</span> <span onmouseout="hideTip(event, 'fs182', 484)" onmouseover="showTip(event, 'fs182', 484)" class="d">StringReader</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs159', 485)" onmouseover="showTip(event, 'fs159', 485)" class="fn">getData</span> <span onmouseout="hideTip(event, 'fs160', 486)" onmouseover="showTip(event, 'fs160', 486)" class="fn">dataset</span><span class="pn">)</span>
+            <span class="pn">[|</span> <span class="k">while</span> <span onmouseout="hideTip(event, 'fs181', 487)" onmouseover="showTip(event, 'fs181', 487)" class="d">data</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs183', 488)" onmouseover="showTip(event, 'fs183', 488)" class="id">Peek</span><span class="pn">(</span><span class="pn">)</span> <span class="o">&lt;&gt;</span> <span class="o">-</span><span class="n">1</span> <span class="k">do</span>
+                    <span onmouseout="hideTip(event, 'fs181', 489)" onmouseover="showTip(event, 'fs181', 489)" class="d">data</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs184', 490)" onmouseover="showTip(event, 'fs184', 490)" class="id">ReadLine</span><span class="pn">(</span><span class="pn">)</span> <span class="pn">|]</span>
+            <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs185', 491)" onmouseover="showTip(event, 'fs185', 491)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs186', 492)" onmouseover="showTip(event, 'fs186', 492)" class="id">skipWhile</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs187', 493)" onmouseover="showTip(event, 'fs187', 493)" class="fn">line</span> <span class="k">-&gt;</span> <span class="fn">not</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs187', 494)" onmouseover="showTip(event, 'fs187', 494)" class="fn">line</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs188', 495)" onmouseover="showTip(event, 'fs188', 495)" class="id">Contains</span><span class="pn">(</span><span class="s">&quot;Mkt-RF&quot;</span><span class="pn">)</span><span class="pn">)</span><span class="pn">)</span>
+            <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs185', 496)" onmouseover="showTip(event, 'fs185', 496)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs189', 497)" onmouseover="showTip(event, 'fs189', 497)" class="id">skip</span> <span class="n">1</span>
+            <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs185', 498)" onmouseover="showTip(event, 'fs185', 498)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs190', 499)" onmouseover="showTip(event, 'fs190', 499)" class="id">takeWhile</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs187', 500)" onmouseover="showTip(event, 'fs187', 500)" class="fn">line</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs187', 501)" onmouseover="showTip(event, 'fs187', 501)" class="fn">line</span> <span class="o">&lt;&gt;</span> <span class="s">&quot;&quot;</span><span class="pn">)</span>
+            <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs185', 502)" onmouseover="showTip(event, 'fs185', 502)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs191', 503)" onmouseover="showTip(event, 'fs191', 503)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs187', 504)" onmouseover="showTip(event, 'fs187', 504)" class="fn">line</span> <span class="k">-&gt;</span> 
+                <span class="k">let</span> <span onmouseout="hideTip(event, 'fs192', 505)" onmouseover="showTip(event, 'fs192', 505)" class="fn">parsedLine</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs128', 506)" onmouseover="showTip(event, 'fs128', 506)" class="d">FF3Csv</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs193', 507)" onmouseover="showTip(event, 'fs193', 507)" class="id">ParseRows</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs187', 508)" onmouseover="showTip(event, 'fs187', 508)" class="fn">line</span><span class="pn">)</span><span class="pn">.</span><span class="pn">[</span><span class="n">0</span><span class="pn">]</span> 
+                <span class="pn">{</span> <span class="prop">Date</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs180', 509)" onmouseover="showTip(event, 'fs180', 509)" class="fn">dateParser</span> <span onmouseout="hideTip(event, 'fs192', 510)" onmouseover="showTip(event, 'fs192', 510)" class="fn">parsedLine</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs194', 511)" onmouseover="showTip(event, 'fs194', 511)" class="id">Date</span>
+                  <span class="prop">MktRf</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs26', 512)" onmouseover="showTip(event, 'fs26', 512)" class="fn">float</span> <span onmouseout="hideTip(event, 'fs192', 513)" onmouseover="showTip(event, 'fs192', 513)" class="fn">parsedLine</span><span class="pn">.</span><span class="id">``Mkt-RF``</span> <span class="o">/</span> <span class="n">100.0</span>
+                  <span class="prop">Smb</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs26', 514)" onmouseover="showTip(event, 'fs26', 514)" class="fn">float</span> <span onmouseout="hideTip(event, 'fs192', 515)" onmouseover="showTip(event, 'fs192', 515)" class="fn">parsedLine</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs195', 516)" onmouseover="showTip(event, 'fs195', 516)" class="id">SMB</span> <span class="o">/</span> <span class="n">100.0</span>
+                  <span class="prop">Hml</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs26', 517)" onmouseover="showTip(event, 'fs26', 517)" class="fn">float</span> <span onmouseout="hideTip(event, 'fs192', 518)" onmouseover="showTip(event, 'fs192', 518)" class="fn">parsedLine</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs196', 519)" onmouseover="showTip(event, 'fs196', 519)" class="id">HML</span> <span class="o">/</span> <span class="n">100.0</span>
+                  <span class="prop">Rf</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs26', 520)" onmouseover="showTip(event, 'fs26', 520)" class="fn">float</span> <span onmouseout="hideTip(event, 'fs192', 521)" onmouseover="showTip(event, 'fs192', 521)" class="fn">parsedLine</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs197', 522)" onmouseover="showTip(event, 'fs197', 522)" class="id">RF</span> <span class="o">/</span> <span class="n">100.0</span> 
+                  <span onmouseout="hideTip(event, 'fs18', 523)" onmouseover="showTip(event, 'fs18', 523)" class="prop">Frequency</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs179', 524)" onmouseover="showTip(event, 'fs179', 524)" class="fn">frequency</span> <span class="pn">}</span><span class="pn">)</span>
+
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs198', 525)" onmouseover="showTip(event, 'fs198', 525)" class="fn">getFF5</span> <span onmouseout="hideTip(event, 'fs179', 526)" onmouseover="showTip(event, 'fs179', 526)" class="fn">frequency</span> <span class="o">=</span>
+        <span class="k">let</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs160', 527)" onmouseover="showTip(event, 'fs160', 527)" class="fn">dataset</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs180', 528)" onmouseover="showTip(event, 'fs180', 528)" class="fn">dateParser</span><span class="pn">)</span> <span class="o">=</span>
+            <span class="k">match</span> <span onmouseout="hideTip(event, 'fs179', 529)" onmouseover="showTip(event, 'fs179', 529)" class="fn">frequency</span> <span class="k">with</span>
+            <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs20', 530)" onmouseover="showTip(event, 'fs20', 530)" class="uc">Monthly</span> <span class="k">-&gt;</span> <span class="s">&quot;F-F_Research_Data_5_Factors_2x3_CSV&quot;</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs152', 531)" onmouseover="showTip(event, 'fs152', 531)" class="fn">frenchMonth</span>
+            <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs19', 532)" onmouseover="showTip(event, 'fs19', 532)" class="uc">Daily</span> <span class="k">-&gt;</span> <span class="s">&quot;F-F_Research_Data_5_Factors_2x3_daily_CSV&quot;</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs146', 533)" onmouseover="showTip(event, 'fs146', 533)" class="fn">frenchDay</span>
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs181', 534)" onmouseover="showTip(event, 'fs181', 534)" class="d">data</span> <span class="o">=</span> <span class="k">new</span> <span onmouseout="hideTip(event, 'fs182', 535)" onmouseover="showTip(event, 'fs182', 535)" class="d">StringReader</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs159', 536)" onmouseover="showTip(event, 'fs159', 536)" class="fn">getData</span> <span onmouseout="hideTip(event, 'fs160', 537)" onmouseover="showTip(event, 'fs160', 537)" class="fn">dataset</span><span class="pn">)</span>
+        <span class="pn">[|</span> <span class="k">while</span> <span onmouseout="hideTip(event, 'fs181', 538)" onmouseover="showTip(event, 'fs181', 538)" class="d">data</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs183', 539)" onmouseover="showTip(event, 'fs183', 539)" class="id">Peek</span><span class="pn">(</span><span class="pn">)</span> <span class="o">&lt;&gt;</span> <span class="o">-</span><span class="n">1</span> <span class="k">do</span>
+                <span onmouseout="hideTip(event, 'fs181', 540)" onmouseover="showTip(event, 'fs181', 540)" class="d">data</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs184', 541)" onmouseover="showTip(event, 'fs184', 541)" class="id">ReadLine</span><span class="pn">(</span><span class="pn">)</span> <span class="pn">|]</span>
+        <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs185', 542)" onmouseover="showTip(event, 'fs185', 542)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs186', 543)" onmouseover="showTip(event, 'fs186', 543)" class="id">skipWhile</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs187', 544)" onmouseover="showTip(event, 'fs187', 544)" class="fn">line</span> <span class="k">-&gt;</span> <span class="fn">not</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs187', 545)" onmouseover="showTip(event, 'fs187', 545)" class="fn">line</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs188', 546)" onmouseover="showTip(event, 'fs188', 546)" class="id">Contains</span><span class="pn">(</span><span class="s">&quot;Mkt-RF&quot;</span><span class="pn">)</span><span class="pn">)</span><span class="pn">)</span>
+        <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs185', 547)" onmouseover="showTip(event, 'fs185', 547)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs189', 548)" onmouseover="showTip(event, 'fs189', 548)" class="id">skip</span> <span class="n">1</span>
+        <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs185', 549)" onmouseover="showTip(event, 'fs185', 549)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs190', 550)" onmouseover="showTip(event, 'fs190', 550)" class="id">takeWhile</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs187', 551)" onmouseover="showTip(event, 'fs187', 551)" class="fn">line</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs187', 552)" onmouseover="showTip(event, 'fs187', 552)" class="fn">line</span> <span class="o">&lt;&gt;</span> <span class="s">&quot;&quot;</span><span class="pn">)</span>
+        <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs185', 553)" onmouseover="showTip(event, 'fs185', 553)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs191', 554)" onmouseover="showTip(event, 'fs191', 554)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs187', 555)" onmouseover="showTip(event, 'fs187', 555)" class="fn">line</span> <span class="k">-&gt;</span> 
+            <span class="k">let</span> <span onmouseout="hideTip(event, 'fs192', 556)" onmouseover="showTip(event, 'fs192', 556)" class="fn">parsedLine</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs136', 557)" onmouseover="showTip(event, 'fs136', 557)" class="d">FF5Csv</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs193', 558)" onmouseover="showTip(event, 'fs193', 558)" class="id">ParseRows</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs187', 559)" onmouseover="showTip(event, 'fs187', 559)" class="fn">line</span><span class="pn">)</span><span class="pn">.</span><span class="pn">[</span><span class="n">0</span><span class="pn">]</span> 
+            <span class="pn">{</span> <span class="prop">Date</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs180', 560)" onmouseover="showTip(event, 'fs180', 560)" class="fn">dateParser</span> <span onmouseout="hideTip(event, 'fs192', 561)" onmouseover="showTip(event, 'fs192', 561)" class="fn">parsedLine</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs194', 562)" onmouseover="showTip(event, 'fs194', 562)" class="id">Date</span>
+              <span class="prop">MktRf</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs26', 563)" onmouseover="showTip(event, 'fs26', 563)" class="fn">float</span> <span onmouseout="hideTip(event, 'fs192', 564)" onmouseover="showTip(event, 'fs192', 564)" class="fn">parsedLine</span><span class="pn">.</span><span class="id">``Mkt-RF``</span> <span class="o">/</span> <span class="n">100.0</span>
+              <span class="prop">Smb</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs26', 565)" onmouseover="showTip(event, 'fs26', 565)" class="fn">float</span> <span onmouseout="hideTip(event, 'fs192', 566)" onmouseover="showTip(event, 'fs192', 566)" class="fn">parsedLine</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs195', 567)" onmouseover="showTip(event, 'fs195', 567)" class="id">SMB</span> <span class="o">/</span> <span class="n">100.0</span>
+              <span class="prop">Hml</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs26', 568)" onmouseover="showTip(event, 'fs26', 568)" class="fn">float</span> <span onmouseout="hideTip(event, 'fs192', 569)" onmouseover="showTip(event, 'fs192', 569)" class="fn">parsedLine</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs196', 570)" onmouseover="showTip(event, 'fs196', 570)" class="id">HML</span> <span class="o">/</span> <span class="n">100.0</span>
+              <span class="prop">Rmw</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs26', 571)" onmouseover="showTip(event, 'fs26', 571)" class="fn">float</span> <span onmouseout="hideTip(event, 'fs192', 572)" onmouseover="showTip(event, 'fs192', 572)" class="fn">parsedLine</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs199', 573)" onmouseover="showTip(event, 'fs199', 573)" class="id">RMW</span> <span class="o">/</span> <span class="n">100.0</span>
+              <span class="prop">Cma</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs26', 574)" onmouseover="showTip(event, 'fs26', 574)" class="fn">float</span> <span onmouseout="hideTip(event, 'fs192', 575)" onmouseover="showTip(event, 'fs192', 575)" class="fn">parsedLine</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs200', 576)" onmouseover="showTip(event, 'fs200', 576)" class="id">CMA</span> <span class="o">/</span> <span class="n">100.0</span>
+              <span class="prop">Rf</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs26', 577)" onmouseover="showTip(event, 'fs26', 577)" class="fn">float</span> <span onmouseout="hideTip(event, 'fs192', 578)" onmouseover="showTip(event, 'fs192', 578)" class="fn">parsedLine</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs197', 579)" onmouseover="showTip(event, 'fs197', 579)" class="id">RF</span> <span class="o">/</span> <span class="n">100.0</span> 
+              <span onmouseout="hideTip(event, 'fs18', 580)" onmouseover="showTip(event, 'fs18', 580)" class="prop">Frequency</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs179', 581)" onmouseover="showTip(event, 'fs179', 581)" class="fn">frequency</span> <span class="pn">}</span><span class="pn">)</span>
+
+<span class="k">module</span> <span onmouseout="hideTip(event, 'fs201', 582)" onmouseover="showTip(event, 'fs201', 582)" class="m">Fred</span> <span class="o">=</span>
+    <span class="k">type</span> <span onmouseout="hideTip(event, 'fs202', 583)" onmouseover="showTip(event, 'fs202', 583)" class="d">Series</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs28', 584)" onmouseover="showTip(event, 'fs28', 584)" class="rt">CsvProvider</span><span class="pn">&lt;</span><span class="s">&quot;https://fred.stlouisfed.org/graph/fredgraph.csv?id=GS10&quot;</span><span class="pn">,</span>
+                              <span class="fn">Schema</span><span class="o">=</span><span class="s">&quot;Date,Value (float)&quot;</span><span class="pn">,</span>
+                              <span class="fn">MissingValues</span><span class="o">=</span><span class="s">&quot;.&quot;</span><span class="pn">&gt;</span>
+    <span class="k">let</span> <span class="k">private</span> <span onmouseout="hideTip(event, 'fs203', 585)" onmouseover="showTip(event, 'fs203', 585)" class="fn">fredUrl</span> <span onmouseout="hideTip(event, 'fs204', 586)" onmouseover="showTip(event, 'fs204', 586)" class="fn">series</span> <span class="o">=</span> <span class="s">$&quot;https://fred.stlouisfed.org/graph/fredgraph.csv?id={</span><span onmouseout="hideTip(event, 'fs204', 587)" onmouseover="showTip(event, 'fs204', 587)" class="fn">series</span><span class="s">}&quot;</span>
+    
+    <span class="c">///&lt;summary&gt;Gets a FRED data series as a CsvProvider&lt;/summary&gt;</span>
+        <span class="c">/// &lt;param name=&quot;series&quot;&gt;The series name such as GS10, EXUSEU, etc.&lt;/param&gt;</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs205', 588)" onmouseover="showTip(event, 'fs205', 588)" class="fn">get</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs206', 589)" onmouseover="showTip(event, 'fs206', 589)" class="fn">series</span><span class="pn">:</span><span onmouseout="hideTip(event, 'fs14', 590)" onmouseover="showTip(event, 'fs14', 590)" class="rt">string</span><span class="pn">)</span> <span class="o">=</span>  <span onmouseout="hideTip(event, 'fs202', 591)" onmouseover="showTip(event, 'fs202', 591)" class="d">Series</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs207', 592)" onmouseover="showTip(event, 'fs207', 592)" class="id">Load</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs203', 593)" onmouseover="showTip(event, 'fs203', 593)" class="fn">fredUrl</span> <span onmouseout="hideTip(event, 'fs206', 594)" onmouseover="showTip(event, 'fs206', 594)" class="fn">series</span><span class="pn">)</span>
+    
+</code></pre>
+
+            <div class="fsdocs-tip" id="fs1">namespace System</div>
+<div class="fsdocs-tip" id="fs2">namespace System.IO</div>
+<div class="fsdocs-tip" id="fs3">Multiple items<br />namespace FSharp<br /><br />--------------------<br />namespace Microsoft.FSharp</div>
+<div class="fsdocs-tip" id="fs4">Multiple items<br />namespace FSharp.Data<br /><br />--------------------<br />namespace Microsoft.FSharp.Data</div>
+<div class="fsdocs-tip" id="fs5">type Environment =
+  static member Exit: exitCode: int -&gt; unit
+  static member ExpandEnvironmentVariables: name: string -&gt; string
+  static member FailFast: message: string -&gt; unit + 1 overload
+  static member GetCommandLineArgs: unit -&gt; string[]
+  static member GetEnvironmentVariable: variable: string -&gt; string + 1 overload
+  static member GetEnvironmentVariables: unit -&gt; IDictionary + 1 overload
+  static member GetFolderPath: folder: SpecialFolder -&gt; string + 1 overload
+  static member GetLogicalDrives: unit -&gt; string[]
+  static member SetEnvironmentVariable: variable: string * value: string -&gt; unit + 1 overload
+  static member CommandLine: string
+  ...<br /><em>&lt;summary&gt;Provides information about, and means to manipulate, the current environment and platform. This class cannot be inherited.&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs6">property Environment.CurrentDirectory: string with get, set<br /><em>&lt;summary&gt;Gets or sets the fully qualified path of the current working directory.&lt;/summary&gt;<br />&lt;exception cref=&quot;T:System.ArgumentException&quot;&gt;Attempted to set to an empty string (&quot;&quot;).&lt;/exception&gt;<br />&lt;exception cref=&quot;T:System.ArgumentNullException&quot;&gt;Attempted to set to &lt;see langword=&quot;null&quot; /&gt;.&lt;/exception&gt;<br />&lt;exception cref=&quot;T:System.IO.IOException&quot;&gt;An I/O error occurred.&lt;/exception&gt;<br />&lt;exception cref=&quot;T:System.IO.DirectoryNotFoundException&quot;&gt;Attempted to set a local path that cannot be found.&lt;/exception&gt;<br />&lt;exception cref=&quot;T:System.Security.SecurityException&quot;&gt;The caller does not have the appropriate permission.&lt;/exception&gt;<br />&lt;returns&gt;The directory path.&lt;/returns&gt;</em></div>
+<div class="fsdocs-tip" id="fs7">val envVars: Collections.IDictionary</div>
+<div class="fsdocs-tip" id="fs8">Environment.GetEnvironmentVariables() : Collections.IDictionary<br />Environment.GetEnvironmentVariables(target: EnvironmentVariableTarget) : Collections.IDictionary</div>
+<div class="fsdocs-tip" id="fs9">val localPath: string</div>
+<div class="fsdocs-tip" id="fs10">val localPath2: string</div>
+<div class="fsdocs-tip" id="fs11">val tiingoKey: string</div>
+<div class="fsdocs-tip" id="fs12">val var: string</div>
+<div class="fsdocs-tip" id="fs13">Collections.IDictionary.Contains(key: obj) : bool</div>
+<div class="fsdocs-tip" id="fs14">Multiple items<br />val string: value: &#39;T -&gt; string<br /><em>&lt;summary&gt;Converts the argument to a string using &lt;c&gt;ToString&lt;/c&gt;.&lt;/summary&gt;<br />&lt;remarks&gt;For standard integer and floating point values the and any type that implements &lt;c&gt;IFormattable&lt;/c&gt;&lt;c&gt;ToString&lt;/c&gt; conversion uses &lt;c&gt;CultureInfo.InvariantCulture&lt;/c&gt;. &lt;/remarks&gt;<br />&lt;param name=&quot;value&quot;&gt;The input value.&lt;/param&gt;<br />&lt;returns&gt;The converted string.&lt;/returns&gt;<br />&lt;example id=&quot;string-example&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;&lt;/code&gt;&lt;/example&gt;</em><br /><br />--------------------<br />type string = String<br /><em>&lt;summary&gt;An abbreviation for the CLI type &lt;see cref=&quot;T:System.String&quot; /&gt;.&lt;/summary&gt;<br />&lt;category&gt;Basic Types&lt;/category&gt;</em></div>
+<div class="fsdocs-tip" id="fs15">type File =
+  static member AppendAllLines: path: string * contents: IEnumerable&lt;string&gt; -&gt; unit + 1 overload
+  static member AppendAllLinesAsync: path: string * contents: IEnumerable&lt;string&gt; * encoding: Encoding * ?cancellationToken: CancellationToken -&gt; Task + 1 overload
+  static member AppendAllText: path: string * contents: string -&gt; unit + 1 overload
+  static member AppendAllTextAsync: path: string * contents: string * encoding: Encoding * ?cancellationToken: CancellationToken -&gt; Task + 1 overload
+  static member AppendText: path: string -&gt; StreamWriter
+  static member Copy: sourceFileName: string * destFileName: string -&gt; unit + 1 overload
+  static member Create: path: string -&gt; FileStream + 2 overloads
+  static member CreateSymbolicLink: path: string * pathToTarget: string -&gt; FileSystemInfo
+  static member CreateText: path: string -&gt; StreamWriter
+  static member Decrypt: path: string -&gt; unit
+  ...<br /><em>&lt;summary&gt;Provides static methods for the creation, copying, deletion, moving, and opening of a single file, and aids in the creation of &lt;see cref=&quot;T:System.IO.FileStream&quot; /&gt; objects.&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs16">File.Exists(path: string) : bool</div>
+<div class="fsdocs-tip" id="fs17">File.ReadAllText(path: string) : string<br />File.ReadAllText(path: string, encoding: Text.Encoding) : string</div>
+<div class="fsdocs-tip" id="fs18">type Frequency =
+  | Daily
+  | Monthly</div>
+<div class="fsdocs-tip" id="fs19">union case Frequency.Daily: Frequency</div>
+<div class="fsdocs-tip" id="fs20">union case Frequency.Monthly: Frequency</div>
+<div class="fsdocs-tip" id="fs21">type ReturnObs =
+  {
+    Symbol: string
+    Date: DateTime
+    Return: float
+  }</div>
+<div class="fsdocs-tip" id="fs22">ReturnObs.Symbol: string</div>
+<div class="fsdocs-tip" id="fs23">ReturnObs.Date: DateTime</div>
+<div class="fsdocs-tip" id="fs24">Multiple items<br />[&lt;Struct&gt;]
+type DateTime =
+  new: year: int * month: int * day: int -&gt; unit + 10 overloads
+  member Add: value: TimeSpan -&gt; DateTime
+  member AddDays: value: float -&gt; DateTime
+  member AddHours: value: float -&gt; DateTime
+  member AddMilliseconds: value: float -&gt; DateTime
+  member AddMinutes: value: float -&gt; DateTime
+  member AddMonths: months: int -&gt; DateTime
+  member AddSeconds: value: float -&gt; DateTime
+  member AddTicks: value: int64 -&gt; DateTime
+  member AddYears: value: int -&gt; DateTime
+  ...<br /><em>&lt;summary&gt;Represents an instant in time, typically expressed as a date and time of day.&lt;/summary&gt;</em><br /><br />--------------------<br />DateTime ()<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(ticks: int64) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(ticks: int64, kind: DateTimeKind) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, calendar: Globalization.Calendar) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int, kind: DateTimeKind) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int, calendar: Globalization.Calendar) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int, millisecond: int) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int, millisecond: int, kind: DateTimeKind) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em></div>
+<div class="fsdocs-tip" id="fs25">ReturnObs.Return: float</div>
+<div class="fsdocs-tip" id="fs26">Multiple items<br />val float: value: &#39;T -&gt; float (requires member op_Explicit)<br /><em>&lt;summary&gt;Converts the argument to 64-bit float. This is a direct conversion for all 
+ primitive numeric types. For strings, the input is converted using &lt;c&gt;Double.Parse()&lt;/c&gt;  
+ with InvariantCulture settings. Otherwise the operation requires an appropriate
+ static conversion method on the input type.&lt;/summary&gt;<br />&lt;param name=&quot;value&quot;&gt;The input value.&lt;/param&gt;<br />&lt;returns&gt;The converted float&lt;/returns&gt;<br />&lt;example id=&quot;float-example&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;&lt;/code&gt;&lt;/example&gt;</em><br /><br />--------------------<br />[&lt;Struct&gt;]
+type float = Double<br /><em>&lt;summary&gt;An abbreviation for the CLI type &lt;see cref=&quot;T:System.Double&quot; /&gt;.&lt;/summary&gt;<br />&lt;category&gt;Basic Types&lt;/category&gt;</em><br /><br />--------------------<br />type float&lt;&#39;Measure&gt; =
+  float<br /><em>&lt;summary&gt;The type of double-precision floating point numbers, annotated with a unit of measure.
+ The unit of measure is erased in compiled code and when values of this type
+ are analyzed using reflection. The type is representationally equivalent to
+ &lt;see cref=&quot;T:System.Double&quot; /&gt;.&lt;/summary&gt;<br />&lt;category index=&quot;6&quot;&gt;Basic Types with Units of Measure&lt;/category&gt;</em></div>
+<div class="fsdocs-tip" id="fs27">type TiingoCsv = CsvProvider&lt;...&gt;</div>
+<div class="fsdocs-tip" id="fs28">type CsvProvider<br /><em>&lt;summary&gt;Typed representation of a CSV file.&lt;/summary&gt;
+           &lt;param name=&#39;Sample&#39;&gt;Location of a CSV sample file or a string containing a sample CSV document.&lt;/param&gt;
+           &lt;param name=&#39;Separators&#39;&gt;Column delimiter(s). Defaults to &lt;c&gt;,&lt;/c&gt;.&lt;/param&gt;
+           &lt;param name=&#39;InferRows&#39;&gt;Number of rows to use for inference. Defaults to &lt;c&gt;1000&lt;/c&gt;. If this is zero, all rows are used.&lt;/param&gt;
+           &lt;param name=&#39;Schema&#39;&gt;Optional column types, in a comma separated list. Valid types are &lt;c&gt;int&lt;/c&gt;, &lt;c&gt;int64&lt;/c&gt;, &lt;c&gt;bool&lt;/c&gt;, &lt;c&gt;float&lt;/c&gt;, &lt;c&gt;decimal&lt;/c&gt;, &lt;c&gt;date&lt;/c&gt;, &lt;c&gt;guid&lt;/c&gt;, &lt;c&gt;string&lt;/c&gt;, &lt;c&gt;int?&lt;/c&gt;, &lt;c&gt;int64?&lt;/c&gt;, &lt;c&gt;bool?&lt;/c&gt;, &lt;c&gt;float?&lt;/c&gt;, &lt;c&gt;decimal?&lt;/c&gt;, &lt;c&gt;date?&lt;/c&gt;, &lt;c&gt;guid?&lt;/c&gt;, &lt;c&gt;int option&lt;/c&gt;, &lt;c&gt;int64 option&lt;/c&gt;, &lt;c&gt;bool option&lt;/c&gt;, &lt;c&gt;float option&lt;/c&gt;, &lt;c&gt;decimal option&lt;/c&gt;, &lt;c&gt;date option&lt;/c&gt;, &lt;c&gt;guid option&lt;/c&gt; and &lt;c&gt;string option&lt;/c&gt;.
+           You can also specify a unit and the name of the column like this: &lt;c&gt;Name (type&amp;lt;unit&amp;gt;)&lt;/c&gt;, or you can override only the name. If you don&#39;t want to specify all the columns, you can reference the columns by name like this: &lt;c&gt;ColumnName=type&lt;/c&gt;.&lt;/param&gt;
+           &lt;param name=&#39;HasHeaders&#39;&gt;Whether the sample contains the names of the columns as its first line.&lt;/param&gt;
+           &lt;param name=&#39;IgnoreErrors&#39;&gt;Whether to ignore rows that have the wrong number of columns or which can&#39;t be parsed using the inferred or specified schema. Otherwise an exception is thrown when these rows are encountered.&lt;/param&gt;
+           &lt;param name=&#39;SkipRows&#39;&gt;Skips the first n rows of the CSV file.&lt;/param&gt;
+           &lt;param name=&#39;AssumeMissingValues&#39;&gt;When set to true, the type provider will assume all columns can have missing values, even if in the provided sample all values are present. Defaults to false.&lt;/param&gt;
+           &lt;param name=&#39;PreferOptionals&#39;&gt;When set to true, inference will prefer to use the option type instead of nullable types, &lt;c&gt;double.NaN&lt;/c&gt; or &lt;c&gt;&quot;&quot;&lt;/c&gt; for missing values. Defaults to false.&lt;/param&gt;
+           &lt;param name=&#39;Quote&#39;&gt;The quotation mark (for surrounding values containing the delimiter). Defaults to &lt;c&gt;&quot;&lt;/c&gt;.&lt;/param&gt;
+           &lt;param name=&#39;MissingValues&#39;&gt;The set of strings recogized as missing values specified as a comma-separated string (e.g., &quot;NA,N/A&quot;). Defaults to &lt;c&gt;NaN,NA,N/A,#N/A,:,-,TBA,TBD&lt;/c&gt;.&lt;/param&gt;
+           &lt;param name=&#39;CacheRows&#39;&gt;Whether the rows should be caches so they can be iterated multiple times. Defaults to true. Disable for large datasets.&lt;/param&gt;
+           &lt;param name=&#39;Culture&#39;&gt;The culture used for parsing numbers and dates. Defaults to the invariant culture.&lt;/param&gt;
+           &lt;param name=&#39;Encoding&#39;&gt;The encoding used to read the sample. You can specify either the character set name or the codepage number. Defaults to UTF8 for files, and to ISO-8859-1 the for HTTP requests, unless &lt;c&gt;charset&lt;/c&gt; is specified in the &lt;c&gt;Content-Type&lt;/c&gt; response header.&lt;/param&gt;
+           &lt;param name=&#39;ResolutionFolder&#39;&gt;A directory that is used when resolving relative file references (at design time and in hosted execution).&lt;/param&gt;
+           &lt;param name=&#39;EmbeddedResource&#39;&gt;When specified, the type provider first attempts to load the sample from the specified resource 
+              (e.g. &#39;MyCompany.MyAssembly, resource_name.csv&#39;). This is useful when exposing types generated by the type provider.&lt;/param&gt;</em></div>
+<div class="fsdocs-tip" id="fs29">type TiingoRequest =
+  {
+    Symbol: string
+    Start: DateTime
+    End: DateTime
+  }</div>
+<div class="fsdocs-tip" id="fs30">TiingoRequest.Symbol: string</div>
+<div class="fsdocs-tip" id="fs31">TiingoRequest.Start: DateTime</div>
+<div class="fsdocs-tip" id="fs32">TiingoRequest.End: DateTime</div>
+<div class="fsdocs-tip" id="fs33">type TiingoObs =
+  {
+    Date: DateTime
+    Close: decimal
+    High: decimal
+    Low: decimal
+    Open: decimal
+    Volume: int
+    AdjClose: decimal
+    AdjHigh: decimal
+    AdjLow: decimal
+    AdjOpen: decimal
+    ...
+  }</div>
+<div class="fsdocs-tip" id="fs34">TiingoObs.Date: DateTime</div>
+<div class="fsdocs-tip" id="fs35">TiingoObs.Close: decimal</div>
+<div class="fsdocs-tip" id="fs36">Multiple items<br />val decimal: value: &#39;T -&gt; decimal (requires member op_Explicit)<br /><em>&lt;summary&gt;Converts the argument to System.Decimal using a direct conversion for all 
+ primitive numeric types. For strings, the input is converted using &lt;c&gt;UInt64.Parse()&lt;/c&gt;  
+ with InvariantCulture settings. Otherwise the operation requires an appropriate
+ static conversion method on the input type.&lt;/summary&gt;<br />&lt;param name=&quot;value&quot;&gt;The input value.&lt;/param&gt;<br />&lt;returns&gt;The converted decimal.&lt;/returns&gt;<br />&lt;example id=&quot;decimal-example&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;&lt;/code&gt;&lt;/example&gt;</em><br /><br />--------------------<br />[&lt;Struct&gt;]
+type decimal = Decimal<br /><em>&lt;summary&gt;An abbreviation for the CLI type &lt;see cref=&quot;T:System.Decimal&quot; /&gt;.&lt;/summary&gt;<br />&lt;category&gt;Basic Types&lt;/category&gt;</em><br /><br />--------------------<br />type decimal&lt;&#39;Measure&gt; =
+  decimal<br /><em>&lt;summary&gt;The type of decimal numbers, annotated with a unit of measure. The unit
+ of measure is erased in compiled code and when values of this type
+ are analyzed using reflection. The type is representationally equivalent to
+ &lt;see cref=&quot;T:System.Decimal&quot; /&gt;.&lt;/summary&gt;<br />&lt;category&gt;Basic Types with Units of Measure&lt;/category&gt;</em></div>
+<div class="fsdocs-tip" id="fs37">TiingoObs.High: decimal</div>
+<div class="fsdocs-tip" id="fs38">TiingoObs.Low: decimal</div>
+<div class="fsdocs-tip" id="fs39">TiingoObs.Open: decimal</div>
+<div class="fsdocs-tip" id="fs40">TiingoObs.Volume: int</div>
+<div class="fsdocs-tip" id="fs41">Multiple items<br />val int: value: &#39;T -&gt; int (requires member op_Explicit)<br /><em>&lt;summary&gt;Converts the argument to signed 32-bit integer. This is a direct conversion for all 
+ primitive numeric types. For strings, the input is converted using &lt;c&gt;Int32.Parse()&lt;/c&gt;  
+ with InvariantCulture settings. Otherwise the operation requires an appropriate
+ static conversion method on the input type.&lt;/summary&gt;<br />&lt;param name=&quot;value&quot;&gt;The input value.&lt;/param&gt;<br />&lt;returns&gt;The converted int&lt;/returns&gt;<br />&lt;example id=&quot;int-example&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;&lt;/code&gt;&lt;/example&gt;</em><br /><br />--------------------<br />[&lt;Struct&gt;]
+type int = int32<br /><em>&lt;summary&gt;An abbreviation for the CLI type &lt;see cref=&quot;T:System.Int32&quot; /&gt;.&lt;/summary&gt;<br />&lt;category&gt;Basic Types&lt;/category&gt;</em><br /><br />--------------------<br />type int&lt;&#39;Measure&gt; =
+  int<br /><em>&lt;summary&gt;The type of 32-bit signed integer numbers, annotated with a unit of measure. The unit
+ of measure is erased in compiled code and when values of this type
+ are analyzed using reflection. The type is representationally equivalent to
+ &lt;see cref=&quot;T:System.Int32&quot; /&gt;.&lt;/summary&gt;<br />&lt;category&gt;Basic Types with Units of Measure&lt;/category&gt;</em></div>
+<div class="fsdocs-tip" id="fs42">TiingoObs.AdjClose: decimal</div>
+<div class="fsdocs-tip" id="fs43">TiingoObs.AdjHigh: decimal</div>
+<div class="fsdocs-tip" id="fs44">TiingoObs.AdjLow: decimal</div>
+<div class="fsdocs-tip" id="fs45">TiingoObs.AdjOpen: decimal</div>
+<div class="fsdocs-tip" id="fs46">TiingoObs.AdjVolume: decimal</div>
+<div class="fsdocs-tip" id="fs47">TiingoObs.DivCash: decimal</div>
+<div class="fsdocs-tip" id="fs48">TiingoObs.SplitFactor: decimal</div>
+<div class="fsdocs-tip" id="fs49">val request: symbol: string -&gt; TiingoRequest<br /><em>&lt;summary&gt;Constructs a Tiingo request. By default is to get the past year of data.&lt;/summary&gt;<br />&#160;&lt;param name=&quot;symbol&quot;&gt;The ticker symbol such as &quot;AAPL&quot;,&quot;MSFT&quot; etc.&lt;/param&gt;</em></div>
+<div class="fsdocs-tip" id="fs50">val symbol: string</div>
+<div class="fsdocs-tip" id="fs51">property DateTime.Now: DateTime with get<br /><em>&lt;summary&gt;Gets a &lt;see cref=&quot;T:System.DateTime&quot; /&gt; object that is set to the current date and time on this computer, expressed as the local time.&lt;/summary&gt;<br />&lt;returns&gt;An object whose value is the current local date and time.&lt;/returns&gt;</em></div>
+<div class="fsdocs-tip" id="fs52">DateTime.AddYears(value: int) : DateTime</div>
+<div class="fsdocs-tip" id="fs53">val startOn: startOn: DateTime -&gt; request: TiingoRequest -&gt; TiingoRequest<br /><em>&lt;summary&gt;Sets the Tiingo request start date.&lt;/summary&gt;<br />&#160;&lt;param name=&quot;startOn&quot;&gt;Request start date&lt;/param&gt;<br />&#160;&lt;param name=&quot;request&quot;&gt;The Tiingo request to update.&lt;/param&gt;</em></div>
+<div class="fsdocs-tip" id="fs54">val startOn: DateTime</div>
+<div class="fsdocs-tip" id="fs55">val request: TiingoRequest</div>
+<div class="fsdocs-tip" id="fs56">val endOn: endOn: DateTime -&gt; request: TiingoRequest -&gt; TiingoRequest<br /><em>&lt;summary&gt;Sets the Tiingo request end date.&lt;/summary&gt;<br />&#160;&lt;param name=&quot;endOn&quot;&gt;Request start date&lt;/param&gt;<br />&#160;&lt;param name=&quot;request&quot;&gt;The Tiingo request to update.&lt;/param&gt;</em></div>
+<div class="fsdocs-tip" id="fs57">val endOn: DateTime</div>
+<div class="fsdocs-tip" id="fs58">val private cache: Runtime.Caching.ICache&lt;string,string&gt;</div>
+<div class="fsdocs-tip" id="fs59">Multiple items<br />namespace FSharp.Data.Runtime<br /><br />--------------------<br />namespace System.Runtime</div>
+<div class="fsdocs-tip" id="fs60">module Caching
+
+from FSharp.Data.Runtime<br /><em>&lt;summary&gt;
+ Implements caching using in-memory and local file system 
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs61">val createInMemoryCache: expiration: TimeSpan -&gt; Runtime.Caching.ICache&lt;&#39;TKey_,&#39;TValue&gt;<br /><em>&lt;summary&gt;
+ Creates a cache that uses in-memory collection
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs62">Multiple items<br />[&lt;Struct&gt;]
+type TimeSpan =
+  new: hours: int * minutes: int * seconds: int -&gt; unit + 3 overloads
+  member Add: ts: TimeSpan -&gt; TimeSpan
+  member CompareTo: value: obj -&gt; int + 1 overload
+  member Divide: divisor: float -&gt; TimeSpan + 1 overload
+  member Duration: unit -&gt; TimeSpan
+  member Equals: value: obj -&gt; bool + 2 overloads
+  member GetHashCode: unit -&gt; int
+  member Multiply: factor: float -&gt; TimeSpan
+  member Negate: unit -&gt; TimeSpan
+  member Subtract: ts: TimeSpan -&gt; TimeSpan
+  ...<br /><em>&lt;summary&gt;Represents a time interval.&lt;/summary&gt;</em><br /><br />--------------------<br />TimeSpan ()<br />TimeSpan(ticks: int64) : TimeSpan<br />TimeSpan(hours: int, minutes: int, seconds: int) : TimeSpan<br />TimeSpan(days: int, hours: int, minutes: int, seconds: int) : TimeSpan<br />TimeSpan(days: int, hours: int, minutes: int, seconds: int, milliseconds: int) : TimeSpan</div>
+<div class="fsdocs-tip" id="fs63">val get: request: TiingoRequest -&gt; TiingoObs[]<br /><em>&lt;summary&gt;Downloads Tiingo data.&lt;/summary&gt;<br />&#160;&lt;param name=&quot;request&quot;&gt;The Tiingo request to download.&lt;/param&gt;</em></div>
+<div class="fsdocs-tip" id="fs64">val dtStr: (DateTime -&gt; string)</div>
+<div class="fsdocs-tip" id="fs65">val x: DateTime</div>
+<div class="fsdocs-tip" id="fs66">property DateTime.Date: DateTime with get<br /><em>&lt;summary&gt;Gets the date component of this instance.&lt;/summary&gt;<br />&lt;returns&gt;A new object with the same date as this instance, and the time value set to 12:00:00 midnight (00:00:00).&lt;/returns&gt;</em></div>
+<div class="fsdocs-tip" id="fs67">DateTime.ToString() : string<br />DateTime.ToString(format: string) : string<br />DateTime.ToString(provider: IFormatProvider) : string<br />DateTime.ToString(format: string, provider: IFormatProvider) : string</div>
+<div class="fsdocs-tip" id="fs68">val key: string</div>
+<div class="fsdocs-tip" id="fs69">abstract Runtime.Caching.ICache.TryRetrieve: key: &#39;TKey * ?extendCacheExpiration: bool -&gt; &#39;TValue option</div>
+<div class="fsdocs-tip" id="fs70">union case Option.Some: Value: &#39;T -&gt; Option&lt;&#39;T&gt;<br /><em>&lt;summary&gt;The representation of &quot;Value of type &#39;T&quot;&lt;/summary&gt;<br />&lt;param name=&quot;Value&quot;&gt;The input value.&lt;/param&gt;<br />&lt;returns&gt;An option representing the value.&lt;/returns&gt;</em></div>
+<div class="fsdocs-tip" id="fs71">val res: string</div>
+<div class="fsdocs-tip" id="fs72">union case Option.None: Option&lt;&#39;T&gt;<br /><em>&lt;summary&gt;The representation of &quot;No value&quot;&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs73">val result: string</div>
+<div class="fsdocs-tip" id="fs74">type Http =
+  static member AsyncRequest: url: string * ?query: (string * string) list * ?headers: seq&lt;string * string&gt; * ?httpMethod: string * ?body: HttpRequestBody * ?cookies: seq&lt;string * string&gt; * ?cookieContainer: CookieContainer * ?silentHttpErrors: bool * ?silentCookieErrors: bool * ?responseEncodingOverride: string * ?customizeHttpRequest: (HttpWebRequest -&gt; HttpWebRequest) * ?timeout: int -&gt; Async&lt;HttpResponse&gt;
+  static member AsyncRequestStream: url: string * ?query: (string * string) list * ?headers: seq&lt;string * string&gt; * ?httpMethod: string * ?body: HttpRequestBody * ?cookies: seq&lt;string * string&gt; * ?cookieContainer: CookieContainer * ?silentHttpErrors: bool * ?silentCookieErrors: bool * ?customizeHttpRequest: (HttpWebRequest -&gt; HttpWebRequest) * ?timeout: int -&gt; Async&lt;HttpResponseWithStream&gt;
+  static member AsyncRequestString: url: string * ?query: (string * string) list * ?headers: seq&lt;string * string&gt; * ?httpMethod: string * ?body: HttpRequestBody * ?cookies: seq&lt;string * string&gt; * ?cookieContainer: CookieContainer * ?silentHttpErrors: bool * ?silentCookieErrors: bool * ?responseEncodingOverride: string * ?customizeHttpRequest: (HttpWebRequest -&gt; HttpWebRequest) * ?timeout: int -&gt; Async&lt;string&gt;
+  static member Request: url: string * ?query: (string * string) list * ?headers: seq&lt;string * string&gt; * ?httpMethod: string * ?body: HttpRequestBody * ?cookies: seq&lt;string * string&gt; * ?cookieContainer: CookieContainer * ?silentHttpErrors: bool * ?silentCookieErrors: bool * ?responseEncodingOverride: string * ?customizeHttpRequest: (HttpWebRequest -&gt; HttpWebRequest) * ?timeout: int -&gt; HttpResponse
+  static member RequestStream: url: string * ?query: (string * string) list * ?headers: seq&lt;string * string&gt; * ?httpMethod: string * ?body: HttpRequestBody * ?cookies: seq&lt;string * string&gt; * ?cookieContainer: CookieContainer * ?silentHttpErrors: bool * ?silentCookieErrors: bool * ?customizeHttpRequest: (HttpWebRequest -&gt; HttpWebRequest) * ?timeout: int -&gt; HttpResponseWithStream
+  static member RequestString: url: string * ?query: (string * string) list * ?headers: seq&lt;string * string&gt; * ?httpMethod: string * ?body: HttpRequestBody * ?cookies: seq&lt;string * string&gt; * ?cookieContainer: CookieContainer * ?silentHttpErrors: bool * ?silentCookieErrors: bool * ?responseEncodingOverride: string * ?customizeHttpRequest: (HttpWebRequest -&gt; HttpWebRequest) * ?timeout: int -&gt; string<br /><em>&lt;summary&gt;
+ Utilities for working with network via HTTP. Includes methods for downloading
+ resources with specified headers, query parameters and HTTP body
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs75">static member Http.RequestString: url: string * ?query: (string * string) list * ?headers: seq&lt;string * string&gt; * ?httpMethod: string * ?body: HttpRequestBody * ?cookies: seq&lt;string * string&gt; * ?cookieContainer: Net.CookieContainer * ?silentHttpErrors: bool * ?silentCookieErrors: bool * ?responseEncodingOverride: string * ?customizeHttpRequest: (Net.HttpWebRequest -&gt; Net.HttpWebRequest) * ?timeout: int -&gt; string</div>
+<div class="fsdocs-tip" id="fs76">val query: Linq.QueryBuilder<br /><em>&lt;summary&gt;Builds a query using query syntax and operators.&lt;/summary&gt;<br />&lt;example id=&quot;query-1&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let findEvensAndSortAndDouble(xs: System.Linq.IQueryable&amp;lt;int&amp;gt;) =
+     query {
+         for x in xs do
+         where (x % 2 = 0)
+         sortBy x
+         select (x+x)
+      }
+
+ let data = [1; 2; 6; 7; 3; 6; 2; 1]
+
+ findEvensAndSortAndDouble (data.AsQueryable()) |&amp;gt; Seq.toList
+ &lt;/code&gt;
+ Evaluates to &lt;c&gt;[4; 4; 12; 12]&lt;/c&gt;.
+ &lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs77">module Secrets
+
+from Common</div>
+<div class="fsdocs-tip" id="fs78">module HttpRequestHeaders
+
+from FSharp.Data<br /><em>&lt;summary&gt;
+ Headers that can be sent in an HTTP request
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs79">val Accept: contentType: string -&gt; string * string<br /><em>&lt;summary&gt;
+ Content-Types that are acceptable for the response
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs80">module HttpContentTypes
+
+from FSharp.Data<br /><em>&lt;summary&gt;
+ Constants for common HTTP content types
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs81">[&lt;Literal&gt;]
+val Csv: string = &quot;text/csv&quot;<br /><em>&lt;summary&gt;
+ text/csv
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs82">abstract Runtime.Caching.ICache.Set: key: &#39;TKey * value: &#39;TValue -&gt; unit</div>
+<div class="fsdocs-tip" id="fs83">CsvProvider&lt;...&gt;.Parse(text: string) : CsvProvider&lt;...&gt;<br /><em>Parses the specified CSV string</em></div>
+<div class="fsdocs-tip" id="fs84">val parsed: CsvProvider&lt;...&gt;</div>
+<div class="fsdocs-tip" id="fs85">property Runtime.CsvFile.Rows: seq&lt;CsvProvider&lt;...&gt;.Row&gt; with get<br /><em>&lt;summary&gt;
+ The rows with data
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs86">module Seq
+
+from Microsoft.FSharp.Collections<br /><em>&lt;summary&gt;Contains operations for working with values of type &lt;see cref=&quot;T:Microsoft.FSharp.Collections.seq`1&quot; /&gt;.&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs87">val map: mapping: (&#39;T -&gt; &#39;U) -&gt; source: seq&lt;&#39;T&gt; -&gt; seq&lt;&#39;U&gt;<br /><em>&lt;summary&gt;Builds a new collection whose elements are the results of applying the given function
+ to each of the elements of the collection.  The given function will be applied
+ as elements are demanded using the &lt;c&gt;MoveNext&lt;/c&gt; method on enumerators retrieved from the
+ object.&lt;/summary&gt;<br />&lt;remarks&gt;The returned sequence may be passed between threads safely. However,
+ individual IEnumerator values generated from the returned sequence should not be accessed concurrently.&lt;/remarks&gt;<br />&lt;param name=&quot;mapping&quot;&gt;A function to transform items from the input sequence.&lt;/param&gt;<br />&lt;param name=&quot;source&quot;&gt;The input sequence.&lt;/param&gt;<br />&lt;returns&gt;The result sequence.&lt;/returns&gt;<br />&lt;exception cref=&quot;T:System.ArgumentNullException&quot;&gt;Thrown when the input sequence is null.&lt;/exception&gt;<br />&lt;example id=&quot;item-1&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let inputs = [&quot;a&quot;; &quot;bbb&quot;; &quot;cc&quot;]
+
+ inputs |&amp;gt; Seq.map (fun x -&amp;gt; x.Length)
+ &lt;/code&gt;
+ Evaluates to a sequence yielding the same results as &lt;c&gt;seq { 1; 3; 2 }&lt;/c&gt;&lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs88">val row: CsvProvider&lt;...&gt;.Row</div>
+<div class="fsdocs-tip" id="fs89">property CsvProvider&lt;...&gt;.Row.Date: DateTime with get</div>
+<div class="fsdocs-tip" id="fs90">property CsvProvider&lt;...&gt;.Row.Close: decimal with get</div>
+<div class="fsdocs-tip" id="fs91">property CsvProvider&lt;...&gt;.Row.High: decimal with get</div>
+<div class="fsdocs-tip" id="fs92">property CsvProvider&lt;...&gt;.Row.Low: decimal with get</div>
+<div class="fsdocs-tip" id="fs93">property CsvProvider&lt;...&gt;.Row.Open: decimal with get</div>
+<div class="fsdocs-tip" id="fs94">property CsvProvider&lt;...&gt;.Row.Volume: int with get</div>
+<div class="fsdocs-tip" id="fs95">property CsvProvider&lt;...&gt;.Row.AdjClose: decimal with get</div>
+<div class="fsdocs-tip" id="fs96">property CsvProvider&lt;...&gt;.Row.AdjHigh: decimal with get</div>
+<div class="fsdocs-tip" id="fs97">property CsvProvider&lt;...&gt;.Row.AdjLow: decimal with get</div>
+<div class="fsdocs-tip" id="fs98">property CsvProvider&lt;...&gt;.Row.AdjOpen: decimal with get</div>
+<div class="fsdocs-tip" id="fs99">property CsvProvider&lt;...&gt;.Row.AdjVolume: decimal with get</div>
+<div class="fsdocs-tip" id="fs100">property CsvProvider&lt;...&gt;.Row.DivCash: decimal with get</div>
+<div class="fsdocs-tip" id="fs101">property CsvProvider&lt;...&gt;.Row.SplitFactor: decimal with get</div>
+<div class="fsdocs-tip" id="fs102">val toArray: source: seq&lt;&#39;T&gt; -&gt; &#39;T[]<br /><em>&lt;summary&gt;Builds an array from the given collection.&lt;/summary&gt;<br />&lt;param name=&quot;source&quot;&gt;The input sequence.&lt;/param&gt;<br />&lt;returns&gt;The result array.&lt;/returns&gt;<br />&lt;exception cref=&quot;T:System.ArgumentNullException&quot;&gt;Thrown when the input sequence is null.&lt;/exception&gt;<br />&lt;example id=&quot;toarray-1&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let inputs = seq { 1; 2; 5 }
+
+ inputs |&amp;gt; Seq.toArray
+ &lt;/code&gt;
+ Evaluates to &lt;c&gt;[| 1; 2; 5 |]&lt;/c&gt;.
+ &lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs103">Multiple items<br />type private Download<br /><br />--------------------<br />private new: symbol: string * ?startOn: DateTime * ?endOn: DateTime -&gt; Download</div>
+<div class="fsdocs-tip" id="fs104">val startOn: DateTime option</div>
+<div class="fsdocs-tip" id="fs105">val endOn: DateTime option</div>
+<div class="fsdocs-tip" id="fs106">val defaultArg: arg: &#39;T option -&gt; defaultValue: &#39;T -&gt; &#39;T<br /><em>&lt;summary&gt;Used to specify a default value for an optional argument in the implementation of a function&lt;/summary&gt;<br />&lt;param name=&quot;arg&quot;&gt;An option representing the argument.&lt;/param&gt;<br />&lt;param name=&quot;defaultValue&quot;&gt;The default value of the argument.&lt;/param&gt;<br />&lt;returns&gt;The argument value. If it is None, the defaultValue is returned.&lt;/returns&gt;<br />&lt;example id=&quot;defaultArg-example&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ type Vector(x: double, y: double, ?z: double) = 
+     let z = defaultArg z 0.0
+     member this.X = x
+     member this.Y = y
+     member this.Z = z
+ 
+ let v1 = Vector(1.0, 2.0)
+ v1.Z  // Evaluates to 0.
+ let v2 = Vector(1.0, 2.0, 3.0)
+ v2.Z  // Evaluates to 3.0
+ &lt;/code&gt;&lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs107">val data: TiingoObs[]</div>
+<div class="fsdocs-tip" id="fs108">val this: Download</div>
+<div class="fsdocs-tip" id="fs109">val private getFromCacheDirectory: cacheDirectory: string -&gt; request: TiingoRequest -&gt; CsvProvider&lt;...&gt;</div>
+<div class="fsdocs-tip" id="fs110">val cacheDirectory: string</div>
+<div class="fsdocs-tip" id="fs111">val cacheFile: string</div>
+<div class="fsdocs-tip" id="fs112">File.WriteAllText(path: string, contents: string) : unit<br />File.WriteAllText(path: string, contents: string, encoding: Text.Encoding) : unit</div>
+<div class="fsdocs-tip" id="fs113">val private returnHelper: symbol: string -&gt; xs: seq&lt;TiingoObs&gt; -&gt; ReturnObs[]</div>
+<div class="fsdocs-tip" id="fs114">val xs: seq&lt;TiingoObs&gt;</div>
+<div class="fsdocs-tip" id="fs115">Multiple items<br />val seq: sequence: seq&lt;&#39;T&gt; -&gt; seq&lt;&#39;T&gt;<br /><em>&lt;summary&gt;Builds a sequence using sequence expression syntax&lt;/summary&gt;<br />&lt;param name=&quot;sequence&quot;&gt;The input sequence.&lt;/param&gt;<br />&lt;returns&gt;The result sequence.&lt;/returns&gt;<br />&lt;example id=&quot;seq-cast-example&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ seq { for i in 0..10 do yield (i, i*i) }
+ &lt;/code&gt;&lt;/example&gt;</em><br /><br />--------------------<br />type seq&lt;&#39;T&gt; = Collections.Generic.IEnumerable&lt;&#39;T&gt;<br /><em>&lt;summary&gt;An abbreviation for the CLI type &lt;see cref=&quot;T:System.Collections.Generic.IEnumerable`1&quot; /&gt;&lt;/summary&gt;<br />&lt;remarks&gt;
+  See the &lt;see cref=&quot;T:Microsoft.FSharp.Collections.SeqModule&quot; /&gt; module for further operations related to sequences.
+
+  See also &lt;a href=&quot;https://docs.microsoft.com/dotnet/fsharp/language-reference/sequences&quot;&gt;F# Language Guide - Sequences&lt;/a&gt;.
+&lt;/remarks&gt;</em></div>
+<div class="fsdocs-tip" id="fs116">val sortBy: projection: (&#39;T -&gt; &#39;Key) -&gt; source: seq&lt;&#39;T&gt; -&gt; seq&lt;&#39;T&gt; (requires comparison)<br /><em>&lt;summary&gt;Applies a key-generating function to each element of a sequence and yield a sequence ordered
+ by keys.  The keys are compared using generic comparison as implemented by &lt;see cref=&quot;M:Microsoft.FSharp.Core.Operators.compare&quot; /&gt;.&lt;/summary&gt;<br />&lt;remarks&gt;This function returns a sequence that digests the whole initial sequence as soon as
+ that sequence is iterated. As a result this function should not be used with
+ large or infinite sequences.
+
+ The function makes no assumption on the ordering of the original
+ sequence and uses a stable sort, that is the original order of equal elements is preserved.&lt;/remarks&gt;<br />&lt;param name=&quot;projection&quot;&gt;A function to transform items of the input sequence into comparable keys.&lt;/param&gt;<br />&lt;param name=&quot;source&quot;&gt;The input sequence.&lt;/param&gt;<br />&lt;returns&gt;The result sequence.&lt;/returns&gt;<br />&lt;exception cref=&quot;T:System.ArgumentNullException&quot;&gt;Thrown when the input sequence is null.&lt;/exception&gt;<br />&lt;example id=&quot;sortby-1&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let input = [ &quot;a&quot;; &quot;bbb&quot;; &quot;cccc&quot;; &quot;dd&quot; ]
+
+ input |&amp;gt; Seq.sortBy (fun s -&amp;gt; s.Length)
+ &lt;/code&gt;
+ Evaluates to a sequence yielding the same results as &lt;c&gt;seq { &quot;a&quot;; &quot;dd&quot;; &quot;bbb&quot;; &quot;cccc&quot; }&lt;/c&gt;.
+ &lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs117">val x: TiingoObs</div>
+<div class="fsdocs-tip" id="fs118">val pairwise: source: seq&lt;&#39;T&gt; -&gt; seq&lt;&#39;T * &#39;T&gt;<br /><em>&lt;summary&gt;Returns a sequence of each element in the input sequence and its predecessor, with the
+ exception of the first element which is only returned as the predecessor of the second element.&lt;/summary&gt;<br />&lt;param name=&quot;source&quot;&gt;The input sequence.&lt;/param&gt;<br />&lt;returns&gt;The result sequence.&lt;/returns&gt;<br />&lt;exception cref=&quot;T:System.ArgumentNullException&quot;&gt;Thrown when the input sequence is null.&lt;/exception&gt;<br />&lt;example id=&quot;pairwise-1&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let inputs = seq { 1; 2; 3; 4 }
+
+ inputs |&amp;gt; Seq.pairwise
+ &lt;/code&gt;
+ Evaluates to a sequence yielding the same results as &lt;c&gt;seq { (1, 2); (2, 3); (3, 4) }&lt;/c&gt;.
+ &lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs119">val yesterday: TiingoObs</div>
+<div class="fsdocs-tip" id="fs120">val today: TiingoObs</div>
+<div class="fsdocs-tip" id="fs121">val getReturns: request: TiingoRequest -&gt; ReturnObs[]</div>
+<div class="fsdocs-tip" id="fs122">val private getInternetFileCache: request: TiingoRequest -&gt; CsvProvider&lt;...&gt;</div>
+<div class="fsdocs-tip" id="fs123">val cache: Runtime.Caching.ICache&lt;string,string&gt;</div>
+<div class="fsdocs-tip" id="fs124">val createInternetFileCache: prefix: string -&gt; expiration: TimeSpan -&gt; Runtime.Caching.ICache&lt;string,string&gt;<br /><em>&lt;summary&gt;
+ Creates a cache that stores data in a local file system
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs125">TimeSpan.FromDays(value: float) : TimeSpan</div>
+<div class="fsdocs-tip" id="fs126">Object.ToString() : string</div>
+<div class="fsdocs-tip" id="fs127">namespace System.IO.Compression</div>
+<div class="fsdocs-tip" id="fs128">type private FF3Csv = CsvProvider&lt;...&gt;</div>
+<div class="fsdocs-tip" id="fs129">type FF3Obs =
+  {
+    Date: DateTime
+    MktRf: float
+    Smb: float
+    Hml: float
+    Rf: float
+    Frequency: Frequency
+  }</div>
+<div class="fsdocs-tip" id="fs130">FF3Obs.Date: DateTime</div>
+<div class="fsdocs-tip" id="fs131">FF3Obs.MktRf: float</div>
+<div class="fsdocs-tip" id="fs132">FF3Obs.Smb: float</div>
+<div class="fsdocs-tip" id="fs133">FF3Obs.Hml: float</div>
+<div class="fsdocs-tip" id="fs134">FF3Obs.Rf: float</div>
+<div class="fsdocs-tip" id="fs135">Multiple items<br />FF3Obs.Frequency: Frequency<br /><br />--------------------<br />type Frequency =
+  | Daily
+  | Monthly</div>
+<div class="fsdocs-tip" id="fs136">type private FF5Csv = CsvProvider&lt;...&gt;</div>
+<div class="fsdocs-tip" id="fs137">type FF5Obs =
+  {
+    Date: DateTime
+    MktRf: float
+    Smb: float
+    Hml: float
+    Rmw: float
+    Cma: float
+    Rf: float
+    Frequency: Frequency
+  }</div>
+<div class="fsdocs-tip" id="fs138">FF5Obs.Date: DateTime</div>
+<div class="fsdocs-tip" id="fs139">FF5Obs.MktRf: float</div>
+<div class="fsdocs-tip" id="fs140">FF5Obs.Smb: float</div>
+<div class="fsdocs-tip" id="fs141">FF5Obs.Hml: float</div>
+<div class="fsdocs-tip" id="fs142">FF5Obs.Rmw: float</div>
+<div class="fsdocs-tip" id="fs143">FF5Obs.Cma: float</div>
+<div class="fsdocs-tip" id="fs144">FF5Obs.Rf: float</div>
+<div class="fsdocs-tip" id="fs145">Multiple items<br />FF5Obs.Frequency: Frequency<br /><br />--------------------<br />type Frequency =
+  | Daily
+  | Monthly</div>
+<div class="fsdocs-tip" id="fs146">val private frenchDay: x: string -&gt; DateTime</div>
+<div class="fsdocs-tip" id="fs147">val x: string</div>
+<div class="fsdocs-tip" id="fs148">DateTime.ParseExact(s: string, format: string, provider: IFormatProvider) : DateTime<br />DateTime.ParseExact(s: string, formats: string[], provider: IFormatProvider, style: Globalization.DateTimeStyles) : DateTime<br />DateTime.ParseExact(s: string, format: string, provider: IFormatProvider, style: Globalization.DateTimeStyles) : DateTime<br />DateTime.ParseExact(s: ReadOnlySpan&lt;char&gt;, formats: string[], provider: IFormatProvider, ?style: Globalization.DateTimeStyles) : DateTime<br />DateTime.ParseExact(s: ReadOnlySpan&lt;char&gt;, format: ReadOnlySpan&lt;char&gt;, provider: IFormatProvider, ?style: Globalization.DateTimeStyles) : DateTime</div>
+<div class="fsdocs-tip" id="fs149">namespace System.Globalization</div>
+<div class="fsdocs-tip" id="fs150">Multiple items<br />type CultureInfo =
+  interface ICloneable
+  interface IFormatProvider
+  new: culture: int -&gt; unit + 3 overloads
+  member ClearCachedData: unit -&gt; unit
+  member Clone: unit -&gt; obj
+  member Equals: value: obj -&gt; bool
+  member GetConsoleFallbackUICulture: unit -&gt; CultureInfo
+  member GetFormat: formatType: Type -&gt; obj
+  member GetHashCode: unit -&gt; int
+  member ToString: unit -&gt; string
+  ...<br /><em>&lt;summary&gt;Provides information about a specific culture (called a locale for unmanaged code development). The information includes the names for the culture, the writing system, the calendar used, the sort order of strings, and formatting for dates and numbers.&lt;/summary&gt;</em><br /><br />--------------------<br />Globalization.CultureInfo(culture: int) : Globalization.CultureInfo<br />Globalization.CultureInfo(name: string) : Globalization.CultureInfo<br />Globalization.CultureInfo(culture: int, useUserOverride: bool) : Globalization.CultureInfo<br />Globalization.CultureInfo(name: string, useUserOverride: bool) : Globalization.CultureInfo</div>
+<div class="fsdocs-tip" id="fs151">property Globalization.CultureInfo.InvariantCulture: Globalization.CultureInfo with get<br /><em>&lt;summary&gt;Gets the &lt;see cref=&quot;T:System.Globalization.CultureInfo&quot; /&gt; object that is culture-independent (invariant).&lt;/summary&gt;<br />&lt;returns&gt;The object that is culture-independent (invariant).&lt;/returns&gt;</em></div>
+<div class="fsdocs-tip" id="fs152">val private frenchMonth: x: string -&gt; DateTime</div>
+<div class="fsdocs-tip" id="fs153">val today: DateTime</div>
+<div class="fsdocs-tip" id="fs154">val nextMonth: DateTime</div>
+<div class="fsdocs-tip" id="fs155">DateTime.AddMonths(months: int) : DateTime</div>
+<div class="fsdocs-tip" id="fs156">val eom: DateTime</div>
+<div class="fsdocs-tip" id="fs157">property DateTime.Year: int with get<br /><em>&lt;summary&gt;Gets the year component of the date represented by this instance.&lt;/summary&gt;<br />&lt;returns&gt;The year, between 1 and 9999.&lt;/returns&gt;</em></div>
+<div class="fsdocs-tip" id="fs158">property DateTime.Month: int with get<br /><em>&lt;summary&gt;Gets the month component of the date represented by this instance.&lt;/summary&gt;<br />&lt;returns&gt;The month component, expressed as a value between 1 and 12.&lt;/returns&gt;</em></div>
+<div class="fsdocs-tip" id="fs159">val private getData: dataset: string -&gt; string</div>
+<div class="fsdocs-tip" id="fs160">val dataset: string</div>
+<div class="fsdocs-tip" id="fs161">val data: string</div>
+<div class="fsdocs-tip" id="fs162">val urlString: string</div>
+<div class="fsdocs-tip" id="fs163">val request: HttpResponseWithStream</div>
+<div class="fsdocs-tip" id="fs164">static member Http.RequestStream: url: string * ?query: (string * string) list * ?headers: seq&lt;string * string&gt; * ?httpMethod: string * ?body: HttpRequestBody * ?cookies: seq&lt;string * string&gt; * ?cookieContainer: Net.CookieContainer * ?silentHttpErrors: bool * ?silentCookieErrors: bool * ?customizeHttpRequest: (Net.HttpWebRequest -&gt; Net.HttpWebRequest) * ?timeout: int -&gt; HttpResponseWithStream</div>
+<div class="fsdocs-tip" id="fs165">[&lt;Literal&gt;]
+val Any: string = &quot;*/*&quot;<br /><em>&lt;summary&gt;
+ */*
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs166">val archive: ZipArchive</div>
+<div class="fsdocs-tip" id="fs167">Multiple items<br />type ZipArchive =
+  interface IDisposable
+  new: stream: Stream -&gt; unit + 3 overloads
+  member CreateEntry: entryName: string -&gt; ZipArchiveEntry + 1 overload
+  member Dispose: unit -&gt; unit
+  member GetEntry: entryName: string -&gt; ZipArchiveEntry
+  member Entries: ReadOnlyCollection&lt;ZipArchiveEntry&gt;
+  member Mode: ZipArchiveMode<br /><em>&lt;summary&gt;Represents a package of compressed files in the zip archive format.&lt;/summary&gt;</em><br /><br />--------------------<br />ZipArchive(stream: Stream) : ZipArchive<br />ZipArchive(stream: Stream, mode: ZipArchiveMode) : ZipArchive<br />ZipArchive(stream: Stream, mode: ZipArchiveMode, leaveOpen: bool) : ZipArchive<br />ZipArchive(stream: Stream, mode: ZipArchiveMode, leaveOpen: bool, entryNameEncoding: Text.Encoding) : ZipArchive</div>
+<div class="fsdocs-tip" id="fs168">HttpResponseWithStream.ResponseStream: Stream</div>
+<div class="fsdocs-tip" id="fs169">[&lt;Struct&gt;]
+type ZipArchiveMode =
+  | Read = 0
+  | Create = 1
+  | Update = 2<br /><em>&lt;summary&gt;Specifies values for interacting with zip archive entries.&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs170">field ZipArchiveMode.Read: ZipArchiveMode = 0<br /><em>&lt;summary&gt;Only reading archive entries is permitted.&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs171">val file: ZipArchiveEntry</div>
+<div class="fsdocs-tip" id="fs172">ZipArchive.GetEntry(entryName: string) : ZipArchiveEntry</div>
+<div class="fsdocs-tip" id="fs173">String.Replace(oldValue: string, newValue: string) : string<br />String.Replace(oldChar: char, newChar: char) : string<br />String.Replace(oldValue: string, newValue: string, comparisonType: StringComparison) : string<br />String.Replace(oldValue: string, newValue: string, ignoreCase: bool, culture: Globalization.CultureInfo) : string</div>
+<div class="fsdocs-tip" id="fs174">val reader: StreamReader</div>
+<div class="fsdocs-tip" id="fs175">Multiple items<br />type StreamReader =
+  inherit TextReader
+  new: stream: Stream -&gt; unit + 12 overloads
+  member Close: unit -&gt; unit
+  member DiscardBufferedData: unit -&gt; unit
+  member Peek: unit -&gt; int
+  member Read: unit -&gt; int + 2 overloads
+  member ReadAsync: buffer: char[] * index: int * count: int -&gt; Task&lt;int&gt; + 1 overload
+  member ReadBlock: buffer: char[] * index: int * count: int -&gt; int + 1 overload
+  member ReadBlockAsync: buffer: char[] * index: int * count: int -&gt; Task&lt;int&gt; + 1 overload
+  member ReadLine: unit -&gt; string
+  ...<br /><em>&lt;summary&gt;Implements a &lt;see cref=&quot;T:System.IO.TextReader&quot; /&gt; that reads characters from a byte stream in a particular encoding.&lt;/summary&gt;</em><br /><br />--------------------<br />StreamReader(stream: Stream) : StreamReader<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />StreamReader(path: string) : StreamReader<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />StreamReader(stream: Stream, detectEncodingFromByteOrderMarks: bool) : StreamReader<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />StreamReader(stream: Stream, encoding: Text.Encoding) : StreamReader<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />StreamReader(path: string, options: FileStreamOptions) : StreamReader<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />StreamReader(path: string, detectEncodingFromByteOrderMarks: bool) : StreamReader<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />StreamReader(path: string, encoding: Text.Encoding) : StreamReader<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />StreamReader(stream: Stream, encoding: Text.Encoding, detectEncodingFromByteOrderMarks: bool) : StreamReader<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />StreamReader(path: string, encoding: Text.Encoding, detectEncodingFromByteOrderMarks: bool) : StreamReader<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />StreamReader(stream: Stream, encoding: Text.Encoding, detectEncodingFromByteOrderMarks: bool, bufferSize: int) : StreamReader<br />&#160;&#160;&#160;<em>(+0 other overloads)</em></div>
+<div class="fsdocs-tip" id="fs176">ZipArchiveEntry.Open() : Stream</div>
+<div class="fsdocs-tip" id="fs177">StreamReader.ReadToEnd() : string</div>
+<div class="fsdocs-tip" id="fs178">val getFF3: frequency: Frequency -&gt; FF3Obs[]</div>
+<div class="fsdocs-tip" id="fs179">val frequency: Frequency</div>
+<div class="fsdocs-tip" id="fs180">val dateParser: (string -&gt; DateTime)</div>
+<div class="fsdocs-tip" id="fs181">val data: StringReader</div>
+<div class="fsdocs-tip" id="fs182">Multiple items<br />type StringReader =
+  inherit TextReader
+  new: s: string -&gt; unit
+  member Close: unit -&gt; unit
+  member Peek: unit -&gt; int
+  member Read: unit -&gt; int + 2 overloads
+  member ReadAsync: buffer: char[] * index: int * count: int -&gt; Task&lt;int&gt; + 1 overload
+  member ReadBlock: buffer: Span&lt;char&gt; -&gt; int
+  member ReadBlockAsync: buffer: char[] * index: int * count: int -&gt; Task&lt;int&gt; + 1 overload
+  member ReadLine: unit -&gt; string
+  member ReadLineAsync: unit -&gt; Task&lt;string&gt;
+  ...<br /><em>&lt;summary&gt;Implements a &lt;see cref=&quot;T:System.IO.TextReader&quot; /&gt; that reads from a string.&lt;/summary&gt;</em><br /><br />--------------------<br />StringReader(s: string) : StringReader</div>
+<div class="fsdocs-tip" id="fs183">StringReader.Peek() : int</div>
+<div class="fsdocs-tip" id="fs184">StringReader.ReadLine() : string</div>
+<div class="fsdocs-tip" id="fs185">type Array =
+  interface ICollection
+  interface IEnumerable
+  interface IList
+  interface IStructuralComparable
+  interface IStructuralEquatable
+  interface ICloneable
+  member Clone: unit -&gt; obj
+  member CopyTo: array: Array * index: int -&gt; unit + 1 overload
+  member GetEnumerator: unit -&gt; IEnumerator
+  member GetLength: dimension: int -&gt; int
+  ...<br /><em>&lt;summary&gt;Provides methods for creating, manipulating, searching, and sorting arrays, thereby serving as the base class for all arrays in the common language runtime.&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs186">val skipWhile: predicate: (&#39;T -&gt; bool) -&gt; array: &#39;T[] -&gt; &#39;T[]<br /><em>&lt;summary&gt;Bypasses elements in an array while the given predicate returns True, and then returns
+ the remaining elements in a new array.&lt;/summary&gt;<br />&lt;param name=&quot;predicate&quot;&gt;A function that evaluates an element of the array to a boolean value.&lt;/param&gt;<br />&lt;param name=&quot;array&quot;&gt;The input array.&lt;/param&gt;<br />&lt;returns&gt;The created sub array.&lt;/returns&gt;<br />&lt;exception cref=&quot;T:System.ArgumentNullException&quot;&gt;Thrown when the input array is null.&lt;/exception&gt;<br />&lt;example id=&quot;skipwhile-1&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let inputs = [| &quot;a&quot;; &quot;bbb&quot;; &quot;cc&quot;; &quot;d&quot; |]
+
+ inputs |&amp;gt; Array.skipWhile (fun x -&amp;gt; x.Length &amp;lt; 3)
+ &lt;/code&gt;
+ Evaluates to &lt;c&gt;[|&quot;bbb&quot;; &quot;cc&quot;; &quot;d&quot;|]&lt;/c&gt;&lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs187">val line: string</div>
+<div class="fsdocs-tip" id="fs188">String.Contains(value: string) : bool<br />String.Contains(value: char) : bool<br />String.Contains(value: string, comparisonType: StringComparison) : bool<br />String.Contains(value: char, comparisonType: StringComparison) : bool</div>
+<div class="fsdocs-tip" id="fs189">val skip: count: int -&gt; array: &#39;T[] -&gt; &#39;T[]<br /><em>&lt;summary&gt;Builds a new array that contains the elements of the given array, excluding the first N elements.&lt;/summary&gt;<br />&lt;param name=&quot;count&quot;&gt;The number of elements to skip. If negative the full array will be returned as a copy.&lt;/param&gt;<br />&lt;param name=&quot;array&quot;&gt;The input array.&lt;/param&gt;<br />&lt;returns&gt;A copy of the input array, after removing the first N elements.&lt;/returns&gt;<br />&lt;exception cref=&quot;T:System.ArgumentNullException&quot;&gt;Thrown when the input array is null.&lt;/exception&gt;<br />&lt;exception cref=&quot;T:System.ArgumentException&quot;&gt;Thrown when count exceeds the number of 
+ elements in the array.&lt;/exception&gt;<br />&lt;example id=&quot;skip-1&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let inputs = [| &quot;a&quot;; &quot;b&quot;; &quot;c&quot;; &quot;d&quot; |]
+
+ inputs |&amp;gt; Array.skip 2
+ &lt;/code&gt;
+ Evaluates to &lt;c&gt;[| &quot;c&quot;; &quot;d&quot; |]&lt;/c&gt;&lt;/example&gt;<br />&lt;example id=&quot;skip-2&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let inputs = [| &quot;a&quot;; &quot;b&quot;; &quot;c&quot;; &quot;d&quot; |]
+
+ inputs |&amp;gt; Array.skip 5
+ &lt;/code&gt;
+ Throws &lt;c&gt;ArgumentException&lt;/c&gt;.
+ &lt;/example&gt;<br />&lt;example id=&quot;skip-3&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let inputs = [| &quot;a&quot;; &quot;b&quot;; &quot;c&quot;; &quot;d&quot; |]
+
+ inputs |&amp;gt; Array.skip -1
+ &lt;/code&gt;
+ Evaluates to &lt;c&gt;[| &quot;a&quot;; &quot;b&quot;; &quot;c&quot;; &quot;d&quot; |]&lt;/c&gt;.
+ &lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs190">val takeWhile: predicate: (&#39;T -&gt; bool) -&gt; array: &#39;T[] -&gt; &#39;T[]<br /><em>&lt;summary&gt;Returns an array that contains all elements of the original array while the 
+ given predicate returns True, and then returns no further elements.&lt;/summary&gt;<br />&lt;param name=&quot;predicate&quot;&gt;A function that evaluates to false when no more items should be returned.&lt;/param&gt;<br />&lt;param name=&quot;array&quot;&gt;The input array.&lt;/param&gt;<br />&lt;returns&gt;The result array.&lt;/returns&gt;<br />&lt;exception cref=&quot;T:System.ArgumentNullException&quot;&gt;Thrown when the input array is null.&lt;/exception&gt;<br />&lt;example id=&quot;takewhile-1&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let inputs = [| &quot;a&quot;; &quot;bb&quot;; &quot;ccc&quot;; &quot;d&quot; |]
+
+ inputs |&amp;gt; Array.takeWhile (fun x -&amp;gt; x.Length &amp;lt; 3)
+ &lt;/code&gt;
+ Evaluates to &lt;c&gt;[| &quot;a&quot;; &quot;bb&quot; |]&lt;/c&gt;&lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs191">val map: mapping: (&#39;T -&gt; &#39;U) -&gt; array: &#39;T[] -&gt; &#39;U[]<br /><em>&lt;summary&gt;Builds a new array whose elements are the results of applying the given function
+ to each of the elements of the array.&lt;/summary&gt;<br />&lt;param name=&quot;mapping&quot;&gt;The function to transform elements of the array.&lt;/param&gt;<br />&lt;param name=&quot;array&quot;&gt;The input array.&lt;/param&gt;<br />&lt;returns&gt;The array of transformed elements.&lt;/returns&gt;<br />&lt;exception cref=&quot;T:System.ArgumentNullException&quot;&gt;Thrown when the input array is null.&lt;/exception&gt;<br />&lt;example id=&quot;map-1&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let inputs = [| &quot;a&quot;; &quot;bbb&quot;; &quot;cc&quot; |]
+
+ inputs |&amp;gt; Array.map (fun x -&amp;gt; x.Length)
+ &lt;/code&gt;
+ Evaluates to &lt;c&gt;[| 1; 3; 2 |]&lt;/c&gt;&lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs192">val parsedLine: CsvProvider&lt;...&gt;.Row</div>
+<div class="fsdocs-tip" id="fs193">CsvProvider&lt;...&gt;.ParseRows(text: string) : CsvProvider&lt;...&gt;.Row[]</div>
+<div class="fsdocs-tip" id="fs194">property CsvProvider&lt;...&gt;.Row.Date: string with get</div>
+<div class="fsdocs-tip" id="fs195">property CsvProvider&lt;...&gt;.Row.SMB: decimal with get</div>
+<div class="fsdocs-tip" id="fs196">property CsvProvider&lt;...&gt;.Row.HML: decimal with get</div>
+<div class="fsdocs-tip" id="fs197">property CsvProvider&lt;...&gt;.Row.RF: decimal with get</div>
+<div class="fsdocs-tip" id="fs198">val getFF5: frequency: Frequency -&gt; FF5Obs[]</div>
+<div class="fsdocs-tip" id="fs199">property CsvProvider&lt;...&gt;.Row.RMW: decimal with get</div>
+<div class="fsdocs-tip" id="fs200">property CsvProvider&lt;...&gt;.Row.CMA: decimal with get</div>
+<div class="fsdocs-tip" id="fs201">module Fred
+
+from Common</div>
+<div class="fsdocs-tip" id="fs202">type Series = CsvProvider&lt;...&gt;</div>
+<div class="fsdocs-tip" id="fs203">val private fredUrl: series: &#39;a -&gt; string</div>
+<div class="fsdocs-tip" id="fs204">val series: &#39;a</div>
+<div class="fsdocs-tip" id="fs205">val get: series: string -&gt; CsvProvider&lt;...&gt;<br /><em>&lt;summary&gt;Gets a FRED data series as a CsvProvider&lt;/summary&gt;<br />&#160;&lt;param name=&quot;series&quot;&gt;The series name such as GS10, EXUSEU, etc.&lt;/param&gt;</em></div>
+<div class="fsdocs-tip" id="fs206">val series: string</div>
+<div class="fsdocs-tip" id="fs207">CsvProvider&lt;...&gt;.Load(uri: string) : CsvProvider&lt;...&gt;<br /><em>Loads CSV from the specified uri</em><br />CsvProvider&lt;...&gt;.Load(reader: TextReader) : CsvProvider&lt;...&gt;<br /><em>Loads CSV from the specified reader</em><br />CsvProvider&lt;...&gt;.Load(stream: Stream) : CsvProvider&lt;...&gt;<br /><em>Loads CSV from the specified stream</em></div>
+
+        </div>
+
+        <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+        <script type="text/javascript">var fsdocs_search_baseurl = '/Teaching/';</script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+        <script type="text/javascript" src="/Teaching/content/fsdocs-search.js"></script>
+        <!-- END SEARCH BOX: this adds support for the search box -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    </div>
+</body>
+
+</html>

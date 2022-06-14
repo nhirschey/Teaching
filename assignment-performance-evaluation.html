@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Performance Evaluation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="">
+
+    <link rel="stylesheet" id="theme_link" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.6.0/materia/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    <link type="text/css" rel="stylesheet" href="/Teaching/content/navbar-fixed-left.css" />
+    <link type="text/css" rel="stylesheet" href="/Teaching/content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="/Teaching/content/fsdocs-custom.css" />
+    <script type="text/javascript" src="/Teaching/content/fsdocs-tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+    
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-light bg-secondary fixed-left" id="fsdocs-nav">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse navbar-nav-scroll" id="navbarsExampleDefault">
+            <a href="/Teaching/"><img id="fsdocs-logo" src="/Teaching/img/logo.png" /></a>
+            <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+            <div id="header">
+                <div class="searchbox" id="fsdocs-searchbox">
+                    <label for="search-by">
+                        <i class="fas fa-search"></i>
+                    </label>
+                    <input data-search-input="" id="search-by" type="search" placeholder="Search..." />
+                    <span data-search-clear="">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- END SEARCH BOX: this adds support for the search box -->
+            <ul class="navbar-nav">
+                <li class="nav-header">Links</li>
+                <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="https://github.com/nhirschey/Teaching/blob/main/LICENSE.md">License</a></li>
+                <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="https://github.com/nhirschey/Teaching">Source Repository</a></li>
+                <li class="nav-header">
+  Getting Started
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/install.html">
+    Install Software
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/learn-fsharp.html">
+    Learn F#
+  </a>
+</li>             
+<li class="nav-header">
+  Lectures
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/portfolio-statistics.html">
+    Basic Portfolio Statistics
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/portfolio-returns.html">
+    Portfolio Returns
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/PortfolioFormation-SimpleExample.html">
+    Building a strategy
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/Momentum-Class.html">
+    Momentum Signal
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/VolatilityTiming.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/optimization.html">
+    Optimization
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/sentiment-mlnet.html">
+    Sentiment classification
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/calls-nn.html">
+    Calls NN
+  </a>
+</li>             
+<li class="nav-header">
+  Assignments
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/football-1-download-data.html">
+    Webscraping HTML to CSV
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/football-tuples-and-records.html">
+    Tuples and Records (with solutions)
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/football-collection-functions.html">
+    Collection functions (with solutions)
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/football-plotting.html">
+    Plotting (with solutions)
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/select-project-signal.html">
+    Select Project Signals
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/assignment-signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/assignment-performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/assignment-volatility-timing.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-header">
+  Practice Quizzes
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-list-module.html">
+    List module functions
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-options.html">
+    Options
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-match-expressions.html">
+    Match expressions
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-map-collection.html">
+    Map collection
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-discriminated-union.html">
+    Dicriminated Union
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-portfolios.html">
+    Portfolios
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-factors.html">
+    Factors
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-folding.html">
+    Fold and Friends
+  </a>
+</li>             
+<li class="nav-header">
+  Project
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/project/signal-exploration.html">
+    Signal Exploration
+  </a>
+</li>             
+<li class="nav-header">
+  Other
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/Common.html">
+    Common
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/Portfolio.html">
+    Portfolio
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/YahooFinance.html">
+    YahooFinance
+  </a>
+</li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="masthead">
+            <h3 class="muted"><a href="/Teaching/">Teaching</a></h3>
+        </div>
+        <hr />
+        <div class="container" id="fsdocs-content">
+            
+<p><a href="https://mybinder.org/v2/gh/nhirschey/teaching/gh-pages?filepath=assignment-performance-evaluation.ipynb"><img src="img/badge-binder.svg" alt="Binder" /></a>&emsp;
+<a href="/Teaching//assignment-performance-evaluation.fsx"><img src="img/badge-script.svg" alt="Script" /></a>&emsp;
+<a href="/Teaching//assignment-performance-evaluation.ipynb"><img src="img/badge-notebook.svg" alt="Notebook" /></a></p>
+<table>
+<thead>
+<tr class="header">
+<th><p>Student Name</p></th>
+<th><p>Student Number</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><p><strong>1:</strong></p></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><p><strong>2:</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Signal Name (e.g., Book to Market):</strong></p>
+<p><strong>Signal Code (e.g., be_me):</strong></p>
+<p>This is an assignment. You may work in pairs (two students) using either student's signal to answer the below questions.  You will find sections labeled <strong>Task</strong> asking you to do each piece of analysis. Please make sure that you complete all of these tasks. Make use of the course resources and example code on the course website. It should be possible to complete all the requested tasks using information given below or somewhere on the course website.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="pp">#r</span> <span class="s">&quot;nuget:FSharp.Data&quot;</span>
+<span class="pp">#r</span> <span class="s">&quot;nuget: FSharp.Stats&quot;</span>
+<span class="pp">#r</span> <span class="s">&quot;nuget: Plotly.NET, 2.0.0-preview.17&quot;</span>
+</code></pre>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="id">System</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="id">FSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="id">Data</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="id">Plotly</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="id">NET</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs6', 6)" onmouseover="showTip(event, 'fs6', 6)" class="id">FSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs7', 7)" onmouseover="showTip(event, 'fs7', 7)" class="id">Stats</span>
+</code></pre>
+<h2><a name="Load-Data" class="anchor" href="#Load-Data">Load Data</a></h2>
+<p>First, make sure that you're referencing the correct files.</p>
+<p>Here I'm assuming that you have a class folder with this
+notebook and these files in it. The folder hierarchy would
+look like below where you have the below files and folders accessible.</p>
+<ul>
+<li><code>Common.fsx</code> is on the course website.</li>
+<li><code>notebook.ipynb</code> is this notebook.</li>
+<li><code>myExcessReturnPortfolios.csv</code> is generated by code for construction <a href="signal-portfolio.html">signal portfolios</a>.</li>
+</ul>
+<table class="pre"><tr><td class="snippet"><pre class="fssnip"><code lang="code">/class
+    Common.fsx
+    notebook.ipynb                
+    /data
+        myExcessReturnPortfolios.csv
+</code></pre></td></tr></table>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="pn">[&lt;</span><span onmouseout="hideTip(event, 'fs9', 10)" onmouseover="showTip(event, 'fs9', 10)" class="rt">Literal</span><span class="pn">&gt;]</span> <span onmouseout="hideTip(event, 'fs10', 11)" onmouseover="showTip(event, 'fs10', 11)" class="prop">ResolutionFolder</span> <span class="o">=</span> <span class="k">__SOURCE_DIRECTORY__</span>
+<span onmouseout="hideTip(event, 'fs11', 12)" onmouseover="showTip(event, 'fs11', 12)" class="rt">Environment</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs12', 13)" onmouseover="showTip(event, 'fs12', 13)" class="id">CurrentDirectory</span> <span class="k">&lt;-</span> <span onmouseout="hideTip(event, 'fs10', 14)" onmouseover="showTip(event, 'fs10', 14)" class="prop">ResolutionFolder</span>
+
+<span class="pp">#load</span> <span class="s">&quot;Common.fsx&quot;</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs13', 15)" onmouseover="showTip(event, 'fs13', 15)" class="m">Common</span>
+</code></pre>
+<p>We get the Fama-French 3-Factor asset pricing model data.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs14', 16)" onmouseover="showTip(event, 'fs14', 16)" class="id">ff3</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs15', 17)" onmouseover="showTip(event, 'fs15', 17)" class="m">French</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs16', 18)" onmouseover="showTip(event, 'fs16', 18)" class="id">getFF3</span> <span onmouseout="hideTip(event, 'fs17', 19)" onmouseover="showTip(event, 'fs17', 19)" class="rt">Frequency</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs18', 20)" onmouseover="showTip(event, 'fs18', 20)" class="id">Monthly</span>
+</code></pre>
+<h3><a name="Data-file" class="anchor" href="#Data-file">Data file</a></h3>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="pn">[&lt;</span><span onmouseout="hideTip(event, 'fs9', 21)" onmouseover="showTip(event, 'fs9', 21)" class="rt">Literal</span><span class="pn">&gt;]</span> <span onmouseout="hideTip(event, 'fs19', 22)" onmouseover="showTip(event, 'fs19', 22)" class="prop">myExcessReturnPortfoliosPath</span> <span class="o">=</span> <span class="s">&quot;data/myExcessReturnPortfolios.csv&quot;</span>
+</code></pre>
+<p>If my paths are correct, then this code should read the first few lines of the files.
+If it doesn't show the first few lines, fix the above file paths.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs20', 23)" onmouseover="showTip(event, 'fs20', 23)" class="id">IO</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs21', 24)" onmouseover="showTip(event, 'fs21', 24)" class="rt">File</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 25)" onmouseover="showTip(event, 'fs22', 25)" class="id">ReadLines</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs19', 26)" onmouseover="showTip(event, 'fs19', 26)" class="prop">myExcessReturnPortfoliosPath</span><span class="pn">)</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs23', 27)" onmouseover="showTip(event, 'fs23', 27)" class="m">Seq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs24', 28)" onmouseover="showTip(event, 'fs24', 28)" class="id">truncate</span> <span class="n">5</span>
+</code></pre>
+<p>Ok, now assuming those paths were correct the below code will work.
+I will put all this prep code in one block so that it is easy to run.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs25', 29)" onmouseover="showTip(event, 'fs25', 29)" class="id">myExcessReturnPortfolios</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs26', 30)" onmouseover="showTip(event, 'fs26', 30)" class="rt">CsvProvider</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs19', 31)" onmouseover="showTip(event, 'fs19', 31)" class="prop">myExcessReturnPortfoliosPath</span><span class="pn">,</span>
+                <span onmouseout="hideTip(event, 'fs10', 32)" onmouseover="showTip(event, 'fs10', 32)" class="fn">ResolutionFolder</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs10', 33)" onmouseover="showTip(event, 'fs10', 33)" class="prop">ResolutionFolder</span><span class="pn">&gt;</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs8', 34)" onmouseover="showTip(event, 'fs8', 34)" class="id">GetSample</span><span class="pn">(</span><span class="pn">)</span>
+</code></pre>
+<p>Headers</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs25', 35)" onmouseover="showTip(event, 'fs25', 35)" class="id">myExcessReturnPortfolios</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs27', 36)" onmouseover="showTip(event, 'fs27', 36)" class="id">Headers</span>
+</code></pre>
+<p>First few rows</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs25', 37)" onmouseover="showTip(event, 'fs25', 37)" class="id">myExcessReturnPortfolios</span><span class="pn">.</span><span class="id">Rows</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs23', 38)" onmouseover="showTip(event, 'fs23', 38)" class="m">Seq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs28', 39)" onmouseover="showTip(event, 'fs28', 39)" class="id">take</span> <span class="n">3</span>
+</code></pre>
+<p>Isolate some notable portfolios.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">type</span> <span onmouseout="hideTip(event, 'fs29', 40)" onmouseover="showTip(event, 'fs29', 40)" class="rt">SignalPortfolioObs</span> <span class="o">=</span> 
+    <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs30', 41)" onmouseover="showTip(event, 'fs30', 41)" class="prop">Month</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs31', 42)" onmouseover="showTip(event, 'fs31', 42)" class="vt">DateTime</span>
+      <span onmouseout="hideTip(event, 'fs32', 43)" onmouseover="showTip(event, 'fs32', 43)" class="prop">Name</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs33', 44)" onmouseover="showTip(event, 'fs33', 44)" class="rt">string</span>
+      <span onmouseout="hideTip(event, 'fs34', 45)" onmouseover="showTip(event, 'fs34', 45)" class="prop">ExcessReturn</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs35', 46)" onmouseover="showTip(event, 'fs35', 46)" class="vt">float</span> <span class="pn">}</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs36', 47)" onmouseover="showTip(event, 'fs36', 47)" class="id">long</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs25', 48)" onmouseover="showTip(event, 'fs25', 48)" class="id">myExcessReturnPortfolios</span><span class="pn">.</span><span class="id">Rows</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs23', 49)" onmouseover="showTip(event, 'fs23', 49)" class="m">Seq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs37', 50)" onmouseover="showTip(event, 'fs37', 50)" class="id">toList</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs38', 51)" onmouseover="showTip(event, 'fs38', 51)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs39', 52)" onmouseover="showTip(event, 'fs39', 52)" class="id">filter</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs40', 53)" onmouseover="showTip(event, 'fs40', 53)" class="fn">row</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs40', 54)" onmouseover="showTip(event, 'fs40', 54)" class="fn">row</span><span class="pn">.</span><span class="id">Index</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs41', 55)" onmouseover="showTip(event, 'fs41', 55)" class="uc">Some</span> <span class="n">3</span><span class="pn">)</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs38', 56)" onmouseover="showTip(event, 'fs38', 56)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs42', 57)" onmouseover="showTip(event, 'fs42', 57)" class="id">map</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs40', 58)" onmouseover="showTip(event, 'fs40', 58)" class="fn">row</span> <span class="k">-&gt;</span> 
+        <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs8', 59)" onmouseover="showTip(event, 'fs8', 59)" class="prop">Month</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs40', 60)" onmouseover="showTip(event, 'fs40', 60)" class="fn">row</span><span class="pn">.</span><span class="id">YearMonth</span>
+          <span onmouseout="hideTip(event, 'fs8', 61)" onmouseover="showTip(event, 'fs8', 61)" class="prop">Name</span> <span class="o">=</span> <span class="s">&quot;Long&quot;</span>
+          <span onmouseout="hideTip(event, 'fs8', 62)" onmouseover="showTip(event, 'fs8', 62)" class="prop">ExcessReturn</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs40', 63)" onmouseover="showTip(event, 'fs40', 63)" class="fn">row</span><span class="pn">.</span><span class="id">Ret</span> <span class="pn">}</span><span class="pn">)</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs43', 64)" onmouseover="showTip(event, 'fs43', 64)" class="id">short</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs25', 65)" onmouseover="showTip(event, 'fs25', 65)" class="id">myExcessReturnPortfolios</span><span class="pn">.</span><span class="id">Rows</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs23', 66)" onmouseover="showTip(event, 'fs23', 66)" class="m">Seq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs37', 67)" onmouseover="showTip(event, 'fs37', 67)" class="id">toList</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs38', 68)" onmouseover="showTip(event, 'fs38', 68)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs39', 69)" onmouseover="showTip(event, 'fs39', 69)" class="id">filter</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs40', 70)" onmouseover="showTip(event, 'fs40', 70)" class="fn">row</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs40', 71)" onmouseover="showTip(event, 'fs40', 71)" class="fn">row</span><span class="pn">.</span><span class="id">Index</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs41', 72)" onmouseover="showTip(event, 'fs41', 72)" class="uc">Some</span> <span class="n">1</span><span class="pn">)</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs38', 73)" onmouseover="showTip(event, 'fs38', 73)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs42', 74)" onmouseover="showTip(event, 'fs42', 74)" class="id">map</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs40', 75)" onmouseover="showTip(event, 'fs40', 75)" class="fn">row</span> <span class="k">-&gt;</span> 
+        <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs8', 76)" onmouseover="showTip(event, 'fs8', 76)" class="prop">Month</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs40', 77)" onmouseover="showTip(event, 'fs40', 77)" class="fn">row</span><span class="pn">.</span><span class="id">YearMonth</span>
+          <span onmouseout="hideTip(event, 'fs8', 78)" onmouseover="showTip(event, 'fs8', 78)" class="prop">Name</span> <span class="o">=</span> <span class="s">&quot;Short&quot;</span>
+          <span onmouseout="hideTip(event, 'fs8', 79)" onmouseover="showTip(event, 'fs8', 79)" class="prop">ExcessReturn</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs40', 80)" onmouseover="showTip(event, 'fs40', 80)" class="fn">row</span><span class="pn">.</span><span class="id">Ret</span> <span class="pn">}</span><span class="pn">)</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs44', 81)" onmouseover="showTip(event, 'fs44', 81)" class="id">shortByMonth</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs43', 82)" onmouseover="showTip(event, 'fs43', 82)" class="id">short</span> 
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs38', 83)" onmouseover="showTip(event, 'fs38', 83)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs42', 84)" onmouseover="showTip(event, 'fs42', 84)" class="id">map</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs45', 85)" onmouseover="showTip(event, 'fs45', 85)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs45', 86)" onmouseover="showTip(event, 'fs45', 86)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs46', 87)" onmouseover="showTip(event, 'fs46', 87)" class="id">Month</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs45', 88)" onmouseover="showTip(event, 'fs45', 88)" class="fn">x</span><span class="pn">)</span> 
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs47', 89)" onmouseover="showTip(event, 'fs47', 89)" class="fn">Map</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs48', 90)" onmouseover="showTip(event, 'fs48', 90)" class="id">longShort</span> <span class="o">=</span>
+    <span class="pn">[</span> <span class="k">for</span> <span onmouseout="hideTip(event, 'fs49', 91)" onmouseover="showTip(event, 'fs49', 91)" class="fn">l</span> <span class="k">in</span> <span onmouseout="hideTip(event, 'fs36', 92)" onmouseover="showTip(event, 'fs36', 92)" class="id">long</span> <span class="k">do</span> 
+        <span class="c">// I&#39;m indexing into shortByMonth directly</span>
+        <span class="c">// rather than using Map.tryFind because</span>
+        <span class="c">// I am pretty confident that the short </span>
+        <span class="c">// data will be there</span>
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs50', 93)" onmouseover="showTip(event, 'fs50', 93)" class="fn">s</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs44', 94)" onmouseover="showTip(event, 'fs44', 94)" class="id">shortByMonth</span><span class="pn">[</span><span onmouseout="hideTip(event, 'fs49', 95)" onmouseover="showTip(event, 'fs49', 95)" class="fn">l</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs46', 96)" onmouseover="showTip(event, 'fs46', 96)" class="id">Month</span><span class="pn">]</span>
+        <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs8', 97)" onmouseover="showTip(event, 'fs8', 97)" class="prop">Month</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs49', 98)" onmouseover="showTip(event, 'fs49', 98)" class="fn">l</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs46', 99)" onmouseover="showTip(event, 'fs46', 99)" class="id">Month</span>
+          <span onmouseout="hideTip(event, 'fs8', 100)" onmouseover="showTip(event, 'fs8', 100)" class="prop">Name</span> <span class="o">=</span> <span class="s">&quot;Long-short&quot;</span>
+          <span onmouseout="hideTip(event, 'fs8', 101)" onmouseover="showTip(event, 'fs8', 101)" class="prop">ExcessReturn</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs49', 102)" onmouseover="showTip(event, 'fs49', 102)" class="fn">l</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs51', 103)" onmouseover="showTip(event, 'fs51', 103)" class="id">ExcessReturn</span> <span class="o">-</span> <span onmouseout="hideTip(event, 'fs50', 104)" onmouseover="showTip(event, 'fs50', 104)" class="fn">s</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs51', 105)" onmouseover="showTip(event, 'fs51', 105)" class="id">ExcessReturn</span> <span class="pn">}</span><span class="pn">]</span>
+</code></pre>
+<h2><a name="Start-of-assignment" class="anchor" href="#Start-of-assignment">Start of assignment</a></h2>
+<blockquote>
+<p><strong>Task:</strong> Calculate the annualized Sharpe ratios of your long, short, and long-short portfolios.</p>
+</blockquote>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// Solution here.</span>
+</code></pre>
+<blockquote>
+<p><strong>Task:</strong> Estimate CAPM and Fama-French 3-factor models for your long-short portfolio.</p>
+</blockquote>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// Solution here.</span>
+</code></pre>
+<h3><a name="CAPM-model-evaluation" class="anchor" href="#CAPM-model-evaluation">CAPM model evaluation.</a></h3>
+<blockquote>
+<p><strong>Task:</strong> What is the CAPM alpha for your long-short portfolio. Is it significantly different from zero?</p>
+</blockquote>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// Solution here.</span>
+</code></pre>
+<blockquote>
+<p><strong>Task:</strong> What is the CAPM beta for your long-short portfolio. Is it significantly different from zero?</p>
+</blockquote>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// Solution here.</span>
+</code></pre>
+<blockquote>
+<p><strong>Task:</strong> What is the information ratio for your long-short portfolio when using the CAPM model?</p>
+</blockquote>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// Solution here.</span>
+</code></pre>
+<h3><a name="Fama-French-3-factor-model-evaluation" class="anchor" href="#Fama-French-3-factor-model-evaluation">Fama-French 3-factor model evaluation.</a></h3>
+<blockquote>
+<p><strong>Task:</strong> What is the Fama-French 3-factor model alpha for your long-short portfolio. Is it significantly different from zero?</p>
+</blockquote>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// Solution here.</span>
+</code></pre>
+<blockquote>
+<p><strong>Task:</strong> What are the betas on the Market, HML, and SMB factors for your long-short portfolio. Are they significantly different from zero?</p>
+</blockquote>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// Solution here.</span>
+</code></pre>
+<blockquote>
+<p><strong>Task:</strong> Based on the Market, HML, and SMB factor betas for your long-short portfolio, would you say your portfolio is more like a value portfolio, more like a growth portfolio, or neither?</p>
+</blockquote>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// Solution here.</span>
+</code></pre>
+<blockquote>
+<p><strong>Task:</strong> Based on the Market, HML, and SMB factor betas for your long-short portfolio, would you say your portfolio is more like a small-cap portfolio, more like a large-cap portfolio, or neither?</p>
+</blockquote>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// Solution here.</span>
+</code></pre>
+<blockquote>
+<p><strong>Task:</strong> What is the information ratio for your long-short portfolio when using the Fama and French 3-factor model?</p>
+</blockquote>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// Solution here.</span>
+</code></pre>
+
+            <div class="fsdocs-tip" id="fs1">namespace System</div>
+<div class="fsdocs-tip" id="fs2">Multiple items<br />namespace FSharp<br /><br />--------------------<br />namespace Microsoft.FSharp</div>
+<div class="fsdocs-tip" id="fs3">Multiple items<br />namespace FSharp.Data<br /><br />--------------------<br />namespace Microsoft.FSharp.Data</div>
+<div class="fsdocs-tip" id="fs4">Multiple items<br />namespace Plotly<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;</div>
+<div class="fsdocs-tip" id="fs5">namespace Plotly.NET</div>
+<div class="fsdocs-tip" id="fs6">Multiple items<br />namespace FSharp<br /><br />--------------------<br />namespace Microsoft.FSharp<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;</div>
+<div class="fsdocs-tip" id="fs7">namespace FSharp.Stats</div>
+<div class="fsdocs-tip" id="fs8">Multiple items<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;</div>
+<div class="fsdocs-tip" id="fs9">Multiple items<br />type LiteralAttribute =
+  inherit Attribute
+  new: unit -&gt; LiteralAttribute<br /><em>&lt;summary&gt;Adding this attribute to a value causes it to be compiled as a CLI constant literal.&lt;/summary&gt;<br />&lt;category&gt;Attributes&lt;/category&gt;</em><br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />new: unit -&gt; LiteralAttribute</div>
+<div class="fsdocs-tip" id="fs10">Multiple items<br />[&lt;Literal&gt;]
+val ResolutionFolder: string = &quot;D:\a\Teaching\Teaching\docs&quot;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;</div>
+<div class="fsdocs-tip" id="fs11">Multiple items<br />type Environment =
+  static member Exit: exitCode: int -&gt; unit
+  static member ExpandEnvironmentVariables: name: string -&gt; string
+  static member FailFast: message: string -&gt; unit + 1 overload
+  static member GetCommandLineArgs: unit -&gt; string[]
+  static member GetEnvironmentVariable: variable: string -&gt; string + 1 overload
+  static member GetEnvironmentVariables: unit -&gt; IDictionary + 1 overload
+  static member GetFolderPath: folder: SpecialFolder -&gt; string + 1 overload
+  static member GetLogicalDrives: unit -&gt; string[]
+  static member SetEnvironmentVariable: variable: string * value: string -&gt; unit + 1 overload
+  static member CommandLine: string
+  ...<br /><em>&lt;summary&gt;Provides information about, and means to manipulate, the current environment and platform. This class cannot be inherited.&lt;/summary&gt;</em><br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;</div>
+<div class="fsdocs-tip" id="fs12">property Environment.CurrentDirectory: string with get, set<br /><em>&lt;summary&gt;Gets or sets the fully qualified path of the current working directory.&lt;/summary&gt;<br />&lt;exception cref=&quot;T:System.ArgumentException&quot;&gt;Attempted to set to an empty string (&quot;&quot;).&lt;/exception&gt;<br />&lt;exception cref=&quot;T:System.ArgumentNullException&quot;&gt;Attempted to set to &lt;see langword=&quot;null&quot; /&gt;.&lt;/exception&gt;<br />&lt;exception cref=&quot;T:System.IO.IOException&quot;&gt;An I/O error occurred.&lt;/exception&gt;<br />&lt;exception cref=&quot;T:System.IO.DirectoryNotFoundException&quot;&gt;Attempted to set a local path that cannot be found.&lt;/exception&gt;<br />&lt;exception cref=&quot;T:System.Security.SecurityException&quot;&gt;The caller does not have the appropriate permission.&lt;/exception&gt;<br />&lt;returns&gt;The directory path.&lt;/returns&gt;</em></div>
+<div class="fsdocs-tip" id="fs13">Multiple items<br />module Common<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;</div>
+<div class="fsdocs-tip" id="fs14">Multiple items<br />val ff3: French.FF3Obs[]<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;</div>
+<div class="fsdocs-tip" id="fs15">Multiple items<br />module French
+
+from Common<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;</div>
+<div class="fsdocs-tip" id="fs16">val getFF3: frequency: Frequency -&gt; French.FF3Obs[]</div>
+<div class="fsdocs-tip" id="fs17">Multiple items<br />type Frequency =
+  | Daily
+  | Monthly<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;</div>
+<div class="fsdocs-tip" id="fs18">union case Frequency.Monthly: Frequency</div>
+<div class="fsdocs-tip" id="fs19">Multiple items<br />[&lt;Literal&gt;]
+val myExcessReturnPortfoliosPath: string = &quot;data/myExcessReturnPortfolios.csv&quot;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;</div>
+<div class="fsdocs-tip" id="fs20">Multiple items<br />namespace System.IO<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;</div>
+<div class="fsdocs-tip" id="fs21">type File =
+  static member AppendAllLines: path: string * contents: IEnumerable&lt;string&gt; -&gt; unit + 1 overload
+  static member AppendAllLinesAsync: path: string * contents: IEnumerable&lt;string&gt; * encoding: Encoding * ?cancellationToken: CancellationToken -&gt; Task + 1 overload
+  static member AppendAllText: path: string * contents: string -&gt; unit + 1 overload
+  static member AppendAllTextAsync: path: string * contents: string * encoding: Encoding * ?cancellationToken: CancellationToken -&gt; Task + 1 overload
+  static member AppendText: path: string -&gt; StreamWriter
+  static member Copy: sourceFileName: string * destFileName: string -&gt; unit + 1 overload
+  static member Create: path: string -&gt; FileStream + 2 overloads
+  static member CreateSymbolicLink: path: string * pathToTarget: string -&gt; FileSystemInfo
+  static member CreateText: path: string -&gt; StreamWriter
+  static member Decrypt: path: string -&gt; unit
+  ...<br /><em>&lt;summary&gt;Provides static methods for the creation, copying, deletion, moving, and opening of a single file, and aids in the creation of &lt;see cref=&quot;T:System.IO.FileStream&quot; /&gt; objects.&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs22">IO.File.ReadLines(path: string) : Collections.Generic.IEnumerable&lt;string&gt;<br />IO.File.ReadLines(path: string, encoding: Text.Encoding) : Collections.Generic.IEnumerable&lt;string&gt;</div>
+<div class="fsdocs-tip" id="fs23">Multiple items<br />module Seq
+
+from FSharp.Stats<br /><em>&lt;summary&gt;
+ Module to compute common statistical measure
+&lt;/summary&gt;</em><br /><br />--------------------<br />module Seq
+
+from Microsoft.FSharp.Collections<br /><em>&lt;summary&gt;Contains operations for working with values of type &lt;see cref=&quot;T:Microsoft.FSharp.Collections.seq`1&quot; /&gt;.&lt;/summary&gt;</em><br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;</div>
+<div class="fsdocs-tip" id="fs24">val truncate: count: int -&gt; source: seq&lt;&#39;T&gt; -&gt; seq&lt;&#39;T&gt;<br /><em>&lt;summary&gt;Returns a sequence that when enumerated returns at most N elements.&lt;/summary&gt;<br />&lt;param name=&quot;count&quot;&gt;The maximum number of items to enumerate.&lt;/param&gt;<br />&lt;param name=&quot;source&quot;&gt;The input sequence.&lt;/param&gt;<br />&lt;returns&gt;The result sequence.&lt;/returns&gt;<br />&lt;exception cref=&quot;T:System.ArgumentNullException&quot;&gt;Thrown when the input sequence is null.&lt;/exception&gt;<br />&lt;example id=&quot;truncate-1&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let inputs = [&quot;a&quot;; &quot;b&quot;; &quot;c&quot;; &quot;d&quot;]
+
+ inputs |&amp;gt; Seq.truncate 2
+ &lt;/code&gt;
+ Evaluates to a sequence yielding the same results as &lt;c&gt;seq { &quot;a&quot;; &quot;b&quot; }&lt;/c&gt;&lt;/example&gt;<br />&lt;example id=&quot;truncate-2&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let inputs = [&quot;a&quot;; &quot;b&quot;; &quot;c&quot;; &quot;d&quot;]
+
+ inputs |&amp;gt; Seq.truncate 6
+ &lt;/code&gt;
+ Evaluates to a sequence yielding the same results as &lt;c&gt;seq { &quot;a&quot;; &quot;b&quot;; &quot;c&quot;; &quot;d&quot; }&lt;/c&gt;&lt;/example&gt;<br />&lt;example id=&quot;truncate-3&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let inputs = [&quot;a&quot;; &quot;b&quot;; &quot;c&quot;; &quot;d&quot;]
+
+ inputs |&amp;gt; Seq.truncate 0
+ &lt;/code&gt;
+ Evaluates to the empty sequence.
+ &lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs25">Multiple items<br />val myExcessReturnPortfolios: HttpResponseWithStream<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;</div>
+<div class="fsdocs-tip" id="fs26">Multiple items<br />type CsvProvider<br /><em>&lt;summary&gt;Typed representation of a CSV file.&lt;/summary&gt;
+           &lt;param name=&#39;Sample&#39;&gt;Location of a CSV sample file or a string containing a sample CSV document.&lt;/param&gt;
+           &lt;param name=&#39;Separators&#39;&gt;Column delimiter(s). Defaults to &lt;c&gt;,&lt;/c&gt;.&lt;/param&gt;
+           &lt;param name=&#39;InferRows&#39;&gt;Number of rows to use for inference. Defaults to &lt;c&gt;1000&lt;/c&gt;. If this is zero, all rows are used.&lt;/param&gt;
+           &lt;param name=&#39;Schema&#39;&gt;Optional column types, in a comma separated list. Valid types are &lt;c&gt;int&lt;/c&gt;, &lt;c&gt;int64&lt;/c&gt;, &lt;c&gt;bool&lt;/c&gt;, &lt;c&gt;float&lt;/c&gt;, &lt;c&gt;decimal&lt;/c&gt;, &lt;c&gt;date&lt;/c&gt;, &lt;c&gt;guid&lt;/c&gt;, &lt;c&gt;string&lt;/c&gt;, &lt;c&gt;int?&lt;/c&gt;, &lt;c&gt;int64?&lt;/c&gt;, &lt;c&gt;bool?&lt;/c&gt;, &lt;c&gt;float?&lt;/c&gt;, &lt;c&gt;decimal?&lt;/c&gt;, &lt;c&gt;date?&lt;/c&gt;, &lt;c&gt;guid?&lt;/c&gt;, &lt;c&gt;int option&lt;/c&gt;, &lt;c&gt;int64 option&lt;/c&gt;, &lt;c&gt;bool option&lt;/c&gt;, &lt;c&gt;float option&lt;/c&gt;, &lt;c&gt;decimal option&lt;/c&gt;, &lt;c&gt;date option&lt;/c&gt;, &lt;c&gt;guid option&lt;/c&gt; and &lt;c&gt;string option&lt;/c&gt;.
+           You can also specify a unit and the name of the column like this: &lt;c&gt;Name (type&amp;lt;unit&amp;gt;)&lt;/c&gt;, or you can override only the name. If you don&#39;t want to specify all the columns, you can reference the columns by name like this: &lt;c&gt;ColumnName=type&lt;/c&gt;.&lt;/param&gt;
+           &lt;param name=&#39;HasHeaders&#39;&gt;Whether the sample contains the names of the columns as its first line.&lt;/param&gt;
+           &lt;param name=&#39;IgnoreErrors&#39;&gt;Whether to ignore rows that have the wrong number of columns or which can&#39;t be parsed using the inferred or specified schema. Otherwise an exception is thrown when these rows are encountered.&lt;/param&gt;
+           &lt;param name=&#39;SkipRows&#39;&gt;Skips the first n rows of the CSV file.&lt;/param&gt;
+           &lt;param name=&#39;AssumeMissingValues&#39;&gt;When set to true, the type provider will assume all columns can have missing values, even if in the provided sample all values are present. Defaults to false.&lt;/param&gt;
+           &lt;param name=&#39;PreferOptionals&#39;&gt;When set to true, inference will prefer to use the option type instead of nullable types, &lt;c&gt;double.NaN&lt;/c&gt; or &lt;c&gt;&quot;&quot;&lt;/c&gt; for missing values. Defaults to false.&lt;/param&gt;
+           &lt;param name=&#39;Quote&#39;&gt;The quotation mark (for surrounding values containing the delimiter). Defaults to &lt;c&gt;&quot;&lt;/c&gt;.&lt;/param&gt;
+           &lt;param name=&#39;MissingValues&#39;&gt;The set of strings recogized as missing values specified as a comma-separated string (e.g., &quot;NA,N/A&quot;). Defaults to &lt;c&gt;NaN,NA,N/A,#N/A,:,-,TBA,TBD&lt;/c&gt;.&lt;/param&gt;
+           &lt;param name=&#39;CacheRows&#39;&gt;Whether the rows should be caches so they can be iterated multiple times. Defaults to true. Disable for large datasets.&lt;/param&gt;
+           &lt;param name=&#39;Culture&#39;&gt;The culture used for parsing numbers and dates. Defaults to the invariant culture.&lt;/param&gt;
+           &lt;param name=&#39;Encoding&#39;&gt;The encoding used to read the sample. You can specify either the character set name or the codepage number. Defaults to UTF8 for files, and to ISO-8859-1 the for HTTP requests, unless &lt;c&gt;charset&lt;/c&gt; is specified in the &lt;c&gt;Content-Type&lt;/c&gt; response header.&lt;/param&gt;
+           &lt;param name=&#39;ResolutionFolder&#39;&gt;A directory that is used when resolving relative file references (at design time and in hosted execution).&lt;/param&gt;
+           &lt;param name=&#39;EmbeddedResource&#39;&gt;When specified, the type provider first attempts to load the sample from the specified resource 
+              (e.g. &#39;MyCompany.MyAssembly, resource_name.csv&#39;). This is useful when exposing types generated by the type provider.&lt;/param&gt;</em><br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;</div>
+<div class="fsdocs-tip" id="fs27">HttpResponseWithStream.Headers: Map&lt;string,string&gt;<br /><em>&lt;summary&gt;
+ If the same header is present multiple times, the values will be concatenated with comma as the separator
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs28">val take: count: int -&gt; source: seq&lt;&#39;T&gt; -&gt; seq&lt;&#39;T&gt;<br /><em>&lt;summary&gt;Returns the first N elements of the sequence.&lt;/summary&gt;<br />&lt;remarks&gt;Throws &lt;c&gt;InvalidOperationException&lt;/c&gt;
+ if the count exceeds the number of elements in the sequence. &lt;c&gt;Seq.truncate&lt;/c&gt;
+ returns as many items as the sequence contains instead of throwing an exception.&lt;/remarks&gt;<br />&lt;param name=&quot;count&quot;&gt;The number of items to take.&lt;/param&gt;<br />&lt;param name=&quot;source&quot;&gt;The input sequence.&lt;/param&gt;<br />&lt;returns&gt;The result sequence.&lt;/returns&gt;<br />&lt;exception cref=&quot;T:System.ArgumentNullException&quot;&gt;Thrown when the input sequence is null.&lt;/exception&gt;<br />&lt;exception cref=&quot;T:System.ArgumentException&quot;&gt;Thrown when the input sequence is empty and the count is greater than zero.&lt;/exception&gt;<br />&lt;exception cref=&quot;T:System.InvalidOperationException&quot;&gt;Thrown when count exceeds the number of elements
+ in the sequence.&lt;/exception&gt;<br />&lt;example id=&quot;take-1&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let inputs = [&quot;a&quot;; &quot;b&quot;; &quot;c&quot;; &quot;d&quot;]
+
+ inputs |&amp;gt; Seq.take 2
+ &lt;/code&gt;
+ Evaluates to a sequence yielding the same results as &lt;c&gt;[&quot;a&quot;; &quot;b&quot;]&lt;/c&gt;&lt;/example&gt;<br />&lt;example id=&quot;take-2&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let inputs = [&quot;a&quot;; &quot;b&quot;; &quot;c&quot;; &quot;d&quot;]
+
+ inputs |&amp;gt; Seq.take 6
+ &lt;/code&gt;
+ Throws &lt;c&gt;InvalidOperationException&lt;/c&gt;.
+ &lt;/example&gt;<br />&lt;example id=&quot;take-3&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let inputs = [&quot;a&quot;; &quot;b&quot;; &quot;c&quot;; &quot;d&quot;]
+
+ inputs |&amp;gt; Seq.take 0
+ &lt;/code&gt;
+ Evaluates to a sequence yielding no results.
+ &lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs29">Multiple items<br />type SignalPortfolioObs =
+  {
+    Month: DateTime
+    Name: string
+    ExcessReturn: float
+  }<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;</div>
+<div class="fsdocs-tip" id="fs30">Multiple items<br />SignalPortfolioObs.Month: DateTime<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;</div>
+<div class="fsdocs-tip" id="fs31">Multiple items<br />[&lt;Struct&gt;]
+type DateTime =
+  new: year: int * month: int * day: int -&gt; unit + 10 overloads
+  member Add: value: TimeSpan -&gt; DateTime
+  member AddDays: value: float -&gt; DateTime
+  member AddHours: value: float -&gt; DateTime
+  member AddMilliseconds: value: float -&gt; DateTime
+  member AddMinutes: value: float -&gt; DateTime
+  member AddMonths: months: int -&gt; DateTime
+  member AddSeconds: value: float -&gt; DateTime
+  member AddTicks: value: int64 -&gt; DateTime
+  member AddYears: value: int -&gt; DateTime
+  ...<br /><em>&lt;summary&gt;Represents an instant in time, typically expressed as a date and time of day.&lt;/summary&gt;</em><br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />DateTime ()<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(ticks: int64) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(ticks: int64, kind: DateTimeKind) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, calendar: Globalization.Calendar) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int, kind: DateTimeKind) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int, calendar: Globalization.Calendar) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int, millisecond: int) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int, millisecond: int, kind: DateTimeKind) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em></div>
+<div class="fsdocs-tip" id="fs32">Multiple items<br />SignalPortfolioObs.Name: string<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;</div>
+<div class="fsdocs-tip" id="fs33">Multiple items<br />val string: value: &#39;T -&gt; string<br /><em>&lt;summary&gt;Converts the argument to a string using &lt;c&gt;ToString&lt;/c&gt;.&lt;/summary&gt;<br />&lt;remarks&gt;For standard integer and floating point values the and any type that implements &lt;c&gt;IFormattable&lt;/c&gt;&lt;c&gt;ToString&lt;/c&gt; conversion uses &lt;c&gt;CultureInfo.InvariantCulture&lt;/c&gt;. &lt;/remarks&gt;<br />&lt;param name=&quot;value&quot;&gt;The input value.&lt;/param&gt;<br />&lt;returns&gt;The converted string.&lt;/returns&gt;<br />&lt;example id=&quot;string-example&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;&lt;/code&gt;&lt;/example&gt;</em><br /><br />--------------------<br />type string = String<br /><em>&lt;summary&gt;An abbreviation for the CLI type &lt;see cref=&quot;T:System.String&quot; /&gt;.&lt;/summary&gt;<br />&lt;category&gt;Basic Types&lt;/category&gt;</em><br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;</div>
+<div class="fsdocs-tip" id="fs34">Multiple items<br />SignalPortfolioObs.ExcessReturn: float<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;</div>
+<div class="fsdocs-tip" id="fs35">Multiple items<br />val float: value: &#39;T -&gt; float (requires member op_Explicit)<br /><em>&lt;summary&gt;Converts the argument to 64-bit float. This is a direct conversion for all 
+ primitive numeric types. For strings, the input is converted using &lt;c&gt;Double.Parse()&lt;/c&gt;  
+ with InvariantCulture settings. Otherwise the operation requires an appropriate
+ static conversion method on the input type.&lt;/summary&gt;<br />&lt;param name=&quot;value&quot;&gt;The input value.&lt;/param&gt;<br />&lt;returns&gt;The converted float&lt;/returns&gt;<br />&lt;example id=&quot;float-example&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;&lt;/code&gt;&lt;/example&gt;</em><br /><br />--------------------<br />[&lt;Struct&gt;]
+type float = Double<br /><em>&lt;summary&gt;An abbreviation for the CLI type &lt;see cref=&quot;T:System.Double&quot; /&gt;.&lt;/summary&gt;<br />&lt;category&gt;Basic Types&lt;/category&gt;</em><br /><br />--------------------<br />type float&lt;&#39;Measure&gt; =
+  float<br /><em>&lt;summary&gt;The type of double-precision floating point numbers, annotated with a unit of measure.
+ The unit of measure is erased in compiled code and when values of this type
+ are analyzed using reflection. The type is representationally equivalent to
+ &lt;see cref=&quot;T:System.Double&quot; /&gt;.&lt;/summary&gt;<br />&lt;category index=&quot;6&quot;&gt;Basic Types with Units of Measure&lt;/category&gt;</em><br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;</div>
+<div class="fsdocs-tip" id="fs36">Multiple items<br />val long: SignalPortfolioObs list<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;</div>
+<div class="fsdocs-tip" id="fs37">val toList: source: seq&lt;&#39;T&gt; -&gt; &#39;T list<br /><em>&lt;summary&gt;Builds a list from the given collection.&lt;/summary&gt;<br />&lt;param name=&quot;source&quot;&gt;The input sequence.&lt;/param&gt;<br />&lt;returns&gt;The result list.&lt;/returns&gt;<br />&lt;exception cref=&quot;T:System.ArgumentNullException&quot;&gt;Thrown when the input sequence is null.&lt;/exception&gt;<br />&lt;example id=&quot;tolist-1&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let inputs = seq { 1; 2; 5 }
+
+ inputs |&amp;gt; Seq.toList
+ &lt;/code&gt;
+ Evaluates to &lt;c&gt;[ 1; 2; 5 ]&lt;/c&gt;.
+ &lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs38">Multiple items<br />module List
+
+from FSharp.Stats<br /><em>&lt;summary&gt;
+ Module to compute common statistical measure on list
+&lt;/summary&gt;</em><br /><br />--------------------<br />module List
+
+from Microsoft.FSharp.Collections<br /><em>&lt;summary&gt;Contains operations for working with values of type &lt;see cref=&quot;T:Microsoft.FSharp.Collections.list`1&quot; /&gt;.&lt;/summary&gt;<br />&lt;namespacedoc&gt;&lt;summary&gt;Operations for collections such as lists, arrays, sets, maps and sequences. See also 
+    &lt;a href=&quot;https://docs.microsoft.com/dotnet/fsharp/language-reference/fsharp-collection-types&quot;&gt;F# Collection Types&lt;/a&gt; in the F# Language Guide.
+ &lt;/summary&gt;&lt;/namespacedoc&gt;</em><br /><br />--------------------<br />type List&lt;&#39;T&gt; =
+  | op_Nil
+  | op_ColonColon of Head: &#39;T * Tail: &#39;T list
+  interface IReadOnlyList&lt;&#39;T&gt;
+  interface IReadOnlyCollection&lt;&#39;T&gt;
+  interface IEnumerable
+  interface IEnumerable&lt;&#39;T&gt;
+  member GetReverseIndex: rank: int * offset: int -&gt; int
+  member GetSlice: startIndex: int option * endIndex: int option -&gt; &#39;T list
+  static member Cons: head: &#39;T * tail: &#39;T list -&gt; &#39;T list
+  member Head: &#39;T
+  member IsEmpty: bool
+  member Item: index: int -&gt; &#39;T with get
+  ...<br /><em>&lt;summary&gt;The type of immutable singly-linked lists.&lt;/summary&gt;<br />&lt;remarks&gt;Use the constructors &lt;c&gt;[]&lt;/c&gt; and &lt;c&gt;::&lt;/c&gt; (infix) to create values of this type, or
+ the notation &lt;c&gt;[1;2;3]&lt;/c&gt;. Use the values in the &lt;c&gt;List&lt;/c&gt; module to manipulate 
+ values of this type, or pattern match against the values directly.
+ &lt;/remarks&gt;<br />&lt;exclude /&gt;</em><br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;</div>
+<div class="fsdocs-tip" id="fs39">val filter: predicate: (&#39;T -&gt; bool) -&gt; list: &#39;T list -&gt; &#39;T list<br /><em>&lt;summary&gt;Returns a new collection containing only the elements of the collection
+ for which the given predicate returns &quot;true&quot;&lt;/summary&gt;<br />&lt;param name=&quot;predicate&quot;&gt;The function to test the input elements.&lt;/param&gt;<br />&lt;param name=&quot;list&quot;&gt;The input list.&lt;/param&gt;<br />&lt;returns&gt;A list containing only the elements that satisfy the predicate.&lt;/returns&gt;<br />&lt;example id=&quot;filter-1&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let input = [1, &quot;Luke&quot;; 2, &quot;Kirk&quot;; 3, &quot;Kenobi&quot;; 4, &quot;Spock&quot;]
+
+ let isComingFromStarTrek (x,_) = isEven x
+ 
+ input |&amp;gt; List.filter isComingFromStarTrek
+ &lt;/code&gt;
+ Evaluates to &lt;c&gt;[(2, &quot;Kirk&quot;); (4, &quot;Spock&quot;)]&lt;/c&gt;&lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs40">Multiple items<br />val row: obj<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;</div>
+<div class="fsdocs-tip" id="fs41">Multiple items<br />union case Option.Some: Value: &#39;T -&gt; Option&lt;&#39;T&gt;<br /><em>&lt;summary&gt;The representation of &quot;Value of type &#39;T&quot;&lt;/summary&gt;<br />&lt;param name=&quot;Value&quot;&gt;The input value.&lt;/param&gt;<br />&lt;returns&gt;An option representing the value.&lt;/returns&gt;</em><br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;</div>
+<div class="fsdocs-tip" id="fs42">val map: mapping: (&#39;T -&gt; &#39;U) -&gt; list: &#39;T list -&gt; &#39;U list<br /><em>&lt;summary&gt;Builds a new collection whose elements are the results of applying the given function
+ to each of the elements of the collection.&lt;/summary&gt;<br />&lt;param name=&quot;mapping&quot;&gt;The function to transform elements from the input list.&lt;/param&gt;<br />&lt;param name=&quot;list&quot;&gt;The input list.&lt;/param&gt;<br />&lt;returns&gt;The list of transformed elements.&lt;/returns&gt;<br />&lt;example id=&quot;map-1&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let inputs = [ &quot;a&quot;; &quot;bbb&quot;; &quot;cc&quot; ]
+
+ inputs |&amp;gt; List.map (fun x -&amp;gt; x.Length)
+ &lt;/code&gt;
+ Evaluates to &lt;c&gt;[ 1; 3; 2 ]&lt;/c&gt;&lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs43">Multiple items<br />val short: SignalPortfolioObs list<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;</div>
+<div class="fsdocs-tip" id="fs44">Multiple items<br />val shortByMonth: Map&lt;DateTime,SignalPortfolioObs&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;</div>
+<div class="fsdocs-tip" id="fs45">val x: SignalPortfolioObs</div>
+<div class="fsdocs-tip" id="fs46">SignalPortfolioObs.Month: DateTime</div>
+<div class="fsdocs-tip" id="fs47">Multiple items<br />module Map
+
+from Microsoft.FSharp.Collections<br /><em>&lt;summary&gt;Contains operations for working with values of type &lt;see cref=&quot;T:Microsoft.FSharp.Collections.Map`2&quot; /&gt;.&lt;/summary&gt;</em><br /><br />--------------------<br />type Map&lt;&#39;Key,&#39;Value (requires comparison)&gt; =
+  interface IReadOnlyDictionary&lt;&#39;Key,&#39;Value&gt;
+  interface IReadOnlyCollection&lt;KeyValuePair&lt;&#39;Key,&#39;Value&gt;&gt;
+  interface IEnumerable
+  interface IComparable
+  interface IEnumerable&lt;KeyValuePair&lt;&#39;Key,&#39;Value&gt;&gt;
+  interface ICollection&lt;KeyValuePair&lt;&#39;Key,&#39;Value&gt;&gt;
+  interface IDictionary&lt;&#39;Key,&#39;Value&gt;
+  new: elements: seq&lt;&#39;Key * &#39;Value&gt; -&gt; Map&lt;&#39;Key,&#39;Value&gt;
+  member Add: key: &#39;Key * value: &#39;Value -&gt; Map&lt;&#39;Key,&#39;Value&gt;
+  member Change: key: &#39;Key * f: (&#39;Value option -&gt; &#39;Value option) -&gt; Map&lt;&#39;Key,&#39;Value&gt;
+  ...<br /><em>&lt;summary&gt;Immutable maps based on binary trees, where keys are ordered by F# generic comparison. By default
+ comparison is the F# structural comparison function or uses implementations of the IComparable interface on key values.&lt;/summary&gt;<br />&lt;remarks&gt;See the &lt;see cref=&quot;T:Microsoft.FSharp.Collections.MapModule&quot; /&gt; module for further operations on maps.
+
+ All members of this class are thread-safe and may be used concurrently from multiple threads.&lt;/remarks&gt;</em><br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />new: elements: seq&lt;&#39;Key * &#39;Value&gt; -&gt; Map&lt;&#39;Key,&#39;Value&gt;</div>
+<div class="fsdocs-tip" id="fs48">Multiple items<br />val longShort: SignalPortfolioObs list<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;<br /><br />--------------------<br />CsvProvider&lt;...&gt;() : CsvProvider&lt;...&gt;<br />CsvProvider&lt;...&gt;(rows: Collections.Generic.IEnumerable&lt;CsvProvider&lt;...&gt;.Row&gt;) : CsvProvider&lt;...&gt;</div>
+<div class="fsdocs-tip" id="fs49">val l: SignalPortfolioObs</div>
+<div class="fsdocs-tip" id="fs50">val s: SignalPortfolioObs</div>
+<div class="fsdocs-tip" id="fs51">SignalPortfolioObs.ExcessReturn: float</div>
+
+        </div>
+
+        <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+        <script type="text/javascript">var fsdocs_search_baseurl = '/Teaching/';</script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+        <script type="text/javascript" src="/Teaching/content/fsdocs-search.js"></script>
+        <!-- END SEARCH BOX: this adds support for the search box -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    </div>
+</body>
+
+</html>

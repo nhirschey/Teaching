@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Map collection</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="">
+
+    <link rel="stylesheet" id="theme_link" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.6.0/materia/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    <link type="text/css" rel="stylesheet" href="/Teaching/content/navbar-fixed-left.css" />
+    <link type="text/css" rel="stylesheet" href="/Teaching/content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="/Teaching/content/fsdocs-custom.css" />
+    <script type="text/javascript" src="/Teaching/content/fsdocs-tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+    
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-light bg-secondary fixed-left" id="fsdocs-nav">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse navbar-nav-scroll" id="navbarsExampleDefault">
+            <a href="/Teaching/"><img id="fsdocs-logo" src="/Teaching/img/logo.png" /></a>
+            <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+            <div id="header">
+                <div class="searchbox" id="fsdocs-searchbox">
+                    <label for="search-by">
+                        <i class="fas fa-search"></i>
+                    </label>
+                    <input data-search-input="" id="search-by" type="search" placeholder="Search..." />
+                    <span data-search-clear="">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- END SEARCH BOX: this adds support for the search box -->
+            <ul class="navbar-nav">
+                <li class="nav-header">Links</li>
+                <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="https://github.com/nhirschey/Teaching/blob/main/LICENSE.md">License</a></li>
+                <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="https://github.com/nhirschey/Teaching">Source Repository</a></li>
+                <li class="nav-header">
+  Getting Started
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/install.html">
+    Install Software
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/learn-fsharp.html">
+    Learn F#
+  </a>
+</li>             
+<li class="nav-header">
+  Lectures
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/portfolio-statistics.html">
+    Basic Portfolio Statistics
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/portfolio-returns.html">
+    Portfolio Returns
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/PortfolioFormation-SimpleExample.html">
+    Building a strategy
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/Momentum-Class.html">
+    Momentum Signal
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/VolatilityTiming.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/optimization.html">
+    Optimization
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/sentiment-mlnet.html">
+    Sentiment classification
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/calls-nn.html">
+    Calls NN
+  </a>
+</li>             
+<li class="nav-header">
+  Assignments
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/football-1-download-data.html">
+    Webscraping HTML to CSV
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/football-tuples-and-records.html">
+    Tuples and Records (with solutions)
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/football-collection-functions.html">
+    Collection functions (with solutions)
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/football-plotting.html">
+    Plotting (with solutions)
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/select-project-signal.html">
+    Select Project Signals
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/assignment-signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/assignment-performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/assignment-volatility-timing.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-header">
+  Practice Quizzes
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-list-module.html">
+    List module functions
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-options.html">
+    Options
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-match-expressions.html">
+    Match expressions
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-map-collection.html">
+    Map collection
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-discriminated-union.html">
+    Dicriminated Union
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-portfolios.html">
+    Portfolios
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-factors.html">
+    Factors
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-folding.html">
+    Fold and Friends
+  </a>
+</li>             
+<li class="nav-header">
+  Project
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/project/signal-exploration.html">
+    Signal Exploration
+  </a>
+</li>             
+<li class="nav-header">
+  Other
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/Common.html">
+    Common
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/Portfolio.html">
+    Portfolio
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/YahooFinance.html">
+    YahooFinance
+  </a>
+</li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="masthead">
+            <h3 class="muted"><a href="/Teaching/">Teaching</a></h3>
+        </div>
+        <hr />
+        <div class="container" id="fsdocs-content">
+            
+<p><a href="https://mybinder.org/v2/gh/nhirschey/teaching/gh-pages?filepath=quizzes/quiz-map-collection.ipynb"><img src="../img/badge-binder.svg" alt="Binder" /></a>&emsp;
+<a href="/Teaching//quizzes/quiz-map-collection.fsx"><img src="../img/badge-script.svg" alt="Script" /></a>&emsp;
+<a href="/Teaching//quizzes/quiz-map-collection.ipynb"><img src="../img/badge-notebook.svg" alt="Notebook" /></a></p>
+<h1><a name="Map-Collections" class="anchor" href="#Map-Collections">Map Collections</a></h1>
+<p>If we're doing lookups, then a good data structure
+for that is a Map collection. Maps consist of key and value pairs.
+If you look up the key, you get the value.</p>
+<p>If you need to do lookups on a key, maps are much more efficient than trying to do the same thing with a list or array.</p>
+<ul>
+<li>
+Some references.
+<ul>
+<li><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-collections-fsharpmap-2.html">Map type documentation</a></li>
+<li><a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-collections-mapmodule.html">Map module documentation</a></li>
+<li><a href="https://en.wikibooks.org/wiki/F_Sharp_Programming/Sets_and_Maps#Maps">F# Wikibook</a></li>
+</ul>
+</li>
+</ul>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="id">exampleMap</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="fn">Map</span> <span class="pn">[</span><span class="pn">(</span><span class="s">&quot;a&quot;</span><span class="pn">,</span> <span class="s">&quot;hey&quot;</span><span class="pn">)</span><span class="pn">;</span> <span class="pn">(</span><span class="s">&quot;b&quot;</span><span class="pn">,</span><span class="s">&quot;ho&quot;</span><span class="pn">)</span><span class="pn">]</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="id">exampleMap2</span> <span class="o">=</span> <span class="pn">[</span><span class="pn">(</span><span class="n">4</span><span class="pn">,</span><span class="s">&quot;apple&quot;</span><span class="pn">)</span><span class="pn">;</span> <span class="pn">(</span><span class="n">10</span><span class="pn">,</span><span class="s">&quot;pizza&quot;</span><span class="pn">)</span><span class="pn">]</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs2', 4)" onmouseover="showTip(event, 'fs2', 4)" class="fn">Map</span>
+<span onmouseout="hideTip(event, 'fs1', 5)" onmouseover="showTip(event, 'fs1', 5)" class="id">exampleMap</span><span class="pn">.</span><span class="pn">[</span><span class="s">&quot;a&quot;</span><span class="pn">]</span>
+<span onmouseout="hideTip(event, 'fs2', 6)" onmouseover="showTip(event, 'fs2', 6)" class="m">Map</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs4', 7)" onmouseover="showTip(event, 'fs4', 7)" class="id">find</span> <span class="s">&quot;a&quot;</span> <span onmouseout="hideTip(event, 'fs1', 8)" onmouseover="showTip(event, 'fs1', 8)" class="id">exampleMap</span>
+<span onmouseout="hideTip(event, 'fs3', 9)" onmouseover="showTip(event, 'fs3', 9)" class="id">exampleMap2</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs2', 10)" onmouseover="showTip(event, 'fs2', 10)" class="m">Map</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs4', 11)" onmouseover="showTip(event, 'fs4', 11)" class="id">find</span> <span class="n">10</span>
+
+<span class="c">// Comparing performance of list vs. Map lookups.</span>
+
+<span class="pp">#time</span> <span class="s">&quot;on&quot;</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs5', 12)" onmouseover="showTip(event, 'fs5', 12)" class="fn">isOdd</span> <span onmouseout="hideTip(event, 'fs6', 13)" onmouseover="showTip(event, 'fs6', 13)" class="fn">x</span> <span class="o">=</span> <span class="k">if</span> <span onmouseout="hideTip(event, 'fs6', 14)" onmouseover="showTip(event, 'fs6', 14)" class="fn">x</span> <span class="o">%</span> <span class="n">2</span> <span class="o">=</span> <span class="n">0</span> <span class="k">then</span> <span class="k">false</span> <span class="k">else</span> <span class="k">true</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs7', 15)" onmouseover="showTip(event, 'fs7', 15)" class="id">arr</span> <span class="o">=</span> <span class="pn">[</span> <span class="k">for</span> <span onmouseout="hideTip(event, 'fs8', 16)" onmouseover="showTip(event, 'fs8', 16)" class="fn">i</span> <span class="o">=</span> <span class="n">1</span> <span class="k">to</span> <span class="n">100_000</span> <span class="k">do</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs8', 17)" onmouseover="showTip(event, 'fs8', 17)" class="fn">i</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs5', 18)" onmouseover="showTip(event, 'fs5', 18)" class="fn">isOdd</span> <span onmouseout="hideTip(event, 'fs8', 19)" onmouseover="showTip(event, 'fs8', 19)" class="fn">i</span><span class="pn">)</span> <span class="pn">]</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs9', 20)" onmouseover="showTip(event, 'fs9', 20)" class="id">arrMap</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs7', 21)" onmouseover="showTip(event, 'fs7', 21)" class="id">arr</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs2', 22)" onmouseover="showTip(event, 'fs2', 22)" class="fn">Map</span>
+
+<span onmouseout="hideTip(event, 'fs7', 23)" onmouseover="showTip(event, 'fs7', 23)" class="id">arr</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 24)" onmouseover="showTip(event, 'fs10', 24)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs11', 25)" onmouseover="showTip(event, 'fs11', 25)" class="id">find</span> <span class="pn">(</span><span class="k">fun</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs12', 26)" onmouseover="showTip(event, 'fs12', 26)" class="fn">a</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs13', 27)" onmouseover="showTip(event, 'fs13', 27)" class="fn">b</span><span class="pn">)</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs12', 28)" onmouseover="showTip(event, 'fs12', 28)" class="fn">a</span> <span class="o">=</span> <span class="n">100</span><span class="pn">)</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>(100, false)</code></pre></td></tr></table>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs9', 29)" onmouseover="showTip(event, 'fs9', 29)" class="id">arrMap</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs2', 30)" onmouseover="showTip(event, 'fs2', 30)" class="m">Map</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs4', 31)" onmouseover="showTip(event, 'fs4', 31)" class="id">find</span> <span class="n">101</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>true</code></pre></td></tr></table>
+<p>Compare performance to find something at the beginning of an list.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">for</span> <span onmouseout="hideTip(event, 'fs8', 32)" onmouseover="showTip(event, 'fs8', 32)" class="fn">i</span> <span class="o">=</span> <span class="n">1</span> <span class="k">to</span> <span class="n">100</span> <span class="k">do</span> 
+    <span onmouseout="hideTip(event, 'fs7', 33)" onmouseover="showTip(event, 'fs7', 33)" class="id">arr</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 34)" onmouseover="showTip(event, 'fs10', 34)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs11', 35)" onmouseover="showTip(event, 'fs11', 35)" class="id">find</span><span class="pn">(</span><span class="k">fun</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs12', 36)" onmouseover="showTip(event, 'fs12', 36)" class="fn">a</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs13', 37)" onmouseover="showTip(event, 'fs13', 37)" class="fn">b</span><span class="pn">)</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs12', 38)" onmouseover="showTip(event, 'fs12', 38)" class="fn">a</span> <span class="o">=</span> <span class="n">1_000</span><span class="pn">)</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs14', 39)" onmouseover="showTip(event, 'fs14', 39)" class="fn">ignore</span>
+</code></pre>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">for</span> <span onmouseout="hideTip(event, 'fs8', 40)" onmouseover="showTip(event, 'fs8', 40)" class="fn">i</span> <span class="o">=</span> <span class="n">1</span> <span class="k">to</span> <span class="n">100</span> <span class="k">do</span>
+    <span onmouseout="hideTip(event, 'fs9', 41)" onmouseover="showTip(event, 'fs9', 41)" class="id">arrMap</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs2', 42)" onmouseover="showTip(event, 'fs2', 42)" class="m">Map</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs4', 43)" onmouseover="showTip(event, 'fs4', 43)" class="id">find</span> <span class="n">1_000</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs14', 44)" onmouseover="showTip(event, 'fs14', 44)" class="fn">ignore</span>
+</code></pre>
+<p>Compare performance to find something that is towards the end of the list.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">for</span> <span onmouseout="hideTip(event, 'fs8', 45)" onmouseover="showTip(event, 'fs8', 45)" class="fn">i</span> <span class="o">=</span> <span class="n">1</span> <span class="k">to</span> <span class="n">100</span> <span class="k">do</span> 
+    <span onmouseout="hideTip(event, 'fs7', 46)" onmouseover="showTip(event, 'fs7', 46)" class="id">arr</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 47)" onmouseover="showTip(event, 'fs10', 47)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs11', 48)" onmouseover="showTip(event, 'fs11', 48)" class="id">find</span><span class="pn">(</span><span class="k">fun</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs12', 49)" onmouseover="showTip(event, 'fs12', 49)" class="fn">a</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs13', 50)" onmouseover="showTip(event, 'fs13', 50)" class="fn">b</span><span class="pn">)</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs12', 51)" onmouseover="showTip(event, 'fs12', 51)" class="fn">a</span> <span class="o">=</span> <span class="n">99_000</span><span class="pn">)</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs14', 52)" onmouseover="showTip(event, 'fs14', 52)" class="fn">ignore</span>
+</code></pre>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">for</span> <span onmouseout="hideTip(event, 'fs8', 53)" onmouseover="showTip(event, 'fs8', 53)" class="fn">i</span> <span class="o">=</span> <span class="n">1</span> <span class="k">to</span> <span class="n">100</span> <span class="k">do</span>
+    <span onmouseout="hideTip(event, 'fs9', 54)" onmouseover="showTip(event, 'fs9', 54)" class="id">arrMap</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs2', 55)" onmouseover="showTip(event, 'fs2', 55)" class="m">Map</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs4', 56)" onmouseover="showTip(event, 'fs4', 56)" class="id">find</span> <span class="n">99_000</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs14', 57)" onmouseover="showTip(event, 'fs14', 57)" class="fn">ignore</span>
+</code></pre>
+<h2><a name="Question-1" class="anchor" href="#Question-1">Question 1</a></h2>
+<p>Create a Map collection named <code>mapA</code>
+from the list <code>[("a",1);("b",2)]</code> where the first thing
+in the tuple is the key and the second thing is the value.</p>
+<ol>
+<li>Use <code>Map.tryFind</code> to retrieve the value for key <code>"a"</code></li>
+<li>Use <code>Map.tryFind</code> to retrieve the value for key <code>"c"</code></li>
+</ol>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<p>Create Map Collection:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs15', 58)" onmouseover="showTip(event, 'fs15', 58)" class="id">mapA</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs2', 59)" onmouseover="showTip(event, 'fs2', 59)" class="fn">Map</span> <span class="pn">[</span><span class="pn">(</span><span class="s">&quot;a&quot;</span><span class="pn">,</span><span class="n">1</span><span class="pn">)</span><span class="pn">;</span><span class="pn">(</span><span class="s">&quot;b&quot;</span><span class="pn">,</span><span class="n">2</span><span class="pn">)</span><span class="pn">]</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>Real: 00:00:00.002, CPU: 00:00:00.000, GC gen0: 0, gen1: 0, gen2: 0
+val mapA: Map&lt;string,int&gt; = map [("a", 1); ("b", 2)]</code></pre></td></tr></table>
+<p>or</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs16', 60)" onmouseover="showTip(event, 'fs16', 60)" class="id">mapA2</span> <span class="o">=</span> <span class="pn">[</span><span class="pn">(</span><span class="s">&quot;a&quot;</span><span class="pn">,</span><span class="n">1</span><span class="pn">)</span><span class="pn">;</span><span class="pn">(</span><span class="s">&quot;b&quot;</span><span class="pn">,</span><span class="n">2</span><span class="pn">)</span><span class="pn">]</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs2', 61)" onmouseover="showTip(event, 'fs2', 61)" class="fn">Map</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>Real: 00:00:00.000, CPU: 00:00:00.000, GC gen0: 0, gen1: 0, gen2: 0
+val mapA2: Map&lt;string,int&gt; = map [("a", 1); ("b", 2)]</code></pre></td></tr></table>
+<p>or</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs17', 62)" onmouseover="showTip(event, 'fs17', 62)" class="id">mapA3</span> <span class="o">=</span> <span class="pn">[</span><span class="pn">(</span><span class="s">&quot;a&quot;</span><span class="pn">,</span><span class="n">1</span><span class="pn">)</span><span class="pn">;</span><span class="pn">(</span><span class="s">&quot;b&quot;</span><span class="pn">,</span><span class="n">2</span><span class="pn">)</span><span class="pn">]</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs2', 63)" onmouseover="showTip(event, 'fs2', 63)" class="m">Map</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs18', 64)" onmouseover="showTip(event, 'fs18', 64)" class="id">ofList</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>Real: 00:00:00.000, CPU: 00:00:00.015, GC gen0: 0, gen1: 0, gen2: 0
+val mapA3: Map&lt;string,int&gt; = map [("a", 1); ("b", 2)]</code></pre></td></tr></table>
+<p>Use <code>Map.tryFind</code> to retrieve the value for key <code>"a"</code>:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs2', 65)" onmouseover="showTip(event, 'fs2', 65)" class="m">Map</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs19', 66)" onmouseover="showTip(event, 'fs19', 66)" class="id">tryFind</span> <span class="s">&quot;a&quot;</span> <span onmouseout="hideTip(event, 'fs15', 67)" onmouseover="showTip(event, 'fs15', 67)" class="id">mapA</span>    <span class="c">// evaluates to Some 1</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>Real: 00:00:00.019, CPU: 00:00:00.015, GC gen0: 0, gen1: 0, gen2: 0
+val it: int option = Some 1</code></pre></td></tr></table>
+<p>or</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs15', 68)" onmouseover="showTip(event, 'fs15', 68)" class="id">mapA</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs2', 69)" onmouseover="showTip(event, 'fs2', 69)" class="m">Map</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs19', 70)" onmouseover="showTip(event, 'fs19', 70)" class="id">tryFind</span> <span class="s">&quot;a&quot;</span> <span class="c">// evaluates to Some 1</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>Real: 00:00:00.018, CPU: 00:00:00.031, GC gen0: 0, gen1: 0, gen2: 0
+val it: int option = Some 1</code></pre></td></tr></table>
+<p>Use <code>Map.tryFind</code> to retrieve the value for key <code>"c"</code>:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs2', 71)" onmouseover="showTip(event, 'fs2', 71)" class="m">Map</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs19', 72)" onmouseover="showTip(event, 'fs19', 72)" class="id">tryFind</span> <span class="s">&quot;c&quot;</span> <span onmouseout="hideTip(event, 'fs15', 73)" onmouseover="showTip(event, 'fs15', 73)" class="id">mapA</span>    <span class="c">// evaluates to None</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>Real: 00:00:00.040, CPU: 00:00:00.046, GC gen0: 1, gen1: 0, gen2: 0
+val it: int option = None</code></pre></td></tr></table>
+<p>or</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs15', 74)" onmouseover="showTip(event, 'fs15', 74)" class="id">mapA</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs2', 75)" onmouseover="showTip(event, 'fs2', 75)" class="m">Map</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs19', 76)" onmouseover="showTip(event, 'fs19', 76)" class="id">tryFind</span> <span class="s">&quot;c&quot;</span> <span class="c">// evaluates to None</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>Real: 00:00:00.018, CPU: 00:00:00.031, GC gen0: 0, gen1: 0, gen2: 0
+val it: int option = None</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<h2><a name="Question-2" class="anchor" href="#Question-2">Question 2</a></h2>
+<p>Create a Map collection named <code>mapB</code>
+from the list <code>[(1,"a");(2,"b")]</code> where the first thing
+in the tuple is the key and the second thing is the value.</p>
+<ol>
+<li>Use <code>Map.tryFind</code> to retrieve the value for key <code>1</code></li>
+<li>Use <code>Map.tryFind</code> to retrieve the value for key <code>3</code></li>
+</ol>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs20', 77)" onmouseover="showTip(event, 'fs20', 77)" class="id">mapB</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs2', 78)" onmouseover="showTip(event, 'fs2', 78)" class="fn">Map</span> <span class="pn">[</span><span class="pn">(</span><span class="n">1</span><span class="pn">,</span><span class="s">&quot;a&quot;</span><span class="pn">)</span><span class="pn">;</span><span class="pn">(</span><span class="n">2</span><span class="pn">,</span><span class="s">&quot;b&quot;</span><span class="pn">)</span><span class="pn">]</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs21', 79)" onmouseover="showTip(event, 'fs21', 79)" class="id">tryFindMapB1</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs2', 80)" onmouseover="showTip(event, 'fs2', 80)" class="m">Map</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs19', 81)" onmouseover="showTip(event, 'fs19', 81)" class="id">tryFind</span> <span class="n">1</span> <span onmouseout="hideTip(event, 'fs20', 82)" onmouseover="showTip(event, 'fs20', 82)" class="id">mapB</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs22', 83)" onmouseover="showTip(event, 'fs22', 83)" class="id">tryFindMapB3</span> <span class="o">=</span><span onmouseout="hideTip(event, 'fs2', 84)" onmouseover="showTip(event, 'fs2', 84)" class="m">Map</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs19', 85)" onmouseover="showTip(event, 'fs19', 85)" class="id">tryFind</span> <span class="n">3</span> <span onmouseout="hideTip(event, 'fs20', 86)" onmouseover="showTip(event, 'fs20', 86)" class="id">mapB</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>Real: 00:00:00.000, CPU: 00:00:00.015, GC gen0: 0, gen1: 0, gen2: 0
+val mapB: Map&lt;int,string&gt; = map [(1, "a"); (2, "b")]
+val tryFindMapB1: string option = Some "a"
+val tryFindMapB3: string option = None</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<h2><a name="Question-3" class="anchor" href="#Question-3">Question 3</a></h2>
+<p>Use this list</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">type</span> <span onmouseout="hideTip(event, 'fs23', 87)" onmouseover="showTip(event, 'fs23', 87)" class="rt">StockDays3</span> <span class="o">=</span> 
+    <span class="pn">{</span>
+        <span onmouseout="hideTip(event, 'fs24', 88)" onmouseover="showTip(event, 'fs24', 88)" class="prop">Day</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs25', 89)" onmouseover="showTip(event, 'fs25', 89)" class="vt">int</span>
+        <span onmouseout="hideTip(event, 'fs26', 90)" onmouseover="showTip(event, 'fs26', 90)" class="prop">Price</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs27', 91)" onmouseover="showTip(event, 'fs27', 91)" class="vt">decimal</span>
+        <span onmouseout="hideTip(event, 'fs28', 92)" onmouseover="showTip(event, 'fs28', 92)" class="prop">Dividend</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs27', 93)" onmouseover="showTip(event, 'fs27', 93)" class="vt">decimal</span> <span onmouseout="hideTip(event, 'fs29', 94)" onmouseover="showTip(event, 'fs29', 94)" class="rt">Option</span> 
+    <span class="pn">}</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs30', 95)" onmouseover="showTip(event, 'fs30', 95)" class="id">stockDays3</span> <span class="o">=</span> 
+    <span class="pn">[</span> <span class="k">for</span> <span onmouseout="hideTip(event, 'fs31', 96)" onmouseover="showTip(event, 'fs31', 96)" class="fn">day</span> <span class="o">=</span> <span class="n">0</span> <span class="k">to</span> <span class="n">5</span> <span class="k">do</span> 
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs32', 97)" onmouseover="showTip(event, 'fs32', 97)" class="fn">dividend</span> <span class="o">=</span> <span class="k">if</span> <span onmouseout="hideTip(event, 'fs31', 98)" onmouseover="showTip(event, 'fs31', 98)" class="fn">day</span> <span class="o">%</span> <span class="n">2</span> <span class="o">=</span> <span class="n">0</span> <span class="k">then</span> <span onmouseout="hideTip(event, 'fs33', 99)" onmouseover="showTip(event, 'fs33', 99)" class="uc">None</span> <span class="k">else</span> <span onmouseout="hideTip(event, 'fs34', 100)" onmouseover="showTip(event, 'fs34', 100)" class="uc">Some</span> <span class="n">1m</span>
+        <span class="pn">{</span> <span class="prop">Day</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs31', 101)" onmouseover="showTip(event, 'fs31', 101)" class="fn">day</span>
+          <span class="prop">Price</span> <span class="o">=</span> <span class="n">100m</span> <span class="o">+</span> <span onmouseout="hideTip(event, 'fs27', 102)" onmouseover="showTip(event, 'fs27', 102)" class="fn">decimal</span> <span onmouseout="hideTip(event, 'fs31', 103)" onmouseover="showTip(event, 'fs31', 103)" class="fn">day</span>
+          <span class="prop">Dividend</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs32', 104)" onmouseover="showTip(event, 'fs32', 104)" class="fn">dividend</span> <span class="pn">}</span> <span class="pn">]</span>     
+</code></pre>
+<ol>
+<li>
+Create a Map collection named <code>mapC</code>. The key should be the day field, 
+and the value should be the full <code>StockDays3</code> record.
+</li>
+<li>
+Create a Map collection named <code>mapD</code>. The key should be the full
+<code>StockDay3</code> record. The value should be the day field.
+</li>
+</ol>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs35', 105)" onmouseover="showTip(event, 'fs35', 105)" class="id">mapC</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs30', 106)" onmouseover="showTip(event, 'fs30', 106)" class="id">stockDays3</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 107)" onmouseover="showTip(event, 'fs10', 107)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs36', 108)" onmouseover="showTip(event, 'fs36', 108)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs37', 109)" onmouseover="showTip(event, 'fs37', 109)" class="fn">day</span> <span class="k">-&gt;</span>
+        <span class="c">// we just want to create a tuple of the (key,value).</span>
+        <span class="c">// The key and value can be anything.</span>
+        <span onmouseout="hideTip(event, 'fs37', 110)" onmouseover="showTip(event, 'fs37', 110)" class="fn">day</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs24', 111)" onmouseover="showTip(event, 'fs24', 111)" class="id">Day</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs37', 112)" onmouseover="showTip(event, 'fs37', 112)" class="fn">day</span><span class="pn">)</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs2', 113)" onmouseover="showTip(event, 'fs2', 113)" class="fn">Map</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>input.fsx (1,1)-(7,11) interactive warning Accessing the internal type, method or field 'Day@' from a previous evaluation in F# Interactive is deprecated and may cause subsequent access errors. To enable the legacy generation of a single dynamic assembly that can access internals, use the '--multiemit-' option.
+Real: 00:00:00.001, CPU: 00:00:00.000, GC gen0: 0, gen1: 0, gen2: 0
+val mapC: Map&lt;int,StockDays3&gt; =
+  map
+    [(0, { Day = 0
+           Price = 100M
+           Dividend = None }); (1, { Day = 1
+                                     Price = 101M
+                                     Dividend = Some 1M });
+     (2, { Day = 2
+           Price = 102M
+           Dividend = None }); (3, { Day = 3
+                                     Price = 103M
+                                     Dividend = Some 1M });
+     (4, { Day = 4
+           Price = 104M
+           Dividend = None }); (5, { Day = 5
+                                     Price = 105M
+                                     Dividend = Some 1M })]</code></pre></td></tr></table>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs38', 114)" onmouseover="showTip(event, 'fs38', 114)" class="id">mapD</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs30', 115)" onmouseover="showTip(event, 'fs30', 115)" class="id">stockDays3</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 116)" onmouseover="showTip(event, 'fs10', 116)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs36', 117)" onmouseover="showTip(event, 'fs36', 117)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs37', 118)" onmouseover="showTip(event, 'fs37', 118)" class="fn">day</span> <span class="k">-&gt;</span>
+        <span class="c">// we just want to create a tuple of the (key,value).</span>
+        <span class="c">// The key and value can be anything.</span>
+        <span onmouseout="hideTip(event, 'fs37', 119)" onmouseover="showTip(event, 'fs37', 119)" class="fn">day</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs37', 120)" onmouseover="showTip(event, 'fs37', 120)" class="fn">day</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs24', 121)" onmouseover="showTip(event, 'fs24', 121)" class="id">Day</span><span class="pn">)</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs2', 122)" onmouseover="showTip(event, 'fs2', 122)" class="fn">Map</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>input.fsx (1,1)-(7,11) interactive warning Accessing the internal type, method or field 'Day@' from a previous evaluation in F# Interactive is deprecated and may cause subsequent access errors. To enable the legacy generation of a single dynamic assembly that can access internals, use the '--multiemit-' option.
+Real: 00:00:00.003, CPU: 00:00:00.000, GC gen0: 0, gen1: 0, gen2: 0
+val mapD: Map&lt;StockDays3,int&gt; =
+  map
+    [({ Day = 0
+        Price = 100M
+        Dividend = None }, 0); ({ Day = 1
+                                  Price = 101M
+                                  Dividend = Some 1M }, 1);
+     ({ Day = 2
+        Price = 102M
+        Dividend = None }, 2); ({ Day = 3
+                                  Price = 103M
+                                  Dividend = Some 1M }, 3);
+     ({ Day = 4
+        Price = 104M
+        Dividend = None }, 4); ({ Day = 5
+                                  Price = 105M
+                                  Dividend = Some 1M }, 5)]</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<h2><a name="Question-4" class="anchor" href="#Question-4">Question 4</a></h2>
+<p>Consider a the following Map collection:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs39', 123)" onmouseover="showTip(event, 'fs39', 123)" class="id">mapp</span> <span class="o">=</span> <span class="pn">[</span><span class="pn">(</span><span class="s">&quot;a&quot;</span><span class="pn">,</span> <span class="n">1</span><span class="pn">)</span><span class="pn">;</span> <span class="pn">(</span><span class="s">&quot;d&quot;</span><span class="pn">,</span><span class="n">7</span><span class="pn">)</span><span class="pn">]</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs2', 124)" onmouseover="showTip(event, 'fs2', 124)" class="m">Map</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs18', 125)" onmouseover="showTip(event, 'fs18', 125)" class="id">ofList</span>
+</code></pre>
+<p>Write a function named <code>lookFor</code> that takes <code>x: string</code> as an input and
+looks up the value in <code>mapp</code>. If it finds <code>Some y</code>, print
+<code>"I found y"</code> to standard output where <code>y</code> is the actual integer found.
+If it finds <code>None</code>, print <code>"I did not find x"</code> to standard output
+where <code>x</code> is the actual key that was looked up. Test it by looking
+up <code>"a"</code>,<code>"b"</code>,"<code>c"</code>,<code>"d"</code></p>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs40', 126)" onmouseover="showTip(event, 'fs40', 126)" class="fn">lookFor</span> <span onmouseout="hideTip(event, 'fs41', 127)" onmouseover="showTip(event, 'fs41', 127)" class="fn">x</span> <span class="o">=</span>
+    <span class="k">match</span> <span onmouseout="hideTip(event, 'fs2', 128)" onmouseover="showTip(event, 'fs2', 128)" class="m">Map</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs19', 129)" onmouseover="showTip(event, 'fs19', 129)" class="id">tryFind</span> <span onmouseout="hideTip(event, 'fs41', 130)" onmouseover="showTip(event, 'fs41', 130)" class="fn">x</span> <span onmouseout="hideTip(event, 'fs39', 131)" onmouseover="showTip(event, 'fs39', 131)" class="id">mapp</span> <span class="k">with</span>
+    <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs34', 132)" onmouseover="showTip(event, 'fs34', 132)" class="uc">Some</span> <span onmouseout="hideTip(event, 'fs42', 133)" onmouseover="showTip(event, 'fs42', 133)" class="fn">y</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs43', 134)" onmouseover="showTip(event, 'fs43', 134)" class="fn">printfn</span> <span class="s">$&quot;I found {</span><span onmouseout="hideTip(event, 'fs42', 135)" onmouseover="showTip(event, 'fs42', 135)" class="fn">y</span><span class="s">}&quot;</span>
+    <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs33', 136)" onmouseover="showTip(event, 'fs33', 136)" class="uc">None</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs43', 137)" onmouseover="showTip(event, 'fs43', 137)" class="fn">printfn</span> <span class="s">$&quot;I did not find {</span><span onmouseout="hideTip(event, 'fs41', 138)" onmouseover="showTip(event, 'fs41', 138)" class="fn">x</span><span class="s">}&quot;</span> 
+
+<span onmouseout="hideTip(event, 'fs40', 139)" onmouseover="showTip(event, 'fs40', 139)" class="fn">lookFor</span> <span class="s">&quot;a&quot;</span> <span class="c">// I found 1</span>
+<span onmouseout="hideTip(event, 'fs40', 140)" onmouseover="showTip(event, 'fs40', 140)" class="fn">lookFor</span> <span class="s">&quot;b&quot;</span> <span class="c">// I did not find b</span>
+<span onmouseout="hideTip(event, 'fs40', 141)" onmouseover="showTip(event, 'fs40', 141)" class="fn">lookFor</span> <span class="s">&quot;c&quot;</span> <span class="c">// I did not find c</span>
+<span onmouseout="hideTip(event, 'fs40', 142)" onmouseover="showTip(event, 'fs40', 142)" class="fn">lookFor</span> <span class="s">&quot;d&quot;</span> <span class="c">// I found 7</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>I found 1
+I did not find b
+I did not find c
+I found 7
+Real: 00:00:00.018, CPU: 00:00:00.031, GC gen0: 0, gen1: 0, gen2: 0
+val lookFor: x: string -&gt; unit
+val it: unit = ()</code></pre></td></tr></table>
+<p>or iterate it
+we use iter instead of map
+because the result of iter has type <code>unit</code>,
+and iter is for when your function has type <code>unit</code>.
+Basically, unit type means the function did something
+(in this case, printed to standard output) but
+it doesn't actually return any output.<br />
+You could use map, but then we get <code>unit list</code> which
+isn't really what we want. We just want to iterate
+through the list and print to output.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="pn">[</span><span class="s">&quot;a&quot;</span><span class="pn">;</span> <span class="s">&quot;b&quot;</span><span class="pn">;</span> <span class="s">&quot;c&quot;</span><span class="pn">;</span> <span class="s">&quot;d&quot;</span><span class="pn">]</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 143)" onmouseover="showTip(event, 'fs10', 143)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs44', 144)" onmouseover="showTip(event, 'fs44', 144)" class="id">iter</span> <span onmouseout="hideTip(event, 'fs40', 145)" onmouseover="showTip(event, 'fs40', 145)" class="fn">lookFor</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>I found 1
+I did not find b
+I did not find c
+I found 7
+Real: 00:00:00.025, CPU: 00:00:00.031, GC gen0: 1, gen1: 0, gen2: 0
+val it: unit = ()</code></pre></td></tr></table>
+<p>or loop it</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">for</span> <span onmouseout="hideTip(event, 'fs45', 146)" onmouseover="showTip(event, 'fs45', 146)" class="fn">letter</span> <span class="k">in</span> <span class="pn">[</span><span class="s">&quot;a&quot;</span><span class="pn">;</span> <span class="s">&quot;b&quot;</span><span class="pn">;</span> <span class="s">&quot;c&quot;</span><span class="pn">;</span> <span class="s">&quot;d&quot;</span><span class="pn">]</span> <span class="k">do</span>
+    <span onmouseout="hideTip(event, 'fs43', 147)" onmouseover="showTip(event, 'fs43', 147)" class="fn">printfn</span> <span class="s">$&quot;{</span><span onmouseout="hideTip(event, 'fs40', 148)" onmouseover="showTip(event, 'fs40', 148)" class="fn">lookFor</span> <span onmouseout="hideTip(event, 'fs45', 149)" onmouseover="showTip(event, 'fs45', 149)" class="fn">letter</span><span class="s">}&quot;</span>    
+</code></pre>
+<table class="pre"><tr><td><pre><code>I found 1
+
+I did not find b
+
+I did not find c
+
+I found 7
+
+Real: 00:00:00.019, CPU: 00:00:00.031, GC gen0: 0, gen1: 0, gen2: 0
+val it: unit = ()</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<h1><a name="Joins" class="anchor" href="#Joins">Joins</a></h1>
+<p>For the following questions use this data:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">type</span> <span onmouseout="hideTip(event, 'fs46', 150)" onmouseover="showTip(event, 'fs46', 150)" class="rt">StockPriceOb</span> <span class="o">=</span>
+    <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs47', 151)" onmouseover="showTip(event, 'fs47', 151)" class="prop">Stock</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs48', 152)" onmouseover="showTip(event, 'fs48', 152)" class="rt">string</span> 
+      <span onmouseout="hideTip(event, 'fs49', 153)" onmouseover="showTip(event, 'fs49', 153)" class="prop">Time</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs25', 154)" onmouseover="showTip(event, 'fs25', 154)" class="vt">int</span>
+      <span onmouseout="hideTip(event, 'fs50', 155)" onmouseover="showTip(event, 'fs50', 155)" class="prop">Price</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs25', 156)" onmouseover="showTip(event, 'fs25', 156)" class="vt">int</span> <span class="pn">}</span>
+<span class="k">type</span> <span onmouseout="hideTip(event, 'fs51', 157)" onmouseover="showTip(event, 'fs51', 157)" class="rt">TwoStocksPriceOb</span> <span class="o">=</span>
+    <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs52', 158)" onmouseover="showTip(event, 'fs52', 158)" class="prop">Time</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs25', 159)" onmouseover="showTip(event, 'fs25', 159)" class="vt">int</span> 
+      <span onmouseout="hideTip(event, 'fs53', 160)" onmouseover="showTip(event, 'fs53', 160)" class="prop">PriceA</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs25', 161)" onmouseover="showTip(event, 'fs25', 161)" class="vt">int</span> <span onmouseout="hideTip(event, 'fs54', 162)" onmouseover="showTip(event, 'fs54', 162)" class="rt">option</span> 
+      <span onmouseout="hideTip(event, 'fs55', 163)" onmouseover="showTip(event, 'fs55', 163)" class="prop">PriceB</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs25', 164)" onmouseover="showTip(event, 'fs25', 164)" class="vt">int</span> <span onmouseout="hideTip(event, 'fs54', 165)" onmouseover="showTip(event, 'fs54', 165)" class="rt">option</span> <span class="pn">}</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs56', 166)" onmouseover="showTip(event, 'fs56', 166)" class="id">stockA</span> <span class="o">=</span> 
+    <span class="pn">[</span><span class="pn">{</span> <span class="prop">Stock</span> <span class="o">=</span> <span class="s">&quot;A&quot;</span><span class="pn">;</span> <span class="prop">Time</span> <span class="o">=</span> <span class="n">1</span><span class="pn">;</span> <span class="prop">Price</span> <span class="o">=</span> <span class="n">5</span><span class="pn">}</span>
+     <span class="pn">{</span> <span class="prop">Stock</span> <span class="o">=</span> <span class="s">&quot;A&quot;</span><span class="pn">;</span> <span class="prop">Time</span> <span class="o">=</span> <span class="n">2</span><span class="pn">;</span> <span class="prop">Price</span> <span class="o">=</span> <span class="n">6</span><span class="pn">}</span><span class="pn">]</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs57', 167)" onmouseover="showTip(event, 'fs57', 167)" class="id">stockB</span> <span class="o">=</span>     
+    <span class="pn">[</span><span class="pn">{</span> <span class="prop">Stock</span> <span class="o">=</span> <span class="s">&quot;B&quot;</span><span class="pn">;</span> <span class="prop">Time</span> <span class="o">=</span> <span class="n">2</span><span class="pn">;</span> <span class="prop">Price</span> <span class="o">=</span> <span class="n">5</span><span class="pn">}</span>
+     <span class="pn">{</span> <span class="prop">Stock</span> <span class="o">=</span> <span class="s">&quot;B&quot;</span><span class="pn">;</span> <span class="prop">Time</span> <span class="o">=</span> <span class="n">3</span><span class="pn">;</span> <span class="prop">Price</span> <span class="o">=</span> <span class="n">4</span><span class="pn">}</span><span class="pn">]</span>
+</code></pre>
+<p>Hint: remember that Map collections are useful for lookups.</p>
+<h2><a name="Question-1-1" class="anchor" href="#Question-1-1">Question 1</a></h2>
+<p>Create a <code>TwoStocksPriceOb list</code> named <code>tslA</code> that has prices for
+every observation of <code>stockA</code>. If there is a price for <code>stockB</code>
+at the same time as <code>stockA</code>, then include the <code>stockB</code> price. Otherwise,
+the <code>stockB</code> price should be <code>None</code>.</p>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs58', 168)" onmouseover="showTip(event, 'fs58', 168)" class="id">stockbByTime</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs57', 169)" onmouseover="showTip(event, 'fs57', 169)" class="id">stockB</span> 
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 170)" onmouseover="showTip(event, 'fs10', 170)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs36', 171)" onmouseover="showTip(event, 'fs36', 171)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs59', 172)" onmouseover="showTip(event, 'fs59', 172)" class="fn">day</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs59', 173)" onmouseover="showTip(event, 'fs59', 173)" class="fn">day</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs49', 174)" onmouseover="showTip(event, 'fs49', 174)" class="id">Time</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs59', 175)" onmouseover="showTip(event, 'fs59', 175)" class="fn">day</span><span class="pn">)</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs2', 176)" onmouseover="showTip(event, 'fs2', 176)" class="fn">Map</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs60', 177)" onmouseover="showTip(event, 'fs60', 177)" class="id">tslA1</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs56', 178)" onmouseover="showTip(event, 'fs56', 178)" class="id">stockA</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 179)" onmouseover="showTip(event, 'fs10', 179)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs36', 180)" onmouseover="showTip(event, 'fs36', 180)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs61', 181)" onmouseover="showTip(event, 'fs61', 181)" class="fn">dayA</span> <span class="k">-&gt;</span>
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs62', 182)" onmouseover="showTip(event, 'fs62', 182)" class="fn">dayB</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs2', 183)" onmouseover="showTip(event, 'fs2', 183)" class="m">Map</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs19', 184)" onmouseover="showTip(event, 'fs19', 184)" class="id">tryFind</span> <span onmouseout="hideTip(event, 'fs61', 185)" onmouseover="showTip(event, 'fs61', 185)" class="fn">dayA</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs49', 186)" onmouseover="showTip(event, 'fs49', 186)" class="id">Time</span> <span onmouseout="hideTip(event, 'fs58', 187)" onmouseover="showTip(event, 'fs58', 187)" class="id">stockbByTime</span>
+        <span class="k">match</span> <span onmouseout="hideTip(event, 'fs62', 188)" onmouseover="showTip(event, 'fs62', 188)" class="fn">dayB</span> <span class="k">with</span>
+        <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs33', 189)" onmouseover="showTip(event, 'fs33', 189)" class="uc">None</span> <span class="k">-&gt;</span> 
+            <span class="pn">{</span> <span class="prop">Time</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs61', 190)" onmouseover="showTip(event, 'fs61', 190)" class="fn">dayA</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs49', 191)" onmouseover="showTip(event, 'fs49', 191)" class="id">Time</span>
+              <span class="prop">PriceA</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs34', 192)" onmouseover="showTip(event, 'fs34', 192)" class="uc">Some</span> <span onmouseout="hideTip(event, 'fs61', 193)" onmouseover="showTip(event, 'fs61', 193)" class="fn">dayA</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs50', 194)" onmouseover="showTip(event, 'fs50', 194)" class="id">Price</span>
+              <span class="prop">PriceB</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs33', 195)" onmouseover="showTip(event, 'fs33', 195)" class="uc">None</span><span class="pn">}</span>
+        <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs34', 196)" onmouseover="showTip(event, 'fs34', 196)" class="uc">Some</span> <span onmouseout="hideTip(event, 'fs63', 197)" onmouseover="showTip(event, 'fs63', 197)" class="fn">db</span> <span class="k">-&gt;</span> 
+            <span class="pn">{</span> <span class="prop">Time</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs61', 198)" onmouseover="showTip(event, 'fs61', 198)" class="fn">dayA</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs49', 199)" onmouseover="showTip(event, 'fs49', 199)" class="id">Time</span>
+              <span class="prop">PriceA</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs34', 200)" onmouseover="showTip(event, 'fs34', 200)" class="uc">Some</span> <span onmouseout="hideTip(event, 'fs61', 201)" onmouseover="showTip(event, 'fs61', 201)" class="fn">dayA</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs50', 202)" onmouseover="showTip(event, 'fs50', 202)" class="id">Price</span> 
+              <span class="prop">PriceB</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs34', 203)" onmouseover="showTip(event, 'fs34', 203)" class="uc">Some</span> <span onmouseout="hideTip(event, 'fs63', 204)" onmouseover="showTip(event, 'fs63', 204)" class="fn">db</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs50', 205)" onmouseover="showTip(event, 'fs50', 205)" class="id">Price</span> <span class="pn">}</span><span class="pn">)</span>
+<span class="c">// or, just a personal preference if you like the loop or List.map</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs64', 206)" onmouseover="showTip(event, 'fs64', 206)" class="id">tslA2</span> <span class="o">=</span>
+    <span class="pn">[</span> <span class="k">for</span> <span onmouseout="hideTip(event, 'fs61', 207)" onmouseover="showTip(event, 'fs61', 207)" class="fn">dayA</span> <span class="k">in</span> <span onmouseout="hideTip(event, 'fs56', 208)" onmouseover="showTip(event, 'fs56', 208)" class="id">stockA</span> <span class="k">do</span> 
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs62', 209)" onmouseover="showTip(event, 'fs62', 209)" class="fn">dayB</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs2', 210)" onmouseover="showTip(event, 'fs2', 210)" class="m">Map</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs19', 211)" onmouseover="showTip(event, 'fs19', 211)" class="id">tryFind</span> <span onmouseout="hideTip(event, 'fs61', 212)" onmouseover="showTip(event, 'fs61', 212)" class="fn">dayA</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs49', 213)" onmouseover="showTip(event, 'fs49', 213)" class="id">Time</span> <span onmouseout="hideTip(event, 'fs58', 214)" onmouseover="showTip(event, 'fs58', 214)" class="id">stockbByTime</span>
+        <span class="k">match</span> <span onmouseout="hideTip(event, 'fs62', 215)" onmouseover="showTip(event, 'fs62', 215)" class="fn">dayB</span> <span class="k">with</span>
+        <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs33', 216)" onmouseover="showTip(event, 'fs33', 216)" class="uc">None</span> <span class="k">-&gt;</span> 
+            <span class="pn">{</span> <span class="prop">Time</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs61', 217)" onmouseover="showTip(event, 'fs61', 217)" class="fn">dayA</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs49', 218)" onmouseover="showTip(event, 'fs49', 218)" class="id">Time</span>
+              <span class="prop">PriceA</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs34', 219)" onmouseover="showTip(event, 'fs34', 219)" class="uc">Some</span> <span onmouseout="hideTip(event, 'fs61', 220)" onmouseover="showTip(event, 'fs61', 220)" class="fn">dayA</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs50', 221)" onmouseover="showTip(event, 'fs50', 221)" class="id">Price</span>
+              <span class="prop">PriceB</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs33', 222)" onmouseover="showTip(event, 'fs33', 222)" class="uc">None</span><span class="pn">}</span>
+        <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs34', 223)" onmouseover="showTip(event, 'fs34', 223)" class="uc">Some</span> <span onmouseout="hideTip(event, 'fs63', 224)" onmouseover="showTip(event, 'fs63', 224)" class="fn">db</span> <span class="k">-&gt;</span> 
+            <span class="pn">{</span> <span class="prop">Time</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs61', 225)" onmouseover="showTip(event, 'fs61', 225)" class="fn">dayA</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs49', 226)" onmouseover="showTip(event, 'fs49', 226)" class="id">Time</span>
+              <span class="prop">PriceA</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs34', 227)" onmouseover="showTip(event, 'fs34', 227)" class="uc">Some</span> <span onmouseout="hideTip(event, 'fs61', 228)" onmouseover="showTip(event, 'fs61', 228)" class="fn">dayA</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs50', 229)" onmouseover="showTip(event, 'fs50', 229)" class="id">Price</span> 
+              <span class="prop">PriceB</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs34', 230)" onmouseover="showTip(event, 'fs34', 230)" class="uc">Some</span> <span onmouseout="hideTip(event, 'fs63', 231)" onmouseover="showTip(event, 'fs63', 231)" class="fn">db</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs50', 232)" onmouseover="showTip(event, 'fs50', 232)" class="id">Price</span> <span class="pn">}</span><span class="pn">]</span>
+<span class="c">// or, define a function</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs65', 233)" onmouseover="showTip(event, 'fs65', 233)" class="fn">tryFindBforA</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs61', 234)" onmouseover="showTip(event, 'fs61', 234)" class="fn">dayA</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs46', 235)" onmouseover="showTip(event, 'fs46', 235)" class="rt">StockPriceOb</span><span class="pn">)</span> <span class="o">=</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs62', 236)" onmouseover="showTip(event, 'fs62', 236)" class="fn">dayB</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs2', 237)" onmouseover="showTip(event, 'fs2', 237)" class="m">Map</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs19', 238)" onmouseover="showTip(event, 'fs19', 238)" class="id">tryFind</span> <span onmouseout="hideTip(event, 'fs61', 239)" onmouseover="showTip(event, 'fs61', 239)" class="fn">dayA</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs49', 240)" onmouseover="showTip(event, 'fs49', 240)" class="id">Time</span> <span onmouseout="hideTip(event, 'fs58', 241)" onmouseover="showTip(event, 'fs58', 241)" class="id">stockbByTime</span>
+    <span class="k">match</span> <span onmouseout="hideTip(event, 'fs62', 242)" onmouseover="showTip(event, 'fs62', 242)" class="fn">dayB</span> <span class="k">with</span>
+    <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs33', 243)" onmouseover="showTip(event, 'fs33', 243)" class="uc">None</span> <span class="k">-&gt;</span> 
+        <span class="pn">{</span> <span class="prop">Time</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs61', 244)" onmouseover="showTip(event, 'fs61', 244)" class="fn">dayA</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs49', 245)" onmouseover="showTip(event, 'fs49', 245)" class="id">Time</span>
+          <span class="prop">PriceA</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs34', 246)" onmouseover="showTip(event, 'fs34', 246)" class="uc">Some</span> <span onmouseout="hideTip(event, 'fs61', 247)" onmouseover="showTip(event, 'fs61', 247)" class="fn">dayA</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs50', 248)" onmouseover="showTip(event, 'fs50', 248)" class="id">Price</span>
+          <span class="prop">PriceB</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs33', 249)" onmouseover="showTip(event, 'fs33', 249)" class="uc">None</span><span class="pn">}</span>
+    <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs34', 250)" onmouseover="showTip(event, 'fs34', 250)" class="uc">Some</span> <span onmouseout="hideTip(event, 'fs63', 251)" onmouseover="showTip(event, 'fs63', 251)" class="fn">db</span> <span class="k">-&gt;</span> 
+        <span class="pn">{</span> <span class="prop">Time</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs61', 252)" onmouseover="showTip(event, 'fs61', 252)" class="fn">dayA</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs49', 253)" onmouseover="showTip(event, 'fs49', 253)" class="id">Time</span>
+          <span class="prop">PriceA</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs34', 254)" onmouseover="showTip(event, 'fs34', 254)" class="uc">Some</span> <span onmouseout="hideTip(event, 'fs61', 255)" onmouseover="showTip(event, 'fs61', 255)" class="fn">dayA</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs50', 256)" onmouseover="showTip(event, 'fs50', 256)" class="id">Price</span> 
+          <span class="prop">PriceB</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs34', 257)" onmouseover="showTip(event, 'fs34', 257)" class="uc">Some</span> <span onmouseout="hideTip(event, 'fs63', 258)" onmouseover="showTip(event, 'fs63', 258)" class="fn">db</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs50', 259)" onmouseover="showTip(event, 'fs50', 259)" class="id">Price</span> <span class="pn">}</span>   
+<span class="c">// checkit</span>
+<span onmouseout="hideTip(event, 'fs65', 260)" onmouseover="showTip(event, 'fs65', 260)" class="fn">tryFindBforA</span> <span onmouseout="hideTip(event, 'fs56', 261)" onmouseover="showTip(event, 'fs56', 261)" class="id">stockA</span><span class="pn">.</span><span class="pn">[</span><span class="n">0</span><span class="pn">]</span>
+<span class="c">// do it</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs66', 262)" onmouseover="showTip(event, 'fs66', 262)" class="id">tslA3</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs56', 263)" onmouseover="showTip(event, 'fs56', 263)" class="id">stockA</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 264)" onmouseover="showTip(event, 'fs10', 264)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs36', 265)" onmouseover="showTip(event, 'fs36', 265)" class="id">map</span> <span onmouseout="hideTip(event, 'fs65', 266)" onmouseover="showTip(event, 'fs65', 266)" class="fn">tryFindBforA</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>input.fsx (1,1)-(46,44) interactive warning Accessing the internal type, method or field 'Time@' from a previous evaluation in F# Interactive is deprecated and may cause subsequent access errors. To enable the legacy generation of a single dynamic assembly that can access internals, use the '--multiemit-' option.
+input.fsx (1,1)-(46,44) interactive warning Accessing the internal type, method or field 'Price@' from a previous evaluation in F# Interactive is deprecated and may cause subsequent access errors. To enable the legacy generation of a single dynamic assembly that can access internals, use the '--multiemit-' option.
+Real: 00:00:00.003, CPU: 00:00:00.015, GC gen0: 0, gen1: 0, gen2: 0
+val stockbByTime: Map&lt;int,StockPriceOb&gt; =
+  map [(2, { Stock = "B"
+             Time = 2
+             Price = 5 }); (3, { Stock = "B"
+                                 Time = 3
+                                 Price = 4 })]
+val tslA1: TwoStocksPriceOb list = [{ Time = 1
+                                      PriceA = Some 5
+                                      PriceB = None }; { Time = 2
+                                                         PriceA = Some 6
+                                                         PriceB = Some 5 }]
+val tslA2: TwoStocksPriceOb list = [{ Time = 1
+                                      PriceA = Some 5
+                                      PriceB = None }; { Time = 2
+                                                         PriceA = Some 6
+                                                         PriceB = Some 5 }]
+val tryFindBforA: dayA: StockPriceOb -&gt; TwoStocksPriceOb
+val tslA3: TwoStocksPriceOb list = [{ Time = 1
+                                      PriceA = Some 5
+                                      PriceB = None }; { Time = 2
+                                                         PriceA = Some 6
+                                                         PriceB = Some 5 }]</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<h2><a name="Question-2-1" class="anchor" href="#Question-2-1">Question 2</a></h2>
+<p>Create a <code>TwoStocksPriceOb list</code> named <code>tslB</code> that has prices for
+every observation of stockB. If there is a price for <code>stockA</code>
+at the same time as <code>stockB</code>, then include the <code>stockA</code> price. Otherwise,
+the <code>stockA</code> price should be <code>None</code>.</p>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs67', 267)" onmouseover="showTip(event, 'fs67', 267)" class="id">stockaByTime</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs56', 268)" onmouseover="showTip(event, 'fs56', 268)" class="id">stockA</span> 
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 269)" onmouseover="showTip(event, 'fs10', 269)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs36', 270)" onmouseover="showTip(event, 'fs36', 270)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs59', 271)" onmouseover="showTip(event, 'fs59', 271)" class="fn">day</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs59', 272)" onmouseover="showTip(event, 'fs59', 272)" class="fn">day</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs49', 273)" onmouseover="showTip(event, 'fs49', 273)" class="id">Time</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs59', 274)" onmouseover="showTip(event, 'fs59', 274)" class="fn">day</span><span class="pn">)</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs2', 275)" onmouseover="showTip(event, 'fs2', 275)" class="fn">Map</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs68', 276)" onmouseover="showTip(event, 'fs68', 276)" class="id">tslB</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs57', 277)" onmouseover="showTip(event, 'fs57', 277)" class="id">stockB</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 278)" onmouseover="showTip(event, 'fs10', 278)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs36', 279)" onmouseover="showTip(event, 'fs36', 279)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs69', 280)" onmouseover="showTip(event, 'fs69', 280)" class="fn">dayB</span> <span class="k">-&gt;</span>
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs70', 281)" onmouseover="showTip(event, 'fs70', 281)" class="fn">dayA</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs2', 282)" onmouseover="showTip(event, 'fs2', 282)" class="m">Map</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs19', 283)" onmouseover="showTip(event, 'fs19', 283)" class="id">tryFind</span> <span onmouseout="hideTip(event, 'fs69', 284)" onmouseover="showTip(event, 'fs69', 284)" class="fn">dayB</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs49', 285)" onmouseover="showTip(event, 'fs49', 285)" class="id">Time</span> <span onmouseout="hideTip(event, 'fs67', 286)" onmouseover="showTip(event, 'fs67', 286)" class="id">stockaByTime</span>
+        <span class="k">match</span> <span onmouseout="hideTip(event, 'fs70', 287)" onmouseover="showTip(event, 'fs70', 287)" class="fn">dayA</span> <span class="k">with</span>
+        <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs33', 288)" onmouseover="showTip(event, 'fs33', 288)" class="uc">None</span> <span class="k">-&gt;</span> 
+            <span class="pn">{</span> <span class="prop">Time</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs69', 289)" onmouseover="showTip(event, 'fs69', 289)" class="fn">dayB</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs49', 290)" onmouseover="showTip(event, 'fs49', 290)" class="id">Time</span>
+              <span class="prop">PriceA</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs33', 291)" onmouseover="showTip(event, 'fs33', 291)" class="uc">None</span>
+              <span class="prop">PriceB</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs34', 292)" onmouseover="showTip(event, 'fs34', 292)" class="uc">Some</span> <span onmouseout="hideTip(event, 'fs69', 293)" onmouseover="showTip(event, 'fs69', 293)" class="fn">dayB</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs50', 294)" onmouseover="showTip(event, 'fs50', 294)" class="id">Price</span> <span class="pn">}</span>
+        <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs34', 295)" onmouseover="showTip(event, 'fs34', 295)" class="uc">Some</span> <span onmouseout="hideTip(event, 'fs71', 296)" onmouseover="showTip(event, 'fs71', 296)" class="fn">da</span> <span class="k">-&gt;</span> 
+            <span class="pn">{</span> <span class="prop">Time</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs69', 297)" onmouseover="showTip(event, 'fs69', 297)" class="fn">dayB</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs49', 298)" onmouseover="showTip(event, 'fs49', 298)" class="id">Time</span>
+              <span class="prop">PriceA</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs34', 299)" onmouseover="showTip(event, 'fs34', 299)" class="uc">Some</span> <span onmouseout="hideTip(event, 'fs71', 300)" onmouseover="showTip(event, 'fs71', 300)" class="fn">da</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs50', 301)" onmouseover="showTip(event, 'fs50', 301)" class="id">Price</span> 
+              <span class="prop">PriceB</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs34', 302)" onmouseover="showTip(event, 'fs34', 302)" class="uc">Some</span> <span onmouseout="hideTip(event, 'fs69', 303)" onmouseover="showTip(event, 'fs69', 303)" class="fn">dayB</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs50', 304)" onmouseover="showTip(event, 'fs50', 304)" class="id">Price</span> <span class="pn">}</span><span class="pn">)</span>                        
+</code></pre>
+<table class="pre"><tr><td><pre><code>input.fsx (1,1)-(17,42) interactive warning Accessing the internal type, method or field 'Time@' from a previous evaluation in F# Interactive is deprecated and may cause subsequent access errors. To enable the legacy generation of a single dynamic assembly that can access internals, use the '--multiemit-' option.
+input.fsx (1,1)-(17,42) interactive warning Accessing the internal type, method or field 'Price@' from a previous evaluation in F# Interactive is deprecated and may cause subsequent access errors. To enable the legacy generation of a single dynamic assembly that can access internals, use the '--multiemit-' option.
+Real: 00:00:00.001, CPU: 00:00:00.015, GC gen0: 0, gen1: 0, gen2: 0
+val stockaByTime: Map&lt;int,StockPriceOb&gt; =
+  map [(1, { Stock = "A"
+             Time = 1
+             Price = 5 }); (2, { Stock = "A"
+                                 Time = 2
+                                 Price = 6 })]
+val tslB: TwoStocksPriceOb list = [{ Time = 2
+                                     PriceA = Some 6
+                                     PriceB = Some 5 }; { Time = 3
+                                                          PriceA = None
+                                                          PriceB = Some 4 }]</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<h2><a name="Question-3-1" class="anchor" href="#Question-3-1">Question 3</a></h2>
+<p>Create a <code>TwoStocksPriceOb list</code> named <code>tslC</code> that only includes times
+when there is a price for both <code>stockA</code> and <code>stockB</code>. The prices for stocks
+A and B should always be something.</p>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs72', 305)" onmouseover="showTip(event, 'fs72', 305)" class="id">stockaByTime2</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs56', 306)" onmouseover="showTip(event, 'fs56', 306)" class="id">stockA</span> 
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 307)" onmouseover="showTip(event, 'fs10', 307)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs36', 308)" onmouseover="showTip(event, 'fs36', 308)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs59', 309)" onmouseover="showTip(event, 'fs59', 309)" class="fn">day</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs59', 310)" onmouseover="showTip(event, 'fs59', 310)" class="fn">day</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs49', 311)" onmouseover="showTip(event, 'fs49', 311)" class="id">Time</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs59', 312)" onmouseover="showTip(event, 'fs59', 312)" class="fn">day</span><span class="pn">)</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs2', 313)" onmouseover="showTip(event, 'fs2', 313)" class="fn">Map</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs73', 314)" onmouseover="showTip(event, 'fs73', 314)" class="id">tslC1</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs57', 315)" onmouseover="showTip(event, 'fs57', 315)" class="id">stockB</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 316)" onmouseover="showTip(event, 'fs10', 316)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs74', 317)" onmouseover="showTip(event, 'fs74', 317)" class="id">choose</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs69', 318)" onmouseover="showTip(event, 'fs69', 318)" class="fn">dayB</span> <span class="k">-&gt;</span>
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs70', 319)" onmouseover="showTip(event, 'fs70', 319)" class="fn">dayA</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs2', 320)" onmouseover="showTip(event, 'fs2', 320)" class="m">Map</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs19', 321)" onmouseover="showTip(event, 'fs19', 321)" class="id">tryFind</span> <span onmouseout="hideTip(event, 'fs69', 322)" onmouseover="showTip(event, 'fs69', 322)" class="fn">dayB</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs49', 323)" onmouseover="showTip(event, 'fs49', 323)" class="id">Time</span> <span onmouseout="hideTip(event, 'fs72', 324)" onmouseover="showTip(event, 'fs72', 324)" class="id">stockaByTime2</span>
+        <span class="k">match</span> <span onmouseout="hideTip(event, 'fs70', 325)" onmouseover="showTip(event, 'fs70', 325)" class="fn">dayA</span> <span class="k">with</span>
+        <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs33', 326)" onmouseover="showTip(event, 'fs33', 326)" class="uc">None</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs33', 327)" onmouseover="showTip(event, 'fs33', 327)" class="uc">None</span>
+        <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs34', 328)" onmouseover="showTip(event, 'fs34', 328)" class="uc">Some</span> <span onmouseout="hideTip(event, 'fs71', 329)" onmouseover="showTip(event, 'fs71', 329)" class="fn">da</span> <span class="k">-&gt;</span> 
+            <span class="k">let</span> <span onmouseout="hideTip(event, 'fs75', 330)" onmouseover="showTip(event, 'fs75', 330)" class="fn">output</span> <span class="o">=</span>
+                <span class="pn">{</span> <span class="prop">Time</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs69', 331)" onmouseover="showTip(event, 'fs69', 331)" class="fn">dayB</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs49', 332)" onmouseover="showTip(event, 'fs49', 332)" class="id">Time</span>
+                  <span class="prop">PriceA</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs34', 333)" onmouseover="showTip(event, 'fs34', 333)" class="uc">Some</span> <span onmouseout="hideTip(event, 'fs71', 334)" onmouseover="showTip(event, 'fs71', 334)" class="fn">da</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs50', 335)" onmouseover="showTip(event, 'fs50', 335)" class="id">Price</span> 
+                  <span class="prop">PriceB</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs34', 336)" onmouseover="showTip(event, 'fs34', 336)" class="uc">Some</span> <span onmouseout="hideTip(event, 'fs69', 337)" onmouseover="showTip(event, 'fs69', 337)" class="fn">dayB</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs50', 338)" onmouseover="showTip(event, 'fs50', 338)" class="id">Price</span> <span class="pn">}</span>
+            <span onmouseout="hideTip(event, 'fs34', 339)" onmouseover="showTip(event, 'fs34', 339)" class="uc">Some</span> <span onmouseout="hideTip(event, 'fs75', 340)" onmouseover="showTip(event, 'fs75', 340)" class="fn">output</span><span class="pn">)</span>
+<span class="c">// or, using set which I know you do not know. But #yolo</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs76', 341)" onmouseover="showTip(event, 'fs76', 341)" class="id">timesA</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs56', 342)" onmouseover="showTip(event, 'fs56', 342)" class="id">stockA</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 343)" onmouseover="showTip(event, 'fs10', 343)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs36', 344)" onmouseover="showTip(event, 'fs36', 344)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs77', 345)" onmouseover="showTip(event, 'fs77', 345)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs77', 346)" onmouseover="showTip(event, 'fs77', 346)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs49', 347)" onmouseover="showTip(event, 'fs49', 347)" class="id">Time</span><span class="pn">)</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs78', 348)" onmouseover="showTip(event, 'fs78', 348)" class="fn">set</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs79', 349)" onmouseover="showTip(event, 'fs79', 349)" class="id">timesB</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs57', 350)" onmouseover="showTip(event, 'fs57', 350)" class="id">stockB</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 351)" onmouseover="showTip(event, 'fs10', 351)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs36', 352)" onmouseover="showTip(event, 'fs36', 352)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs77', 353)" onmouseover="showTip(event, 'fs77', 353)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs77', 354)" onmouseover="showTip(event, 'fs77', 354)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs49', 355)" onmouseover="showTip(event, 'fs49', 355)" class="id">Time</span><span class="pn">)</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs78', 356)" onmouseover="showTip(event, 'fs78', 356)" class="fn">set</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs80', 357)" onmouseover="showTip(event, 'fs80', 357)" class="id">timesAandB</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs81', 358)" onmouseover="showTip(event, 'fs81', 358)" class="m">Set</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs82', 359)" onmouseover="showTip(event, 'fs82', 359)" class="id">intersect</span> <span onmouseout="hideTip(event, 'fs76', 360)" onmouseover="showTip(event, 'fs76', 360)" class="id">timesA</span> <span onmouseout="hideTip(event, 'fs79', 361)" onmouseover="showTip(event, 'fs79', 361)" class="id">timesB</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs83', 362)" onmouseover="showTip(event, 'fs83', 362)" class="id">tslC2</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs80', 363)" onmouseover="showTip(event, 'fs80', 363)" class="id">timesAandB</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs81', 364)" onmouseover="showTip(event, 'fs81', 364)" class="m">Set</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs84', 365)" onmouseover="showTip(event, 'fs84', 365)" class="id">toList</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 366)" onmouseover="showTip(event, 'fs10', 366)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs36', 367)" onmouseover="showTip(event, 'fs36', 367)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs85', 368)" onmouseover="showTip(event, 'fs85', 368)" class="fn">time</span> <span class="k">-&gt;</span> 
+        <span class="pn">{</span> <span class="prop">Time</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs85', 369)" onmouseover="showTip(event, 'fs85', 369)" class="fn">time</span> 
+          <span class="prop">PriceA</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs34', 370)" onmouseover="showTip(event, 'fs34', 370)" class="uc">Some</span> <span onmouseout="hideTip(event, 'fs67', 371)" onmouseover="showTip(event, 'fs67', 371)" class="id">stockaByTime</span><span class="pn">.</span><span class="pn">[</span><span onmouseout="hideTip(event, 'fs85', 372)" onmouseover="showTip(event, 'fs85', 372)" class="fn">time</span><span class="pn">]</span><span class="pn">.</span><span class="id">Price</span>
+          <span class="prop">PriceB</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs34', 373)" onmouseover="showTip(event, 'fs34', 373)" class="uc">Some</span> <span onmouseout="hideTip(event, 'fs58', 374)" onmouseover="showTip(event, 'fs58', 374)" class="id">stockbByTime</span><span class="pn">.</span><span class="pn">[</span><span onmouseout="hideTip(event, 'fs85', 375)" onmouseover="showTip(event, 'fs85', 375)" class="fn">time</span><span class="pn">]</span><span class="pn">.</span><span class="id">Price</span><span class="pn">}</span><span class="pn">)</span>                      
+</code></pre>
+<table class="pre"><tr><td><pre><code>input.fsx (1,1)-(27,52) interactive warning Accessing the internal type, method or field 'Time@' from a previous evaluation in F# Interactive is deprecated and may cause subsequent access errors. To enable the legacy generation of a single dynamic assembly that can access internals, use the '--multiemit-' option.
+input.fsx (1,1)-(27,52) interactive warning Accessing the internal type, method or field 'Price@' from a previous evaluation in F# Interactive is deprecated and may cause subsequent access errors. To enable the legacy generation of a single dynamic assembly that can access internals, use the '--multiemit-' option.
+Real: 00:00:00.039, CPU: 00:00:00.031, GC gen0: 0, gen1: 0, gen2: 0
+val stockaByTime2: Map&lt;int,StockPriceOb&gt; =
+  map [(1, { Stock = "A"
+             Time = 1
+             Price = 5 }); (2, { Stock = "A"
+                                 Time = 2
+                                 Price = 6 })]
+val tslC1: TwoStocksPriceOb list = [{ Time = 2
+                                      PriceA = Some 6
+                                      PriceB = Some 5 }]
+val timesA: Set&lt;int&gt; = set [1; 2]
+val timesB: Set&lt;int&gt; = set [2; 3]
+val timesAandB: Set&lt;int&gt; = set [2]
+val tslC2: TwoStocksPriceOb list = [{ Time = 2
+                                      PriceA = Some 6
+                                      PriceB = Some 5 }]</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<h2><a name="Question-4-1" class="anchor" href="#Question-4-1">Question 4</a></h2>
+<p>Create a <code>TwoStocksPriceOb list</code> named <code>tslD</code> that includes available
+stock prices for <code>stockA</code> and <code>stockB</code> at all possible times. If a price for
+one of the stocks is missing for a given time, it should be None.</p>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs86', 376)" onmouseover="showTip(event, 'fs86', 376)" class="id">stockATimes</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs56', 377)" onmouseover="showTip(event, 'fs56', 377)" class="id">stockA</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 378)" onmouseover="showTip(event, 'fs10', 378)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs36', 379)" onmouseover="showTip(event, 'fs36', 379)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs77', 380)" onmouseover="showTip(event, 'fs77', 380)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs77', 381)" onmouseover="showTip(event, 'fs77', 381)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs49', 382)" onmouseover="showTip(event, 'fs49', 382)" class="id">Time</span><span class="pn">)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs87', 383)" onmouseover="showTip(event, 'fs87', 383)" class="id">stockBTimes</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs57', 384)" onmouseover="showTip(event, 'fs57', 384)" class="id">stockB</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 385)" onmouseover="showTip(event, 'fs10', 385)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs36', 386)" onmouseover="showTip(event, 'fs36', 386)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs77', 387)" onmouseover="showTip(event, 'fs77', 387)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs77', 388)" onmouseover="showTip(event, 'fs77', 388)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs49', 389)" onmouseover="showTip(event, 'fs49', 389)" class="id">Time</span><span class="pn">)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs88', 390)" onmouseover="showTip(event, 'fs88', 390)" class="id">allTimes</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs10', 391)" onmouseover="showTip(event, 'fs10', 391)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs89', 392)" onmouseover="showTip(event, 'fs89', 392)" class="id">append</span> <span onmouseout="hideTip(event, 'fs86', 393)" onmouseover="showTip(event, 'fs86', 393)" class="id">stockATimes</span> <span onmouseout="hideTip(event, 'fs87', 394)" onmouseover="showTip(event, 'fs87', 394)" class="id">stockBTimes</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 395)" onmouseover="showTip(event, 'fs10', 395)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs90', 396)" onmouseover="showTip(event, 'fs90', 396)" class="id">distinct</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs91', 397)" onmouseover="showTip(event, 'fs91', 397)" class="id">tslD</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs88', 398)" onmouseover="showTip(event, 'fs88', 398)" class="id">allTimes</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 399)" onmouseover="showTip(event, 'fs10', 399)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs36', 400)" onmouseover="showTip(event, 'fs36', 400)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs85', 401)" onmouseover="showTip(event, 'fs85', 401)" class="fn">time</span> <span class="k">-&gt;</span>
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs92', 402)" onmouseover="showTip(event, 'fs92', 402)" class="fn">a</span> <span class="o">=</span> 
+            <span class="k">match</span> <span onmouseout="hideTip(event, 'fs2', 403)" onmouseover="showTip(event, 'fs2', 403)" class="m">Map</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs19', 404)" onmouseover="showTip(event, 'fs19', 404)" class="id">tryFind</span> <span onmouseout="hideTip(event, 'fs85', 405)" onmouseover="showTip(event, 'fs85', 405)" class="fn">time</span> <span onmouseout="hideTip(event, 'fs67', 406)" onmouseover="showTip(event, 'fs67', 406)" class="id">stockaByTime</span> <span class="k">with</span>
+            <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs33', 407)" onmouseover="showTip(event, 'fs33', 407)" class="uc">None</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs33', 408)" onmouseover="showTip(event, 'fs33', 408)" class="uc">None</span>
+            <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs34', 409)" onmouseover="showTip(event, 'fs34', 409)" class="uc">Some</span> <span onmouseout="hideTip(event, 'fs93', 410)" onmouseover="showTip(event, 'fs93', 410)" class="fn">a</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs34', 411)" onmouseover="showTip(event, 'fs34', 411)" class="uc">Some</span> <span onmouseout="hideTip(event, 'fs93', 412)" onmouseover="showTip(event, 'fs93', 412)" class="fn">a</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs50', 413)" onmouseover="showTip(event, 'fs50', 413)" class="id">Price</span>
+            
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs94', 414)" onmouseover="showTip(event, 'fs94', 414)" class="fn">b</span> <span class="o">=</span> 
+            <span class="c">// same thing as what&#39;s done above with match expression,</span>
+            <span class="c">// but with Option.map. Personal preference depending</span>
+            <span class="c">// on what seems clearest. If you&#39;re mapping an option</span>
+            <span class="c">// and returning None for the None case,</span>
+            <span class="c">// a Option.map can be nice.</span>
+            <span onmouseout="hideTip(event, 'fs2', 415)" onmouseover="showTip(event, 'fs2', 415)" class="m">Map</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs19', 416)" onmouseover="showTip(event, 'fs19', 416)" class="id">tryFind</span> <span onmouseout="hideTip(event, 'fs85', 417)" onmouseover="showTip(event, 'fs85', 417)" class="fn">time</span> <span onmouseout="hideTip(event, 'fs58', 418)" onmouseover="showTip(event, 'fs58', 418)" class="id">stockbByTime</span>
+            <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs29', 419)" onmouseover="showTip(event, 'fs29', 419)" class="m">Option</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs95', 420)" onmouseover="showTip(event, 'fs95', 420)" class="id">map</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs96', 421)" onmouseover="showTip(event, 'fs96', 421)" class="fn">b</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs96', 422)" onmouseover="showTip(event, 'fs96', 422)" class="fn">b</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs50', 423)" onmouseover="showTip(event, 'fs50', 423)" class="id">Price</span><span class="pn">)</span>
+        <span class="pn">{</span> <span class="prop">Time</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs85', 424)" onmouseover="showTip(event, 'fs85', 424)" class="fn">time</span><span class="pn">;</span> <span class="prop">PriceA</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs92', 425)" onmouseover="showTip(event, 'fs92', 425)" class="fn">a</span><span class="pn">;</span> <span class="prop">PriceB</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs94', 426)" onmouseover="showTip(event, 'fs94', 426)" class="fn">b</span> <span class="pn">}</span><span class="pn">)</span> 
+
+<span class="c">// or, using a function. This is the same thing as in the above</span>
+<span class="c">// anonymous function that begins with `(fun time -&gt; `, </span>
+<span class="c">// but I&#39;m going to use different </span>
+<span class="c">// code to achieve the same goal just to show you different options.</span>
+<span class="c">// again, it&#39;s just personal preference.</span>
+<span class="c">// check how to write the function using time = 1 as a test</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs97', 427)" onmouseover="showTip(event, 'fs97', 427)" class="id">testTime</span> <span class="o">=</span> <span class="n">1</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs98', 428)" onmouseover="showTip(event, 'fs98', 428)" class="id">time1A</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs2', 429)" onmouseover="showTip(event, 'fs2', 429)" class="m">Map</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs19', 430)" onmouseover="showTip(event, 'fs19', 430)" class="id">tryFind</span> <span onmouseout="hideTip(event, 'fs97', 431)" onmouseover="showTip(event, 'fs97', 431)" class="id">testTime</span> <span onmouseout="hideTip(event, 'fs67', 432)" onmouseover="showTip(event, 'fs67', 432)" class="id">stockaByTime</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs99', 433)" onmouseover="showTip(event, 'fs99', 433)" class="id">time1B</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs2', 434)" onmouseover="showTip(event, 'fs2', 434)" class="m">Map</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs19', 435)" onmouseover="showTip(event, 'fs19', 435)" class="id">tryFind</span> <span onmouseout="hideTip(event, 'fs97', 436)" onmouseover="showTip(event, 'fs97', 436)" class="id">testTime</span> <span onmouseout="hideTip(event, 'fs58', 437)" onmouseover="showTip(event, 'fs58', 437)" class="id">stockbByTime</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs100', 438)" onmouseover="showTip(event, 'fs100', 438)" class="id">time1Aprice</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs98', 439)" onmouseover="showTip(event, 'fs98', 439)" class="id">time1A</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs29', 440)" onmouseover="showTip(event, 'fs29', 440)" class="m">Option</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs95', 441)" onmouseover="showTip(event, 'fs95', 441)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs77', 442)" onmouseover="showTip(event, 'fs77', 442)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs77', 443)" onmouseover="showTip(event, 'fs77', 443)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs50', 444)" onmouseover="showTip(event, 'fs50', 444)" class="id">Price</span> <span class="pn">)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs101', 445)" onmouseover="showTip(event, 'fs101', 445)" class="id">time1Bprice</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs99', 446)" onmouseover="showTip(event, 'fs99', 446)" class="id">time1B</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs29', 447)" onmouseover="showTip(event, 'fs29', 447)" class="m">Option</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs95', 448)" onmouseover="showTip(event, 'fs95', 448)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs77', 449)" onmouseover="showTip(event, 'fs77', 449)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs77', 450)" onmouseover="showTip(event, 'fs77', 450)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs50', 451)" onmouseover="showTip(event, 'fs50', 451)" class="id">Price</span><span class="pn">)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs102', 452)" onmouseover="showTip(event, 'fs102', 452)" class="id">testOutput</span> <span class="o">=</span> <span class="pn">{</span> <span class="prop">Time</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs97', 453)" onmouseover="showTip(event, 'fs97', 453)" class="id">testTime</span><span class="pn">;</span> <span class="prop">PriceA</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs100', 454)" onmouseover="showTip(event, 'fs100', 454)" class="id">time1Aprice</span><span class="pn">;</span> <span class="prop">PriceB</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs101', 455)" onmouseover="showTip(event, 'fs101', 455)" class="id">time1Bprice</span> <span class="pn">}</span>
+<span class="c">// now turn above code into a function to do the same thing</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs103', 456)" onmouseover="showTip(event, 'fs103', 456)" class="fn">getTheMatch</span> <span onmouseout="hideTip(event, 'fs85', 457)" onmouseover="showTip(event, 'fs85', 457)" class="fn">time</span> <span class="o">=</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs104', 458)" onmouseover="showTip(event, 'fs104', 458)" class="fn">a</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs2', 459)" onmouseover="showTip(event, 'fs2', 459)" class="m">Map</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs19', 460)" onmouseover="showTip(event, 'fs19', 460)" class="id">tryFind</span> <span onmouseout="hideTip(event, 'fs85', 461)" onmouseover="showTip(event, 'fs85', 461)" class="fn">time</span> <span onmouseout="hideTip(event, 'fs67', 462)" onmouseover="showTip(event, 'fs67', 462)" class="id">stockaByTime</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs105', 463)" onmouseover="showTip(event, 'fs105', 463)" class="fn">b</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs2', 464)" onmouseover="showTip(event, 'fs2', 464)" class="m">Map</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs19', 465)" onmouseover="showTip(event, 'fs19', 465)" class="id">tryFind</span> <span onmouseout="hideTip(event, 'fs85', 466)" onmouseover="showTip(event, 'fs85', 466)" class="fn">time</span> <span onmouseout="hideTip(event, 'fs58', 467)" onmouseover="showTip(event, 'fs58', 467)" class="id">stockbByTime</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs106', 468)" onmouseover="showTip(event, 'fs106', 468)" class="fn">aPrice</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs104', 469)" onmouseover="showTip(event, 'fs104', 469)" class="fn">a</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs29', 470)" onmouseover="showTip(event, 'fs29', 470)" class="m">Option</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs95', 471)" onmouseover="showTip(event, 'fs95', 471)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs77', 472)" onmouseover="showTip(event, 'fs77', 472)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs77', 473)" onmouseover="showTip(event, 'fs77', 473)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs50', 474)" onmouseover="showTip(event, 'fs50', 474)" class="id">Price</span><span class="pn">)</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs107', 475)" onmouseover="showTip(event, 'fs107', 475)" class="fn">bPrice</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs105', 476)" onmouseover="showTip(event, 'fs105', 476)" class="fn">b</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs29', 477)" onmouseover="showTip(event, 'fs29', 477)" class="m">Option</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs95', 478)" onmouseover="showTip(event, 'fs95', 478)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs77', 479)" onmouseover="showTip(event, 'fs77', 479)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs77', 480)" onmouseover="showTip(event, 'fs77', 480)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs50', 481)" onmouseover="showTip(event, 'fs50', 481)" class="id">Price</span><span class="pn">)</span>
+    <span class="pn">{</span> <span class="prop">Time</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs85', 482)" onmouseover="showTip(event, 'fs85', 482)" class="fn">time</span><span class="pn">;</span> <span class="prop">PriceA</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs106', 483)" onmouseover="showTip(event, 'fs106', 483)" class="fn">aPrice</span><span class="pn">;</span> <span class="prop">PriceB</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs107', 484)" onmouseover="showTip(event, 'fs107', 484)" class="fn">bPrice</span> <span class="pn">}</span>
+<span class="c">// test it to see that it works</span>
+<span onmouseout="hideTip(event, 'fs103', 485)" onmouseover="showTip(event, 'fs103', 485)" class="fn">getTheMatch</span> <span class="n">1</span>
+<span onmouseout="hideTip(event, 'fs103', 486)" onmouseover="showTip(event, 'fs103', 486)" class="fn">getTheMatch</span> <span class="n">2</span>
+<span class="c">// now do it for the whole list</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs108', 487)" onmouseover="showTip(event, 'fs108', 487)" class="id">tslD2</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs88', 488)" onmouseover="showTip(event, 'fs88', 488)" class="id">allTimes</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs10', 489)" onmouseover="showTip(event, 'fs10', 489)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs36', 490)" onmouseover="showTip(event, 'fs36', 490)" class="id">map</span> <span onmouseout="hideTip(event, 'fs103', 491)" onmouseover="showTip(event, 'fs103', 491)" class="fn">getTheMatch</span>                  
+</code></pre>
+<table class="pre"><tr><td><pre><code>input.fsx (1,1)-(47,45) interactive warning Accessing the internal type, method or field 'Time@' from a previous evaluation in F# Interactive is deprecated and may cause subsequent access errors. To enable the legacy generation of a single dynamic assembly that can access internals, use the '--multiemit-' option.
+input.fsx (1,1)-(47,45) interactive warning Accessing the internal type, method or field 'Price@' from a previous evaluation in F# Interactive is deprecated and may cause subsequent access errors. To enable the legacy generation of a single dynamic assembly that can access internals, use the '--multiemit-' option.
+Real: 00:00:00.038, CPU: 00:00:00.046, GC gen0: 0, gen1: 0, gen2: 0
+val stockATimes: int list = [1; 2]
+val stockBTimes: int list = [2; 3]
+val allTimes: int list = [1; 2; 3]
+val tslD: TwoStocksPriceOb list =
+  [{ Time = 1
+     PriceA = Some 5
+     PriceB = None }; { Time = 2
+                        PriceA = Some 6
+                        PriceB = Some 5 }; { Time = 3
+                                             PriceA = None
+                                             PriceB = Some 4 }]
+val testTime: int = 1
+val time1A: StockPriceOb option = Some { Stock = "A"
+                                         Time = 1
+                                         Price = 5 }
+val time1B: StockPriceOb option = None
+val time1Aprice: int option = Some 5
+val time1Bprice: int option = None
+val testOutput: TwoStocksPriceOb = { Time = 1
+                                     PriceA = Some 5
+                                     PriceB = None }
+val getTheMatch: time: int -&gt; TwoStocksPriceOb
+val tslD2: TwoStocksPriceOb list =
+  [{ Time = 1
+     PriceA = Some 5
+     PriceB = None }; { Time = 2
+                        PriceA = Some 6
+                        PriceB = Some 5 }; { Time = 3
+                                             PriceA = None
+                                             PriceB = Some 4 }]</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+
+            <div class="fsdocs-tip" id="fs1">val exampleMap: Map&lt;string,string&gt;</div>
+<div class="fsdocs-tip" id="fs2">Multiple items<br />module Map
+
+from Microsoft.FSharp.Collections<br /><em>&lt;summary&gt;Contains operations for working with values of type &lt;see cref=&quot;T:Microsoft.FSharp.Collections.Map`2&quot; /&gt;.&lt;/summary&gt;</em><br /><br />--------------------<br />type Map&lt;&#39;Key,&#39;Value (requires comparison)&gt; =
+  interface IReadOnlyDictionary&lt;&#39;Key,&#39;Value&gt;
+  interface IReadOnlyCollection&lt;KeyValuePair&lt;&#39;Key,&#39;Value&gt;&gt;
+  interface IEnumerable
+  interface IComparable
+  interface IEnumerable&lt;KeyValuePair&lt;&#39;Key,&#39;Value&gt;&gt;
+  interface ICollection&lt;KeyValuePair&lt;&#39;Key,&#39;Value&gt;&gt;
+  interface IDictionary&lt;&#39;Key,&#39;Value&gt;
+  new: elements: seq&lt;&#39;Key * &#39;Value&gt; -&gt; Map&lt;&#39;Key,&#39;Value&gt;
+  member Add: key: &#39;Key * value: &#39;Value -&gt; Map&lt;&#39;Key,&#39;Value&gt;
+  member Change: key: &#39;Key * f: (&#39;Value option -&gt; &#39;Value option) -&gt; Map&lt;&#39;Key,&#39;Value&gt;
+  ...<br /><em>&lt;summary&gt;Immutable maps based on binary trees, where keys are ordered by F# generic comparison. By default
+ comparison is the F# structural comparison function or uses implementations of the IComparable interface on key values.&lt;/summary&gt;<br />&lt;remarks&gt;See the &lt;see cref=&quot;T:Microsoft.FSharp.Collections.MapModule&quot; /&gt; module for further operations on maps.
+
+ All members of this class are thread-safe and may be used concurrently from multiple threads.&lt;/remarks&gt;</em><br /><br />--------------------<br />new: elements: seq&lt;&#39;Key * &#39;Value&gt; -&gt; Map&lt;&#39;Key,&#39;Value&gt;</div>
+<div class="fsdocs-tip" id="fs3">val exampleMap2: Map&lt;int,string&gt;</div>
+<div class="fsdocs-tip" id="fs4">val find: key: &#39;Key -&gt; table: Map&lt;&#39;Key,&#39;T&gt; -&gt; &#39;T (requires comparison)<br /><em>&lt;summary&gt;Lookup an element in the map, raising &lt;c&gt;KeyNotFoundException&lt;/c&gt; if no binding
+ exists in the map.&lt;/summary&gt;<br />&lt;param name=&quot;key&quot;&gt;The input key.&lt;/param&gt;<br />&lt;param name=&quot;table&quot;&gt;The input map.&lt;/param&gt;<br />&lt;exception cref=&quot;T:System.Collections.Generic.KeyNotFoundException&quot;&gt;Thrown when the key does not exist in the map.&lt;/exception&gt;<br />&lt;returns&gt;The value mapped to the given key.&lt;/returns&gt;<br />&lt;example id=&quot;find-1&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let sample = Map [ (1, &quot;a&quot;); (2, &quot;b&quot;) ]
+ 
+ sample |&amp;gt; Map.find 1 // evaluates to &quot;a&quot;
+ sample |&amp;gt; Map.find 3 // throws KeyNotFoundException
+ &lt;/code&gt;&lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs5">val isOdd: x: int -&gt; bool</div>
+<div class="fsdocs-tip" id="fs6">val x: int</div>
+<div class="fsdocs-tip" id="fs7">val arr: (int * bool) list</div>
+<div class="fsdocs-tip" id="fs8">val i: int</div>
+<div class="fsdocs-tip" id="fs9">val arrMap: Map&lt;int,bool&gt;</div>
+<div class="fsdocs-tip" id="fs10">Multiple items<br />module List
+
+from Microsoft.FSharp.Collections<br /><em>&lt;summary&gt;Contains operations for working with values of type &lt;see cref=&quot;T:Microsoft.FSharp.Collections.list`1&quot; /&gt;.&lt;/summary&gt;<br />&lt;namespacedoc&gt;&lt;summary&gt;Operations for collections such as lists, arrays, sets, maps and sequences. See also 
+    &lt;a href=&quot;https://docs.microsoft.com/dotnet/fsharp/language-reference/fsharp-collection-types&quot;&gt;F# Collection Types&lt;/a&gt; in the F# Language Guide.
+ &lt;/summary&gt;&lt;/namespacedoc&gt;</em><br /><br />--------------------<br />type List&lt;&#39;T&gt; =
+  | op_Nil
+  | op_ColonColon of Head: &#39;T * Tail: &#39;T list
+  interface IReadOnlyList&lt;&#39;T&gt;
+  interface IReadOnlyCollection&lt;&#39;T&gt;
+  interface IEnumerable
+  interface IEnumerable&lt;&#39;T&gt;
+  member GetReverseIndex: rank: int * offset: int -&gt; int
+  member GetSlice: startIndex: int option * endIndex: int option -&gt; &#39;T list
+  static member Cons: head: &#39;T * tail: &#39;T list -&gt; &#39;T list
+  member Head: &#39;T
+  member IsEmpty: bool
+  member Item: index: int -&gt; &#39;T with get
+  ...<br /><em>&lt;summary&gt;The type of immutable singly-linked lists.&lt;/summary&gt;<br />&lt;remarks&gt;Use the constructors &lt;c&gt;[]&lt;/c&gt; and &lt;c&gt;::&lt;/c&gt; (infix) to create values of this type, or
+ the notation &lt;c&gt;[1;2;3]&lt;/c&gt;. Use the values in the &lt;c&gt;List&lt;/c&gt; module to manipulate 
+ values of this type, or pattern match against the values directly.
+ &lt;/remarks&gt;<br />&lt;exclude /&gt;</em></div>
+<div class="fsdocs-tip" id="fs11">val find: predicate: (&#39;T -&gt; bool) -&gt; list: &#39;T list -&gt; &#39;T<br /><em>&lt;summary&gt;Returns the first element for which the given function returns True.
+ Raises &lt;c&gt;KeyNotFoundException&lt;/c&gt; if no such element exists.&lt;/summary&gt;<br />&lt;param name=&quot;predicate&quot;&gt;The function to test the input elements.&lt;/param&gt;<br />&lt;param name=&quot;list&quot;&gt;The input list.&lt;/param&gt;<br />&lt;exception cref=&quot;T:System.Collections.Generic.KeyNotFoundException&quot;&gt;Thrown if the predicate evaluates to false for
+ all the elements of the list.&lt;/exception&gt;<br />&lt;returns&gt;The first element that satisfies the predicate.&lt;/returns&gt;<br />&lt;example id=&quot;find-1&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let isEven x  = 0 = x % 2
+
+ let isGreaterThan x y = y &amp;gt; x
+
+ let input = [1, &quot;Luke&quot;; 2, &quot;Kirk&quot;; 3, &quot;Spock&quot;; 4, &quot;Kenobi&quot;]
+ 
+ input |&amp;gt; List.find (fun (x,_) -&amp;gt; isEven x)              // evaluates (2, &quot;Kirk&quot;)
+ input |&amp;gt; List.find (fun (x,_) -&amp;gt; x |&amp;gt; isGreaterThan 6)  // raises an exception
+ &lt;/code&gt;&lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs12">val a: int</div>
+<div class="fsdocs-tip" id="fs13">val b: bool</div>
+<div class="fsdocs-tip" id="fs14">val ignore: value: &#39;T -&gt; unit<br /><em>&lt;summary&gt;Ignore the passed value. This is often used to throw away results of a computation.&lt;/summary&gt;<br />&lt;param name=&quot;value&quot;&gt;The value to ignore.&lt;/param&gt;<br />&lt;example id=&quot;min-example&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+  ignore 55555   //  Evaluates to ()
+ &lt;/code&gt;&lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs15">val mapA: Map&lt;string,int&gt;</div>
+<div class="fsdocs-tip" id="fs16">val mapA2: Map&lt;string,int&gt;</div>
+<div class="fsdocs-tip" id="fs17">val mapA3: Map&lt;string,int&gt;</div>
+<div class="fsdocs-tip" id="fs18">val ofList: elements: (&#39;Key * &#39;T) list -&gt; Map&lt;&#39;Key,&#39;T&gt; (requires comparison)<br /><em>&lt;summary&gt;Returns a new map made from the given bindings.&lt;/summary&gt;<br />&lt;param name=&quot;elements&quot;&gt;The input list of key/value pairs.&lt;/param&gt;<br />&lt;returns&gt;The resulting map.&lt;/returns&gt;<br />&lt;example id=&quot;oflist-1&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let input = [ (1, &quot;a&quot;); (2, &quot;b&quot;) ]
+
+ input |&amp;gt; Map.ofList // evaluates to map [(1, &quot;a&quot;); (2, &quot;b&quot;)]
+ &lt;/code&gt;&lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs19">val tryFind: key: &#39;Key -&gt; table: Map&lt;&#39;Key,&#39;T&gt; -&gt; &#39;T option (requires comparison)<br /><em>&lt;summary&gt;Lookup an element in the map, returning a &lt;c&gt;Some&lt;/c&gt; value if the element is in the domain 
+ of the map and &lt;c&gt;None&lt;/c&gt; if not.&lt;/summary&gt;<br />&lt;param name=&quot;key&quot;&gt;The input key.&lt;/param&gt;<br />&lt;param name=&quot;table&quot;&gt;The input map.&lt;/param&gt;<br />&lt;returns&gt;The found &lt;c&gt;Some&lt;/c&gt; value or &lt;c&gt;None&lt;/c&gt;.&lt;/returns&gt;<br />&lt;example id=&quot;tryfind-1&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let sample = Map [ (1, &quot;a&quot;); (2, &quot;b&quot;) ]
+ 
+ sample |&amp;gt; Map.tryFind 1 // evaluates to Some &quot;a&quot;
+ sample |&amp;gt; Map.tryFind 3 // evaluates to None
+ &lt;/code&gt;&lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs20">val mapB: Map&lt;int,string&gt;</div>
+<div class="fsdocs-tip" id="fs21">val tryFindMapB1: string option</div>
+<div class="fsdocs-tip" id="fs22">val tryFindMapB3: string option</div>
+<div class="fsdocs-tip" id="fs23">type StockDays3 =
+  {
+    Day: int
+    Price: decimal
+    Dividend: Option&lt;decimal&gt;
+  }</div>
+<div class="fsdocs-tip" id="fs24">StockDays3.Day: int</div>
+<div class="fsdocs-tip" id="fs25">Multiple items<br />val int: value: &#39;T -&gt; int (requires member op_Explicit)<br /><em>&lt;summary&gt;Converts the argument to signed 32-bit integer. This is a direct conversion for all 
+ primitive numeric types. For strings, the input is converted using &lt;c&gt;Int32.Parse()&lt;/c&gt;  
+ with InvariantCulture settings. Otherwise the operation requires an appropriate
+ static conversion method on the input type.&lt;/summary&gt;<br />&lt;param name=&quot;value&quot;&gt;The input value.&lt;/param&gt;<br />&lt;returns&gt;The converted int&lt;/returns&gt;<br />&lt;example id=&quot;int-example&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;&lt;/code&gt;&lt;/example&gt;</em><br /><br />--------------------<br />[&lt;Struct&gt;]
+type int = int32<br /><em>&lt;summary&gt;An abbreviation for the CLI type &lt;see cref=&quot;T:System.Int32&quot; /&gt;.&lt;/summary&gt;<br />&lt;category&gt;Basic Types&lt;/category&gt;</em><br /><br />--------------------<br />type int&lt;&#39;Measure&gt; =
+  int<br /><em>&lt;summary&gt;The type of 32-bit signed integer numbers, annotated with a unit of measure. The unit
+ of measure is erased in compiled code and when values of this type
+ are analyzed using reflection. The type is representationally equivalent to
+ &lt;see cref=&quot;T:System.Int32&quot; /&gt;.&lt;/summary&gt;<br />&lt;category&gt;Basic Types with Units of Measure&lt;/category&gt;</em></div>
+<div class="fsdocs-tip" id="fs26">StockDays3.Price: decimal</div>
+<div class="fsdocs-tip" id="fs27">Multiple items<br />val decimal: value: &#39;T -&gt; decimal (requires member op_Explicit)<br /><em>&lt;summary&gt;Converts the argument to System.Decimal using a direct conversion for all 
+ primitive numeric types. For strings, the input is converted using &lt;c&gt;UInt64.Parse()&lt;/c&gt;  
+ with InvariantCulture settings. Otherwise the operation requires an appropriate
+ static conversion method on the input type.&lt;/summary&gt;<br />&lt;param name=&quot;value&quot;&gt;The input value.&lt;/param&gt;<br />&lt;returns&gt;The converted decimal.&lt;/returns&gt;<br />&lt;example id=&quot;decimal-example&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;&lt;/code&gt;&lt;/example&gt;</em><br /><br />--------------------<br />[&lt;Struct&gt;]
+type decimal = System.Decimal<br /><em>&lt;summary&gt;An abbreviation for the CLI type &lt;see cref=&quot;T:System.Decimal&quot; /&gt;.&lt;/summary&gt;<br />&lt;category&gt;Basic Types&lt;/category&gt;</em><br /><br />--------------------<br />type decimal&lt;&#39;Measure&gt; =
+  decimal<br /><em>&lt;summary&gt;The type of decimal numbers, annotated with a unit of measure. The unit
+ of measure is erased in compiled code and when values of this type
+ are analyzed using reflection. The type is representationally equivalent to
+ &lt;see cref=&quot;T:System.Decimal&quot; /&gt;.&lt;/summary&gt;<br />&lt;category&gt;Basic Types with Units of Measure&lt;/category&gt;</em></div>
+<div class="fsdocs-tip" id="fs28">StockDays3.Dividend: Option&lt;decimal&gt;</div>
+<div class="fsdocs-tip" id="fs29">module Option
+
+from Microsoft.FSharp.Core<br /><em>&lt;summary&gt;Contains operations for working with options.&lt;/summary&gt;<br />&lt;category&gt;Options&lt;/category&gt;</em></div>
+<div class="fsdocs-tip" id="fs30">val stockDays3: StockDays3 list</div>
+<div class="fsdocs-tip" id="fs31">val day: int</div>
+<div class="fsdocs-tip" id="fs32">val dividend: decimal option</div>
+<div class="fsdocs-tip" id="fs33">union case Option.None: Option&lt;&#39;T&gt;<br /><em>&lt;summary&gt;The representation of &quot;No value&quot;&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs34">union case Option.Some: Value: &#39;T -&gt; Option&lt;&#39;T&gt;<br /><em>&lt;summary&gt;The representation of &quot;Value of type &#39;T&quot;&lt;/summary&gt;<br />&lt;param name=&quot;Value&quot;&gt;The input value.&lt;/param&gt;<br />&lt;returns&gt;An option representing the value.&lt;/returns&gt;</em></div>
+<div class="fsdocs-tip" id="fs35">val mapC: Map&lt;int,StockDays3&gt;</div>
+<div class="fsdocs-tip" id="fs36">val map: mapping: (&#39;T -&gt; &#39;U) -&gt; list: &#39;T list -&gt; &#39;U list<br /><em>&lt;summary&gt;Builds a new collection whose elements are the results of applying the given function
+ to each of the elements of the collection.&lt;/summary&gt;<br />&lt;param name=&quot;mapping&quot;&gt;The function to transform elements from the input list.&lt;/param&gt;<br />&lt;param name=&quot;list&quot;&gt;The input list.&lt;/param&gt;<br />&lt;returns&gt;The list of transformed elements.&lt;/returns&gt;<br />&lt;example id=&quot;map-1&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let inputs = [ &quot;a&quot;; &quot;bbb&quot;; &quot;cc&quot; ]
+
+ inputs |&amp;gt; List.map (fun x -&amp;gt; x.Length)
+ &lt;/code&gt;
+ Evaluates to &lt;c&gt;[ 1; 3; 2 ]&lt;/c&gt;&lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs37">val day: StockDays3</div>
+<div class="fsdocs-tip" id="fs38">val mapD: Map&lt;StockDays3,int&gt;</div>
+<div class="fsdocs-tip" id="fs39">val mapp: Map&lt;string,int&gt;</div>
+<div class="fsdocs-tip" id="fs40">val lookFor: x: string -&gt; unit</div>
+<div class="fsdocs-tip" id="fs41">val x: string</div>
+<div class="fsdocs-tip" id="fs42">val y: int</div>
+<div class="fsdocs-tip" id="fs43">val printfn: format: Printf.TextWriterFormat&lt;&#39;T&gt; -&gt; &#39;T<br /><em>&lt;summary&gt;Print to &lt;c&gt;stdout&lt;/c&gt; using the given format, and add a newline.&lt;/summary&gt;<br />&lt;param name=&quot;format&quot;&gt;The formatter.&lt;/param&gt;<br />&lt;returns&gt;The formatted result.&lt;/returns&gt;<br />&lt;example&gt;See &lt;c&gt;Printf.printfn&lt;/c&gt; (link: &lt;see cref=&quot;M:Microsoft.FSharp.Core.PrintfModule.PrintFormatLine``1&quot; /&gt;) for examples.&lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs44">val iter: action: (&#39;T -&gt; unit) -&gt; list: &#39;T list -&gt; unit<br /><em>&lt;summary&gt;Applies the given function to each element of the collection.&lt;/summary&gt;<br />&lt;param name=&quot;action&quot;&gt;The function to apply to elements from the input list.&lt;/param&gt;<br />&lt;param name=&quot;list&quot;&gt;The input list.&lt;/param&gt;<br />&lt;example id=&quot;iter-1&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let inputs = [ &quot;a&quot;; &quot;b&quot;; &quot;c&quot; ]
+
+ inputs |&amp;gt; List.iter (printfn &quot;%s&quot;)
+ &lt;/code&gt;
+ Evaluates to &lt;c&gt;unit&lt;/c&gt; and prints
+ &lt;code&gt;
+ a
+ b
+ c
+ &lt;/code&gt;
+ in the console.
+ &lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs45">val letter: string</div>
+<div class="fsdocs-tip" id="fs46">type StockPriceOb =
+  {
+    Stock: string
+    Time: int
+    Price: int
+  }</div>
+<div class="fsdocs-tip" id="fs47">StockPriceOb.Stock: string</div>
+<div class="fsdocs-tip" id="fs48">Multiple items<br />val string: value: &#39;T -&gt; string<br /><em>&lt;summary&gt;Converts the argument to a string using &lt;c&gt;ToString&lt;/c&gt;.&lt;/summary&gt;<br />&lt;remarks&gt;For standard integer and floating point values the and any type that implements &lt;c&gt;IFormattable&lt;/c&gt;&lt;c&gt;ToString&lt;/c&gt; conversion uses &lt;c&gt;CultureInfo.InvariantCulture&lt;/c&gt;. &lt;/remarks&gt;<br />&lt;param name=&quot;value&quot;&gt;The input value.&lt;/param&gt;<br />&lt;returns&gt;The converted string.&lt;/returns&gt;<br />&lt;example id=&quot;string-example&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;&lt;/code&gt;&lt;/example&gt;</em><br /><br />--------------------<br />type string = System.String<br /><em>&lt;summary&gt;An abbreviation for the CLI type &lt;see cref=&quot;T:System.String&quot; /&gt;.&lt;/summary&gt;<br />&lt;category&gt;Basic Types&lt;/category&gt;</em></div>
+<div class="fsdocs-tip" id="fs49">StockPriceOb.Time: int</div>
+<div class="fsdocs-tip" id="fs50">StockPriceOb.Price: int</div>
+<div class="fsdocs-tip" id="fs51">type TwoStocksPriceOb =
+  {
+    Time: int
+    PriceA: int option
+    PriceB: int option
+  }</div>
+<div class="fsdocs-tip" id="fs52">TwoStocksPriceOb.Time: int</div>
+<div class="fsdocs-tip" id="fs53">TwoStocksPriceOb.PriceA: int option</div>
+<div class="fsdocs-tip" id="fs54">type &#39;T option = Option&lt;&#39;T&gt;<br /><em>&lt;summary&gt;The type of optional values. When used from other CLI languages the
+ empty option is the &lt;c&gt;null&lt;/c&gt; value. &lt;/summary&gt;<br />&lt;remarks&gt;Use the constructors &lt;c&gt;Some&lt;/c&gt; and &lt;c&gt;None&lt;/c&gt; to create values of this type.
+ Use the values in the &lt;c&gt;Option&lt;/c&gt; module to manipulate values of this type,
+ or pattern match against the values directly.
+
+ &#39;None&#39; values will appear as the value &lt;c&gt;null&lt;/c&gt; to other CLI languages.
+ Instance methods on this type will appear as static methods to other CLI languages
+ due to the use of &lt;c&gt;null&lt;/c&gt; as a value representation.&lt;/remarks&gt;<br />&lt;category index=&quot;3&quot;&gt;Options&lt;/category&gt;</em></div>
+<div class="fsdocs-tip" id="fs55">TwoStocksPriceOb.PriceB: int option</div>
+<div class="fsdocs-tip" id="fs56">val stockA: StockPriceOb list</div>
+<div class="fsdocs-tip" id="fs57">val stockB: StockPriceOb list</div>
+<div class="fsdocs-tip" id="fs58">val stockbByTime: Map&lt;int,StockPriceOb&gt;</div>
+<div class="fsdocs-tip" id="fs59">val day: StockPriceOb</div>
+<div class="fsdocs-tip" id="fs60">val tslA1: TwoStocksPriceOb list</div>
+<div class="fsdocs-tip" id="fs61">val dayA: StockPriceOb</div>
+<div class="fsdocs-tip" id="fs62">val dayB: StockPriceOb option</div>
+<div class="fsdocs-tip" id="fs63">val db: StockPriceOb</div>
+<div class="fsdocs-tip" id="fs64">val tslA2: TwoStocksPriceOb list</div>
+<div class="fsdocs-tip" id="fs65">val tryFindBforA: dayA: StockPriceOb -&gt; TwoStocksPriceOb</div>
+<div class="fsdocs-tip" id="fs66">val tslA3: TwoStocksPriceOb list</div>
+<div class="fsdocs-tip" id="fs67">val stockaByTime: Map&lt;int,StockPriceOb&gt;</div>
+<div class="fsdocs-tip" id="fs68">val tslB: TwoStocksPriceOb list</div>
+<div class="fsdocs-tip" id="fs69">val dayB: StockPriceOb</div>
+<div class="fsdocs-tip" id="fs70">val dayA: StockPriceOb option</div>
+<div class="fsdocs-tip" id="fs71">val da: StockPriceOb</div>
+<div class="fsdocs-tip" id="fs72">val stockaByTime2: Map&lt;int,StockPriceOb&gt;</div>
+<div class="fsdocs-tip" id="fs73">val tslC1: TwoStocksPriceOb list</div>
+<div class="fsdocs-tip" id="fs74">val choose: chooser: (&#39;T -&gt; &#39;U option) -&gt; list: &#39;T list -&gt; &#39;U list<br /><em>&lt;summary&gt;Applies the given function to each element of the list. Returns
+ the list comprised of the results &lt;c&gt;x&lt;/c&gt; for each element where
+ the function returns Some(x)&lt;/summary&gt;<br />&lt;param name=&quot;chooser&quot;&gt;The function to generate options from the elements.&lt;/param&gt;<br />&lt;param name=&quot;list&quot;&gt;The input list.&lt;/param&gt;<br />&lt;returns&gt;The list comprising the values selected from the chooser function.&lt;/returns&gt;<br />&lt;example id=&quot;choose-1&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ type Happiness =
+     | AlwaysHappy
+     | MostOfTheTimeGrumpy
+
+ type People =
+     {
+       Name: string
+       Happiness: Happiness
+     }
+
+ let takeJustHappyPersons person =
+     match person.Happiness with
+     | AlwaysHappy -&amp;gt; Some person.Name
+     | MostOfTheTimeGrumpy -&amp;gt; None
+
+ let candidatesForTheTrip = 
+     [ { Name = &quot;SpongeBob&quot;; Happiness = AlwaysHappy }
+       { Name = &quot;Patrick&quot;; Happiness = AlwaysHappy }
+       { Name = &quot;Squidward&quot;; Happiness = MostOfTheTimeGrumpy } ]
+
+ candidatesForTheTrip |&amp;gt; List.choose takeJustHappyPersons
+ &lt;/code&gt;
+ The sample evaluates to &lt;c&gt;[ &quot;SpongeBob&quot;; &quot;Patrick&quot; ]&lt;/c&gt;&lt;/example&gt;<br />&lt;example id=&quot;choose-2&quot;&gt;
+ Using the identity function &lt;c&gt;id&lt;/c&gt; (is defined like &lt;c&gt;fun x -&amp;gt; x&lt;/c&gt;):
+ &lt;code lang=&quot;fsharp&quot;&gt;
+ 
+ let input1 = [ Some 1; None; Some 3; None ]
+
+ input1 |&amp;gt; List.choose id  // evaluates [1; 3]
+ &lt;/code&gt;&lt;/example&gt;<br />&lt;example id=&quot;choose-3&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let input2: int option list = [] 
+
+ input2 |&amp;gt; List.choose id  // evaluates to the empty list
+ &lt;/code&gt;&lt;/example&gt;<br />&lt;example id=&quot;choose-4&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let input3: string option list = [None; None]
+
+ input3 |&amp;gt; List.choose id  // evaluates to the empty list
+ &lt;/code&gt;&lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs75">val output: TwoStocksPriceOb</div>
+<div class="fsdocs-tip" id="fs76">val timesA: Set&lt;int&gt;</div>
+<div class="fsdocs-tip" id="fs77">val x: StockPriceOb</div>
+<div class="fsdocs-tip" id="fs78">val set: elements: seq&lt;&#39;T&gt; -&gt; Set&lt;&#39;T&gt; (requires comparison)<br /><em>&lt;summary&gt;Builds a set from a sequence of objects. The objects are indexed using generic comparison.&lt;/summary&gt;<br />&lt;param name=&quot;elements&quot;&gt;The input sequence of elements.&lt;/param&gt;<br />&lt;returns&gt;The created set.&lt;/returns&gt;<br />&lt;example id=&quot;set-1&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let values = set [ 1; 2; 3; 5; 7; 11 ]
+ &lt;/code&gt;
+ Evaluates to a set containing the given numbers.
+ &lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs79">val timesB: Set&lt;int&gt;</div>
+<div class="fsdocs-tip" id="fs80">val timesAandB: Set&lt;int&gt;</div>
+<div class="fsdocs-tip" id="fs81">Multiple items<br />module Set
+
+from Microsoft.FSharp.Collections<br /><em>&lt;summary&gt;Contains operations for working with values of type &lt;see cref=&quot;T:Microsoft.FSharp.Collections.Set`1&quot; /&gt;.&lt;/summary&gt;</em><br /><br />--------------------<br />type Set&lt;&#39;T (requires comparison)&gt; =
+  interface IReadOnlyCollection&lt;&#39;T&gt;
+  interface IComparable
+  interface IEnumerable
+  interface IEnumerable&lt;&#39;T&gt;
+  interface ICollection&lt;&#39;T&gt;
+  new: elements: seq&lt;&#39;T&gt; -&gt; Set&lt;&#39;T&gt;
+  member Add: value: &#39;T -&gt; Set&lt;&#39;T&gt;
+  member Contains: value: &#39;T -&gt; bool
+  override Equals: obj -&gt; bool
+  member IsProperSubsetOf: otherSet: Set&lt;&#39;T&gt; -&gt; bool
+  ...<br /><em>&lt;summary&gt;Immutable sets based on binary trees, where elements are ordered by F# generic comparison. By default
+ comparison is the F# structural comparison function or uses implementations of the IComparable interface on element values.&lt;/summary&gt;<br />&lt;remarks&gt;See the &lt;see cref=&quot;T:Microsoft.FSharp.Collections.SetModule&quot; /&gt; module for further operations on sets.
+
+ All members of this class are thread-safe and may be used concurrently from multiple threads.&lt;/remarks&gt;</em><br /><br />--------------------<br />new: elements: seq&lt;&#39;T&gt; -&gt; Set&lt;&#39;T&gt;</div>
+<div class="fsdocs-tip" id="fs82">val intersect: set1: Set&lt;&#39;T&gt; -&gt; set2: Set&lt;&#39;T&gt; -&gt; Set&lt;&#39;T&gt; (requires comparison)<br /><em>&lt;summary&gt;Computes the intersection of the two sets.&lt;/summary&gt;<br />&lt;param name=&quot;set1&quot;&gt;The first input set.&lt;/param&gt;<br />&lt;param name=&quot;set2&quot;&gt;The second input set.&lt;/param&gt;<br />&lt;returns&gt;The intersection of &lt;c&gt;set1&lt;/c&gt; and &lt;c&gt;set2&lt;/c&gt;.&lt;/returns&gt;<br />&lt;example id=&quot;set-intersect&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let set1 = Set.empty.Add(1).Add(2).Add(3)
+ let set2 = Set.empty.Add(2).Add(3).Add(4)
+ printfn $&quot;The intersection of {set1} and {set2} is {Set.intersect set1 set2}&quot;
+ &lt;/code&gt;
+ The sample evaluates to the following output: &lt;c&gt;The intersection of set [1; 2; 3] and set [2; 3; 4] is set [2; 3]&lt;/c&gt;&lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs83">val tslC2: TwoStocksPriceOb list</div>
+<div class="fsdocs-tip" id="fs84">val toList: set: Set&lt;&#39;T&gt; -&gt; &#39;T list (requires comparison)<br /><em>&lt;summary&gt;Builds a list that contains the elements of the set in order.&lt;/summary&gt;<br />&lt;param name=&quot;set&quot;&gt;The input set.&lt;/param&gt;<br />&lt;returns&gt;An ordered list of the elements of &lt;c&gt;set&lt;/c&gt;.&lt;/returns&gt;<br />&lt;example id=&quot;set-tolist&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let set = Set.empty.Add(1).Add(2).Add(3)
+ let list = Set.toList set
+ printfn $&quot;The set is {list} and type is {list.GetType().Name}&quot;
+ &lt;/code&gt;
+ The sample evaluates to the following output: &lt;c&gt;The set is [1; 2; 3] and type is &quot;FSharpList`1&quot;&lt;/c&gt;&lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs85">val time: int</div>
+<div class="fsdocs-tip" id="fs86">val stockATimes: int list</div>
+<div class="fsdocs-tip" id="fs87">val stockBTimes: int list</div>
+<div class="fsdocs-tip" id="fs88">val allTimes: int list</div>
+<div class="fsdocs-tip" id="fs89">val append: list1: &#39;T list -&gt; list2: &#39;T list -&gt; &#39;T list<br /><em>&lt;summary&gt;Returns a new list that contains the elements of the first list
+ followed by elements of the second.&lt;/summary&gt;<br />&lt;param name=&quot;list1&quot;&gt;The first input list.&lt;/param&gt;<br />&lt;param name=&quot;list2&quot;&gt;The second input list.&lt;/param&gt;<br />&lt;returns&gt;The resulting list.&lt;/returns&gt;<br />&lt;example id=&quot;append-1&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ List.append [1..3] [4..7]     //  evaluates [1; 2; 3; 4; 5; 6; 7]
+ 
+ [4..7] |&amp;gt; List.append [1..3]  //  evaluates [1; 2; 3; 4; 5; 6; 7]
+ &lt;/code&gt;&lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs90">val distinct: list: &#39;T list -&gt; &#39;T list (requires equality)<br /><em>&lt;summary&gt;Returns a list that contains no duplicate entries according to generic hash and
+ equality comparisons on the entries.
+ If an element occurs multiple times in the list then the later occurrences are discarded.&lt;/summary&gt;<br />&lt;param name=&quot;list&quot;&gt;The input list.&lt;/param&gt;<br />&lt;returns&gt;The result list.&lt;/returns&gt;<br />&lt;example id=&quot;distinct-1&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let input = [6;1;2;3;1;4;5;5]
+
+ input |&amp;gt; List.distinct
+ &lt;/code&gt;
+ Evaluates to &lt;c&gt;[6; 1; 2; 3; 4; 5]&lt;/c&gt;.
+ &lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs91">val tslD: TwoStocksPriceOb list</div>
+<div class="fsdocs-tip" id="fs92">val a: int option</div>
+<div class="fsdocs-tip" id="fs93">val a: StockPriceOb</div>
+<div class="fsdocs-tip" id="fs94">val b: int option</div>
+<div class="fsdocs-tip" id="fs95">val map: mapping: (&#39;T -&gt; &#39;U) -&gt; option: &#39;T option -&gt; &#39;U option<br /><em>&lt;summary&gt;&lt;c&gt;map f inp&lt;/c&gt; evaluates to &lt;c&gt;match inp with None -&amp;gt; None | Some x -&amp;gt; Some (f x)&lt;/c&gt;.&lt;/summary&gt;<br />&lt;param name=&quot;mapping&quot;&gt;A function to apply to the option value.&lt;/param&gt;<br />&lt;param name=&quot;option&quot;&gt;The input option.&lt;/param&gt;<br />&lt;returns&gt;An option of the input value after applying the mapping function, or None if the input is None.&lt;/returns&gt;<br />&lt;example id=&quot;map-1&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ None |&amp;gt; Option.map (fun x -&amp;gt; x * 2) // evaluates to None
+ Some 42 |&amp;gt; Option.map (fun x -&amp;gt; x * 2) // evaluates to Some 84
+ &lt;/code&gt;&lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs96">val b: StockPriceOb</div>
+<div class="fsdocs-tip" id="fs97">val testTime: int</div>
+<div class="fsdocs-tip" id="fs98">val time1A: StockPriceOb option</div>
+<div class="fsdocs-tip" id="fs99">val time1B: StockPriceOb option</div>
+<div class="fsdocs-tip" id="fs100">val time1Aprice: int option</div>
+<div class="fsdocs-tip" id="fs101">val time1Bprice: int option</div>
+<div class="fsdocs-tip" id="fs102">val testOutput: TwoStocksPriceOb</div>
+<div class="fsdocs-tip" id="fs103">val getTheMatch: time: int -&gt; TwoStocksPriceOb</div>
+<div class="fsdocs-tip" id="fs104">val a: StockPriceOb option</div>
+<div class="fsdocs-tip" id="fs105">val b: StockPriceOb option</div>
+<div class="fsdocs-tip" id="fs106">val aPrice: int option</div>
+<div class="fsdocs-tip" id="fs107">val bPrice: int option</div>
+<div class="fsdocs-tip" id="fs108">val tslD2: TwoStocksPriceOb list</div>
+
+        </div>
+
+        <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+        <script type="text/javascript">var fsdocs_search_baseurl = '/Teaching/';</script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+        <script type="text/javascript" src="/Teaching/content/fsdocs-search.js"></script>
+        <!-- END SEARCH BOX: this adds support for the search box -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    </div>
+</body>
+
+</html>

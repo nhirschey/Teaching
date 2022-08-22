@@ -40,12 +40,12 @@ The APT way of thinking is less restrictive than economically motivated equilibr
 #r "nuget: Plotly.NET, 2.0.0-preview.17"
 
 #load "Common.fsx"
-#load "YahooFinance.fsx"
+#r "nuget: Quotes.YahooFinance, 0.0.1-alpha.1"
 
 open System
 open FSharp.Data
 open Common
-open YahooFinance
+open Quotes.YahooFinance
 
 open FSharp.Stats
 open Plotly.NET
@@ -83,7 +83,7 @@ type Return = { YearMonth : DateTime; Return : float }
         
 
 let vbr = 
-    YahooFinance.PriceHistory("VBR",
+    YahooFinance.History("VBR",
                               startDate=DateTime(2010,1,1),
                               endDate=DateTime(2021,12,31),
                               interval=Interval.Monthly)

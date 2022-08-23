@@ -21,12 +21,12 @@ index: 9
 
 (** *)
 #load "Common.fsx"
-#load "YahooFinance.fsx"
+#r "nuget: Quotes.YahooFinance, 0.0.1-alpha.4"
 
 open System
 open FSharp.Data
 open Common
-open YahooFinance
+open Quotes.YahooFinance
 
 open FSharp.Stats
 open Plotly.NET
@@ -116,7 +116,7 @@ let tickers =
     ]
 
 let tickPrices = 
-    YahooFinance.PriceHistory(
+    YahooFinance.History(
         tickers,
         startDate = DateTime(2010,1,1),
         interval = Monthly)
@@ -126,7 +126,7 @@ tickPrices[..3]
 (**
 A function to calculate returns from Price observations
 *)
-let pricesToReturns (symbol, adjPrices: list<PriceObs>) =
+let pricesToReturns (symbol, adjPrices: list<Quote>) =
     adjPrices
     |> List.sortBy (fun x -> x.Date)
     |> List.pairwise

@@ -61,13 +61,16 @@ type Trade =
 let accountAt0 = { Time = 0; Cash = 100.0; Shares = 0.0 }
 let tradeAt1 = { Shares = 4.0; Price = 25.0 }
 
-// `updateAccount` is a function that updates an account after a trade is made.
-// 
-// (trade: Trade) restricts the `trade` parameter to data of type `Trade`.
-//
-// (inAccount: AccountBalances) restricts the `inAccount` parameter 
-// to data of type `AccountBalances`
-//
+(** `updateAccount` is a function that updates an account after a trade is made.
+
+(trade: Trade) restricts the `trade` parameter to data of type `Trade`.
+
+(inAccount: AccountBalances) restricts the `inAccount` parameter 
+to data of type `AccountBalances`
+
+*)
+
+/// Function that updates an account after a trade is made.
 let updateAccount (trade: Trade) (inAccount: AccountBalances) =
     let tradeValue = trade.Price * trade.Shares
     let newCash = inAccount.Cash - tradeValue
@@ -151,10 +154,10 @@ If it is correct then the account value test below should evaluate to `true`
 let accountValue (stockPrice: float) (account: AccountBalances) =
     failwith "unimplemented"
 
-(***do-not-eval***)
-// simple account value test
-(accountValue 27.0 accountAt2) = 108.0
-
+(**
+    // simple account value test
+    (accountValue 27.0 accountAt2) = 108.0
+*)
 (**
 ### Portfolio weights of long positions
 
@@ -363,7 +366,7 @@ let portfolio =
       { Id = "TSLA"; PositionValue = tslaPositionValueB } ]
 
 // This is called a list comprehension
-let positionValues = [ for p in portfolio -> p.PositionValue ]
+let positionValues = [ for p in portfolio do p.PositionValue ]
 (***include-value:positionValues***)
 
 (**
@@ -395,7 +398,7 @@ let portfolioValue = positionValues |> List.sum
 And with this we can calculate portfolio weights.
 *)
 let portfolioWeights =
-    [ for p in portfolio -> 
+    [ for p in portfolio do 
         let weight = p.PositionValue / portfolioValue 
         p.Id, weight ]
 portfolioWeights
@@ -421,7 +424,7 @@ let exPortfolio =
     [ { Id = "A"; Weight = 0.25; Return = 0.1 }
       { Id = "B"; Weight = 0.75; Return = 0.2 } ]
 
-let weightsXreturn = [ for pos in exPortfolio -> pos.Weight * pos.Return ]
+let weightsXreturn = [ for pos in exPortfolio do pos.Weight * pos.Return ]
 weightsXreturn
 (***include-value:weightsXreturn***)
 
@@ -439,83 +442,61 @@ VTI tracks a stock market index and BND tracks a bond market index.
 They are good proxies for the return of the overall US stock and bond markets.
 
 We are going to load some helper code that allows us to download and plot this data.
-This will introduce using `#load` to load scripts with external code,
-the `nuget` package manager for loading external libraries,
+This will introduce using the `nuget` package manager for loading external libraries,
 and how to open namespaces.
 
-When you type `#load "Script.fsx"` in the REPL,
-F# interactive compiles the code in `Script.fsx` and puts it into
-a code module with the same name as the script.
+We're going to use the **Quotes.YahooFinance** library for this.
+We download the code from the [nuget.org](http://www.nuget.org) package manager.
 
-We are going to use a helper script called `YahooFinance.fsx` that includes
-code for requesting price histories from yahoo. To download it,
-go to the [YahooFinance](YahooFinance.html) page and click the "download script"
-button at the top. Make sure that you have saved it in 
-the same directory as this file.
-
-If you have downloaded it correctly then the following code will evaluate to `true`.
+This is equivalent to loading libraries with `pip` or `conda` in python
+or `install.packages` in R.
 *)
 
-System.IO.File.Exists("YahooFinance.fsx")
-(***include-it***)
+#r "nuget: Quotes.YahooFinance, 0.0.1-alpha.4"
 
 (**
-Assuming that the above code evaluated to `true` we can now load it into our session.
+We now have access to the code in the **Quotes.YahooFinance** library.
+The library has a function called `YahooFinance.History` that we 
+can use to download quote histories from yahoo finance.  
+
+We can access code using fully qualified names.
 *)
 
-#load "YahooFinance.fsx"
+Quotes.YahooFinance.YahooFinance.History("AAPL")
 
 (**
-Namespaces are a hierarchical way of organizing code.
-In the above checking for the existence of a file we have a hierarchy of
-`System.IO` where the period `.` separates the `System` and `IO` namespaces.
-If we `open` a namespace, then we have access to the code inside the namespace directly.
-
-It is common to open the `System` namespace.
+However, it's common to open a library's namespace in order to access
+the library's functionality directly. 
 *)
 
-open System
+open Quotes.YahooFinance
+
+YahooFinance.History("AAPL")
 
 (**
-Now we can leave `System` off when accessing code in the `System` namespace.
+Namespaces such as `Quotes.YahooFinance` are a hierarchical way of organizing code.
 *)
-
-IO.File.Exists("YahooFinance.fsx")
-(***include-it***)
-
-(**
-We also want to open the `YahooFinance` module from `YahooFinance.fsx`,
-which is similar to a namespace.
-*)
-
-open YahooFinance
 
 (**
 We are ready to request some data. Let's define our start and end dates.
 `DateTime` is a type in the `System` namespace.
-We have opened that namespace so we can access the type directly.
 *)
+
+open System
 
 let myStart = DateTime(2010,1,1)
 let myEnd = DateTime.UtcNow
 myEnd
 (***include-it***)
 
-(**
-Our `YahooFinance` module has code for requesting price histories of stocks.
-*)
-
-let bnd = YahooFinance.PriceHistory("BND",startDate=myStart,endDate=myEnd,interval = Interval.Daily)
-let vti = YahooFinance.PriceHistory("VTI",startDate=myStart,endDate=myEnd,interval = Interval.Daily)
+let bnd = YahooFinance.History("BND",startDate=myStart,endDate=myEnd,interval = Interval.Daily)
+let vti = YahooFinance.History("VTI",startDate=myStart,endDate=myEnd,interval = Interval.Daily)
 
 (**
 This returns several data items for each point in time.
 *)
 
-(***do-not-eval***)
 vti[0..3]
-(***hide***)
-vti.[0..3]
 (***include-it***)
 
 (**
@@ -524,11 +505,6 @@ This adjustment is done so that you can calculate returns from the price changes
 
 Let's see what it looks like to plot it. 
 We're going to use the [plotly.NET](https://plotly.net) library for this.
-We download the code from the [nuget.org](http://www.nuget.org) package manager.
-
-This is equivalent to loading libraries with `pip` or `conda` in python
-or `install.packages` in R.
-
 *)
 
 #r "nuget: Plotly.NET, 2.0.0-preview.17"
@@ -543,7 +519,7 @@ Above we are loading an exact version by using a "," and version number.
 Plot prices as a line chart.
 *)
 
-let vtiAdjPrices = [ for period in vti -> period.Date, period.AdjustedClose ]
+let vtiAdjPrices = [ for period in vti do period.Date, period.AdjustedClose ]
 
 (***do-not-eval***)
 Chart.Line(vtiAdjPrices)
@@ -650,7 +626,7 @@ vtiAvgReturn
 (*** Portfolio returns for different weights. *)
 
 let differentReturns =
-  [ for w in [0.0 .. 0.2 .. 1.0] -> w, w*bndAvgReturn + (1.0-w)*vtiAvgReturn ]
+  [ for w in [0.0 .. 0.2 .. 1.0] do w, w*bndAvgReturn + (1.0-w)*vtiAvgReturn ]
 
 differentReturns
 (***include-it***)

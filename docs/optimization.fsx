@@ -21,7 +21,7 @@ index: 9
 
 (** *)
 #load "Common.fsx"
-#r "nuget: Quotes.YahooFinance, 0.0.1-alpha.1"
+#r "nuget: Quotes.YahooFinance, 0.0.1-alpha.4"
 
 open System
 open FSharp.Data

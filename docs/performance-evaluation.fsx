@@ -40,7 +40,7 @@ The APT way of thinking is less restrictive than economically motivated equilibr
 #r "nuget: Plotly.NET, 2.0.0-preview.17"
 
 #load "Common.fsx"
-#r "nuget: Quotes.YahooFinance, 0.0.1-alpha.1"
+#r "nuget: Quotes.YahooFinance, 0.0.1-alpha.4"
 
 open System
 open FSharp.Data

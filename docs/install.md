@@ -9,7 +9,7 @@ index: 1
 
 Install the software below to run the code on this site. Once this software is installed, click the links at the top of the webpages to download the page as a script or jupyter notebook. The code should run on your computer inside visual studio code as long as the below software is installed:
 
-1. [.NET 6 SDK](https://dotnet.microsoft.com/en-us/download) for your operating system. 
+1. [.NET 7 SDK](https://dotnet.microsoft.com/en-us/download) for your operating system. 
     - This includes the F# language.
     - If it is installed correctly, then if you open a terminal (powershell on windows, terminal app on Mac) and type 
         ```code
@@ -19,12 +19,12 @@ Install the software below to run the code on this site. Once this software is i
         
         ```code
         PS C:\Users\nicho> dotnet --version
-        6.0.101
+        7.0.100
         PS C:\Users\nicho>
         ```
 2. [Visual Studio Code](https://code.visualstudio.com/) for your operating system.
 3. [Ionide](https://marketplace.visualstudio.com/items?itemName=Ionide.Ionide-fsharp) extension for visual studio code (make sure that visual studio code is installed first).
-4. [.NET Interactive Notebooks](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.dotnet-interactive-vscode)  extension for visual studio code (make sure that visual studio code is installed first).
+4. [Polyglot Notebooks](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.dotnet-interactive-vscode)  extension for visual studio code (make sure that visual studio code is installed first).
 
 ## More detailed guides
 

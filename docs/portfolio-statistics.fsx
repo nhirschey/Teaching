@@ -507,8 +507,10 @@ Let's see what it looks like to plot it.
 We're going to use the [plotly.NET](https://plotly.net) library for this.
 *)
 
-#r "nuget: Plotly.NET, 2.0.0-preview.17"
-#r "nuget: Plotly.NET.Interactive, 2.0.0-preview.17"
+#r "nuget: Plotly.NET, 3.*"
+#r "nuget: Plotly.NET.Interactive, 3.*"
+
+(** *)
 
 
 open Plotly.NET

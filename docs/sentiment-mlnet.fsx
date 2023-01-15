@@ -26,7 +26,10 @@ To start we'll load some libaries.
 #r "nuget: Microsoft.ML, 1.7.*"
 #r "nuget: Microsoft.ML.FastTree"
 #r "nuget: FSharp.Data"
-#r "nuget: Plotly.NET, 2.0.*"
+#r "nuget: Plotly.NET, 3.*"
+#r "nuget: Plotly.NET.Interactive, 3.*"
+
+(** *)
 
 #time "on"
 

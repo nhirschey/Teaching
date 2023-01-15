@@ -19,17 +19,13 @@ index: 4
 *)
 
 (*** condition:prepare ***)
-#r "nuget: FSharp.Formatting"
-
-type H2 = H2 of string 
-type H3 = H3 of string 
-
 let makeNumberedHeading (htmlTag:string) (text:string) =
     let name = text.Replace(" ", "-")
     let snippet = sprintf $"<{htmlTag} class=numbered><a name={name} class=anchor href=#{name}>{text}</a></{htmlTag}>"
     snippet 
-fsi.AddPrinter(fun (H2 text) -> makeNumberedHeading "h2" text)
-fsi.AddPrinter(fun (H3 text) -> makeNumberedHeading "h3" text)
+
+let H2 = makeNumberedHeading "h2"
+let H3 = makeNumberedHeading "h3"
 
 (*** hide,define-output:preDetails ***)
 """

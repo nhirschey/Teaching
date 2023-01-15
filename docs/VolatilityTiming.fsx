@@ -48,8 +48,8 @@ One thing that can help us manage volatility is the fact that volatility tends t
 *)
 
 #r "nuget: FSharp.Stats"
-#r "nuget: Plotly.NET, 2.0.0-preview.17"
-#r "nuget: Plotly.NET.Interactive, 2.0.0-preview.17"
+#r "nuget: Plotly.NET, 3.*"
+#r "nuget: Plotly.NET.Interactive, 3.*"
 
 open FSharp.Stats
 open Plotly.NET

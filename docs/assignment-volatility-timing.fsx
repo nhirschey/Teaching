@@ -25,9 +25,9 @@ All work that you submit should be your own. Make use of the course resources an
 
 #r "nuget:FSharp.Data"
 #r "nuget: FSharp.Stats"
-#r "nuget: Plotly.NET, 2.0.0-preview.17"
+#r "nuget: Plotly.NET, 3.*"
 (*** condition: ipynb ***)
-#r "nuget: Plotly.NET.Interactive, 2.0.0-preview.17"
+#r "nuget: Plotly.NET.Interactive, 3.*"
 
 (** *)
 

@@ -52,8 +52,8 @@ let H3 = makeNumberedHeading "h3"
 
 #r "nuget:FSharp.Data"
 #r "nuget: FSharp.Stats"
-#r "nuget: Plotly.NET, 2.0.0-preview.17"
-#r "nuget: Plotly.NET.Interactive, 2.0.0-preview.17"
+#r "nuget: Plotly.NET, 3.*"
+#r "nuget: Plotly.NET.Interactive, 3.*"
 
 open FSharp.Data
 open FSharp.Stats

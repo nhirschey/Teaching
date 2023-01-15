@@ -15,9 +15,8 @@ index: 9
 #r "nuget: FSharp.Data"
 #r "nuget: DiffSharp-lite"
 
-#r "nuget: Plotly.NET, 2.0.0-preview.18"
-(*** condition: ipynb ***)
-#r "nuget: Plotly.NET.Interactive, 2.0.0-preview.18"
+#r "nuget: Plotly.NET, 3.*"
+#r "nuget: Plotly.NET.Interactive, 3.*"
 
 (** *)
 #load "Common.fsx"

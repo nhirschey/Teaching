@@ -290,7 +290,7 @@ This download code used pipelining and lambda functions, which are two important
 
 *)
 
-(** A simple int array.*)
+(** A simple float array.*)
 
 let ar = [| 0 .. 10 |] 
 (** *)
@@ -301,15 +301,9 @@ ar |> Array.take 5
 When we look at the type signature of the elements in the array `val ar : int []`, it tells us that we have a integer array, meaning an array in which each element of the array is an integer. Arrays are "zero indexed", meaning the 0th item is the first in the array. We can access the elements individually or use a range to access multiple together.
 *)
 
-ar.[0] // or ar[0] in F# 6
+ar[0]
 (*** include-fsi-output ***)
-ar.[0 .. 2] // or ar[0 .. 2] in F# 6
-(*** include-fsi-output ***)
-
-(** A simple float array.*)
-let arr = [| 1.0 .. 10.0 |]
-arr.[0]
-arr.[0 .. 5]
+ar[0 .. 2]
 (*** include-fsi-output ***)
 
 (** Lists and sequences are similar. *)
@@ -322,15 +316,15 @@ seq { 1.0 .. 10.0 }
 
 These collections have several built-in functions for operating on them such as map, filter, groupBy, etc.*)
 
-arr
-|> Array.map(fun x -> x + 1.0)
+ar
+|> Array.map(fun x -> x + 1)
 (*** include-fsi-output ***)
 
-arr
-|> Array.filter(fun x -> x < 5.0)
+ar
+|> Array.filter(fun x -> x < 5)
 (*** include-fsi-output ***)
-arr
-|> Array.groupBy(fun x -> x < 5.0)
+ar
+|> Array.groupBy(fun x -> x < 5)
 |> Array.map(fun (group, xs) -> Array.min xs, Array.max xs)
 (*** include-fsi-output ***)
 
@@ -485,6 +479,7 @@ But it is also convenient to use the [FSharp.Stats](https://fslab.org/FSharp.Sta
 #r "nuget: FSharp.Stats"
 
 open FSharp.Stats
+
 [1.0 .. 10.0 ] |> Seq.stDev
 (***include-fsi-output***)
 

@@ -15,18 +15,17 @@ index: 9
 #r "nuget: FSharp.Data"
 #r "nuget: DiffSharp-lite"
 
-#r "nuget: Plotly.NET, 2.0.0-preview.18"
-(*** condition: ipynb ***)
-#r "nuget: Plotly.NET.Interactive, 2.0.0-preview.18"
+#r "nuget: Plotly.NET, 3.*"
+#r "nuget: Plotly.NET.Interactive, 3.*"
 
 (** *)
 #load "Common.fsx"
-#load "YahooFinance.fsx"
+#r "nuget: Quotes.YahooFinance, 0.0.1-alpha.4"
 
 open System
 open FSharp.Data
 open Common
-open YahooFinance
+open Quotes.YahooFinance
 
 open FSharp.Stats
 open Plotly.NET
@@ -116,7 +115,7 @@ let tickers =
     ]
 
 let tickPrices = 
-    YahooFinance.PriceHistory(
+    YahooFinance.History(
         tickers,
         startDate = DateTime(2010,1,1),
         interval = Monthly)
@@ -126,7 +125,7 @@ tickPrices[..3]
 (**
 A function to calculate returns from Price observations
 *)
-let pricesToReturns (symbol, adjPrices: list<PriceObs>) =
+let pricesToReturns (symbol, adjPrices: list<Quote>) =
     adjPrices
     |> List.sortBy (fun x -> x.Date)
     |> List.pairwise
@@ -514,8 +513,8 @@ A function to accumulate returns.
 *)
 
 
-let cumulateReturns xs =
-    let folder prev current =
+let cumulateReturns (xs: list<StockData>) =
+    let folder (prev: StockData) (current: StockData) =
         let newReturn = prev.Return * (1.0+current.Return)
         { current with Return = newReturn}
     

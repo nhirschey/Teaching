@@ -33,6 +33,7 @@ index: 3
 (**
 # Options
 Sometimes something exists or doesn't exist. This can be useful to model explicitly. [FSharp For Fun And Profit](https://fsharpforfunandprofit.com/posts/the-option-type/) has a nice discussion of option types and how to use them. You can also find information on the [tour of F#](https://docs.microsoft.com/en-us/dotnet/fsharp/tour#options), [F# language reference](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/options) and the [F# core documentation](https://fsharp.github.io/fsharp-core-docs/reference/fsharp-core-optionmodule.html).
+Finally, Jane Street's tech [blog](https://blog.janestreet.com/making-something-out-of-nothing-or-why-none-is-better-than-nan-and-null/) has a good discussion as well.
 
 The main purpose is to model situations where you could have "something" or "nothing" explicitly.
 

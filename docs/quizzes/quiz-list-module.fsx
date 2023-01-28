@@ -112,7 +112,7 @@ Given the list below, take elements until you find one that is greater than `4`.
 
 (**
 ## Question 3
-Given the list below, take elements until you find one that is greater than `4`.
+Given the list below, skip elements until you find one that is greater than `4`.
 ```fsharp
 [ 1; -4; 7; 2; -10]
 ```

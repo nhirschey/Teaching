@@ -14,12 +14,11 @@ index: 6
 #r "nuget: FSharp.Stats"
 #r "nuget: FSharp.Data"
 #r "nuget: DiffSharp-lite"
-
-#load "YahooFinance.fsx"
+#r "nuget: Quotes.YahooFinance, 0.0.1-alpha.4"
 
 open System
 open FSharp.Data
-open YahooFinance
+open Quotes.YahooFinance
 
 open FSharp.Stats
 open DiffSharp
@@ -84,7 +83,7 @@ let tickers =
     ]
 
 let tickPrices = 
-    YahooFinance.PriceHistory(
+    YahooFinance.History(
         tickers,
         startDate = DateTime(2010,1,1),
         interval = Monthly)
@@ -99,12 +98,12 @@ type StockReturn =
       Date : DateTime
       Return : float }
 
-let pricesToReturns (symbol, adjPrices: list<PriceObs>) =
+let pricesToReturns (symbol, adjPrices: list<Quote>) =
     adjPrices
     |> List.sortBy (fun x -> x.Date)
     |> List.pairwise
     |> List.map (fun (yesterday, today) ->
-        let r = (log today.AdjustedClose) - log (yesterday.AdjustedClose) 
+        let r = (log today.AdjustedClose) - (log yesterday.AdjustedClose) 
         { Symbol = symbol 
           Date = today.Date 
           Return = r })

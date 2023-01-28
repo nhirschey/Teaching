@@ -402,8 +402,8 @@ aapl
 Now let's plot the stock price using [Plotly.NET](https://plotly.github.io/Plotly.NET/).
 *)
 
-#r "nuget: Plotly.NET, 2.0.0-preview.17"
-#r "nuget: Plotly.NET.Interactive, 2.0.0-preview.17"
+#r "nuget: Plotly.NET, 3.*"
+#r "nuget: Plotly.NET.Interactive, 3.*"
 open Plotly.NET
 
 

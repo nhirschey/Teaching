@@ -23,8 +23,8 @@ Install the software below to run the code on this site. Once this software is i
         PS C:\Users\nicho>
         ```
 2. [Visual Studio Code](https://code.visualstudio.com/) for your operating system.
-3. [Ionide](https://marketplace.visualstudio.com/items?itemName=Ionide.Ionide-fsharp) extension for visual studio code (make sure that visual studio code is installed first).
-4. [Polyglot Notebooks](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.dotnet-interactive-vscode)  extension for visual studio code (make sure that visual studio code is installed first).
+3. [Polyglot Notebooks](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.dotnet-interactive-vscode)  extension for visual studio code (make sure that visual studio code is installed first).
+4. *This one is optional*: [Ionide](https://marketplace.visualstudio.com/items?itemName=Ionide.Ionide-fsharp) extension for visual studio code (make sure that visual studio code is installed first).
 
 ## More detailed guides
 

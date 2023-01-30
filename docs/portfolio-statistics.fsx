@@ -452,7 +452,7 @@ This is equivalent to loading libraries with `pip` or `conda` in python
 or `install.packages` in R.
 *)
 
-#r "nuget: Quotes.YahooFinance, 0.0.1-alpha.4"
+#r "nuget: Quotes.YahooFinance, 0.0.5"
 
 (**
 We now have access to the code in the **Quotes.YahooFinance** library.

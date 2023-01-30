@@ -14,7 +14,7 @@ index: 6
 #r "nuget: FSharp.Stats"
 #r "nuget: FSharp.Data"
 #r "nuget: DiffSharp-lite"
-#r "nuget: Quotes.YahooFinance, 0.0.1-alpha.4"
+#r "nuget: Quotes.YahooFinance, 0.0.5"
 
 open System
 open FSharp.Data

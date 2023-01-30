@@ -125,7 +125,7 @@ addOne 0 // here x is 0
 addOne 1 // here x is 1
 addOne 2 // here x is 2
 
-// We can also chain them
+(** We can also chain them *)
 addOne (addOne (addOne 0)) // = (1 + (1 + (1 + 0)))
 
 (**
@@ -278,9 +278,16 @@ simpleReturnRecord3 x
 
 (**
 ### Pipelines and lambda expressions
-This download code used pipelining and lambda functions, which are two important language features. Pipelines are created using the pipe operator (`|>`) and allow you to pipe the output of one function to the input of another. Lambda expressions allow you to create functions on the fly. 
+Pipelines and lambda functions are two important tools. Pipelines are created using the pipe operator (`|>`) and allow you to pipe the output of one function to the input of another. Lambda expressions allow you to create functions on the fly. 
 
+Take this example from before
 *)
+addOne (addOne (addOne 0)) // = (1 + (1 + (1 + 0)))
+
+(** We can write the same thing using pipes. *)
+0 |> addOne |> addOne |> addOne // = (1 + (1 + (1 + 0)))
+
+(** lambda expressions `fun x -> ...` are used to create functions on the fly. *)
 
 1.0 |> fun x -> x + 1.0 |> fun x -> x ** 2.0
 (*** include-fsi-output ***)
@@ -288,41 +295,71 @@ This download code used pipelining and lambda functions, which are two important
 (**
 ### Collections: Arrays, Lists, Sequences
 
+Collections provide a way to store multiple values together. 
+Maybe you want to store a list of stock prices, or an array of portfolios.
 *)
 
-(** A simple float array.*)
+(** A simple int array.*)
 
 let ar = [| 0 .. 10 |] 
 (** *)
-ar |> Array.take 5
+ar 
 (*** include-fsi-output ***)
 
 (**
-When we look at the type signature of the elements in the array `val ar : int []`, it tells us that we have a integer array, meaning an array in which each element of the array is an integer. Arrays are "zero indexed", meaning the 0th item is the first in the array. We can access the elements individually or use a range to access multiple together.
+When we look at the type signature of the elements in the array `val ar : int []`, it tells us that we have a integer array, meaning an array in which each element of the array is an integer. Arrays are "zero indexed", meaning the 0th item is the first in the array. 
+
+We can access the elements individually
 *)
 
 ar[0]
 (*** include-fsi-output ***)
+ar[3]
+(*** include-fsi-output ***)
+
+(** Or we can access a range of elements. *)
 ar[0 .. 2]
 (*** include-fsi-output ***)
 
 (** Lists and sequences are similar. *)
 // List
 [ 1.0 .. 10.0 ]
+(*** include-fsi-output***)
 // Sequence
 seq { 1.0 .. 10.0 }
+(*** include-fsi-output ***)
 
 (** Arrays, lists, and sequences have different properties that can make one data structure preferable to the others in a given setting. We'll discuss these different properties in due time, but for an overview you can see the F# collection language reference [here](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/fsharp-collection-types). Sequences are the most different as they are "lazy", meaning "Sequences are particularly useful when you have a large, ordered collection of data but don't necessarily expect to use all the elements. Individual sequence elements are computed only as required, so a sequence can perform better than a list if not all the elements are used" (see F# language reference).
 
 These collections have several built-in functions for operating on them such as map, filter, groupBy, etc.*)
 
+(** Array.map applies a function to each element of an array. *)
 ar
 |> Array.map(fun x -> x + 1)
 (*** include-fsi-output ***)
 
+(** The Array.map function is equivalent to *)
+
+[| for x in ar do x + 1 |]
+
+(** Array.filter filters elements of a list to those for which a function evaluates to `true`.*)
 ar
 |> Array.filter(fun x -> x < 5)
 (*** include-fsi-output ***)
+
+(** Array.filter is equivalent to *)
+[| for x in ar do if x < 5 then x |]
+
+(** While the comprehension syntax `[| for x in ar do ... |]` is common to use,
+the Array module functions tend to be more useful when you're chaining multiple operations
+together using pipes.
+
+For example, this is what a groupBy function does.*)
+ar
+|> Array.groupBy(fun x -> x < 5)
+(*** include-fsi-output***)
+
+(** Now a pipeline of two operations.*)
 ar
 |> Array.groupBy(fun x -> x < 5)
 |> Array.map(fun (group, xs) -> Array.min xs, Array.max xs)
@@ -331,71 +368,56 @@ ar
 (**
 ## Working with data
 
-With this foundation, let's now try loading some data. We are going to obtain and process the data using an external F# library called [FSharp.Data](https://github.com/fsprojects/FSharp.Data) that makes the processing easier. 
+With this foundation, let's now try loading some data. 
+We are going to load some helper code that allows us to download and plot this data.
+This will introduce using the `nuget` package manager for loading external libraries,
+and how to open namespaces.
 
-### Namespaces
-First, let's create a file directory to hold data. We are going to use built-in dotnet IO (input-output) libraries to do so.
+We're going to use the **Quotes.YahooFinance** library for this.
+We download the code from the [nuget.org](http://www.nuget.org) package manager.
 
+This is equivalent to loading libraries with `pip` or `conda` in python
+or `install.packages` in R.
 *)
 
-(***do-not-eval***)
-// Set working directory to the this code file's directory
-System.IO.Directory.SetCurrentDirectory(__SOURCE_DIRECTORY__)
-// Now create cache directory one level above the working directory
-System.IO.File.WriteAllLines("test.txt",["first";"second"]) 
+#r "nuget: Quotes.YahooFinance, 0.0.5"
 
-(** This illustrates the library namespace hierarchy. If we want to access the function within the hierarchy without typing the full namespace repetitively, we can open it. The following code is equivalent.
+(**
+We now have access to the code in the **Quotes.YahooFinance** library.
+The library has a function called `YahooFinance.History` that we 
+can use to download quote histories from yahoo finance.  
 
-```
-open System.IO
-Directory.SetCurrentDirectory(__SOURCE_DIRECTORY__)
-File.WriteAllLines("test.txt",["first";"second"]) 
-```
+We can access code using fully qualified names.
+*)
 
-It is common to open the System namespace
+Quotes.YahooFinance.YahooFinance.History("AAPL")
+
+(**
+However, it's common to open a library's namespace in order to access
+the library's functionality directly. 
+*)
+
+open Quotes.YahooFinance
+
+YahooFinance.History("AAPL")
+
+(**
+Namespaces such as `Quotes.YahooFinance` are a hierarchical way of organizing code.
+*)
+
+(**
+We are ready to request some data. Let's define our start and end dates.
+`DateTime` is a type in the `System` namespace.
 *)
 
 open System
 
-(**
-### API keys
-We are going to request the data from the provider [tiingo](https://api.tiingo.com/). Make sure that you are signed up and have your [API token](https://api.tiingo.com/documentation/general/connecting). An [API](https://en.wikipedia.org/wiki/API) (application programming interface) allows you to write code to communicate with another program. In this case we are goig to write code that requests stock price data from tiingo's web servers.
-
-Once you have your api key, create a file called `secrets.fsx` and save it at the root/top level of your project folder. In `secrets.fsx`, assign your key to a value named `tiingoKey`. If you are using git, make sure to add `secrets.fsx` to your `.gitignore` file.
-
-```fsharp
-let tiingoKey = "yourSuperSecretApiKey"
-```
-
-We can load this in our interactive session as follows, assuming that `secrets.fsx` is located one folder above the current one in the file system.
-
-
-    #load "secrets.fsx"
-
-and we can access the value by typing 
-
-    Secrets.tiingoKey
-
-*)
-
-(**
-### FSharp.Data Csv Type Provider
-We're now going to process our downloaded data using the **FSharp.Data** [Csv Type Provider](http://fsprojects.github.io/FSharp.Data/library/CsvProvider.html). This is code that automatically defines the types of input data based on a sample. We have already reference the nuget packaged and opened the namespace, so we can just use it now.
-*)
-
-#load "Common.fsx"
-open Common
-
-
-let aapl = 
-    "AAPL"
-    |> Tiingo.request
-    |> Tiingo.get  
-
-aapl
-|> Array.take 5
+let myStart = DateTime(2020,1,1)
+let myEnd = DateTime.UtcNow
+myEnd
 (***include-it***)
 
+let aapl = YahooFinance.History("AAPL",startDate=myStart,endDate=myEnd,interval = Interval.Daily)
 
 (**
 ### Plotting
@@ -407,16 +429,19 @@ Now let's plot the stock price using [Plotly.NET](https://plotly.github.io/Plotl
 open Plotly.NET
 
 
-let sampleChart =
-    aapl
-    |> Seq.map(fun x -> x.Date, x.AdjClose)
-    |> Chart.Line
+let dateAdjClose = [ for x in aapl do x.Date, x.AdjustedClose ]
+
+dateAdjClose[..3]
+(***include-fsi-output***)
 
 (***do-not-eval***)
-sampleChart |> Chart.show   
+dateAdjClose
+|> Chart.Line   
 
 (***hide***)
-sampleChart |> GenericChart.toChartHTML
+dateAdjClose
+|> Chart.Line 
+|> GenericChart.toChartHTML
 (*** include-it-raw ***) 
 
 (**
@@ -426,34 +451,28 @@ Let's calculate returns for this data. Typically we calculate close-close return
 // Returns
 let returns = 
     aapl
-    |> Seq.sortBy(fun x -> x.Date)
-    |> Seq.pairwise
-    |> Seq.map(fun (a,b) -> b.Date, calcReturn (float a.AdjClose) (float b.AdjClose))
+    |> List.sortBy(fun x -> x.Date)
+    |> List.pairwise
+    |> List.map(fun (a,b) -> b.Date, calcReturn a.AdjustedClose b.AdjustedClose)
 
 let avgReturnEachMonth = 
     returns
-    |> Seq.groupBy(fun (date, ret) -> DateTime(date.Year, date.Month,1))
-    |> Seq.map(fun (month, xs) -> month, Seq.length xs, xs |> Seq.averageBy snd)
+    |> List.groupBy(fun (date, ret) -> DateTime(date.Year, date.Month,1))
+    |> List.map(fun (month, xs) -> 
+        let avgPrice = [ for (date, price) in xs do price ] |> List.average
+        month, xs.Length, avgPrice)
 
 (** We can look at a few of these*)
-avgReturnEachMonth |> Seq.take 3 |> Seq.toList
-(***include-fsi-output***)
-
-(** The default DateTime printing is too verbose if we don't care about time. We can simplify the printing:
-
-    fsi.AddPrinter<DateTime>(fun dt -> dt.ToString("s"))
- *)
-
-avgReturnEachMonth |> Seq.take 3 |> Seq.toList
+avgReturnEachMonth |> List.take 3 
 (***include-fsi-output***)
 
 let monthlyReturnChart =
     avgReturnEachMonth
-    |> Seq.map(fun (month, cnt, ret) -> month, ret)
+    |> List.map(fun (month, cnt, ret) -> month, ret)
     |> Chart.Bar
 
 (***do-not-eval***)
-monthlyReturnChart |> Chart.show
+monthlyReturnChart 
 (***hide***)
 monthlyReturnChart |> GenericChart.toChartHTML
 (*** include-it-raw ***) 
@@ -480,7 +499,7 @@ But it is also convenient to use the [FSharp.Stats](https://fslab.org/FSharp.Sta
 
 open FSharp.Stats
 
-[1.0 .. 10.0 ] |> Seq.stDev
+[1.0 .. 10.0 ] |> stDev
 (***include-fsi-output***)
 
 (** Now let's look at 5-day rolling volatilities.*)
@@ -489,11 +508,14 @@ let rollingVols =
     returns
     // Sort by date again because you never can be too careful
     // about making sure that you have the right sort order.
-    |> Seq.sortBy fst 
-    |> Seq.windowed 5
-    |> Seq.map(fun xs ->
+    |> List.sortBy fst 
+    |> List.windowed 5
+    |> List.map(fun xs ->
         let maxWindowDate = xs |> Seq.map fst |> Seq.max
-        let dailyVol = xs |> Seq.stDevBy snd
+        let dailyVol = 
+            xs 
+            |> List.map (fun (date, ret) -> ret) 
+            |> stDev
         let annualizedVolInPct = dailyVol * sqrt(252.0) * 100.0
         maxWindowDate, annualizedVolInPct)
 
@@ -502,7 +524,7 @@ let volChart =
     |> Chart.Line
 
 (***do-not-eval***)
-volChart |> Chart.show    
+volChart     
 (***hide***)
 volChart |> GenericChart.toChartHTML
 (*** include-it-raw ***) 

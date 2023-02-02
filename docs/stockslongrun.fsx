@@ -1,3 +1,24 @@
+(**
+---
+title: Stocks for the long run
+category: Lectures
+categoryindex: 1
+index: 2
+---
+
+[![Binder](img/badge-binder.svg)](https://mybinder.org/v2/gh/nhirschey/teaching/gh-pages?filepath={{fsdocs-source-basename}}.ipynb)&emsp;
+[![Script](img/badge-script.svg)]({{root}}/{{fsdocs-source-basename}}.fsx)&emsp;
+[![Notebook](img/badge-notebook.svg)]({{root}}/{{fsdocs-source-basename}}.ipynb)
+
+# Stocks for the long run
+To explore working with returns, we're going to simulate return data and look at how
+our portfolio would grow.
+
+We will do analysis using relatively simple syntax common 
+to many programming languages to make learning easier.
+
+*)
+
 #r "nuget: FSharp.Stats"
 #r "nuget: Plotly.NET"
 

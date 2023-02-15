@@ -53,7 +53,7 @@ type ValueOb = { Symbol : string; Date : DateTime; Value : float }
 
 let seed = 1
 Random.SetSampleGenerator(Random.RandBasic(seed))   
-let normal = Distributions.Continuous.normal 0.0 0.1
+let normal = Distributions.ContinuousDistribution.normal 0.0 0.1
 
 let returns =
     [ 

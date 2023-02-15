@@ -45,6 +45,7 @@ let download (inputUrl: string) (outputFile: string) =
 (** Download the excel file from Robert Shiller's website to your current directory. *)
 download "http://www.econ.yale.edu/~shiller/data/ie_data.xls" "shiller_data.xls"
 
+(** Now loading the excel data.*)
 
 let [<Literal>] shillerFile = __SOURCE_DIRECTORY__ + "/shiller_data.xls"
 type ShillerXls = ExcelFile<shillerFile,SheetName="Data",Range="A8:V2000",ForceString = true>

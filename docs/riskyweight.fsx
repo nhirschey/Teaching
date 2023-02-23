@@ -27,14 +27,6 @@ open FSharp.Stats.Distributions.ContinuousDistribution
 open Plotly.NET
 
 (**
-From 1/1871-1/2023, the US market return was annualized
-7.5% with a 14% standard deviation (Robert Schiller data). 
-*)
-
-let rnorm = normal 0.075 0.14
-
-
-(**
 # Portfolios of a risky asset and the risk-free asset
 
 ## Portfolio return
@@ -81,7 +73,7 @@ where $w_x$ and $w_y$ are the weights in stocks $x$ and $y$, $r_x$ and $r_y$ are
 
 If one asset is the risk free asset (borrowing a risk-free bond), then this asset does not vary, so the risk free variance and covariance terms are zero. Thus we are left with the result that if we leverage risky asset $x$ by borrowing or lending the risk-free asset, then our leveraged portfolio's standard deviation ($\sigma$) is
 
-$$ \sigma^2 = w_x^2 \sigma^2_x \rightarrow \sigma = w_x \sigma_x$$ 
+$$ \sigma^2 = w_x^2 \sigma^2_x \rightarrow \sigma = w_x \sigma_x. $$ 
 
 *)
 
@@ -96,7 +88,7 @@ where $\mu$ is the expected portfolio return, $\sigma$ is the standard deviation
 
 If our portfolio is comprised of a risky asset *x* and the risk-free asset, then this objective function can be written
 
-$$ u = w_x (\mu_x ) + r_f - \gamma \frac{w_x^2 \sigma_x^2}{2} $$.
+$$ u = w_x (\mu_x - r_f) + r_f - \gamma \frac{w_x^2 \sigma_x^2}{2}. $$
 
 To maximize this with respect to $w_x$ we take the derivative and set it equal to zero:
 
@@ -104,11 +96,11 @@ $$ \frac{\partial u}{\partial w_x} = (\mu_x - r_f) - \gamma w_x \sigma_x^2 = 0 $
 
 This gives us the optimal weight
 
-$$ w_x = \frac{\mu_x - r_f}{\gamma \sigma_x^2} $$.
+$$ w_x = \frac{\mu_x - r_f}{\gamma \sigma_x^2}. $$
 
 It is common to define $\mu$ as the expected excess return, so that $\mu_x = r_x - r_f$. Then the optimal weight is
 
-$$ w_x = \frac{\mu_x}{\gamma \sigma_x^2} $$.
+$$ w_x = \frac{\mu_x}{\gamma \sigma_x^2}. $$
 
 Typical values for $\gamma$ range from two to five. Higher values for $\gamma$ indicate higher risk aversion.
 
@@ -126,9 +118,9 @@ let meanVarianceWeight mu sigma gamma =
 (**
 # Kelly Criterion
 
-The mean-variance optimal weight has a similar form to the optimal weight from the Kelly Criterion. The Kelly Criterion is often seen in industry as a formula for determining the optimal fraction of your wealth to bet on a risky asset. Originally developed for gambling, it can also be used for asset management.
+The mean-variance optimal weight has a similar form to the optimal weight from the Kelly Criterion (Kelly, 1956). The Kelly Criterion is the weight that maximizes the expected geometric growth rate of an investor's wealth or, equivalently, the expected value of log wealth. It is often seen in industry as a formula for determining the optimal fraction of your wealth to bet on a risky asset. Originally developed for gambling, it can also be used for asset management.
 
-The Kelly weight is the weight that maximizes the expected geometric growth rate of an investor's wealth. This weight is
+This weight is
 
 $$ w = \frac{\mu}{\sigma^2} $$
 
@@ -150,93 +142,126 @@ We can simulate the results of different portfolio rules, using the mean-varianc
 let seed = 99
 Random.SetSampleGenerator(Random.RandThreadSafe(seed))
 
-let careerLength = 30.0
+// Let's start with this sample of returns
+let rnorm1 = normal 0.01 1.0
+
+let careerLength = 30
 let draws =
-    [ for draw in [1 .. 10000] do 
-        [ for year in [1.0 .. careerLength] do
-            rnorm.Sample() ]]
+    [ for draw in [1 .. 100] do 
+        [ for year in [1 .. 10_000] do
+            rnorm1.Sample() ]]
 
 (** Those are our returns. Let's calculate it for a particular gamma. *)
 
 
 let gamma = 2.0
-let ww = meanVarianceWeight 0.075 0.14 gamma
+let ww = meanVarianceWeight 0.01 1.0 gamma
+(***include-fsi-result***)
 
+let investmentResult riskyWeight returns  =
+    let mutable wealth = 1.0
+    for yearReturn in returns do 
+        let newWealth = wealth*(1.0 + riskyWeight*yearReturn)
+        // If we go bankrupt, we are done
+        wealth <- max 0.0 newWealth
+    // This is the last wealth value
+    wealth
+
+investmentResult  1.0 [0.1; 0.1; 0.1]
+(***include-fsi-result***)
+
+investmentResult  ww [0.1; 0.1; 0.1]
+(***include-fsi-result***)
+
+(** Now do it for all our draws.*)
 let myResult =
-    [for draw in draws do
-        let mutable wealth = 1.0
-        for yearReturn in draw do 
-            let newWealth = wealth*(1.0 + ww*yearReturn)
-            wealth <- max 0.0 newWealth
-        // This is the last wealth value per draw
-        wealth ]
+    [ for draw in draws do investmentResult  ww draw]
 
-let myAvgWealth = myResult |> List.average
-let myAvgGrowth =
-    [ for wealth in myResult do
-        let growthRate = wealth**(1.0/careerLength) - 1.0 
-        growthRate ] 
-    |> List.average
+myResult
+(***include-fsi-output***)
 
-(** Same thing as a function. *)
-type GammaResult = 
-    { 
-        Gamma : float 
-        AvgWealth : float
-        AvgGrowth : float 
-    }
-let gammaRecord gamma =
-    let w = meanVarianceWeight 0.075 0.14 gamma
-    let myResult =
-        [for draw in draws do
-            let mutable wealth = 1.0
-            for yearReturn in draw do 
-                let newWealth = wealth*(1.0 + w*yearReturn)
-                wealth <- max 0.0 newWealth
-            // This is the last wealth value per draw
-            wealth ]
-    let myAvgWealth = myResult |> List.average
-    let myAvgGrowth =
-        [ for wealth in myResult do
-            let growthRate = wealth**(1.0/careerLength) - 1.0 
-            growthRate ] 
-        |> List.average
+(** Now let's calculate some statistics. *)
+
+type SimulationSummary =
+    { Gamma: float 
+      AvgLogWealth: float 
+      AvgWealth: float
+      AvgGeometricGrowth: float 
+      MinWealth: float
+      FractionBankrupt: float
+      FractionLoseMoney: float }
+
+let calcSummary gamma nPeriods wealths =
     { Gamma = gamma
-      AvgWealth = myAvgWealth
-      AvgGrowth = myAvgGrowth }
+      AvgLogWealth = wealths |> List.map log |> List.average
+      AvgWealth = wealths |> List.average
+      AvgGeometricGrowth = 
+        wealths 
+        |> List.map (fun w -> w**(1.0/float nPeriods) - 1.0) 
+        |> List.average
+      MinWealth = wealths |> List.min
+      FractionBankrupt = 
+        let bankrupts = wealths |> List.filter (fun w -> w = 0.0)
+        float bankrupts.Length / float wealths.Length
+      FractionLoseMoney = 
+        let lostMoney = wealths |> List.filter (fun w -> w < 1.0)
+        float lostMoney.Length / float wealths.Length  
+      }
 
-gammaRecord 3.0
+calcSummary gamma careerLength myResult
+(***include-fsi-output***)
+
+(** Now a function to do it for a particular gamma *)
+
+let gammaRecord mu sigma draws (gamma: float) =
+    let w = meanVarianceWeight mu sigma gamma
+    let myResult = draws |> List.map (investmentResult w)
+    let careerLength = draws[0] |> List.length
+    calcSummary gamma careerLength myResult
+
+gammaRecord 0.01 1.0 draws 3.0
 
 (** Now do it for many gammas.*)
 let ruleResults =
-    [ for gamma in [0.25 .. 0.25 .. 3.0] do
-        gammaRecord gamma ]
+    let gammas = [0.5 .. 0.1 .. 1.0] @ [1.25 .. 0.25 .. 2.0]
+    [ for gamma in gammas do
+        gammaRecord 0.01 1.0 draws gamma ]
 
-(** Now with daily compounding. *)
+let veryLongRunChart =
+    ruleResults
+    |> List.map (fun x -> 
+        let kellyFraction = 1.0 / x.Gamma
+        kellyFraction, x.AvgGeometricGrowth)
+    |> Chart.Line
+    |> Chart.withXAxisStyle("Kelly fraction")
+    |> Chart.withYAxisStyle("Average geometric growth")
+(***do-not-eval***)
+veryLongRunChart
+(***hide***)
+veryLongRunChart |> GenericChart.toChartHTML
+(***include-it-raw***)
 
-let gammaRecord2 gamma =
-    let w = meanVarianceWeight (0.075/252.0) (0.14/sqrt(252.0)) gamma
-    let myResult =
-        [for draw in draws do
-            let mutable wealth = 1.0
-            for yearReturn in draw do 
-                let newWealth = wealth*(1.0 + w*yearReturn/252.0)
-                wealth <- max 0.0 newWealth
-            // This is the last wealth value per draw
-            wealth ]
-    let myAvgWealth = myResult |> List.average
-    let myAvgGrowth =
-        [ for wealth in myResult do
-            let growthRate = wealth**(1.0/careerLength) - 1.0 
-            growthRate ] 
-        |> List.average
-    { Gamma = gamma
-      AvgWealth = myAvgWealth
-      AvgGrowth = myAvgGrowth }
+(**
+A couple takeaways:
 
-gammaRecord 3.0
+1. Even an investor who is not very risk averse should not bet more than 1x the Kelly bet. This is particularly true if we take into account uncertainty about expected returns and variances.
 
-(** Now do it for many gammas.*)
-let ruleResults2 =
-    [ for gamma in [0.25 .. 0.25 .. 3.0] do
-        gammaRecord2 gamma ]
+2. It takes a very long time to converge to the kelly result.
+
+*)
+
+(** Now let's try with representative returns, monthly rebalancing. *)
+
+let monthlyMu = 0.075/12.0
+let monthlySigma = 0.14/sqrt 12.0
+let rnorm2 = normal monthlyMu monthlySigma
+let investmentCareer = 30
+let drawsRealistic =
+    [ for draw in [1 .. 1000] do 
+        [ for year in [1 .. investmentCareer*12] do
+            rnorm2.Sample() ]]
+
+let realisticResults =
+    let gammas = [0.75 .. 0.25 .. 3.0]
+    [ for gamma in gammas do
+        gammaRecord monthlyMu monthlySigma drawsRealistic gamma ]

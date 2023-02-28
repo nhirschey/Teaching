@@ -32,11 +32,15 @@ open Plotly.NET
 ## Portfolio return
 Suppose an investor has a portfolio comprised of a risky asset and the risk-free asset. The risky asset has return $r_i$ and the risk-free asset has return $r_f$. If $w$ is the weight that the investor puts on the risky asset, then the portfolio return is
 
-$$ r_p = w r_i + (1-w) r_f = w (r_i - r_f) + r_f$$
+$$ 
+r_p = w r_i + (1-w) r_f = w (r_i - r_f) + r_f
+$$
 
 If we put this in terms of excess returns, meaning returns in excess of the risk-free rate, then the portfolio excess return is
 
-$$ r_p - r_f = w (r_i - r_f) $$.
+$$ 
+r_p - r_f = w (r_i - r_f) 
+$$.
 
 So if we work in excess returns the excess return of the portfolio is the risky weight times the risky asset's excess return.
 
@@ -67,13 +71,17 @@ result = result2
 ## Portfolio variance
 Recall the formula for variance of a portfolio consisting of stocks $x$ and $y$:
 
-$$ \sigma^2 = w_x^2 \sigma^2_x + w_y^2 \sigma^2_y + 2 w_x w_y cov(r_x,r_y), $$
+$$ 
+\sigma^2 = w_x^2 \sigma^2_x + w_y^2 \sigma^2_y + 2 w_x w_y cov(r_x,r_y), 
+$$
 
 where $w_x$ and $w_y$ are the weights in stocks $x$ and $y$, $r_x$ and $r_y$ are the stock returns, $\sigma^2$ is variance, and $cov(.,.)$ is covariance. 
 
 If one asset is the risk free asset (borrowing a risk-free bond), then this asset does not vary, so the risk free variance and covariance terms are zero. Thus we are left with the result that if we leverage risky asset $x$ by borrowing or lending the risk-free asset, then our leveraged portfolio's standard deviation ($\sigma$) is
 
-$$ \sigma^2 = w_x^2 \sigma^2_x \rightarrow \sigma = w_x \sigma_x. $$ 
+$$ 
+\sigma^2 = w_x^2 \sigma^2_x \rightarrow \sigma = w_x \sigma_x. 
+$$ 
 
 *)
 
@@ -82,25 +90,35 @@ $$ \sigma^2 = w_x^2 \sigma^2_x \rightarrow \sigma = w_x \sigma_x. $$
 
 An investor with mean-variance preferences will try to maximize utility of the form
 
-$$ u = \mu - \gamma \frac{\sigma^2}{2} $$
+$$ 
+u = \mu - \gamma \frac{\sigma^2}{2} 
+$$
 
 where $\mu$ is the expected portfolio return, $\sigma$ is the standard deviation of the portfolio, and $\gamma$ is the investor's coefficient of relative risk aversion. 
 
 If our portfolio is comprised of a risky asset *x* and the risk-free asset, then this objective function can be written
 
-$$ u = w_x (\mu_x - r_f) + r_f - \gamma \frac{w_x^2 \sigma_x^2}{2}. $$
+$$ 
+u = w_x (\mu_x - r_f) + r_f - \gamma \frac{w_x^2 \sigma_x^2}{2}. 
+$$
 
 To maximize this with respect to $w_x$ we take the derivative and set it equal to zero:
 
-$$ \frac{\partial u}{\partial w_x} = (\mu_x - r_f) - \gamma w_x \sigma_x^2 = 0 $$
+$$ 
+\frac{\partial u}{\partial w_x} = (\mu_x - r_f) - \gamma w_x \sigma_x^2 = 0 
+$$
 
 This gives us the optimal weight
 
-$$ w_x = \frac{\mu_x - r_f}{\gamma \sigma_x^2}. $$
+$$ 
+w_x = \frac{\mu_x - r_f}{\gamma \sigma_x^2}. 
+$$
 
 It is common to define $\mu$ as the expected excess return, so that $\mu_x = r_x - r_f$. Then the optimal weight is
 
-$$ w_x = \frac{\mu_x}{\gamma \sigma_x^2}. $$
+$$ 
+w_x = \frac{\mu_x}{\gamma \sigma_x^2}. 
+$$
 
 Typical values for $\gamma$ range from two to five. Higher values for $\gamma$ indicate higher risk aversion.
 
@@ -120,9 +138,23 @@ let meanVarianceWeight mu sigma gamma =
 
 The mean-variance optimal weight has a similar form to the optimal weight from the Kelly Criterion (Kelly, 1956). The Kelly Criterion is the weight that maximizes the expected geometric growth rate of an investor's wealth or, equivalently, the expected value of log wealth. It is often seen in industry as a formula for determining the optimal fraction of your wealth to bet on a risky asset. Originally developed for gambling, it can also be used for asset management.
 
-This weight is
+The objective is to maximize wealth, which grows as
 
-$$ w = \frac{\mu}{\sigma^2} $$
+$$
+(1+w r_1)(1+w r_2)...(1+w r_T)=\prod_{i=1}^T (1 + w_i r_i)
+$$
+
+It can be shown that the expected long-term growth rate is
+
+$$
+ \approx w \mu - \frac{1}{2} w^2 \sigma^2
+$$
+
+This is maximized when
+
+$$ 
+w = \frac{\mu}{\sigma^2} 
+$$
 
 where $\mu$ is the expected excess return of the risky asset and $\sigma^2$ is the variance of the risky asset.
 *)
@@ -132,6 +164,19 @@ let kellyWeight mu sigma =
 
 kellyWeight 0.075 0.14
 (***include-fsi-output***)
+
+(**
+> Practice: Use a loop to calculate the Kelly Criterion weight for a range of $\mu$ and $\sigma$ values. 
+>
+> First, hold $\sigma$ fixed and vary $\mu$ from 0.05 to 0.10 by 0.01. What happens to the optimal weight as $\mu$ increases? 
+
+    // Answer here
+
+> Second, hold $\mu$ fixed and vary $\sigma$ from 0.1 to 0.2 by 0.01. What happens to the optimal weight as $\sigma$ increases?
+
+    // Answer here
+
+*)
 
 (**
 # Simulating results from different portfolio rules
@@ -158,7 +203,7 @@ let gamma = 2.0
 let ww = meanVarianceWeight 0.01 1.0 gamma
 (***include-fsi-result***)
 
-let investmentResult riskyWeight returns  =
+let investmentResult (riskyWeight: float) (returns: float list)  =
     let mutable wealth = 1.0
     for yearReturn in returns do 
         let newWealth = wealth*(1.0 + riskyWeight*yearReturn)
@@ -191,7 +236,7 @@ type SimulationSummary =
       FractionBankrupt: float
       FractionLoseMoney: float }
 
-let calcSummary gamma nPeriods wealths =
+let calcSummary (gamma: float) (nPeriods: int) (wealths: list<float>) =
     { Gamma = gamma
       AvgLogWealth = wealths |> List.map log |> List.average
       AvgWealth = wealths |> List.average
@@ -213,7 +258,7 @@ calcSummary gamma careerLength myResult
 
 (** Now a function to do it for a particular gamma *)
 
-let gammaRecord mu sigma draws (gamma: float) =
+let gammaRecord (mu: float) (sigma: float) (draws: list<list<float>>) (gamma: float) =
     let w = meanVarianceWeight mu sigma gamma
     let myResult = draws |> List.map (investmentResult w)
     let careerLength = draws[0] |> List.length

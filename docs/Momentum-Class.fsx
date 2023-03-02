@@ -3,7 +3,7 @@
 title: Momentum Signal
 category: Lectures
 categoryindex: 1
-index: 5
+index: 6
 ---
 
 [![Binder](img/badge-binder.svg)](https://mybinder.org/v2/gh/nhirschey/teaching/gh-pages?filepath={{fsdocs-source-basename}}.ipynb)&emsp;

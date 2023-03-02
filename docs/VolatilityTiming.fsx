@@ -4,7 +4,7 @@
 title: Volatility Timing
 category: Lectures
 categoryindex: 1
-index: 8
+index: 5
 ---
 
 [![Binder](img/badge-binder.svg)](https://mybinder.org/v2/gh/nhirschey/teaching/gh-pages?filepath={{fsdocs-source-basename}}.ipynb)&emsp;
@@ -15,7 +15,7 @@ index: 8
 # Volatility timing
 We're going to look at how to manage portfolio volatility. Managing volatility is a fundamental risk-management task. You probably have some notion of the amount of volatility that you want in your portfolio, or that you feel comfortable bearing. Maybe you're ok with an annualized volatility of 15%, but 30% is too much and makes it hard for you to sleep at night. If that's the case, then when markets get volatile you might want to take action to reduce your portfolio's volatility. We'll discuss some strategies for predicting and managing volatility below.
 
-We will focus on allocating between a risky asset and a risk-free asset as a way to manage volatility (i.e., two-fund seperation). We're taking the risky asset, such as the market portfolio of equities, as given. The essential idea is to put more weight on the risky asset when expected volatility is low and less weight on the risky asset when expected volatility is high. This is related to a portfolio construction strategy known as risk-parity. The managed volatility strategy that we consider below is based off work by [Barroso and Santa-Clara (2015)](https://scholar.google.com/scholar?hl=en&as_sdt=0%2C39&q=barroso+santa-clara+2015+jfe&btnG=), [Daniel and Moskowitz (2016)](https://scholar.google.com/scholar?hl=en&as_sdt=0%2C39&q=daniel+and+moskowitz+momentum+crash+2016+jfe&btnG=), and [Moreira and Muir (2017)](https://scholar.google.com/scholar?hl=en&as_sdt=0%2C39&q=moreira+and+muir+2017+jf+volatility+managed+portfolios&btnG=). The Moreira and Muir (2017) paper is probably the best place to start. Though the observation that a) predictable volatility and b) unpredictable returns implies predictable Sharpe ratios predates the aoove work.
+We will focus on allocating between a risky asset and a risk-free asset as a way to manage volatility (i.e., two-fund separation). We're taking the risky asset, such as the market portfolio of equities, as given. The essential idea is to put more weight on the risky asset when expected volatility is low and less weight on the risky asset when expected volatility is high. This is related to a portfolio construction strategy known as risk-parity. The managed volatility strategy that we consider below is based off work by [Barroso and Santa-Clara (2015)](https://scholar.google.com/scholar?hl=en&as_sdt=0%2C39&q=barroso+santa-clara+2015+jfe&btnG=), [Daniel and Moskowitz (2016)](https://scholar.google.com/scholar?hl=en&as_sdt=0%2C39&q=daniel+and+moskowitz+momentum+crash+2016+jfe&btnG=), and [Moreira and Muir (2017)](https://scholar.google.com/scholar?hl=en&as_sdt=0%2C39&q=moreira+and+muir+2017+jf+volatility+managed+portfolios&btnG=). The Moreira and Muir (2017) paper is probably the best place to start. Though the observation that a) predictable volatility and b) unpredictable returns implies predictable Sharpe ratios predates the above work.
 *)
 
 (**
@@ -63,16 +63,51 @@ $$ \sigma_{[1,T]} = \sqrt{T}\sigma $$
 *)
 let annualizeDaily x = x * sqrt(252.0) * 100. 
 
+(** First, group days by month.*)
+
+let daysByMonth = ff3 |> List.groupBy (fun x -> x.Date.Year, x.Date.Month)
+daysByMonth[0..2]
+
+(** Look at a test month *)
+let testMonth = daysByMonth[0]
+testMonth
+
+(** Split month from observations that month *)
+let testMonthGroup, testMonthObs = testMonth
+(** testMonthGroup *)
+testMonthGroup
+
+(** testMonthXS *)
+testMonthObs
+
+(** Test month return standard deviation. *)
+testMonthObs
+|> List.map(fun x -> x.MktRf)
+|> stDev
+|> annualizeDaily
+
+(** Then, compute the standard deviation of returns for each month.*)
+[ for ((year, month), xs) in daysByMonth do 
+    let lastDayOb = xs |> List.sortBy (fun x -> x.Date) |> List.last 
+    let lastDate = lastDayOb.Date
+    let annualizedVolPct = 
+        xs 
+        |> List.map(fun x -> x.MktRf)
+        |> stDev
+        |> annualizeDaily
+    lastDate, annualizedVolPct]
+
+(** Or, all in one go *)
 let monthlyVol =
     ff3
-    |> List.sortBy(fun x -> x.Date)
     |> List.groupBy(fun x -> x.Date.Year, x.Date.Month)
     |> List.map(fun (_ym, xs) -> 
-        let dt = xs |> List.last |> fun x -> x.Date
+        let lastOb = xs |> List.sortBy (fun x -> x.Date) |> List.last 
         let annualizedVolPct = xs |> stDevBy(fun x -> x.MktRf) |> annualizeDaily
-        dt, annualizedVolPct)
+        lastOb.Date, annualizedVolPct)
 
-let volChart vols =
+(** A function to plot volatilities.*)
+let volChart (vols: list<DateTime * float>) =
     let years = vols |> List.map(fun (dt:DateTime,_vol) -> dt.Year ) 
     let minYear = years |> List.min
     let maxYear = years |> List.max
@@ -82,13 +117,8 @@ let volChart vols =
     |> Chart.withXAxisStyle(TitleText = $"Time-varying Volatility ({minYear}-{maxYear})")
     |> Chart.withYAxisStyle(TitleText = "Annualized Volatility (%)")
 
-let allVolsChart = volChart monthlyVol
-let since2019VolChart = 
-    monthlyVol 
-    |> List.filter(fun (dt,_) -> dt >= DateTime(2019,1,1))
-    |> volChart
-
 (** the full time series *)
+let allVolsChart = volChart monthlyVol
 (***do-not-eval***)
 allVolsChart
 (***hide***)
@@ -96,6 +126,10 @@ allVolsChart |> GenericChart.toChartHTML
 (*** include-it-raw ***)
 
 (** since 2019 *)
+let since2019VolChart = 
+    monthlyVol 
+    |> List.filter(fun (dt,_) -> dt >= DateTime(2019,1,1))
+    |> volChart
 (***do-not-eval***)
 since2019VolChart
 (***hide***)
@@ -167,185 +201,18 @@ $$ r_{\text{levered}} - r_f = 150\% \times (r_{\text{unlevered}}-r_f) - 50\% \ti
 
 So, if we work in excess returns we can just multiply unlevered excess returns by the weight. 
 
-Does this check out? Imagine that you have \$1 and you borrow \$1 for a net stake of \$2. Then you invest at an exess return of 15%. What are you left with?
-*)
-
-let invest = 1.0m
-let borrow = 1.0m 
-let ret = 0.15m
-let result = (invest + borrow)*(1.0m+ret)-borrow
-result = 1.0m + ret * (invest + borrow)/invest
-
-(**
-## Calculating cumulative returns
-We can illustrate this with cumulative return plots. Let's first show a simple example for how we can calculate cumulative returns.
-
-Imagine that you invest \$1 at a 10% return. What do you have after n years?
-*)
-
-[ 1.0 .. 5.0 ]
-|> List.map(fun years -> 1.0*(1.1**years))
-
-(** But what if we have the data like this?*)
-[ for i = 1 to 5 do 0.1 ]
-
-(** For this, we could use functions that operate by threading an accumulator through a collection: [fold](https://fsharp.github.io/fsharp-core-docs/reference/fsharp-collections-arraymodule.html#fold) and [scan](https://fsharp.github.io/fsharp-core-docs/reference/fsharp-collections-arraymodule.html#scan). The website [www.fsharpforfunandprofit.com](https://fsharpforfunandprofit.com/posts/list-module-functions/#14) has a good discussion of the various module functions. We could use `fold` to return a final cumulative return or `scan` to return intermediate and final cumulative returns.
-
-Let's start with `scan` to see how it works. First, let's define a function to calculate returns:
-*)
-
-/// <summary>Function to calculate cumulative returns.
-/// We are using the FV = PV*(1+r) formula.</summary>
-/// <param name="pv">cumulative return thus far, like the PV in our FV formula</param>
-/// <param name="ret">this period's return</param> 
-let fv pv ret = pv*(1.0+ret)
-
-// Now let's imagine we have a series of returns like
-[0.1; -0.05; 0.3; -0.15]
-
-// Our starting place is 1.0
-1.0
-(*** include-it ***)
-// After the first period we're at
-(fv 1.0 0.1)
-(*** include-it ***)
-// After two periods we're at
-(fv (fv 1.0 0.1) -0.05)
-(*** include-it ***)
-// And so on
-(fv (fv (fv 1.0 0.1) -0.05) 0.3)
-(*** include-it ***)
-(fv (fv (fv (fv 1.0 0.1) -0.05) 0.3) -0.15)
-(*** include-it ***)
-
-// now put these all in a list
-[(fv 1.0 0.1)
- (fv (fv 1.0 0.1) -0.05)
- (fv (fv (fv 1.0 0.1) -0.05) 0.3)
- (fv (fv (fv (fv 1.0 0.1) -0.05) 0.3) -0.15)]
-(*** include-it ***)
-
-(*
-We can do this all in one step using scan. Scan expects: to be given:
-
-- An initial state (`1.0`).
-- A collection to accumulate ('[...]`).
-- A function to apply to do the accumulation (`fv`). The function nee
-*)
-(1.0, [0.1; -0.05; 0.3; -0.15])
-||> List.scan fv
-(*** include-it ***)
-
-// Or if all we cared about was the final cumulative sum,
-// we could just use fold
-(1.0, [0.1; -0.05; 0.3; -0.15])
-||> List.fold fv
-(*** include-it ***)
-
-(** One thing about `scan` and `fold` is that they expect the output of our function `fv` to have the same F# type as
-the accumulator (in this case our pv term, but often called acc in functions). This is fine if we're
-just working with floats. But sometimes we want to thread a float accumulator through our function but return a different `type` from our function. This is where `mapFold` is useful. It combines a `map` function and a `fold` function.
-
-If we look at the definition of `mapFold` for arrays, we can see that we call it with `Array.mapFold mapping state array`, where 
-
-
-```output
-mapping : 'State -> 'T -> 'Result * 'State
-The function to transform elements from the input array and accumulate the final value.
-
-state : 'State
-The initial state.
-
-array : 'T[]
-The input array.
-
-Returns: 'Result[] * 'State
-The array of transformed elements, and the final accumulated value.
-```
-
-But maybe it's easier to just think of it as a combination of a `map` transformation and a `fold` transformation.
-
-In this example, we want to thread a float accumulator through a collection, but we're interested in returning a record with a stock ticker symbol and the cumulative return of the stock at that point.
-*)
-
-
-type MapFoldInputRecord = { Symbol: string; Return : float }
-type MapFoldOutputRecord = { Symbol : string; CumulativeReturn : float }
-
-// `map` transformation
-let mapfun pv (input:MapFoldInputRecord) =
-  let cumulativeReturn = pv*(1.0 + input.Return)
-  { Symbol = input.Symbol; CumulativeReturn = cumulativeReturn }
-
-mapfun 10.0 { Symbol = "AAPL"; Return = 0.3 }
-(*** include-it ***)
-
-// `fold` transformation
-let foldfun pv (input:MapFoldInputRecord) =
-  pv*(1.0 + input.Return)
-
-foldfun 10.0 { Symbol = "AAPL"; Return = 0.3 }
-(*** include-it ***)
-
-(** 
-Now we'll combine the `map` and `fold` transformations.
-
-mapFold expects us to give it a function that operates on an accumulator
-and the collection element. It expect us to return a tuple of the `map` result
-and the `fold` result.
-
-So let's create `mapfoldfun` that is a tuple of the `mapfun` and `foldfun` transformations.
-*)
-let mapfoldfun acc input = mapfun acc input, foldfun acc input
-
-mapfoldfun 10.0 { Symbol = "AAPL"; Return = 0.3 }
-(*** include-it ***)
-
-// Now create a list of records that we want to get cumulative returns for
-let mapFoldExampleRecords =
-    [{ Symbol = "AAPL"; Return = 0.1}
-     { Symbol = "AAPL"; Return = -0.05}
-     { Symbol = "AAPL"; Return = 0.3}
-     { Symbol = "AAPL"; Return = -0.15}]
-
-// Now accumulate them with mapFold and our mapfoldfun.
-// This will give us a tuple of cumulative returns as records of type `MapFoldOutputRecord` and the final cumulative return.
-(1.0, mapFoldExampleRecords)
-||> List.mapFold mapfoldfun
-(*** include-it ***)
-
-// We can discard the final cumulative return part by calling fst at the end.
-(1.0, mapFoldExampleRecords)
-||> List.mapFold mapfoldfun
-|> fst
-(*** include-it ***)
-List.scan (fun acc (x: MapFoldInputRecord) -> {x with Return = (1.0+acc.Return) * (1.0+x.Return)-1.0}) mapFoldExampleRecords.Head mapFoldExampleRecords.Tail
-// Same thing, but using an anonymous function instead of mapfoldfun
-(1.0, mapFoldExampleRecords)
-||> List.mapFold(fun acc input -> 
-    let cumret = acc*(1.0+input.Return)
-    { Symbol = input.Symbol; CumulativeReturn = cumret}, cumret)
-|> fst
-
-(** Now we know how to calculate cumulative returns on our real data.
-
 ## Managed Portfolios.
 *)
 
 let since2020 = 
     ff3 |> List.filter(fun x -> x.Date >= DateTime(2020,1,1))
 
-let cumulativeReturn (xs: seq<DateTime * float>) =
-    /// cr0 is a cumulative return through dt0.
-    /// r1 is the return only for period dt1.
-    let accumulate (_dt0, cr0) (dt1, r1) =
-        let cr1 = (1.0 + cr0) * (1.0 + r1) - 1.0
-        (dt1, cr1)
-    let l = xs |> Seq.sortBy fst |> Seq.toList
-    match l with
-    | [] -> []
-    | h::t ->
-        (h, t) ||> List.scan accumulate
+let cumulativeReturn (xs: list<DateTime * float>) =
+    let xs = xs |> List.sortBy (fun (dt, r) -> dt)
+    let mutable cr = 0.0
+    [ for (dt, r) in xs do
+        cr <- (1.0 + cr) * (1.0 + r) - 1.0
+        dt, cr ]
         
 let cumulativeReturnEx =
     since2020
@@ -405,6 +272,9 @@ To manage or target volatility, we need to be able to predict volatility. A simp
 Let's start by creating a dataset that has the past 22 days as a training period and the 23rd day as a test period. We'll look at how volatility the past 22 days predicts volatility on the 23rd day.
 *)
 
+type DaysWithTrailing = 
+    { Train: list<FF3Obs> 
+      Test: FF3Obs }
 let dayWithTrailing =
     ff3 
     |> List.sortBy(fun x -> x.Date)
@@ -412,19 +282,17 @@ let dayWithTrailing =
     |> List.map(fun xs ->
         let train = xs |> List.take (xs.Length-1)
         let test = xs |> List.last
-        train, test)
+        { Train = train; Test = test })
 
 (**
-This is a list of tuples where the first thing is the 22-day training dataset and the second thing is the 23rd day that we use as the test data.
+This is a list of records where `Train` is the 22-day training dataset and the `Test` is the 23rd day that we use as the test date.
 
 *)
-let (exTrainData, exTestData) = dayWithTrailing[0]
-
 (** Look at the training data.*)
-exTrainData
+dayWithTrailing[0].Train
 
-(** Look at the testData. *)
-exTestData
+(** Look at the test data. *)
+dayWithTrailing[0].Test
 
 (**
 One way to do this is to look at the correlation between volatilities. What is the correlation between volatility the past 22 days (training observations) and volatility on the 23rd day (test observation)? 
@@ -435,9 +303,9 @@ How do we measure volatility that last (23rd) day? You can't calculate a standar
 open Correlation
 
 let trainVsTest =
-    [ for (train, test) in dayWithTrailing do 
-        let trainSd = train |> stDevBy(fun x -> x.MktRf)
-        let testSd = abs(test.MktRf)
+    [ for x in dayWithTrailing do 
+        let trainSd = x.Train |> stDevBy(fun x -> x.MktRf)
+        let testSd = abs(x.Test.MktRf)
         annualizeDaily trainSd, annualizeDaily testSd ]
 
 
@@ -451,16 +319,18 @@ Another way is to try sorting days into 20 groups based on trailing 22-day volat
 Then we'll see if this sorts actual realized volatility. Think of this as splitting days into 20 groups along the x-axis and comparing the typical x-axis value to the typical y-axis value.
 *)
 
-(** A bin-scatterplot. *)
-
-let binScatterData =
+let twentyChunksByTrainVol =
     trainVsTest
     |> List.sortBy fst
     |> List.splitInto 20
-    |> List.map (fun xs ->
-        let avgTrain = xs |> List.averageBy fst
-        let avgTest = xs |> List.averageBy snd
-        avgTrain, avgTest)
+
+(** A bin-scatterplot. *)
+
+let binScatterData =
+    [ for chunk in twentyChunksByTrainVol do 
+        let avgTrain = chunk |> List.averageBy fst
+        let avgTest = chunk |> List.averageBy snd
+        avgTrain, avgTest ]
 
 let binScatterPlot = 
     binScatterData
@@ -503,11 +373,11 @@ type VolPosition =
 
 let targetted =
     dayWithTrailing
-    |> List.map(fun (train,test) -> 
-        let predicted = train |> stDevBy(fun x -> x.MktRf) |> annualizeDaily
+    |> List.map(fun x -> 
+        let predicted = x.Train |> stDevBy(fun x -> x.MktRf) |> annualizeDaily
         let w = (15.0/predicted)
-        { Date = test.Date
-          Return = test.MktRf * w 
+        { Date = x.Test.Date
+          Return = x.Test.MktRf * w 
           Weight = w })
 
 let targettedSince2019 = 
@@ -578,7 +448,7 @@ let leverageLimit = 1.3
 
 let sampleStdDev = 
     dayWithTrailing 
-    |> stDevBy(fun (train, test) -> test.MktRf)
+    |> stDevBy(fun x -> x.Test.MktRf)
     |> annualizeDaily
 
 let buyHoldWeight predictedStdDev = 1.0
@@ -627,11 +497,11 @@ combinedWeightChart |> GenericChart.toChartHTML
 let getManaged weightFun =
     let managedReturn =
         dayWithTrailing
-        |> List.map(fun (train,test) -> 
-            let predicted = train |> stDevBy(fun x -> x.MktRf) |> annualizeDaily
+        |> List.map(fun x -> 
+            let predicted = x.Train |> stDevBy(fun x -> x.MktRf) |> annualizeDaily
             let w = weightFun predicted
-            { Date = test.Date
-              Return = test.MktRf * w 
+            { Date = x.Test.Date
+              Return = x.Test.MktRf * w 
               Weight = w })
     
     // Rescale to have same realized SD for
@@ -685,16 +555,24 @@ bhVsManagedChart
 bhVsManagedChart |> GenericChart.toChartHTML
 (***include-it-raw***)
 
-[ buyHoldMktPort, "Buy-Hold Mkt"
-  managedMktPort, "Managed Vol Mkt"
-  managedMktPortNoLimit, "Manage Vol No Limit"]
-|> List.iter(fun (x, name) -> 
+let summarisePortfolio (portfolio, name) =
     let mu = 
-        x 
-        |> List.averageBy(fun x -> x.Return) 
-        |> fun x -> round 2 (100.0*252.0*x)
-    let sd = x |> stDevBy(fun x -> x.Return) |> annualizeDaily
-    printfn $"Name: %25s{name} Mean: %.2f{mu} SD: %.2f{sd} Sharpe: %.3f{round 3 (mu/sd)}")
+        let mu = portfolio |> List.averageBy(fun x -> x.Return) 
+        round 2 (100.0*252.0*mu)
+    let sd = portfolio |> stDevBy(fun x -> x.Return) |> annualizeDaily
+    printfn $"Name: %25s{name} Mean: %.2f{mu} SD: %.2f{sd} Sharpe: %.3f{round 3 (mu/sd)}"
+
+summarisePortfolio (buyHoldMktPort, "Buy-Hold Mkt")
+
+(** Now let's compare the performance of the managed portfolio to the buy and hold portfolio. *)
+let listOfAllPortfolios =
+    [ buyHoldMktPort, "Buy-Hold Mkt"
+      managedMktPort, "Managed Vol Mkt"
+      managedMktPortNoLimit, "Manage Vol No Limit"]
+
+for port in listOfAllPortfolios do 
+    summarisePortfolio port
+
 (***include-output***)
 
 (**

@@ -81,14 +81,14 @@ let ar = {| X = 1; Y = 2|}
 
 (**
 ## Question 2
-Imagine you have this array
+Imagine you have this list
 *)
 
 open System
 type ArExample = { Date : DateTime; Value: float}
-let arr = [|{ Date = DateTime(1990,1,1); Value = 1.25}
+let arr = [ { Date = DateTime(1990,1,1); Value = 1.25}
             { Date = DateTime(1990,1,2); Value = 2.25}
-            { Date = DateTime(1991,1,1); Value = 3.25} |]
+            { Date = DateTime(1991,1,1); Value = 3.25} ]
 
 (**
 1. Group the observations by a tuple of `(year,month)` and find the 
@@ -104,51 +104,45 @@ field for the group and a value field for the minimum value [so it will be
 (*** include-it-raw:preDetails ***)
 (*** define: RecordsAndTransformations, define-output: RecordsAndTransformations ***)
 
-// here I will explicitly put year and month in the final result
+// 1.
+
+// Option 1: here I will explicitly put year and month in the final result
 arr 
-|> Array.groupBy(fun x -> x.Date.Year, x.Date.Month)
-|> Array.map(fun (group, xs) ->
-    let year, month = group // Explicitly access year, month; same as let a,b = (1,2)
-    let minValue = xs |> Array.map(fun x -> x.Value)|> Array.min
+|> List.groupBy(fun x -> x.Date.Year, x.Date.Month)
+|> List.map(fun ((year, month), xs) ->
+    let minValue = 
+        xs 
+        |> List.map(fun x -> x.Value)
+        |> List.min
     (year, month), minValue) // explicitly put it in the result
 
-// here I will explicitly put year and month in the final result,
-// but I will deconstruct them using pattern matching in the
-// function input
-arr 
-|> Array.groupBy(fun x -> x.Date.Year, x.Date.Month)
-|> Array.map(fun ((year, month), xs) -> // Explicitly pattern match year, month in function input
-    let minValue = xs |> Array.map(fun x -> x.Value)|> Array.min
-    (year, month), minValue) // explicitly put it in the result
-
-// or
+// or Option 1:
 // since I'm just returning the grouping variable, there's really
 // no need to deconstruct it into year, month at any point.
 arr 
-|> Array.groupBy(fun x -> x.Date.Year, x.Date.Month)
-|> Array.map(fun (group, xs) -> // match group to (year,month) together
-    let minValue = xs |> Array.map(fun x -> x.Value)|> Array.min
+|> List.groupBy(fun x -> x.Date.Year, x.Date.Month)
+|> List.map(fun (group, xs) -> // match group to (year,month) together
+    let minValue = 
+        xs 
+        |> List.map(fun x -> x.Value)
+        |> List.min
     group, minValue)
 
-// Now using anonymous records
+// 2. Now using anonymous records
 // This is where anonymous records can be useful.
 // For example, sometimes grouping by many things, 
 // using anonymous records like this make it more clear what the different
 // grouping variables are because they have names.
 // It's like a middle ground between tuples with no clear naming structure
 // and regular named records that are very explicit.
-arr 
-|> Array.groupBy(fun x -> {| Year = x.Date.Year; Month = x.Date.Month |})
-|> Array.map(fun (group, xs) -> 
-    let year, month = group.Year, group.Month // explicit deconstruct 
-    let minValue = xs |> Array.map(fun x -> x.Value)|> Array.min
-    {| Group = {| Year = year; Month = month|}; Value = minValue |})
 
-// or, do the same thing by returning the whole group without deconstructing
 arr 
-|> Array.groupBy(fun x -> {| Year = x.Date.Year; Month = x.Date.Month |})
-|> Array.map(fun (group, xs) -> 
-    let minValue = xs |> Array.map(fun x -> x.Value)|> Array.min
+|> List.groupBy(fun x -> {| Year = x.Date.Year; Month = x.Date.Month |})
+|> List.map(fun (group, xs) -> 
+    let minValue = 
+        xs 
+        |> List.map(fun x -> x.Value)
+        |> List.min
     {| Group = group; Value = minValue |})
 
 (*** condition:html, include:RecordsAndTransformations ***)
@@ -192,16 +186,17 @@ field for the group and a value field for the minimum value [so it will be
 // of the returns of the stocks in the portfolio. The weights
 // are the position weights.
 
+// Option 1:
 let stockAndBondPort = 
     stockPos.Weight*stockPos.Return + bondPos.Weight*bondPos.Return
-// or, doing the multiplication and summation with collections
+
+// Option 2: or, doing the multiplication and summation with collections
 let weightXreturn =
-    [|stockPos;bondPos|]
-    |> Array.map(fun pos -> pos.Weight*pos.Return)
+    [ for pos in [ stockPos; bondPos ] do pos.Weight * pos.Return ]
 // look at it
 weightXreturn
 // now sum
-let stockAndBondPort2 = weightXreturn |> Array.sum
+let stockAndBondPort2 = weightXreturn |> List.sum
 // check
 stockAndBondPort = stockAndBondPort2 // evaluates to true
 
@@ -221,17 +216,28 @@ What is the return of the entire portfolio?
 *)
 
 let positions =
-    [|{ Id = "stock"; Weight = 0.25; Return = 0.12 }
+    [ { Id = "stock"; Weight = 0.25; Return = 0.12 }
       { Id = "bond"; Weight = 0.25; Return = 0.22 }
-      { Id = "real-estate"; Weight = 0.5; Return = -0.15 } |]
+      { Id = "real-estate"; Weight = 0.5; Return = -0.15 } ]
 
 (*** include-it-raw:preDetails ***)
 (*** define: EntirePortRet, define-output: EntirePortRet ***)
 
+// Option 1:
 let threeAssetPortfolioReturn =
     positions
-    |> Array.map(fun pos -> pos.Weight*pos.Return)
-    |> Array.sum
+    |> List.map(fun pos -> pos.Weight*pos.Return)
+    |> List.sum
+
+// Option 2:
+let threeAssetPortfolioReturn2 =
+    positions
+    |> List.sumBy(fun pos -> pos.Weight*pos.Return)
+
+// Option 3:
+let threeAssetPortfolioReturn3 =
+    [ for pos in positions do pos.Weight * pos.Return ]
+    |> List.sum
 
 (*** condition:html, include:EntirePortRet ***)
 (*** condition:html, include-fsi-output:EntirePortRet ***)
@@ -249,17 +255,17 @@ What is the return of the entire portfolio?
 *)
 
 let positionsWithShort =
-    [|{ Id = "stock"; Weight = 0.25; Return = 0.12 }
+    [ { Id = "stock"; Weight = 0.25; Return = 0.12 }
       { Id = "bond"; Weight = -0.25; Return = 0.22 }
-      { Id = "real-estate"; Weight = 1.0; Return = -0.15 } |]
+      { Id = "real-estate"; Weight = 1.0; Return = -0.15 } ]
 
 (*** include-it-raw:preDetails ***)
 (*** define: EntirePortRetWithShort, define-output: EntirePortRetWithShort ***)
 
 let positionsWithShortReturn =
     positionsWithShort
-    |> Array.map(fun pos -> pos.Weight*pos.Return)
-    |> Array.sum
+    |> List.map(fun pos -> pos.Weight*pos.Return)
+    |> List.sum
 
 
 (*** condition:html, include:EntirePortRetWithShort ***)
@@ -280,7 +286,7 @@ Imagine that you have the following array of *annual* returns in
 excess of the risk-free rate. What is the *annualized* Sharpe ratio?
 *)
 
-let rets = [| 0.1; -0.4; 0.2; 0.15; -0.03 |]
+let rets = [ 0.1; -0.4; 0.2; 0.15; -0.03 ]
 //Note that the units are such that 0.1 is 10%.
 
 (*** include-it-raw:preDetails ***)
@@ -289,13 +295,10 @@ let rets = [| 0.1; -0.4; 0.2; 0.15; -0.03 |]
 #r "nuget: FSharp.Stats"
 open FSharp.Stats
 
-let retsAvg = rets |> Array.average
+let retsAvg = rets |> List.average
 // we get stDev from FSharp.Stats
-// there is only a Seq.stDev, not Array.stDev.
-// We can use Seq.stDev with array because you
-// can pipe any collection to a Seq.
-let retsStdDev = rets |> Seq.stDev 
-let retsSharpeRatio = retsAvg/retsStdDev
+let retsStdDev = rets |> stDev 
+let retsSharpeRatio = retsAvg / retsStdDev
 
 (*** condition:html, include:AnnualizedSR ***)
 (*** condition:html, include-fsi-output:AnnualizedSR ***)
@@ -311,7 +314,7 @@ Imagine that you have the following array of *monthly* returns in
 excess of the risk-free rate. What is the *annualized* Sharpe ratio?
 
 ```fsharp
-let rets = [| 0.1; -0.4; 0.2; 0.15; -0.03 |]
+let rets = [ 0.1; -0.4; 0.2; 0.15; -0.03 ]
 //Note that the units are such that 0.1 is 10%.
 ```
 *)
@@ -324,27 +327,27 @@ let rets = [| 0.1; -0.4; 0.2; 0.15; -0.03 |]
 // to annualize a standard deviation, 
 // we do sd * sqrt(# compounding periods per year)
 
-let monthlyRetsAnnualizedAvg = 12.0*(rets |> Array.average)
+let monthlyRetsAnnualizedAvg = 12.0*(rets |> List.average)
 // or
 let monthlyRetsAnnualizedAvg2 = 
     rets 
-    |> Array.average 
+    |> List.average 
     // now we're going to use a lambda expression.
     // this is the same idea as when we do Array.map(fun x -> ...)
     // except now we're only piping a float, not an array so
     // we're leaving off the "Array.map" 
     |> (fun avg -> 12.0 * avg) 
 // or, in two steps
-let monthlyRetsAvg = rets |> Array.average
+let monthlyRetsAvg = rets |> List.average
 let monthlyRetsAnnualizedAvg3 = 12.0*monthlyRetsAvg
 
 // now the standard deviation
 let monthlyRetsAnnualizedSd = 
     rets 
-    |> Seq.stDev
+    |> stDev
     |> fun monthlySd -> sqrt(12.0) * monthlySd
 //or, in two steps
-let monthlyRetsSd = rets |> Seq.stDev
+let monthlyRetsSd = rets |> stDev
 let monthlyRetsAnnualizedSd2 = sqrt(12.0)*monthlyRetsSd
 
 // SharpeRatio
@@ -355,7 +358,7 @@ let annualizedSharpeFromMonthly =
 // (monthlyRetsAvg *12.0)/(monthlyRetsSd*sqrt(12.0)) = 
 //      sqrt(12.0)*(monthlyRetsAvg/monthlyRetsSd)
 let annualizedSharpeFromMonthly2 =
-    sqrt(12.0) * (monthlyRetsAvg/monthlyRetsSd)
+    sqrt(12.0) * (monthlyRetsAvg / monthlyRetsSd)
 
 // check
 // we have to round because floating point math gives us slightly different #'s
@@ -376,7 +379,7 @@ Imagine that you have the following array of *daily* returns in
 excess of the risk-free rate. What is the *annualized* Sharpe ratio?
 
 ```fsharp
-let rets = [| 0.1; -0.4; 0.2; 0.15; -0.03 |]
+let rets = [ 0.1; -0.4; 0.2; 0.15; -0.03 ]
 //Note that the units are such that 0.1 is 10%.
 ```
 *)
@@ -387,12 +390,12 @@ let rets = [| 0.1; -0.4; 0.2; 0.15; -0.03 |]
 // Convention for daily is 252 trading days per year.
 // so annualize daily by multiplying by sqrt(252.0)
 let annualizedSharpeFromDaily =
-    let avgRet = rets |> Array.average
-    let stdevRet = rets |> Seq.stDev
+    let avgRet = rets |> List.average
+    let stdevRet = rets |> stDev
     sqrt(252.0) * (avgRet/stdevRet)
 // or in multiple steps
-let dailyAvgRet = rets |> Array.average
-let dailyStDevRet = rets |> Seq.stDev
+let dailyAvgRet = rets |> List.average
+let dailyStDevRet = rets |> stDev
 let annualizedSharpeFromDaily2 =
     sqrt(252.0) * (dailyAvgRet/dailyStDevRet)
 
@@ -404,5 +407,34 @@ let annualizedSharpeFromDaily2 =
 // write your code here, see website for solution.
 
 
+(**
+# Risky weights
 
+## Question 1
+
+Assume that you are a mean-variance investor where your
+utility function has the form
+
+$$
+U = \mu - \frac{\gamma}{2}\sigma^2
+$$
+
+You plan to allocate only between a risky asset and the risk-free asset.
+Your risk aversion parameter $\gamma=3$. For the risky asset, $\mu=0.1$ and $\sigma=0.2$. What is your optimal weight in the risky asset?
+*)
+
+(*** include-it-raw:preDetails ***)
+(*** define: riskyWeight, define-output: riskyWeight ***)
+
+let mu = 0.1
+let sigma = 0.2
+let gamma = 3.0
+let riskyWeight = mu / (gamma * sigma ** 2.0)
+
+(*** condition:html, include:riskyWeight ***)
+(*** condition:html, include-fsi-output:riskyWeight ***)
+(*** include-it-raw:postDetails ***)
+
+(*** condition:ipynb ***)
+// write your code here, see website for solution.
 

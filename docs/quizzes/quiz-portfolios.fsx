@@ -168,17 +168,6 @@ type PortReturnPos = { Id: string;  Weight: float; Return: float}
 let stockPos = { Id = "stock"; Weight = 0.25; Return = 0.1 }
 let bondPos = { Id = "bond"; Weight = 0.75; Return = 0.05}
 
-(**
-1. Group the observations by a tuple of `(year,month)` and find the 
-minimum value for each group. Report the result as a tuple of the group
-and the minimum value [so it will be `((year, month), minValue)`].
-2. Now, the same thing with anonymous records.
-Group the observations by an Anonymous Record `{| Year = year; Month= month|}` and find the 
-minimum value for each group. Report the result as an Anonymous record with a Group
-field for the group and a value field for the minimum value [so it will be
-`{| Group = {| Year = year; Month= month|}; Value = minValue |}`].
-*)
-
 (*** include-it-raw:preDetails ***)
 (*** define: PortfolioRet1, define-output: PortfolioRet1 ***)
 

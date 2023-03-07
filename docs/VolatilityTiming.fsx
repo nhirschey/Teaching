@@ -25,15 +25,15 @@ As a start, let's acquire a long daily time series on aggregate US market return
 *)
 
 #r "nuget: FSharp.Data"
-#load "Common.fsx"
+#r "nuget: NovaSBE.Finance"
 open System
 open FSharp.Data
-open Common
-open Common.French
+open NovaSBE.Finance.French
 
 let ff3 = 
-    French.getFF3 Frequency.Daily 
+    getFF3 Frequency.Daily 
     |> Array.toList
+        
         
 (***condition:FSX***)
 #if FSX

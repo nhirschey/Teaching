@@ -16,8 +16,8 @@ index: 3
 
 #r "nuget: ExcelProvider, 2.0.0"
 #r "nuget: FSharp.Stats"
-#r "nuget: Plotly.NET"
-#r "nuget: Plotly.NET.Interactive"
+#r "nuget: Plotly.NET, 3.*"
+#r "nuget: Plotly.NET.Interactive, 3.*"
 
 
 open FSharp.Interop.Excel

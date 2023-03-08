@@ -20,7 +20,8 @@ to many programming languages to make learning easier.
 *)
 
 #r "nuget: FSharp.Stats"
-#r "nuget: Plotly.NET"
+#r "nuget: Plotly.NET, 3.*"
+#r "nuget: Plotly.NET.Interactive, 3.*"
 
 open FSharp.Stats
 open FSharp.Stats.Distributions.ContinuousDistribution

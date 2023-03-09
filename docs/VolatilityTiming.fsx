@@ -161,22 +161,32 @@ let rollingVolSubset =
     monthlyVol
     |> List.filter(fun (dt, vol) -> dt > DateTime(2020,1,1))
 
-// Let's take each of the leverages and map a function to them.
-// The function takes a leverage as input, and the output is
-// a tuple of (leverage, leveraged volatilities)
+(** Let's write a function to leverage a `list<DateTime * float>`.*)
+let leverageListOfVols leverage listOfVols =
+    [ for (dt, vol) in listOfVols do 
+        dt, leveragedVol (leverage, vol) ]
+
+// A test list of vols
+let exVols1 = 
+    [ DateTime.Now, 0.1
+      DateTime.Now, 0.15
+      DateTime.Now, 0.05 ]
+
+// testing the function
+leverageListOfVols 1.5 exVols1
+
+(** We could run it on the rollingVolSubset as well. *)
+
+leverageListOfVols 1.5 rollingVolSubset
+
+(** Now do the same for each of the example leverages. *)
 let exampleLeveragedVols =
-    exampleLeverages
-    |> List.map(fun leverage ->
-        let leveragedVols =
-            rollingVolSubset
-            |> List.map(fun (dt, vol) -> 
-                dt, leveragedVol(leverage, vol))
-        leverage, leveragedVols)
+    [ for exLev in exampleLeverages do
+        exLev, leverageListOfVols exLev rollingVolSubset ]
 
 let exampleLeveragesChart =
-    exampleLeveragedVols
-    |> List.map(fun (leverage, leveragedVols) ->
-        Chart.Line(leveragedVols,Name= $"Levarage of {leverage}"))
+    [ for (leverage, leveragedVols) in exampleLeveragedVols do
+        Chart.Line(leveragedVols,Name= $"Levarage of {leverage}") ]
     |> Chart.combine
 
 (***condition:fsx,do-not-eval***)
@@ -237,18 +247,36 @@ cumulativeReturnExPlot
 cumulativeReturnExPlot |> GenericChart.toChartHTML
 (***include-it-raw***)
 
-(** Let's try leverage with daily rebalancing (each day we take leverage of X).*)
+(** Let's try leverage with daily rebalancing. The `leverage` argument quantifies the amount of leverage.*)
 
 let getLeveragedReturn leverage =
     since2020 
     |> List.map (fun x -> x.Date, leverage * x.MktRf)
     |> cumulativeReturn
 
+(** Compare leverage of 1: *)
+getLeveragedReturn 1.0
+|> List.take 3
+
+(** To leverage of 2:*)
+getLeveragedReturn 2.0
+|> List.take 3
+
+(** We can do this for all our example leverages. *)
+
+let exampleLeveragedReturn =
+    [ for exLev in exampleLeverages do 
+        exLev, getLeveragedReturn exLev ]
+
+// Look at the first few observations
+exampleLeveragedReturn
+|> List.map (fun (exLev, levReturn) ->
+    exLev, levReturn |> List.take 3)
+
+(** Turn it into a chart. *)
 let exampleLeveragedReturnChart = 
-    exampleLeverages
-    |> List.map(fun lev ->
-        let levReturn = getLeveragedReturn lev
-        Chart.Line(levReturn, Name= $"Leverage of {lev}")) 
+    [ for (exLev, levReturn) in exampleLeveragedReturn do 
+        Chart.Line(levReturn, Name= $"Leverage of {exLev}") ] 
     |> Chart.combine
 
 (***condition:fsx,do-not-eval***)
@@ -275,7 +303,7 @@ Let's start by creating a dataset that has the past 22 days as a training period
 type DaysWithTrailing = 
     { Train: list<FF3Obs> 
       Test: FF3Obs }
-let dayWithTrailing =
+let daysWithTrailingVol =
     ff3 
     |> List.sortBy(fun x -> x.Date)
     |> List.windowed 23
@@ -289,10 +317,10 @@ This is a list of records where `Train` is the 22-day training dataset and the `
 
 *)
 (** Look at the training data.*)
-dayWithTrailing[0].Train
+daysWithTrailingVol[0].Train
 
 (** Look at the test data. *)
-dayWithTrailing[0].Test
+daysWithTrailingVol[0].Test
 
 (**
 One way to do this is to look at the correlation between volatilities. What is the correlation between volatility the past 22 days (training observations) and volatility on the 23rd day (test observation)? 
@@ -302,15 +330,24 @@ How do we measure volatility that last (23rd) day? You can't calculate a standar
 
 open Correlation
 
+type TrainTestVols = 
+    { TrainVol: float 
+      TestVol: float }
+
 let trainVsTest =
-    [ for x in dayWithTrailing do 
+    [ for x in daysWithTrailingVol do 
         let trainSd = x.Train |> stDevBy(fun x -> x.MktRf)
         let testSd = abs(x.Test.MktRf)
-        annualizeDaily trainSd, annualizeDaily testSd ]
+        { TrainVol = annualizeDaily trainSd
+          TestVol = annualizeDaily testSd } ]
 
+// What's that look like?
+trainVsTest[..10]
 
-trainVsTest 
-|> Seq.pearsonOfPairs
+(** The correlation: *)
+trainVsTest
+|> List.map (fun vols -> vols.TrainVol, vols.TestVol) 
+|> pearsonOfPairs
 
 (*** include-it ***)
 
@@ -321,17 +358,21 @@ Then we'll see if this sorts actual realized volatility. Think of this as splitt
 
 let twentyChunksByTrainVol =
     trainVsTest
-    |> List.sortBy fst
+    |> List.sortBy (fun vols -> vols.TrainVol)
     |> List.splitInto 20
 
 (** A bin-scatterplot. *)
 
 let binScatterData =
     [ for chunk in twentyChunksByTrainVol do 
-        let avgTrain = chunk |> List.averageBy fst
-        let avgTest = chunk |> List.averageBy snd
+        let avgTrain = chunk |> List.averageBy (fun vols -> vols.TrainVol)
+        let avgTest = chunk |> List.averageBy (fun vols -> vols.TestVol)
         avgTrain, avgTest ]
 
+// the data
+binScatterData
+
+(** Now a scatterplot of it. *)
 let binScatterPlot = 
     binScatterData
     |> Chart.Point
@@ -371,31 +412,46 @@ type VolPosition =
       Return : float 
       Weight : float }
 
+/// This is the daily returns of a strategy targetting 15\% annualized volatility.
 let targetted =
-    dayWithTrailing
+    daysWithTrailingVol
     |> List.map(fun x -> 
         let predicted = x.Train |> stDevBy(fun x -> x.MktRf) |> annualizeDaily
-        let w = (15.0/predicted)
+        let w = (15.0/predicted) // 15.0 is the target
         { Date = x.Test.Date
           Return = x.Test.MktRf * w 
           Weight = w })
 
-let targettedSince2019 = 
+(** This is volatility of the strategy each month since 2019. *)
+let targettedSince2019MonthlyVol =
     targetted
     |> List.filter(fun x -> x.Date >= DateTime(2019,1,1) )
     |> List.groupBy(fun x -> x.Date.Year, x.Date.Month)
     |> List.map(fun (_, xs) -> 
-        xs |> List.map(fun x -> x.Date) |> List.max,
-        xs |> stDevBy(fun x -> x.Return) |> annualizeDaily) 
+        let lastDayOfMonth = xs |> List.map(fun x -> x.Date) |> List.max
+        let strategyVolatility = xs |> stDevBy(fun x -> x.Return) |> annualizeDaily
+        lastDayOfMonth, strategyVolatility) 
+
+(** This is a chart of the monthly volatilities. *)
+let targettedSince2019Chart = 
+    targettedSince2019MonthlyVol
     |> volChart 
     |> Chart.withTraceInfo(Name="Managed")
-let rawSince2019 =
+
+(** For comparison, this is monthly volatility of buy-and-hold 100\% weight on the market. *)
+let rawSince2019Chart =
     monthlyVol
     |> List.filter(fun (dt,_) -> dt >= DateTime(2019,1,1))
     |> volChart
     |> Chart.withTraceInfo(Name="Unmangaged")
 
-let weightsSince2019 = 
+(** This chart combines the two, comparing the volatility managed portfolio to the unmanaged buy-and-hold version. *)
+let volComparison = 
+    [ targettedSince2019Chart; rawSince2019Chart]
+    |> Chart.combine
+
+(** We can also add the targetted strategy's weights. *)
+let targettedWeightsSince2019Chart = 
     targetted
     |> List.filter(fun x -> x.Date >= DateTime(2019,1,1) )
     |> List.groupBy(fun x -> x.Date.Year, x.Date.Month)
@@ -405,12 +461,8 @@ let weightsSince2019 =
     |> Chart.Line 
     |> Chart.withTraceInfo(Name="weight on the Market")
 
-let volComparison = 
-    [ targettedSince2019; rawSince2019]
-    |> Chart.combine
-
 let volComparisonWithWeights =
-    [volComparison; weightsSince2019 ]
+    [volComparison; targettedWeightsSince2019Chart ]
     |> Chart.SingleStack()
 
 
@@ -432,7 +484,7 @@ volComparisonWithWeights |> GenericChart.toChartHTML
 
 - Volatility still moves around with our managed portfolio. We haven't targetted a 15\% volatility perfectly. 
 - We do avoid some of the extreme volatilities from 2020, particularly in March and April.
-- The weight we put on the market varies quite (implies lots of trading) and goes as high as 2 (lots of leverage). *)
+- The weight we put on the market varies quite a lot (implies lots of trading) and goes as high as 2 (lots of leverage). *)
 
 (**
 ## Evaluating performance.
@@ -447,7 +499,7 @@ We start by defining functions to calculate the weights. In the managed weights,
 let leverageLimit = 1.3
 
 let sampleStdDev = 
-    dayWithTrailing 
+    daysWithTrailingVol 
     |> stDevBy(fun x -> x.Test.MktRf)
     |> annualizeDaily
 
@@ -459,9 +511,15 @@ let inverseStdDevWeight predictedStdDev =
 let inverseStdDevNoLeverageLimit predictedStdDev = 
     sampleStdDev / predictedStdDev
 
+(** 
+> **Practice:** Write a function that takes `predictedStdDev` as its only input and outputs the desired
+weight for a mean-variance investor who has $\gamma=3$ and expects the market excess return to be 7% per year.
+*)
+// answer here
+
 (** Some examples: *)
 let weightExampleLineChart weightFun name =
-    [ for sd in [ 5.0 .. 15.0 .. 65.0] do sd, weightFun sd ]
+    [ for sd in [ 5.0 .. 65.0] do sd, weightFun sd ]
     |> Chart.Line
     |> Chart.withTraceInfo(Name=name)
     |> Chart.withXAxisStyle(TitleText="Predicted volatility")
@@ -474,8 +532,8 @@ weightExampleLineChart buyHoldWeight "Buy-Hold"
 (** Combining: *)
 let combinedWeightChart =
     [ weightExampleLineChart buyHoldWeight "Buy-Hold"
-      weightExampleLineChart inverseStdDevWeight "Inverse StdDev"
-      weightExampleLineChart inverseStdDevNoLeverageLimit "Inverse StdDev No Limit" ]
+      weightExampleLineChart inverseStdDevNoLeverageLimit "Inverse StdDev No Limit" 
+      weightExampleLineChart inverseStdDevWeight "Inverse StdDev"]
     |> Chart.combine
 
 (***condition:fsx,do-not-eval***)
@@ -492,24 +550,29 @@ combinedWeightChart
 combinedWeightChart |> GenericChart.toChartHTML
 (***include-it-raw***) 
 
+(**
+> **Practice:** Add your mean-variance weight function to the graph.
+*)
+// answer here
+
 (** A function to construct the backtest given a weighting function. *)
 
-let getManaged weightFun =
-    let managedReturn =
-        dayWithTrailing
-        |> List.map(fun x -> 
-            let predicted = x.Train |> stDevBy(fun x -> x.MktRf) |> annualizeDaily
-            let w = weightFun predicted
-            { Date = x.Test.Date
-              Return = x.Test.MktRf * w 
-              Weight = w })
-    
-    // Rescale to have same realized SD for
-    // more interpretable graphs. 
-    // Does not affect sharpe ratio
-    let sd = managedReturn |> stDevBy(fun x -> x.Return) |> annualizeDaily
-    [ for x in managedReturn do 
-        { x with Return = x.Return * (sampleStdDev/sd)}]
+let getManaged weightFun days =
+    days
+    |> List.map(fun day -> 
+        let predicted = day.Train |> stDevBy(fun x -> x.MktRf) |> annualizeDaily
+        let w = weightFun predicted
+        { Date = day.Test.Date
+          Return = day.Test.MktRf * w 
+          Weight = w })
+
+/// Rescale to desired SD for
+/// more interpretable graphs. 
+/// Does not affect sharpe ratio
+let rescaleToVol desiredVol xs =
+    let sd = xs |> stDevBy(fun x -> x.Return) |> annualizeDaily
+    [ for x in xs do 
+        { x with Return = x.Return * (desiredVol/sd)}]
 
 (** Function to accumulate the returns. *)
 let accVolPortReturn (port: List<VolPosition>) =
@@ -522,6 +585,20 @@ let accVolPortReturn (port: List<VolPosition>) =
         // 1.0 = 0% cumulative return
         dt, 1.0 + ret)
 
+(** Now making the 3 strategies. *)    
+let buyHoldMktPort = 
+    daysWithTrailingVol 
+    |> getManaged buyHoldWeight 
+    |> rescaleToVol sampleStdDev
+let managedMktPort = 
+    daysWithTrailingVol
+    |> getManaged inverseStdDevWeight
+    |> rescaleToVol sampleStdDev
+let managedMktPortNoLimit = 
+    daysWithTrailingVol
+    |> getManaged inverseStdDevNoLeverageLimit
+    |> rescaleToVol sampleStdDev 
+
 (** A function to make a chart. *)
 let portChart name port  = 
     port 
@@ -529,17 +606,16 @@ let portChart name port  =
     |> Chart.withTraceInfo(Name=name)
     |> Chart.withYAxis (LayoutObjects.LinearAxis.init(AxisType = StyleParam.AxisType.Log))
 
-(** Now making the 3 strategies. *)    
-let buyHoldMktPort = getManaged buyHoldWeight 
-let managedMktPort = getManaged inverseStdDevWeight
-let managedMktPortNoLimit = getManaged inverseStdDevNoLeverageLimit 
-
 let bhVsManagedChart =
     Chart.combine(
         [ buyHoldMktPort |> accVolPortReturn |> (portChart "Buy-Hold")
           managedMktPort |> accVolPortReturn |> (portChart "Managed Vol")
           managedMktPortNoLimit |> accVolPortReturn |> (portChart "Managed Vol No Limit")
           ])
+
+(**
+> **Practice:** Make a chart comparing the three strategies starting from 2020-01-01.
+*)
 
 (***condition:fsx,do-not-eval***)
 #if FSX

@@ -22,6 +22,8 @@ We're going to use [ML.NET](https://dotnet.microsoft.com/en-us/apps/machinelearn
 To start we'll load some libaries.
 *)
 
+(***do-not-eval-file***)
+
 #r "nuget:FSharp.Stats"
 #r "nuget: Microsoft.ML, 1.7.*"
 #r "nuget: Microsoft.ML.FastTree"

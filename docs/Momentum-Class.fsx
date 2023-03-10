@@ -11,6 +11,8 @@ index: 6
 [![Notebook](img/badge-notebook.svg)]({{root}}/{{fsdocs-source-basename}}.ipynb)
 *)
 
+(***do-not-eval-file***)
+
 #time "on"
 
 #r "nuget: FSharp.Data"

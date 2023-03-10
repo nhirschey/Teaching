@@ -12,6 +12,7 @@ index: 6
 
 *)
 
+(***do-not-eval-file***)
 #r "nuget:FSharp.Data"
 #r "nuget: FSharp.Stats"
 #r "nuget: Plotly.NET, 3.*"

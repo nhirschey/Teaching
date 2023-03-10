@@ -38,17 +38,18 @@ The APT way of thinking is less restrictive than economically motivated equilibr
 #r "nuget: FSharp.Data"
 #r "nuget: Plotly.NET, 3.*"
 #r "nuget: Plotly.NET.Interactive, 3.*"
+#r "nuget: NovaSBE.Finance"
 
 (** *)
 #r "nuget: Quotes.YahooFinance, 0.0.5"
 
 open System
 open FSharp.Data
-open Common
 open Quotes.YahooFinance
 
 open FSharp.Stats
 open Plotly.NET
+open NovaSBE.Finance
 
 Environment.CurrentDirectory <- __SOURCE_DIRECTORY__
 
@@ -73,7 +74,7 @@ Formatter.SetPreferredMimeTypesFor(typeof<GenericChart.GenericChart>,"text/html"
 We get the Fama-French 3-Factor asset pricing model data.
 *)
 
-let ff3 = French.getFF3 Frequency.Monthly
+let ff3 = French.getFF3 French.Frequency.Monthly
 
 (**
 Let's get a portfolio to analyze.

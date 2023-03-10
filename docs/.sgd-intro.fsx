@@ -3,8 +3,8 @@
 //#r "nuget:DiffSharp-lite,1.0.7"
 // Use CPU if you're on Windows/Linux/Intel Mac
 #r "nuget: DiffSharp-cpu,1.0.7"
-#r "nuget: Plotly.NET, 2.0.*"
-#r "nuget: Plotly.NET.Interactive, 2.0.*"
+#r "nuget: Plotly.NET, 3.*"
+#r "nuget: Plotly.NET.Interactive, 3.*"
 
 open DiffSharp
 open DiffSharp.Compose

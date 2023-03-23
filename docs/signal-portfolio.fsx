@@ -3,7 +3,7 @@
 title: Signal Portfolio
 category: Lectures
 categoryindex: 1
-index: 6
+index: 7
 ---
 
 [![Binder](img/badge-binder.svg)](https://mybinder.org/v2/gh/nhirschey/teaching/gh-pages?filepath={{fsdocs-source-basename}}.ipynb)&emsp;

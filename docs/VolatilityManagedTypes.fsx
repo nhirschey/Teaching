@@ -123,9 +123,9 @@ let expRealizedVol (width: int) (lambda: float) (data: list<ReturnObs>) =
         let train = window |> List.take width |> List.rev
         let mu = train |> List.map (fun x -> x.Return) |> List.average
         let sd =
-            [ for i = 0 to train.Length-1 do
-                let w = (1.0 - lambda)*lambda**(float i)
-                w * (train[i].Return - mu)**2.0 ]
+            [ for t = 1 to width do
+                let w = (1.0 - lambda)*lambda**(float t - 1.0)
+                w * (train[t-1].Return - mu)**2.0 ]
             |> List.sum
             |> sqrt
         let last = window |> List.last

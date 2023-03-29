@@ -49,7 +49,7 @@ type VolatilityPrediction =
     { /// First date the prediction is valid for
       Date: DateTime
       /// The volatility prediction
-      Vol: float}
+      PredictedVol: float}
 
 let expRealizedVolList (width: int) (lambda: float) (data: list<ReturnObs>) =
     data
@@ -57,16 +57,20 @@ let expRealizedVolList (width: int) (lambda: float) (data: list<ReturnObs>) =
     |> List.sortByDescending (fun x -> x.Date)
     |> List.windowed (width + 1)
     |> List.map (fun window ->
-        let train = window[1..]
-        let mu = train |> List.map (fun x -> x.Return) |> List.average
+        let dayToPredict = window[0]
+        let trainingDays = window[1..]
+        let mu = 
+            trainingDays 
+            |> List.map (fun x -> x.Return) 
+            |> List.average
         let sd =
             [ for t = 1 to width do
                 let w = (1.0 - lambda)*lambda**(float t - 1.0)
-                w * (train[t-1].Return - mu)**2.0 ]
+                w * (trainingDays[t-1].Return - mu)**2.0 ]
             |> List.sum
             |> sqrt
-        let predictionDay = window[0]
-        { VolatilityPrediction.Date = predictionDay.Date; Vol = sd })
+
+        { VolatilityPrediction.Date = dayToPredict.Date; PredictedVol = sd })
     |> List.rev
 
 (**
@@ -84,29 +88,34 @@ let vList = expRealizedVolList 500 0.94 rets
 (**
 That's kinda slow.
 
-Part of the reason is that it's iterating through lists, and iterating through large
+Part of the reason is that it's iterating through lists, 
+and iterating through large
 lists can be slow.
 
 Try it with array.
 *)
 
 
-let expRealizedVolArray (width: int) (lambda: float) (data: array<ReturnObs>) =
+let xvArray (width: int) (lambda: float) (data: array<ReturnObs>) =
     data
     // Descending gets us ordered t, t-1, t-2, ...
     |> Array.sortByDescending (fun x -> x.Date)
     |> Array.windowed (width + 1)
     |> Array.map (fun window ->
-        let train = window[1..]
-        let mu = train |> Array.map (fun x -> x.Return) |> Array.average
+        let dayToPredict = window[0]
+        let trainingDays = window[1..]
+        let mu = 
+            trainingDays 
+            |> Array.map (fun x -> x.Return) 
+            |> Array.average
         let sd =
-            [ for t = 1 to width do
+            [| for t = 1 to width do
                 let w = (1.0 - lambda)*lambda**(float t - 1.0)
-                w * (train[t-1].Return - mu)**2.0 ]
-            |> List.sum
+                w * (trainingDays[t-1].Return - mu)**2.0 |]
+            |> Array.sum
             |> sqrt
-        let predictionDay = window[0]
-        { VolatilityPrediction.Date = predictionDay.Date; Vol = sd })
+
+        { VolatilityPrediction.Date = dayToPredict.Date; PredictedVol = sd })
     |> Array.rev
 
 (**
@@ -118,7 +127,7 @@ let retsArray = rets |> List.toArray
 Test it.
 *)
 
-let vArray = expRealizedVolArray 500 0.94 retsArray
+let vArray = xvArray 500 0.94 retsArray
 
 (**
 That's somewhat faster.
@@ -126,7 +135,7 @@ That's somewhat faster.
 We can be even faster by reducing allocations.
 *)
 
-let expRealizedVolArrayFewerAlloc (width: int) (lambda: float) (data: array<ReturnObs>) =
+let xvArrayFewerAlloc (width: int) (lambda: float) (data: array<ReturnObs>) =
     data
     |> Array.sortByDescending (fun x -> x.Date)
     |> Array.windowed (width + 1)
@@ -136,18 +145,34 @@ let expRealizedVolArrayFewerAlloc (width: int) (lambda: float) (data: array<Retu
         for t = 1 to width do 
             let w = (1.0 - lambda)*lambda**(float t - 1.0)
             acc <- acc + w * (window[t].Return - mu)**2.0
-        { VolatilityPrediction.Date = window[0].Date; Vol = sqrt acc })
+        { VolatilityPrediction.Date = window[0].Date; PredictedVol = sqrt acc })
     |> Array.rev
 
 (**
 Test it.
 *)
 
-let vFewerAlloc = expRealizedVolArrayFewerAlloc 500 0.94 retsArray
+let vFewerAlloc = xvArrayFewerAlloc 500 0.94 retsArray 
+
+(** Even fewer allocations. *)
+let xvArrayFewerAlloc2 (width: int) (lambda: float) (data: array<ReturnObs>) =
+    let data = data |> Array.sortByDescending (fun x -> x.Date)
+    data[..data.Length-1-width]
+    |> Array.mapi (fun i x ->
+        let mu = data[i+1..i+width] |> Array.averageBy (fun x -> x.Return)
+        let mutable acc = 0.0
+        for t = 1 to width do 
+            let w = (1.0 - lambda)*lambda**(float t - 1.0)
+            acc <- acc + w * (data[i+t].Return - mu)**2.0
+        { VolatilityPrediction.Date = x.Date; PredictedVol = sqrt acc })
+    |> Array.rev
+
+let vFewerAlloc2 = xvArrayFewerAlloc2 500 0.94 retsArray 
+
 
 (** Now make the fewer alloc version parallel.*)
 
-let expRealizedVolParallel (width: int) (lambda: float) (data: array<ReturnObs>) =
+let xvFewerAllocParallel (width: int) (lambda: float) (data: array<ReturnObs>) =
     data
     |> Array.sortByDescending (fun x -> x.Date)
     |> Array.windowed (width + 1)
@@ -157,27 +182,51 @@ let expRealizedVolParallel (width: int) (lambda: float) (data: array<ReturnObs>)
         for t = 1 to width do 
             let w = (1.0 - lambda)*lambda**(float t - 1.0)
             acc <- acc + w * (window[t].Return - mu)**2.0
-        { VolatilityPrediction.Date = window[0].Date; Vol = sqrt acc })
+        { VolatilityPrediction.Date = window[0].Date; PredictedVol = sqrt acc })
     |> Array.rev
 
 (**
 Test it.
 *)
 
-let vParallel = expRealizedVolParallel 500 0.94 retsArray
+let vFewerParallel = xvFewerAllocParallel 500 0.94 retsArray
+
+(** Now make the second fewer alloc version parallel.*)
+
+let xvFewerAlloc2Parallel (width: int) (lambda: float) (data: array<ReturnObs>) =
+    let data = data |> Array.sortByDescending (fun x -> x.Date)
+    data[..data.Length-1-width]
+    |> Array.Parallel.mapi (fun i x ->
+        let mu = data[i+1..i+width] |> Array.averageBy (fun x -> x.Return)
+        let mutable acc = 0.0
+        for t = 1 to width do 
+            let w = (1.0 - lambda)*lambda**(float t - 1.0)
+            acc <- acc + w * (data[i+t].Return - mu)**2.0
+        { VolatilityPrediction.Date = x.Date; PredictedVol = sqrt acc })
+    |> Array.rev
+
+(** Test it. *)
+let vFewer2Parallel = xvFewerAlloc2Parallel 500 0.94 retsArray
+
 
 (** Compare results.*)
-(vList |> List.toArray) = vParallel
+(vList |> List.toArray) = vFewerAlloc2
+
+[ vArray; vFewerAlloc; vFewerAlloc2; vFewerParallel; vFewer2Parallel]
+|> List.forall (fun x -> x = (vList |> List.toArray ))
 
 (**
 ## Return predictions
 *)
 
+type ReturnPrediction = { Date: DateTime; PredictedReturn: float }
+
 let avgReturnAccumulatorList (xs: list<ReturnObs>) =
     let mutable acc = 0.0
     [ for i=0 to (xs.Length-2) do
         acc <- acc + xs[i].Return
-        { Date = xs[i+1].Date; Return = acc / float (i + 1)}]
+        let avgReturn = acc / float (i + 1)
+        { Date = xs[i+1].Date; PredictedReturn = avgReturn }]
 
 (**
 Test it.
@@ -199,22 +248,42 @@ let retPredictions = avgReturnAccumulatorList rets
 ## Combining predictions
 *)
 
-let commonDates =
-    let vDates = vParallel |> Array.map (fun x -> x.Date) |> set
-    let rDates = retPredictions |> List.map (fun x -> x.Date) |> set
-    Set.intersect vDates rDates
+(**
+Now form portfolios based on these predictions.
+*)
+
+type VolAndReturnPrediction = { Date: DateTime; PredictedVol: float; PredictedReturn: float }
+
+let combinePredictions (predReturns: seq<ReturnPrediction>) (predVols: seq<VolatilityPrediction>) =
+    let predVols = 
+        predVols 
+        |> Seq.map (fun x -> x.Date, x.PredictedVol) 
+        |> dict
+    [ for retObs in predReturns do 
+        if predVols.ContainsKey retObs.Date then
+            { Date = retObs.Date 
+              PredictedVol = predVols[retObs.Date]
+              PredictedReturn = retObs.PredictedReturn } ]
 
 
-let filteredVols = 
-    vParallel
-    |> Array.filter (fun x -> commonDates.Contains x.Date)
-    |> Array.map (fun x -> x.Date, x.Vol)
-    |> dict
-let filteredRets =
-    retPredictions
-    |> List.filter (fun x -> commonDates.Contains x.Date)
-    |> List.map (fun x -> x.Date, x.Return)
-    |> dict
+let managedPortfolio predVols predReturns (xs: list<ReturnObs>) =
+    let preds = 
+        combinePredictions predReturns predVols
+        |> List.map (fun x -> x.Date, x)
+        |> dict
+    [ for x in xs do 
+        if preds.ContainsKey x.Date then
+            let pred = preds[x.Date]
+            let w = pred.PredictedReturn / (3.0 * pred.PredictedVol ** 2.0)
+            { Date = x.Date
+              Return = w * x.Return } ]
+
+let result = managedPortfolio vFewer2Parallel retPredictions rets
+
+let avgReturn = result |> List.averageBy (fun x -> x.Return)
+let varResult = result |> varBy (fun x -> x.Return)
+
+(avgReturn - 1.0/2.0 * 3.0 * varResult)*252.0
 
 
 let rmse (actualVsPredicted: list< float * float>) =

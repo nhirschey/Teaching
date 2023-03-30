@@ -390,7 +390,6 @@ let tslA2 =
 // or, using Map.tryFind statement
 let tslA4 =
     [ for dayA in stockA do
-        let lookup = Map.tryFind dayA.Time stockbByTime
         let priceB =
             match Map.tryFind dayA.Time stockbByTime with
             | Some dayB -> Some dayB.Price
@@ -414,16 +413,14 @@ let tslA5 =
 
 // or, define a function
 let tryFindBforA (dayA: StockPriceOb) =
-    let dayB = Map.tryFind dayA.Time stockbByTime
-    match dayB with
-    | None -> 
-        { Time = dayA.Time
-          PriceA = Some dayA.Price
-          PriceB = None}
-    | Some db -> 
-        { Time = dayA.Time
-          PriceA = Some dayA.Price 
-          PriceB = Some db.Price }   
+    let priceB =
+        match Map.tryFind dayA.Time stockbByTime with
+        | Some dayB -> Some dayB.Price
+        | None -> None 
+    { Time = dayA.Time
+      PriceA = Some dayA.Price
+      PriceB = priceB } 
+
 // checkit
 tryFindBforA stockA.[0]
 // do it

@@ -3,7 +3,7 @@
 title: Volatility Timing
 category: Assignments
 categoryindex: 2
-index: 8
+index: 4
 ---
 
 [![Binder](img/badge-binder.svg)](https://mybinder.org/v2/gh/nhirschey/teaching/gh-pages?filepath={{fsdocs-source-basename}}.ipynb)&emsp;
@@ -11,13 +11,18 @@ index: 8
 [![Notebook](img/badge-notebook.svg)]({{root}}/{{fsdocs-source-basename}}.ipynb)
 
 
+
+Group Name: 
+
 | Student Name | Student Number  | 
 | -----------  | --------------  |
 | **1:**       |                 |
-| **2:**       |                 |
+| **2:**       |                 | 
+| **3:**       |                 | 
+| **4:**       |                 | 
+| **5:**       |                 |
 
-
-This is an assignment. You may work in pairs (two students).  You will find sections labeled **Task** asking you to do each piece of analysis. Please make sure that you complete all of these tasks. I included some tests to help you see if you are calculating the solution correctly, but if you cannot get the test to pass submit your best attempt and you may recieve partial credit.
+This is an assignment. You should work in groups. Please write your group and group member names above. You will find sections labeled **Task** asking you to do each piece of analysis. Please make sure that you complete all of these tasks. I included some tests to help you see if you are calculating the solution correctly, but if you cannot get the test to pass submit your best attempt and you may recieve partial credit.
 
 All work that you submit should be your own. Make use of the course resources and example code on the course website. It should be possible to complete all the requested tasks using information given below or somewhere on the course website.
 
@@ -62,36 +67,21 @@ Formatter.SetPreferredMimeTypesFor(typeof<GenericChart.GenericChart>,"text/html"
 (**
 ## Load Data
 
-First, make sure that you're referencing the correct files.
 
-Here I'm assuming that you have a class folder with this 
-notebook and these files in it. The folder hierarchy would 
-look like below where you have the below files and folders accessible.
-
-- `Common.fsx` is on the course website.
-- `notebook.ipynb` is this notebook.
-
-```code
-/class
-    Common.fsx
-    notebook.ipynb                
-```
 *)
-
-let [<Literal>] ResolutionFolder = __SOURCE_DIRECTORY__
-Environment.CurrentDirectory <- ResolutionFolder
-
-#load "Common.fsx"
-open Common
-
 (**
 We get the Fama-French 3-Factor asset pricing model data.
 *)
 
+#r "nuget: NovaSBE.Finance"
+
+open NovaSBE.Finance
+open NovaSBE.Finance.French
+
 let ff3 = 
     French.getFF3 Frequency.Daily
     |> Seq.toList
-    |> List.filter (fun x -> x.Date < DateTime(2022,3,1))
+    |> List.filter (fun x -> x.Date < DateTime(2023,3,1))
 
 let annualizeDailyStdDev dailyStdDev = sqrt(252.0) * dailyStdDev
 
@@ -183,7 +173,7 @@ hml[..1] |> should be ofExactType<list<ReturnObs>>
 
 hml[0].Name |> shouldEqual "hml"
 
-hml |> shouldHaveLength 25187
+hml |> shouldHaveLength 25419
 
 hml
 |> List.averageBy (fun x -> x.Return)
@@ -211,7 +201,7 @@ hml2x[..1] |> should be ofExactType<list<ReturnObs>>
 
 hml2x[0].Name |> shouldEqual "hml2x"
 
-hml2x |> shouldHaveLength 25187
+hml2x |> shouldHaveLength 25419
 
 hml2x
 |> List.averageBy (fun x -> x.Return)
@@ -293,7 +283,7 @@ hmlGrowth[..1] |> should be ofExactType<list<GrowthObs>>
 hmlGrowth
 |> List.map (fun x -> x.Growth)
 |> List.last
-|> should (equalWithin 1.0) 27.0
+|> should (equalWithin 1.0) 29.0
 
 (**
 > **Task:** Calculate the cumulative growth of \$1 invested in 2x levered HML at the start of the sample. Assign it to a value named `hml2xGrowth` that is a `list` of `GrowthObs`.
@@ -312,7 +302,7 @@ hml2xGrowth[..1] |> should be ofExactType<list<GrowthObs>>
 hml2xGrowth
 |> List.map (fun x -> x.Growth)
 |> List.last
-|> should (equalWithin 1.0) 286.0
+|> should (equalWithin 1.0) 332.0
 
 (**
 Here is an example of a plot of the cumulative growth of \$1 invested in the market.
@@ -422,3 +412,45 @@ mktHmlChart10 |> Chart.show
 (** 
 Write your answer here.
 *)
+
+
+(**
+> **Task:** Construct a volatility managed HML portfolio that puts a weight of $1/\hat{\sigma^2_t}$ on HML,
+where $\hat{\sigma_t}$ is estimated as the *annualized* standard deviation of returns over the prior 22 days from t-1 to t-22.
+
+The result should be a `list<ReturnOb>` named `hmlVolManaged`.
+
+*)
+
+(***hide***)
+let hmlVolManaged =
+    ff3
+    |> Seq.sortBy (fun x -> x.Date)
+    |> Seq.windowed 23
+    |> Seq.map (fun window ->
+        let sd = 
+            window 
+            |> Seq.take 22 
+            |> stDevBy (fun x -> x.Hml)
+            |> annualizeDailyStdDev
+        let last = Seq.last window
+        { ReturnObs.Date = last.Date 
+          Return = last.Hml * (1.0 / sd ** 2.0)
+          Name = "HML volmanaged"})
+    |> Seq.toList
+
+252.0 * (hmlVolManaged |> List.averageBy (fun x -> x.Return))
+
+(** Write your solution in the cell below.*)
+// Solution here
+
+
+// Tests
+hmlVolManaged |> should be ofExactType<list<ReturnObs>>
+
+let hmlAnnualizedReturn =
+    let dailyRet =
+        hmlVolManaged
+        |> List.averageBy (fun x -> x.Return)
+    252.0 * dailyRet
+hmlAnnualizedReturn |> should (equalWithin 0.02) 8.18

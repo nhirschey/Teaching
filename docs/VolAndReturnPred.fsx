@@ -258,36 +258,54 @@ let combinePredictions (predReturns: seq<ReturnPrediction>) (predVols: seq<Volat
     let predVols = 
         predVols 
         |> Seq.map (fun x -> x.Date, x.PredictedVol) 
-        |> dict
+        |> Map
     [ for retObs in predReturns do 
         if predVols.ContainsKey retObs.Date then
             { Date = retObs.Date 
               PredictedVol = predVols[retObs.Date]
               PredictedReturn = retObs.PredictedReturn } ]
 
+(** Let's see how it works *)
 
-let managedPortfolio predVols predReturns (xs: list<ReturnObs>) =
+combinePredictions retPredictions[1000..1005] vFewer2Parallel
+
+(** Now let's have a function that creates returns off of that.*)
+
+let managedPortfolio gamma predVols predReturns (xs: list<ReturnObs>) =
     let preds = 
         combinePredictions predReturns predVols
         |> List.map (fun x -> x.Date, x)
-        |> dict
+        |> Map
     [ for x in xs do 
         if preds.ContainsKey x.Date then
             let pred = preds[x.Date]
-            let w = pred.PredictedReturn / (3.0 * pred.PredictedVol ** 2.0)
+            let w = pred.PredictedReturn / (gamma* pred.PredictedVol ** 2.0)
             { Date = x.Date
               Return = w * x.Return } ]
 
-let result = managedPortfolio vFewer2Parallel retPredictions rets
+(** Let's see how it works *)
 
+managedPortfolio 3.0 vFewer2Parallel retPredictions[1000..1005] rets
+
+(** Doing it for the full sample.*)
+
+let result = 
+    managedPortfolio 3.0 vFewer2Parallel retPredictions rets
+
+(** Now calculate mean-variance utility of the portfolio.*)
 let avgReturn = result |> List.averageBy (fun x -> x.Return)
 let varResult = result |> varBy (fun x -> x.Return)
 
-(avgReturn - 1.0/2.0 * 3.0 * varResult)*252.0
+(avgReturn - (3.0/2.0) * varResult)*252.0
+
+(** Compare to just buy and hold*)
+
+let managedMinDate = result |> List.map (fun x -> x.Date) |> List.min
+let buyHoldPeriod = rets |> List.filter (fun x -> x.Date >= managedMinDate)
+let avgBuyHold = buyHoldPeriod |> List.averageBy (fun x -> x.Return)
+let varBuyHold = buyHoldPeriod |> varBy (fun x -> x.Return)
+
+(avgBuyHold - (3.0/2.0) * varBuyHold)*252.0
 
 
-let rmse (actualVsPredicted: list< float * float>) =
-    [ for (actual, pred) in actualVsPredicted do
-        (actual - pred)**2.0 ]
-    |> List.average
-    |> sqrt
+(** Why the difference? *)

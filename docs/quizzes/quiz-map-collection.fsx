@@ -34,7 +34,8 @@ index: 5
 (**
 # Map Collections
 If we're doing lookups, then a good data structure 
-for that is a Map collection. Maps consist of key and value pairs. 
+for that is a Map collection. A Map is an immutable dictionary of elements.
+Maps consist of key and value pairs. 
 If you look up the key, you get the value.
 
 If you need to do lookups on a key, maps are much more efficient than trying to do the same thing with a list or array. 
@@ -49,8 +50,17 @@ If you need to do lookups on a key, maps are much more efficient than trying to 
 
 let exampleMap = Map [("a", "hey"); ("b","ho")]
 let exampleMap2 = [(4,"apple"); (10,"pizza")] |> Map
-exampleMap.["a"]
+
+(** Three equivalent ways to find a key given a value.async
+
+Option 1:*)
+
+exampleMap["a"]
+
+(** Option 2:*)
 Map.find "a" exampleMap
+
+(** Option 3:*)
 exampleMap2 |> Map.find 10
 
 // Comparing performance of list vs. Map lookups.
@@ -357,29 +367,51 @@ let stockbByTime =
 let tslA1 =
     stockA
     |> List.map(fun dayA ->
-        let dayB = Map.tryFind dayA.Time stockbByTime
-        match dayB with
-        | None -> 
-            { Time = dayA.Time
-              PriceA = Some dayA.Price
-              PriceB = None}
-        | Some db -> 
-            { Time = dayA.Time
-              PriceA = Some dayA.Price 
-              PriceB = Some db.Price })
+        let priceB = 
+            if stockbByTime.ContainsKey dayA.Time then
+                Some stockbByTime[dayA.Time].Price
+            else 
+                None
+        { Time = dayA.Time
+          PriceA = Some dayA.Price
+          PriceB = priceB } )
 // or, just a personal preference if you like the loop or List.map
 let tslA2 =
     [ for dayA in stockA do 
-        let dayB = Map.tryFind dayA.Time stockbByTime
-        match dayB with
-        | None -> 
-            { Time = dayA.Time
-              PriceA = Some dayA.Price
-              PriceB = None}
-        | Some db -> 
-            { Time = dayA.Time
-              PriceA = Some dayA.Price 
-              PriceB = Some db.Price }]
+        let priceB = 
+            if stockbByTime.ContainsKey dayA.Time then
+                Some stockbByTime[dayA.Time].Price
+            else 
+                None
+        { Time = dayA.Time
+          PriceA = Some dayA.Price
+          PriceB = priceB } ]
+
+// or, using Map.tryFind statement
+let tslA4 =
+    [ for dayA in stockA do
+        let lookup = Map.tryFind dayA.Time stockbByTime
+        let priceB =
+            match Map.tryFind dayA.Time stockbByTime with
+            | Some dayB -> Some dayB.Price
+            | None -> None 
+        { Time = dayA.Time
+          PriceA = Some dayA.Price
+          PriceB = priceB } ]
+
+// or, this is the same as tslA4, but using Option.map
+let tslA5 =
+    [ for dayA in stockA do
+        let priceB =
+            stockbByTime
+            |> Map.tryFind dayA.Time
+            |> Option.map (fun x -> x.Price)
+        { Time = dayA.Time
+          PriceA = Some dayA.Price
+          PriceB = priceB } ]
+
+
+
 // or, define a function
 let tryFindBforA (dayA: StockPriceOb) =
     let dayB = Map.tryFind dayA.Time stockbByTime

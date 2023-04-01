@@ -81,7 +81,7 @@ open NovaSBE.Finance.French
 let ff3 = 
     French.getFF3 Frequency.Daily
     |> Seq.toList
-    |> List.filter (fun x -> x.Date < DateTime(2023,3,1))
+    |> List.filter (fun x -> x.Date < DateTime(2023,2,1))
 
 let annualizeDailyStdDev dailyStdDev = sqrt(252.0) * dailyStdDev
 

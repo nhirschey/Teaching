@@ -71,8 +71,8 @@ Environment.CurrentDirectory <- ResolutionFolder
 We assume the `id_and_return_data.csv` file and the signal csv file  are in the `data` folder. In this example the signal file is `zero_trades_252d.csv`. You should replace that file name with your signal file name.
 *)
 
-let [<Literal>] IdAndReturnsFilePath = "../data/id_and_return_data.csv"
-let [<Literal>] MySignalFilePath = "../data/zero_trades_252d.csv"
+let [<Literal>] IdAndReturnsFilePath = "id_and_return_data.csv"
+let [<Literal>] MySignalFilePath = "zero_trades_252d.csv"
 
 (**
 ## Input data

@@ -48,7 +48,7 @@ open MathNet.Numerics.Statistics
 (**
 ### First, make sure that you're referencing the correct files.
 
-You're going to write code to explore an investment signal. The investment signals can be downloaded from moodle. You are free to use whichever signal you want. It does not have to be the signal that you are suing for your final project.
+You're going to write code to explore an investment signal. The investment signals can be downloaded from moodle. You are free to use whichever signal you want. It does not have to be the signal that you are using for your final project.
 
 Here I'm assuming that you have a class folder with this `signal-exploration.ipynb` notebook and a `data` folder inside of it. The folder hierarchy would look like below where you
 have the below files and folders accessible:

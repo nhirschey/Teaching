@@ -4,11 +4,11 @@ open System.IO
 
 open FSharp.Data
 
-Environment.CurrentDirectory <- @"C:\Users\nicho\Downloads"
-let [<Literal>] ResolutionFolder = @"C:\Users\nicho\Downloads"
+Environment.CurrentDirectory <- @"C:\Users\Nicholas Hirschey\Downloads"
+let [<Literal>] ResolutionFolder = @"C:\Users\Nicholas Hirschey\Downloads"
 
 let input = "signal-choices"
-let [<Literal>] studentList = "202122_S2_2280_all_detailed.csv"
+let [<Literal>] studentList = "202223_S2_2280_all_roster.csv"
 
 let files =
     let files = 
@@ -249,19 +249,55 @@ let corrections =
       Signal "Earnings-to-price", Signal "ni_me"
       Signal "Return on equity", Signal "ni_be"
       Signal "rmax5_rvol_21", Signal "rmax5_rvol_21d"
-      Signal "mispricing_mgm", Signal "mispricing_mgmt"]
+      Signal "mispricing_mgm", Signal "mispricing_mgmt" 
+      Signal "rvol 21d", Signal "rvol_21d"
+      Signal "at gr1", Signal "at_gr1"
+      Signal "sale gr1", Signal "sale_gr1"
+      Signal "sale gr3", Signal "sale_gr3"
+      Signal "saleq gr1", Signal "saleq_gr1"
+      Signal "ivol capm 252d", Signal "ivol_capm_252d"
+      Signal "ivol ff3 21d", Signal "ivol_ff3_21d"
+      Signal "z score", Signal "z_score"
+      Signal "qmj growth", Signal "qmj_growth"
+      Signal "qmj prof", Signal "qmj_prof"
+      Signal "ocfq saleq std", Signal "ocfq_saleq_std"
+      Signal "earnings variabilityF", Signal "earnings_variability"
+      Signal "noa at", Signal "noa_at"
+      Signal "ni ivol", Signal "ni_ivol"
+      Signal "rmax5 21d", Signal "rmax5_21d"
+      Signal "rmax1 21d", Signal "rmax1_21d"
+      Signal "seas 1 1an", Signal "seas_1_1an"
+      Signal "capx gr2", Signal "capx_gr2"
+      Signal "capx gr3", Signal "capx_gr3"
+      Signal "capx gr1", Signal "capx_gr1"
+      Signal "seas 2 5na",Signal "seas_2_5na"
+      Signal "ni inc8q", Signal "ni_inc8q"
+      Signal "rmax5 rvol 21d", Signal "rmax5_rvol_21d"
+      Signal "inv gr1", Signal "inv_gr1"
+      Signal "beta 60m", Signal "beta_60m" ]
     |> Map
 
+let removeRemainingMisspelled = false
 let correctedSubmissions =
-    submissions
-    |> List.map(fun x ->
-        let newPrefs =
-            x.Preferences
-            |> List.map(fun x ->
-                match Map.tryFind x corrections with
-                | None -> x
-                | Some correction -> correction )
-        { x with Preferences = newPrefs })
+    let corrected = 
+        submissions
+        |> List.map(fun x ->
+            let newPrefs =
+                x.Preferences
+                |> List.map(fun x ->
+                    match Map.tryFind x corrections with
+                    | None -> x
+                    | Some correction -> correction )
+            { x with Preferences = newPrefs })
+
+    if removeRemainingMisspelled then // running this will toss out any uncorrected typos.
+        corrected
+        |> List.map(fun x ->
+            { x with 
+                Preferences = 
+                    x.Preferences
+                    |> List.filter(fun y -> List.contains y signals )} )
+    else corrected
 
 let checkCorrected =
     correctedSubmissions

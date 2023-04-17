@@ -238,6 +238,8 @@ ff3Estimate.summary ()
 
 *)
 
+// Answer here
+
 (**
 You will probably see that the CAPM $R^2$ is lower than the
 Fama-French $R^2$. This means that you can explain more of the

@@ -50,6 +50,7 @@ open Quotes.YahooFinance
 open FSharp.Stats
 open Plotly.NET
 open NovaSBE.Finance
+open NovaSBE.Finance.Ols
 
 Environment.CurrentDirectory <- __SOURCE_DIRECTORY__
 
@@ -60,17 +61,9 @@ fsi.AddPrinter<DateTime>(fun dt -> dt.ToString("s"))
 fsi.AddPrinter<YearMonth>(fun ym -> $"{ym.Year}-{ym.Month}")
 #endif // FSX
 
-(*** condition: ipynb ***)
-#if IPYNB
-// Set dotnet interactive formatter to plaintext
-Formatter.Register(fun (x:obj) (writer: TextWriter) -> fprintfn writer "%120A" x )
-Formatter.SetPreferredMimeTypesFor(typeof<obj>, "text/plain")
-// Make plotly graphs work with interactive plaintext formatter
-Formatter.SetPreferredMimeTypesFor(typeof<GenericChart.GenericChart>,"text/html")
-#endif // IPYNB
-
-
 (**
+
+## Data
 We get the Fama-French 3-Factor asset pricing model data.
 *)
 
@@ -78,35 +71,40 @@ let ff3 = French.getFF3 French.Frequency.Monthly
 
 (**
 Let's get a portfolio to analyze.
+
+VBR is the Vanguard Small Cap Value ETF. It invests in small-cap value stocks. 
 *)
 
-type Return = { YearMonth : DateTime; Return : float }
-        
+type Return = { YearMonth: DateTime; Return: float }
 
-let vbr = 
-    YahooFinance.History("VBR",
-                              startDate=DateTime(2010,1,1),
-                              endDate=DateTime(2021,12,31),
-                              interval=Interval.Monthly)
+let getReturns (ticker: string) =
+    YahooFinance.History(
+        ticker,
+        startDate = DateTime(2010, 1, 1),
+        endDate = DateTime(DateTime.Now.Year - 1, 12, 31),
+        interval = Monthly
+    )
     |> List.sortBy (fun x -> x.Date)
     |> List.pairwise
-    |> List.map (fun (yesterday, today) -> 
-        { YearMonth = DateTime(today.Date.Year,today.Date.Month,1)
-          Return = today.AdjustedClose/yesterday.AdjustedClose - 1.0 })
+    |> List.map (fun (yesterday, today) ->
+        { YearMonth = DateTime(today.Date.Year, today.Date.Month, 1)
+          Return = today.AdjustedClose / yesterday.AdjustedClose - 1.0 })
     |> List.toArray
+
+let vbr = getReturns "VBR"
+
+(**
+We'll also use VTI as a proxy for the market later.
+*)
+let vti = getReturns "VTI"
 
 (** A function to accumulate simple returns. *)
 let cumulativeReturn (xs: seq<DateTime * float>) =
-    /// cr0 is a cumulative return through dt0.
-    /// r1 is the return only for period dt1.
-    let accumulate (dt0, cr0) (dt1, r1) =
-        let cr1 = (1.0 + cr0) * (1.0 + r1) - 1.0
-        (dt1, cr1)
-    let l = xs |> Seq.sortBy fst |> Seq.toList
-    match l with
-    | [] -> []
-    | h::t ->
-        (h, t) ||> List.scan accumulate    
+    let mutable cr = 1.0
+
+    [ for (dt, r) in xs do
+          cr <- cr * (1.0 + r)
+          dt, cr - 1.0 ]
 
 (** Plot of vbr cumulative return. *)
 let vbrChart =
@@ -126,166 +124,119 @@ vbrChart |> Chart.show
 #endif // FSX
 
 (***hide***)
-vbrChart
-|> GenericChart.toChartHTML
+vbrChart |> GenericChart.toChartHTML
 (*** include-it-raw ***)
 
 (**
 You want to work with excess returns. If you have a zero-cost, long-short portfolio then it is already an excess return. But if you have a long portfolio such as we have with VBR, we need to convert it to an excess return.
 *)
 
-type ExcessReturn = { YearMonth: DateTime; ExcessReturn: float }
+type ExcessReturn =
+    { YearMonth: DateTime
+      ExcessReturn: float }
 
 // ff3 indexed by month
-let ff3ByMonth = 
-    ff3
-    |> Array.map(fun x -> DateTime(x.Date.Year, x.Date.Month,1), x)
-    |> Map
+let ff3ByMonth =
+    ff3 |> Array.map (fun x -> DateTime(x.Date.Year, x.Date.Month, 1), x) |> Map
 
 let vbrExcess =
     vbr
     |> Array.map (fun x ->
         { YearMonth = x.YearMonth
-          ExcessReturn = x.Return - ff3ByMonth[x.YearMonth].Rf } )
+          ExcessReturn = x.Return - ff3ByMonth[x.YearMonth].Rf })
+
+let vtiExcess =
+    vti
+    |> Array.map (fun x ->
+        { YearMonth = x.YearMonth
+          ExcessReturn = x.Return - ff3ByMonth[x.YearMonth].Rf })
 
 (**
+## Factor Models
 For regression, it is helpful to have the portfolio
 return data merged into our factor model data.
 *)
 
 
 type RegData =
-    { Date : DateTime
-      /// Make sure Portfolio is an Excess Return
-      Portfolio : float
-      MktRf : float 
-      Hml : float 
-      Smb : float }
+    {
+        Date: DateTime
+        /// Make sure Portfolio is an Excess Return
+        Portfolio: float
+        MktRf: float
+        Hml: float
+        Smb: float
+    }
 
 let regData =
     vbrExcess
     |> Array.map (fun x ->
         let xff3 = ff3ByMonth[x.YearMonth]
+
         { Date = x.YearMonth
           Portfolio = x.ExcessReturn
-          MktRf = xff3.MktRf 
-          Hml = xff3.Hml 
+          MktRf = xff3.MktRf
+          Hml = xff3.Hml
           Smb = xff3.Smb })
 
 (** One way to evaluate performance is Sharpe ratios. *)
 
 /// Calculates sharpe ratio of a sequence of excess returns
-let sharpe (xs: float seq) =
-    (Seq.mean xs) / (Seq.stDev xs)
+let sharpe (xs: float seq) = (Seq.mean xs) / (Seq.stDev xs)
 
-let annualizeMonthlySharpe monthlySharpe = sqrt(12.0) * monthlySharpe
-    
+let annualizeMonthlySharpe monthlySharpe = sqrt (12.0) * monthlySharpe
+
 
 (** Our portfolio. *)
-regData
-|> Array.map (fun x -> x.Portfolio)
-|> sharpe
-|> annualizeMonthlySharpe
+regData |> Array.map (fun x -> x.Portfolio) |> sharpe |> annualizeMonthlySharpe
 (***include-output***)
 
 (** The market. *)
-regData
-|> Array.map (fun x -> x.MktRf)
-|> sharpe
-|> annualizeMonthlySharpe
+regData |> Array.map (fun x -> x.MktRf) |> sharpe |> annualizeMonthlySharpe
 (***include-output***)
 
 (** The HML factor. *)
-regData
-|> Array.map (fun x -> x.Hml)
-|> sharpe
-|> annualizeMonthlySharpe
+regData |> Array.map (fun x -> x.Hml) |> sharpe |> annualizeMonthlySharpe
 (***include-output***)
 
-(**
-[Accord.NET](http://accord-framework.net/) is a .NET (C#/F#/VB.NET) machine learning library. 
-
-*)
-
-#r "nuget: Accord"
-#r "nuget: Accord.Statistics"
-
-open Accord
-open Accord.Statistics.Models.Regression.Linear
-
-
-(** 
-The OLS trainer is documented [here](https://github.com/accord-net/framework/wiki/Regression) with an example in C#. 
-
-We'll use it in a a more F# way
-*) 
-
-type RegressionOutput =
-    { Model : MultipleLinearRegression 
-      TValuesWeights : float array
-      TValuesIntercept : float 
-      R2: float }
-
-/// Type alias for x, y regression data 
-type XY = (float array) array * float array
-
-let fitModel (x: (float array) array, y: float array) =
-    let ols = new OrdinaryLeastSquares(UseIntercept=true)
-    let estimate = ols.Learn(x,y)
-    let mse = estimate.GetStandardError(x,y)
-    let se = estimate.GetStandardErrors(mse, ols.GetInformationMatrix())
-    let tvaluesWeights = 
-        estimate.Weights
-        |> Array.mapi(fun i w -> w / se.[i])
-    let tvalueIntercept = estimate.Intercept / (se |> Array.last)
-    let r2 = estimate.CoefficientOfDetermination(x,y)
-    { Model = estimate
-      TValuesWeights = tvaluesWeights
-      TValuesIntercept = tvalueIntercept  
-      R2 = r2 }
-
-let capmModelData = 
-    regData
-    |> Array.map(fun obs -> [|obs.MktRf|], obs.Portfolio)
-    |> Array.unzip 
-
-let ff3ModelData = 
-    regData
-    |> Array.map(fun obs -> [|obs.MktRf; obs.Hml; obs.Smb |], obs.Portfolio)
-    |> Array.unzip
 
 (**
-Now we can estimate our models.
+Now we can estimate our factor models using OLS.
 *)
-let capmEstimate = capmModelData |> fitModel
-let ff3Estimate = ff3ModelData |> fitModel
+let capmEstimate = Ols("Portfolio ~ MktRf", regData).fit()
+let ff3Estimate = Ols("Portfolio ~ MktRf + Hml + Smb", regData).fit()
 
 
 (**
 CAPM results.
 *)
 
-capmEstimate.Model
-(*** include-fsi-output***)
+capmEstimate.summary ()
 
-capmEstimate.TValuesIntercept
-(*** include-fsi-output***)
-
-capmEstimate.R2 
-(*** include-fsi-output***)
+(**
+- What's the interpretation of the alpha?
+- What's the interpretation of the beta?
+- If you want to replicate VBR with the MKT factor and risk-free bonds, what are the weights that you would use?
+*)
 
 (**
 Fama-French 3-Factor model results
 *)
+ff3Estimate.summary ()
 
-ff3Estimate.Model
-(*** include-fsi-output***)
+(**
+- What's the interpretation of the alpha?
+- What's the interpretation of the factor betas?
+- If you want to replicate VBR with risk free bonds and the MKT, HML, and SMB factors, what are the weights that you would use?
+*)
 
-ff3Estimate.TValuesIntercept
-(*** include-fsi-output***)
+(**
+> **Practice:** What is the expected annual return of VBR? When answering this, 
+>
+> - Assume that your alpha and beta estimates for the 3 factor model explaining VBR returns are accurate. 
+> - Use the average annual premia on the Fama and French factors from 1926 until end of 2022 as your estimate of the factors' expected returns.
 
-ff3Estimate.R2
-(*** include-fsi-output***)
+*)
 
 (**
 You will probably see that the CAPM $R^2$ is lower than the
@@ -295,33 +246,51 @@ you can hedge the portfolio better with the multi-factor model.
 *)
 
 (**
-We also want predicted values so that we can get regression residuals for calculating
-the information ratio. 
-
+Let's turn things around and see if we can explain the HML factor.
 *)
 
-type Prediction = { Label : float; Score : float}
+let hmlRegData =
+    let vbrByMonth = vbrExcess |> Array.map (fun x -> x.YearMonth, x) |> Map
 
-let makePredictions 
-    (estimate:MultipleLinearRegression) 
-    (x: (float array) array, y: float array) =
-    (estimate.Transform(x), y)
-    ||> Array.zip
-    |> Array.map(fun (score, label) -> { Score = score; Label = label })
+    [| for vti in vtiExcess do
+           {| YearMonth = vti.YearMonth
+              Hml = ff3ByMonth[vti.YearMonth].Hml
+              Vti = vti.ExcessReturn
+              Vbr = vbrByMonth[vti.YearMonth].ExcessReturn |} |]
 
-let residuals (xs: Prediction array) = xs |> Array.map(fun x -> x.Label - x.Score)
+hmlRegData[..3]
 
-let capmPredictions = makePredictions capmEstimate.Model capmModelData
-let ff3Predictions = makePredictions ff3Estimate.Model ff3ModelData
+(**
+Explain the HML factor with VTI and VBR
+*)
 
-capmPredictions |> Array.take 3
-(*** include-output ***)
+let hmlModel = Ols("Hml ~ Vti + Vbr", hmlRegData).fit()
+hmlModel.summary()
 
-capmPredictions |> residuals |> Array.take 3
-(*** include-fsi-output ***)
+(**
+- What's the interpretation of the alpha?
+- What's the interpretation of the betas?
+- If you want to replicate HML using VTI, VBR, and risk-free bonds, what are the weights you would use?
 
-let capmResiduals = residuals capmPredictions
-let ff3Residuals = residuals ff3Predictions
+Note:
+
+HML average return.
+*)
+hmlRegData |> Array.averageBy (fun x -> 12.0 * x.Hml)
+
+(**
+VTI average return
+*)
+hmlRegData |> Array.averageBy (fun x -> 12.0 * x.Vti)
+
+(** VBR average return. *)
+hmlRegData |> Array.averageBy (fun x -> 12.0 * x.Vbr)
+
+(** 
+## Information Ratios
+We want residuals so that we can estimate information ratios.*)
+let capmResiduals = capmEstimate.resid
+let ff3Residuals = ff3Estimate.resid
 
 (**
 In general I would write a function to do this. Function makes it a bit
@@ -329,26 +298,25 @@ simpler to follow. It's hard for me to read the next few lines and understand
 what everything is. Too much going on.
 *)
 
-let capmAlpha = 12.0 * capmEstimate.Model.Intercept 
-let capmStDevResiduals = sqrt(12.0) * (Seq.stDev capmResiduals)
+let capmAlpha = 12.0 * capmEstimate.coefs["Intercept"]
+let capmStDevResiduals = sqrt (12.0) * (Seq.stDev capmResiduals)
 let capmInformationRatio = capmAlpha / capmStDevResiduals
 (*** include-fsi-output***)
 
-let ff3Alpha = 12.0 * ff3Estimate.Model.Intercept 
-let ff3StDevResiduals = sqrt(12.0) * (Seq.stDev ff3Residuals)
+let ff3Alpha = 12.0 * ff3Estimate.coefs["Intercept"]
+let ff3StDevResiduals = sqrt (12.0) * (Seq.stDev ff3Residuals)
 let ff3InformationRatio = ff3Alpha / ff3StDevResiduals
 (*** include-fsi-output***)
 
-// Function version
+(** Here is the function version.*)
 
 let informationRatio monthlyAlpha (monthlyResiduals: float array) =
     let annualAlpha = 12.0 * monthlyAlpha
-    let annualStDev = sqrt(12.0) * (Seq.stDev monthlyResiduals)
-    annualAlpha / annualStDev 
+    let annualStDev = sqrt (12.0) * (Seq.stDev monthlyResiduals)
+    annualAlpha / annualStDev
 
-informationRatio capmEstimate.Model.Intercept capmResiduals
+informationRatio capmEstimate.coefs["Intercept"] capmResiduals
 (*** include-fsi-output***)
 
-informationRatio ff3Estimate.Model.Intercept ff3Residuals
+informationRatio ff3Estimate.coefs["Intercept"] ff3Residuals
 (*** include-fsi-output***)
-

@@ -3,7 +3,7 @@
 title: Signal Portfolio
 category: Lectures
 categoryindex: 1
-index: 100
+index: 10
 ---
 
 [![Binder](img/badge-binder.svg)](https://mybinder.org/v2/gh/nhirschey/teaching/gh-pages?filepath={{fsdocs-source-basename}}.ipynb)&emsp;
@@ -31,16 +31,6 @@ fsi.AddPrinter<DateTime>(fun dt -> dt.ToString("s"))
 fsi.AddPrinter<YearMonth>(fun ym -> $"{ym.Year}-{ym.Month}")
 #endif // FSX
 
-(*** condition: ipynb ***)
-#if IPYNB
-// Set dotnet interactive formatter to plaintext
-Formatter.Register(fun (x:obj) (writer: TextWriter) -> fprintfn writer "%120A" x )
-Formatter.SetPreferredMimeTypesFor(typeof<obj>, "text/plain")
-// Make plotly graphs work with interactive plaintext formatter
-Formatter.SetPreferredMimeTypesFor(typeof<GenericChart.GenericChart>,"text/html")
-#endif // IPYNB
-
-
 (**
 ## Load Data
 
@@ -51,45 +41,44 @@ have the below files and folders accessible:
 
 ```code
 /class
-    Portfolio.fsx
-    Common.fsx
     signal-portfolio.ipynb
-    /data
-        id_and_return_data.csv
-        zero_trades_252d.csv
+    id_and_return_data.csv
+    zero_trades_252d.csv
     
 ```
 
 First, make sure that our working directory is the source file directory.
 *)
 
+(***condition:ipynb***)
+#if IPYNB
 let [<Literal>] ResolutionFolder = __SOURCE_DIRECTORY__
 Environment.CurrentDirectory <- ResolutionFolder
+#endif //IPYNB
+
+(***condition:fsx***)
+// These conditions are so that I can store files in the /data folder during developement
+#if FSX
+let [<Literal>] ResolutionFolder = __SOURCE_DIRECTORY__ + "/data"
+Environment.CurrentDirectory <- ResolutionFolder
+#endif //FSX
 
 (**
 ### We will use the portfolio module
-Make sure that you load this code
+We will use the [Portfolio module](https://github.com/nhirschey/NovaSBE.Finance/blob/main/src/NovaSBE.Finance/Portfolio.fs). Make sure that you load this code
 *)
 
-#load "Portfolio.fsx"
-open Portfolio
-
-(**
-### We will use the Common.fsx file
-Make sure that this loads correctly.
-*)
-
-#load "Common.fsx"
-open Common
-
+#r "nuget:NovaSBE.Finance, 0.1.0"
+open NovaSBE.Finance
+open NovaSBE.Finance.Portfolio
 
 (**
 ### Data files
-We assume the `id_and_return_data.csv` file and the signal csv file  are in the `data` folder. In this example the signal file is `zero_trades_252d.csv`. You should replace that file name with your signal file name.
+We assume the `id_and_return_data.csv` file and the signal csv file are in the same folder as the notebook. In this example the signal file is `zero_trades_252d.csv`. You should replace that file name with your signal file name.
 *)
 
-let [<Literal>] IdAndReturnsFilePath = "data/id_and_return_data.csv"
-let [<Literal>] MySignalFilePath = "data/zero_trades_252d.csv"
+let [<Literal>] IdAndReturnsFilePath = "id_and_return_data.csv"
+let [<Literal>] MySignalFilePath = "zero_trades_252d.csv"
 let strategyName = "Zero-trades"
 
 (**
@@ -110,12 +99,6 @@ First define the Csv types from the sample files:
 
 type IdAndReturnsType = 
     CsvProvider<Sample=IdAndReturnsFilePath,
-                // The schema parameter is not required,
-                // but I am using it to override some column types
-                // to make filtering easier.
-                // If I didn't do this these particular columns 
-                // would have strings of "1" or "0", but explicit boolean is nicer.
-                Schema="obsMain(string)->obsMain=bool,exchMain(string)->exchMain=bool",
                 ResolutionFolder=ResolutionFolder>
 
 type MySignalType = 
@@ -428,8 +411,9 @@ let portfoliosEW =
 Common.fsx has some easy to use code to get Fama-French factors.
 We're going to use the French data to get monthly risk-free rates.
 *)
+open NovaSBE.Finance.French
 
-let ff3 = French.getFF3 Frequency.Monthly
+let ff3 = getFF3 Frequency.Monthly
 let monthlyRiskFreeRate =
     [ for obs in ff3 do 
         let key = DateTime(obs.Date.Year,obs.Date.Month,1)
@@ -456,17 +440,13 @@ let long =
     portfolioExcessReturns 
     |> List.filter(fun x -> 
         x.PortfolioId = Indexed {| Name = strategyName; Index = 3 |})
-    
+
 let cumulateSimpleReturn (xs: PortfolioReturn list) =
-    let accumulator (priorObs:PortfolioReturn) (thisObs:PortfolioReturn) =
-        let asOfNow = (1.0 + priorObs.Return)*(1.0 + thisObs.Return) - 1.0
-        { thisObs with Return = asOfNow}
-    // remember to make sure that your sort order is correct.
-    match xs |> List.sortBy(fun x -> x.YearMonth) with
-    | [] -> []      // return empty list if the input list is empty
-    | head::tail -> // if there are observations do the calculation
-        (head, tail) 
-        ||> List.scan accumulator
+    let xs = xs |> List.sortBy (fun x -> x.YearMonth)
+    let mutable cr = 1.0
+    [ for x in xs do 
+        cr <- cr * (1.0 + x.Return)
+        { x with Return = cr - 1.0 } ]
 
 let longCumulative = long |> cumulateSimpleReturn
 
@@ -611,4 +591,4 @@ let csvRows =
     |> List.map makePortfolioReturnCsvRow
 
 let csv = new PortfolioReturnCsv(csvRows)
-csv.Save("data/myExcessReturnPortfolios.csv")
+csv.Save("myExcessReturnPortfolios.csv")

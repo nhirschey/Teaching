@@ -3,7 +3,7 @@
 title: Sentiment classification
 category: Lectures
 categoryindex: 1
-index: 10
+index: 100
 ---
 
 [![Binder](img/badge-binder.svg)](https://mybinder.org/v2/gh/nhirschey/teaching/gh-pages?filepath={{fsdocs-source-basename}}.ipynb)&emsp;

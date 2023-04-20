@@ -282,7 +282,7 @@ let exampleLeveragedReturnChart =
 (***condition:fsx,do-not-eval***)
 #if FSX
 exampleLeveragedReturnChart |> Chart.show
-#endif //FSX
+#endif // fsx
 
 (***condition:ipynb***)
 #if IPYNB
@@ -380,7 +380,7 @@ let binScatterPlot =
 (***condition:fsx,do-not-eval***)
 #if FSX
 binScatterPlot |> Chart.show
-#endif //FSX
+#endif // fsx
 
 (***condition:ipynb***)
 #if IPYNB
@@ -469,7 +469,7 @@ let volComparisonWithWeights =
 (***condition:fsx,do-not-eval***)
 #if FSX
 volComparisonWithWeights |> Chart.show
-#endif //FSX
+#endif // fsx
 
 (***condition:ipynb***)
 #if IPYNB
@@ -539,7 +539,7 @@ let combinedWeightChart =
 (***condition:fsx,do-not-eval***)
 #if FSX
 combinedWeightChart |> Chart.show
-#endif //FSX
+#endif // fsx
 
 (***condition:ipynb***)
 #if IPYNB
@@ -620,7 +620,7 @@ let bhVsManagedChart =
 (***condition:fsx,do-not-eval***)
 #if FSX
 bhVsManagedChart |> Chart.show
-#endif //FSX
+#endif // fsx
 
 (***condition:ipynb***)
 #if IPYNB

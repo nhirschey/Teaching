@@ -54,14 +54,14 @@ First, make sure that our working directory is the source file directory.
 #if IPYNB
 let [<Literal>] ResolutionFolder = __SOURCE_DIRECTORY__
 Environment.CurrentDirectory <- ResolutionFolder
-#endif //IPYNB
+#endif // ipynb
 
 (***condition:fsx***)
 // These conditions are so that I can store files in the /data folder during developement
 #if FSX
 let [<Literal>] ResolutionFolder = __SOURCE_DIRECTORY__ + "/data"
 Environment.CurrentDirectory <- ResolutionFolder
-#endif //FSX
+#endif // fsx
 
 (**
 ### We will use the portfolio module

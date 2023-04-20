@@ -3,7 +3,7 @@
 title: Plotting (with solutions)
 category: Assignments
 categoryindex: 2
-index: 4
+index: 9
 ---
 *)
 

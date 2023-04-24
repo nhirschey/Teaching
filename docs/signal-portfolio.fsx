@@ -68,18 +68,18 @@ Environment.CurrentDirectory <- ResolutionFolder
 We will use the [Portfolio module](https://github.com/nhirschey/NovaSBE.Finance/blob/main/src/NovaSBE.Finance/Portfolio.fs). Make sure that you load this code
 *)
 
-#r "nuget:NovaSBE.Finance, 0.1.0"
+#r "nuget:NovaSBE.Finance, 0.2.*-*"
 open NovaSBE.Finance
 open NovaSBE.Finance.Portfolio
 
 (**
 ### Data files
-We assume the `id_and_return_data.csv` file and the signal csv file are in the same folder as the notebook. In this example the signal file is `zero_trades_252d.csv`. You should replace that file name with your signal file name.
+We assume the `id_and_return_data.csv` file and the signal csv file are in the same folder as the notebook. In this example the signal file is `be_me.csv`. You should replace that file name with your signal file name.
 *)
 
 let [<Literal>] IdAndReturnsFilePath = "id_and_return_data.csv"
-let [<Literal>] MySignalFilePath = "zero_trades_252d.csv"
-let strategyName = "Zero-trades"
+let [<Literal>] MySignalFilePath = "be_me.csv"
+let strategyName = "book to market"
 
 (**
 If my paths are correct, then this code should read the first few lines of the files.
@@ -267,54 +267,8 @@ let getSecurityReturn (security, formationMonth) =
         | Some r -> security, r
 
 (**
-And we should do a few restrictions. These come from the data documentation
-section 1.2, "How to use the data". These are some basic ones.
-*)
-
-let isObsMain (security, formationMonth) =
-    match Map.tryFind (security, formationMonth) msfBySecurityIdAndMonth with
-    | None -> false
-    | Some row -> row.ObsMain
-
-let isPrimarySecurity (security, formationMonth) =
-    match Map.tryFind (security, formationMonth) msfBySecurityIdAndMonth with
-    | None -> false
-    | Some row -> row.PrimarySec
-
-let isCommonStock (security, formationMonth) =
-    match Map.tryFind (security, formationMonth) msfBySecurityIdAndMonth with
-    | None -> false
-    | Some row -> row.Common
-
-let isExchMain (security, formationMonth) =
-    match Map.tryFind (security, formationMonth) msfBySecurityIdAndMonth with
-    | None -> false
-    | Some row -> row.ExchMain
-
-let hasMarketEquity (security, formationMonth) =
-    match Map.tryFind (security, formationMonth) msfBySecurityIdAndMonth with
-    | None -> false
-    | Some row -> row.MarketEquity.IsSome
-
-let myFilters securityAndFormationMonth =
-    isObsMain securityAndFormationMonth &&
-    isPrimarySecurity securityAndFormationMonth &&
-    isCommonStock securityAndFormationMonth &&
-    isExchMain securityAndFormationMonth &&
-    isExchMain securityAndFormationMonth &&
-    hasMarketEquity securityAndFormationMonth
-
-let doMyFilters (universe:InvestmentUniverse) =
-    let filtered = 
-        universe.Securities
-        // my filters expect security, formationMonth
-        |> List.map(fun security -> security, universe.FormationMonth)
-        // do the filters
-        |> List.filter myFilters
-        // now convert back from security, formationMonth -> security
-        |> List.map fst
-    { universe with Securities = filtered }
-
+The data is already filtered to valid securities based on the data documentation
+section 1.2, "How to use the data", from the paper the data came from. *)
 (**
 Define sample months
 *)
@@ -344,9 +298,9 @@ Strategy function
 let formStrategy ym =
     ym
     |> getInvestmentUniverse
-    |> doMyFilters
     |> getMySignals
     |> assignSignalSort strategyName 3
+    |> Seq.toList
     |> List.map (giveValueWeights getMarketCap)
     |> List.map (getPortfolioReturn getSecurityReturn)  
 
@@ -375,7 +329,8 @@ let giveEqualWeights (port: AssignedPortfolio): Portfolio =
         { SecurityId = securityId; Weight = weight }
     
     { FormationMonth = failwith "unimplemented"
-      PortfolioId = failwith "unimplemented"
+      Name = failwith "unimplemented"
+      Index = failwith "unimplemented"
       Positions = failwith "unimplemented" }
 
 (** Now make the equal-weight strategy.*)
@@ -383,9 +338,9 @@ let giveEqualWeights (port: AssignedPortfolio): Portfolio =
 let formEqualWeightStrategy ym =
     ym
     |> getInvestmentUniverse
-    |> doMyFilters
     |> getMySignals
     |> assignSignalSort strategyName 3
+    |> Seq.toList
     |> List.map giveEqualWeights
     |> List.map (getPortfolioReturn getSecurityReturn)  
 
@@ -427,8 +382,8 @@ Now I'll convert my portfolios into excess returns.
 let portfolioExcessReturns =
     portfolios
     |> List.map(fun x -> 
-        match Map.tryFind x.YearMonth monthlyRiskFreeRate with 
-        | None -> failwith $"Can't find risk-free rate for {x.YearMonth}"
+        match Map.tryFind x.Month monthlyRiskFreeRate with 
+        | None -> failwith $"Can't find risk-free rate for {x.Month}"
         | Some rf -> { x with Return = x.Return - rf })
 
 (**
@@ -438,11 +393,10 @@ Let's plot the top portfolio, calling it long.
 
 let long = 
     portfolioExcessReturns 
-    |> List.filter(fun x -> 
-        x.PortfolioId = Indexed {| Name = strategyName; Index = 3 |})
+    |> List.filter(fun x -> x.Index = 3)
 
 let cumulateSimpleReturn (xs: PortfolioReturn list) =
-    let xs = xs |> List.sortBy (fun x -> x.YearMonth)
+    let xs = xs |> List.sortBy (fun x -> x.Month)
     let mutable cr = 1.0
     [ for x in xs do 
         cr <- cr * (1.0 + x.Return)
@@ -452,7 +406,7 @@ let longCumulative = long |> cumulateSimpleReturn
 
 let longCumulativeChart =
     longCumulative
-    |> List.map(fun x -> x.YearMonth, x.Return)
+    |> List.map(fun x -> x.Month, x.Return)
     |> Chart.Line 
     |> Chart.withTitle "Growth of 1 Euro"
 
@@ -470,7 +424,7 @@ longCumulativeChart |> GenericChart.toChartHTML
 (** And function to do the plot *)
 let portfolioReturnPlot (xs:PortfolioReturn list) =
     xs
-    |> List.map(fun x -> x.YearMonth, x.Return)
+    |> List.map(fun x -> x.Month, x.Return)
     |> Chart.Line 
     |> Chart.withTitle "Growth of 1 Euro"
 
@@ -504,14 +458,15 @@ has the same time range and same F# type as our portfolios.
 let vwMktRf =
     let portfolioMonths = 
         portfolioExcessReturns 
-        |> List.map(fun x -> x.YearMonth)
+        |> List.map(fun x -> x.Month)
     let minYm = portfolioMonths |> List.min
     let maxYm = portfolioMonths |> List.max
     
     [ for x in ff3 do
         if x.Date >= minYm && x.Date <= maxYm then
-            { PortfolioId = Named("Mkt-Rf")
-              YearMonth = x.Date
+            { Name = "Mkt-Rf"
+              Index = 1
+              Month = x.Date
               Return = x.MktRf } ]
 
 
@@ -522,7 +477,7 @@ Let's also create a long-short portfolio.
 let short = 
     portfolioExcessReturns 
     |> List.filter(fun x -> 
-        x.PortfolioId = Indexed {| Name = strategyName; Index = 1 |})
+        x.Name = strategyName && x.Index = 1)
 
 let longShort = 
     // We'll loop through the long portfolio observations,
@@ -531,26 +486,27 @@ let longShort =
     // put it in a Map collection indexed by month.
     let shortByYearMonthMap = 
         short 
-        |> List.map(fun row -> row.YearMonth, row) 
+        |> List.map(fun row -> row.Month, row) 
         |> Map
     
     [ for longObs in long do
-        match Map.tryFind longObs.YearMonth shortByYearMonthMap with
+        match Map.tryFind longObs.Month shortByYearMonthMap with
         | None -> failwith "probably your date variables are not aligned for a weird reason"
         | Some shortObs ->
-            { PortfolioId = Named "Long-Short"
-              YearMonth = longObs.YearMonth
+            { Name = "Long-Short"
+              Index = 1
+              Month = longObs.Month
               Return = longObs.Return - shortObs.Return } ] 
   
 
 let combinedChart =
     List.concat [long; longShort; vwMktRf]
-    |> List.groupBy(fun x -> x.PortfolioId)
-    |> List.map(fun (portId, xs) ->
+    |> List.groupBy(fun x -> x.Name, x.Index)
+    |> List.map(fun ((name, index), xs) ->
         xs
         |> cumulateSimpleReturn
         |> portfolioReturnPlot
-        |> Chart.withTraceInfo (Name=portId.ToString()))
+        |> Chart.withTraceInfo (Name=($"{name}: {index}")))
     |> Chart.combine
 
 
@@ -570,20 +526,16 @@ You might also want to save your results to a csv file.
 *)
 
 let [<Literal>] OutputSchema =
-    "portfolioName(string),index(int option),yearMonth(date),ret(float)"
+    "Name(string),Index(int),Month(date),Ret(float)"
 
 (*** do-not-eval ***)
 type PortfolioReturnCsv = CsvProvider<OutputSchema>
 
 let makePortfolioReturnCsvRow (row:PortfolioReturn) =
-    let name, index =
-        match row.PortfolioId with
-        | Indexed p -> p.Name, Some p.Index
-        | Named name -> name, None
     PortfolioReturnCsv
-        .Row(portfolioName=name,
-             index = index,
-             yearMonth=row.YearMonth,
+        .Row(name=row.Name,
+             index = row.Index,
+             month=row.Month,
              ret = row.Return)
 
 let csvRows =

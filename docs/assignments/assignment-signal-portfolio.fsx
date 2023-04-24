@@ -6,9 +6,9 @@ categoryindex: 2
 index: 6
 ---
 
-[![Binder](img/badge-binder.svg)](https://mybinder.org/v2/gh/nhirschey/teaching/gh-pages?filepath={{fsdocs-source-basename}}.ipynb)&emsp;
-[![Script](img/badge-script.svg)]({{root}}/{{fsdocs-source-basename}}.fsx)&emsp;
-[![Notebook](img/badge-notebook.svg)]({{root}}/{{fsdocs-source-basename}}.ipynb)
+[![Binder](../img/badge-binder.svg)](https://mybinder.org/v2/gh/nhirschey/teaching/gh-pages?filepath={{fsdocs-source-basename}}.ipynb)&emsp;
+[![Script](../img/badge-script.svg)]({{root}}/{{fsdocs-source-basename}}.fsx)&emsp;
+[![Notebook](../img/badge-notebook.svg)]({{root}}/{{fsdocs-source-basename}}.ipynb)
 
 Group Name: 
 
@@ -117,7 +117,7 @@ let mySignalCsv =
     |> Seq.toList
 
 (**
-A list of `Signal` records. The signal type is defined in the `NovaSBE.Finance.Portfolio` module [here]https://github.com/nhirschey/NovaSBE.Finance/blob/6d1398625e5a9279af00bb6e1c1802af3596c3f6/src/NovaSBE.Finance/Portfolio.fs#L178-L181).
+A list of `Signal` records. The signal type is defined in the `NovaSBE.Finance.Portfolio` module [here](https://github.com/nhirschey/NovaSBE.Finance/blob/6d1398625e5a9279af00bb6e1c1802af3596c3f6/src/NovaSBE.Finance/Portfolio.fs#L178-L181).
 *)
 
 let mySignals =

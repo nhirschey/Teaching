@@ -3,7 +3,7 @@
 title: Optimization
 category: Lectures
 categoryindex: 1
-index: 100
+index: 12
 ---
 
 [![Binder](img/badge-binder.svg)](https://mybinder.org/v2/gh/nhirschey/teaching/gh-pages?filepath={{fsdocs-source-basename}}.ipynb)&emsp;
@@ -32,16 +32,6 @@ open Plotly.NET
 open DiffSharp
 
 Environment.CurrentDirectory <- __SOURCE_DIRECTORY__
-
-(*** condition: ipynb ***)
-#if IPYNB
-// Set dotnet interactive formatter to plaintext
-Formatter.Register(fun (x:obj) (writer: TextWriter) -> fprintfn writer "%120A" x )
-Formatter.SetPreferredMimeTypesFor(typeof<obj>, "text/plain")
-// Make plotly graphs work with interactive plaintext formatter
-Formatter.SetPreferredMimeTypesFor(typeof<GenericChart.GenericChart>,"text/html")
-#endif // IPYNB
-
 
 (**
 # Portfolio Optimization
@@ -188,41 +178,21 @@ ff3
 (*** include-fsi-output***)
 
 (**
-Let's put our stocks in a map keyed by symbol
-*)
-
-let stockData =
-    standardInvestmentsExcess
-    |> List.groupBy(fun x -> x.Symbol)
-    |> Map
-
-(**
-Look at an one
-*)
-stockData["VBR"][..3]
-
-(**
 Let's create a function that calculates covariances
 for two securities using mutually overlapping data.
 *)
 
-let getCov xId yId (stockData: Map<string,StockData list>) =
-    let xRet = 
-        stockData[xId] 
-        |> List.map (fun x -> x.Date,x.Return) 
-        |> Map
-    let yRet = 
-        stockData[yId]
-        |> List.map (fun y -> y.Date, y.Return)
-        |> Map
-    let overlappingDates =
-        [ xRet.Keys |> set
-          yRet.Keys |> set]
-        |> Set.intersectMany
-    [ for date in overlappingDates do xRet[date], yRet[date]]
-    |> Seq.covOfPairs
+let getCov xId yId (stockData: StockData list) =
+    stockData
+    |> List.groupBy (fun x -> x.Date)
+    |> List.filter (fun (dt, xs) -> xs.Length = 2) // data for both stocks
+    |> List.map (fun (dt, xs) ->
+        let x = xs |> List.find (fun x -> x.Symbol = xId)
+        let y = xs |> List.find (fun x -> x.Symbol = yId)
+        x.Return, y.Return)
+    |> covOfPairs
 
-getCov "VBR" "VTI" stockData
+getCov "VBR" "VTI" standardInvestmentsExcess
 
 (**
 A covariance matrix.
@@ -241,7 +211,7 @@ covariances
 let covariances =
     [ for rowTick in tickers do 
         [ for colTick in tickers do
-            getCov rowTick colTick stockData ]]
+            getCov rowTick colTick standardInvestmentsExcess ]]
     |> dsharp.tensor
 
 (**
@@ -256,10 +226,17 @@ let means =
     |> vector
 *)
 (** *)
+let meansByTick =
+    standardInvestmentsExcess
+    |> List.groupBy (fun x -> x.Symbol)
+    |> List.map (fun (sym, xs) ->
+        let symAvg = xs |> List.averageBy (fun x -> x.Return)
+        sym, symAvg)
+    |> Map
+
 let means =
-    [ for ticker in tickers do 
-        stockData[ticker]
-        |> List.averageBy (fun x -> x.Return)]
+    // Make sure ticker avg returns are ordered by our ticker list
+    [ for ticker in tickers do meansByTick[ticker]]
     |> dsharp.tensor
 
 (**
@@ -338,11 +315,9 @@ Next, we'd like to get the symbol data grouped by date.
 *)
 
 let stockDataByDate =
-    stockData.Values
-    |> Seq.toList
-    |> List.collect id // combine all different StockData symbols into one list.
+    standardInvestmentsExcess
     |> List.groupBy(fun x -> x.Date) // group all symbols on the same date together.
-    |> List.sortBy fst // sort by the grouping variable, which here is Date.
+    |> List.sortBy (fun (dt, xs) -> dt) 
 
 (**
 Now if we look we do not have all the symbols on all the dates.
@@ -353,15 +328,13 @@ for VTI and BND trading recently.
 Compare the first month of data
 *)
 
-let firstMonth =
-    stockDataByDate 
-    |> List.head // first date group
-    |> snd // convert (date, StockData list) -> StockData list
+let (firstMonth, firstMonthDta) = stockDataByDate[0]
+
 // look at it
-firstMonth
+firstMonthDta
 (*** include-it ***)
 // How many stocks?
-firstMonth.Length
+firstMonthDta.Length
 (*** include-it ***)
 
 (**
@@ -685,7 +658,7 @@ let symStockBond = ["VTI";"BND"]
 let covStockBond =
     [ for x in symStockBond do
         [ for y in symStockBond do
-            getCov x y stockData ]]
+            getCov x y standardInvestmentsExcess ]]
     |> dsharp.tensor
 
 let meansStockBond = dsharp.tensor([ 0.055/12.0; 0.01/12.0])

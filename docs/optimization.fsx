@@ -14,19 +14,15 @@ index: 12
 #r "nuget: FSharp.Stats"
 #r "nuget: FSharp.Data"
 #r "nuget: DiffSharp-lite"
-
 #r "nuget: Plotly.NET, 3.*"
 #r "nuget: Plotly.NET.Interactive, 3.*"
-
-(** *)
-#load "Common.fsx"
 #r "nuget: Quotes.YahooFinance, 0.0.5"
+#r "nuget: NovaSBE.Finance"
 
 open System
 open FSharp.Data
-open Common
 open Quotes.YahooFinance
-
+open NovaSBE.Finance.French
 open FSharp.Stats
 open Plotly.NET
 open DiffSharp
@@ -82,7 +78,7 @@ type StockData =
 We get the Fama-French 3-Factor asset pricing model data.
 *)
 
-let ff3 = French.getFF3 Frequency.Monthly |> Array.toList
+let ff3 = getFF3 Frequency.Monthly |> Array.toList
 
 // Transform to a StockData record type.
 let ff3StockData =
@@ -108,7 +104,7 @@ let tickPrices =
     YahooFinance.History(
         tickers,
         startDate = DateTime(2010,1,1),
-        interval = Monthly)
+        interval = Interval.Monthly)
 
 tickPrices[..3]
 
@@ -185,11 +181,13 @@ for two securities using mutually overlapping data.
 let getCov xId yId (stockData: StockData list) =
     stockData
     |> List.groupBy (fun x -> x.Date)
-    |> List.filter (fun (dt, xs) -> xs.Length = 2) // data for both stocks
-    |> List.map (fun (dt, xs) ->
-        let x = xs |> List.find (fun x -> x.Symbol = xId)
-        let y = xs |> List.find (fun x -> x.Symbol = yId)
-        x.Return, y.Return)
+    |> List.choose (fun (dt, xs) ->
+        let x = xs |> List.tryFind (fun x -> x.Symbol = xId)
+        let y = xs |> List.tryFind (fun x -> x.Symbol = yId)
+        match x, y with
+        | Some x, Some y ->
+            Some (x.Return, y.Return)
+        | _ -> None )
     |> covOfPairs
 
 getCov "VBR" "VTI" standardInvestmentsExcess

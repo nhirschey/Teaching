@@ -178,19 +178,30 @@ Let's create a function that calculates covariances
 for two securities using mutually overlapping data.
 *)
 
-let getCov xId yId (stockData: StockData list) =
-    stockData
-    |> List.groupBy (fun x -> x.Date)
-    |> List.choose (fun (dt, xs) ->
-        let x = xs |> List.tryFind (fun x -> x.Symbol = xId)
-        let y = xs |> List.tryFind (fun x -> x.Symbol = yId)
-        match x, y with
-        | Some x, Some y ->
-            Some (x.Return, y.Return)
-        | _ -> None )
+/// Excess return by symbol
+let xrBySymbol =
+    standardInvestmentsExcess
+    |> List.groupBy (fun x -> x.Symbol)
+    |> Map
+
+xrBySymbol["VTI"][..3]
+
+(** Now the cov*)
+
+let getCov xId yId =
+    let xs = xrBySymbol[xId]
+    let ys = 
+        xrBySymbol[yId]
+        |> List.map (fun x -> x.Date, x)
+        |> Map
+    [ for x in xs do
+        if ys.ContainsKey x.Date then
+            x.Return, ys[x.Date].Return ]
     |> covOfPairs
 
-getCov "VBR" "VTI" standardInvestmentsExcess
+
+
+getCov "VBR" "VTI"
 
 (**
 A covariance matrix.
@@ -209,7 +220,7 @@ covariances
 let covariances =
     [ for rowTick in tickers do 
         [ for colTick in tickers do
-            getCov rowTick colTick standardInvestmentsExcess ]]
+            getCov rowTick colTick ]]
     |> dsharp.tensor
 
 (**
@@ -656,7 +667,7 @@ let symStockBond = ["VTI";"BND"]
 let covStockBond =
     [ for x in symStockBond do
         [ for y in symStockBond do
-            getCov x y standardInvestmentsExcess ]]
+            getCov x y ]]
     |> dsharp.tensor
 
 let meansStockBond = dsharp.tensor([ 0.055/12.0; 0.01/12.0])

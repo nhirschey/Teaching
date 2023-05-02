@@ -12,7 +12,7 @@ index: 12
 *)
 
 #r "nuget: FSharp.Stats"
-#r "nuget: FSharp.Data"
+#r "nuget: FSharp.Data,5.*"
 #r "nuget: DiffSharp-lite"
 #r "nuget: Plotly.NET, 3.*"
 #r "nuget: Plotly.NET.Interactive, 3.*"
@@ -28,6 +28,15 @@ open Plotly.NET
 open DiffSharp
 
 Environment.CurrentDirectory <- __SOURCE_DIRECTORY__
+
+(*** condition: ipynb ***)
+#if IPYNB
+Formatter.Register<Tensor>(
+    Action<_, _>(fun t (writer: IO.TextWriter) -> fprintfn writer "%120A" t),"text/plain")
+Formatter.Register<Tensor>(
+    Action<_, _>(fun t (writer: IO.TextWriter) -> fprintfn writer "%120A" t),"text/html")
+Formatter.SetPreferredMimeTypesFor(typeof<Tensor>, "text/plain")
+#endif // IPYNB
 
 (**
 # Portfolio Optimization
@@ -179,27 +188,23 @@ for two securities using mutually overlapping data.
 *)
 
 /// Excess return by symbol
-let xrBySymbol =
+let returnMap =
     standardInvestmentsExcess
-    |> List.groupBy (fun x -> x.Symbol)
+    |> List.map (fun x -> (x.Symbol, x.Date), x.Return)
     |> Map
 
-xrBySymbol["VTI"][..3]
+returnMap["VTI", DateTime(2015,12,1)]
 
 (** Now the cov*)
-
 let getCov xId yId =
-    let xs = xrBySymbol[xId]
-    let ys = 
-        xrBySymbol[yId]
-        |> List.map (fun x -> x.Date, x)
-        |> Map
+    let xs = 
+        standardInvestmentsExcess
+        |> List.filter (fun x -> x.Symbol = xId)
     [ for x in xs do
-        if ys.ContainsKey x.Date then
-            x.Return, ys[x.Date].Return ]
+        let yLookup = yId, x.Date
+        if returnMap.ContainsKey yLookup then
+            x.Return, returnMap[yLookup]]
     |> covOfPairs
-
-
 
 getCov "VBR" "VTI"
 
@@ -496,15 +501,10 @@ A function to accumulate returns.
 
 
 let cumulateReturns (xs: list<StockData>) =
-    let folder (prev: StockData) (current: StockData) =
-        let newReturn = prev.Return * (1.0+current.Return)
-        { current with Return = newReturn}
-    
-    match xs |> List.sortBy (fun x -> x.Date) with
-    | [] -> []
-    | h::t ->
-        ({ h with Return = 1.0+h.Return}, t) 
-        ||> List.scan folder
+    let mutable cr = 1.0
+    [ for x in xs do 
+        cr <- cr * (1.0 + x.Return)
+        { x with Return = cr } ]
     
 
 (**

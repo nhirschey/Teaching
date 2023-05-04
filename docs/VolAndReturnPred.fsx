@@ -307,5 +307,26 @@ let varBuyHold = buyHoldPeriod |> varBy (fun x -> x.Return)
 
 (avgBuyHold - (3.0/2.0) * varBuyHold)*252.0
 
+(** Now our managed portfolio. *)
+
+let avgReturn = result |> List.averageBy (fun x -> x.Return)
+let varResult = result |> varBy (fun x -> x.Return)
+
+(avgReturn - (3.0/2.0) * varResult)*252.0
 
 (** Why the difference? *)
+
+(** Try scaling managed to full sample variance. *)
+let c = sqrt varBuyHold / sqrt varResult
+(c * avgReturn - (3.0/2.0) * c ** 2.0 * varResult)*252.0
+
+(** Another way of seeing it.*)
+
+let mvu gamma mu sigma =
+    mu - 0.5 * gamma * sigma ** 2.0
+
+mvu 3.0 (avgBuyHold * 252.0) (sqrt (varBuyHold * 252.0))
+
+let w_star = avgBuyHold / (3.0 * varBuyHold)
+
+mvu 3.0 (w_star * avgBuyHold * 252.0) (sqrt (w_star ** 2.0 * varBuyHold * 252.0))

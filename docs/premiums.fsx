@@ -172,7 +172,6 @@ Compare predictions
               Name = "Historical")]
 |> Chart.combine
 
-
 (**
 Accuracy
 *)
@@ -223,3 +222,9 @@ let rmses =
              Name = "Hist")]
 |> Chart.combine
 
+(** The difference. *)
+rmses
+|> Array.map (fun x ->
+    x.Month, 12.0*(x.mseCAPE - x.mseHist))
+|> Chart.Line
+|> Chart.withTitle("CAPE RMSE - Hist Avg. RMSE")

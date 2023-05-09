@@ -10,7 +10,7 @@ index: 14
 [![Script](img/badge-script.svg)]({{root}}/{{fsdocs-source-basename}}.fsx)&emsp;
 [![Notebook](img/badge-notebook.svg)]({{root}}/{{fsdocs-source-basename}}.ipynb)
 
-# Predictability
+# Equity Premium usings CAPE
 
 *)
 
@@ -195,8 +195,8 @@ let accuracyComps =
 accuracyComps[..3]
 
 
-(** mean squared errors *)
-(***hide***)
+(** root mean squared errors *)
+
 let rmse xy = 
     xy 
     |> Array.averageBy (fun (x,y) -> (x - y) ** 2.0)

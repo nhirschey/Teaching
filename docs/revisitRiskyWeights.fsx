@@ -226,9 +226,15 @@ let managedMVUtility gamma (xs: seq<ManagedObs>) =
     let stDev = xs |> annualizedStDev
     mvUtility gamma avg stDev
 
-printfn $"Buy and Hold: {managedMVUtility 3.0 buyHold}"
-printfn $"Unnormalized Managed Vol: {managedMVUtility 3.0 simpleManaged}"
-printfn $"Normalized Managed Vol: {managedMVUtility 3.0 simpleManaged2}"
+let portSummary name port =
+    printfn $"_________\n{name}\nNumber of months: {Seq.length port}"
+    printfn $"Sharpe: {port |> sharpe}"
+    printfn $"MV Utility: {managedMVUtility 3.0 port}"
+    printfn $"annaluzed stdev: {port |> annualizedStDev}"
+
+portSummary "Buy and Hold" buyHold
+portSummary "Unnormalized Managed Vol" simpleManaged
+portSummary "Normalized Managed Vol" simpleManaged2
 
 (**
 Mean-variance optimal weight.
@@ -252,11 +258,8 @@ let managedStaticMuSigma =
             RiskyWeight = w_staticMuSigma
             Return = w_staticMuSigma * x.Return })
 
-printfn $"Managed, known mu and sigma\nSharpe: {managedStaticMuSigma |> sharpe}"
-printfn $"MV Utility: {managedMVUtility 3.0 managedStaticMuSigma}"
-printfn "\n--------\n"
-printfn $"Managed, base case\nSharpe: {simpleManaged2 |> sharpe}"
-printfn $"MV Utility: {managedMVUtility 3.0 simpleManaged2}"
+portSummary "Managed, known mu and sigma" managedStaticMuSigma
+portSummary "Managed, base case" simpleManaged2
 
 (**
 Let's now try with a static mean return estimate, but we'll use the rolling variance estimate.
@@ -284,17 +287,14 @@ let managedMVPort gamma muEstimates varEstimates =
 let muEstFull = [ for x in ff3 do x.Date, buyHoldAvg / 12.0 ] |> Map
 let sigmaEstFull = [ for x in ff3 do x.Date, buyHoldStDev / sqrt 12.0 ] |> Map
 
-printfn $"Managed, known mu and sigma\nSharpe: {managedStaticMuSigma |> sharpe}"
-printfn $"\nShould equal {managedMVPort 3.0 muEstFull sigmaEstFull |> sharpe}"
+portSummary "Managed, static mu and static sigma" managedStaticMuSigma
+portSummary "Managed, static mu and rolling sigma" (managedMVPort 3.0 muEstFull sigmaEstFull)
 
 (** Now actual static mu but rolling sigma estimates. *)
 let managedStaticMuRollingSigma = managedMVPort 3.0 muEstFull mmVarPred
 
-printfn $"Managed, static mu and rolling sigma\nSharpe: {managedStaticMuRollingSigma |> sharpe}"
-printfn $"MV Utility: {managedMVUtility 3.0 managedStaticMuRollingSigma}"
-printfn "\n--------\n"
-printfn $"Managed base case\nSharpe: {simpleManaged2 |> sharpe}"
-printfn $"MV Utility: {managedMVUtility 3.0 simpleManaged2}"
+portSummary "Managd, static mu and rolling sigma" managedStaticMuRollingSigma
+portSummary "Managed, base case" simpleManaged2
 
 (** How volatile is that portfolio?*)
 let sigmaStaticMuRollingSigma = managedStaticMuRollingSigma |> annualizedStDev
@@ -310,11 +310,8 @@ let managedStaticMuRollingSigma2 =
             RiskyWeight = x.RiskyWeight * c
             Return = x.Return * c })
 
-printfn $"Managed normalized, static mu and rolling sigma\nSharpe: {managedStaticMuRollingSigma2 |> sharpe}"
-printfn $"MV Utility: {managedMVUtility 3.0 managedStaticMuRollingSigma2}"
-printfn "\n--------\n"
-printfn $"Managed base case\nSharpe: {simpleManaged2 |> sharpe}"
-printfn $"MV Utility: {managedMVUtility 3.0 simpleManaged2}"
+portSummary "Managed, static mu and rolling sigma" managedStaticMuRollingSigma2
+portSummary "Managed base case" simpleManaged2
 
 (** Why is the ex-post rescaling so critical to the utility calculation?*)
 let managedHiVolDays =
@@ -354,11 +351,6 @@ let managedMVPortLimited gamma muEstimates varEstimates =
 
 let managedStaticMuRollingSigma3 = managedMVPortLimited 3.0 muEstFull mmVarPred
 
-let portSummary name port =
-    printfn $"_________\n{name}\nNumber of months: {Seq.length port}"
-    printfn $"Sharpe: {port |> sharpe}"
-    printfn $"MV Utility: {managedMVUtility 3.0 port}"
-    printfn $"annaluzed stdev: {port |> annualizedStDev}"
 
 portSummary "Managed, static mu and rolling sigma" managedStaticMuRollingSigma3
 portSummary "Managed base case" simpleManaged2
@@ -374,6 +366,7 @@ let muExpandingEstimate =
 
 muExpandingEstimate
 |> Chart.Line
+
 
 (** How big of a burn-in period to use? Let's just use post-war period.*)
 let muExpandingMap = muExpandingEstimate |> Map
@@ -436,12 +429,30 @@ let expRealizedVol (width: int) (lambda: float) (data: array<ReturnObs>) =
     |> Array.rev
 
 let expVarPred =
-    expRealizedVol 500 0.94 (ff3Daily |> Array.map (fun x -> { Date = x.Date; Return = x.MktRf }))
+    ff3Daily
+    |> Array.map (fun x -> { Date = x.Date; Return = x.MktRf })
+    |> expRealizedVol 500 0.94 
     |> Array.groupBy (fun x -> DateTime(x.Date.Year, x.Date.Month, 1))
     |> Array.map (fun (month, xs) ->
         let last = xs |> Array.sortBy (fun x -> x.Date) |> Array.last
         month.AddMonths(1), 22.0 * last.PredictedVol ** 2.0)
     |> Map
+
+(**
+Compare vol accuracies
+*)
+let checkVols =
+    [| for dt in expVarPred.Keys |> Seq.filter (fun x -> x >= DateTime(1945,1,1) ) do
+        if expVarPred.ContainsKey (dt.AddMonths(1)) then
+           {| Date = dt
+              ExpVar = expVarPred[dt]
+              Var22d = mmVarPred[dt]
+              Actual = mmVarPred[dt.AddMonths(1)]|}|]
+
+(** Exponential vol*)
+Ols("Actual~ExpVar", checkVols).fit().summary()
+(** Rolling vol*)
+Ols("Actual~Var22d", checkVols).fit().summary()
 
 (** Compare ports*)
 let managedExpVar = 
@@ -451,6 +462,4 @@ let managedExpVar =
 portSummary "Managed, rolling mu and exp. vol" managedExpVar
 portSummary "Managed, rolling mu and rolling vol" managedEstAll
 portSummary "Buy and hold" buyHold1945
-
-
 

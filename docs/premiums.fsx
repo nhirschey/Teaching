@@ -188,12 +188,15 @@ let accuracyComps =
     [| for i = cape1927Index to capePredictor.Length-1 do
         let month = capePredictor[i].Month 
         {  Month = month
-           Actual = capePredictor[i].R 
-           PredCAPE = muCAPEMap[month]
-           PredHist = muHistoricalMap[month] }|]
+           Actual = 12.0*capePredictor[i].R 
+           PredCAPE = 12.0*muCAPEMap[month]
+           PredHist = 12.0*muHistoricalMap[month] }|]
 
-accuracyComps[..3]
-
+accuracyComps
+|> Array.filter (fun x ->
+    x.Month = DateTime(1929,1,1) ||
+    x.Month = DateTime(2000,1,1) ||
+    x.Month = DateTime(2022,12,1))
 
 (** root mean squared errors *)
 
@@ -222,9 +225,10 @@ let rmses =
              Name = "Hist")]
 |> Chart.combine
 
-(** The difference. *)
+(** The difference, much easier to interpret. *)
 rmses
 |> Array.map (fun x ->
-    x.Month, 12.0*(x.mseCAPE - x.mseHist))
+    x.Month, (x.mseHist - x.mseCAPE))
 |> Chart.Line
-|> Chart.withTitle("CAPE RMSE - Hist Avg. RMSE")
+|> Chart.withTitle("Hist Avg. RMSE - CAPE RMSE")
+|> Chart.withYAxisStyle(TitleText="Positive means that CAPE has lower error")

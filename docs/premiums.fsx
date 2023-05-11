@@ -163,6 +163,20 @@ let capePrediction (xs: array<Predictors>) =
 
 capePrediction capePredictor[..100]
 
+(** Restricted predictor*)
+let capePredictionRestricted (xs: array<Predictors>) =
+    let mdl = Ols("R~CAPE",xs[..xs.Length-2]).fit()
+    let lastObs = xs |> Array.last
+    let slope = min 0.0 mdl.coefs["CAPE"]
+    let prediction = max 0.0 (mdl.coefs["Intercept"] + slope * lastObs.CAPE)
+    { Month = lastObs.Month 
+      R = prediction }
+
+(** Restricted vs. unrestricted predictions*)
+let index1999 = capePredictor |> Array.findIndex (fun x -> x.Month = DateTime(1999,1,1))
+printfn $"Unrestricted:\n{capePrediction capePredictor[..index1999]}"
+printfn $"Restricted:\n{capePredictionRestricted capePredictor[..index1999]}"
+
 (** the CAPE predictons. *)
 let cape1927Index =
     capePredictor

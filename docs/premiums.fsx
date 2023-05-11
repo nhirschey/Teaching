@@ -65,19 +65,20 @@ let shiller =
     |> Seq.toList
     |> Seq.takeWhile (fun x -> 
         not (isNull x.Date) &&
-        not (isNull x.D) &&
-        not (isNull x.CAPE))
+        not (isNull x.D) && 
+        not (isNull x.CAPE)
+        )
     |> Seq.pairwise
-    |> Seq.choose (fun (x0, x1) ->
-        match x1.CAPE with
-        | "NA" -> None
-        | cape -> 
-            let result = 
-                { Month = shillerDate x1
-                  CAPE = float cape 
-                  Ret = (float x1.P + float x1.D / 12.0) / float x0.P - 1.0}
-            Some (result.Month, result))
-    |> Map    
+    |> Seq.map (fun (x0, x1) ->
+        let cape = 
+            match x1.CAPE with
+            | "NA" -> nan
+            | cape -> cape |> float
+        shillerDate x1,
+        { Month = shillerDate x1
+          CAPE = cape 
+          Ret = (float x1.P + float x1.D / 12.0) / float x0.P - 1.0})
+    |> Map     
 
 
 /// Goyal and Welch Monthly Excel worksheet
@@ -104,6 +105,25 @@ let capePredictor=
           CAPE = shiller[month.AddMonths(-1)].CAPE 
           R = r })
     |> Seq.toArray
+
+let crspRet = gwXlMd |> Seq.map (fun x -> parseMonth x.Yyyymm, x) |> Map
+
+type ReturnPrediction = { Month: DateTime; R: float }
+let muHistorical =
+    let mutable acc = 0.0
+    let mutable n = 0.0
+    [| while dt <= DateTime(2022,12,1) do 
+        printfn $"{dt}"
+        if dt < DateTime(1927,1,1) then 
+          acc <- acc + shiller[dt].Ret - crspRet[dt].Rfree
+        else
+          acc <- acc + crspRet[dt].CRSP_SPvw - crspRet[dt].Rfree
+        n <- n + 1.0
+        dt <- dt.AddMonths(1)
+        { Month = dt.AddMonths(1)
+          R = acc / n}
+    |]
+let muHistoricalMap = muHistorical |> Seq.map (fun x -> x.Month, x.R) |> Map
 
 (** Might have seen a chart like this before. Looks like CAPE is a good predictor. *)
 capePredictor
@@ -134,7 +154,7 @@ Ols("R~CAPE",
 (**
 We can do rolling regressions.
 *)
-type ReturnPrediction = { Month: DateTime; R: float }
+
 let capePrediction (xs: array<Predictors>) =
     let mdl = Ols("R~CAPE",xs[..xs.Length-2]).fit()
     let lastObs = xs |> Array.last
@@ -154,13 +174,6 @@ let muCAPE =
 
 (** Historical sample average. *)
 
-let muHistorical =
-    let mutable acc = 0.0
-    [| for i = 0 to capePredictor.Length-1 do 
-        acc <- acc + capePredictor[i].R 
-        { Month = capePredictor[i].Month.AddMonths(1)
-          R = acc / (float i + 1.0)} |]
-
 
 (** 
 Compare predictions
@@ -177,20 +190,19 @@ Accuracy
 *)
 
 let muCAPEMap = muCAPE |> Array.map (fun x -> x.Month, x.R) |> Map
-let muHistoricalMap = muHistorical |> Array.map (fun x -> x.Month, x.R) |> Map
 
 type PredictionCombo =
     { Month: DateTime 
       Actual: float 
-      PredCAPE: float 
-      PredHist: float }
+      PredRegression: float 
+      PredHistAvg: float }
 let accuracyComps =
     [| for i = cape1927Index to capePredictor.Length-1 do
         let month = capePredictor[i].Month 
         {  Month = month
            Actual = 12.0*capePredictor[i].R 
-           PredCAPE = 12.0*muCAPEMap[month]
-           PredHist = 12.0*muHistoricalMap[month] }|]
+           PredRegression = 12.0*muCAPEMap[month]
+           PredHistAvg = 12.0*muHistoricalMap[month] }|]
 
 accuracyComps
 |> Array.filter (fun x ->
@@ -209,11 +221,11 @@ let rmses =
     [| for i = 1 to accuracyComps.Length-1 do 
         let mseCAPE = 
             accuracyComps[..i]
-            |> Array.map (fun x -> x.Actual, x.PredCAPE)
+            |> Array.map (fun x -> x.Actual, x.PredRegression)
             |> rmse 
         let mseHist =
             accuracyComps[..i]
-            |> Array.map (fun x -> x.Actual, x.PredHist)
+            |> Array.map (fun x -> x.Actual, x.PredHistAvg)
             |> rmse
         {| Month = accuracyComps[i].Month 
            mseCAPE = mseCAPE
@@ -232,3 +244,24 @@ rmses
 |> Chart.Line
 |> Chart.withTitle("Hist Avg. RMSE - CAPE RMSE")
 |> Chart.withYAxisStyle(TitleText="Positive means that CAPE has lower error")
+
+(** OOS R2*)
+let oosR2 (xs: seq<PredictionCombo>) =
+    let sseHist = xs |> Seq.sumBy (fun x -> (x.Actual - x.PredHistAvg) ** 2.0)
+    let sseRegression = xs |> Seq.sumBy (fun x -> (x.Actual - x.PredRegression) ** 2.0)
+    1.0 - sseRegression / sseHist
+
+(** Pre 2005 *)
+accuracyComps
+|> Array.filter (fun x -> x.Month <= DateTime(2005,12,1))
+|> oosR2
+
+(** Plot of OOS R2*)
+[| for i = 1 to accuracyComps.Length-1 do 
+    accuracyComps[i].Month,
+    accuracyComps[..i] |> oosR2 |]
+|> Array.filter (fun (dt, xs) -> dt <= DateTime(2005,12,1))
+|> Chart.Line
+|> Chart.withYAxis(LayoutObjects.LinearAxis.init(TickFormat = ".1%",TickVals = [| -0.01;0.0;0.01;0.02|]))
+|> Chart.withYAxisStyle(MinMax = (-0.01,0.02))
+|> Chart.withSize(Width=1000,Height=500)

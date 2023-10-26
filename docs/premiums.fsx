@@ -112,8 +112,8 @@ type ReturnPrediction = { Month: DateTime; R: float }
 let muHistorical =
     let mutable acc = 0.0
     let mutable n = 0.0
+    let mutable dt = shiller.Keys |> Seq.min
     [| while dt <= DateTime(2022,12,1) do 
-        printfn $"{dt}"
         if dt < DateTime(1927,1,1) then 
           acc <- acc + shiller[dt].Ret - crspRet[dt].Rfree
         else

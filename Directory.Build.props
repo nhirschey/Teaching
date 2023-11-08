@@ -2,17 +2,27 @@
   <PropertyGroup>
     <Description>
       The package is a collection of of files that contain Data Analytics for Finance materials
-      and exercises which really on F# programming language. 
+      and exercises which rely on F# programming language. 
     </Description>
     <Authors>Nicholas Hirschey; Davide Costa</Authors>
-    <Copyright>Copyright 2021</Copyright>
+    <Copyright>Copyright 2023</Copyright>
+    <ChangelogFile>$(MSBuildThisFileDirectory)CHANGELOG.md</ChangelogFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <FsDocsLicenseLink>https://github.com/nhirschey/Teaching/blob/main/LICENSE.md</FsDocsLicenseLink>
+    <FsDocsReleaseNotesLink>https://github.com/nhirschey/Teaching/blob/main/CHANGELOG.md</FsDocsReleaseNotesLink>
     <RepositoryUrl>https://github.com/nhirschey/Teaching</RepositoryUrl>
-    <PackageProjectUrl>https://nhirschey.github.io/Teaching/</PackageProjectUrl>
-    <FsDocsLicenseLink>"https://github.com/nhirschey/Teaching/blob/main/LICENSE.md"</FsDocsLicenseLink>
-    <FsDocsRepositoryLink>"https://github.com/nhirschey/Teaching"</FsDocsRepositoryLink>
-    <PackageIconUrl></PackageIconUrl>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(IsPackable)' == 'true'">
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <FsDocsLogoSource>images/logo.png</FsDocsLogoSource>
+    <FsDocsFaviconSource>images/logo.png</FsDocsFaviconSource>
   </PropertyGroup>
 </Project>
 

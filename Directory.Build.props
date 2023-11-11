@@ -21,8 +21,8 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <FsDocsLogoSource>images/logo.png</FsDocsLogoSource>
-    <FsDocsFaviconSource>images/logo.png</FsDocsFaviconSource>
+    <FsDocsLogoSource>docs/img/logo.png</FsDocsLogoSource>
+    <FsDocsFaviconSource>docs/img/logo.png</FsDocsFaviconSource>
   </PropertyGroup>
 </Project>
 

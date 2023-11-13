@@ -1,0 +1,10 @@
+/* GitHub Style */
+blockquote  {
+    border-left: .25em solid #dfe2e5;
+    margin-left: 1.5em;
+    padding: 0 1em;
+    border-radius: unset;
+    color: var(--textcolor);
+    background-color: var(--background);
+    font-family: var(--system-font);
+}

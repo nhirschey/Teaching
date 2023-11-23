@@ -10,3 +10,4 @@ data-cache
 docs/*.csv
 docs/data
 docs/project/data
+*/*shiller_data.xls

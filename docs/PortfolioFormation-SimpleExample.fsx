@@ -26,7 +26,7 @@ samplePeriod
 Now let's dig in. This is a *relatively* basic version of a strategy to build intuition with what we're doing. It is simpler than working with real data. But we will next move to real data.
 *)
 
-#r "nuget: FSharp.Stats"
+#r "nuget: FSharp.Stats, 0.5.0"
 open FSharp.Stats
 
 (**

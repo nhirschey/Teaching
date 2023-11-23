@@ -19,9 +19,9 @@ Last time we looked at volatility managed portfolios, but we hard coded the vola
 *)
 
 
-#r "nuget: FSharp.Data"
-#r "nuget: NovaSBE.Finance"
-#r "nuget: FSharp.Stats"
+#r "nuget: FSharp.Data, 5.0.2"
+#r "nuget: NovaSBE.Finance, 0.4.0"
+#r "nuget: FSharp.Stats, 0.5.0"
 #r "nuget: Plotly.NET, 3.*"
 #r "nuget: Plotly.NET.Interactive, 3.*"
 

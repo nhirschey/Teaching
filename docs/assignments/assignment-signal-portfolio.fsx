@@ -40,9 +40,9 @@ open FsUnitTyped
 For the assignment
 *)
 
-#r "nuget:FSharp.Data"
-#r "nuget: FSharp.Stats"
-#r "nuget: NovaSBE.Finance, 0.2.0-beta1"
+#r "nuget: FSharp.Data, 5.0.2"
+#r "nuget: FSharp.Stats, 0.5.0"
+#r "nuget: NovaSBE.Finance, 0.4.0"
 #r "nuget: MathNet.Numerics"
 #r "nuget: MathNet.Numerics.FSharp"
 #r "nuget: Plotly.NET, 3.*"

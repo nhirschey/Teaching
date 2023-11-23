@@ -495,7 +495,7 @@ let stddev xs =
 But it is also convenient to use the [FSharp.Stats](https://fslab.org/FSharp.Stats/)
 *)
 
-#r "nuget: FSharp.Stats"
+#r "nuget: FSharp.Stats, 0.5.0"
 
 open FSharp.Stats
 

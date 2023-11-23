@@ -19,12 +19,11 @@ to many programming languages to make learning easier.
 
 *)
 
-#r "nuget: FSharp.Stats"
+#r "nuget: FSharp.Stats, 0.5.0"
 #r "nuget: Plotly.NET, 3.*"
 #r "nuget: Plotly.NET.Interactive, 3.*"
 
 open FSharp.Stats
-open FSharp.Stats.Distributions.ContinuousDistribution
 
 open Plotly.NET
 
@@ -33,7 +32,7 @@ From 1/1871-1/2023, the US market return was annualized
 7.5% with a 14% standard deviation (Robert Schiller data). 
 *)
 
-let rnorm = normal 0.075 0.14
+let rnorm = Distributions.Continuous.Normal.Init 0.075 0.14
 
 for i = 0 to 5 do
     printfn $"{rnorm.Sample()}"

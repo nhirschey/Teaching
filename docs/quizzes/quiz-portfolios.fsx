@@ -281,7 +281,7 @@ let rets = [ 0.1; -0.4; 0.2; 0.15; -0.03 ]
 (*** include-it-raw:preDetails ***)
 (*** define: AnnualizedSR, define-output: AnnualizedSR ***)
 
-#r "nuget: FSharp.Stats"
+#r "nuget: FSharp.Stats, 0.5.0"
 open FSharp.Stats
 
 let retsAvg = rets |> List.average

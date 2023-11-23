@@ -50,8 +50,8 @@ let H3 = makeNumberedHeading "h3"
 ### Reference needed nuget packages and open namespaces
 *)
 
-#r "nuget:FSharp.Data"
-#r "nuget: FSharp.Stats"
+#r "nuget: FSharp.Data, 5.0.2"
+#r "nuget: FSharp.Stats, 0.5.0"
 #r "nuget: Plotly.NET, 3.*"
 #r "nuget: Plotly.NET.Interactive, 3.*"
 

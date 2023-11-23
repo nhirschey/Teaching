@@ -32,8 +32,8 @@ All work that you submit should be your own. Make use of the course resources an
 Load libraries.
 *)
 
-#r "nuget: FSharp.Data"
-#r "nuget: FSharp.Stats"
+#r "nuget: FSharp.Data, 5.0.2"
+#r "nuget: FSharp.Stats, 0.5.0"
 #r "nuget: Plotly.NET, 3.*"
 #r "nuget: Plotly.NET.Interactive, 3.*"
 #r "nuget: MathNet.Numerics"

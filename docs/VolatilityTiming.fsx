@@ -24,8 +24,8 @@ As a start, let's acquire a long daily time series on aggregate US market return
 
 *)
 
-#r "nuget: FSharp.Data"
-#r "nuget: NovaSBE.Finance"
+#r "nuget: FSharp.Data, 5.0.2"
+#r "nuget: NovaSBE.Finance, 0.4.0"
 open System
 open FSharp.Data
 open NovaSBE.Finance.French
@@ -47,7 +47,7 @@ ff3 |> List.take 5
 One thing that can help us manage volatility is the fact that volatility tends to be somewhat persistent. By this we mean that if our risky asset is volatile today, then it is likely to be volatile tomorrow. We can observe this by plotting monthly volatility as we do below. It also means that we can use recent past volatility to form estimates of future volatility.
 *)
 
-#r "nuget: FSharp.Stats"
+#r "nuget: FSharp.Stats, 0.5.0"
 #r "nuget: Plotly.NET, 3.*"
 #r "nuget: Plotly.NET.Interactive, 3.*"
 
@@ -76,9 +76,11 @@ testMonth
 let testMonthGroup, testMonthObs = testMonth
 (** testMonthGroup *)
 testMonthGroup
+(***include-it***)
 
 (** testMonthXS *)
-testMonthObs
+testMonthObs |> List.take 3
+(***include-it***)
 
 (** Test month return standard deviation. *)
 testMonthObs

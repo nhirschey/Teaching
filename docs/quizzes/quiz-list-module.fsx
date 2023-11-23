@@ -43,7 +43,7 @@ There are similar functions for [arrays](https://fsharp.github.io/fsharp-core-do
 We're going to use the following data in the questions
 *)
 
-#r "nuget: FSharp.Stats"
+#r "nuget: FSharp.Stats, 0.5.0"
 
 open System
 open FSharp.Stats
@@ -53,7 +53,7 @@ type ValueOb = { Symbol : string; Date : DateTime; Value : float }
 
 let seed = 1
 Random.SetSampleGenerator(Random.RandBasic(seed))   
-let normal = Distributions.ContinuousDistribution.normal 0.0 0.1
+let normal = Distributions.Continuous.Normal.Init 0.0 0.1
 
 let returns =
     [ 

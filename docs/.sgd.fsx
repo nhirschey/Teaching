@@ -11,8 +11,8 @@ index: 1000
 [![Notebook](img/badge-notebook.svg)]({{root}}/{{fsdocs-source-basename}}.ipynb)
 *)
 
-#r "nuget: FSharp.Stats"
-#r "nuget: FSharp.Data"
+#r "nuget: FSharp.Stats, 0.5.0"
+#r "nuget: FSharp.Data, 5.0.2"
 #r "nuget: DiffSharp-lite"
 #r "nuget: Quotes.YahooFinance, 0.0.5"
 

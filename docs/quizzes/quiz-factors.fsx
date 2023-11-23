@@ -232,7 +232,7 @@ of a factor model that uses SPY as the only risk factor?
 (*** include-it-raw:preDetails ***)
 (*** define: IO, define-output: IO ***)
 
-#r "nuget: FSharp.Stats"
+#r "nuget: FSharp.Stats, 0.5.0"
 open FSharp.Stats
 
 let sdHedgeReturns =

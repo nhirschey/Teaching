@@ -14,7 +14,7 @@ index: 4
 
 *)
 
-#r "nuget: FSharp.Stats"
+#r "nuget: FSharp.Stats, 0.5.0"
 #r "nuget: Plotly.NET, 3.*"
 #r "nuget: Plotly.NET.Interactive, 3.*"
 
@@ -22,7 +22,6 @@ index: 4
 open System
 
 open FSharp.Stats
-open FSharp.Stats.Distributions.ContinuousDistribution
 
 open Plotly.NET
 
@@ -188,7 +187,7 @@ let seed = 99
 Random.SetSampleGenerator(Random.RandThreadSafe(seed))
 
 // Let's start with this sample of returns
-let rnorm1 = normal 0.01 1.0
+let rnorm1 = Distributions.Continuous.Normal.Init 0.01 1.0
 
 let careerLength = 30
 let draws =
@@ -213,17 +212,17 @@ let investmentResult (riskyWeight: float) (returns: float list)  =
     wealth
 
 investmentResult  1.0 [0.1; 0.1; 0.1]
-(***include-fsi-result***)
+(***include-it***)
 
 investmentResult  ww [0.1; 0.1; 0.1]
-(***include-fsi-result***)
+(***include-it***)
 
 (** Now do it for all our draws.*)
 let myResult =
     [ for draw in draws do investmentResult  ww draw]
 
 myResult
-(***include-fsi-output***)
+(***include-it***)
 
 (** Now let's calculate some statistics. *)
 
@@ -252,7 +251,7 @@ let calcSummary (gamma: float) (nPeriods: int) (wealths: list<float>) =
         let lostMoney = wealths |> List.filter (fun w -> w < 1.0)
         float lostMoney.Length / float wealths.Length  
       }
-
+(** *)
 calcSummary gamma careerLength myResult
 (***include-fsi-output***)
 
@@ -265,6 +264,7 @@ let gammaRecord (mu: float) (sigma: float) (draws: list<list<float>>) (gamma: fl
     calcSummary gamma careerLength myResult
 
 gammaRecord 0.01 1.0 draws 3.0
+(***include-it***)
 
 (** Now do it for many gammas.*)
 let ruleResults =
@@ -299,7 +299,7 @@ A couple takeaways:
 
 let monthlyMu = 0.075/12.0
 let monthlySigma = 0.14/sqrt 12.0
-let rnorm2 = normal monthlyMu monthlySigma
+let rnorm2 = Distributions.Continuous.Normal.Init monthlyMu monthlySigma
 let investmentCareer = 30
 let drawsRealistic =
     [ for draw in [1 .. 1000] do 
@@ -310,3 +310,7 @@ let realisticResults =
     let gammas = [0.75 .. 0.25 .. 3.0]
     [ for gamma in gammas do
         gammaRecord monthlyMu monthlySigma drawsRealistic gamma ]
+
+(** The results:*)
+realisticResults
+(***include-fsi-output***)

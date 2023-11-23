@@ -18,16 +18,15 @@ index: 8
 ## Loading Fama and French data
 *)
 
-#r "nuget: FSharp.Data"
-#r "nuget: NovaSBE.Finance"
-#r "nuget: FSharp.Stats"
+#r "nuget: FSharp.Data, 5.0.2"
+#r "nuget: NovaSBE.Finance, 0.4.0"
+#r "nuget: FSharp.Stats, 0.5.0"
 #r "nuget: Plotly.NET, 3.*"
 #r "nuget: Plotly.NET.Interactive, 3.*"
 
 open System
 open FSharp.Data
 open FSharp.Stats
-open FSharp.Stats.Distributions.ContinuousDistribution
 open Plotly.NET
 open NovaSBE.Finance.French
 
@@ -55,7 +54,7 @@ let seed = 99
 Random.SetSampleGenerator(Random.RandThreadSafe(seed))
 
 // Let's start with this sample of returns
-let rnorm =  normal 0.01 1.0
+let rnorm =  Distributions.Continuous.Normal.Init 0.01 1.0
 let testData = 
     [| for i=1 to 100 do 
         { Date = DateTime(2010, 1, 1).AddDays(float i); 

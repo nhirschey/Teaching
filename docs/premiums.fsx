@@ -14,9 +14,9 @@ index: 14
 
 *)
 
-#r "nuget: NovaSBE.Finance,0.3.*-*"
-#r "nuget: FSharp.Stats,0.4.*"
-#r "nuget: FSharp.Data,5.*-*"
+#r "nuget: NovaSBE.Finance, 0.4.0"
+#r "nuget: FSharp.Stats, 0.5.0"
+#r "nuget: FSharp.Data, 5.0.2"
 #r "nuget: Plotly.NET, 3.*"
 #r "nuget: Plotly.NET.Interactive, 3.*"
 #r "nuget: ExcelProvider,2.*"

@@ -27,8 +27,8 @@ Objectives:
 
 *)
 
-#r "nuget: NovaSBE.Finance,0.3.*-*"
-#r "nuget: FSharp.Stats,0.4.*"
+#r "nuget: NovaSBE.Finance, 0.4.0"
+#r "nuget: FSharp.Stats, 0.5.0"
 #r "nuget: ExcelProvider, 2.0.0"
 #r "nuget: Plotly.NET, 3.*"
 #r "nuget: Plotly.NET.Interactive, 3.*"

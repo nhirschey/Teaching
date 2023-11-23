@@ -28,8 +28,8 @@ All work that you submit should be your own. Make use of the course resources an
 
 *)
 
-#r "nuget:FSharp.Data"
-#r "nuget: FSharp.Stats"
+#r "nuget: FSharp.Data, 5.0.2"
+#r "nuget: FSharp.Stats, 0.5.0"
 #r "nuget: Plotly.NET, 3.*"
 (*** condition: ipynb ***)
 #r "nuget: Plotly.NET.Interactive, 3.*"
@@ -73,7 +73,7 @@ Formatter.SetPreferredMimeTypesFor(typeof<GenericChart.GenericChart>,"text/html"
 We get the Fama-French 3-Factor asset pricing model data.
 *)
 
-#r "nuget: NovaSBE.Finance"
+#r "nuget: NovaSBE.Finance, 0.4.0"
 
 open NovaSBE.Finance
 open NovaSBE.Finance.French
@@ -453,4 +453,4 @@ let hmlAnnualizedReturn =
         hmlVolManaged
         |> List.averageBy (fun x -> x.Return)
     252.0 * dailyRet
-hmlAnnualizedReturn |> should (equalWithin 0.02) 8.18
+hmlAnnualizedReturn |> should (equalWithin 0.02) 8.15

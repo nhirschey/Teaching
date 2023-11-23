@@ -208,7 +208,7 @@ let signals =
 
 (**
 *)
-#r "nuget:FSharp.Data"
+#r "nuget: FSharp.Data, 5.0.2"
 
 open FSharp.Data
 [<Literal>]

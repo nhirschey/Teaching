@@ -19,9 +19,9 @@ index: 7
 *)
 
 
-#r "nuget: FSharp.Data"
-#r "nuget: NovaSBE.Finance"
-#r "nuget: FSharp.Stats"
+#r "nuget: FSharp.Data, 5.0.2"
+#r "nuget: NovaSBE.Finance, 0.4.0"
+#r "nuget: FSharp.Stats, 0.5.0"
 #r "nuget: Plotly.NET, 3.*"
 #r "nuget: Plotly.NET.Interactive, 3.*"
 
@@ -309,16 +309,16 @@ let varBuyHold = buyHoldPeriod |> varBy (fun x -> x.Return)
 
 (** Now our managed portfolio. *)
 
-let avgReturn = result |> List.averageBy (fun x -> x.Return)
-let varResult = result |> varBy (fun x -> x.Return)
+let avgManagedReturn = result |> List.averageBy (fun x -> x.Return)
+let varManagedResult = result |> varBy (fun x -> x.Return)
 
-(avgReturn - (3.0/2.0) * varResult)*252.0
+(avgManagedReturn - (3.0/2.0) * varManagedResult)*252.0
 
 (** Why the difference? *)
 
 (** Try scaling managed to full sample variance. *)
-let c = sqrt varBuyHold / sqrt varResult
-(c * avgReturn - (3.0/2.0) * c ** 2.0 * varResult)*252.0
+let c = sqrt varBuyHold / sqrt varManagedResult
+(c * avgManagedReturn - (3.0/2.0) * c ** 2.0 * varManagedResult)*252.0
 
 (** Another way of seeing it.*)
 

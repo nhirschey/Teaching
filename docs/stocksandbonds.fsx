@@ -17,7 +17,7 @@ index: 3
 (***do-not-eval-file***)
 
 #r "nuget: ExcelProvider, 2.0.0"
-#r "nuget: FSharp.Stats"
+#r "nuget: FSharp.Stats, 0.5.0"
 #r "nuget: Plotly.NET, 3.*"
 #r "nuget: Plotly.NET.Interactive, 3.*"
 

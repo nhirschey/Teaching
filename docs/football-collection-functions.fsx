@@ -62,8 +62,8 @@ let H3 = makeNumberedHeading "h3"
 ### Reference needed nuget packages and open namespaces
 *)
 
-#r "nuget:FSharp.Data"
-#r "nuget: FSharp.Stats"
+#r "nuget: FSharp.Data, 5.0.2"
+#r "nuget: FSharp.Stats, 0.5.0"
 
 open FSharp.Data
 open FSharp.Stats
@@ -799,7 +799,7 @@ playerStatsTable
 (**
 ### 9 Seq.stDev
 
-For `Seq.stDev` to work, we loaded the `FSharp.Stats nuget` (`#r "nuget: FSharp.Stats"`).
+For `Seq.stDev` to work, we loaded the `FSharp.Stats nuget` (`#r "nuget: FSharp.Stats, 0.5.0"`).
 This nuget contains the standard deviation function.
 Besides this we also opened the module `FSharp.Stats` (`open FSharp.Stats`).
 [FSharp.Stats documentation](https://fslab.org/FSharp.Stats/)

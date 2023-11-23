@@ -654,7 +654,7 @@ For next time: Portfolio Variance and Leverage
 ## Leverage
 *)
 
-#r "nuget: FSharp.Stats"
+#r "nuget: FSharp.Stats, 0.5.0"
 
 open FSharp.Stats
 open FSharp.Stats.Correlation

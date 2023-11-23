@@ -19,7 +19,8 @@ index: 100
 // !bash <(curl -Ls https://raw.githubusercontent.com/gbaydin/scripts/main/colab_dotnet6.sh)
 #endif // IPYNB
 
-(***do-not-eval***)
+(***do-not-eval-file***)
+
 #r "nuget:FSharp.Stats"
 // Use lite if you're on Apple Silicon
 //#r "nuget:DiffSharp-lite,1.0.7"

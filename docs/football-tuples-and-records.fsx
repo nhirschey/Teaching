@@ -62,7 +62,7 @@ let H3 = makeNumberedHeading "h3"
 ## Import the Football Players Data from the Csv File
 *)
 
-#r "nuget:FSharp.Data"
+#r "nuget: FSharp.Data, 5.0.2"
 open FSharp.Data
 
 (**

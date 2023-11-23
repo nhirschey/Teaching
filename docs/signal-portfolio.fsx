@@ -13,8 +13,8 @@ index: 10
 *)
 
 (***do-not-eval-file***)
-#r "nuget:FSharp.Data"
-#r "nuget: FSharp.Stats"
+#r "nuget: FSharp.Data, 5.0.2"
+#r "nuget: FSharp.Stats, 0.5.0"
 #r "nuget: Plotly.NET, 3.*"
 #r "nuget: Plotly.NET.Interactive, 3.*"
 
@@ -68,7 +68,7 @@ Environment.CurrentDirectory <- ResolutionFolder
 We will use the [Portfolio module](https://github.com/nhirschey/NovaSBE.Finance/blob/main/src/NovaSBE.Finance/Portfolio.fs). Make sure that you load this code
 *)
 
-#r "nuget:NovaSBE.Finance, 0.2.*-*"
+#r "nuget: NovaSBE.Finance, 0.4.0"
 open NovaSBE.Finance
 open NovaSBE.Finance.Portfolio
 

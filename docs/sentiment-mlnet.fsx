@@ -27,7 +27,7 @@ To start we'll load some libaries.
 #r "nuget:FSharp.Stats"
 #r "nuget: Microsoft.ML, 1.7.*"
 #r "nuget: Microsoft.ML.FastTree"
-#r "nuget: FSharp.Data"
+#r "nuget: FSharp.Data, 5.0.2"
 #r "nuget: Plotly.NET, 3.*"
 #r "nuget: Plotly.NET.Interactive, 3.*"
 

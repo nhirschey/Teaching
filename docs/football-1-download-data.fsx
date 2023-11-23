@@ -31,7 +31,7 @@ For the **Football Players' Exercises** we are trying to scrape data from [Sport
 Both type providers are located in `FSharp.Data` assembly. To use it we need to load and open `FSharp.Data`.
 *)
 
-#r "nuget: FSharp.Data"
+#r "nuget: FSharp.Data, 5.0.2"
 open FSharp.Data
 
 (**

@@ -11,13 +11,13 @@ index: 12
 [![Notebook](img/badge-notebook.svg)]({{root}}/{{fsdocs-source-basename}}.ipynb)
 *)
 
-#r "nuget: FSharp.Stats"
-#r "nuget: FSharp.Data,5.*"
+#r "nuget: FSharp.Stats, 0.5.0"
+#r "nuget: FSharp.Data, 5.0.2"
 #r "nuget: DiffSharp-lite"
 #r "nuget: Plotly.NET, 3.*"
 #r "nuget: Plotly.NET.Interactive, 3.*"
 #r "nuget: Quotes.YahooFinance, 0.0.5"
-#r "nuget: NovaSBE.Finance"
+#r "nuget: NovaSBE.Finance, 0.4.0"
 
 open System
 open FSharp.Data

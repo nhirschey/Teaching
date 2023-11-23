@@ -126,30 +126,41 @@ let muHistorical =
 let muHistoricalMap = muHistorical |> Seq.map (fun x -> x.Month, x.R) |> Map
 
 (** Might have seen a chart like this before. Looks like CAPE is a good predictor. *)
-capePredictor
-|> Seq.filter (fun x -> x.Month <= DateTime(2005,12,1))
-|> Seq.sortBy (fun x -> x.CAPE)
-|> Seq.splitInto 5
-|> Seq.map (fun xs -> 
-    let cape = xs |> Seq.map (fun x -> x.CAPE) |> Seq.average
-    let r = xs |> Seq.map (fun x -> x.R * 12.0) |> Seq.average
-    $"%.2f{cape}", r)
-|> Chart.Column
-|> Chart.withXAxisStyle ("CAPE")
-|> Chart.withYAxisStyle ("Annualized Excess Return")
-|> Chart.withYAxis(LayoutObjects.LinearAxis.init(TickFormat = ".1%"))
 
+let capeBarChart =
+    capePredictor
+    |> Seq.filter (fun x -> x.Month <= DateTime(2005,12,1))
+    |> Seq.sortBy (fun x -> x.CAPE)
+    |> Seq.splitInto 5
+    |> Seq.map (fun xs -> 
+        let cape = xs |> Seq.map (fun x -> x.CAPE) |> Seq.average
+        let r = xs |> Seq.map (fun x -> x.R * 12.0) |> Seq.average
+        $"%.2f{cape}", r)
+    |> Chart.Column
+    |> Chart.withXAxisStyle ("CAPE")
+    |> Chart.withYAxisStyle ("Annualized Excess Return")
+    |> Chart.withYAxis(LayoutObjects.LinearAxis.init(TickFormat = ".1%"))
+
+(***dot-not-eval***)
+capeBarChart
+
+(***hide***)
+capeBarChart
+|> GenericChart.toChartHTML
+(***include-it-raw***)
 
 (**
 Though simple OLS results are not too special.
 *)
 
 Ols("R~CAPE", capePredictor).fit().summary()
+(***include-it***)
 
 (** Until 2005 *)
 Ols("R~CAPE", 
     capePredictor 
     |> Array.filter (fun x -> x.Month <= DateTime(2005,12,1))).fit().summary()
+(***include-it***)
 
 (**
 We can do rolling regressions.
@@ -162,6 +173,7 @@ let capePrediction (xs: array<Predictors>) =
       R = mdl.predict([lastObs])[0] }
 
 capePrediction capePredictor[..100]
+(***include-it***)
 
 (** Restricted predictor*)
 let capePredictionRestricted (xs: array<Predictors>) =
@@ -176,6 +188,7 @@ let capePredictionRestricted (xs: array<Predictors>) =
 let index1999 = capePredictor |> Array.findIndex (fun x -> x.Month = DateTime(1999,1,1))
 printfn $"Unrestricted:\n{capePrediction capePredictor[..index1999]}"
 printfn $"Restricted:\n{capePredictionRestricted capePredictor[..index1999]}"
+(***include-output***)
 
 (** the CAPE predictons. *)
 let cape1927Index =
@@ -223,6 +236,8 @@ accuracyComps
     x.Month = DateTime(1929,1,1) ||
     x.Month = DateTime(2000,1,1) ||
     x.Month = DateTime(2022,12,1))
+(***include-it***)
+
 
 (** root mean squared errors *)
 
@@ -245,19 +260,36 @@ let rmses =
            mseCAPE = mseCAPE
            mseHist = mseHist |}|]
 
-[ Chart.Line(rmses |> Array.map (fun x -> x.Month, x.mseCAPE),
-             Name ="CAPE")
-  Chart.Line(rmses |> Array.map (fun x -> x.Month, x.mseHist),
-             Name = "Hist")]
-|> Chart.combine
+let rmseChart = 
+    [ Chart.Line(rmses |> Array.map (fun x -> x.Month, x.mseCAPE),
+                 Name ="CAPE")
+      Chart.Line(rmses |> Array.map (fun x -> x.Month, x.mseHist),
+                 Name = "Hist")]
+    |> Chart.combine
+
+(***dot-not-eval***)
+rmseChart
+
+(***hide***)
+rmseChart
+|> GenericChart.toChartHTML
+(***include-it-raw***)
 
 (** The difference, much easier to interpret. *)
-rmses
-|> Array.map (fun x ->
-    x.Month, (x.mseHist - x.mseCAPE))
-|> Chart.Line
-|> Chart.withTitle("Hist Avg. RMSE - CAPE RMSE")
-|> Chart.withYAxisStyle(TitleText="Positive means that CAPE has lower error")
+let rmsesDiffChart =
+    rmses
+    |> Array.map (fun x ->
+        x.Month, (x.mseHist - x.mseCAPE))
+    |> Chart.Line
+    |> Chart.withTitle("Hist Avg. RMSE - CAPE RMSE")
+    |> Chart.withYAxisStyle(TitleText="Positive means that CAPE has lower error")
+
+(***do-not-eval***)
+rmsesDiffChart
+(***hide***)
+rmsesDiffChart
+|> GenericChart.toChartHTML
+(***include-it-raw***)
 
 (** OOS R2*)
 let oosR2 (xs: seq<PredictionCombo>) =
@@ -269,13 +301,23 @@ let oosR2 (xs: seq<PredictionCombo>) =
 accuracyComps
 |> Array.filter (fun x -> x.Month <= DateTime(2005,12,1))
 |> oosR2
+(***include-it***)
 
 (** Plot of OOS R2*)
-[| for i = 1 to accuracyComps.Length-1 do 
-    accuracyComps[i].Month,
-    accuracyComps[..i] |> oosR2 |]
-|> Array.filter (fun (dt, xs) -> dt <= DateTime(2005,12,1))
-|> Chart.Line
-|> Chart.withYAxis(LayoutObjects.LinearAxis.init(TickFormat = ".1%",TickVals = [| -0.01;0.0;0.01;0.02|]))
-|> Chart.withYAxisStyle(MinMax = (-0.01,0.02))
-|> Chart.withSize(Width=1000,Height=500)
+let oosr2Chart =
+    [| for i = 1 to accuracyComps.Length-1 do 
+        accuracyComps[i].Month,
+        accuracyComps[..i] |> oosR2 |]
+    |> Array.filter (fun (dt, xs) -> dt <= DateTime(2005,12,1))
+    |> Chart.Line
+    |> Chart.withYAxis(LayoutObjects.LinearAxis.init(TickFormat = ".1%",TickVals = [| -0.01;0.0;0.01;0.02|]))
+    |> Chart.withYAxisStyle(MinMax = (-0.01,0.02))
+    |> Chart.withSize(Width=1000,Height=500)
+
+(***dot-not-eval***)
+oosr2Chart
+
+(***hide***)
+oosr2Chart
+|> GenericChart.toChartHTML
+(***include-it-raw***)

@@ -24,25 +24,12 @@ index: 3
 
 open FSharp.Interop.Excel
 open System
-open System.Net
-
 open FSharp.Stats
 open Plotly.NET
+open NovaSBE.Finance.Utils
 
 Environment.CurrentDirectory <- __SOURCE_DIRECTORY__
 
-(** 
-A function to download a file. Don't worry about the specifics of the code in this function. 
-*)
-
-let download (inputUrl: string) (outputFile: string) =
-    if IO.File.Exists(outputFile) then
-        printfn $"The file {outputFile} already exists. Skipping download" 
-    else
-        use fileStream = IO.File.Create(outputFile)
-        use http = new Http.HttpClient()
-        use urlStream = http.GetStreamAsync(inputUrl).Result
-        urlStream.CopyTo(fileStream)
 
 (** Download the excel file from Robert Shiller's website to your current directory. *)
 download "http://www.econ.yale.edu/~shiller/data/ie_data.xls" "shiller_data.xls"
@@ -56,10 +43,10 @@ let shiller =
     ShillerXls().Data |> Seq.toList
 
 (** Let's look at the dates. *)
-shiller[..7] |> List.map (fun x -> x.Date)
+shiller[..11] |> List.map (fun x -> x.Date)
 
 (** Remember that is the same as *)
-[ for x in shiller[..7] do x.Date ]
+[ for x in shiller[..11] do x.Date ]
 
 (** Function to parse the dates. *)
 let parseDate (x: ShillerXls.Row) =
@@ -70,7 +57,7 @@ let parseDate (x: ShillerXls.Row) =
     DateTime(year, month, 1)
 
 (** Parse the first few dates. *)
-shiller[..7] 
+shiller[..11] 
 |> List.map (fun x -> x.Date, parseDate x)
 
 (** Check that we're getting the right data. *)
@@ -94,24 +81,33 @@ let shillerClean =
 
 (** 
 The S&P500 total (price + dividend) return index is the Price2 column.
-To calculate returns from it, we want to do $p1/p0$. We can do this using
-`List.pairwise`.
+To calculate returns from it we want consecutive observations.
 *)
 
-[ 1..10] |> List.pairwise
+let x0 = shillerClean[0]
+let x1 = shillerClean[1]
 
-(**
-With the price index ...
-*)
-shillerClean[0..5] 
-|> List.map (fun x -> x.Price2)
+x0.Price2, x1.Price2
+
+(** We can do this for the whole list using `List.pairwise`*)
+
+shillerClean
 |> List.pairwise
+|> List.map (fun (x0, x1) -> x0.Price2, x1.Price2)
+|> List.take 3
+
 
 (** We'll calculate a log return. *)
+let logReturn (p0, p1) = log (p1 / p0)
+
+logReturn (float x0.Price2, float x1.Price2)
+
+(** Now for the whole list. *)
+
 shillerClean[0..5] 
-|> List.map (fun x -> x.Price2)
+|> List.map (fun x -> float x.Price2)
 |> List.pairwise
-|> List.map (fun (x0, x1) -> log (float x1 / float x0))
+|> List.map logReturn
 
 (** A type to hold return data.*)
 type ShillerObs =
@@ -124,17 +120,39 @@ type ShillerObs =
         CAPE: float
     }
 
+(** Function to make the return data.*)
+
+let makeShillerObs (x0: ShillerXls.Row, x1: ShillerXls.Row) =
+    {
+        Date = parseDate x0
+        SP500RealReturn = logReturn (float x0.Price2, float x1.Price2)
+        GS10RealReturn = logReturn (float x0.Returns2, float x1.Returns2)
+        CAPE = if x0.CAPE = "NA" then nan else float x0.CAPE
+    }
+
+
 (** Making our list of records containing stock and bond returns.*)
 let shillerObs =
     shillerClean
     |> List.pairwise
-    |> List.map (fun (x0, x1) -> 
-        {
-            Date = parseDate x1
-            SP500RealReturn = log ((float x1.Price2)/(float x0.Price2))
-            GS10RealReturn = log ((float x1.Returns2)/(float x0.Returns2))
-            CAPE = if x1.CAPE = "NA" then nan else float x1.CAPE
-        })
+    |> List.map makeShillerObs
+
+(** Average annualized stock and bond returns*)
+let avgStock = shillerObs |> List.averageBy (fun x -> x.SP500RealReturn * 12.0)
+let avgBond = shillerObs |> List.averageBy (fun x -> x.GS10RealReturn * 12.0)
+let port6040 = shillerObs |> List.map (fun x -> x.SP500RealReturn * 0.6 + x.GS10RealReturn * 0.4)
+let avg6040 = port6040 |> List.averageBy (fun x -> x * 12.0)
+
+let sdStock = shillerObs |> Seq.stDevBy _.SP500RealReturn |> fun x ->  x * sqrt 12.0 
+let sdBond = shillerObs |> Seq.stDevBy _.GS10RealReturn |> fun x ->  x * sqrt 12.0
+let sd6040 = port6040 |> Seq.stDev |> fun x ->  x * sqrt 12.0 
+
+let lev6040 = sdStock / sd6040
+/// this is a cost above the risk-free rate
+let costOfLeverage = 0.01
+let lev6040Return = lev6040 * avg6040 - max 0.0 ((lev6040 - 1.0) * costOfLeverage)
+
+(** Standard deviation of stock and bond returns*)
 
 (** Let's look at returns by decade. *)
 let dateToDecade (date: DateTime) = floor (float date.Year / 10.0) * 10.0
@@ -170,6 +188,13 @@ let stockByDecade =
 (** Plot of stock return by decade*)
 stockByDecade
 |> Chart.Column
+
+(***hide***)
+#if FSX
+stockByDecade
+|> Chart.Column
+|> Chart.show
+#endif // FSX
 
 (** Now the same thing for bonds.*)
 let bondByDecade =
@@ -243,8 +268,7 @@ let annualizedRet = avgReturns * 12.0
 
 (** Our sampler.*)
 let rmultinorm = 
-    Distributions.ContinuousDistribution.multivariateNormal annualizedRet annualizedCov
-
+    Distributions.Continuous.MultivariateNormal.Init annualizedRet annualizedCov
 (** Try a sample. *)
 let s = rmultinorm.Sample()
 (** Stock return*)

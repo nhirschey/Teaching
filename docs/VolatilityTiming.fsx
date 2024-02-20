@@ -25,7 +25,7 @@ As a start, let's acquire a long daily time series on aggregate US market return
 *)
 
 #r "nuget: FSharp.Data, 5.0.2"
-#r "nuget: NovaSBE.Finance, 0.4.0"
+#r "nuget: NovaSBE.Finance, 0.5.0"
 open System
 open FSharp.Data
 open NovaSBE.Finance.French

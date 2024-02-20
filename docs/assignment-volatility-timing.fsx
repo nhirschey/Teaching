@@ -73,7 +73,7 @@ Formatter.SetPreferredMimeTypesFor(typeof<GenericChart.GenericChart>,"text/html"
 We get the Fama-French 3-Factor asset pricing model data.
 *)
 
-#r "nuget: NovaSBE.Finance, 0.4.0"
+#r "nuget: NovaSBE.Finance, 0.5.0"
 
 open NovaSBE.Finance
 open NovaSBE.Finance.French

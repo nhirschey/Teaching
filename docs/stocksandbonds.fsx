@@ -186,6 +186,8 @@ let stockByDecade =
         decade, decadeReturn)
 
 (** Plot of stock return by decade*)
+
+(***do-not-eval***)
 stockByDecade
 |> Chart.Column
 
@@ -193,8 +195,9 @@ stockByDecade
 #if FSX
 stockByDecade
 |> Chart.Column
-|> Chart.show
+|> GenericChart.toChartHTML
 #endif // FSX
+(***include-it-raw***)
 
 (** Now the same thing for bonds.*)
 let bondByDecade =

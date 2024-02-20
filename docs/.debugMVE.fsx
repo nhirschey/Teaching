@@ -1,4 +1,4 @@
-#r "nuget: NovaSBE.Finance, 0.4.0"
+#r "nuget: NovaSBE.Finance, 0.5.0"
 #r "nuget: FSharp.Stats, 0.5.0"
 
 open System

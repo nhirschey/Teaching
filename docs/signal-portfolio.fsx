@@ -68,7 +68,7 @@ Environment.CurrentDirectory <- ResolutionFolder
 We will use the [Portfolio module](https://github.com/nhirschey/NovaSBE.Finance/blob/main/src/NovaSBE.Finance/Portfolio.fs). Make sure that you load this code
 *)
 
-#r "nuget: NovaSBE.Finance, 0.4.0"
+#r "nuget: NovaSBE.Finance, 0.5.0"
 open NovaSBE.Finance
 open NovaSBE.Finance.Portfolio
 

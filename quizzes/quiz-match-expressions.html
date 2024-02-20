@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en" data-root="/Teaching/">
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Nicholas Hirschey; Davide Costa" name="author">
+    <!-- Opengraph properties (https://ogp.me/) -->
+    <meta property="og:site_name" content="Teaching">
+    <meta property="og:title" content="Match expressions" />
+    <meta property="og:url" content="/Teaching/quizzes/quiz-match-expressions.html">
+    <meta property="og:type" content="website" />
+    <!-- Twitter cards (https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="/Teaching/">
+    <meta name="twitter:title" content="Match expressions">
+    
+    <title>Match expressions | Teaching</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="/Teaching/img/logo.png" rel="icon" sizes="32x32" type="image/png"/>
+    <script type="application/javascript" src="/Teaching/content/fsdocs-theme-set-dark.js"></script>
+    <link href="/Teaching/content/fsdocs-default.css" rel="stylesheet" type="text/css"/>
+    <link href="/Teaching/content/fsdocs-theme.css" rel="stylesheet" type="text/css"/>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js"></script>
+    
+</head>
+<body class="content">
+<header>
+    <div class="start">
+        <div id="menu-toggle">
+            <iconify-icon class="icon closed" height="22" icon="eva:menu-fill" width="22"></iconify-icon>
+            <iconify-icon class="icon open" height="22" icon="mi:close" width="22"></iconify-icon>
+            <input type="checkbox" name="mobile-menu" />
+            <ul class="menu">
+                <li class="nav-header">Links</li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/nhirschey/Teaching/blob/main/LICENSE.md">License</a>
+                </li>
+                <li class="nav-item"><a class="nav-link"
+                                        href="https://github.com/nhirschey/Teaching/blob/main/CHANGELOG.md">Release
+                    Notes</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/nhirschey/Teaching/">Source
+                    Repository</a></li>
+                <li class="nav-header ">
+  Getting Started
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/install.html">
+    Install Software
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/learn-fsharp.html">
+    Learn F#
+  </a>
+</li>             
+<li class="nav-header ">
+  Lectures
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/stockslongrun.html">
+    Stocks for the long run
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/stocksandbonds.html">
+    Stocks and bonds
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/riskyweight.html">
+    Risky Weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolatilityTiming.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolatilityManagedTypes.html">
+    Volatility Managed, but with different vols
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolAndReturnPred.html">
+    Volatility and Return predictions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/mveComparisons.html">
+    More managed portfolio comparisons
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/PortfolioFormation-SimpleExample.html">
+    Building a strategy
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Momentum-Class.html">
+    Momentum Signal
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/optimization.html">
+    Optimization
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/revisitRiskyWeights.html">
+    Revisiting Mean-variance optimal risky weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/premiums.html">
+    Premiums
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/calls-nn.html">
+    Calls NN
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/portfolio-statistics.html">
+    Basic Portfolio Statistics
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/sentiment-mlnet.html">
+    Sentiment classification
+  </a>
+</li>             
+<li class="nav-header ">
+  Assignments
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-1-download-data.html">
+    Webscraping HTML to CSV
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-tuples-and-records.html">
+    Tuples and Records (with solutions)
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-collection-functions.html">
+    Collection functions (with solutions)
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignment-risky-weights.html">
+    Risky Weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignment-volatility-timing.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/select-project-signal.html">
+    Select Project Signals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/signal-exploration.html">
+    Signal Exploration
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/assignment-signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/assignment-performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-plotting.html">
+    Plotting (with solutions)
+  </a>
+</li>             
+<li class="nav-header active">
+  Practice Quizzes
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-list-module.html">
+    List module functions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-options.html">
+    Options
+  </a>
+</li>             
+<li class="nav-item active">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-match-expressions.html">
+    Match expressions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-map-collection.html">
+    Map collection
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-discriminated-union.html">
+    Dicriminated Union
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-portfolios.html">
+    Portfolios
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-factors.html">
+    Factors
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-folding.html">
+    Fold and Friends
+  </a>
+</li>             
+<li class="nav-header ">
+  Other
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Common.html">
+    Common
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/loading-scripts.html">
+    Loading external scripts
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Portfolio.html">
+    Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/YahooFinance.html">
+    YahooFinance
+  </a>
+</li>
+                
+            </ul>
+        </div>
+        <a href="/Teaching/">
+            <img alt="Header menu logo" src="/Teaching/img/logo.png">
+            <strong>Teaching</strong>
+        </a>
+    </div>
+    <div class="end">
+        <a href="https://github.com/nhirschey/Teaching/" target="_blank">
+            <iconify-icon icon="uil:github" width="26" height="26"></iconify-icon>
+        </a>
+        <iconify-icon id="search-btn" icon="carbon:search" class="search" width="24" height="24"></iconify-icon>
+        <fsdocs-theme-toggle></fsdocs-theme-toggle>
+    </div>
+</header>
+<aside id="fsdocs-main-menu">
+    <ul class="menu">
+        <li class="nav-header">Links</li>
+        <li class="nav-item"><a class="nav-link" href="https://github.com/nhirschey/Teaching/blob/main/LICENSE.md">License</a>
+        </li>
+        <li class="nav-item"><a class="nav-link"
+                                href="https://github.com/nhirschey/Teaching/blob/main/CHANGELOG.md">Release
+            Notes</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://github.com/nhirschey/Teaching/">Source
+            Repository</a></li>
+        <li class="nav-header ">
+  Getting Started
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/install.html">
+    Install Software
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/learn-fsharp.html">
+    Learn F#
+  </a>
+</li>             
+<li class="nav-header ">
+  Lectures
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/stockslongrun.html">
+    Stocks for the long run
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/stocksandbonds.html">
+    Stocks and bonds
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/riskyweight.html">
+    Risky Weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolatilityTiming.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolatilityManagedTypes.html">
+    Volatility Managed, but with different vols
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolAndReturnPred.html">
+    Volatility and Return predictions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/mveComparisons.html">
+    More managed portfolio comparisons
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/PortfolioFormation-SimpleExample.html">
+    Building a strategy
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Momentum-Class.html">
+    Momentum Signal
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/optimization.html">
+    Optimization
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/revisitRiskyWeights.html">
+    Revisiting Mean-variance optimal risky weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/premiums.html">
+    Premiums
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/calls-nn.html">
+    Calls NN
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/portfolio-statistics.html">
+    Basic Portfolio Statistics
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/sentiment-mlnet.html">
+    Sentiment classification
+  </a>
+</li>             
+<li class="nav-header ">
+  Assignments
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-1-download-data.html">
+    Webscraping HTML to CSV
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-tuples-and-records.html">
+    Tuples and Records (with solutions)
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-collection-functions.html">
+    Collection functions (with solutions)
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignment-risky-weights.html">
+    Risky Weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignment-volatility-timing.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/select-project-signal.html">
+    Select Project Signals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/signal-exploration.html">
+    Signal Exploration
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/assignment-signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/assignment-performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-plotting.html">
+    Plotting (with solutions)
+  </a>
+</li>             
+<li class="nav-header active">
+  Practice Quizzes
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-list-module.html">
+    List module functions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-options.html">
+    Options
+  </a>
+</li>             
+<li class="nav-item active">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-match-expressions.html">
+    Match expressions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-map-collection.html">
+    Map collection
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-discriminated-union.html">
+    Dicriminated Union
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-portfolios.html">
+    Portfolios
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-factors.html">
+    Factors
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-folding.html">
+    Fold and Friends
+  </a>
+</li>             
+<li class="nav-header ">
+  Other
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Common.html">
+    Common
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/loading-scripts.html">
+    Loading external scripts
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Portfolio.html">
+    Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/YahooFinance.html">
+    YahooFinance
+  </a>
+</li>
+        
+    </ul>
+</aside>
+<main>
+    <div id="content">
+        
+<p><a href="https://mybinder.org/v2/gh/nhirschey/teaching/gh-pages?filepath=quizzes/quiz-match-expressions.ipynb"><img src="../img/badge-binder.svg" alt="Binder" /></a>&emsp;
+<a href="/Teaching//quizzes/quiz-match-expressions.fsx"><img src="../img/badge-script.svg" alt="Script" /></a>&emsp;
+<a href="/Teaching//quizzes/quiz-match-expressions.ipynb"><img src="../img/badge-notebook.svg" alt="Notebook" /></a></p>
+<h1><a name="Match-Expressions" class="anchor" href="#Match-Expressions">Match Expressions</a></h1>
+<p>There is a very good discussion of match expressions with examples on <a href="https://fsharpforfunandprofit.com/posts/match-expression/">FSharp For Fun and Profit</a>.The <a href="https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/match-expressions">F# Language reference</a> and <a href="https://docs.microsoft.com/en-us/dotnet/fsharp/tour#pattern-matching">Tour of F#</a> are also good resources on this.</p>
+<p>The idea is that you give the match expression a value to match, the things it can match to, and then what you want to return for each of those matches.</p>
+<p>Simple match expressions such as the one below are
+similar to if/then/else statements. However, as shown in the linked
+F# for fun and profit article, pattern matching is can do much
+more than if/then/else.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="fn">f1</span> <span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="fn">x</span> <span class="o">=</span>
+    <span class="k">match</span> <span onmouseout="hideTip(event, 'fs2', 3)" onmouseover="showTip(event, 'fs2', 3)" class="fn">x</span> <span class="k">with</span> <span class="c">// x is the thing that I am matching</span>
+    <span class="pn">|</span> <span class="n">1.0</span> <span class="k">-&gt;</span> <span class="n">1.0</span> <span class="c">// when x matches 1.0 then return 1.0</span>
+    <span class="pn">|</span> <span class="n">2.0</span> <span class="k">-&gt;</span> <span class="n">1.0</span> <span class="c">// when x matches with 2.0 then return 1.0</span>
+    <span class="pn">|</span> <span class="n">3.0</span> <span class="k">-&gt;</span> <span class="n">7.0</span> <span class="o">+</span> <span class="n">7.0</span> <span class="c">// when x matches with 3.0 return 7.0+7.0</span>
+    <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs3', 4)" onmouseover="showTip(event, 'fs3', 4)" class="fn">z</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs3', 5)" onmouseover="showTip(event, 'fs3', 5)" class="fn">z</span> <span class="o">**</span> <span class="n">2.0</span> <span class="c">// everything else matches an arbitrary y, and let&#39;s return y**2.0</span>
+    
+<span class="pn">[</span> <span class="n">1.0</span> <span class="o">..</span> <span class="n">10.0</span><span class="pn">]</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs4', 6)" onmouseover="showTip(event, 'fs4', 6)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs5', 7)" onmouseover="showTip(event, 'fs5', 7)" class="id">map</span> <span onmouseout="hideTip(event, 'fs1', 8)" onmouseover="showTip(event, 'fs1', 8)" class="fn">f1</span>
+</code></pre>
+<h2><a name="Question-1" class="anchor" href="#Question-1">Question 1</a></h2>
+<p>Write a function named <code>ma</code> that takes <code>x: float Option</code> as an input.
+Use a match expression to output the <code>float</code> if <code>x</code> is something and
+<code>0.0</code> if the <code>float</code> is nothing. Provide a test case for both cases to show
+that the function works.</p>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs6', 9)" onmouseover="showTip(event, 'fs6', 9)" class="fn">ma</span> <span onmouseout="hideTip(event, 'fs7', 10)" onmouseover="showTip(event, 'fs7', 10)" class="fn">x</span> <span class="o">=</span> 
+    <span class="k">match</span> <span onmouseout="hideTip(event, 'fs7', 11)" onmouseover="showTip(event, 'fs7', 11)" class="fn">x</span> <span class="k">with</span>
+    <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs8', 12)" onmouseover="showTip(event, 'fs8', 12)" class="uc">None</span> <span class="k">-&gt;</span> <span class="n">0.0</span>
+    <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs9', 13)" onmouseover="showTip(event, 'fs9', 13)" class="uc">Some</span> <span onmouseout="hideTip(event, 'fs10', 14)" onmouseover="showTip(event, 'fs10', 14)" class="fn">y</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs10', 15)" onmouseover="showTip(event, 'fs10', 15)" class="fn">y</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs11', 16)" onmouseover="showTip(event, 'fs11', 16)" class="id">ma2Some7</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 17)" onmouseover="showTip(event, 'fs6', 17)" class="fn">ma</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs9', 18)" onmouseover="showTip(event, 'fs9', 18)" class="uc">Some</span> <span class="n">7.0</span><span class="pn">)</span> <span class="c">// returns 7.0</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs12', 19)" onmouseover="showTip(event, 'fs12', 19)" class="id">ma2None</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 20)" onmouseover="showTip(event, 'fs6', 20)" class="fn">ma</span> <span onmouseout="hideTip(event, 'fs8', 21)" onmouseover="showTip(event, 'fs8', 21)" class="uc">None</span> <span class="c">// returns 0.0</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val ma: x: float option -&gt; float
+val ma2Some7: float = 7.0
+val ma2None: float = 0.0</code></pre></td></tr></table>
+<p>or, see the <code>x</code> in the (<code>Some x</code>) part of the match expression
+is the <code>float</code>, not the original (<code>x: float Option</code>)
+To see this, hover your cursor over the first two xs. it says <code>x is float Option</code>.
+Then hover over the second two xs. It says <code>x is float</code>. Two different xs!</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs13', 22)" onmouseover="showTip(event, 'fs13', 22)" class="fn">ma2</span> <span onmouseout="hideTip(event, 'fs7', 23)" onmouseover="showTip(event, 'fs7', 23)" class="fn">x</span> <span class="o">=</span> 
+    <span class="k">match</span> <span onmouseout="hideTip(event, 'fs7', 24)" onmouseover="showTip(event, 'fs7', 24)" class="fn">x</span> <span class="k">with</span>
+    <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs8', 25)" onmouseover="showTip(event, 'fs8', 25)" class="uc">None</span> <span class="k">-&gt;</span> <span class="n">0.0</span>
+    <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs9', 26)" onmouseover="showTip(event, 'fs9', 26)" class="uc">Some</span> <span onmouseout="hideTip(event, 'fs2', 27)" onmouseover="showTip(event, 'fs2', 27)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs2', 28)" onmouseover="showTip(event, 'fs2', 28)" class="fn">x</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs14', 29)" onmouseover="showTip(event, 'fs14', 29)" class="id">ma2Some7Other</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs13', 30)" onmouseover="showTip(event, 'fs13', 30)" class="fn">ma2</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs9', 31)" onmouseover="showTip(event, 'fs9', 31)" class="uc">Some</span> <span class="n">7.0</span><span class="pn">)</span> <span class="c">// returns 7.0</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs15', 32)" onmouseover="showTip(event, 'fs15', 32)" class="id">ma2NoneOther</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs13', 33)" onmouseover="showTip(event, 'fs13', 33)" class="fn">ma2</span> <span onmouseout="hideTip(event, 'fs8', 34)" onmouseover="showTip(event, 'fs8', 34)" class="uc">None</span> <span class="c">// returns 0.0</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val ma2: x: float option -&gt; float
+val ma2Some7Other: float = 7.0
+val ma2NoneOther: float = 0.0</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<h2><a name="Question-2" class="anchor" href="#Question-2">Question 2</a></h2>
+<p>Write a function named <code>mb</code> that takes <code>x: float</code> as an input.
+Use a match expression to output <code>1.0</code> if <code>x</code> is <code>1.0</code>, <code>4.0</code> if <code>x</code> is <code>2.0</code>,
+and <code>x^3.0</code> if <code>x</code> is anything else. Provide 3 tests for the 3 test cases
+to show that the function works.</p>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs16', 35)" onmouseover="showTip(event, 'fs16', 35)" class="fn">mb</span> <span onmouseout="hideTip(event, 'fs2', 36)" onmouseover="showTip(event, 'fs2', 36)" class="fn">x</span> <span class="o">=</span> 
+    <span class="k">match</span> <span onmouseout="hideTip(event, 'fs2', 37)" onmouseover="showTip(event, 'fs2', 37)" class="fn">x</span> <span class="k">with</span> 
+    <span class="pn">|</span> <span class="n">1.0</span> <span class="k">-&gt;</span> <span class="n">1.0</span>
+    <span class="pn">|</span> <span class="n">2.0</span> <span class="k">-&gt;</span> <span class="n">4.0</span>
+    <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs2', 38)" onmouseover="showTip(event, 'fs2', 38)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs2', 39)" onmouseover="showTip(event, 'fs2', 39)" class="fn">x</span><span class="o">**</span><span class="n">3.0</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs17', 40)" onmouseover="showTip(event, 'fs17', 40)" class="id">mb1</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs16', 41)" onmouseover="showTip(event, 'fs16', 41)" class="fn">mb</span> <span class="n">1.0</span> <span class="c">// evaluates to 1.0</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs18', 42)" onmouseover="showTip(event, 'fs18', 42)" class="id">mb2</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs16', 43)" onmouseover="showTip(event, 'fs16', 43)" class="fn">mb</span> <span class="n">2.0</span> <span class="c">// evaluates to 4.0</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs19', 44)" onmouseover="showTip(event, 'fs19', 44)" class="id">mb7</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs16', 45)" onmouseover="showTip(event, 'fs16', 45)" class="fn">mb</span> <span class="n">7.0</span> <span class="c">// evaluates to 343.00</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val mb: x: float -&gt; float
+val mb1: float = 1.0
+val mb2: float = 4.0
+val mb7: float = 343.0</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<h2><a name="Question-3" class="anchor" href="#Question-3">Question 3</a></h2>
+<p>Write a function named <code>mc</code> that takes a tuple pair of ints  <code>x: int * int</code>
+as an input. Handle these cases in the following order:</p>
+<ol>
+<li>if the first <code>int</code> is <code>7</code>, return <code>"a"</code>.</li>
+<li>if the second int is <code>7</code>, return <code>"b"</code>.</li>
+<li>For everything else, return <code>"c"</code>.</li>
+</ol>
+<p>Finally, test the function on <code>(7,6)</code>, <code>(6,7)</code>, <code>(7, 7)</code>, and <code>(6,6)</code>.
+Make sure that you understand how those 4 examples are handled.</p>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs20', 46)" onmouseover="showTip(event, 'fs20', 46)" class="fn">mc</span> <span onmouseout="hideTip(event, 'fs21', 47)" onmouseover="showTip(event, 'fs21', 47)" class="fn">x</span> <span class="o">=</span>
+    <span class="k">match</span> <span onmouseout="hideTip(event, 'fs21', 48)" onmouseover="showTip(event, 'fs21', 48)" class="fn">x</span> <span class="k">with</span>
+    <span class="pn">|</span> <span class="pn">(</span><span class="n">7</span><span class="pn">,</span> <span class="id">_</span><span class="pn">)</span> <span class="k">-&gt;</span> <span class="s">&quot;a&quot;</span> <span class="c">// the _ in (7, _) indicates wildcard; it matches anything.</span>
+    <span class="pn">|</span> <span class="pn">(</span><span class="id">_</span><span class="pn">,</span> <span class="n">7</span><span class="pn">)</span> <span class="k">-&gt;</span> <span class="s">&quot;b&quot;</span> 
+    <span class="pn">|</span> <span class="id">_</span> <span class="k">-&gt;</span> <span class="s">&quot;c&quot;</span> <span class="c">// wild card at the end catches anything remaining.</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs22', 49)" onmouseover="showTip(event, 'fs22', 49)" class="id">mc76</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs20', 50)" onmouseover="showTip(event, 'fs20', 50)" class="fn">mc</span> <span class="pn">(</span><span class="n">7</span><span class="pn">,</span><span class="n">6</span><span class="pn">)</span> <span class="c">// evaluates to &quot;a&quot; because it matches the first case and stops checking.</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs23', 51)" onmouseover="showTip(event, 'fs23', 51)" class="id">mc67</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs20', 52)" onmouseover="showTip(event, 'fs20', 52)" class="fn">mc</span> <span class="pn">(</span><span class="n">6</span><span class="pn">,</span><span class="n">7</span><span class="pn">)</span> <span class="c">// evaluates to &quot;b&quot; because it matches the second case and stops checking.</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs24', 53)" onmouseover="showTip(event, 'fs24', 53)" class="id">mc77</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs20', 54)" onmouseover="showTip(event, 'fs20', 54)" class="fn">mc</span> <span class="pn">(</span><span class="n">7</span><span class="pn">,</span><span class="n">7</span><span class="pn">)</span> <span class="c">// evaluates to &quot;a&quot; because it matches the first case and stops checking.</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs25', 55)" onmouseover="showTip(event, 'fs25', 55)" class="id">mc66</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs20', 56)" onmouseover="showTip(event, 'fs20', 56)" class="fn">mc</span> <span class="pn">(</span><span class="n">6</span><span class="pn">,</span><span class="n">6</span><span class="pn">)</span> <span class="c">// evaluates to &quot;c&quot; because it matches the last wildcard.</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val mc: int * int -&gt; string
+val mc76: string = "a"
+val mc67: string = "b"
+val mc77: string = "a"
+val mc66: string = "c"</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<h2><a name="Question-4" class="anchor" href="#Question-4">Question 4</a></h2>
+<p>Consider this list of trading days for a stock and it's price and dividends:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">type</span> <span onmouseout="hideTip(event, 'fs26', 57)" onmouseover="showTip(event, 'fs26', 57)" class="rt">StockDays2</span> <span class="o">=</span> <span class="pn">{</span> <span class="prop">Day</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs27', 58)" onmouseover="showTip(event, 'fs27', 58)" class="vt">int</span><span class="pn">;</span> <span class="prop">Price</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs28', 59)" onmouseover="showTip(event, 'fs28', 59)" class="vt">decimal</span><span class="pn">;</span> <span class="prop">Dividend</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs28', 60)" onmouseover="showTip(event, 'fs28', 60)" class="vt">decimal</span> <span onmouseout="hideTip(event, 'fs29', 61)" onmouseover="showTip(event, 'fs29', 61)" class="rt">Option</span> <span class="pn">}</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs30', 62)" onmouseover="showTip(event, 'fs30', 62)" class="id">stockDays2</span> <span class="o">=</span> 
+    <span class="pn">[</span> <span class="k">for</span> <span onmouseout="hideTip(event, 'fs31', 63)" onmouseover="showTip(event, 'fs31', 63)" class="fn">day</span> <span class="o">=</span> <span class="n">0</span> <span class="k">to</span> <span class="n">5</span> <span class="k">do</span> 
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs32', 64)" onmouseover="showTip(event, 'fs32', 64)" class="fn">dividend</span> <span class="o">=</span> <span class="k">if</span> <span onmouseout="hideTip(event, 'fs31', 65)" onmouseover="showTip(event, 'fs31', 65)" class="fn">day</span> <span class="o">%</span> <span class="n">2</span> <span class="o">=</span> <span class="n">0</span> <span class="k">then</span> <span onmouseout="hideTip(event, 'fs8', 66)" onmouseover="showTip(event, 'fs8', 66)" class="uc">None</span> <span class="k">else</span> <span onmouseout="hideTip(event, 'fs9', 67)" onmouseover="showTip(event, 'fs9', 67)" class="uc">Some</span> <span class="n">1m</span>
+        <span class="pn">{</span> <span class="prop">Day</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs31', 68)" onmouseover="showTip(event, 'fs31', 68)" class="fn">day</span>
+          <span class="prop">Price</span> <span class="o">=</span> <span class="n">100m</span> <span class="o">+</span> <span onmouseout="hideTip(event, 'fs28', 69)" onmouseover="showTip(event, 'fs28', 69)" class="fn">decimal</span> <span onmouseout="hideTip(event, 'fs31', 70)" onmouseover="showTip(event, 'fs31', 70)" class="fn">day</span>
+          <span class="prop">Dividend</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs32', 71)" onmouseover="showTip(event, 'fs32', 71)" class="fn">dividend</span> <span class="pn">}</span> <span class="pn">]</span>   
+</code></pre>
+<ol>
+<li>
+create a new list called <code>daysWithDividends</code> that is a filtered
+version of <code>stockDays</code> that only contains days with dividends. For
+each day with a dividend, you should return a <code>(int * decimal)</code> tuple
+where the int is the day  and the decimal is the dividend.
+Thus the result is an <code>(int * decimal) list</code>.
+</li>
+<li>
+Then create a list called <code>daysWithoutDividends</code> that is a filtered
+version of <code>stockDays</code> that only contains days that do not have dividends.
+For each day without a dividend, you should return the day as an <code>int</code>.
+Thus the result is an <code>int list</code>.
+</li>
+</ol>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<p>Days With Dividends:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs33', 72)" onmouseover="showTip(event, 'fs33', 72)" class="id">daysWithDividends1</span> <span class="o">=</span>
+    <span class="c">// using filter and then a map</span>
+    <span onmouseout="hideTip(event, 'fs30', 73)" onmouseover="showTip(event, 'fs30', 73)" class="id">stockDays2</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs4', 74)" onmouseover="showTip(event, 'fs4', 74)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs34', 75)" onmouseover="showTip(event, 'fs34', 75)" class="id">filter</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs35', 76)" onmouseover="showTip(event, 'fs35', 76)" class="fn">day</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs35', 77)" onmouseover="showTip(event, 'fs35', 77)" class="fn">day</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs36', 78)" onmouseover="showTip(event, 'fs36', 78)" class="prop">Dividend</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs37', 79)" onmouseover="showTip(event, 'fs37', 79)" class="id">IsSome</span><span class="pn">)</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs4', 80)" onmouseover="showTip(event, 'fs4', 80)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs5', 81)" onmouseover="showTip(event, 'fs5', 81)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs35', 82)" onmouseover="showTip(event, 'fs35', 82)" class="fn">day</span> <span class="k">-&gt;</span>
+        <span class="k">match</span> <span onmouseout="hideTip(event, 'fs35', 83)" onmouseover="showTip(event, 'fs35', 83)" class="fn">day</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs36', 84)" onmouseover="showTip(event, 'fs36', 84)" class="id">Dividend</span> <span class="k">with</span>
+        <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs8', 85)" onmouseover="showTip(event, 'fs8', 85)" class="uc">None</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs38', 86)" onmouseover="showTip(event, 'fs38', 86)" class="fn">failwith</span> <span class="s">&quot;shouldn&#39;t happen because I filtered on IsSome&quot;</span>
+        <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs9', 87)" onmouseover="showTip(event, 'fs9', 87)" class="uc">Some</span> <span onmouseout="hideTip(event, 'fs39', 88)" onmouseover="showTip(event, 'fs39', 88)" class="fn">div</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs35', 89)" onmouseover="showTip(event, 'fs35', 89)" class="fn">day</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs40', 90)" onmouseover="showTip(event, 'fs40', 90)" class="id">Day</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs39', 91)" onmouseover="showTip(event, 'fs39', 91)" class="fn">div</span><span class="pn">)</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val daysWithDividends1: (int * decimal) list = [(1, 1M); (3, 1M); (5, 1M)]</code></pre></td></tr></table>
+<p>or</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs41', 92)" onmouseover="showTip(event, 'fs41', 92)" class="id">daysWithDividends2</span> <span class="o">=</span>
+    <span class="c">// using choose, this is better. Think of choose</span>
+    <span class="c">// as a filter on IsSome and a map combined. Choose applies</span>
+    <span class="c">// a function that returns an option. If the</span>
+    <span class="c">// option result is Some x then choose returns x.</span>
+    <span class="c">// If the result is None then choose filters it out.</span>
+    <span class="c">// Notice that we don&#39;t have to worry about </span>
+    <span class="c">// the &quot;this shouldn&#39;t happen&quot; exception</span>
+    <span class="c">// because it literally cannot happen in this version.</span>
+    <span class="c">// This is an example of making illegal states unrepresentable.</span>
+    <span onmouseout="hideTip(event, 'fs30', 93)" onmouseover="showTip(event, 'fs30', 93)" class="id">stockDays2</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs4', 94)" onmouseover="showTip(event, 'fs4', 94)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs42', 95)" onmouseover="showTip(event, 'fs42', 95)" class="id">choose</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs35', 96)" onmouseover="showTip(event, 'fs35', 96)" class="fn">day</span> <span class="k">-&gt;</span> 
+        <span class="c">// our function takes a day as an input and outputs</span>
+        <span class="c">// a `(int * decimal) option`. That is,</span>
+        <span class="c">// an optional tuple.</span>
+        <span class="k">match</span> <span onmouseout="hideTip(event, 'fs35', 97)" onmouseover="showTip(event, 'fs35', 97)" class="fn">day</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs36', 98)" onmouseover="showTip(event, 'fs36', 98)" class="id">Dividend</span> <span class="k">with</span> 
+        <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs8', 99)" onmouseover="showTip(event, 'fs8', 99)" class="uc">None</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs8', 100)" onmouseover="showTip(event, 'fs8', 100)" class="uc">None</span>
+        <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs9', 101)" onmouseover="showTip(event, 'fs9', 101)" class="uc">Some</span> <span onmouseout="hideTip(event, 'fs39', 102)" onmouseover="showTip(event, 'fs39', 102)" class="fn">div</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs9', 103)" onmouseover="showTip(event, 'fs9', 103)" class="uc">Some</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs35', 104)" onmouseover="showTip(event, 'fs35', 104)" class="fn">day</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs40', 105)" onmouseover="showTip(event, 'fs40', 105)" class="id">Day</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs39', 106)" onmouseover="showTip(event, 'fs39', 106)" class="fn">div</span><span class="pn">)</span><span class="pn">)</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val daysWithDividends2: (int * decimal) list = [(1, 1M); (3, 1M); (5, 1M)]</code></pre></td></tr></table>
+<p>Days Without Dividends:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs43', 107)" onmouseover="showTip(event, 'fs43', 107)" class="id">daysWithoutDividends</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs30', 108)" onmouseover="showTip(event, 'fs30', 108)" class="id">stockDays2</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs4', 109)" onmouseover="showTip(event, 'fs4', 109)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs42', 110)" onmouseover="showTip(event, 'fs42', 110)" class="id">choose</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs35', 111)" onmouseover="showTip(event, 'fs35', 111)" class="fn">day</span> <span class="k">-&gt;</span> 
+        <span class="k">match</span> <span onmouseout="hideTip(event, 'fs35', 112)" onmouseover="showTip(event, 'fs35', 112)" class="fn">day</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs36', 113)" onmouseover="showTip(event, 'fs36', 113)" class="id">Dividend</span> <span class="k">with</span>
+        <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs8', 114)" onmouseover="showTip(event, 'fs8', 114)" class="uc">None</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs9', 115)" onmouseover="showTip(event, 'fs9', 115)" class="uc">Some</span> <span onmouseout="hideTip(event, 'fs35', 116)" onmouseover="showTip(event, 'fs35', 116)" class="fn">day</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs40', 117)" onmouseover="showTip(event, 'fs40', 117)" class="id">Day</span>
+        <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs9', 118)" onmouseover="showTip(event, 'fs9', 118)" class="uc">Some</span> <span onmouseout="hideTip(event, 'fs39', 119)" onmouseover="showTip(event, 'fs39', 119)" class="fn">div</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs8', 120)" onmouseover="showTip(event, 'fs8', 120)" class="uc">None</span><span class="pn">)</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val daysWithoutDividends: int list = [0; 2; 4]</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+
+        <div class="fsdocs-tip" id="fs1">val f1: x: float -&gt; float</div>
+<div class="fsdocs-tip" id="fs2">val x: float</div>
+<div class="fsdocs-tip" id="fs3">val z: float</div>
+<div class="fsdocs-tip" id="fs4">Multiple items<br />module List
+
+from Microsoft.FSharp.Collections<br /><br />--------------------<br />type List&lt;&#39;T&gt; =
+  | op_Nil
+  | op_ColonColon of Head: &#39;T * Tail: &#39;T list
+  interface IReadOnlyList&lt;&#39;T&gt;
+  interface IReadOnlyCollection&lt;&#39;T&gt;
+  interface IEnumerable
+  interface IEnumerable&lt;&#39;T&gt;
+  member GetReverseIndex: rank: int * offset: int -&gt; int
+  member GetSlice: startIndex: int option * endIndex: int option -&gt; &#39;T list
+  static member Cons: head: &#39;T * tail: &#39;T list -&gt; &#39;T list
+  member Head: &#39;T
+  member IsEmpty: bool
+  member Item: index: int -&gt; &#39;T with get
+  ...</div>
+<div class="fsdocs-tip" id="fs5">val map: mapping: (&#39;T -&gt; &#39;U) -&gt; list: &#39;T list -&gt; &#39;U list</div>
+<div class="fsdocs-tip" id="fs6">val ma: x: float option -&gt; float</div>
+<div class="fsdocs-tip" id="fs7">val x: float option</div>
+<div class="fsdocs-tip" id="fs8">union case Option.None: Option&lt;&#39;T&gt;</div>
+<div class="fsdocs-tip" id="fs9">union case Option.Some: Value: &#39;T -&gt; Option&lt;&#39;T&gt;</div>
+<div class="fsdocs-tip" id="fs10">val y: float</div>
+<div class="fsdocs-tip" id="fs11">val ma2Some7: float</div>
+<div class="fsdocs-tip" id="fs12">val ma2None: float</div>
+<div class="fsdocs-tip" id="fs13">val ma2: x: float option -&gt; float</div>
+<div class="fsdocs-tip" id="fs14">val ma2Some7Other: float</div>
+<div class="fsdocs-tip" id="fs15">val ma2NoneOther: float</div>
+<div class="fsdocs-tip" id="fs16">val mb: x: float -&gt; float</div>
+<div class="fsdocs-tip" id="fs17">val mb1: float</div>
+<div class="fsdocs-tip" id="fs18">val mb2: float</div>
+<div class="fsdocs-tip" id="fs19">val mb7: float</div>
+<div class="fsdocs-tip" id="fs20">val mc: int * int -&gt; string</div>
+<div class="fsdocs-tip" id="fs21">val x: int * int</div>
+<div class="fsdocs-tip" id="fs22">val mc76: string</div>
+<div class="fsdocs-tip" id="fs23">val mc67: string</div>
+<div class="fsdocs-tip" id="fs24">val mc77: string</div>
+<div class="fsdocs-tip" id="fs25">val mc66: string</div>
+<div class="fsdocs-tip" id="fs26">type StockDays2 =
+  {
+    Day: int
+    Price: decimal
+    Dividend: Option&lt;decimal&gt;
+  }</div>
+<div class="fsdocs-tip" id="fs27">Multiple items<br />val int: value: &#39;T -&gt; int (requires member op_Explicit)<br /><br />--------------------<br />type int = int32<br /><br />--------------------<br />type int&lt;&#39;Measure&gt; =
+  int</div>
+<div class="fsdocs-tip" id="fs28">Multiple items<br />val decimal: value: &#39;T -&gt; decimal (requires member op_Explicit)<br /><br />--------------------<br />type decimal = System.Decimal<br /><br />--------------------<br />type decimal&lt;&#39;Measure&gt; =
+  decimal</div>
+<div class="fsdocs-tip" id="fs29">module Option
+
+from Microsoft.FSharp.Core</div>
+<div class="fsdocs-tip" id="fs30">val stockDays2: StockDays2 list</div>
+<div class="fsdocs-tip" id="fs31">val day: int</div>
+<div class="fsdocs-tip" id="fs32">val dividend: decimal option</div>
+<div class="fsdocs-tip" id="fs33">val daysWithDividends1: (int * decimal) list</div>
+<div class="fsdocs-tip" id="fs34">val filter: predicate: (&#39;T -&gt; bool) -&gt; list: &#39;T list -&gt; &#39;T list</div>
+<div class="fsdocs-tip" id="fs35">val day: StockDays2</div>
+<div class="fsdocs-tip" id="fs36">StockDays2.Dividend: Option&lt;decimal&gt;</div>
+<div class="fsdocs-tip" id="fs37">property Option.IsSome: bool with get</div>
+<div class="fsdocs-tip" id="fs38">val failwith: message: string -&gt; &#39;T</div>
+<div class="fsdocs-tip" id="fs39">val div: decimal</div>
+<div class="fsdocs-tip" id="fs40">StockDays2.Day: int</div>
+<div class="fsdocs-tip" id="fs41">val daysWithDividends2: (int * decimal) list</div>
+<div class="fsdocs-tip" id="fs42">val choose: chooser: (&#39;T -&gt; &#39;U option) -&gt; list: &#39;T list -&gt; &#39;U list</div>
+<div class="fsdocs-tip" id="fs43">val daysWithoutDividends: int list</div>
+
+    </div>
+</main>
+<aside id="fsdocs-page-menu">
+    <p id="on-this-page">On this page</p>
+    <ul>
+  <li class="level-1">
+    <a href="#Match-Expressions">
+      Match Expressions
+    </a>
+  </li>
+  <li class="level-2">
+    <a href="#Question-1">
+      Question 1
+    </a>
+  </li>
+  <li class="level-2">
+    <a href="#Question-2">
+      Question 2
+    </a>
+  </li>
+  <li class="level-2">
+    <a href="#Question-3">
+      Question 3
+    </a>
+  </li>
+  <li class="level-2">
+    <a href="#Question-4">
+      Question 4
+    </a>
+  </li>
+</ul>
+</aside>
+<dialog>
+    <input type="search" placeholder="Search docs" />
+    <div class="results">
+        <ul></ul>
+        <p class="empty">Type something to start searching.</p>
+    </div>
+</dialog>
+<script type="module" src="/Teaching/content/fsdocs-tips.js"></script>
+<script type="module" src="/Teaching/content/fsdocs-theme-toggle.js"></script>
+<script type="module" src="/Teaching/content/fsdocs-theme.js"></script>
+<script type="module" src="/Teaching/content/fsdocs-search.js"></script>
+
+</body>
+</html>

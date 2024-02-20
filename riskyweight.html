@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en" data-root="/Teaching/">
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Nicholas Hirschey; Davide Costa" name="author">
+    <!-- Opengraph properties (https://ogp.me/) -->
+    <meta property="og:site_name" content="Teaching">
+    <meta property="og:title" content="Risky Weights" />
+    <meta property="og:url" content="/Teaching/riskyweight.html">
+    <meta property="og:type" content="website" />
+    <!-- Twitter cards (https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="/Teaching/">
+    <meta name="twitter:title" content="Risky Weights">
+    
+    <title>Risky Weights | Teaching</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="/Teaching/img/logo.png" rel="icon" sizes="32x32" type="image/png"/>
+    <script type="application/javascript" src="/Teaching/content/fsdocs-theme-set-dark.js"></script>
+    <link href="/Teaching/content/fsdocs-default.css" rel="stylesheet" type="text/css"/>
+    <link href="/Teaching/content/fsdocs-theme.css" rel="stylesheet" type="text/css"/>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js"></script>
+    
+</head>
+<body class="content">
+<header>
+    <div class="start">
+        <div id="menu-toggle">
+            <iconify-icon class="icon closed" height="22" icon="eva:menu-fill" width="22"></iconify-icon>
+            <iconify-icon class="icon open" height="22" icon="mi:close" width="22"></iconify-icon>
+            <input type="checkbox" name="mobile-menu" />
+            <ul class="menu">
+                <li class="nav-header">Links</li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/nhirschey/Teaching/blob/main/LICENSE.md">License</a>
+                </li>
+                <li class="nav-item"><a class="nav-link"
+                                        href="https://github.com/nhirschey/Teaching/blob/main/CHANGELOG.md">Release
+                    Notes</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/nhirschey/Teaching/">Source
+                    Repository</a></li>
+                <li class="nav-header ">
+  Getting Started
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/install.html">
+    Install Software
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/learn-fsharp.html">
+    Learn F#
+  </a>
+</li>             
+<li class="nav-header active">
+  Lectures
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/stockslongrun.html">
+    Stocks for the long run
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/stocksandbonds.html">
+    Stocks and bonds
+  </a>
+</li>             
+<li class="nav-item active">
+  <a class="nav-link" href="/Teaching/riskyweight.html">
+    Risky Weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolatilityTiming.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolatilityManagedTypes.html">
+    Volatility Managed, but with different vols
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolAndReturnPred.html">
+    Volatility and Return predictions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/mveComparisons.html">
+    More managed portfolio comparisons
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/PortfolioFormation-SimpleExample.html">
+    Building a strategy
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Momentum-Class.html">
+    Momentum Signal
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/optimization.html">
+    Optimization
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/revisitRiskyWeights.html">
+    Revisiting Mean-variance optimal risky weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/premiums.html">
+    Premiums
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/calls-nn.html">
+    Calls NN
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/portfolio-statistics.html">
+    Basic Portfolio Statistics
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/sentiment-mlnet.html">
+    Sentiment classification
+  </a>
+</li>             
+<li class="nav-header ">
+  Assignments
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-1-download-data.html">
+    Webscraping HTML to CSV
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-tuples-and-records.html">
+    Tuples and Records (with solutions)
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-collection-functions.html">
+    Collection functions (with solutions)
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignment-risky-weights.html">
+    Risky Weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignment-volatility-timing.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/select-project-signal.html">
+    Select Project Signals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/signal-exploration.html">
+    Signal Exploration
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/assignment-signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/assignment-performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-plotting.html">
+    Plotting (with solutions)
+  </a>
+</li>             
+<li class="nav-header ">
+  Practice Quizzes
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-list-module.html">
+    List module functions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-options.html">
+    Options
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-match-expressions.html">
+    Match expressions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-map-collection.html">
+    Map collection
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-discriminated-union.html">
+    Dicriminated Union
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-portfolios.html">
+    Portfolios
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-factors.html">
+    Factors
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-folding.html">
+    Fold and Friends
+  </a>
+</li>             
+<li class="nav-header ">
+  Other
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Common.html">
+    Common
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/loading-scripts.html">
+    Loading external scripts
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Portfolio.html">
+    Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/YahooFinance.html">
+    YahooFinance
+  </a>
+</li>
+                
+            </ul>
+        </div>
+        <a href="/Teaching/">
+            <img alt="Header menu logo" src="/Teaching/img/logo.png">
+            <strong>Teaching</strong>
+        </a>
+    </div>
+    <div class="end">
+        <a href="https://github.com/nhirschey/Teaching/" target="_blank">
+            <iconify-icon icon="uil:github" width="26" height="26"></iconify-icon>
+        </a>
+        <iconify-icon id="search-btn" icon="carbon:search" class="search" width="24" height="24"></iconify-icon>
+        <fsdocs-theme-toggle></fsdocs-theme-toggle>
+    </div>
+</header>
+<aside id="fsdocs-main-menu">
+    <ul class="menu">
+        <li class="nav-header">Links</li>
+        <li class="nav-item"><a class="nav-link" href="https://github.com/nhirschey/Teaching/blob/main/LICENSE.md">License</a>
+        </li>
+        <li class="nav-item"><a class="nav-link"
+                                href="https://github.com/nhirschey/Teaching/blob/main/CHANGELOG.md">Release
+            Notes</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://github.com/nhirschey/Teaching/">Source
+            Repository</a></li>
+        <li class="nav-header ">
+  Getting Started
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/install.html">
+    Install Software
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/learn-fsharp.html">
+    Learn F#
+  </a>
+</li>             
+<li class="nav-header active">
+  Lectures
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/stockslongrun.html">
+    Stocks for the long run
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/stocksandbonds.html">
+    Stocks and bonds
+  </a>
+</li>             
+<li class="nav-item active">
+  <a class="nav-link" href="/Teaching/riskyweight.html">
+    Risky Weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolatilityTiming.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolatilityManagedTypes.html">
+    Volatility Managed, but with different vols
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolAndReturnPred.html">
+    Volatility and Return predictions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/mveComparisons.html">
+    More managed portfolio comparisons
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/PortfolioFormation-SimpleExample.html">
+    Building a strategy
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Momentum-Class.html">
+    Momentum Signal
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/optimization.html">
+    Optimization
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/revisitRiskyWeights.html">
+    Revisiting Mean-variance optimal risky weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/premiums.html">
+    Premiums
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/calls-nn.html">
+    Calls NN
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/portfolio-statistics.html">
+    Basic Portfolio Statistics
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/sentiment-mlnet.html">
+    Sentiment classification
+  </a>
+</li>             
+<li class="nav-header ">
+  Assignments
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-1-download-data.html">
+    Webscraping HTML to CSV
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-tuples-and-records.html">
+    Tuples and Records (with solutions)
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-collection-functions.html">
+    Collection functions (with solutions)
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignment-risky-weights.html">
+    Risky Weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignment-volatility-timing.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/select-project-signal.html">
+    Select Project Signals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/signal-exploration.html">
+    Signal Exploration
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/assignment-signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/assignment-performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-plotting.html">
+    Plotting (with solutions)
+  </a>
+</li>             
+<li class="nav-header ">
+  Practice Quizzes
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-list-module.html">
+    List module functions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-options.html">
+    Options
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-match-expressions.html">
+    Match expressions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-map-collection.html">
+    Map collection
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-discriminated-union.html">
+    Dicriminated Union
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-portfolios.html">
+    Portfolios
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-factors.html">
+    Factors
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-folding.html">
+    Fold and Friends
+  </a>
+</li>             
+<li class="nav-header ">
+  Other
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Common.html">
+    Common
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/loading-scripts.html">
+    Loading external scripts
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Portfolio.html">
+    Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/YahooFinance.html">
+    YahooFinance
+  </a>
+</li>
+        
+    </ul>
+</aside>
+<main>
+    <div id="content">
+        
+<p><a href="https://mybinder.org/v2/gh/nhirschey/teaching/gh-pages?filepath=riskyweight.ipynb"><img src="img/badge-binder.svg" alt="Binder" /></a>&emsp;
+<a href="/Teaching//riskyweight.fsx"><img src="img/badge-script.svg" alt="Script" /></a>&emsp;
+<a href="/Teaching//riskyweight.ipynb"><img src="img/badge-notebook.svg" alt="Notebook" /></a></p>
+<h1><a name="Choosing-the-risky-asset-weight-in-your-portfolio" class="anchor" href="#Choosing-the-risky-asset-weight-in-your-portfolio">Choosing the risky asset weight in your portfolio</a></h1>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="pp">#r</span> <span class="s">&quot;nuget: FSharp.Stats, 0.5.0&quot;</span>
+<span class="pp">#r</span> <span class="s">&quot;nuget: Plotly.NET, 3.*&quot;</span>
+<span class="pp">#r</span> <span class="s">&quot;nuget: Plotly.NET.Interactive, 3.*&quot;</span>
+
+
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="id">System</span>
+
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="id">FSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="id">Stats</span>
+
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="id">Plotly</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="id">NET</span>
+</code></pre>
+<h1><a name="Portfolios-of-a-risky-asset-and-the-risk-free-asset" class="anchor" href="#Portfolios-of-a-risky-asset-and-the-risk-free-asset">Portfolios of a risky asset and the risk-free asset</a></h1>
+<h2><a name="Portfolio-return" class="anchor" href="#Portfolio-return">Portfolio return</a></h2>
+<p>Suppose an investor has a portfolio comprised of a risky asset and the risk-free asset. The risky asset has return <span class="math">\(r_i\)</span> and the risk-free asset has return <span class="math">\(r_f\)</span>. If <span class="math">\(w\)</span> is the weight that the investor puts on the risky asset, then the portfolio return is</p>
+<p><span class="math">\[r_p = w r_i + (1-w) r_f = w (r_i - r_f) + r_f\]</span></p>
+<p>If we put this in terms of excess returns, meaning returns in excess of the risk-free rate, then the portfolio excess return is</p>
+<p><span class="math">\[r_p - r_f = w (r_i - r_f)\]</span>.</p>
+<p>So if we work in excess returns the excess return of the portfolio is the risky weight times the risky asset's excess return.</p>
+<p>When <span class="math">\(w &lt; 0\)</span> we are short the risky asset and long the risk-free asset, when <span class="math">\(0 &lt; w &lt; 1\)</span> we are long both the risky and risk-free asset, and when <span class="math">\(w &gt; 1\)</span> we are short the risk-free asset and long the risky asset.</p>
+<p>Does this check out? Imagine that you have $1 and you borrow $1 at the risk-free rate for a net stake of $2. Assuming that you invest in an asset with a return of 15% and the risk-free rate is 4%, what are you left with?</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs6', 6)" onmouseover="showTip(event, 'fs6', 6)" class="id">invest</span> <span class="o">=</span> <span class="n">1.0m</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs7', 7)" onmouseover="showTip(event, 'fs7', 7)" class="id">borrow</span> <span class="o">=</span> <span class="n">1.0m</span> 
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs8', 8)" onmouseover="showTip(event, 'fs8', 8)" class="id">ret</span> <span class="o">=</span> <span class="n">0.15m</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs9', 9)" onmouseover="showTip(event, 'fs9', 9)" class="id">rf</span> <span class="o">=</span> <span class="n">0.04m</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs10', 10)" onmouseover="showTip(event, 'fs10', 10)" class="id">result</span> <span class="o">=</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs6', 11)" onmouseover="showTip(event, 'fs6', 11)" class="id">invest</span> <span class="o">+</span> <span onmouseout="hideTip(event, 'fs7', 12)" onmouseover="showTip(event, 'fs7', 12)" class="id">borrow</span><span class="pn">)</span><span class="o">*</span><span class="pn">(</span><span class="n">1.0m</span><span class="o">+</span><span onmouseout="hideTip(event, 'fs8', 13)" onmouseover="showTip(event, 'fs8', 13)" class="id">ret</span><span class="pn">)</span><span class="o">-</span><span onmouseout="hideTip(event, 'fs7', 14)" onmouseover="showTip(event, 'fs7', 14)" class="id">borrow</span><span class="o">*</span><span class="pn">(</span><span class="n">1.0m</span><span class="o">+</span><span onmouseout="hideTip(event, 'fs9', 15)" onmouseover="showTip(event, 'fs9', 15)" class="id">rf</span><span class="pn">)</span>
+<span onmouseout="hideTip(event, 'fs11', 16)" onmouseover="showTip(event, 'fs11', 16)" class="fn">printfn</span> <span class="s">$&quot;You are left with {</span><span onmouseout="hideTip(event, 'fs10', 17)" onmouseover="showTip(event, 'fs10', 17)" class="id">result</span><span class="s">}&quot;</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>You are left with 1.260</code></pre></td></tr></table>
+<p>If we calculate this using weights ...</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs12', 18)" onmouseover="showTip(event, 'fs12', 18)" class="id">w</span> <span class="o">=</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs6', 19)" onmouseover="showTip(event, 'fs6', 19)" class="id">invest</span> <span class="o">+</span> <span onmouseout="hideTip(event, 'fs7', 20)" onmouseover="showTip(event, 'fs7', 20)" class="id">borrow</span><span class="pn">)</span><span class="o">/</span><span onmouseout="hideTip(event, 'fs6', 21)" onmouseover="showTip(event, 'fs6', 21)" class="id">invest</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs13', 22)" onmouseover="showTip(event, 'fs13', 22)" class="id">result2</span> <span class="o">=</span> <span class="n">1m</span> <span class="o">+</span> <span onmouseout="hideTip(event, 'fs9', 23)" onmouseover="showTip(event, 'fs9', 23)" class="id">rf</span> <span class="o">+</span> <span onmouseout="hideTip(event, 'fs12', 24)" onmouseover="showTip(event, 'fs12', 24)" class="id">w</span><span class="o">*</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs8', 25)" onmouseover="showTip(event, 'fs8', 25)" class="id">ret</span> <span class="o">-</span> <span onmouseout="hideTip(event, 'fs9', 26)" onmouseover="showTip(event, 'fs9', 26)" class="id">rf</span><span class="pn">)</span>
+<span onmouseout="hideTip(event, 'fs11', 27)" onmouseover="showTip(event, 'fs11', 27)" class="fn">printfn</span> <span class="s">$&quot;You are left with {</span><span onmouseout="hideTip(event, 'fs13', 28)" onmouseover="showTip(event, 'fs13', 28)" class="id">result2</span><span class="s">}&quot;</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>You are left with 1.26</code></pre></td></tr></table>
+<p>... we get the same result.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs10', 29)" onmouseover="showTip(event, 'fs10', 29)" class="id">result</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs13', 30)" onmouseover="showTip(event, 'fs13', 30)" class="id">result2</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val it: bool = true</code></pre></td></tr></table>
+<h2><a name="Portfolio-variance" class="anchor" href="#Portfolio-variance">Portfolio variance</a></h2>
+<p>Recall the formula for variance of a portfolio consisting of stocks <span class="math">\(x\)</span> and <span class="math">\(y\)</span>:</p>
+<p><span class="math">\[\sigma^2 = w_x^2 \sigma^2_x + w_y^2 \sigma^2_y + 2 w_x w_y cov(r_x,r_y),\]</span></p>
+<p>where <span class="math">\(w_x\)</span> and <span class="math">\(w_y\)</span> are the weights in stocks <span class="math">\(x\)</span> and <span class="math">\(y\)</span>, <span class="math">\(r_x\)</span> and <span class="math">\(r_y\)</span> are the stock returns, <span class="math">\(\sigma^2\)</span> is variance, and <span class="math">\(cov(.,.)\)</span> is covariance.</p>
+<p>If one asset is the risk free asset (borrowing a risk-free bond), then this asset does not vary, so the risk free variance and covariance terms are zero. Thus we are left with the result that if we leverage risky asset <span class="math">\(x\)</span> by borrowing or lending the risk-free asset, then our leveraged portfolio's standard deviation (<span class="math">\(\sigma\)</span>) is</p>
+<p><span class="math">\[\sigma^2 = w_x^2 \sigma^2_x \rightarrow \sigma = w_x \sigma_x.\]</span></p>
+<h1><a name="Mean-Variance-optimal-weight" class="anchor" href="#Mean-Variance-optimal-weight">Mean-Variance optimal weight</a></h1>
+<p>An investor with mean-variance preferences will try to maximize utility of the form</p>
+<p><span class="math">\[u = \mu - \gamma \frac{\sigma^2}{2}\]</span></p>
+<p>where <span class="math">\(\mu\)</span> is the expected portfolio return, <span class="math">\(\sigma\)</span> is the standard deviation of the portfolio, and <span class="math">\(\gamma\)</span> is the investor's coefficient of relative risk aversion.</p>
+<p>If our portfolio is comprised of a risky asset <em>x</em> and the risk-free asset, then this objective function can be written</p>
+<p><span class="math">\[u = w_x (\mu_x - r_f) + r_f - \gamma \frac{w_x^2 \sigma_x^2}{2}.\]</span></p>
+<p>To maximize this with respect to <span class="math">\(w_x\)</span> we take the derivative and set it equal to zero:</p>
+<p><span class="math">\[\frac{\partial u}{\partial w_x} = (\mu_x - r_f) - \gamma w_x \sigma_x^2 = 0\]</span></p>
+<p>This gives us the optimal weight</p>
+<p><span class="math">\[w_x = \frac{\mu_x - r_f}{\gamma \sigma_x^2}.\]</span></p>
+<p>It is common to define <span class="math">\(\mu\)</span> as the expected excess return, so that <span class="math">\(\mu_x = r_x - r_f\)</span>. Then the optimal weight is</p>
+<p><span class="math">\[w_x = \frac{\mu_x}{\gamma \sigma_x^2}.\]</span></p>
+<p>Typical values for <span class="math">\(\gamma\)</span> range from two to five. Higher values for <span class="math">\(\gamma\)</span> indicate higher risk aversion.</p>
+<p>Examples</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs14', 31)" onmouseover="showTip(event, 'fs14', 31)" class="fn">meanVarianceWeight</span> <span onmouseout="hideTip(event, 'fs15', 32)" onmouseover="showTip(event, 'fs15', 32)" class="fn">mu</span> <span onmouseout="hideTip(event, 'fs16', 33)" onmouseover="showTip(event, 'fs16', 33)" class="fn">sigma</span> <span onmouseout="hideTip(event, 'fs17', 34)" onmouseover="showTip(event, 'fs17', 34)" class="fn">gamma</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs15', 35)" onmouseover="showTip(event, 'fs15', 35)" class="fn">mu</span><span class="o">/</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs17', 36)" onmouseover="showTip(event, 'fs17', 36)" class="fn">gamma</span><span class="o">*</span><span onmouseout="hideTip(event, 'fs16', 37)" onmouseover="showTip(event, 'fs16', 37)" class="fn">sigma</span><span class="o">**</span><span class="n">2.0</span><span class="pn">)</span>
+
+<span class="pn">[</span> <span class="k">for</span> <span onmouseout="hideTip(event, 'fs17', 38)" onmouseover="showTip(event, 'fs17', 38)" class="fn">gamma</span> <span class="k">in</span> <span class="pn">[</span><span class="n">1.0</span> <span class="o">..</span> <span class="n">5.0</span> <span class="pn">]</span> <span class="k">do</span> 
+    <span class="pn">{|</span> <span class="prop">Gamma</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs17', 39)" onmouseover="showTip(event, 'fs17', 39)" class="fn">gamma</span>
+       <span class="prop">RiskyWeight</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs14', 40)" onmouseover="showTip(event, 'fs14', 40)" class="fn">meanVarianceWeight</span> <span class="n">0.075</span> <span class="n">0.14</span> <span onmouseout="hideTip(event, 'fs17', 41)" onmouseover="showTip(event, 'fs17', 41)" class="fn">gamma</span> <span class="pn">|}</span> <span class="pn">]</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val meanVarianceWeight: mu: float -&gt; sigma: float -&gt; gamma: float -&gt; float
+val it: {| Gamma: float; RiskyWeight: float |} list =
+  [{ Gamma = 1.0
+     RiskyWeight = 3.826530612 }; { Gamma = 2.0
+                                    RiskyWeight = 1.913265306 };
+   { Gamma = 3.0
+     RiskyWeight = 1.275510204 }; { Gamma = 4.0
+                                    RiskyWeight = 0.9566326531 };
+   { Gamma = 5.0
+     RiskyWeight = 0.7653061224 }]</code></pre></td></tr></table>
+<h1><a name="Kelly-Criterion" class="anchor" href="#Kelly-Criterion">Kelly Criterion</a></h1>
+<p>The mean-variance optimal weight has a similar form to the optimal weight from the Kelly Criterion (Kelly, 1956). The Kelly Criterion is the weight that maximizes the expected geometric growth rate of an investor's wealth or, equivalently, the expected value of log wealth. It is often seen in industry as a formula for determining the optimal fraction of your wealth to bet on a risky asset. Originally developed for gambling, it can also be used for asset management.</p>
+<p>The objective is to maximize wealth, which grows as</p>
+<p><span class="math">\[(1+w r_1)(1+w r_2)...(1+w r_T)=\prod_{i=1}^T (1 + w_i r_i)\]</span></p>
+<p>It can be shown that the expected long-term growth rate is</p>
+<p><span class="math">\[\approx w \mu - \frac{1}{2} w^2 \sigma^2\]</span></p>
+<p>This is maximized when</p>
+<p><span class="math">\[w = \frac{\mu}{\sigma^2}\]</span></p>
+<p>where <span class="math">\(\mu\)</span> is the expected excess return of the risky asset and <span class="math">\(\sigma^2\)</span> is the variance of the risky asset.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs18', 42)" onmouseover="showTip(event, 'fs18', 42)" class="fn">kellyWeight</span> <span onmouseout="hideTip(event, 'fs15', 43)" onmouseover="showTip(event, 'fs15', 43)" class="fn">mu</span> <span onmouseout="hideTip(event, 'fs16', 44)" onmouseover="showTip(event, 'fs16', 44)" class="fn">sigma</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs15', 45)" onmouseover="showTip(event, 'fs15', 45)" class="fn">mu</span><span class="o">/</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs16', 46)" onmouseover="showTip(event, 'fs16', 46)" class="fn">sigma</span><span class="o">**</span><span class="n">2.0</span><span class="pn">)</span>
+
+<span onmouseout="hideTip(event, 'fs18', 47)" onmouseover="showTip(event, 'fs18', 47)" class="fn">kellyWeight</span> <span class="n">0.075</span> <span class="n">0.14</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val kellyWeight: mu: float -&gt; sigma: float -&gt; float
+val it: float = 3.826530612</code></pre></td></tr></table>
+<blockquote>
+<p>Practice: Use a loop to calculate the Kelly Criterion weight for a range of <span class="math">\(\mu\)</span> and <span class="math">\(\sigma\)</span> values.</p>
+<p>First, hold <span class="math">\(\sigma\)</span> fixed and vary <span class="math">\(\mu\)</span> from 0.05 to 0.10 by 0.01. What happens to the optimal weight as <span class="math">\(\mu\)</span> increases?</p>
+</blockquote>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// Answer here</span>
+</code></pre>
+<blockquote>
+<p>Second, hold <span class="math">\(\mu\)</span> fixed and vary <span class="math">\(\sigma\)</span> from 0.1 to 0.2 by 0.01. What happens to the optimal weight as <span class="math">\(\sigma\)</span> increases?</p>
+</blockquote>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// Answer here</span>
+</code></pre>
+<h1><a name="Simulating-results-from-different-portfolio-rules" class="anchor" href="#Simulating-results-from-different-portfolio-rules">Simulating results from different portfolio rules</a></h1>
+<p>We can simulate the results of different portfolio rules, using the mean-variance weight and varying <span class="math">\(\gamma\)</span>. The Kelly Criterion corresponds to <span class="math">\(\gamma = 1\)</span>.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs19', 48)" onmouseover="showTip(event, 'fs19', 48)" class="id">seed</span> <span class="o">=</span> <span class="n">99</span>
+<span onmouseout="hideTip(event, 'fs20', 49)" onmouseover="showTip(event, 'fs20', 49)" class="m">Random</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs21', 50)" onmouseover="showTip(event, 'fs21', 50)" class="id">SetSampleGenerator</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs20', 51)" onmouseover="showTip(event, 'fs20', 51)" class="m">Random</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 52)" onmouseover="showTip(event, 'fs22', 52)" class="id">RandThreadSafe</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs19', 53)" onmouseover="showTip(event, 'fs19', 53)" class="id">seed</span><span class="pn">)</span><span class="pn">)</span>
+
+<span class="c">// Let&#39;s start with this sample of returns</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs23', 54)" onmouseover="showTip(event, 'fs23', 54)" class="id">rnorm1</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 55)" onmouseover="showTip(event, 'fs24', 55)" class="id">Distributions</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 56)" onmouseover="showTip(event, 'fs25', 56)" class="id">Continuous</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs26', 57)" onmouseover="showTip(event, 'fs26', 57)" class="rt">Normal</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs27', 58)" onmouseover="showTip(event, 'fs27', 58)" class="id">Init</span> <span class="n">0.01</span> <span class="n">1.0</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs28', 59)" onmouseover="showTip(event, 'fs28', 59)" class="id">careerLength</span> <span class="o">=</span> <span class="n">30</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs29', 60)" onmouseover="showTip(event, 'fs29', 60)" class="id">draws</span> <span class="o">=</span>
+    <span class="pn">[</span> <span class="k">for</span> <span onmouseout="hideTip(event, 'fs30', 61)" onmouseover="showTip(event, 'fs30', 61)" class="fn">draw</span> <span class="k">in</span> <span class="pn">[</span><span class="n">1</span> <span class="o">..</span> <span class="n">100</span><span class="pn">]</span> <span class="k">do</span> 
+        <span class="pn">[</span> <span class="k">for</span> <span onmouseout="hideTip(event, 'fs31', 62)" onmouseover="showTip(event, 'fs31', 62)" class="fn">year</span> <span class="k">in</span> <span class="pn">[</span><span class="n">1</span> <span class="o">..</span> <span class="n">10_000</span><span class="pn">]</span> <span class="k">do</span>
+            <span onmouseout="hideTip(event, 'fs23', 63)" onmouseover="showTip(event, 'fs23', 63)" class="id">rnorm1</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs32', 64)" onmouseover="showTip(event, 'fs32', 64)" class="id">Sample</span><span class="pn">(</span><span class="pn">)</span> <span class="pn">]</span><span class="pn">]</span>
+</code></pre>
+<p>Those are our returns. Let's calculate it for a particular gamma.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs17', 65)" onmouseover="showTip(event, 'fs17', 65)" class="id">gamma</span> <span class="o">=</span> <span class="n">2.0</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs33', 66)" onmouseover="showTip(event, 'fs33', 66)" class="id">ww</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs14', 67)" onmouseover="showTip(event, 'fs14', 67)" class="fn">meanVarianceWeight</span> <span class="n">0.01</span> <span class="n">1.0</span> <span onmouseout="hideTip(event, 'fs17', 68)" onmouseover="showTip(event, 'fs17', 68)" class="id">gamma</span>
+</code></pre>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs34', 69)" onmouseover="showTip(event, 'fs34', 69)" class="fn">investmentResult</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs35', 70)" onmouseover="showTip(event, 'fs35', 70)" class="fn">riskyWeight</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs36', 71)" onmouseover="showTip(event, 'fs36', 71)" class="vt">float</span><span class="pn">)</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs37', 72)" onmouseover="showTip(event, 'fs37', 72)" class="fn">returns</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs36', 73)" onmouseover="showTip(event, 'fs36', 73)" class="vt">float</span> <span onmouseout="hideTip(event, 'fs38', 74)" onmouseover="showTip(event, 'fs38', 74)" class="rt">list</span><span class="pn">)</span>  <span class="o">=</span>
+    <span class="k">let</span> <span class="k">mutable</span> <span onmouseout="hideTip(event, 'fs39', 75)" onmouseover="showTip(event, 'fs39', 75)" class="mv">wealth</span> <span class="o">=</span> <span class="n">1.0</span>
+    <span class="k">for</span> <span onmouseout="hideTip(event, 'fs40', 76)" onmouseover="showTip(event, 'fs40', 76)" class="fn">yearReturn</span> <span class="k">in</span> <span onmouseout="hideTip(event, 'fs37', 77)" onmouseover="showTip(event, 'fs37', 77)" class="fn">returns</span> <span class="k">do</span> 
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs41', 78)" onmouseover="showTip(event, 'fs41', 78)" class="fn">newWealth</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs39', 79)" onmouseover="showTip(event, 'fs39', 79)" class="mv">wealth</span><span class="o">*</span><span class="pn">(</span><span class="n">1.0</span> <span class="o">+</span> <span onmouseout="hideTip(event, 'fs35', 80)" onmouseover="showTip(event, 'fs35', 80)" class="fn">riskyWeight</span><span class="o">*</span><span onmouseout="hideTip(event, 'fs40', 81)" onmouseover="showTip(event, 'fs40', 81)" class="fn">yearReturn</span><span class="pn">)</span>
+        <span class="c">// If we go bankrupt, we are done</span>
+        <span onmouseout="hideTip(event, 'fs39', 82)" onmouseover="showTip(event, 'fs39', 82)" class="mv">wealth</span> <span class="k">&lt;-</span> <span onmouseout="hideTip(event, 'fs42', 83)" onmouseover="showTip(event, 'fs42', 83)" class="fn">max</span> <span class="n">0.0</span> <span onmouseout="hideTip(event, 'fs41', 84)" onmouseover="showTip(event, 'fs41', 84)" class="fn">newWealth</span>
+    <span class="c">// This is the last wealth value</span>
+    <span onmouseout="hideTip(event, 'fs39', 85)" onmouseover="showTip(event, 'fs39', 85)" class="mv">wealth</span>
+
+<span onmouseout="hideTip(event, 'fs34', 86)" onmouseover="showTip(event, 'fs34', 86)" class="fn">investmentResult</span>  <span class="n">1.0</span> <span class="pn">[</span><span class="n">0.1</span><span class="pn">;</span> <span class="n">0.1</span><span class="pn">;</span> <span class="n">0.1</span><span class="pn">]</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>1.331</code></pre></td></tr></table>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs34', 87)" onmouseover="showTip(event, 'fs34', 87)" class="fn">investmentResult</span>  <span onmouseout="hideTip(event, 'fs33', 88)" onmouseover="showTip(event, 'fs33', 88)" class="id">ww</span> <span class="pn">[</span><span class="n">0.1</span><span class="pn">;</span> <span class="n">0.1</span><span class="pn">;</span> <span class="n">0.1</span><span class="pn">]</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>1.00150075</code></pre></td></tr></table>
+<p>Now do it for all our draws.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs43', 89)" onmouseover="showTip(event, 'fs43', 89)" class="id">myResult</span> <span class="o">=</span>
+    <span class="pn">[</span> <span class="k">for</span> <span onmouseout="hideTip(event, 'fs44', 90)" onmouseover="showTip(event, 'fs44', 90)" class="fn">draw</span> <span class="k">in</span> <span onmouseout="hideTip(event, 'fs29', 91)" onmouseover="showTip(event, 'fs29', 91)" class="id">draws</span> <span class="k">do</span> <span onmouseout="hideTip(event, 'fs34', 92)" onmouseover="showTip(event, 'fs34', 92)" class="fn">investmentResult</span>  <span onmouseout="hideTip(event, 'fs33', 93)" onmouseover="showTip(event, 'fs33', 93)" class="id">ww</span> <span onmouseout="hideTip(event, 'fs44', 94)" onmouseover="showTip(event, 'fs44', 94)" class="fn">draw</span><span class="pn">]</span>
+
+<span onmouseout="hideTip(event, 'fs43', 95)" onmouseover="showTip(event, 'fs43', 95)" class="id">myResult</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>[2.837887967; 1.023004546; 1.643739485; 2.12179225; 1.436309156; 2.346815953;
+ 0.8786401356; 3.792752596; 1.815664246; 2.972106488; 1.517589968; 2.72606676;
+ 1.155107973; 1.410694065; 1.632517331; 1.947730141; 2.279910946; 1.481477892;
+ 2.086684258; 0.538281238; 2.424849205; 1.468674191; 1.143783327; 1.833370522;
+ 1.6039682; 1.368936275; 0.616193267; 1.263363465; 1.947484509; 1.297083759;
+ 0.8644086517; 1.754023531; 1.036148661; 3.989536962; 0.9810447439; 3.340688473;
+ 1.148285313; 1.288333618; 1.734002934; 1.23840977; 2.793957289; 1.001289703;
+ 1.461894733; 3.625290137; 2.028797723; 2.550341752; 1.306375484; 1.828023863;
+ 1.044705207; 1.150132042; 1.927413813; 1.461602833; 1.065465273; 1.045489968;
+ 1.014470884; 1.671204029; 1.284125979; 2.096228342; 0.9096693827; 3.574390319;
+ 0.9957710939; 1.800322085; 2.254395349; 0.4030964431; 2.036395802; 1.689207898;
+ 1.345681325; 0.665578875; 0.440331489; 0.918066828; 1.896234599; 1.664944745;
+ 5.056735953; 0.8511369538; 3.299352623; 0.9708549067; 4.549881402; 2.913110159;
+ 0.5309154183; 1.944486473; 4.581272808; 3.034970632; 0.9535913349; 1.787086779;
+ 0.734172244; 1.464532329; 1.17019237; 0.8295362389; 1.195536513; 0.6561338853;
+ 1.353833407; 1.084669355; 0.666350047; 1.181805047; 1.374376343; 0.7532359753;
+ 1.322688859; 2.582040177; 2.217090877; 0.9919548743]</code></pre></td></tr></table>
+<p>Now let's calculate some statistics.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">type</span> <span onmouseout="hideTip(event, 'fs45', 96)" onmouseover="showTip(event, 'fs45', 96)" class="rt">SimulationSummary</span> <span class="o">=</span>
+    <span class="pn">{</span> <span class="prop">Gamma</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs36', 97)" onmouseover="showTip(event, 'fs36', 97)" class="vt">float</span> 
+      <span class="prop">AvgLogWealth</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs36', 98)" onmouseover="showTip(event, 'fs36', 98)" class="vt">float</span> 
+      <span class="prop">AvgWealth</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs36', 99)" onmouseover="showTip(event, 'fs36', 99)" class="vt">float</span>
+      <span class="prop">AvgGeometricGrowth</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs36', 100)" onmouseover="showTip(event, 'fs36', 100)" class="vt">float</span> 
+      <span class="prop">MinWealth</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs36', 101)" onmouseover="showTip(event, 'fs36', 101)" class="vt">float</span>
+      <span class="prop">FractionBankrupt</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs36', 102)" onmouseover="showTip(event, 'fs36', 102)" class="vt">float</span>
+      <span class="prop">FractionLoseMoney</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs36', 103)" onmouseover="showTip(event, 'fs36', 103)" class="vt">float</span> <span class="pn">}</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs46', 104)" onmouseover="showTip(event, 'fs46', 104)" class="fn">calcSummary</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs17', 105)" onmouseover="showTip(event, 'fs17', 105)" class="fn">gamma</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs36', 106)" onmouseover="showTip(event, 'fs36', 106)" class="vt">float</span><span class="pn">)</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs47', 107)" onmouseover="showTip(event, 'fs47', 107)" class="fn">nPeriods</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs48', 108)" onmouseover="showTip(event, 'fs48', 108)" class="vt">int</span><span class="pn">)</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs49', 109)" onmouseover="showTip(event, 'fs49', 109)" class="fn">wealths</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs38', 110)" onmouseover="showTip(event, 'fs38', 110)" class="rt">list</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs36', 111)" onmouseover="showTip(event, 'fs36', 111)" class="vt">float</span><span class="pn">&gt;</span><span class="pn">)</span> <span class="o">=</span>
+    <span class="pn">{</span> <span class="prop">Gamma</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs17', 112)" onmouseover="showTip(event, 'fs17', 112)" class="fn">gamma</span>
+      <span class="prop">AvgLogWealth</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs49', 113)" onmouseover="showTip(event, 'fs49', 113)" class="fn">wealths</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs50', 114)" onmouseover="showTip(event, 'fs50', 114)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs51', 115)" onmouseover="showTip(event, 'fs51', 115)" class="id">map</span> <span onmouseout="hideTip(event, 'fs52', 116)" onmouseover="showTip(event, 'fs52', 116)" class="fn">log</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs50', 117)" onmouseover="showTip(event, 'fs50', 117)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs53', 118)" onmouseover="showTip(event, 'fs53', 118)" class="id">average</span>
+      <span class="prop">AvgWealth</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs49', 119)" onmouseover="showTip(event, 'fs49', 119)" class="fn">wealths</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs50', 120)" onmouseover="showTip(event, 'fs50', 120)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs53', 121)" onmouseover="showTip(event, 'fs53', 121)" class="id">average</span>
+      <span class="prop">AvgGeometricGrowth</span> <span class="o">=</span> 
+        <span onmouseout="hideTip(event, 'fs49', 122)" onmouseover="showTip(event, 'fs49', 122)" class="fn">wealths</span> 
+        <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs50', 123)" onmouseover="showTip(event, 'fs50', 123)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs51', 124)" onmouseover="showTip(event, 'fs51', 124)" class="id">map</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs54', 125)" onmouseover="showTip(event, 'fs54', 125)" class="fn">w</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs54', 126)" onmouseover="showTip(event, 'fs54', 126)" class="fn">w</span><span class="o">**</span><span class="pn">(</span><span class="n">1.0</span><span class="o">/</span><span onmouseout="hideTip(event, 'fs36', 127)" onmouseover="showTip(event, 'fs36', 127)" class="fn">float</span> <span onmouseout="hideTip(event, 'fs47', 128)" onmouseover="showTip(event, 'fs47', 128)" class="fn">nPeriods</span><span class="pn">)</span> <span class="o">-</span> <span class="n">1.0</span><span class="pn">)</span> 
+        <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs50', 129)" onmouseover="showTip(event, 'fs50', 129)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs53', 130)" onmouseover="showTip(event, 'fs53', 130)" class="id">average</span>
+      <span class="prop">MinWealth</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs49', 131)" onmouseover="showTip(event, 'fs49', 131)" class="fn">wealths</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs50', 132)" onmouseover="showTip(event, 'fs50', 132)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs55', 133)" onmouseover="showTip(event, 'fs55', 133)" class="id">min</span>
+      <span class="prop">FractionBankrupt</span> <span class="o">=</span> 
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs56', 134)" onmouseover="showTip(event, 'fs56', 134)" class="fn">bankrupts</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs49', 135)" onmouseover="showTip(event, 'fs49', 135)" class="fn">wealths</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs50', 136)" onmouseover="showTip(event, 'fs50', 136)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs57', 137)" onmouseover="showTip(event, 'fs57', 137)" class="id">filter</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs54', 138)" onmouseover="showTip(event, 'fs54', 138)" class="fn">w</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs54', 139)" onmouseover="showTip(event, 'fs54', 139)" class="fn">w</span> <span class="o">=</span> <span class="n">0.0</span><span class="pn">)</span>
+        <span onmouseout="hideTip(event, 'fs36', 140)" onmouseover="showTip(event, 'fs36', 140)" class="fn">float</span> <span onmouseout="hideTip(event, 'fs56', 141)" onmouseover="showTip(event, 'fs56', 141)" class="fn">bankrupts</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs58', 142)" onmouseover="showTip(event, 'fs58', 142)" class="id">Length</span> <span class="o">/</span> <span onmouseout="hideTip(event, 'fs36', 143)" onmouseover="showTip(event, 'fs36', 143)" class="fn">float</span> <span onmouseout="hideTip(event, 'fs49', 144)" onmouseover="showTip(event, 'fs49', 144)" class="fn">wealths</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs58', 145)" onmouseover="showTip(event, 'fs58', 145)" class="id">Length</span>
+      <span class="prop">FractionLoseMoney</span> <span class="o">=</span> 
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs59', 146)" onmouseover="showTip(event, 'fs59', 146)" class="fn">lostMoney</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs49', 147)" onmouseover="showTip(event, 'fs49', 147)" class="fn">wealths</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs50', 148)" onmouseover="showTip(event, 'fs50', 148)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs57', 149)" onmouseover="showTip(event, 'fs57', 149)" class="id">filter</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs54', 150)" onmouseover="showTip(event, 'fs54', 150)" class="fn">w</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs54', 151)" onmouseover="showTip(event, 'fs54', 151)" class="fn">w</span> <span class="o">&lt;</span> <span class="n">1.0</span><span class="pn">)</span>
+        <span onmouseout="hideTip(event, 'fs36', 152)" onmouseover="showTip(event, 'fs36', 152)" class="fn">float</span> <span onmouseout="hideTip(event, 'fs59', 153)" onmouseover="showTip(event, 'fs59', 153)" class="fn">lostMoney</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs58', 154)" onmouseover="showTip(event, 'fs58', 154)" class="id">Length</span> <span class="o">/</span> <span onmouseout="hideTip(event, 'fs36', 155)" onmouseover="showTip(event, 'fs36', 155)" class="fn">float</span> <span onmouseout="hideTip(event, 'fs49', 156)" onmouseover="showTip(event, 'fs49', 156)" class="fn">wealths</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs58', 157)" onmouseover="showTip(event, 'fs58', 157)" class="id">Length</span>  
+      <span class="pn">}</span>
+</code></pre>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs46', 158)" onmouseover="showTip(event, 'fs46', 158)" class="fn">calcSummary</span> <span onmouseout="hideTip(event, 'fs17', 159)" onmouseover="showTip(event, 'fs17', 159)" class="id">gamma</span> <span onmouseout="hideTip(event, 'fs28', 160)" onmouseover="showTip(event, 'fs28', 160)" class="id">careerLength</span> <span onmouseout="hideTip(event, 'fs43', 161)" onmouseover="showTip(event, 'fs43', 161)" class="id">myResult</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val it: SimulationSummary = { Gamma = 2.0
+                              AvgLogWealth = 0.3996341337
+                              AvgWealth = 1.70989802
+                              AvgGeometricGrowth = 0.01356404241
+                              MinWealth = 0.4030964431
+                              FractionBankrupt = 0.0
+                              FractionLoseMoney = 0.21 }</code></pre></td></tr></table>
+<p>Now a function to do it for a particular gamma</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs60', 162)" onmouseover="showTip(event, 'fs60', 162)" class="fn">gammaRecord</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs15', 163)" onmouseover="showTip(event, 'fs15', 163)" class="fn">mu</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs36', 164)" onmouseover="showTip(event, 'fs36', 164)" class="vt">float</span><span class="pn">)</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs16', 165)" onmouseover="showTip(event, 'fs16', 165)" class="fn">sigma</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs36', 166)" onmouseover="showTip(event, 'fs36', 166)" class="vt">float</span><span class="pn">)</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs29', 167)" onmouseover="showTip(event, 'fs29', 167)" class="fn">draws</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs38', 168)" onmouseover="showTip(event, 'fs38', 168)" class="rt">list</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs38', 169)" onmouseover="showTip(event, 'fs38', 169)" class="rt">list</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs36', 170)" onmouseover="showTip(event, 'fs36', 170)" class="vt">float</span><span class="pn">&gt;</span><span class="pn">&gt;</span><span class="pn">)</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs17', 171)" onmouseover="showTip(event, 'fs17', 171)" class="fn">gamma</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs36', 172)" onmouseover="showTip(event, 'fs36', 172)" class="vt">float</span><span class="pn">)</span> <span class="o">=</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs54', 173)" onmouseover="showTip(event, 'fs54', 173)" class="fn">w</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs14', 174)" onmouseover="showTip(event, 'fs14', 174)" class="fn">meanVarianceWeight</span> <span onmouseout="hideTip(event, 'fs15', 175)" onmouseover="showTip(event, 'fs15', 175)" class="fn">mu</span> <span onmouseout="hideTip(event, 'fs16', 176)" onmouseover="showTip(event, 'fs16', 176)" class="fn">sigma</span> <span onmouseout="hideTip(event, 'fs17', 177)" onmouseover="showTip(event, 'fs17', 177)" class="fn">gamma</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs43', 178)" onmouseover="showTip(event, 'fs43', 178)" class="fn">myResult</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs29', 179)" onmouseover="showTip(event, 'fs29', 179)" class="fn">draws</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs50', 180)" onmouseover="showTip(event, 'fs50', 180)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs51', 181)" onmouseover="showTip(event, 'fs51', 181)" class="id">map</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs34', 182)" onmouseover="showTip(event, 'fs34', 182)" class="fn">investmentResult</span> <span onmouseout="hideTip(event, 'fs54', 183)" onmouseover="showTip(event, 'fs54', 183)" class="fn">w</span><span class="pn">)</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs28', 184)" onmouseover="showTip(event, 'fs28', 184)" class="fn">careerLength</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs29', 185)" onmouseover="showTip(event, 'fs29', 185)" class="fn">draws</span><span class="pn">[</span><span class="n">0</span><span class="pn">]</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs50', 186)" onmouseover="showTip(event, 'fs50', 186)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs61', 187)" onmouseover="showTip(event, 'fs61', 187)" class="id">length</span>
+    <span onmouseout="hideTip(event, 'fs46', 188)" onmouseover="showTip(event, 'fs46', 188)" class="fn">calcSummary</span> <span onmouseout="hideTip(event, 'fs17', 189)" onmouseover="showTip(event, 'fs17', 189)" class="fn">gamma</span> <span onmouseout="hideTip(event, 'fs28', 190)" onmouseover="showTip(event, 'fs28', 190)" class="fn">careerLength</span> <span onmouseout="hideTip(event, 'fs43', 191)" onmouseover="showTip(event, 'fs43', 191)" class="fn">myResult</span>
+
+<span onmouseout="hideTip(event, 'fs60', 192)" onmouseover="showTip(event, 'fs60', 192)" class="fn">gammaRecord</span> <span class="n">0.01</span> <span class="n">1.0</span> <span onmouseout="hideTip(event, 'fs29', 193)" onmouseover="showTip(event, 'fs29', 193)" class="id">draws</span> <span class="n">3.0</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>{ Gamma = 3.0
+  AvgLogWealth = 0.2942149837
+  AvgWealth = 1.426273684
+  AvgGeometricGrowth = 2.942253804e-05
+  MinWealth = 0.5613435247
+  FractionBankrupt = 0.0
+  FractionLoseMoney = 0.17 }</code></pre></td></tr></table>
+<p>Now do it for many gammas.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs62', 194)" onmouseover="showTip(event, 'fs62', 194)" class="id">ruleResults</span> <span class="o">=</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs63', 195)" onmouseover="showTip(event, 'fs63', 195)" class="fn">gammas</span> <span class="o">=</span> <span class="pn">[</span><span class="n">0.5</span> <span class="o">..</span> <span class="n">0.1</span> <span class="o">..</span> <span class="n">1.0</span><span class="pn">]</span> <span class="o">@</span> <span class="pn">[</span><span class="n">1.25</span> <span class="o">..</span> <span class="n">0.25</span> <span class="o">..</span> <span class="n">2.0</span><span class="pn">]</span>
+    <span class="pn">[</span> <span class="k">for</span> <span onmouseout="hideTip(event, 'fs17', 196)" onmouseover="showTip(event, 'fs17', 196)" class="fn">gamma</span> <span class="k">in</span> <span onmouseout="hideTip(event, 'fs63', 197)" onmouseover="showTip(event, 'fs63', 197)" class="fn">gammas</span> <span class="k">do</span>
+        <span onmouseout="hideTip(event, 'fs60', 198)" onmouseover="showTip(event, 'fs60', 198)" class="fn">gammaRecord</span> <span class="n">0.01</span> <span class="n">1.0</span> <span onmouseout="hideTip(event, 'fs29', 199)" onmouseover="showTip(event, 'fs29', 199)" class="id">draws</span> <span onmouseout="hideTip(event, 'fs17', 200)" onmouseover="showTip(event, 'fs17', 200)" class="fn">gamma</span> <span class="pn">]</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs64', 201)" onmouseover="showTip(event, 'fs64', 201)" class="id">veryLongRunChart</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs62', 202)" onmouseover="showTip(event, 'fs62', 202)" class="id">ruleResults</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs50', 203)" onmouseover="showTip(event, 'fs50', 203)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs51', 204)" onmouseover="showTip(event, 'fs51', 204)" class="id">map</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs65', 205)" onmouseover="showTip(event, 'fs65', 205)" class="fn">x</span> <span class="k">-&gt;</span> 
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs66', 206)" onmouseover="showTip(event, 'fs66', 206)" class="fn">kellyFraction</span> <span class="o">=</span> <span class="n">1.0</span> <span class="o">/</span> <span onmouseout="hideTip(event, 'fs65', 207)" onmouseover="showTip(event, 'fs65', 207)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs67', 208)" onmouseover="showTip(event, 'fs67', 208)" class="id">Gamma</span>
+        <span onmouseout="hideTip(event, 'fs66', 209)" onmouseover="showTip(event, 'fs66', 209)" class="fn">kellyFraction</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs65', 210)" onmouseover="showTip(event, 'fs65', 210)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs68', 211)" onmouseover="showTip(event, 'fs68', 211)" class="id">AvgGeometricGrowth</span><span class="pn">)</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs69', 212)" onmouseover="showTip(event, 'fs69', 212)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs70', 213)" onmouseover="showTip(event, 'fs70', 213)" class="id">Line</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs69', 214)" onmouseover="showTip(event, 'fs69', 214)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs71', 215)" onmouseover="showTip(event, 'fs71', 215)" class="id">withXAxisStyle</span><span class="pn">(</span><span class="s">&quot;Kelly fraction&quot;</span><span class="pn">)</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs69', 216)" onmouseover="showTip(event, 'fs69', 216)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs72', 217)" onmouseover="showTip(event, 'fs72', 217)" class="id">withYAxisStyle</span><span class="pn">(</span><span class="s">&quot;Average geometric growth&quot;</span><span class="pn">)</span>
+</code></pre>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs64', 218)" onmouseover="showTip(event, 'fs64', 218)" class="id">veryLongRunChart</span>
+</code></pre>
+<div id="f960361c-038f-4c79-9f55-27a641e8eb2f"><!-- Plotly chart will be drawn inside this DIV --></div>
+<script type="text/javascript">
+
+            var renderPlotly_f960361c038f4c799f5527a641e8eb2f = function() {
+            var fsharpPlotlyRequire = requirejs.config({context:'fsharp-plotly',paths:{plotly:'https://cdn.plot.ly/plotly-2.6.3.min'}}) || require;
+            fsharpPlotlyRequire(['plotly'], function(Plotly) {
+
+            var data = [{"type":"scatter","mode":"lines","x":[2.0,1.6666666666666667,1.4285714285714286,1.25,1.1111111111111112,1.0,0.8,0.6666666666666666,0.5714285714285714,0.5],"y":[9.740686217507566E-06,3.5931432269324934E-05,4.782216803905226E-05,5.301416684176496E-05,5.4845080090880624E-05,5.491950822580027E-05,5.1939800136249214E-05,4.7729621971690504E-05,4.363332349391569E-05,3.996557729414984E-05],"marker":{},"line":{}}];
+            var layout = {"width":600,"height":600,"template":{"layout":{"title":{"x":0.05},"font":{"color":"rgba(42, 63, 95, 1.0)"},"paper_bgcolor":"rgba(255, 255, 255, 1.0)","plot_bgcolor":"rgba(229, 236, 246, 1.0)","autotypenumbers":"strict","colorscale":{"diverging":[[0.0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1.0,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"hovermode":"closest","hoverlabel":{"align":"left"},"coloraxis":{"colorbar":{"outlinewidth":0.0,"ticks":""}},"geo":{"showland":true,"landcolor":"rgba(229, 236, 246, 1.0)","showlakes":true,"lakecolor":"rgba(255, 255, 255, 1.0)","subunitcolor":"rgba(255, 255, 255, 1.0)","bgcolor":"rgba(255, 255, 255, 1.0)"},"mapbox":{"style":"light"},"polar":{"bgcolor":"rgba(229, 236, 246, 1.0)","radialaxis":{"linecolor":"rgba(255, 255, 255, 1.0)","gridcolor":"rgba(255, 255, 255, 1.0)","ticks":""},"angularaxis":{"linecolor":"rgba(255, 255, 255, 1.0)","gridcolor":"rgba(255, 255, 255, 1.0)","ticks":""}},"scene":{"xaxis":{"ticks":"","linecolor":"rgba(255, 255, 255, 1.0)","gridcolor":"rgba(255, 255, 255, 1.0)","gridwidth":2.0,"zerolinecolor":"rgba(255, 255, 255, 1.0)","backgroundcolor":"rgba(229, 236, 246, 1.0)","showbackground":true},"yaxis":{"ticks":"","linecolor":"rgba(255, 255, 255, 1.0)","gridcolor":"rgba(255, 255, 255, 1.0)","gridwidth":2.0,"zerolinecolor":"rgba(255, 255, 255, 1.0)","backgroundcolor":"rgba(229, 236, 246, 1.0)","showbackground":true},"zaxis":{"ticks":"","linecolor":"rgba(255, 255, 255, 1.0)","gridcolor":"rgba(255, 255, 255, 1.0)","gridwidth":2.0,"zerolinecolor":"rgba(255, 255, 255, 1.0)","backgroundcolor":"rgba(229, 236, 246, 1.0)","showbackground":true}},"ternary":{"aaxis":{"ticks":"","linecolor":"rgba(255, 255, 255, 1.0)","gridcolor":"rgba(255, 255, 255, 1.0)"},"baxis":{"ticks":"","linecolor":"rgba(255, 255, 255, 1.0)","gridcolor":"rgba(255, 255, 255, 1.0)"},"caxis":{"ticks":"","linecolor":"rgba(255, 255, 255, 1.0)","gridcolor":"rgba(255, 255, 255, 1.0)"},"bgcolor":"rgba(229, 236, 246, 1.0)"},"xaxis":{"title":{"standoff":15},"ticks":"","automargin":true,"linecolor":"rgba(255, 255, 255, 1.0)","gridcolor":"rgba(255, 255, 255, 1.0)","zerolinecolor":"rgba(255, 255, 255, 1.0)","zerolinewidth":2.0},"yaxis":{"title":{"standoff":15},"ticks":"","automargin":true,"linecolor":"rgba(255, 255, 255, 1.0)","gridcolor":"rgba(255, 255, 255, 1.0)","zerolinecolor":"rgba(255, 255, 255, 1.0)","zerolinewidth":2.0},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"shapedefaults":{"line":{"color":"rgba(42, 63, 95, 1.0)"}},"colorway":["rgba(99, 110, 250, 1.0)","rgba(239, 85, 59, 1.0)","rgba(0, 204, 150, 1.0)","rgba(171, 99, 250, 1.0)","rgba(255, 161, 90, 1.0)","rgba(25, 211, 243, 1.0)","rgba(255, 102, 146, 1.0)","rgba(182, 232, 128, 1.0)","rgba(255, 151, 255, 1.0)","rgba(254, 203, 82, 1.0)"]},"data":{"bar":[{"marker":{"line":{"color":"rgba(229, 236, 246, 1.0)","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"error_x":{"color":"rgba(42, 63, 95, 1.0)"},"error_y":{"color":"rgba(42, 63, 95, 1.0)"}}],"barpolar":[{"marker":{"line":{"color":"rgba(229, 236, 246, 1.0)","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}}}],"carpet":[{"aaxis":{"linecolor":"rgba(255, 255, 255, 1.0)","gridcolor":"rgba(255, 255, 255, 1.0)","endlinecolor":"rgba(42, 63, 95, 1.0)","minorgridcolor":"rgba(255, 255, 255, 1.0)","startlinecolor":"rgba(42, 63, 95, 1.0)"},"baxis":{"linecolor":"rgba(255, 255, 255, 1.0)","gridcolor":"rgba(255, 255, 255, 1.0)","endlinecolor":"rgba(42, 63, 95, 1.0)","minorgridcolor":"rgba(255, 255, 255, 1.0)","startlinecolor":"rgba(42, 63, 95, 1.0)"}}],"choropleth":[{"colorbar":{"outlinewidth":0.0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contour":[{"colorbar":{"outlinewidth":0.0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"colorbar":{"outlinewidth":0.0,"ticks":""}}],"heatmap":[{"colorbar":{"outlinewidth":0.0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"colorbar":{"outlinewidth":0.0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}}}],"histogram2d":[{"colorbar":{"outlinewidth":0.0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0.0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"colorbar":{"outlinewidth":0.0,"ticks":""}}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0.0,"ticks":""}}}],"pie":[{"automargin":true}],"scatter":[{"marker":{"colorbar":{"outlinewidth":0.0,"ticks":""}}}],"scatter3d":[{"marker":{"colorbar":{"outlinewidth":0.0,"ticks":""}},"line":{"colorbar":{"outlinewidth":0.0,"ticks":""}}}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0.0,"ticks":""}}}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0.0,"ticks":""}}}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0.0,"ticks":""}}}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0.0,"ticks":""}}}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0.0,"ticks":""}}}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0.0,"ticks":""}}}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0.0,"ticks":""}}}],"surface":[{"colorbar":{"outlinewidth":0.0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"table":[{"cells":{"fill":{"color":"rgba(235, 240, 248, 1.0)"},"line":{"color":"rgba(255, 255, 255, 1.0)"}},"header":{"fill":{"color":"rgba(200, 212, 227, 1.0)"},"line":{"color":"rgba(255, 255, 255, 1.0)"}}}]}},"xaxis":{"title":{"text":"Kelly fraction"}},"yaxis":{"title":{"text":"Average geometric growth"}}};
+            var config = {"responsive":true};
+            Plotly.newPlot('f960361c-038f-4c79-9f55-27a641e8eb2f', data, layout, config);
+});
+            };
+            if ((typeof(requirejs) !==  typeof(Function)) || (typeof(requirejs.config) !== typeof(Function))) {
+                var script = document.createElement("script");
+                script.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js");
+                script.onload = function(){
+                    renderPlotly_f960361c038f4c799f5527a641e8eb2f();
+                };
+                document.getElementsByTagName("head")[0].appendChild(script);
+            }
+            else {
+                renderPlotly_f960361c038f4c799f5527a641e8eb2f();
+            }
+</script>
+
+<p>A couple takeaways:</p>
+<ol>
+<li>Even an investor who is not very risk averse should not bet more than 1x the Kelly bet. This is particularly true if we take into account uncertainty about expected returns and variances.</li>
+<li>It takes a very long time to converge to the kelly result.</li>
+</ol>
+<p>Now let's try with representative returns, monthly rebalancing.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs75', 222)" onmouseover="showTip(event, 'fs75', 222)" class="id">monthlyMu</span> <span class="o">=</span> <span class="n">0.075</span><span class="o">/</span><span class="n">12.0</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs76', 223)" onmouseover="showTip(event, 'fs76', 223)" class="id">monthlySigma</span> <span class="o">=</span> <span class="n">0.14</span><span class="o">/</span><span onmouseout="hideTip(event, 'fs77', 224)" onmouseover="showTip(event, 'fs77', 224)" class="fn">sqrt</span> <span class="n">12.0</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs78', 225)" onmouseover="showTip(event, 'fs78', 225)" class="id">rnorm2</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 226)" onmouseover="showTip(event, 'fs24', 226)" class="id">Distributions</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 227)" onmouseover="showTip(event, 'fs25', 227)" class="id">Continuous</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs26', 228)" onmouseover="showTip(event, 'fs26', 228)" class="rt">Normal</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs27', 229)" onmouseover="showTip(event, 'fs27', 229)" class="id">Init</span> <span onmouseout="hideTip(event, 'fs75', 230)" onmouseover="showTip(event, 'fs75', 230)" class="id">monthlyMu</span> <span onmouseout="hideTip(event, 'fs76', 231)" onmouseover="showTip(event, 'fs76', 231)" class="id">monthlySigma</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs79', 232)" onmouseover="showTip(event, 'fs79', 232)" class="id">investmentCareer</span> <span class="o">=</span> <span class="n">30</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs80', 233)" onmouseover="showTip(event, 'fs80', 233)" class="id">drawsRealistic</span> <span class="o">=</span>
+    <span class="pn">[</span> <span class="k">for</span> <span onmouseout="hideTip(event, 'fs30', 234)" onmouseover="showTip(event, 'fs30', 234)" class="fn">draw</span> <span class="k">in</span> <span class="pn">[</span><span class="n">1</span> <span class="o">..</span> <span class="n">1000</span><span class="pn">]</span> <span class="k">do</span> 
+        <span class="pn">[</span> <span class="k">for</span> <span onmouseout="hideTip(event, 'fs31', 235)" onmouseover="showTip(event, 'fs31', 235)" class="fn">year</span> <span class="k">in</span> <span class="pn">[</span><span class="n">1</span> <span class="o">..</span> <span onmouseout="hideTip(event, 'fs79', 236)" onmouseover="showTip(event, 'fs79', 236)" class="id">investmentCareer</span><span class="o">*</span><span class="n">12</span><span class="pn">]</span> <span class="k">do</span>
+            <span onmouseout="hideTip(event, 'fs78', 237)" onmouseover="showTip(event, 'fs78', 237)" class="id">rnorm2</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs32', 238)" onmouseover="showTip(event, 'fs32', 238)" class="id">Sample</span><span class="pn">(</span><span class="pn">)</span> <span class="pn">]</span><span class="pn">]</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs81', 239)" onmouseover="showTip(event, 'fs81', 239)" class="id">realisticResults</span> <span class="o">=</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs63', 240)" onmouseover="showTip(event, 'fs63', 240)" class="fn">gammas</span> <span class="o">=</span> <span class="pn">[</span><span class="n">0.75</span> <span class="o">..</span> <span class="n">0.25</span> <span class="o">..</span> <span class="n">3.0</span><span class="pn">]</span>
+    <span class="pn">[</span> <span class="k">for</span> <span onmouseout="hideTip(event, 'fs17', 241)" onmouseover="showTip(event, 'fs17', 241)" class="fn">gamma</span> <span class="k">in</span> <span onmouseout="hideTip(event, 'fs63', 242)" onmouseover="showTip(event, 'fs63', 242)" class="fn">gammas</span> <span class="k">do</span>
+        <span onmouseout="hideTip(event, 'fs60', 243)" onmouseover="showTip(event, 'fs60', 243)" class="fn">gammaRecord</span> <span onmouseout="hideTip(event, 'fs75', 244)" onmouseover="showTip(event, 'fs75', 244)" class="id">monthlyMu</span> <span onmouseout="hideTip(event, 'fs76', 245)" onmouseover="showTip(event, 'fs76', 245)" class="id">monthlySigma</span> <span onmouseout="hideTip(event, 'fs80', 246)" onmouseover="showTip(event, 'fs80', 246)" class="id">drawsRealistic</span> <span onmouseout="hideTip(event, 'fs17', 247)" onmouseover="showTip(event, 'fs17', 247)" class="fn">gamma</span> <span class="pn">]</span>
+</code></pre>
+<p>The results:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs81', 248)" onmouseover="showTip(event, 'fs81', 248)" class="id">realisticResults</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val it: SimulationSummary list =
+  [{ Gamma = 0.75
+     AvgLogWealth = 3.450913017
+     AvgWealth = 404528.9387
+     AvgGeometricGrowth = 0.00969663175
+     MinWealth = 0.0003612225864
+     FractionBankrupt = 0.0
+     FractionLoseMoney = 0.19 }; { Gamma = 1.0
+                                   AvgLogWealth = 4.129875279
+                                   AvgWealth = 17346.91124
+                                   AvgGeometricGrowth = 0.01157315897
+                                   MinWealth = 0.01479285394
+                                   FractionBankrupt = 0.0
+                                   FractionLoseMoney = 0.087 };
+   { Gamma = 1.25
+     AvgLogWealth = 4.011820663
+     AvgWealth = 1924.313345
+     AvgGeometricGrowth = 0.011228559
+     MinWealth = 0.07365774793
+     FractionBankrupt = 0.0
+     FractionLoseMoney = 0.05 }; { Gamma = 1.5
+                                   AvgLogWealth = 3.730401519
+                                   AvgWealth = 446.1184822
+                                   AvgGeometricGrowth = 0.01043149726
+                                   MinWealth = 0.1711251698
+                                   FractionBankrupt = 0.0
+                                   FractionLoseMoney = 0.036 };
+   { Gamma = 1.75
+     AvgLogWealth = 3.433054336
+     AvgWealth = 165.4387707
+     AvgGeometricGrowth = 0.009593159598
+     MinWealth = 0.2813529385
+     FractionBankrupt = 0.0
+     FractionLoseMoney = 0.024 }; { Gamma = 2.0
+                                    AvgLogWealth = 3.158107278
+                                    AvgWealth = 81.67908898
+                                    AvgGeometricGrowth = 0.008819737755
+                                    MinWealth = 0.3864483271
+                                    FractionBankrupt = 0.0
+                                    FractionLoseMoney = 0.016 };
+   { Gamma = 2.25
+     AvgLogWealth = 2.913705061
+     AvgWealth = 48.21241209
+     AvgGeometricGrowth = 0.008133277799
+     MinWealth = 0.4789578792
+     FractionBankrupt = 0.0
+     FractionLoseMoney = 0.014 }; { Gamma = 2.5
+                                    AvgLogWealth = 2.699006896
+                                    AvgWealth = 31.99927166
+                                    AvgGeometricGrowth = 0.00753093058
+                                    MinWealth = 0.5573887274
+                                    FractionBankrupt = 0.0
+                                    FractionLoseMoney = 0.011 };
+   { Gamma = 2.75
+     AvgLogWealth = 2.510690679
+     AvgWealth = 23.03190791
+     AvgGeometricGrowth = 0.007003073346
+     MinWealth = 0.6227931384
+     FractionBankrupt = 0.0
+     FractionLoseMoney = 0.008 }; { Gamma = 3.0
+                                    AvgLogWealth = 2.345068506
+                                    AvgWealth = 17.57720025
+                                    AvgGeometricGrowth = 0.006539170532
+                                    MinWealth = 0.6770275267
+                                    FractionBankrupt = 0.0
+                                    FractionLoseMoney = 0.006 }]</code></pre></td></tr></table>
+
+        <div class="fsdocs-tip" id="fs1">namespace System</div>
+<div class="fsdocs-tip" id="fs2">Multiple items<br />namespace FSharp<br /><br />--------------------<br />namespace Microsoft.FSharp</div>
+<div class="fsdocs-tip" id="fs3">namespace FSharp.Stats</div>
+<div class="fsdocs-tip" id="fs4">namespace Plotly</div>
+<div class="fsdocs-tip" id="fs5">namespace Plotly.NET</div>
+<div class="fsdocs-tip" id="fs6">val invest: decimal</div>
+<div class="fsdocs-tip" id="fs7">val borrow: decimal</div>
+<div class="fsdocs-tip" id="fs8">val ret: decimal</div>
+<div class="fsdocs-tip" id="fs9">val rf: decimal</div>
+<div class="fsdocs-tip" id="fs10">val result: decimal</div>
+<div class="fsdocs-tip" id="fs11">val printfn: format: Printf.TextWriterFormat&lt;&#39;T&gt; -&gt; &#39;T</div>
+<div class="fsdocs-tip" id="fs12">val w: decimal</div>
+<div class="fsdocs-tip" id="fs13">val result2: decimal</div>
+<div class="fsdocs-tip" id="fs14">val meanVarianceWeight: mu: float -&gt; sigma: float -&gt; gamma: float -&gt; float</div>
+<div class="fsdocs-tip" id="fs15">val mu: float</div>
+<div class="fsdocs-tip" id="fs16">val sigma: float</div>
+<div class="fsdocs-tip" id="fs17">val gamma: float</div>
+<div class="fsdocs-tip" id="fs18">val kellyWeight: mu: float -&gt; sigma: float -&gt; float</div>
+<div class="fsdocs-tip" id="fs19">val seed: int</div>
+<div class="fsdocs-tip" id="fs20">Multiple items<br />type Random =
+  new: unit -&gt; unit + 1 overload
+  member GetItems&lt;&#39;T&gt; : choices: ReadOnlySpan&lt;&#39;T&gt; * length: int -&gt; &#39;T array + 2 overloads
+  member Next: unit -&gt; int + 2 overloads
+  member NextBytes: buffer: byte array -&gt; unit + 1 overload
+  member NextDouble: unit -&gt; float
+  member NextInt64: unit -&gt; int64 + 2 overloads
+  member NextSingle: unit -&gt; float32
+  member Shuffle&lt;&#39;T&gt; : values: Span&lt;&#39;T&gt; -&gt; unit + 1 overload
+  static member Shared: Random<br /><em>&lt;summary&gt;Represents a pseudo-random number generator, which is an algorithm that produces a sequence of numbers that meet certain statistical requirements for randomness.&lt;/summary&gt;</em><br /><br />--------------------<br />Random() : Random<br />Random(Seed: int) : Random</div>
+<div class="fsdocs-tip" id="fs21">val SetSampleGenerator: rg: Random.IRandom -&gt; unit<br /><em>&lt;summary&gt;
+ Sets the random number generator used for sampling.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs22">Multiple items<br />type RandThreadSafe =
+  interface IRandom
+  new: unit -&gt; RandThreadSafe + 1 overload
+  val mutable rnd: ThreadLocal&lt;Random&gt;<br /><br />--------------------<br />new: unit -&gt; Random.RandThreadSafe<br />new: n: int -&gt; Random.RandThreadSafe</div>
+<div class="fsdocs-tip" id="fs23">val rnorm1: Distributions.ContinuousDistribution&lt;float,float&gt;</div>
+<div class="fsdocs-tip" id="fs24">namespace FSharp.Stats.Distributions</div>
+<div class="fsdocs-tip" id="fs25">namespace FSharp.Stats.Distributions.Continuous</div>
+<div class="fsdocs-tip" id="fs26">type Normal =
+  static member CDF: mu: float -&gt; sigma: float -&gt; x: float -&gt; float
+  static member CheckParam: mu: float -&gt; sigma: float -&gt; unit
+  static member Estimate: samples: float seq -&gt; ContinuousDistribution&lt;float,float&gt;
+  static member Init: mu: float -&gt; sigma: float -&gt; ContinuousDistribution&lt;float,float&gt;
+  static member InvCDF: mu: float -&gt; sigma: float -&gt; p: float -&gt; float
+  static member Mean: mu: float -&gt; sigma: float -&gt; float
+  static member Mode: mu: float -&gt; sigma: float -&gt; float
+  static member PDF: mu: float -&gt; sigma: float -&gt; x: float -&gt; float
+  static member Sample: mu: float -&gt; sigma: float -&gt; float
+  static member SampleUnchecked: mu: float -&gt; sigma: float -&gt; float
+  ...<br /><em>&lt;summary&gt;
+ Normal distribution.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs27">static member Distributions.Continuous.Normal.Init: mu: float -&gt; sigma: float -&gt; Distributions.ContinuousDistribution&lt;float,float&gt;</div>
+<div class="fsdocs-tip" id="fs28">val careerLength: int</div>
+<div class="fsdocs-tip" id="fs29">val draws: float list list</div>
+<div class="fsdocs-tip" id="fs30">val draw: int</div>
+<div class="fsdocs-tip" id="fs31">val year: int</div>
+<div class="fsdocs-tip" id="fs32">abstract Distributions.ContinuousDistribution.Sample: unit -&gt; &#39;b</div>
+<div class="fsdocs-tip" id="fs33">val ww: float</div>
+<div class="fsdocs-tip" id="fs34">val investmentResult: riskyWeight: float -&gt; returns: float list -&gt; float</div>
+<div class="fsdocs-tip" id="fs35">val riskyWeight: float</div>
+<div class="fsdocs-tip" id="fs36">Multiple items<br />val float: value: &#39;T -&gt; float (requires member op_Explicit)<br /><br />--------------------<br />type float = Double<br /><br />--------------------<br />type float&lt;&#39;Measure&gt; =
+  float</div>
+<div class="fsdocs-tip" id="fs37">val returns: float list</div>
+<div class="fsdocs-tip" id="fs38">type &#39;T list = List&lt;&#39;T&gt;</div>
+<div class="fsdocs-tip" id="fs39">val mutable wealth: float</div>
+<div class="fsdocs-tip" id="fs40">val yearReturn: float</div>
+<div class="fsdocs-tip" id="fs41">val newWealth: float</div>
+<div class="fsdocs-tip" id="fs42">val max: e1: &#39;T -&gt; e2: &#39;T -&gt; &#39;T (requires comparison)</div>
+<div class="fsdocs-tip" id="fs43">val myResult: float list</div>
+<div class="fsdocs-tip" id="fs44">val draw: float list</div>
+<div class="fsdocs-tip" id="fs45">type SimulationSummary =
+  {
+    Gamma: float
+    AvgLogWealth: float
+    AvgWealth: float
+    AvgGeometricGrowth: float
+    MinWealth: float
+    FractionBankrupt: float
+    FractionLoseMoney: float
+  }</div>
+<div class="fsdocs-tip" id="fs46">val calcSummary: gamma: float -&gt; nPeriods: int -&gt; wealths: float list -&gt; SimulationSummary</div>
+<div class="fsdocs-tip" id="fs47">val nPeriods: int</div>
+<div class="fsdocs-tip" id="fs48">Multiple items<br />val int: value: &#39;T -&gt; int (requires member op_Explicit)<br /><br />--------------------<br />type int = int32<br /><br />--------------------<br />type int&lt;&#39;Measure&gt; =
+  int</div>
+<div class="fsdocs-tip" id="fs49">val wealths: float list</div>
+<div class="fsdocs-tip" id="fs50">Multiple items<br />module List
+
+from FSharp.Stats<br /><em>&lt;summary&gt;
+ Module to compute common statistical measure on list
+&lt;/summary&gt;</em><br /><br />--------------------<br />module List
+
+from Microsoft.FSharp.Collections<br /><br />--------------------<br />type List =
+  new: unit -&gt; List
+  static member geomspace: start: float * stop: float * num: int * ?IncludeEndpoint: bool -&gt; float list
+  static member linspace: start: float * stop: float * num: int * ?IncludeEndpoint: bool -&gt; float list<br /><br />--------------------<br />type List&lt;&#39;T&gt; =
+  | op_Nil
+  | op_ColonColon of Head: &#39;T * Tail: &#39;T list
+  interface IReadOnlyList&lt;&#39;T&gt;
+  interface IReadOnlyCollection&lt;&#39;T&gt;
+  interface IEnumerable
+  interface IEnumerable&lt;&#39;T&gt;
+  member GetReverseIndex: rank: int * offset: int -&gt; int
+  member GetSlice: startIndex: int option * endIndex: int option -&gt; &#39;T list
+  static member Cons: head: &#39;T * tail: &#39;T list -&gt; &#39;T list
+  member Head: &#39;T
+  member IsEmpty: bool
+  member Item: index: int -&gt; &#39;T with get
+  ...<br /><br />--------------------<br />new: unit -&gt; List</div>
+<div class="fsdocs-tip" id="fs51">val map: mapping: (&#39;T -&gt; &#39;U) -&gt; list: &#39;T list -&gt; &#39;U list</div>
+<div class="fsdocs-tip" id="fs52">val log: value: &#39;T -&gt; &#39;T (requires member Log)</div>
+<div class="fsdocs-tip" id="fs53">val average: list: &#39;T list -&gt; &#39;T (requires member (+) and member DivideByInt and member Zero)</div>
+<div class="fsdocs-tip" id="fs54">val w: float</div>
+<div class="fsdocs-tip" id="fs55">val min: list: &#39;T list -&gt; &#39;T (requires comparison)</div>
+<div class="fsdocs-tip" id="fs56">val bankrupts: float list</div>
+<div class="fsdocs-tip" id="fs57">val filter: predicate: (&#39;T -&gt; bool) -&gt; list: &#39;T list -&gt; &#39;T list</div>
+<div class="fsdocs-tip" id="fs58">property List.Length: int with get</div>
+<div class="fsdocs-tip" id="fs59">val lostMoney: float list</div>
+<div class="fsdocs-tip" id="fs60">val gammaRecord: mu: float -&gt; sigma: float -&gt; draws: float list list -&gt; gamma: float -&gt; SimulationSummary</div>
+<div class="fsdocs-tip" id="fs61">val length: list: &#39;T list -&gt; int</div>
+<div class="fsdocs-tip" id="fs62">val ruleResults: SimulationSummary list</div>
+<div class="fsdocs-tip" id="fs63">val gammas: float list</div>
+<div class="fsdocs-tip" id="fs64">val veryLongRunChart: GenericChart.GenericChart</div>
+<div class="fsdocs-tip" id="fs65">val x: SimulationSummary</div>
+<div class="fsdocs-tip" id="fs66">val kellyFraction: float</div>
+<div class="fsdocs-tip" id="fs67">SimulationSummary.Gamma: float</div>
+<div class="fsdocs-tip" id="fs68">SimulationSummary.AvgGeometricGrowth: float</div>
+<div class="fsdocs-tip" id="fs69">type Chart =
+  static member AnnotatedHeatmap: zData: #(&#39;a1 seq) seq * annotationText: #(string seq) seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Name: string * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowLegend: bool * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Opacity: float * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?X: #IConvertible seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?XGap: int * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Y: #IConvertible seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?YGap: int * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Text: &#39;a5 * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiText: &#39;a5 seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ColorBar: ColorBar * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ColorScale: Colorscale * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowScale: bool * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ReverseScale: bool * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ZSmooth: SmoothAlg * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Transpose: bool * [&lt;Optional; DefaultParameterValue ((false :&gt; obj))&gt;] ?UseWebGL: bool * [&lt;Optional; DefaultParameterValue ((false :&gt; obj))&gt;] ?ReverseYAxis: bool * [&lt;Optional; DefaultParameterValue ((true :&gt; obj))&gt;] ?UseDefaults: bool -&gt; GenericChart (requires &#39;a1 :&gt; IConvertible and &#39;a5 :&gt; IConvertible) + 1 overload
+  static member Area: x: #IConvertible seq * y: #IConvertible seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowMarkers: bool * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Name: string * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowLegend: bool * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Opacity: float * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiOpacity: float seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Text: &#39;a2 * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiText: &#39;a2 seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?TextPosition: TextPosition * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiTextPosition: TextPosition seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerColor: Color * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerColorScale: Colorscale * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerOutline: Line * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerSymbol: MarkerSymbol * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiMarkerSymbol: MarkerSymbol seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Marker: Marker * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?LineColor: Color * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?LineColorScale: Colorscale * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?LineWidth: float * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?LineDash: DrawingStyle * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Line: Line * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?StackGroup: string * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Orientation: Orientation * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?GroupNorm: GroupNorm * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?FillColor: Color * [&lt;Optional; DefaultParameterValue ((false :&gt; obj))&gt;] ?UseWebGL: bool * [&lt;Optional; DefaultParameterValue ((true :&gt; obj))&gt;] ?UseDefaults: bool -&gt; GenericChart (requires &#39;a2 :&gt; IConvertible) + 1 overload
+  static member Bar: values: #IConvertible seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Keys: #IConvertible seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Name: string * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowLegend: bool * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Opacity: float * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiOpacity: float seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Text: &#39;a2 * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiText: &#39;a2 seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerColor: Color * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerColorScale: Colorscale * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerOutline: Line * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerPatternShape: PatternShape * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiMarkerPatternShape: PatternShape seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerPattern: Pattern * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Marker: Marker * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Base: #IConvertible * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Width: &#39;a4 * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiWidth: &#39;a4 seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?TextPosition: TextPosition * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiTextPosition: TextPosition seq * [&lt;Optional; DefaultParameterValue ((true :&gt; obj))&gt;] ?UseDefaults: bool -&gt; GenericChart (requires &#39;a2 :&gt; IConvertible and &#39;a4 :&gt; IConvertible) + 1 overload
+  static member BoxPlot: [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?X: #IConvertible seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Y: #IConvertible seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Name: string * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowLegend: bool * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Text: &#39;a2 * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiText: &#39;a2 seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?FillColor: Color * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerColor: Color * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Marker: Marker * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Opacity: float * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?WhiskerWidth: float * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?BoxPoints: BoxPoints * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?BoxMean: BoxMean * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Jitter: float * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?PointPos: float * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Orientation: Orientation * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?OutlineColor: Color * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?OutlineWidth: float * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Outline: Line * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?AlignmentGroup: string * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?OffsetGroup: string * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Notched: bool * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?NotchWidth: float * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?QuartileMethod: QuartileMethod * [&lt;Optional; DefaultParameterValue ((true :&gt; obj))&gt;] ?UseDefaults: bool -&gt; GenericChart (requires &#39;a2 :&gt; IConvertible) + 2 overloads
+  static member Bubble: x: #IConvertible seq * y: #IConvertible seq * sizes: int seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Name: string * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowLegend: bool * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Opacity: float * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiOpacity: float seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Text: &#39;a2 * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiText: &#39;a2 seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?TextPosition: TextPosition * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiTextPosition: TextPosition seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerColor: Color * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerColorScale: Colorscale * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerOutline: Line * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerSymbol: MarkerSymbol * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiMarkerSymbol: MarkerSymbol seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Marker: Marker * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?LineColor: Color * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?LineColorScale: Colorscale * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?LineWidth: float * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?LineDash: DrawingStyle * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Line: Line * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?StackGroup: string * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Orientation: Orientation * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?GroupNorm: GroupNorm * [&lt;Optional; DefaultParameterValue ((false :&gt; obj))&gt;] ?UseWebGL: bool * [&lt;Optional; DefaultParameterValue ((true :&gt; obj))&gt;] ?UseDefaults: bool -&gt; GenericChart (requires &#39;a2 :&gt; IConvertible) + 1 overload
+  static member Candlestick: ``open`` : #IConvertible seq * high: #IConvertible seq * low: #IConvertible seq * close: #IConvertible seq * x: #IConvertible seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Name: string * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowLegend: bool * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Opacity: float * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Text: &#39;a5 * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiText: &#39;a5 seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Line: Line * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?IncreasingColor: Color * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Increasing: FinanceMarker * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?DecreasingColor: Color * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Decreasing: FinanceMarker * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?WhiskerWidth: float * [&lt;Optional; DefaultParameterValue ((true :&gt; obj))&gt;] ?UseDefaults: bool -&gt; GenericChart (requires &#39;a5 :&gt; IConvertible) + 1 overload
+  static member Column: values: #IConvertible seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Keys: #IConvertible seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Name: string * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowLegend: bool * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Opacity: float * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiOpacity: float seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Text: &#39;a2 * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiText: &#39;a2 seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerColor: Color * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerColorScale: Colorscale * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerOutline: Line * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerPatternShape: PatternShape * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiMarkerPatternShape: PatternShape seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerPattern: Pattern * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Marker: Marker * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Base: #IConvertible * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Width: &#39;a4 * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiWidth: &#39;a4 seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?TextPosition: TextPosition * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiTextPosition: TextPosition seq * [&lt;Optional; DefaultParameterValue ((true :&gt; obj))&gt;] ?UseDefaults: bool -&gt; GenericChart (requires &#39;a2 :&gt; IConvertible and &#39;a4 :&gt; IConvertible) + 1 overload
+  static member Contour: zData: #(&#39;a1 seq) seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Name: string * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowLegend: bool * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Opacity: float * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?X: #IConvertible seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Y: #IConvertible seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Text: &#39;a4 * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiText: &#39;a4 seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ColorBar: ColorBar * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ColorScale: Colorscale * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowScale: bool * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ReverseScale: bool * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Transpose: bool * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ContourLineColor: Color * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ContourLineDash: DrawingStyle * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ContourLineSmoothing: float * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ContourLine: Line * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ContoursColoring: ContourColoring * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ContoursOperation: ConstraintOperation * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ContoursType: ContourType * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowContourLabels: bool * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ContourLabelFont: Font * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Contours: Contours * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?FillColor: Color * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?NContours: int * [&lt;Optional; DefaultParameterValue ((true :&gt; obj))&gt;] ?UseDefaults: bool -&gt; GenericChart (requires &#39;a1 :&gt; IConvertible and &#39;a4 :&gt; IConvertible)
+  static member Funnel: x: #IConvertible seq * y: #IConvertible seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Name: string * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowLegend: bool * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Opacity: float * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Width: float * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Offset: float * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Text: &#39;a2 * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiText: &#39;a2 seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?TextPosition: TextPosition * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiTextPosition: TextPosition seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Orientation: Orientation * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?AlignmentGroup: string * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?OffsetGroup: string * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerColor: Color * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerOutline: Line * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Marker: Marker * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?TextInfo: TextInfo * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ConnectorLineColor: Color * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ConnectorLineStyle: DrawingStyle * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ConnectorFillColor: Color * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ConnectorLine: Line * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Connector: FunnelConnector * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?InsideTextFont: Font * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?OutsideTextFont: Font * [&lt;Optional; DefaultParameterValue ((true :&gt; obj))&gt;] ?UseDefaults: bool -&gt; GenericChart (requires &#39;a2 :&gt; IConvertible)
+  static member Heatmap: zData: #(&#39;a1 seq) seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Name: string * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowLegend: bool * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Opacity: float * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?X: #IConvertible seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?XGap: int * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Y: #IConvertible seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?YGap: int * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Text: &#39;a4 * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiText: &#39;a4 seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ColorBar: ColorBar * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ColorScale: Colorscale * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowScale: bool * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ReverseScale: bool * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ZSmooth: SmoothAlg * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Transpose: bool * [&lt;Optional; DefaultParameterValue ((false :&gt; obj))&gt;] ?UseWebGL: bool * [&lt;Optional; DefaultParameterValue ((false :&gt; obj))&gt;] ?ReverseYAxis: bool * [&lt;Optional; DefaultParameterValue ((true :&gt; obj))&gt;] ?UseDefaults: bool -&gt; GenericChart (requires &#39;a1 :&gt; IConvertible and &#39;a4 :&gt; IConvertible) + 1 overload
+  ...</div>
+<div class="fsdocs-tip" id="fs70">static member Chart.Line: xy: (#IConvertible * #IConvertible) seq * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowMarkers: bool * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Name: string * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowLegend: bool * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Opacity: float * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiOpacity: float seq * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Text: &#39;c * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiText: &#39;c seq * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?TextPosition: StyleParam.TextPosition * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiTextPosition: StyleParam.TextPosition seq * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerColor: Color * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerColorScale: StyleParam.Colorscale * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerOutline: Line * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerSymbol: StyleParam.MarkerSymbol * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiMarkerSymbol: StyleParam.MarkerSymbol seq * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Marker: TraceObjects.Marker * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?LineColor: Color * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?LineColorScale: StyleParam.Colorscale * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?LineWidth: float * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?LineDash: StyleParam.DrawingStyle * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Line: Line * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?StackGroup: string * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Orientation: StyleParam.Orientation * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?GroupNorm: StyleParam.GroupNorm * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Fill: StyleParam.Fill * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?FillColor: Color * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((false :&gt; obj))&gt;] ?UseWebGL: bool * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((true :&gt; obj))&gt;] ?UseDefaults: bool -&gt; GenericChart.GenericChart (requires &#39;c :&gt; IConvertible)<br />static member Chart.Line: x: #IConvertible seq * y: #IConvertible seq * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowMarkers: bool * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Name: string * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowLegend: bool * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Opacity: float * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiOpacity: float seq * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Text: &#39;a2 * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiText: &#39;a2 seq * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?TextPosition: StyleParam.TextPosition * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiTextPosition: StyleParam.TextPosition seq * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerColor: Color * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerColorScale: StyleParam.Colorscale * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerOutline: Line * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerSymbol: StyleParam.MarkerSymbol * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiMarkerSymbol: StyleParam.MarkerSymbol seq * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Marker: TraceObjects.Marker * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?LineColor: Color * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?LineColorScale: StyleParam.Colorscale * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?LineWidth: float * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?LineDash: StyleParam.DrawingStyle * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Line: Line * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?StackGroup: string * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Orientation: StyleParam.Orientation * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?GroupNorm: StyleParam.GroupNorm * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Fill: StyleParam.Fill * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?FillColor: Color * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((false :&gt; obj))&gt;] ?UseWebGL: bool * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((true :&gt; obj))&gt;] ?UseDefaults: bool -&gt; GenericChart.GenericChart (requires &#39;a2 :&gt; IConvertible)</div>
+<div class="fsdocs-tip" id="fs71">static member Chart.withXAxisStyle: [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?TitleText: string * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?TitleFont: Font * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?TitleStandoff: int * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Title: Title * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Color: Color * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?AxisType: StyleParam.AxisType * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?MinMax: (#IConvertible * #IConvertible) * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Mirror: StyleParam.Mirror * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowSpikes: bool * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?SpikeColor: Color * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?SpikeThickness: int * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowLine: bool * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?LineColor: Color * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowGrid: bool * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?GridColor: Color * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?ZeroLine: bool * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?ZeroLineColor: Color * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Anchor: StyleParam.LinearAxisId * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Side: StyleParam.Side * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Overlaying: StyleParam.LinearAxisId * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Domain: (float * float) * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Position: float * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?CategoryOrder: StyleParam.CategoryOrder * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?CategoryArray: #IConvertible seq * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?RangeSlider: LayoutObjects.RangeSlider * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?RangeSelector: LayoutObjects.RangeSelector * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?BackgroundColor: Color * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowBackground: bool * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Id: StyleParam.SubPlotId -&gt; (GenericChart.GenericChart -&gt; GenericChart.GenericChart)</div>
+<div class="fsdocs-tip" id="fs72">static member Chart.withYAxisStyle: [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?TitleText: string * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?TitleFont: Font * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?TitleStandoff: int * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Title: Title * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Color: Color * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?AxisType: StyleParam.AxisType * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?MinMax: (#IConvertible * #IConvertible) * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Mirror: StyleParam.Mirror * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowSpikes: bool * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?SpikeColor: Color * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?SpikeThickness: int * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowLine: bool * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?LineColor: Color * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowGrid: bool * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?GridColor: Color * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?ZeroLine: bool * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?ZeroLineColor: Color * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Anchor: StyleParam.LinearAxisId * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Side: StyleParam.Side * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Overlaying: StyleParam.LinearAxisId * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Domain: (float * float) * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Position: float * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?CategoryOrder: StyleParam.CategoryOrder * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?CategoryArray: #IConvertible seq * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?RangeSlider: LayoutObjects.RangeSlider * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?RangeSelector: LayoutObjects.RangeSelector * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?BackgroundColor: Color * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowBackground: bool * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Id: StyleParam.SubPlotId -&gt; (GenericChart.GenericChart -&gt; GenericChart.GenericChart)</div>
+<div class="fsdocs-tip" id="fs73">module GenericChart
+
+from Plotly.NET<br /><em>&lt;summary&gt;
+ Module to represent a GenericChart
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs74">val toChartHTML: gChart: GenericChart.GenericChart -&gt; string<br /><em>&lt;summary&gt;
+ Converts a GenericChart to it HTML representation. The div layer has a default size of 600 if not specified otherwise.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs75">val monthlyMu: float</div>
+<div class="fsdocs-tip" id="fs76">val monthlySigma: float</div>
+<div class="fsdocs-tip" id="fs77">val sqrt: value: &#39;T -&gt; &#39;U (requires member Sqrt)</div>
+<div class="fsdocs-tip" id="fs78">val rnorm2: Distributions.ContinuousDistribution&lt;float,float&gt;</div>
+<div class="fsdocs-tip" id="fs79">val investmentCareer: int</div>
+<div class="fsdocs-tip" id="fs80">val drawsRealistic: float list list</div>
+<div class="fsdocs-tip" id="fs81">val realisticResults: SimulationSummary list</div>
+
+    </div>
+</main>
+<aside id="fsdocs-page-menu">
+    <p id="on-this-page">On this page</p>
+    <ul>
+  <li class="level-1">
+    <a href="#Choosing-the-risky-asset-weight-in-your-portfolio">
+      Choosing the risky asset weight in your portfolio
+    </a>
+  </li>
+  <li class="level-1">
+    <a href="#Portfolios-of-a-risky-asset-and-the-risk-free-asset">
+      Portfolios of a risky asset and the risk-free asset
+    </a>
+  </li>
+  <li class="level-2">
+    <a href="#Portfolio-return">
+      Portfolio return
+    </a>
+  </li>
+  <li class="level-2">
+    <a href="#Portfolio-variance">
+      Portfolio variance
+    </a>
+  </li>
+  <li class="level-1">
+    <a href="#Mean-Variance-optimal-weight">
+      Mean-Variance optimal weight
+    </a>
+  </li>
+  <li class="level-1">
+    <a href="#Kelly-Criterion">
+      Kelly Criterion
+    </a>
+  </li>
+  <li class="level-1">
+    <a href="#Simulating-results-from-different-portfolio-rules">
+      Simulating results from different portfolio rules
+    </a>
+  </li>
+</ul>
+</aside>
+<dialog>
+    <input type="search" placeholder="Search docs" />
+    <div class="results">
+        <ul></ul>
+        <p class="empty">Type something to start searching.</p>
+    </div>
+</dialog>
+<script type="module" src="/Teaching/content/fsdocs-tips.js"></script>
+<script type="module" src="/Teaching/content/fsdocs-theme-toggle.js"></script>
+<script type="module" src="/Teaching/content/fsdocs-theme.js"></script>
+<script type="module" src="/Teaching/content/fsdocs-search.js"></script>
+
+</body>
+</html>

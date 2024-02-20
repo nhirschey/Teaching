@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en" data-root="/Teaching/">
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Nicholas Hirschey; Davide Costa" name="author">
+    <!-- Opengraph properties (https://ogp.me/) -->
+    <meta property="og:site_name" content="Teaching">
+    <meta property="og:title" content="Performance Evaluation" />
+    <meta property="og:url" content="/Teaching/performance-evaluation.html">
+    <meta property="og:type" content="website" />
+    <!-- Twitter cards (https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="/Teaching/">
+    <meta name="twitter:title" content="Performance Evaluation">
+    
+    <title>Performance Evaluation | Teaching</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="/Teaching/img/logo.png" rel="icon" sizes="32x32" type="image/png"/>
+    <script type="application/javascript" src="/Teaching/content/fsdocs-theme-set-dark.js"></script>
+    <link href="/Teaching/content/fsdocs-default.css" rel="stylesheet" type="text/css"/>
+    <link href="/Teaching/content/fsdocs-theme.css" rel="stylesheet" type="text/css"/>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js"></script>
+    
+</head>
+<body class="content">
+<header>
+    <div class="start">
+        <div id="menu-toggle">
+            <iconify-icon class="icon closed" height="22" icon="eva:menu-fill" width="22"></iconify-icon>
+            <iconify-icon class="icon open" height="22" icon="mi:close" width="22"></iconify-icon>
+            <input type="checkbox" name="mobile-menu" />
+            <ul class="menu">
+                <li class="nav-header">Links</li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/nhirschey/Teaching/blob/main/LICENSE.md">License</a>
+                </li>
+                <li class="nav-item"><a class="nav-link"
+                                        href="https://github.com/nhirschey/Teaching/blob/main/CHANGELOG.md">Release
+                    Notes</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/nhirschey/Teaching/">Source
+                    Repository</a></li>
+                <li class="nav-header ">
+  Getting Started
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/install.html">
+    Install Software
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/learn-fsharp.html">
+    Learn F#
+  </a>
+</li>             
+<li class="nav-header active">
+  Lectures
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/stockslongrun.html">
+    Stocks for the long run
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/stocksandbonds.html">
+    Stocks and bonds
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/riskyweight.html">
+    Risky Weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolatilityTiming.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolatilityManagedTypes.html">
+    Volatility Managed, but with different vols
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolAndReturnPred.html">
+    Volatility and Return predictions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/mveComparisons.html">
+    More managed portfolio comparisons
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/PortfolioFormation-SimpleExample.html">
+    Building a strategy
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Momentum-Class.html">
+    Momentum Signal
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item active">
+  <a class="nav-link" href="/Teaching/performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/optimization.html">
+    Optimization
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/revisitRiskyWeights.html">
+    Revisiting Mean-variance optimal risky weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/premiums.html">
+    Premiums
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/calls-nn.html">
+    Calls NN
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/portfolio-statistics.html">
+    Basic Portfolio Statistics
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/sentiment-mlnet.html">
+    Sentiment classification
+  </a>
+</li>             
+<li class="nav-header ">
+  Assignments
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-1-download-data.html">
+    Webscraping HTML to CSV
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-tuples-and-records.html">
+    Tuples and Records (with solutions)
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-collection-functions.html">
+    Collection functions (with solutions)
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignment-risky-weights.html">
+    Risky Weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignment-volatility-timing.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/select-project-signal.html">
+    Select Project Signals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/signal-exploration.html">
+    Signal Exploration
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/assignment-signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/assignment-performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-plotting.html">
+    Plotting (with solutions)
+  </a>
+</li>             
+<li class="nav-header ">
+  Practice Quizzes
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-list-module.html">
+    List module functions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-options.html">
+    Options
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-match-expressions.html">
+    Match expressions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-map-collection.html">
+    Map collection
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-discriminated-union.html">
+    Dicriminated Union
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-portfolios.html">
+    Portfolios
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-factors.html">
+    Factors
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-folding.html">
+    Fold and Friends
+  </a>
+</li>             
+<li class="nav-header ">
+  Other
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Common.html">
+    Common
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/loading-scripts.html">
+    Loading external scripts
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Portfolio.html">
+    Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/YahooFinance.html">
+    YahooFinance
+  </a>
+</li>
+                
+            </ul>
+        </div>
+        <a href="/Teaching/">
+            <img alt="Header menu logo" src="/Teaching/img/logo.png">
+            <strong>Teaching</strong>
+        </a>
+    </div>
+    <div class="end">
+        <a href="https://github.com/nhirschey/Teaching/" target="_blank">
+            <iconify-icon icon="uil:github" width="26" height="26"></iconify-icon>
+        </a>
+        <iconify-icon id="search-btn" icon="carbon:search" class="search" width="24" height="24"></iconify-icon>
+        <fsdocs-theme-toggle></fsdocs-theme-toggle>
+    </div>
+</header>
+<aside id="fsdocs-main-menu">
+    <ul class="menu">
+        <li class="nav-header">Links</li>
+        <li class="nav-item"><a class="nav-link" href="https://github.com/nhirschey/Teaching/blob/main/LICENSE.md">License</a>
+        </li>
+        <li class="nav-item"><a class="nav-link"
+                                href="https://github.com/nhirschey/Teaching/blob/main/CHANGELOG.md">Release
+            Notes</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://github.com/nhirschey/Teaching/">Source
+            Repository</a></li>
+        <li class="nav-header ">
+  Getting Started
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/install.html">
+    Install Software
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/learn-fsharp.html">
+    Learn F#
+  </a>
+</li>             
+<li class="nav-header active">
+  Lectures
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/stockslongrun.html">
+    Stocks for the long run
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/stocksandbonds.html">
+    Stocks and bonds
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/riskyweight.html">
+    Risky Weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolatilityTiming.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolatilityManagedTypes.html">
+    Volatility Managed, but with different vols
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolAndReturnPred.html">
+    Volatility and Return predictions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/mveComparisons.html">
+    More managed portfolio comparisons
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/PortfolioFormation-SimpleExample.html">
+    Building a strategy
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Momentum-Class.html">
+    Momentum Signal
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item active">
+  <a class="nav-link" href="/Teaching/performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/optimization.html">
+    Optimization
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/revisitRiskyWeights.html">
+    Revisiting Mean-variance optimal risky weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/premiums.html">
+    Premiums
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/calls-nn.html">
+    Calls NN
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/portfolio-statistics.html">
+    Basic Portfolio Statistics
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/sentiment-mlnet.html">
+    Sentiment classification
+  </a>
+</li>             
+<li class="nav-header ">
+  Assignments
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-1-download-data.html">
+    Webscraping HTML to CSV
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-tuples-and-records.html">
+    Tuples and Records (with solutions)
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-collection-functions.html">
+    Collection functions (with solutions)
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignment-risky-weights.html">
+    Risky Weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignment-volatility-timing.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/select-project-signal.html">
+    Select Project Signals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/signal-exploration.html">
+    Signal Exploration
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/assignment-signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/assignment-performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-plotting.html">
+    Plotting (with solutions)
+  </a>
+</li>             
+<li class="nav-header ">
+  Practice Quizzes
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-list-module.html">
+    List module functions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-options.html">
+    Options
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-match-expressions.html">
+    Match expressions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-map-collection.html">
+    Map collection
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-discriminated-union.html">
+    Dicriminated Union
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-portfolios.html">
+    Portfolios
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-factors.html">
+    Factors
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-folding.html">
+    Fold and Friends
+  </a>
+</li>             
+<li class="nav-header ">
+  Other
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Common.html">
+    Common
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/loading-scripts.html">
+    Loading external scripts
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Portfolio.html">
+    Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/YahooFinance.html">
+    YahooFinance
+  </a>
+</li>
+        
+    </ul>
+</aside>
+<main>
+    <div id="content">
+        
+<p><a href="https://mybinder.org/v2/gh/nhirschey/teaching/gh-pages?filepath=performance-evaluation.ipynb"><img src="img/badge-binder.svg" alt="Binder" /></a>&emsp;
+<a href="/Teaching//performance-evaluation.fsx"><img src="img/badge-script.svg" alt="Script" /></a>&emsp;
+<a href="/Teaching//performance-evaluation.ipynb"><img src="img/badge-notebook.svg" alt="Notebook" /></a></p>
+<h1><a name="Performance-evaluation" class="anchor" href="#Performance-evaluation">Performance evaluation</a></h1>
+<p>We're going to evaluate portfolio performance. The common way to do this is to estimate a portfolio's return adjusted for risk using a factor model with tradeable risk factors.</p>
+<p>What's a risk factor? These risk factors are portfolios and the idea is that the expected excess return on these risk factors is compensation to investors for bearing the risk inherent in holding those portfolios. For the return variation in these factors to be "risky", it should be something that investors cannot easily diversify. If it was easy to diversify, then investors could put a small bit of the asset in their portfolio and capture the return without affecting portfolio volatility. That would imply being able to increase return without adding risk. Hence the requirement that a factor constitute return variation that is hard to diversify away.</p>
+<p>The greater the riskiness of the factor, the greater the factor's expected return (i.e., the risk-return tradeoff). For example, most people feel that stocks are riskier than bonds and indeed stocks have historically had higher returns than bonds.</p>
+<p>The risk adjustment involves estimating a portfolio's <span class="math">\(\beta\)</span>'s on different risk factors. These <span class="math">\(\beta\)</span>'s constitute the exposure of the portfolio to the risk factor. If the factor return goes up by 1%, then the portfolio's return goes up by <span class="math">\(\beta \times 1\%\)</span>.</p>
+<p>We can estimate these <span class="math">\(\beta\)</span>'s by OLS regressions of the portfolio's returns on contemporaneous returns of the risk factors. The slope coefficients on the risk factors are the portfolio's betas on the risk factors. The regression intercept is known as <span class="math">\(\alpha\)</span>. It represents the average return of the portfolio that is not explained by the portfolio's <span class="math">\(\beta\)</span>'s on the risk factors. This alpha is the risk-adjusted return.</p>
+<p>Intuitively, <span class="math">\(\alpha\)</span> is the average return on a portfolio long the investment you are evaluating and short a portfolio with the same factor risk as that portfolio. If the factors and factor betas accurately measure the portfolio's risk, then the alpha is the portfolio's return that is unrelated to the portfolio's risk. Investors like positive alphas because that implies that the portfolio's return is higher than what investors require for bearing the portfolio's risk.</p>
+<p>One thing to keep in mind is that throughout this discussion, we have discussed things from the perspective of arbitrage. That is, like a trader. We have not made any assumptions about utility functions or return distributions. This is the Arbitrage Pricing Theory (APT) of Stephen Ross (1976). He was motivated by the observation that</p>
+<blockquote>
+<p>"... on theoretical grounds it is difficult to justify either the assumption [in mean-variance anlysis and CAPM] of normality in returns...or of quadratic preferences...and on empirical grounds the conclusions as well as the assumptions of the theory have also come under attack."</p>
+</blockquote>
+<p>The APT way of thinking is less restrictive than economically motivated equilibrium asset pricing models. Which is nice. But it has the cost that it does not tell us as much. With the APT we cannot say precisely what a security's return should be. We can only say that if we go long a portfolio and short the portfolio that replicates its factor exposure, then the alpha shouldn't be <em>too</em> big. But if we're thinking like a trader, that's perhaps most of what we care about anyway.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="pp">#r</span> <span class="s">&quot;nuget: FSharp.Stats, 0.5.0&quot;</span>
+<span class="pp">#r</span> <span class="s">&quot;nuget: FSharp.Data, 5.0.2&quot;</span>
+<span class="pp">#r</span> <span class="s">&quot;nuget: Plotly.NET, 3.*&quot;</span>
+<span class="pp">#r</span> <span class="s">&quot;nuget: Plotly.NET.Interactive, 3.*&quot;</span>
+<span class="pp">#r</span> <span class="s">&quot;nuget: NovaSBE.Finance, 0.5.0&quot;</span>
+</code></pre>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="pp">#r</span> <span class="s">&quot;nuget: Quotes.YahooFinance, 0.0.5&quot;</span>
+
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="id">System</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="id">FSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="id">Data</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="id">Quotes</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="id">YahooFinance</span>
+
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs2', 6)" onmouseover="showTip(event, 'fs2', 6)" class="id">FSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs6', 7)" onmouseover="showTip(event, 'fs6', 7)" class="id">Stats</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs7', 8)" onmouseover="showTip(event, 'fs7', 8)" class="id">Plotly</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs8', 9)" onmouseover="showTip(event, 'fs8', 9)" class="id">NET</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs9', 10)" onmouseover="showTip(event, 'fs9', 10)" class="id">NovaSBE</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs10', 11)" onmouseover="showTip(event, 'fs10', 11)" class="id">Finance</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs9', 12)" onmouseover="showTip(event, 'fs9', 12)" class="id">NovaSBE</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs10', 13)" onmouseover="showTip(event, 'fs10', 13)" class="id">Finance</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs11', 14)" onmouseover="showTip(event, 'fs11', 14)" class="m">Ols</span>
+
+<span onmouseout="hideTip(event, 'fs12', 15)" onmouseover="showTip(event, 'fs12', 15)" class="rt">Environment</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs13', 16)" onmouseover="showTip(event, 'fs13', 16)" class="id">CurrentDirectory</span> <span class="k">&lt;-</span> <span class="k">__SOURCE_DIRECTORY__</span>
+</code></pre>
+<h2><a name="Data" class="anchor" href="#Data">Data</a></h2>
+<p>We get the Fama-French 3-Factor asset pricing model data.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs14', 17)" onmouseover="showTip(event, 'fs14', 17)" class="id">ff3</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs15', 18)" onmouseover="showTip(event, 'fs15', 18)" class="m">French</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs16', 19)" onmouseover="showTip(event, 'fs16', 19)" class="id">getFF3</span> <span onmouseout="hideTip(event, 'fs15', 20)" onmouseover="showTip(event, 'fs15', 20)" class="m">French</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs17', 21)" onmouseover="showTip(event, 'fs17', 21)" class="rt">Frequency</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs18', 22)" onmouseover="showTip(event, 'fs18', 22)" class="id">Monthly</span>
+</code></pre>
+<p>Let's get a portfolio to analyze.</p>
+<p>VBR is the Vanguard Small Cap Value ETF. It invests in small-cap value stocks.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">type</span> <span onmouseout="hideTip(event, 'fs19', 23)" onmouseover="showTip(event, 'fs19', 23)" class="rt">Return</span> <span class="o">=</span> <span class="pn">{</span> <span class="prop">YearMonth</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs20', 24)" onmouseover="showTip(event, 'fs20', 24)" class="vt">DateTime</span><span class="pn">;</span> <span onmouseout="hideTip(event, 'fs19', 25)" onmouseover="showTip(event, 'fs19', 25)" class="prop">Return</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs21', 26)" onmouseover="showTip(event, 'fs21', 26)" class="vt">float</span> <span class="pn">}</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs22', 27)" onmouseover="showTip(event, 'fs22', 27)" class="fn">getReturns</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs23', 28)" onmouseover="showTip(event, 'fs23', 28)" class="fn">ticker</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs24', 29)" onmouseover="showTip(event, 'fs24', 29)" class="rt">string</span><span class="pn">)</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs25', 30)" onmouseover="showTip(event, 'fs25', 30)" class="rt">YahooFinance</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs26', 31)" onmouseover="showTip(event, 'fs26', 31)" class="id">History</span><span class="pn">(</span>
+        <span onmouseout="hideTip(event, 'fs23', 32)" onmouseover="showTip(event, 'fs23', 32)" class="fn">ticker</span><span class="pn">,</span>
+        <span class="fn">startDate</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs20', 33)" onmouseover="showTip(event, 'fs20', 33)" class="fn">DateTime</span><span class="pn">(</span><span class="n">2010</span><span class="pn">,</span> <span class="n">1</span><span class="pn">,</span> <span class="n">1</span><span class="pn">)</span><span class="pn">,</span>
+        <span class="fn">endDate</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs20', 34)" onmouseover="showTip(event, 'fs20', 34)" class="fn">DateTime</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs20', 35)" onmouseover="showTip(event, 'fs20', 35)" class="vt">DateTime</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs27', 36)" onmouseover="showTip(event, 'fs27', 36)" class="id">Now</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs28', 37)" onmouseover="showTip(event, 'fs28', 37)" class="id">Year</span> <span class="o">-</span> <span class="n">1</span><span class="pn">,</span> <span class="n">12</span><span class="pn">,</span> <span class="n">31</span><span class="pn">)</span><span class="pn">,</span>
+        <span class="fn">interval</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs29', 38)" onmouseover="showTip(event, 'fs29', 38)" class="uc">Monthly</span>
+    <span class="pn">)</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs30', 39)" onmouseover="showTip(event, 'fs30', 39)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 40)" onmouseover="showTip(event, 'fs31', 40)" class="id">sortBy</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs32', 41)" onmouseover="showTip(event, 'fs32', 41)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs32', 42)" onmouseover="showTip(event, 'fs32', 42)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs33', 43)" onmouseover="showTip(event, 'fs33', 43)" class="id">Date</span><span class="pn">)</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs30', 44)" onmouseover="showTip(event, 'fs30', 44)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs34', 45)" onmouseover="showTip(event, 'fs34', 45)" class="id">pairwise</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs30', 46)" onmouseover="showTip(event, 'fs30', 46)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs35', 47)" onmouseover="showTip(event, 'fs35', 47)" class="id">map</span> <span class="pn">(</span><span class="k">fun</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs36', 48)" onmouseover="showTip(event, 'fs36', 48)" class="fn">yesterday</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs37', 49)" onmouseover="showTip(event, 'fs37', 49)" class="fn">today</span><span class="pn">)</span> <span class="k">-&gt;</span>
+        <span class="pn">{</span> <span class="prop">YearMonth</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs20', 50)" onmouseover="showTip(event, 'fs20', 50)" class="fn">DateTime</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs37', 51)" onmouseover="showTip(event, 'fs37', 51)" class="fn">today</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs33', 52)" onmouseover="showTip(event, 'fs33', 52)" class="prop">Date</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs28', 53)" onmouseover="showTip(event, 'fs28', 53)" class="id">Year</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs37', 54)" onmouseover="showTip(event, 'fs37', 54)" class="fn">today</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs33', 55)" onmouseover="showTip(event, 'fs33', 55)" class="prop">Date</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs38', 56)" onmouseover="showTip(event, 'fs38', 56)" class="id">Month</span><span class="pn">,</span> <span class="n">1</span><span class="pn">)</span>
+          <span onmouseout="hideTip(event, 'fs19', 57)" onmouseover="showTip(event, 'fs19', 57)" class="prop">Return</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs37', 58)" onmouseover="showTip(event, 'fs37', 58)" class="fn">today</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs39', 59)" onmouseover="showTip(event, 'fs39', 59)" class="id">AdjustedClose</span> <span class="o">/</span> <span onmouseout="hideTip(event, 'fs36', 60)" onmouseover="showTip(event, 'fs36', 60)" class="fn">yesterday</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs39', 61)" onmouseover="showTip(event, 'fs39', 61)" class="id">AdjustedClose</span> <span class="o">-</span> <span class="n">1.0</span> <span class="pn">}</span><span class="pn">)</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs30', 62)" onmouseover="showTip(event, 'fs30', 62)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs40', 63)" onmouseover="showTip(event, 'fs40', 63)" class="id">toArray</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs41', 64)" onmouseover="showTip(event, 'fs41', 64)" class="id">vbr</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs22', 65)" onmouseover="showTip(event, 'fs22', 65)" class="fn">getReturns</span> <span class="s">&quot;VBR&quot;</span>
+</code></pre>
+<p>We'll also use VTI as a proxy for the market later.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs42', 66)" onmouseover="showTip(event, 'fs42', 66)" class="id">vti</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs22', 67)" onmouseover="showTip(event, 'fs22', 67)" class="fn">getReturns</span> <span class="s">&quot;VTI&quot;</span>
+</code></pre>
+<p>A function to accumulate simple returns.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs43', 68)" onmouseover="showTip(event, 'fs43', 68)" class="fn">cumulativeReturn</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs44', 69)" onmouseover="showTip(event, 'fs44', 69)" class="fn">xs</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs45', 70)" onmouseover="showTip(event, 'fs45', 70)" class="if">seq</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs20', 71)" onmouseover="showTip(event, 'fs20', 71)" class="vt">DateTime</span> <span class="pn">*</span> <span onmouseout="hideTip(event, 'fs21', 72)" onmouseover="showTip(event, 'fs21', 72)" class="vt">float</span><span class="pn">&gt;</span><span class="pn">)</span> <span class="o">=</span>
+    <span class="k">let</span> <span class="k">mutable</span> <span onmouseout="hideTip(event, 'fs46', 73)" onmouseover="showTip(event, 'fs46', 73)" class="mv">cr</span> <span class="o">=</span> <span class="n">1.0</span>
+
+    <span class="pn">[</span> <span class="k">for</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs47', 74)" onmouseover="showTip(event, 'fs47', 74)" class="fn">dt</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs48', 75)" onmouseover="showTip(event, 'fs48', 75)" class="fn">r</span><span class="pn">)</span> <span class="k">in</span> <span onmouseout="hideTip(event, 'fs44', 76)" onmouseover="showTip(event, 'fs44', 76)" class="fn">xs</span> <span class="k">do</span>
+          <span onmouseout="hideTip(event, 'fs46', 77)" onmouseover="showTip(event, 'fs46', 77)" class="mv">cr</span> <span class="k">&lt;-</span> <span onmouseout="hideTip(event, 'fs46', 78)" onmouseover="showTip(event, 'fs46', 78)" class="mv">cr</span> <span class="o">*</span> <span class="pn">(</span><span class="n">1.0</span> <span class="o">+</span> <span onmouseout="hideTip(event, 'fs48', 79)" onmouseover="showTip(event, 'fs48', 79)" class="fn">r</span><span class="pn">)</span>
+          <span onmouseout="hideTip(event, 'fs47', 80)" onmouseover="showTip(event, 'fs47', 80)" class="fn">dt</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs46', 81)" onmouseover="showTip(event, 'fs46', 81)" class="mv">cr</span> <span class="o">-</span> <span class="n">1.0</span> <span class="pn">]</span>
+</code></pre>
+<p>Plot of vbr cumulative return.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs49', 82)" onmouseover="showTip(event, 'fs49', 82)" class="id">vbrChart</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs41', 83)" onmouseover="showTip(event, 'fs41', 83)" class="id">vbr</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs50', 84)" onmouseover="showTip(event, 'fs50', 84)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs51', 85)" onmouseover="showTip(event, 'fs51', 85)" class="id">map</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs52', 86)" onmouseover="showTip(event, 'fs52', 86)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs52', 87)" onmouseover="showTip(event, 'fs52', 87)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs53', 88)" onmouseover="showTip(event, 'fs53', 88)" class="id">YearMonth</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs52', 89)" onmouseover="showTip(event, 'fs52', 89)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs54', 90)" onmouseover="showTip(event, 'fs54', 90)" class="id">Return</span><span class="pn">)</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs43', 91)" onmouseover="showTip(event, 'fs43', 91)" class="fn">cumulativeReturn</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs55', 92)" onmouseover="showTip(event, 'fs55', 92)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs56', 93)" onmouseover="showTip(event, 'fs56', 93)" class="id">Line</span>
+</code></pre>
+<div id="119627bd-67f0-4bcf-aa36-687699306bcd"><!-- Plotly chart will be drawn inside this DIV --></div>
+<script type="text/javascript">
+
+            var renderPlotly_119627bd67f04bcfaa36687699306bcd = function() {
+            var fsharpPlotlyRequire = requirejs.config({context:'fsharp-plotly',paths:{plotly:'https://cdn.plot.ly/plotly-2.6.3.min'}}) || require;
+            fsharpPlotlyRequire(['plotly'], function(Plotly) {
+
+            var data = [{"type":"scatter","mode":"lines","x":["2010-02-01T00:00:00","2010-03-01T00:00:00","2010-04-01T00:00:00","2010-05-01T00:00:00","2010-06-01T00:00:00","2010-07-01T00:00:00","2010-08-01T00:00:00","2010-09-01T00:00:00","2010-10-01T00:00:00","2010-11-01T00:00:00","2010-12-01T00:00:00","2011-01-01T00:00:00","2011-02-01T00:00:00","2011-03-01T00:00:00","2011-04-01T00:00:00","2011-05-01T00:00:00","2011-06-01T00:00:00","2011-07-01T00:00:00","2011-08-01T00:00:00","2011-09-01T00:00:00","2011-10-01T00:00:00","2011-11-01T00:00:00","2011-12-01T00:00:00","2012-01-01T00:00:00","2012-02-01T00:00:00","2012-03-01T00:00:00","2012-04-01T00:00:00","2012-05-01T00:00:00","2012-06-01T00:00:00","2012-07-01T00:00:00","2012-08-01T00:00:00","2012-09-01T00:00:00","2012-10-01T00:00:00","2012-11-01T00:00:00","2012-12-01T00:00:00","2013-01-01T00:00:00","2013-02-01T00:00:00","2013-03-01T00:00:00","2013-04-01T00:00:00","2013-05-01T00:00:00","2013-06-01T00:00:00","2013-07-01T00:00:00","2013-08-01T00:00:00","2013-09-01T00:00:00","2013-10-01T00:00:00","2013-11-01T00:00:00","2013-12-01T00:00:00","2014-01-01T00:00:00","2014-02-01T00:00:00","2014-03-01T00:00:00","2014-04-01T00:00:00","2014-05-01T00:00:00","2014-06-01T00:00:00","2014-07-01T00:00:00","2014-08-01T00:00:00","2014-09-01T00:00:00","2014-10-01T00:00:00","2014-11-01T00:00:00","2014-12-01T00:00:00","2015-01-01T00:00:00","2015-02-01T00:00:00","2015-03-01T00:00:00","2015-04-01T00:00:00","2015-05-01T00:00:00","2015-06-01T00:00:00","2015-07-01T00:00:00","2015-08-01T00:00:00","2015-09-01T00:00:00","2015-10-01T00:00:00","2015-11-01T00:00:00","2015-12-01T00:00:00","2016-01-01T00:00:00","2016-02-01T00:00:00","2016-03-01T00:00:00","2016-04-01T00:00:00","2016-05-01T00:00:00","2016-06-01T00:00:00","2016-07-01T00:00:00","2016-08-01T00:00:00","2016-09-01T00:00:00","2016-10-01T00:00:00","2016-11-01T00:00:00","2016-12-01T00:00:00","2017-01-01T00:00:00","2017-02-01T00:00:00","2017-03-01T00:00:00","2017-04-01T00:00:00","2017-05-01T00:00:00","2017-06-01T00:00:00","2017-07-01T00:00:00","2017-08-01T00:00:00","2017-09-01T00:00:00","2017-10-01T00:00:00","2017-11-01T00:00:00","2017-12-01T00:00:00","2018-01-01T00:00:00","2018-02-01T00:00:00","2018-03-01T00:00:00","2018-04-01T00:00:00","2018-05-01T00:00:00","2018-06-01T00:00:00","2018-07-01T00:00:00","2018-08-01T00:00:00","2018-09-01T00:00:00","2018-10-01T00:00:00","2018-11-01T00:00:00","2018-12-01T00:00:00","2019-01-01T00:00:00","2019-02-01T00:00:00","2019-03-01T00:00:00","2019-04-01T00:00:00","2019-05-01T00:00:00","2019-06-01T00:00:00","2019-07-01T00:00:00","2019-08-01T00:00:00","2019-09-01T00:00:00","2019-10-01T00:00:00","2019-11-01T00:00:00","2019-12-01T00:00:00","2020-01-01T00:00:00","2020-02-01T00:00:00","2020-03-01T00:00:00","2020-04-01T00:00:00","2020-05-01T00:00:00","2020-06-01T00:00:00","2020-07-01T00:00:00","2020-08-01T00:00:00","2020-09-01T00:00:00","2020-10-01T00:00:00","2020-11-01T00:00:00","2020-12-01T00:00:00","2021-01-01T00:00:00","2021-02-01T00:00:00","2021-03-01T00:00:00","2021-04-01T00:00:00","2021-05-01T00:00:00","2021-06-01T00:00:00","2021-07-01T00:00:00","2021-08-01T00:00:00","2021-09-01T00:00:00","2021-10-01T00:00:00","2021-11-01T00:00:00","2021-12-01T00:00:00","2022-01-01T00:00:00","2022-02-01T00:00:00","2022-03-01T00:00:00","2022-04-01T00:00:00","2022-05-01T00:00:00","2022-06-01T00:00:00","2022-07-01T00:00:00","2022-08-01T00:00:00","2022-09-01T00:00:00","2022-10-01T00:00:00","2022-11-01T00:00:00","2022-12-01T00:00:00","2023-01-01T00:00:00","2023-02-01T00:00:00","2023-03-01T00:00:00","2023-04-01T00:00:00","2023-05-01T00:00:00","2023-06-01T00:00:00","2023-07-01T00:00:00","2023-08-01T00:00:00","2023-09-01T00:00:00","2023-10-01T00:00:00","2023-11-01T00:00:00","2023-12-01T00:00:00"],"y":[0.05014213290322189,0.1356671120897548,0.20701367017577854,0.11103560916001998,0.020358246191498397,0.09645912179319671,0.023387161613655838,0.1301557578354653,0.1708563045137781,0.1975485496276923,0.26569857027545885,0.29741332813080756,0.3583679936278663,0.37823586137111764,0.41061265414621495,0.38071051946783263,0.35196569713900483,0.3070157162210183,0.19994645701331026,0.07223538703443233,0.22695540687626847,0.22521905411808918,0.20901360735354468,0.32146319707344495,0.355169727137294,0.3872996496651837,0.3740679807656382,0.2873012538414983,0.3448827303887767,0.3391636977397543,0.3791952932890583,0.41784595238939204,0.40798622367962145,0.4221839525309823,0.4326356895417409,0.5644143550918239,0.5896992476797318,0.6617093776208951,0.6635552370256956,0.7153514966436694,0.6935001177196454,0.809434612380572,0.7339653211661847,0.8258229544566662,0.8974483702577261,0.9530888895228748,0.9700848974292549,0.9509252687259488,1.0477911981054966,1.0741713492765403,1.0511691899783742,1.084770247851004,1.1748571394539287,1.070752052265025,1.1767126047049241,1.056115624417946,1.1558913567268347,1.1795987772526262,1.1804231509730672,1.1456127170645072,1.2670749919767168,1.294975364366556,1.266754925181505,1.2978238819971746,1.2631865454370454,1.2417743458010495,1.1332438452701825,1.0331098148982258,1.193070976540891,1.221952874294919,1.097508368373059,0.9787428387215891,1.008483307008512,1.1798690857645489,1.2339177241982888,1.2652727431136408,1.261621176741134,1.373876248075589,1.391109136149134,1.3837848705424913,1.328155301942005,1.5658901973012003,1.6222359777939737,1.6564950361309503,1.7099342796820896,1.6798337842797837,1.7011720189000799,1.6363523451280644,1.6915365866989585,1.72827376123728,1.6885013314183128,1.8080387868700005,1.8460694846569194,1.9361621397675606,1.9319659219158063,2.007935869833869,1.8654732939704979,1.8763630575677412,1.900276235319026,2.031295366610483,2.0308490789962703,2.1178196419766646,2.193093550279449,2.1220761845425224,1.855586957066767,1.9227237530579018,1.569690270055879,1.8775693597328886,1.992409364278375,1.9215987163515615,2.0498137090218207,1.8017429231569775,1.976395265970032,2.0162251387492445,1.852250078215603,1.9549924800633067,2.017549208588741,2.092354927947989,2.1549616068736364,2.071230135230142,1.758658013336181,1.0590807570213698,1.3378762261742603,1.4500688595084488,1.4887066467748813,1.5828902396629818,1.702398493342237,1.5873333277619435,1.6839310619157315,2.1515603688529685,2.3451517901406955,2.4344369778201984,2.7364382502105853,2.919627116420071,3.0930514478555775,3.1845363743136987,3.126556639383182,3.0738781788506744,3.158790785342286,3.037146191469298,3.237340863548283,3.10924152526621,3.282355395752699,3.1208626779927284,3.187873061047939,3.2409027113173297,2.986187945873362,3.0604495901041338,2.6240709825925737,2.9992457489567808,2.889384838727928,2.4854251936562606,2.923792595564001,3.141957500470446,2.8795738116583656,3.261287085410477,3.165093373147644,2.9057897028594772,2.891178058095581,2.7580406456012376,3.0931113883358323,3.3394563878733114,3.1916473901348157,2.968690320678688,2.7969662240196684,3.125701334837994,3.502471055904393],"marker":{},"line":{}}];
+            var layout = {"width":600,"height":600,"template":{"layout":{"title":{"x":0.05},"font":{"color":"rgba(42, 63, 95, 1.0)"},"paper_bgcolor":"rgba(255, 255, 255, 1.0)","plot_bgcolor":"rgba(229, 236, 246, 1.0)","autotypenumbers":"strict","colorscale":{"diverging":[[0.0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1.0,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"hovermode":"closest","hoverlabel":{"align":"left"},"coloraxis":{"colorbar":{"outlinewidth":0.0,"ticks":""}},"geo":{"showland":true,"landcolor":"rgba(229, 236, 246, 1.0)","showlakes":true,"lakecolor":"rgba(255, 255, 255, 1.0)","subunitcolor":"rgba(255, 255, 255, 1.0)","bgcolor":"rgba(255, 255, 255, 1.0)"},"mapbox":{"style":"light"},"polar":{"bgcolor":"rgba(229, 236, 246, 1.0)","radialaxis":{"linecolor":"rgba(255, 255, 255, 1.0)","gridcolor":"rgba(255, 255, 255, 1.0)","ticks":""},"angularaxis":{"linecolor":"rgba(255, 255, 255, 1.0)","gridcolor":"rgba(255, 255, 255, 1.0)","ticks":""}},"scene":{"xaxis":{"ticks":"","linecolor":"rgba(255, 255, 255, 1.0)","gridcolor":"rgba(255, 255, 255, 1.0)","gridwidth":2.0,"zerolinecolor":"rgba(255, 255, 255, 1.0)","backgroundcolor":"rgba(229, 236, 246, 1.0)","showbackground":true},"yaxis":{"ticks":"","linecolor":"rgba(255, 255, 255, 1.0)","gridcolor":"rgba(255, 255, 255, 1.0)","gridwidth":2.0,"zerolinecolor":"rgba(255, 255, 255, 1.0)","backgroundcolor":"rgba(229, 236, 246, 1.0)","showbackground":true},"zaxis":{"ticks":"","linecolor":"rgba(255, 255, 255, 1.0)","gridcolor":"rgba(255, 255, 255, 1.0)","gridwidth":2.0,"zerolinecolor":"rgba(255, 255, 255, 1.0)","backgroundcolor":"rgba(229, 236, 246, 1.0)","showbackground":true}},"ternary":{"aaxis":{"ticks":"","linecolor":"rgba(255, 255, 255, 1.0)","gridcolor":"rgba(255, 255, 255, 1.0)"},"baxis":{"ticks":"","linecolor":"rgba(255, 255, 255, 1.0)","gridcolor":"rgba(255, 255, 255, 1.0)"},"caxis":{"ticks":"","linecolor":"rgba(255, 255, 255, 1.0)","gridcolor":"rgba(255, 255, 255, 1.0)"},"bgcolor":"rgba(229, 236, 246, 1.0)"},"xaxis":{"title":{"standoff":15},"ticks":"","automargin":true,"linecolor":"rgba(255, 255, 255, 1.0)","gridcolor":"rgba(255, 255, 255, 1.0)","zerolinecolor":"rgba(255, 255, 255, 1.0)","zerolinewidth":2.0},"yaxis":{"title":{"standoff":15},"ticks":"","automargin":true,"linecolor":"rgba(255, 255, 255, 1.0)","gridcolor":"rgba(255, 255, 255, 1.0)","zerolinecolor":"rgba(255, 255, 255, 1.0)","zerolinewidth":2.0},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"shapedefaults":{"line":{"color":"rgba(42, 63, 95, 1.0)"}},"colorway":["rgba(99, 110, 250, 1.0)","rgba(239, 85, 59, 1.0)","rgba(0, 204, 150, 1.0)","rgba(171, 99, 250, 1.0)","rgba(255, 161, 90, 1.0)","rgba(25, 211, 243, 1.0)","rgba(255, 102, 146, 1.0)","rgba(182, 232, 128, 1.0)","rgba(255, 151, 255, 1.0)","rgba(254, 203, 82, 1.0)"]},"data":{"bar":[{"marker":{"line":{"color":"rgba(229, 236, 246, 1.0)","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"error_x":{"color":"rgba(42, 63, 95, 1.0)"},"error_y":{"color":"rgba(42, 63, 95, 1.0)"}}],"barpolar":[{"marker":{"line":{"color":"rgba(229, 236, 246, 1.0)","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}}}],"carpet":[{"aaxis":{"linecolor":"rgba(255, 255, 255, 1.0)","gridcolor":"rgba(255, 255, 255, 1.0)","endlinecolor":"rgba(42, 63, 95, 1.0)","minorgridcolor":"rgba(255, 255, 255, 1.0)","startlinecolor":"rgba(42, 63, 95, 1.0)"},"baxis":{"linecolor":"rgba(255, 255, 255, 1.0)","gridcolor":"rgba(255, 255, 255, 1.0)","endlinecolor":"rgba(42, 63, 95, 1.0)","minorgridcolor":"rgba(255, 255, 255, 1.0)","startlinecolor":"rgba(42, 63, 95, 1.0)"}}],"choropleth":[{"colorbar":{"outlinewidth":0.0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contour":[{"colorbar":{"outlinewidth":0.0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"colorbar":{"outlinewidth":0.0,"ticks":""}}],"heatmap":[{"colorbar":{"outlinewidth":0.0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"colorbar":{"outlinewidth":0.0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}}}],"histogram2d":[{"colorbar":{"outlinewidth":0.0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0.0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"colorbar":{"outlinewidth":0.0,"ticks":""}}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0.0,"ticks":""}}}],"pie":[{"automargin":true}],"scatter":[{"marker":{"colorbar":{"outlinewidth":0.0,"ticks":""}}}],"scatter3d":[{"marker":{"colorbar":{"outlinewidth":0.0,"ticks":""}},"line":{"colorbar":{"outlinewidth":0.0,"ticks":""}}}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0.0,"ticks":""}}}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0.0,"ticks":""}}}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0.0,"ticks":""}}}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0.0,"ticks":""}}}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0.0,"ticks":""}}}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0.0,"ticks":""}}}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0.0,"ticks":""}}}],"surface":[{"colorbar":{"outlinewidth":0.0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"table":[{"cells":{"fill":{"color":"rgba(235, 240, 248, 1.0)"},"line":{"color":"rgba(255, 255, 255, 1.0)"}},"header":{"fill":{"color":"rgba(200, 212, 227, 1.0)"},"line":{"color":"rgba(255, 255, 255, 1.0)"}}}]}}};
+            var config = {"responsive":true};
+            Plotly.newPlot('119627bd-67f0-4bcf-aa36-687699306bcd', data, layout, config);
+});
+            };
+            if ((typeof(requirejs) !==  typeof(Function)) || (typeof(requirejs.config) !== typeof(Function))) {
+                var script = document.createElement("script");
+                script.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js");
+                script.onload = function(){
+                    renderPlotly_119627bd67f04bcfaa36687699306bcd();
+                };
+                document.getElementsByTagName("head")[0].appendChild(script);
+            }
+            else {
+                renderPlotly_119627bd67f04bcfaa36687699306bcd();
+            }
+</script>
+
+<p>You want to work with excess returns. If you have a zero-cost, long-short portfolio then it is already an excess return. But if you have a long portfolio such as we have with VBR, we need to convert it to an excess return.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">type</span> <span onmouseout="hideTip(event, 'fs59', 97)" onmouseover="showTip(event, 'fs59', 97)" class="rt">ExcessReturn</span> <span class="o">=</span>
+    <span class="pn">{</span> <span class="prop">YearMonth</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs20', 98)" onmouseover="showTip(event, 'fs20', 98)" class="vt">DateTime</span>
+      <span onmouseout="hideTip(event, 'fs59', 99)" onmouseover="showTip(event, 'fs59', 99)" class="prop">ExcessReturn</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs21', 100)" onmouseover="showTip(event, 'fs21', 100)" class="vt">float</span> <span class="pn">}</span>
+
+<span class="c">// ff3 indexed by month</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs60', 101)" onmouseover="showTip(event, 'fs60', 101)" class="id">ff3ByMonth</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs14', 102)" onmouseover="showTip(event, 'fs14', 102)" class="id">ff3</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs50', 103)" onmouseover="showTip(event, 'fs50', 103)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs51', 104)" onmouseover="showTip(event, 'fs51', 104)" class="id">map</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs61', 105)" onmouseover="showTip(event, 'fs61', 105)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs20', 106)" onmouseover="showTip(event, 'fs20', 106)" class="fn">DateTime</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs61', 107)" onmouseover="showTip(event, 'fs61', 107)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs62', 108)" onmouseover="showTip(event, 'fs62', 108)" class="prop">Date</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs28', 109)" onmouseover="showTip(event, 'fs28', 109)" class="id">Year</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs61', 110)" onmouseover="showTip(event, 'fs61', 110)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs62', 111)" onmouseover="showTip(event, 'fs62', 111)" class="prop">Date</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs38', 112)" onmouseover="showTip(event, 'fs38', 112)" class="id">Month</span><span class="pn">,</span> <span class="n">1</span><span class="pn">)</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs61', 113)" onmouseover="showTip(event, 'fs61', 113)" class="fn">x</span><span class="pn">)</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs63', 114)" onmouseover="showTip(event, 'fs63', 114)" class="fn">Map</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs64', 115)" onmouseover="showTip(event, 'fs64', 115)" class="id">vbrExcess</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs41', 116)" onmouseover="showTip(event, 'fs41', 116)" class="id">vbr</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs50', 117)" onmouseover="showTip(event, 'fs50', 117)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs51', 118)" onmouseover="showTip(event, 'fs51', 118)" class="id">map</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs52', 119)" onmouseover="showTip(event, 'fs52', 119)" class="fn">x</span> <span class="k">-&gt;</span>
+        <span class="pn">{</span> <span class="prop">YearMonth</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs52', 120)" onmouseover="showTip(event, 'fs52', 120)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs53', 121)" onmouseover="showTip(event, 'fs53', 121)" class="id">YearMonth</span>
+          <span onmouseout="hideTip(event, 'fs59', 122)" onmouseover="showTip(event, 'fs59', 122)" class="prop">ExcessReturn</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs52', 123)" onmouseover="showTip(event, 'fs52', 123)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs54', 124)" onmouseover="showTip(event, 'fs54', 124)" class="id">Return</span> <span class="o">-</span> <span onmouseout="hideTip(event, 'fs60', 125)" onmouseover="showTip(event, 'fs60', 125)" class="id">ff3ByMonth</span><span class="pn">[</span><span onmouseout="hideTip(event, 'fs52', 126)" onmouseover="showTip(event, 'fs52', 126)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs53', 127)" onmouseover="showTip(event, 'fs53', 127)" class="id">YearMonth</span><span class="pn">]</span><span class="pn">.</span><span class="id">Rf</span> <span class="pn">}</span><span class="pn">)</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs65', 128)" onmouseover="showTip(event, 'fs65', 128)" class="id">vtiExcess</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs42', 129)" onmouseover="showTip(event, 'fs42', 129)" class="id">vti</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs50', 130)" onmouseover="showTip(event, 'fs50', 130)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs51', 131)" onmouseover="showTip(event, 'fs51', 131)" class="id">map</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs52', 132)" onmouseover="showTip(event, 'fs52', 132)" class="fn">x</span> <span class="k">-&gt;</span>
+        <span class="pn">{</span> <span class="prop">YearMonth</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs52', 133)" onmouseover="showTip(event, 'fs52', 133)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs53', 134)" onmouseover="showTip(event, 'fs53', 134)" class="id">YearMonth</span>
+          <span onmouseout="hideTip(event, 'fs59', 135)" onmouseover="showTip(event, 'fs59', 135)" class="prop">ExcessReturn</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs52', 136)" onmouseover="showTip(event, 'fs52', 136)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs54', 137)" onmouseover="showTip(event, 'fs54', 137)" class="id">Return</span> <span class="o">-</span> <span onmouseout="hideTip(event, 'fs60', 138)" onmouseover="showTip(event, 'fs60', 138)" class="id">ff3ByMonth</span><span class="pn">[</span><span onmouseout="hideTip(event, 'fs52', 139)" onmouseover="showTip(event, 'fs52', 139)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs53', 140)" onmouseover="showTip(event, 'fs53', 140)" class="id">YearMonth</span><span class="pn">]</span><span class="pn">.</span><span class="id">Rf</span> <span class="pn">}</span><span class="pn">)</span>
+</code></pre>
+<h2><a name="Factor-Models" class="anchor" href="#Factor-Models">Factor Models</a></h2>
+<p>For regression, it is helpful to have the portfolio
+return data merged into our factor model data.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">type</span> <span onmouseout="hideTip(event, 'fs66', 141)" onmouseover="showTip(event, 'fs66', 141)" class="rt">RegData</span> <span class="o">=</span>
+    <span class="pn">{</span>
+        <span class="prop">Date</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs20', 142)" onmouseover="showTip(event, 'fs20', 142)" class="vt">DateTime</span>
+        <span class="c">/// Make sure Portfolio is an Excess Return</span>
+        <span onmouseout="hideTip(event, 'fs67', 143)" onmouseover="showTip(event, 'fs67', 143)" class="prop">Portfolio</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs21', 144)" onmouseover="showTip(event, 'fs21', 144)" class="vt">float</span>
+        <span class="prop">MktRf</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs21', 145)" onmouseover="showTip(event, 'fs21', 145)" class="vt">float</span>
+        <span class="prop">Hml</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs21', 146)" onmouseover="showTip(event, 'fs21', 146)" class="vt">float</span>
+        <span class="prop">Smb</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs21', 147)" onmouseover="showTip(event, 'fs21', 147)" class="vt">float</span>
+    <span class="pn">}</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs68', 148)" onmouseover="showTip(event, 'fs68', 148)" class="id">regData</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs64', 149)" onmouseover="showTip(event, 'fs64', 149)" class="id">vbrExcess</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs50', 150)" onmouseover="showTip(event, 'fs50', 150)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs51', 151)" onmouseover="showTip(event, 'fs51', 151)" class="id">map</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs69', 152)" onmouseover="showTip(event, 'fs69', 152)" class="fn">x</span> <span class="k">-&gt;</span>
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs70', 153)" onmouseover="showTip(event, 'fs70', 153)" class="fn">xff3</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs60', 154)" onmouseover="showTip(event, 'fs60', 154)" class="id">ff3ByMonth</span><span class="pn">[</span><span onmouseout="hideTip(event, 'fs69', 155)" onmouseover="showTip(event, 'fs69', 155)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs71', 156)" onmouseover="showTip(event, 'fs71', 156)" class="id">YearMonth</span><span class="pn">]</span>
+
+        <span class="pn">{</span> <span class="prop">Date</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs69', 157)" onmouseover="showTip(event, 'fs69', 157)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs71', 158)" onmouseover="showTip(event, 'fs71', 158)" class="id">YearMonth</span>
+          <span onmouseout="hideTip(event, 'fs67', 159)" onmouseover="showTip(event, 'fs67', 159)" class="prop">Portfolio</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs69', 160)" onmouseover="showTip(event, 'fs69', 160)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs72', 161)" onmouseover="showTip(event, 'fs72', 161)" class="id">ExcessReturn</span>
+          <span class="prop">MktRf</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs70', 162)" onmouseover="showTip(event, 'fs70', 162)" class="fn">xff3</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs73', 163)" onmouseover="showTip(event, 'fs73', 163)" class="id">MktRf</span>
+          <span class="prop">Hml</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs70', 164)" onmouseover="showTip(event, 'fs70', 164)" class="fn">xff3</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs74', 165)" onmouseover="showTip(event, 'fs74', 165)" class="id">Hml</span>
+          <span class="prop">Smb</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs70', 166)" onmouseover="showTip(event, 'fs70', 166)" class="fn">xff3</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs75', 167)" onmouseover="showTip(event, 'fs75', 167)" class="id">Smb</span> <span class="pn">}</span><span class="pn">)</span>
+</code></pre>
+<p>One way to evaluate performance is Sharpe ratios.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">/// Calculates sharpe ratio of a sequence of excess returns</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs76', 168)" onmouseover="showTip(event, 'fs76', 168)" class="fn">sharpe</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs77', 169)" onmouseover="showTip(event, 'fs77', 169)" class="fn">xs</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs21', 170)" onmouseover="showTip(event, 'fs21', 170)" class="vt">float</span> <span onmouseout="hideTip(event, 'fs45', 171)" onmouseover="showTip(event, 'fs45', 171)" class="if">seq</span><span class="pn">)</span> <span class="o">=</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs78', 172)" onmouseover="showTip(event, 'fs78', 172)" class="m">Seq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs79', 173)" onmouseover="showTip(event, 'fs79', 173)" class="id">mean</span> <span onmouseout="hideTip(event, 'fs77', 174)" onmouseover="showTip(event, 'fs77', 174)" class="fn">xs</span><span class="pn">)</span> <span class="o">/</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs78', 175)" onmouseover="showTip(event, 'fs78', 175)" class="m">Seq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs80', 176)" onmouseover="showTip(event, 'fs80', 176)" class="id">stDev</span> <span onmouseout="hideTip(event, 'fs77', 177)" onmouseover="showTip(event, 'fs77', 177)" class="fn">xs</span><span class="pn">)</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs81', 178)" onmouseover="showTip(event, 'fs81', 178)" class="fn">annualizeMonthlySharpe</span> <span onmouseout="hideTip(event, 'fs82', 179)" onmouseover="showTip(event, 'fs82', 179)" class="fn">monthlySharpe</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs83', 180)" onmouseover="showTip(event, 'fs83', 180)" class="fn">sqrt</span> <span class="pn">(</span><span class="n">12.0</span><span class="pn">)</span> <span class="o">*</span> <span onmouseout="hideTip(event, 'fs82', 181)" onmouseover="showTip(event, 'fs82', 181)" class="fn">monthlySharpe</span>
+</code></pre>
+<p>Our portfolio.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs68', 182)" onmouseover="showTip(event, 'fs68', 182)" class="id">regData</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs50', 183)" onmouseover="showTip(event, 'fs50', 183)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs51', 184)" onmouseover="showTip(event, 'fs51', 184)" class="id">map</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs84', 185)" onmouseover="showTip(event, 'fs84', 185)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs84', 186)" onmouseover="showTip(event, 'fs84', 186)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs85', 187)" onmouseover="showTip(event, 'fs85', 187)" class="id">Portfolio</span><span class="pn">)</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs76', 188)" onmouseover="showTip(event, 'fs76', 188)" class="fn">sharpe</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs81', 189)" onmouseover="showTip(event, 'fs81', 189)" class="fn">annualizeMonthlySharpe</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code></code></pre></td></tr></table>
+<p>The market.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs68', 190)" onmouseover="showTip(event, 'fs68', 190)" class="id">regData</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs50', 191)" onmouseover="showTip(event, 'fs50', 191)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs51', 192)" onmouseover="showTip(event, 'fs51', 192)" class="id">map</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs84', 193)" onmouseover="showTip(event, 'fs84', 193)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs84', 194)" onmouseover="showTip(event, 'fs84', 194)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs86', 195)" onmouseover="showTip(event, 'fs86', 195)" class="id">MktRf</span><span class="pn">)</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs76', 196)" onmouseover="showTip(event, 'fs76', 196)" class="fn">sharpe</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs81', 197)" onmouseover="showTip(event, 'fs81', 197)" class="fn">annualizeMonthlySharpe</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code></code></pre></td></tr></table>
+<p>The HML factor.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs68', 198)" onmouseover="showTip(event, 'fs68', 198)" class="id">regData</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs50', 199)" onmouseover="showTip(event, 'fs50', 199)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs51', 200)" onmouseover="showTip(event, 'fs51', 200)" class="id">map</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs84', 201)" onmouseover="showTip(event, 'fs84', 201)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs84', 202)" onmouseover="showTip(event, 'fs84', 202)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs87', 203)" onmouseover="showTip(event, 'fs87', 203)" class="id">Hml</span><span class="pn">)</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs76', 204)" onmouseover="showTip(event, 'fs76', 204)" class="fn">sharpe</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs81', 205)" onmouseover="showTip(event, 'fs81', 205)" class="fn">annualizeMonthlySharpe</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code></code></pre></td></tr></table>
+<p>Now we can estimate our factor models using OLS.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs88', 206)" onmouseover="showTip(event, 'fs88', 206)" class="id">capmEstimate</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs89', 207)" onmouseover="showTip(event, 'fs89', 207)" class="fn">Ols</span><span class="pn">(</span><span class="s">&quot;Portfolio ~ MktRf&quot;</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs68', 208)" onmouseover="showTip(event, 'fs68', 208)" class="id">regData</span><span class="pn">)</span><span class="pn">.</span><span class="id">fit</span><span class="pn">(</span><span class="pn">)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs90', 209)" onmouseover="showTip(event, 'fs90', 209)" class="id">ff3Estimate</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs89', 210)" onmouseover="showTip(event, 'fs89', 210)" class="fn">Ols</span><span class="pn">(</span><span class="s">&quot;Portfolio ~ MktRf + Hml + Smb&quot;</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs68', 211)" onmouseover="showTip(event, 'fs68', 211)" class="id">regData</span><span class="pn">)</span><span class="pn">.</span><span class="id">fit</span><span class="pn">(</span><span class="pn">)</span>
+</code></pre>
+<p>CAPM results.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs88', 212)" onmouseover="showTip(event, 'fs88', 212)" class="id">capmEstimate</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs91', 213)" onmouseover="showTip(event, 'fs91', 213)" class="id">summary</span> <span class="pn">(</span><span class="pn">)</span>
+</code></pre>
+<ul>
+<li>What's the interpretation of the alpha?</li>
+<li>What's the interpretation of the beta?</li>
+<li>If you want to replicate VBR with the MKT factor and risk-free bonds, what are the weights that you would use?</li>
+</ul>
+<p>Fama-French 3-Factor model results</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs90', 214)" onmouseover="showTip(event, 'fs90', 214)" class="id">ff3Estimate</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs91', 215)" onmouseover="showTip(event, 'fs91', 215)" class="id">summary</span> <span class="pn">(</span><span class="pn">)</span>
+</code></pre>
+<ul>
+<li>What's the interpretation of the alpha?</li>
+<li>What's the interpretation of the factor betas?</li>
+<li>If you want to replicate VBR with risk free bonds and the MKT, HML, and SMB factors, what are the weights that you would use?</li>
+</ul>
+<blockquote>
+<p><strong>Practice:</strong> What is the expected annual return of VBR? When answering this,</p>
+<ul>
+<li>Assume that your alpha and beta estimates for the 3 factor model explaining VBR returns are accurate.</li>
+<li>Use the average annual premia on the Fama and French factors from 1926 until end of 2022 as your estimate of the factors' expected returns.</li>
+</ul>
+</blockquote>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// Answer here</span>
+</code></pre>
+<p>You will probably see that the CAPM <span class="math">\(R^2\)</span> is lower than the
+Fama-French <span class="math">\(R^2\)</span>. This means that you can explain more of the
+portfolio's returns with the Fama-French model. Or in trader terms,
+you can hedge the portfolio better with the multi-factor model.</p>
+<p>Let's turn things around and see if we can explain the HML factor.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs92', 216)" onmouseover="showTip(event, 'fs92', 216)" class="id">hmlRegData</span> <span class="o">=</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs93', 217)" onmouseover="showTip(event, 'fs93', 217)" class="fn">vbrByMonth</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs64', 218)" onmouseover="showTip(event, 'fs64', 218)" class="id">vbrExcess</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs50', 219)" onmouseover="showTip(event, 'fs50', 219)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs51', 220)" onmouseover="showTip(event, 'fs51', 220)" class="id">map</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs69', 221)" onmouseover="showTip(event, 'fs69', 221)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs69', 222)" onmouseover="showTip(event, 'fs69', 222)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs71', 223)" onmouseover="showTip(event, 'fs71', 223)" class="id">YearMonth</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs69', 224)" onmouseover="showTip(event, 'fs69', 224)" class="fn">x</span><span class="pn">)</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs63', 225)" onmouseover="showTip(event, 'fs63', 225)" class="fn">Map</span>
+
+    <span class="pn">[|</span> <span class="k">for</span> <span onmouseout="hideTip(event, 'fs94', 226)" onmouseover="showTip(event, 'fs94', 226)" class="fn">vti</span> <span class="k">in</span> <span onmouseout="hideTip(event, 'fs65', 227)" onmouseover="showTip(event, 'fs65', 227)" class="id">vtiExcess</span> <span class="k">do</span>
+           <span class="pn">{|</span> <span class="prop">YearMonth</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs94', 228)" onmouseover="showTip(event, 'fs94', 228)" class="fn">vti</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs71', 229)" onmouseover="showTip(event, 'fs71', 229)" class="id">YearMonth</span>
+              <span class="prop">Hml</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs60', 230)" onmouseover="showTip(event, 'fs60', 230)" class="id">ff3ByMonth</span><span class="pn">[</span><span onmouseout="hideTip(event, 'fs94', 231)" onmouseover="showTip(event, 'fs94', 231)" class="fn">vti</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs71', 232)" onmouseover="showTip(event, 'fs71', 232)" class="id">YearMonth</span><span class="pn">]</span><span class="pn">.</span><span class="id">Hml</span>
+              <span class="prop">Vti</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs94', 233)" onmouseover="showTip(event, 'fs94', 233)" class="fn">vti</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs72', 234)" onmouseover="showTip(event, 'fs72', 234)" class="id">ExcessReturn</span>
+              <span class="prop">Vbr</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs93', 235)" onmouseover="showTip(event, 'fs93', 235)" class="fn">vbrByMonth</span><span class="pn">[</span><span onmouseout="hideTip(event, 'fs94', 236)" onmouseover="showTip(event, 'fs94', 236)" class="fn">vti</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs71', 237)" onmouseover="showTip(event, 'fs71', 237)" class="id">YearMonth</span><span class="pn">]</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs59', 238)" onmouseover="showTip(event, 'fs59', 238)" class="id">ExcessReturn</span> <span class="pn">|}</span> <span class="pn">|]</span>
+
+<span onmouseout="hideTip(event, 'fs92', 239)" onmouseover="showTip(event, 'fs92', 239)" class="id">hmlRegData</span><span class="pn">[</span><span class="o">..</span><span class="n">3</span><span class="pn">]</span>
+</code></pre>
+<p>Explain the HML factor with VTI and VBR</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs95', 240)" onmouseover="showTip(event, 'fs95', 240)" class="id">hmlModel</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs89', 241)" onmouseover="showTip(event, 'fs89', 241)" class="fn">Ols</span><span class="pn">(</span><span class="s">&quot;Hml ~ Vti + Vbr&quot;</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs92', 242)" onmouseover="showTip(event, 'fs92', 242)" class="id">hmlRegData</span><span class="pn">)</span><span class="pn">.</span><span class="id">fit</span><span class="pn">(</span><span class="pn">)</span>
+<span onmouseout="hideTip(event, 'fs95', 243)" onmouseover="showTip(event, 'fs95', 243)" class="id">hmlModel</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs91', 244)" onmouseover="showTip(event, 'fs91', 244)" class="id">summary</span><span class="pn">(</span><span class="pn">)</span>
+</code></pre>
+<ul>
+<li>What's the interpretation of the alpha?</li>
+<li>What's the interpretation of the betas?</li>
+<li>If you want to replicate HML using VTI, VBR, and risk-free bonds, what are the weights you would use?</li>
+</ul>
+<p>Note:</p>
+<p>HML average return.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs92', 245)" onmouseover="showTip(event, 'fs92', 245)" class="id">hmlRegData</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs50', 246)" onmouseover="showTip(event, 'fs50', 246)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs96', 247)" onmouseover="showTip(event, 'fs96', 247)" class="id">averageBy</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs97', 248)" onmouseover="showTip(event, 'fs97', 248)" class="fn">x</span> <span class="k">-&gt;</span> <span class="n">12.0</span> <span class="o">*</span> <span onmouseout="hideTip(event, 'fs97', 249)" onmouseover="showTip(event, 'fs97', 249)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs98', 250)" onmouseover="showTip(event, 'fs98', 250)" class="id">Hml</span><span class="pn">)</span>
+</code></pre>
+<p>VTI average return</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs92', 251)" onmouseover="showTip(event, 'fs92', 251)" class="id">hmlRegData</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs50', 252)" onmouseover="showTip(event, 'fs50', 252)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs96', 253)" onmouseover="showTip(event, 'fs96', 253)" class="id">averageBy</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs97', 254)" onmouseover="showTip(event, 'fs97', 254)" class="fn">x</span> <span class="k">-&gt;</span> <span class="n">12.0</span> <span class="o">*</span> <span onmouseout="hideTip(event, 'fs97', 255)" onmouseover="showTip(event, 'fs97', 255)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs99', 256)" onmouseover="showTip(event, 'fs99', 256)" class="id">Vti</span><span class="pn">)</span>
+</code></pre>
+<p>VBR average return.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs92', 257)" onmouseover="showTip(event, 'fs92', 257)" class="id">hmlRegData</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs50', 258)" onmouseover="showTip(event, 'fs50', 258)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs96', 259)" onmouseover="showTip(event, 'fs96', 259)" class="id">averageBy</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs97', 260)" onmouseover="showTip(event, 'fs97', 260)" class="fn">x</span> <span class="k">-&gt;</span> <span class="n">12.0</span> <span class="o">*</span> <span onmouseout="hideTip(event, 'fs97', 261)" onmouseover="showTip(event, 'fs97', 261)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs100', 262)" onmouseover="showTip(event, 'fs100', 262)" class="id">Vbr</span><span class="pn">)</span>
+</code></pre>
+<h2><a name="Information-Ratios" class="anchor" href="#Information-Ratios">Information Ratios</a></h2>
+<p>We want residuals so that we can estimate information ratios.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs101', 263)" onmouseover="showTip(event, 'fs101', 263)" class="id">capmResiduals</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs88', 264)" onmouseover="showTip(event, 'fs88', 264)" class="id">capmEstimate</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs102', 265)" onmouseover="showTip(event, 'fs102', 265)" class="id">resid</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs103', 266)" onmouseover="showTip(event, 'fs103', 266)" class="id">ff3Residuals</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs90', 267)" onmouseover="showTip(event, 'fs90', 267)" class="id">ff3Estimate</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs102', 268)" onmouseover="showTip(event, 'fs102', 268)" class="id">resid</span>
+</code></pre>
+<p>In general I would write a function to do this. Function makes it a bit
+simpler to follow. It's hard for me to read the next few lines and understand
+what everything is. Too much going on.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs104', 269)" onmouseover="showTip(event, 'fs104', 269)" class="id">capmAlpha</span> <span class="o">=</span> <span class="n">12.0</span> <span class="o">*</span> <span onmouseout="hideTip(event, 'fs88', 270)" onmouseover="showTip(event, 'fs88', 270)" class="id">capmEstimate</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs105', 271)" onmouseover="showTip(event, 'fs105', 271)" class="id">coefs</span><span class="pn">[</span><span class="s">&quot;Intercept&quot;</span><span class="pn">]</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs106', 272)" onmouseover="showTip(event, 'fs106', 272)" class="id">capmStDevResiduals</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs83', 273)" onmouseover="showTip(event, 'fs83', 273)" class="fn">sqrt</span> <span class="pn">(</span><span class="n">12.0</span><span class="pn">)</span> <span class="o">*</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs78', 274)" onmouseover="showTip(event, 'fs78', 274)" class="m">Seq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs80', 275)" onmouseover="showTip(event, 'fs80', 275)" class="id">stDev</span> <span onmouseout="hideTip(event, 'fs101', 276)" onmouseover="showTip(event, 'fs101', 276)" class="id">capmResiduals</span><span class="pn">)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs107', 277)" onmouseover="showTip(event, 'fs107', 277)" class="id">capmInformationRatio</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs104', 278)" onmouseover="showTip(event, 'fs104', 278)" class="id">capmAlpha</span> <span class="o">/</span> <span onmouseout="hideTip(event, 'fs106', 279)" onmouseover="showTip(event, 'fs106', 279)" class="id">capmStDevResiduals</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val capmAlpha: float = -0.03043829182
+val capmStDevResiduals: float = 0.07553316546
+val capmInformationRatio: float = -0.4029791634</code></pre></td></tr></table>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs108', 280)" onmouseover="showTip(event, 'fs108', 280)" class="id">ff3Alpha</span> <span class="o">=</span> <span class="n">12.0</span> <span class="o">*</span> <span onmouseout="hideTip(event, 'fs90', 281)" onmouseover="showTip(event, 'fs90', 281)" class="id">ff3Estimate</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs105', 282)" onmouseover="showTip(event, 'fs105', 282)" class="id">coefs</span><span class="pn">[</span><span class="s">&quot;Intercept&quot;</span><span class="pn">]</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs109', 283)" onmouseover="showTip(event, 'fs109', 283)" class="id">ff3StDevResiduals</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs83', 284)" onmouseover="showTip(event, 'fs83', 284)" class="fn">sqrt</span> <span class="pn">(</span><span class="n">12.0</span><span class="pn">)</span> <span class="o">*</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs78', 285)" onmouseover="showTip(event, 'fs78', 285)" class="m">Seq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs80', 286)" onmouseover="showTip(event, 'fs80', 286)" class="id">stDev</span> <span onmouseout="hideTip(event, 'fs103', 287)" onmouseover="showTip(event, 'fs103', 287)" class="id">ff3Residuals</span><span class="pn">)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs110', 288)" onmouseover="showTip(event, 'fs110', 288)" class="id">ff3InformationRatio</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs108', 289)" onmouseover="showTip(event, 'fs108', 289)" class="id">ff3Alpha</span> <span class="o">/</span> <span onmouseout="hideTip(event, 'fs109', 290)" onmouseover="showTip(event, 'fs109', 290)" class="id">ff3StDevResiduals</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val ff3Alpha: float = -0.008830715608
+val ff3StDevResiduals: float = 0.03868132804
+val ff3InformationRatio: float = -0.228294013</code></pre></td></tr></table>
+<p>Here is the function version.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs111', 291)" onmouseover="showTip(event, 'fs111', 291)" class="fn">informationRatio</span> <span onmouseout="hideTip(event, 'fs112', 292)" onmouseover="showTip(event, 'fs112', 292)" class="fn">monthlyAlpha</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs113', 293)" onmouseover="showTip(event, 'fs113', 293)" class="fn">monthlyResiduals</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs21', 294)" onmouseover="showTip(event, 'fs21', 294)" class="vt">float</span> <span onmouseout="hideTip(event, 'fs114', 295)" onmouseover="showTip(event, 'fs114', 295)" class="rt">array</span><span class="pn">)</span> <span class="o">=</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs115', 296)" onmouseover="showTip(event, 'fs115', 296)" class="fn">annualAlpha</span> <span class="o">=</span> <span class="n">12.0</span> <span class="o">*</span> <span onmouseout="hideTip(event, 'fs112', 297)" onmouseover="showTip(event, 'fs112', 297)" class="fn">monthlyAlpha</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs116', 298)" onmouseover="showTip(event, 'fs116', 298)" class="fn">annualStDev</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs83', 299)" onmouseover="showTip(event, 'fs83', 299)" class="fn">sqrt</span> <span class="pn">(</span><span class="n">12.0</span><span class="pn">)</span> <span class="o">*</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs78', 300)" onmouseover="showTip(event, 'fs78', 300)" class="m">Seq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs80', 301)" onmouseover="showTip(event, 'fs80', 301)" class="id">stDev</span> <span onmouseout="hideTip(event, 'fs113', 302)" onmouseover="showTip(event, 'fs113', 302)" class="fn">monthlyResiduals</span><span class="pn">)</span>
+    <span onmouseout="hideTip(event, 'fs115', 303)" onmouseover="showTip(event, 'fs115', 303)" class="fn">annualAlpha</span> <span class="o">/</span> <span onmouseout="hideTip(event, 'fs116', 304)" onmouseover="showTip(event, 'fs116', 304)" class="fn">annualStDev</span>
+
+<span onmouseout="hideTip(event, 'fs111', 305)" onmouseover="showTip(event, 'fs111', 305)" class="fn">informationRatio</span> <span onmouseout="hideTip(event, 'fs88', 306)" onmouseover="showTip(event, 'fs88', 306)" class="id">capmEstimate</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs105', 307)" onmouseover="showTip(event, 'fs105', 307)" class="id">coefs</span><span class="pn">[</span><span class="s">&quot;Intercept&quot;</span><span class="pn">]</span> <span onmouseout="hideTip(event, 'fs101', 308)" onmouseover="showTip(event, 'fs101', 308)" class="id">capmResiduals</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val informationRatio:
+  monthlyAlpha: float -&gt; monthlyResiduals: float array -&gt; float
+val it: float = -0.4029791634</code></pre></td></tr></table>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs111', 309)" onmouseover="showTip(event, 'fs111', 309)" class="fn">informationRatio</span> <span onmouseout="hideTip(event, 'fs90', 310)" onmouseover="showTip(event, 'fs90', 310)" class="id">ff3Estimate</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs105', 311)" onmouseover="showTip(event, 'fs105', 311)" class="id">coefs</span><span class="pn">[</span><span class="s">&quot;Intercept&quot;</span><span class="pn">]</span> <span onmouseout="hideTip(event, 'fs103', 312)" onmouseover="showTip(event, 'fs103', 312)" class="id">ff3Residuals</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val it: float = -0.228294013</code></pre></td></tr></table>
+
+        <div class="fsdocs-tip" id="fs1">namespace System</div>
+<div class="fsdocs-tip" id="fs2">Multiple items<br />namespace FSharp<br /><br />--------------------<br />namespace Microsoft.FSharp</div>
+<div class="fsdocs-tip" id="fs3">Multiple items<br />namespace FSharp.Data<br /><br />--------------------<br />namespace Microsoft.FSharp.Data</div>
+<div class="fsdocs-tip" id="fs4">namespace Quotes</div>
+<div class="fsdocs-tip" id="fs5">namespace Quotes.YahooFinance</div>
+<div class="fsdocs-tip" id="fs6">namespace FSharp.Stats</div>
+<div class="fsdocs-tip" id="fs7">namespace Plotly</div>
+<div class="fsdocs-tip" id="fs8">namespace Plotly.NET</div>
+<div class="fsdocs-tip" id="fs9">namespace NovaSBE</div>
+<div class="fsdocs-tip" id="fs10">namespace NovaSBE.Finance</div>
+<div class="fsdocs-tip" id="fs11">module Ols
+
+from NovaSBE.Finance</div>
+<div class="fsdocs-tip" id="fs12">type Environment =
+  static member Exit: exitCode: int -&gt; unit
+  static member ExpandEnvironmentVariables: name: string -&gt; string
+  static member FailFast: message: string -&gt; unit + 1 overload
+  static member GetCommandLineArgs: unit -&gt; string array
+  static member GetEnvironmentVariable: variable: string -&gt; string + 1 overload
+  static member GetEnvironmentVariables: unit -&gt; IDictionary + 1 overload
+  static member GetFolderPath: folder: SpecialFolder -&gt; string + 1 overload
+  static member GetLogicalDrives: unit -&gt; string array
+  static member SetEnvironmentVariable: variable: string * value: string -&gt; unit + 1 overload
+  static member CommandLine: string
+  ...<br /><em>&lt;summary&gt;Provides information about, and means to manipulate, the current environment and platform. This class cannot be inherited.&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs13">property Environment.CurrentDirectory: string with get, set<br /><em>&lt;summary&gt;Gets or sets the fully qualified path of the current working directory.&lt;/summary&gt;<br />&lt;exception cref=&quot;T:System.ArgumentException&quot;&gt;Attempted to set to an empty string (&quot;&quot;).&lt;/exception&gt;<br />&lt;exception cref=&quot;T:System.ArgumentNullException&quot;&gt;Attempted to set to &lt;see langword=&quot;null&quot; /&gt;.&lt;/exception&gt;<br />&lt;exception cref=&quot;T:System.IO.IOException&quot;&gt;An I/O error occurred.&lt;/exception&gt;<br />&lt;exception cref=&quot;T:System.IO.DirectoryNotFoundException&quot;&gt;Attempted to set a local path that cannot be found.&lt;/exception&gt;<br />&lt;exception cref=&quot;T:System.Security.SecurityException&quot;&gt;The caller does not have the appropriate permission.&lt;/exception&gt;<br />&lt;returns&gt;The directory path.&lt;/returns&gt;</em></div>
+<div class="fsdocs-tip" id="fs14">val ff3: French.FF3Obs array</div>
+<div class="fsdocs-tip" id="fs15">module French
+
+from NovaSBE.Finance</div>
+<div class="fsdocs-tip" id="fs16">val getFF3: frequency: French.Frequency -&gt; French.FF3Obs array</div>
+<div class="fsdocs-tip" id="fs17">type Frequency =
+  | Daily
+  | Monthly</div>
+<div class="fsdocs-tip" id="fs18">union case French.Frequency.Monthly: French.Frequency</div>
+<div class="fsdocs-tip" id="fs19">type Return =
+  {
+    YearMonth: DateTime
+    Return: float
+  }</div>
+<div class="fsdocs-tip" id="fs20">Multiple items<br />[&lt;Struct&gt;]
+type DateTime =
+  new: year: int * month: int * day: int -&gt; unit + 16 overloads
+  member Add: value: TimeSpan -&gt; DateTime
+  member AddDays: value: float -&gt; DateTime
+  member AddHours: value: float -&gt; DateTime
+  member AddMicroseconds: value: float -&gt; DateTime
+  member AddMilliseconds: value: float -&gt; DateTime
+  member AddMinutes: value: float -&gt; DateTime
+  member AddMonths: months: int -&gt; DateTime
+  member AddSeconds: value: float -&gt; DateTime
+  member AddTicks: value: int64 -&gt; DateTime
+  ...<br /><em>&lt;summary&gt;Represents an instant in time, typically expressed as a date and time of day.&lt;/summary&gt;</em><br /><br />--------------------<br />DateTime ()<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(ticks: int64) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(ticks: int64, kind: DateTimeKind) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(date: DateOnly, time: TimeOnly) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(date: DateOnly, time: TimeOnly, kind: DateTimeKind) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, calendar: Globalization.Calendar) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int, kind: DateTimeKind) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int, calendar: Globalization.Calendar) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em></div>
+<div class="fsdocs-tip" id="fs21">Multiple items<br />val float: value: &#39;T -&gt; float (requires member op_Explicit)<br /><br />--------------------<br />type float = Double<br /><br />--------------------<br />type float&lt;&#39;Measure&gt; =
+  float</div>
+<div class="fsdocs-tip" id="fs22">val getReturns: ticker: string -&gt; Return array</div>
+<div class="fsdocs-tip" id="fs23">val ticker: string</div>
+<div class="fsdocs-tip" id="fs24">Multiple items<br />val string: value: &#39;T -&gt; string<br /><br />--------------------<br />type string = String</div>
+<div class="fsdocs-tip" id="fs25">type YahooFinance =
+  static member Dividends: symbols: string list * ?startDate: DateTime * ?endDate: DateTime * ?interval: Interval * ?displayLogs: bool -&gt; Dividend list
+  static member History: symbol: string * ?startDate: DateTime * ?endDate: DateTime * ?interval: Interval * ?displayLogs: bool -&gt; Quote list + 1 overload
+  static member Meta: symbols: string list * ?startDate: DateTime * ?endDate: DateTime * ?interval: Interval * ?displayLogs: bool -&gt; Meta list</div>
+<div class="fsdocs-tip" id="fs26">static member YahooFinance.History: symbols: string seq * ?startDate: DateTime * ?endDate: DateTime * ?interval: Interval * ?displayLogs: bool -&gt; Quote list<br />static member YahooFinance.History: symbol: string * ?startDate: DateTime * ?endDate: DateTime * ?interval: Interval * ?displayLogs: bool -&gt; Quote list</div>
+<div class="fsdocs-tip" id="fs27">property DateTime.Now: DateTime with get<br /><em>&lt;summary&gt;Gets a &lt;see cref=&quot;T:System.DateTime&quot; /&gt; object that is set to the current date and time on this computer, expressed as the local time.&lt;/summary&gt;<br />&lt;returns&gt;An object whose value is the current local date and time.&lt;/returns&gt;</em></div>
+<div class="fsdocs-tip" id="fs28">property DateTime.Year: int with get<br /><em>&lt;summary&gt;Gets the year component of the date represented by this instance.&lt;/summary&gt;<br />&lt;returns&gt;The year, between 1 and 9999.&lt;/returns&gt;</em></div>
+<div class="fsdocs-tip" id="fs29">union case Interval.Monthly: Interval</div>
+<div class="fsdocs-tip" id="fs30">Multiple items<br />module List
+
+from FSharp.Stats<br /><em>&lt;summary&gt;
+ Module to compute common statistical measure on list
+&lt;/summary&gt;</em><br /><br />--------------------<br />module List
+
+from Microsoft.FSharp.Collections<br /><br />--------------------<br />type List =
+  new: unit -&gt; List
+  static member geomspace: start: float * stop: float * num: int * ?IncludeEndpoint: bool -&gt; float list
+  static member linspace: start: float * stop: float * num: int * ?IncludeEndpoint: bool -&gt; float list<br /><br />--------------------<br />type List&lt;&#39;T&gt; =
+  | op_Nil
+  | op_ColonColon of Head: &#39;T * Tail: &#39;T list
+  interface IReadOnlyList&lt;&#39;T&gt;
+  interface IReadOnlyCollection&lt;&#39;T&gt;
+  interface IEnumerable
+  interface IEnumerable&lt;&#39;T&gt;
+  member GetReverseIndex: rank: int * offset: int -&gt; int
+  member GetSlice: startIndex: int option * endIndex: int option -&gt; &#39;T list
+  static member Cons: head: &#39;T * tail: &#39;T list -&gt; &#39;T list
+  member Head: &#39;T
+  member IsEmpty: bool
+  member Item: index: int -&gt; &#39;T with get
+  ...<br /><br />--------------------<br />new: unit -&gt; List</div>
+<div class="fsdocs-tip" id="fs31">val sortBy: projection: (&#39;T -&gt; &#39;Key) -&gt; list: &#39;T list -&gt; &#39;T list (requires comparison)</div>
+<div class="fsdocs-tip" id="fs32">val x: Quote</div>
+<div class="fsdocs-tip" id="fs33">Quote.Date: DateTime</div>
+<div class="fsdocs-tip" id="fs34">val pairwise: list: &#39;T list -&gt; (&#39;T * &#39;T) list</div>
+<div class="fsdocs-tip" id="fs35">val map: mapping: (&#39;T -&gt; &#39;U) -&gt; list: &#39;T list -&gt; &#39;U list</div>
+<div class="fsdocs-tip" id="fs36">val yesterday: Quote</div>
+<div class="fsdocs-tip" id="fs37">val today: Quote</div>
+<div class="fsdocs-tip" id="fs38">property DateTime.Month: int with get<br /><em>&lt;summary&gt;Gets the month component of the date represented by this instance.&lt;/summary&gt;<br />&lt;returns&gt;The month component, expressed as a value between 1 and 12.&lt;/returns&gt;</em></div>
+<div class="fsdocs-tip" id="fs39">Quote.AdjustedClose: float<br /><em>&lt;summary&gt;
+ Split and dividend adjusted Close price
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs40">val toArray: list: &#39;T list -&gt; &#39;T array</div>
+<div class="fsdocs-tip" id="fs41">val vbr: Return array</div>
+<div class="fsdocs-tip" id="fs42">val vti: Return array</div>
+<div class="fsdocs-tip" id="fs43">val cumulativeReturn: xs: (DateTime * float) seq -&gt; (DateTime * float) list</div>
+<div class="fsdocs-tip" id="fs44">val xs: (DateTime * float) seq</div>
+<div class="fsdocs-tip" id="fs45">Multiple items<br />val seq: sequence: &#39;T seq -&gt; &#39;T seq<br /><br />--------------------<br />type &#39;T seq = Collections.Generic.IEnumerable&lt;&#39;T&gt;</div>
+<div class="fsdocs-tip" id="fs46">val mutable cr: float</div>
+<div class="fsdocs-tip" id="fs47">val dt: DateTime</div>
+<div class="fsdocs-tip" id="fs48">val r: float</div>
+<div class="fsdocs-tip" id="fs49">val vbrChart: GenericChart.GenericChart</div>
+<div class="fsdocs-tip" id="fs50">Multiple items<br />type Array =
+  new: unit -&gt; Array
+  static member geomspace: start: float * stop: float * num: int * ?IncludeEndpoint: bool -&gt; float array
+  static member linspace: start: float * stop: float * num: int * ?IncludeEndpoint: bool -&gt; float array<br /><br />--------------------<br />new: unit -&gt; Array</div>
+<div class="fsdocs-tip" id="fs51">val map: mapping: (&#39;T -&gt; &#39;U) -&gt; array: &#39;T array -&gt; &#39;U array</div>
+<div class="fsdocs-tip" id="fs52">val x: Return</div>
+<div class="fsdocs-tip" id="fs53">Return.YearMonth: DateTime</div>
+<div class="fsdocs-tip" id="fs54">Return.Return: float</div>
+<div class="fsdocs-tip" id="fs55">type Chart =
+  static member AnnotatedHeatmap: zData: #(&#39;a1 seq) seq * annotationText: #(string seq) seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Name: string * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowLegend: bool * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Opacity: float * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?X: #IConvertible seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?XGap: int * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Y: #IConvertible seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?YGap: int * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Text: &#39;a5 * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiText: &#39;a5 seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ColorBar: ColorBar * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ColorScale: Colorscale * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowScale: bool * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ReverseScale: bool * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ZSmooth: SmoothAlg * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Transpose: bool * [&lt;Optional; DefaultParameterValue ((false :&gt; obj))&gt;] ?UseWebGL: bool * [&lt;Optional; DefaultParameterValue ((false :&gt; obj))&gt;] ?ReverseYAxis: bool * [&lt;Optional; DefaultParameterValue ((true :&gt; obj))&gt;] ?UseDefaults: bool -&gt; GenericChart (requires &#39;a1 :&gt; IConvertible and &#39;a5 :&gt; IConvertible) + 1 overload
+  static member Area: x: #IConvertible seq * y: #IConvertible seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowMarkers: bool * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Name: string * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowLegend: bool * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Opacity: float * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiOpacity: float seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Text: &#39;a2 * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiText: &#39;a2 seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?TextPosition: TextPosition * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiTextPosition: TextPosition seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerColor: Color * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerColorScale: Colorscale * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerOutline: Line * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerSymbol: MarkerSymbol * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiMarkerSymbol: MarkerSymbol seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Marker: Marker * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?LineColor: Color * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?LineColorScale: Colorscale * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?LineWidth: float * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?LineDash: DrawingStyle * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Line: Line * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?StackGroup: string * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Orientation: Orientation * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?GroupNorm: GroupNorm * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?FillColor: Color * [&lt;Optional; DefaultParameterValue ((false :&gt; obj))&gt;] ?UseWebGL: bool * [&lt;Optional; DefaultParameterValue ((true :&gt; obj))&gt;] ?UseDefaults: bool -&gt; GenericChart (requires &#39;a2 :&gt; IConvertible) + 1 overload
+  static member Bar: values: #IConvertible seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Keys: #IConvertible seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Name: string * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowLegend: bool * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Opacity: float * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiOpacity: float seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Text: &#39;a2 * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiText: &#39;a2 seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerColor: Color * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerColorScale: Colorscale * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerOutline: Line * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerPatternShape: PatternShape * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiMarkerPatternShape: PatternShape seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerPattern: Pattern * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Marker: Marker * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Base: #IConvertible * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Width: &#39;a4 * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiWidth: &#39;a4 seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?TextPosition: TextPosition * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiTextPosition: TextPosition seq * [&lt;Optional; DefaultParameterValue ((true :&gt; obj))&gt;] ?UseDefaults: bool -&gt; GenericChart (requires &#39;a2 :&gt; IConvertible and &#39;a4 :&gt; IConvertible) + 1 overload
+  static member BoxPlot: [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?X: #IConvertible seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Y: #IConvertible seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Name: string * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowLegend: bool * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Text: &#39;a2 * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiText: &#39;a2 seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?FillColor: Color * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerColor: Color * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Marker: Marker * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Opacity: float * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?WhiskerWidth: float * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?BoxPoints: BoxPoints * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?BoxMean: BoxMean * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Jitter: float * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?PointPos: float * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Orientation: Orientation * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?OutlineColor: Color * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?OutlineWidth: float * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Outline: Line * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?AlignmentGroup: string * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?OffsetGroup: string * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Notched: bool * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?NotchWidth: float * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?QuartileMethod: QuartileMethod * [&lt;Optional; DefaultParameterValue ((true :&gt; obj))&gt;] ?UseDefaults: bool -&gt; GenericChart (requires &#39;a2 :&gt; IConvertible) + 2 overloads
+  static member Bubble: x: #IConvertible seq * y: #IConvertible seq * sizes: int seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Name: string * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowLegend: bool * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Opacity: float * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiOpacity: float seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Text: &#39;a2 * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiText: &#39;a2 seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?TextPosition: TextPosition * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiTextPosition: TextPosition seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerColor: Color * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerColorScale: Colorscale * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerOutline: Line * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerSymbol: MarkerSymbol * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiMarkerSymbol: MarkerSymbol seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Marker: Marker * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?LineColor: Color * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?LineColorScale: Colorscale * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?LineWidth: float * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?LineDash: DrawingStyle * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Line: Line * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?StackGroup: string * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Orientation: Orientation * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?GroupNorm: GroupNorm * [&lt;Optional; DefaultParameterValue ((false :&gt; obj))&gt;] ?UseWebGL: bool * [&lt;Optional; DefaultParameterValue ((true :&gt; obj))&gt;] ?UseDefaults: bool -&gt; GenericChart (requires &#39;a2 :&gt; IConvertible) + 1 overload
+  static member Candlestick: ``open`` : #IConvertible seq * high: #IConvertible seq * low: #IConvertible seq * close: #IConvertible seq * x: #IConvertible seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Name: string * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowLegend: bool * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Opacity: float * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Text: &#39;a5 * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiText: &#39;a5 seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Line: Line * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?IncreasingColor: Color * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Increasing: FinanceMarker * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?DecreasingColor: Color * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Decreasing: FinanceMarker * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?WhiskerWidth: float * [&lt;Optional; DefaultParameterValue ((true :&gt; obj))&gt;] ?UseDefaults: bool -&gt; GenericChart (requires &#39;a5 :&gt; IConvertible) + 1 overload
+  static member Column: values: #IConvertible seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Keys: #IConvertible seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Name: string * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowLegend: bool * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Opacity: float * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiOpacity: float seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Text: &#39;a2 * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiText: &#39;a2 seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerColor: Color * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerColorScale: Colorscale * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerOutline: Line * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerPatternShape: PatternShape * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiMarkerPatternShape: PatternShape seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerPattern: Pattern * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Marker: Marker * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Base: #IConvertible * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Width: &#39;a4 * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiWidth: &#39;a4 seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?TextPosition: TextPosition * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiTextPosition: TextPosition seq * [&lt;Optional; DefaultParameterValue ((true :&gt; obj))&gt;] ?UseDefaults: bool -&gt; GenericChart (requires &#39;a2 :&gt; IConvertible and &#39;a4 :&gt; IConvertible) + 1 overload
+  static member Contour: zData: #(&#39;a1 seq) seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Name: string * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowLegend: bool * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Opacity: float * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?X: #IConvertible seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Y: #IConvertible seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Text: &#39;a4 * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiText: &#39;a4 seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ColorBar: ColorBar * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ColorScale: Colorscale * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowScale: bool * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ReverseScale: bool * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Transpose: bool * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ContourLineColor: Color * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ContourLineDash: DrawingStyle * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ContourLineSmoothing: float * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ContourLine: Line * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ContoursColoring: ContourColoring * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ContoursOperation: ConstraintOperation * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ContoursType: ContourType * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowContourLabels: bool * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ContourLabelFont: Font * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Contours: Contours * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?FillColor: Color * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?NContours: int * [&lt;Optional; DefaultParameterValue ((true :&gt; obj))&gt;] ?UseDefaults: bool -&gt; GenericChart (requires &#39;a1 :&gt; IConvertible and &#39;a4 :&gt; IConvertible)
+  static member Funnel: x: #IConvertible seq * y: #IConvertible seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Name: string * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowLegend: bool * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Opacity: float * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Width: float * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Offset: float * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Text: &#39;a2 * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiText: &#39;a2 seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?TextPosition: TextPosition * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiTextPosition: TextPosition seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Orientation: Orientation * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?AlignmentGroup: string * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?OffsetGroup: string * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerColor: Color * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerOutline: Line * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Marker: Marker * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?TextInfo: TextInfo * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ConnectorLineColor: Color * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ConnectorLineStyle: DrawingStyle * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ConnectorFillColor: Color * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ConnectorLine: Line * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Connector: FunnelConnector * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?InsideTextFont: Font * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?OutsideTextFont: Font * [&lt;Optional; DefaultParameterValue ((true :&gt; obj))&gt;] ?UseDefaults: bool -&gt; GenericChart (requires &#39;a2 :&gt; IConvertible)
+  static member Heatmap: zData: #(&#39;a1 seq) seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Name: string * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowLegend: bool * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Opacity: float * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?X: #IConvertible seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?XGap: int * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Y: #IConvertible seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?YGap: int * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Text: &#39;a4 * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiText: &#39;a4 seq * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ColorBar: ColorBar * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ColorScale: Colorscale * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowScale: bool * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ReverseScale: bool * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?ZSmooth: SmoothAlg * [&lt;Optional; DefaultParameterValue ((null :&gt; obj))&gt;] ?Transpose: bool * [&lt;Optional; DefaultParameterValue ((false :&gt; obj))&gt;] ?UseWebGL: bool * [&lt;Optional; DefaultParameterValue ((false :&gt; obj))&gt;] ?ReverseYAxis: bool * [&lt;Optional; DefaultParameterValue ((true :&gt; obj))&gt;] ?UseDefaults: bool -&gt; GenericChart (requires &#39;a1 :&gt; IConvertible and &#39;a4 :&gt; IConvertible) + 1 overload
+  ...</div>
+<div class="fsdocs-tip" id="fs56">static member Chart.Line: xy: (#IConvertible * #IConvertible) seq * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowMarkers: bool * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Name: string * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowLegend: bool * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Opacity: float * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiOpacity: float seq * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Text: &#39;c * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiText: &#39;c seq * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?TextPosition: StyleParam.TextPosition * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiTextPosition: StyleParam.TextPosition seq * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerColor: Color * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerColorScale: StyleParam.Colorscale * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerOutline: Line * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerSymbol: StyleParam.MarkerSymbol * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiMarkerSymbol: StyleParam.MarkerSymbol seq * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Marker: TraceObjects.Marker * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?LineColor: Color * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?LineColorScale: StyleParam.Colorscale * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?LineWidth: float * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?LineDash: StyleParam.DrawingStyle * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Line: Line * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?StackGroup: string * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Orientation: StyleParam.Orientation * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?GroupNorm: StyleParam.GroupNorm * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Fill: StyleParam.Fill * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?FillColor: Color * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((false :&gt; obj))&gt;] ?UseWebGL: bool * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((true :&gt; obj))&gt;] ?UseDefaults: bool -&gt; GenericChart.GenericChart (requires &#39;c :&gt; IConvertible)<br />static member Chart.Line: x: #IConvertible seq * y: #IConvertible seq * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowMarkers: bool * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Name: string * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?ShowLegend: bool * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Opacity: float * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiOpacity: float seq * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Text: &#39;a2 * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiText: &#39;a2 seq * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?TextPosition: StyleParam.TextPosition * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiTextPosition: StyleParam.TextPosition seq * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerColor: Color * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerColorScale: StyleParam.Colorscale * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerOutline: Line * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?MarkerSymbol: StyleParam.MarkerSymbol * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?MultiMarkerSymbol: StyleParam.MarkerSymbol seq * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Marker: TraceObjects.Marker * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?LineColor: Color * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?LineColorScale: StyleParam.Colorscale * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?LineWidth: float * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?LineDash: StyleParam.DrawingStyle * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Line: Line * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?StackGroup: string * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Orientation: StyleParam.Orientation * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?GroupNorm: StyleParam.GroupNorm * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?Fill: StyleParam.Fill * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((null :&gt; obj))&gt;] ?FillColor: Color * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((false :&gt; obj))&gt;] ?UseWebGL: bool * [&lt;Runtime.InteropServices.Optional; Runtime.InteropServices.DefaultParameterValue ((true :&gt; obj))&gt;] ?UseDefaults: bool -&gt; GenericChart.GenericChart (requires &#39;a2 :&gt; IConvertible)</div>
+<div class="fsdocs-tip" id="fs57">module GenericChart
+
+from Plotly.NET<br /><em>&lt;summary&gt;
+ Module to represent a GenericChart
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs58">val toChartHTML: gChart: GenericChart.GenericChart -&gt; string<br /><em>&lt;summary&gt;
+ Converts a GenericChart to it HTML representation. The div layer has a default size of 600 if not specified otherwise.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs59">type ExcessReturn =
+  {
+    YearMonth: DateTime
+    ExcessReturn: float
+  }</div>
+<div class="fsdocs-tip" id="fs60">val ff3ByMonth: Map&lt;DateTime,French.FF3Obs&gt;</div>
+<div class="fsdocs-tip" id="fs61">val x: French.FF3Obs</div>
+<div class="fsdocs-tip" id="fs62">French.FF3Obs.Date: DateTime</div>
+<div class="fsdocs-tip" id="fs63">Multiple items<br />module Map
+
+from FSharp.Stats<br /><em>&lt;summary&gt;
+ Module to strore specialised computations on maps
+&lt;/summary&gt;</em><br /><br />--------------------<br />module Map
+
+from Microsoft.FSharp.Collections<br /><br />--------------------<br />type Map&lt;&#39;Key,&#39;Value (requires comparison)&gt; =
+  interface IReadOnlyDictionary&lt;&#39;Key,&#39;Value&gt;
+  interface IReadOnlyCollection&lt;KeyValuePair&lt;&#39;Key,&#39;Value&gt;&gt;
+  interface IEnumerable
+  interface IStructuralEquatable
+  interface IComparable
+  interface IEnumerable&lt;KeyValuePair&lt;&#39;Key,&#39;Value&gt;&gt;
+  interface ICollection&lt;KeyValuePair&lt;&#39;Key,&#39;Value&gt;&gt;
+  interface IDictionary&lt;&#39;Key,&#39;Value&gt;
+  new: elements: (&#39;Key * &#39;Value) seq -&gt; Map&lt;&#39;Key,&#39;Value&gt;
+  member Add: key: &#39;Key * value: &#39;Value -&gt; Map&lt;&#39;Key,&#39;Value&gt;
+  ...<br /><br />--------------------<br />new: elements: (&#39;Key * &#39;Value) seq -&gt; Map&lt;&#39;Key,&#39;Value&gt;</div>
+<div class="fsdocs-tip" id="fs64">val vbrExcess: ExcessReturn array</div>
+<div class="fsdocs-tip" id="fs65">val vtiExcess: ExcessReturn array</div>
+<div class="fsdocs-tip" id="fs66">type RegData =
+  {
+    Date: DateTime
+    Portfolio: float
+    MktRf: float
+    Hml: float
+    Smb: float
+  }</div>
+<div class="fsdocs-tip" id="fs67">module Portfolio
+
+from NovaSBE.Finance</div>
+<div class="fsdocs-tip" id="fs68">val regData: RegData array</div>
+<div class="fsdocs-tip" id="fs69">val x: ExcessReturn</div>
+<div class="fsdocs-tip" id="fs70">val xff3: French.FF3Obs</div>
+<div class="fsdocs-tip" id="fs71">ExcessReturn.YearMonth: DateTime</div>
+<div class="fsdocs-tip" id="fs72">ExcessReturn.ExcessReturn: float</div>
+<div class="fsdocs-tip" id="fs73">French.FF3Obs.MktRf: float</div>
+<div class="fsdocs-tip" id="fs74">French.FF3Obs.Hml: float</div>
+<div class="fsdocs-tip" id="fs75">French.FF3Obs.Smb: float</div>
+<div class="fsdocs-tip" id="fs76">val sharpe: xs: float seq -&gt; float<br /><em>&#160;Calculates sharpe ratio of a sequence of excess returns</em></div>
+<div class="fsdocs-tip" id="fs77">val xs: float seq</div>
+<div class="fsdocs-tip" id="fs78">Multiple items<br />module Seq
+
+from FSharp.Stats<br /><em>&lt;summary&gt;
+ Module to compute common statistical measure
+&lt;/summary&gt;</em><br /><br />--------------------<br />module Seq
+
+from Microsoft.FSharp.Collections<br /><br />--------------------<br />type Seq =
+  new: unit -&gt; Seq
+  static member geomspace: start: float * stop: float * num: int * ?IncludeEndpoint: bool -&gt; float seq
+  static member linspace: start: float * stop: float * num: int * ?IncludeEndpoint: bool -&gt; float seq<br /><br />--------------------<br />new: unit -&gt; Seq</div>
+<div class="fsdocs-tip" id="fs79">val mean: items: &#39;T seq -&gt; &#39;U (requires member (+) and member Zero and member DivideByInt and member (/))<br /><em>&lt;summary&gt;
+   Computes the population mean (Normalized by N)
+ &lt;/summary&gt;<br />&lt;param name=&quot;items&quot;&gt;The input sequence.&lt;/param&gt;<br />&lt;remarks&gt;Returns default value if data is empty or if any entry is NaN.&lt;/remarks&gt;<br />&lt;returns&gt;population mean (Normalized by N)&lt;/returns&gt;</em></div>
+<div class="fsdocs-tip" id="fs80">val stDev: items: &#39;T seq -&gt; &#39;U (requires member (-) and member Zero and member DivideByInt and member (+) and member ( * ) and member (+) and member (/) and member Sqrt)<br /><em>&lt;summary&gt;
+   Computes the sample standard deviation
+ &lt;/summary&gt;<br />&lt;param name=&quot;items&quot;&gt;The input sequence.&lt;/param&gt;<br />&lt;remarks&gt;Returns NaN if data is empty or if any entry is NaN.&lt;/remarks&gt;<br />&lt;returns&gt;standard deviation of a sample (Bessel&#39;s correction by N-1)&lt;/returns&gt;</em></div>
+<div class="fsdocs-tip" id="fs81">val annualizeMonthlySharpe: monthlySharpe: float -&gt; float</div>
+<div class="fsdocs-tip" id="fs82">val monthlySharpe: float</div>
+<div class="fsdocs-tip" id="fs83">val sqrt: value: &#39;T -&gt; &#39;U (requires member Sqrt)</div>
+<div class="fsdocs-tip" id="fs84">val x: RegData</div>
+<div class="fsdocs-tip" id="fs85">RegData.Portfolio: float<br /><em>&#160;Make sure Portfolio is an Excess Return</em></div>
+<div class="fsdocs-tip" id="fs86">RegData.MktRf: float</div>
+<div class="fsdocs-tip" id="fs87">RegData.Hml: float</div>
+<div class="fsdocs-tip" id="fs88">val capmEstimate: RegressionResults</div>
+<div class="fsdocs-tip" id="fs89">Multiple items<br />module Ols
+
+from NovaSBE.Finance<br /><br />--------------------<br />type Ols&lt;&#39;Record&gt; =
+  new: formula: string * data: &#39;Record seq -&gt; Ols&lt;&#39;Record&gt;
+  member fit: unit -&gt; RegressionResults
+  member df_model: int
+  member df_resid: int
+  member endog_names: string
+  member exog_names: string array
+  member k_constant: int<br /><em>&lt;summary&gt;Create a model from a formula and collection of records&lt;/summary&gt;</em><br /><br />--------------------<br />new: formula: string * data: &#39;Record seq -&gt; Ols&lt;&#39;Record&gt;</div>
+<div class="fsdocs-tip" id="fs90">val ff3Estimate: RegressionResults</div>
+<div class="fsdocs-tip" id="fs91">member RegressionResults.summary: ?yname: string * ?xname: string seq * ?title: string * ?alpha: float * ?slim: bool -&gt; string</div>
+<div class="fsdocs-tip" id="fs92">val hmlRegData: {| Hml: float; Vbr: float; Vti: float; YearMonth: DateTime |} array</div>
+<div class="fsdocs-tip" id="fs93">val vbrByMonth: Map&lt;DateTime,ExcessReturn&gt;</div>
+<div class="fsdocs-tip" id="fs94">val vti: ExcessReturn</div>
+<div class="fsdocs-tip" id="fs95">val hmlModel: RegressionResults</div>
+<div class="fsdocs-tip" id="fs96">val averageBy: projection: (&#39;T -&gt; &#39;U) -&gt; array: &#39;T array -&gt; &#39;U (requires member (+) and member DivideByInt and member Zero)</div>
+<div class="fsdocs-tip" id="fs97">val x: {| Hml: float; Vbr: float; Vti: float; YearMonth: DateTime |}</div>
+<div class="fsdocs-tip" id="fs98">anonymous record field Hml: float</div>
+<div class="fsdocs-tip" id="fs99">anonymous record field Vti: float</div>
+<div class="fsdocs-tip" id="fs100">anonymous record field Vbr: float</div>
+<div class="fsdocs-tip" id="fs101">val capmResiduals: float array</div>
+<div class="fsdocs-tip" id="fs102">property RegressionResults.resid: float array with get<br /><em>&lt;summary&gt;
+ The model residuals
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs103">val ff3Residuals: float array</div>
+<div class="fsdocs-tip" id="fs104">val capmAlpha: float</div>
+<div class="fsdocs-tip" id="fs105">property RegressionResults.coefs: Map&lt;string,float&gt; with get<br /><em>&lt;summary&gt;
+ The estimated model coefficients
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs106">val capmStDevResiduals: float</div>
+<div class="fsdocs-tip" id="fs107">val capmInformationRatio: float</div>
+<div class="fsdocs-tip" id="fs108">val ff3Alpha: float</div>
+<div class="fsdocs-tip" id="fs109">val ff3StDevResiduals: float</div>
+<div class="fsdocs-tip" id="fs110">val ff3InformationRatio: float</div>
+<div class="fsdocs-tip" id="fs111">val informationRatio: monthlyAlpha: float -&gt; monthlyResiduals: float array -&gt; float</div>
+<div class="fsdocs-tip" id="fs112">val monthlyAlpha: float</div>
+<div class="fsdocs-tip" id="fs113">val monthlyResiduals: float array</div>
+<div class="fsdocs-tip" id="fs114">type &#39;T array = &#39;T array</div>
+<div class="fsdocs-tip" id="fs115">val annualAlpha: float</div>
+<div class="fsdocs-tip" id="fs116">val annualStDev: float</div>
+
+    </div>
+</main>
+<aside id="fsdocs-page-menu">
+    <p id="on-this-page">On this page</p>
+    <ul>
+  <li class="level-1">
+    <a href="#Performance-evaluation">
+      Performance evaluation
+    </a>
+  </li>
+  <li class="level-2">
+    <a href="#Data">
+      Data
+    </a>
+  </li>
+  <li class="level-2">
+    <a href="#Factor-Models">
+      Factor Models
+    </a>
+  </li>
+  <li class="level-2">
+    <a href="#Information-Ratios">
+      Information Ratios
+    </a>
+  </li>
+</ul>
+</aside>
+<dialog>
+    <input type="search" placeholder="Search docs" />
+    <div class="results">
+        <ul></ul>
+        <p class="empty">Type something to start searching.</p>
+    </div>
+</dialog>
+<script type="module" src="/Teaching/content/fsdocs-tips.js"></script>
+<script type="module" src="/Teaching/content/fsdocs-theme-toggle.js"></script>
+<script type="module" src="/Teaching/content/fsdocs-theme.js"></script>
+<script type="module" src="/Teaching/content/fsdocs-search.js"></script>
+
+</body>
+</html>

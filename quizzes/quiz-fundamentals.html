@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en" data-root="/Teaching/">
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Nicholas Hirschey; Davide Costa" name="author">
+    <!-- Opengraph properties (https://ogp.me/) -->
+    <meta property="og:site_name" content="Teaching">
+    <meta property="og:title" content="Fundamentals" />
+    <meta property="og:url" content="/Teaching/quizzes/quiz-fundamentals.html">
+    <meta property="og:type" content="website" />
+    <!-- Twitter cards (https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="/Teaching/">
+    <meta name="twitter:title" content="Fundamentals">
+    
+    <title>Fundamentals | Teaching</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="/Teaching/img/logo.png" rel="icon" sizes="32x32" type="image/png"/>
+    <script type="application/javascript" src="/Teaching/content/fsdocs-theme-set-dark.js"></script>
+    <link href="/Teaching/content/fsdocs-default.css" rel="stylesheet" type="text/css"/>
+    <link href="/Teaching/content/fsdocs-theme.css" rel="stylesheet" type="text/css"/>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js"></script>
+    
+</head>
+<body class="content">
+<header>
+    <div class="start">
+        <div id="menu-toggle">
+            <iconify-icon class="icon closed" height="22" icon="eva:menu-fill" width="22"></iconify-icon>
+            <iconify-icon class="icon open" height="22" icon="mi:close" width="22"></iconify-icon>
+            <input type="checkbox" name="mobile-menu" />
+            <ul class="menu">
+                <li class="nav-header">Links</li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/nhirschey/Teaching/blob/main/LICENSE.md">License</a>
+                </li>
+                <li class="nav-item"><a class="nav-link"
+                                        href="https://github.com/nhirschey/Teaching/blob/main/CHANGELOG.md">Release
+                    Notes</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/nhirschey/Teaching/">Source
+                    Repository</a></li>
+                <li class="nav-header ">
+  Getting Started
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/install.html">
+    Install Software
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/learn-fsharp.html">
+    Learn F#
+  </a>
+</li>             
+<li class="nav-header ">
+  Lectures
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/stockslongrun.html">
+    Stocks for the long run
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/stocksandbonds.html">
+    Stocks and bonds
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/riskyweight.html">
+    Risky Weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolatilityTiming.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolatilityManagedTypes.html">
+    Volatility Managed, but with different vols
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolAndReturnPred.html">
+    Volatility and Return predictions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/mveComparisons.html">
+    More managed portfolio comparisons
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/PortfolioFormation-SimpleExample.html">
+    Building a strategy
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Momentum-Class.html">
+    Momentum Signal
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/optimization.html">
+    Optimization
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/revisitRiskyWeights.html">
+    Revisiting Mean-variance optimal risky weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/premiums.html">
+    Premiums
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/calls-nn.html">
+    Calls NN
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/portfolio-statistics.html">
+    Basic Portfolio Statistics
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/sentiment-mlnet.html">
+    Sentiment classification
+  </a>
+</li>             
+<li class="nav-header ">
+  Assignments
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-1-download-data.html">
+    Webscraping HTML to CSV
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-tuples-and-records.html">
+    Tuples and Records (with solutions)
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-collection-functions.html">
+    Collection functions (with solutions)
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignment-risky-weights.html">
+    Risky Weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignment-volatility-timing.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/select-project-signal.html">
+    Select Project Signals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/signal-exploration.html">
+    Signal Exploration
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/assignment-signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/assignment-performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-plotting.html">
+    Plotting (with solutions)
+  </a>
+</li>             
+<li class="nav-header active">
+  Practice Quizzes
+</li>             
+<li class="nav-item active">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-list-module.html">
+    List module functions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-options.html">
+    Options
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-match-expressions.html">
+    Match expressions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-map-collection.html">
+    Map collection
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-discriminated-union.html">
+    Dicriminated Union
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-portfolios.html">
+    Portfolios
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-factors.html">
+    Factors
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-folding.html">
+    Fold and Friends
+  </a>
+</li>             
+<li class="nav-header ">
+  Other
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Common.html">
+    Common
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/loading-scripts.html">
+    Loading external scripts
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Portfolio.html">
+    Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/YahooFinance.html">
+    YahooFinance
+  </a>
+</li>
+                
+            </ul>
+        </div>
+        <a href="/Teaching/">
+            <img alt="Header menu logo" src="/Teaching/img/logo.png">
+            <strong>Teaching</strong>
+        </a>
+    </div>
+    <div class="end">
+        <a href="https://github.com/nhirschey/Teaching/" target="_blank">
+            <iconify-icon icon="uil:github" width="26" height="26"></iconify-icon>
+        </a>
+        <iconify-icon id="search-btn" icon="carbon:search" class="search" width="24" height="24"></iconify-icon>
+        <fsdocs-theme-toggle></fsdocs-theme-toggle>
+    </div>
+</header>
+<aside id="fsdocs-main-menu">
+    <ul class="menu">
+        <li class="nav-header">Links</li>
+        <li class="nav-item"><a class="nav-link" href="https://github.com/nhirschey/Teaching/blob/main/LICENSE.md">License</a>
+        </li>
+        <li class="nav-item"><a class="nav-link"
+                                href="https://github.com/nhirschey/Teaching/blob/main/CHANGELOG.md">Release
+            Notes</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://github.com/nhirschey/Teaching/">Source
+            Repository</a></li>
+        <li class="nav-header ">
+  Getting Started
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/install.html">
+    Install Software
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/learn-fsharp.html">
+    Learn F#
+  </a>
+</li>             
+<li class="nav-header ">
+  Lectures
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/stockslongrun.html">
+    Stocks for the long run
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/stocksandbonds.html">
+    Stocks and bonds
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/riskyweight.html">
+    Risky Weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolatilityTiming.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolatilityManagedTypes.html">
+    Volatility Managed, but with different vols
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolAndReturnPred.html">
+    Volatility and Return predictions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/mveComparisons.html">
+    More managed portfolio comparisons
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/PortfolioFormation-SimpleExample.html">
+    Building a strategy
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Momentum-Class.html">
+    Momentum Signal
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/optimization.html">
+    Optimization
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/revisitRiskyWeights.html">
+    Revisiting Mean-variance optimal risky weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/premiums.html">
+    Premiums
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/calls-nn.html">
+    Calls NN
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/portfolio-statistics.html">
+    Basic Portfolio Statistics
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/sentiment-mlnet.html">
+    Sentiment classification
+  </a>
+</li>             
+<li class="nav-header ">
+  Assignments
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-1-download-data.html">
+    Webscraping HTML to CSV
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-tuples-and-records.html">
+    Tuples and Records (with solutions)
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-collection-functions.html">
+    Collection functions (with solutions)
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignment-risky-weights.html">
+    Risky Weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignment-volatility-timing.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/select-project-signal.html">
+    Select Project Signals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/signal-exploration.html">
+    Signal Exploration
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/assignment-signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/assignment-performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-plotting.html">
+    Plotting (with solutions)
+  </a>
+</li>             
+<li class="nav-header active">
+  Practice Quizzes
+</li>             
+<li class="nav-item active">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-list-module.html">
+    List module functions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-options.html">
+    Options
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-match-expressions.html">
+    Match expressions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-map-collection.html">
+    Map collection
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-discriminated-union.html">
+    Dicriminated Union
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-portfolios.html">
+    Portfolios
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-factors.html">
+    Factors
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-folding.html">
+    Fold and Friends
+  </a>
+</li>             
+<li class="nav-header ">
+  Other
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Common.html">
+    Common
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/loading-scripts.html">
+    Loading external scripts
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Portfolio.html">
+    Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/YahooFinance.html">
+    YahooFinance
+  </a>
+</li>
+        
+    </ul>
+</aside>
+<main>
+    <div id="content">
+        
+<p><a href="https://mybinder.org/v2/gh/nhirschey/teaching/gh-pages?filepath=quizzes/quiz-fundamentals.ipynb"><img src="../img/badge-binder.svg" alt="Binder" /></a>&emsp;
+<a href="/Teaching//quizzes/quiz-fundamentals.fsx"><img src="../img/badge-script.svg" alt="Script" /></a>&emsp;
+<a href="/Teaching//quizzes/quiz-fundamentals.ipynb"><img src="../img/badge-notebook.svg" alt="Notebook" /></a></p>
+<h2><a name="Question-1" class="anchor" href="#Question-1">Question 1</a></h2>
+<p>Calculate <code>3.0</code> to the power of <code>4.0</code>.</p>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="n">3.0</span> <span class="o">**</span> <span class="n">4.0</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val it: float = 81.0</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<h2><a name="Question-2" class="anchor" href="#Question-2">Question 2</a></h2>
+<p>Assign the integer <code>1</code> to a value called <code>a</code>.</p>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="id">a</span> <span class="o">=</span> <span class="n">1</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val a: int = 1</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<h2><a name="Question-3" class="anchor" href="#Question-3">Question 3</a></h2>
+<p>Write a function named <code>add3</code> that adds <code>3.0</code> to any <code>float</code> input.</p>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="fn">add3</span> <span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="fn">x</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 4)" onmouseover="showTip(event, 'fs3', 4)" class="fn">x</span> <span class="o">+</span> <span class="n">3.0</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val add3: x: float -&gt; float</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<h2><a name="Question-4" class="anchor" href="#Question-4">Question 4</a></h2>
+<p>Take the following two-parameter function:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs4', 5)" onmouseover="showTip(event, 'fs4', 5)" class="fn">multiply</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs3', 6)" onmouseover="showTip(event, 'fs3', 6)" class="fn">x</span><span class="pn">:</span><span onmouseout="hideTip(event, 'fs5', 7)" onmouseover="showTip(event, 'fs5', 7)" class="vt">float</span><span class="pn">)</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs6', 8)" onmouseover="showTip(event, 'fs6', 8)" class="fn">y</span><span class="pn">:</span><span onmouseout="hideTip(event, 'fs5', 9)" onmouseover="showTip(event, 'fs5', 9)" class="vt">float</span><span class="pn">)</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 10)" onmouseover="showTip(event, 'fs3', 10)" class="fn">x</span> <span class="o">*</span> <span onmouseout="hideTip(event, 'fs6', 11)" onmouseover="showTip(event, 'fs6', 11)" class="fn">y</span>
+</code></pre>
+<p>Use the above function and <a href="https://fsharpforfunandprofit.com/posts/partial-application/">partial application</a>
+to define a new function called
+<code>multiply2</code> that multiplies its input by <code>2.0</code>.</p>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs7', 12)" onmouseover="showTip(event, 'fs7', 12)" class="fn">multiply2</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 13)" onmouseover="showTip(event, 'fs4', 13)" class="fn">multiply</span> <span class="n">2.0</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val multiply2: (float -&gt; float)</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<h2><a name="Question-5" class="anchor" href="#Question-5">Question 5</a></h2>
+<p>Given a tuple <code>(1.0,2.0)</code>, assign the second element to a value named <code>b</code>.</p>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs8', 14)" onmouseover="showTip(event, 'fs8', 14)" class="id">b</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs9', 15)" onmouseover="showTip(event, 'fs9', 15)" class="fn">snd</span> <span class="pn">(</span><span class="n">1.0</span><span class="pn">,</span> <span class="n">2.0</span><span class="pn">)</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val b: float = 2.0</code></pre></td></tr></table>
+<p>or</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="pn">(</span><span class="id">_</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs10', 16)" onmouseover="showTip(event, 'fs10', 16)" class="id">b1</span><span class="pn">)</span> <span class="o">=</span> <span class="pn">(</span><span class="n">1.0</span><span class="pn">,</span> <span class="n">2.0</span><span class="pn">)</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val b1: float = 2.0</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<h2><a name="Question-6" class="anchor" href="#Question-6">Question 6</a></h2>
+<p>Create a tuple where the first, second, and third elements are <code>"a"</code>, <code>1</code>, and <code>2.0</code>.</p>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="pn">(</span><span class="s">&quot;a&quot;</span><span class="pn">,</span> <span class="n">1</span><span class="pn">,</span> <span class="n">2.0</span><span class="pn">)</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val it: string * int * float = ("a", 1, 2.0)</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<h2><a name="Question-7" class="anchor" href="#Question-7">Question 7</a></h2>
+<p>Define a record type named <code>Record1</code> that has a <code>string</code> <code>Id</code> field and a <code>float Y</code> field.</p>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">type</span> <span onmouseout="hideTip(event, 'fs11', 17)" onmouseover="showTip(event, 'fs11', 17)" class="rt">Record1</span> <span class="o">=</span> <span class="pn">{</span> <span class="prop">Id</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs12', 18)" onmouseover="showTip(event, 'fs12', 18)" class="rt">string</span><span class="pn">;</span> <span onmouseout="hideTip(event, 'fs13', 19)" onmouseover="showTip(event, 'fs13', 19)" class="prop">Y</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs5', 20)" onmouseover="showTip(event, 'fs5', 20)" class="vt">float</span> <span class="pn">}</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>type Record1 =
+  {
+    Id: string
+    Y: float
+  }</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<h2><a name="Question-8" class="anchor" href="#Question-8">Question 8</a></h2>
+<p>Given the type signature <code>val a : float = 2.0</code>, what is the type of value a?</p>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<p>float</p>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<h2><a name="Question-9" class="anchor" href="#Question-9">Question 9</a></h2>
+<p>Create a record type named <code>Record2</code>. It should have two integer fields <code>X</code> and <code>Y</code>. Create an instance of the record where <code>X = 4</code> and <code>Y = 2</code>.</p>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">type</span> <span onmouseout="hideTip(event, 'fs14', 21)" onmouseover="showTip(event, 'fs14', 21)" class="rt">Record2</span> <span class="o">=</span> <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs15', 22)" onmouseover="showTip(event, 'fs15', 22)" class="prop">X</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs16', 23)" onmouseover="showTip(event, 'fs16', 23)" class="vt">int</span><span class="pn">;</span> <span onmouseout="hideTip(event, 'fs17', 24)" onmouseover="showTip(event, 'fs17', 24)" class="prop">Y</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs16', 25)" onmouseover="showTip(event, 'fs16', 25)" class="vt">int</span> <span class="pn">}</span>
+<span class="pn">{</span> <span onmouseout="hideTip(event, 'fs15', 26)" onmouseover="showTip(event, 'fs15', 26)" class="prop">X</span> <span class="o">=</span> <span class="n">4</span><span class="pn">;</span> <span onmouseout="hideTip(event, 'fs17', 27)" onmouseover="showTip(event, 'fs17', 27)" class="prop">Y</span> <span class="o">=</span> <span class="n">2</span><span class="pn">}</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>type Record2 =
+  {
+    X: int
+    Y: int
+  }
+val it: Record2 = { X = 4
+                    Y = 2 }</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<h2><a name="Question-10" class="anchor" href="#Question-10">Question 10</a></h2>
+<p>Explain why this expression gives an error when you try to run it: <code>4 + 7.0</code></p>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<p>Because 4 is an integer and 7.0 is a float.
+Addition is defined on values with the same type.
+The two values need to either both be integers or both be floats.</p>
+<p>Note: there are some cases where F# will convert (or "automatically widen")
+integers into floats when it can tell that the conversion
+is intended. But with simple addition like this, it cannot tell
+if you are intending to add integers or floats, so it gives an error.</p>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<h2><a name="Question-11" class="anchor" href="#Question-11">Question 11</a></h2>
+<p>Create a <code>list</code> where the elements are <code>1</code>, <code>2</code>, and <code>3</code>.</p>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="pn">[</span> <span class="n">1</span><span class="pn">;</span> <span class="n">2</span><span class="pn">;</span> <span class="n">3</span> <span class="pn">]</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val it: int list = [1; 2; 3]</code></pre></td></tr></table>
+<p>or</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="pn">[</span> <span class="n">1</span> <span class="o">..</span> <span class="n">3</span> <span class="pn">]</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val it: int list = [1; 2; 3]</code></pre></td></tr></table>
+<p>or</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="pn">[</span> <span class="k">for</span> <span onmouseout="hideTip(event, 'fs18', 28)" onmouseover="showTip(event, 'fs18', 28)" class="fn">i</span> <span class="o">=</span> <span class="n">1</span> <span class="k">to</span> <span class="n">3</span> <span class="k">do</span> <span onmouseout="hideTip(event, 'fs18', 29)" onmouseover="showTip(event, 'fs18', 29)" class="fn">i</span> <span class="pn">]</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val it: int list = [1; 2; 3]</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<h2><a name="Question-12" class="anchor" href="#Question-12">Question 12</a></h2>
+<p>Given the below list, use <code>printfn</code> to print the whole
+list to standard output using the <a href="https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/plaintext-formatting">structured plaintext formatter</a>.</p>
+<p>The list to print:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="pn">[</span><span class="n">1</span><span class="pn">;</span> <span class="n">2</span><span class="pn">;</span> <span class="n">3</span><span class="pn">]</span>
+</code></pre>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="pn">[</span><span class="n">1</span><span class="pn">;</span> <span class="n">2</span><span class="pn">;</span> <span class="n">3</span><span class="pn">]</span> <span class="o">|&gt;</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs19', 30)" onmouseover="showTip(event, 'fs19', 30)" class="fn">printfn</span> <span class="s">&quot;</span><span class="pf">%A</span><span class="s">&quot;</span><span class="pn">)</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>[1; 2; 3]</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<h2><a name="Question-13" class="anchor" href="#Question-13">Question 13</a></h2>
+<p>Given the tuple <code>("hi", false, 20.321, 4)</code>,
+use <code>printfn</code> and the tuple to print the following string
+to standard output:
+<code>"hi teacher, my False knowledge implies that 4%=0020.1"</code></p>
+<p><a href="https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/plaintext-formatting#format-specifiers-for-printf">String formatting</a> documentation will be useful.</p>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs20', 31)" onmouseover="showTip(event, 'fs20', 31)" class="id">xString</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs21', 32)" onmouseover="showTip(event, 'fs21', 32)" class="id">xBool</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs22', 33)" onmouseover="showTip(event, 'fs22', 33)" class="id">xFloat</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs23', 34)" onmouseover="showTip(event, 'fs23', 34)" class="id">xInt</span><span class="pn">)</span> <span class="o">=</span> <span class="pn">(</span><span class="s">&quot;hi&quot;</span><span class="pn">,</span> <span class="k">false</span><span class="pn">,</span> <span class="n">20.321</span><span class="pn">,</span> <span class="n">4</span><span class="pn">)</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val xString: string = "hi"
+val xInt: int = 4
+val xFloat: float = 20.321
+val xBool: bool = false</code></pre></td></tr></table>
+<p>Using string interpolation</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs19', 35)" onmouseover="showTip(event, 'fs19', 35)" class="fn">printfn</span> <span class="s">$&quot;{</span><span onmouseout="hideTip(event, 'fs20', 36)" onmouseover="showTip(event, 'fs20', 36)" class="id">xString</span><span class="s">} teacher, my {</span><span class="id">xBool</span><span class="s">} knowledge implies that {</span><span class="id">xInt</span><span class="s">}</span><span class="pf">%%</span><span class="s">=</span><span class="pf">%06.1f</span><span class="s">{</span><span class="id">xFloat</span><span class="s">}&quot;</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>hi teacher, my False knowledge implies that 4%=0020.3</code></pre></td></tr></table>
+<p>Using old-style printfn</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs19', 37)" onmouseover="showTip(event, 'fs19', 37)" class="fn">printfn</span> <span class="s">&quot;</span><span class="pf">%s</span><span class="s"> teacher, my </span><span class="pf">%b</span><span class="s"> knowledge implies that </span><span class="pf">%i</span><span class="s"></span><span class="pf">%%</span><span class="s">=</span><span class="pf">%06.1f</span><span class="s">&quot;</span> <span onmouseout="hideTip(event, 'fs20', 38)" onmouseover="showTip(event, 'fs20', 38)" class="id">xString</span> <span onmouseout="hideTip(event, 'fs21', 39)" onmouseover="showTip(event, 'fs21', 39)" class="id">xBool</span> <span onmouseout="hideTip(event, 'fs23', 40)" onmouseover="showTip(event, 'fs23', 40)" class="id">xInt</span> <span onmouseout="hideTip(event, 'fs22', 41)" onmouseover="showTip(event, 'fs22', 41)" class="id">xFloat</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>hi teacher, my false knowledge implies that 4%=0020.3</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+
+        <div class="fsdocs-tip" id="fs1">val a: int</div>
+<div class="fsdocs-tip" id="fs2">val add3: x: float -&gt; float</div>
+<div class="fsdocs-tip" id="fs3">val x: float</div>
+<div class="fsdocs-tip" id="fs4">val multiply: x: float -&gt; y: float -&gt; float</div>
+<div class="fsdocs-tip" id="fs5">Multiple items<br />val float: value: &#39;T -&gt; float (requires member op_Explicit)<br /><br />--------------------<br />type float = System.Double<br /><br />--------------------<br />type float&lt;&#39;Measure&gt; =
+  float</div>
+<div class="fsdocs-tip" id="fs6">val y: float</div>
+<div class="fsdocs-tip" id="fs7">val multiply2: (float -&gt; float)</div>
+<div class="fsdocs-tip" id="fs8">val b: float</div>
+<div class="fsdocs-tip" id="fs9">val snd: tuple: (&#39;T1 * &#39;T2) -&gt; &#39;T2</div>
+<div class="fsdocs-tip" id="fs10">val b1: float</div>
+<div class="fsdocs-tip" id="fs11">type Record1 =
+  {
+    Id: string
+    Y: float
+  }</div>
+<div class="fsdocs-tip" id="fs12">Multiple items<br />val string: value: &#39;T -&gt; string<br /><br />--------------------<br />type string = System.String</div>
+<div class="fsdocs-tip" id="fs13">Record1.Y: float</div>
+<div class="fsdocs-tip" id="fs14">type Record2 =
+  {
+    X: int
+    Y: int
+  }</div>
+<div class="fsdocs-tip" id="fs15">Record2.X: int</div>
+<div class="fsdocs-tip" id="fs16">Multiple items<br />val int: value: &#39;T -&gt; int (requires member op_Explicit)<br /><br />--------------------<br />type int = int32<br /><br />--------------------<br />type int&lt;&#39;Measure&gt; =
+  int</div>
+<div class="fsdocs-tip" id="fs17">Record2.Y: int</div>
+<div class="fsdocs-tip" id="fs18">val i: int</div>
+<div class="fsdocs-tip" id="fs19">val printfn: format: Printf.TextWriterFormat&lt;&#39;T&gt; -&gt; &#39;T</div>
+<div class="fsdocs-tip" id="fs20">val xString: string</div>
+<div class="fsdocs-tip" id="fs21">val xBool: bool</div>
+<div class="fsdocs-tip" id="fs22">val xFloat: float</div>
+<div class="fsdocs-tip" id="fs23">val xInt: int</div>
+
+    </div>
+</main>
+<aside id="fsdocs-page-menu">
+    <p id="on-this-page">On this page</p>
+    <ul>
+  <li class="level-2">
+    <a href="#Question-1">
+      Question 1
+    </a>
+  </li>
+  <li class="level-2">
+    <a href="#Question-2">
+      Question 2
+    </a>
+  </li>
+  <li class="level-2">
+    <a href="#Question-3">
+      Question 3
+    </a>
+  </li>
+  <li class="level-2">
+    <a href="#Question-4">
+      Question 4
+    </a>
+  </li>
+  <li class="level-2">
+    <a href="#Question-5">
+      Question 5
+    </a>
+  </li>
+  <li class="level-2">
+    <a href="#Question-6">
+      Question 6
+    </a>
+  </li>
+  <li class="level-2">
+    <a href="#Question-7">
+      Question 7
+    </a>
+  </li>
+  <li class="level-2">
+    <a href="#Question-8">
+      Question 8
+    </a>
+  </li>
+  <li class="level-2">
+    <a href="#Question-9">
+      Question 9
+    </a>
+  </li>
+  <li class="level-2">
+    <a href="#Question-10">
+      Question 10
+    </a>
+  </li>
+  <li class="level-2">
+    <a href="#Question-11">
+      Question 11
+    </a>
+  </li>
+  <li class="level-2">
+    <a href="#Question-12">
+      Question 12
+    </a>
+  </li>
+  <li class="level-2">
+    <a href="#Question-13">
+      Question 13
+    </a>
+  </li>
+</ul>
+</aside>
+<dialog>
+    <input type="search" placeholder="Search docs" />
+    <div class="results">
+        <ul></ul>
+        <p class="empty">Type something to start searching.</p>
+    </div>
+</dialog>
+<script type="module" src="/Teaching/content/fsdocs-tips.js"></script>
+<script type="module" src="/Teaching/content/fsdocs-theme-toggle.js"></script>
+<script type="module" src="/Teaching/content/fsdocs-theme.js"></script>
+<script type="module" src="/Teaching/content/fsdocs-search.js"></script>
+
+</body>
+</html>

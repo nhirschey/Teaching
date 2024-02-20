@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en" data-root="/Teaching/">
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Nicholas Hirschey; Davide Costa" name="author">
+    <!-- Opengraph properties (https://ogp.me/) -->
+    <meta property="og:site_name" content="Teaching">
+    <meta property="og:title" content="Webscraping HTML to CSV" />
+    <meta property="og:url" content="/Teaching/football-1-download-data.html">
+    <meta property="og:type" content="website" />
+    <!-- Twitter cards (https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="/Teaching/">
+    <meta name="twitter:title" content="Webscraping HTML to CSV">
+    
+    <title>Webscraping HTML to CSV | Teaching</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="/Teaching/img/logo.png" rel="icon" sizes="32x32" type="image/png"/>
+    <script type="application/javascript" src="/Teaching/content/fsdocs-theme-set-dark.js"></script>
+    <link href="/Teaching/content/fsdocs-default.css" rel="stylesheet" type="text/css"/>
+    <link href="/Teaching/content/fsdocs-theme.css" rel="stylesheet" type="text/css"/>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js"></script>
+    
+</head>
+<body class="content">
+<header>
+    <div class="start">
+        <div id="menu-toggle">
+            <iconify-icon class="icon closed" height="22" icon="eva:menu-fill" width="22"></iconify-icon>
+            <iconify-icon class="icon open" height="22" icon="mi:close" width="22"></iconify-icon>
+            <input type="checkbox" name="mobile-menu" />
+            <ul class="menu">
+                <li class="nav-header">Links</li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/nhirschey/Teaching/blob/main/LICENSE.md">License</a>
+                </li>
+                <li class="nav-item"><a class="nav-link"
+                                        href="https://github.com/nhirschey/Teaching/blob/main/CHANGELOG.md">Release
+                    Notes</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/nhirschey/Teaching/">Source
+                    Repository</a></li>
+                <li class="nav-header ">
+  Getting Started
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/install.html">
+    Install Software
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/learn-fsharp.html">
+    Learn F#
+  </a>
+</li>             
+<li class="nav-header ">
+  Lectures
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/stockslongrun.html">
+    Stocks for the long run
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/stocksandbonds.html">
+    Stocks and bonds
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/riskyweight.html">
+    Risky Weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolatilityTiming.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolatilityManagedTypes.html">
+    Volatility Managed, but with different vols
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolAndReturnPred.html">
+    Volatility and Return predictions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/mveComparisons.html">
+    More managed portfolio comparisons
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/PortfolioFormation-SimpleExample.html">
+    Building a strategy
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Momentum-Class.html">
+    Momentum Signal
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/optimization.html">
+    Optimization
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/revisitRiskyWeights.html">
+    Revisiting Mean-variance optimal risky weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/premiums.html">
+    Premiums
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/calls-nn.html">
+    Calls NN
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/portfolio-statistics.html">
+    Basic Portfolio Statistics
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/sentiment-mlnet.html">
+    Sentiment classification
+  </a>
+</li>             
+<li class="nav-header active">
+  Assignments
+</li>             
+<li class="nav-item active">
+  <a class="nav-link" href="/Teaching/football-1-download-data.html">
+    Webscraping HTML to CSV
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-tuples-and-records.html">
+    Tuples and Records (with solutions)
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-collection-functions.html">
+    Collection functions (with solutions)
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignment-risky-weights.html">
+    Risky Weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignment-volatility-timing.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/select-project-signal.html">
+    Select Project Signals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/signal-exploration.html">
+    Signal Exploration
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/assignment-signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/assignment-performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-plotting.html">
+    Plotting (with solutions)
+  </a>
+</li>             
+<li class="nav-header ">
+  Practice Quizzes
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-list-module.html">
+    List module functions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-options.html">
+    Options
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-match-expressions.html">
+    Match expressions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-map-collection.html">
+    Map collection
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-discriminated-union.html">
+    Dicriminated Union
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-portfolios.html">
+    Portfolios
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-factors.html">
+    Factors
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-folding.html">
+    Fold and Friends
+  </a>
+</li>             
+<li class="nav-header ">
+  Other
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Common.html">
+    Common
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/loading-scripts.html">
+    Loading external scripts
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Portfolio.html">
+    Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/YahooFinance.html">
+    YahooFinance
+  </a>
+</li>
+                
+            </ul>
+        </div>
+        <a href="/Teaching/">
+            <img alt="Header menu logo" src="/Teaching/img/logo.png">
+            <strong>Teaching</strong>
+        </a>
+    </div>
+    <div class="end">
+        <a href="https://github.com/nhirschey/Teaching/" target="_blank">
+            <iconify-icon icon="uil:github" width="26" height="26"></iconify-icon>
+        </a>
+        <iconify-icon id="search-btn" icon="carbon:search" class="search" width="24" height="24"></iconify-icon>
+        <fsdocs-theme-toggle></fsdocs-theme-toggle>
+    </div>
+</header>
+<aside id="fsdocs-main-menu">
+    <ul class="menu">
+        <li class="nav-header">Links</li>
+        <li class="nav-item"><a class="nav-link" href="https://github.com/nhirschey/Teaching/blob/main/LICENSE.md">License</a>
+        </li>
+        <li class="nav-item"><a class="nav-link"
+                                href="https://github.com/nhirschey/Teaching/blob/main/CHANGELOG.md">Release
+            Notes</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://github.com/nhirschey/Teaching/">Source
+            Repository</a></li>
+        <li class="nav-header ">
+  Getting Started
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/install.html">
+    Install Software
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/learn-fsharp.html">
+    Learn F#
+  </a>
+</li>             
+<li class="nav-header ">
+  Lectures
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/stockslongrun.html">
+    Stocks for the long run
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/stocksandbonds.html">
+    Stocks and bonds
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/riskyweight.html">
+    Risky Weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolatilityTiming.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolatilityManagedTypes.html">
+    Volatility Managed, but with different vols
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolAndReturnPred.html">
+    Volatility and Return predictions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/mveComparisons.html">
+    More managed portfolio comparisons
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/PortfolioFormation-SimpleExample.html">
+    Building a strategy
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Momentum-Class.html">
+    Momentum Signal
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/optimization.html">
+    Optimization
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/revisitRiskyWeights.html">
+    Revisiting Mean-variance optimal risky weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/premiums.html">
+    Premiums
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/calls-nn.html">
+    Calls NN
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/portfolio-statistics.html">
+    Basic Portfolio Statistics
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/sentiment-mlnet.html">
+    Sentiment classification
+  </a>
+</li>             
+<li class="nav-header active">
+  Assignments
+</li>             
+<li class="nav-item active">
+  <a class="nav-link" href="/Teaching/football-1-download-data.html">
+    Webscraping HTML to CSV
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-tuples-and-records.html">
+    Tuples and Records (with solutions)
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-collection-functions.html">
+    Collection functions (with solutions)
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignment-risky-weights.html">
+    Risky Weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignment-volatility-timing.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/select-project-signal.html">
+    Select Project Signals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/signal-exploration.html">
+    Signal Exploration
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/assignment-signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/assignment-performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-plotting.html">
+    Plotting (with solutions)
+  </a>
+</li>             
+<li class="nav-header ">
+  Practice Quizzes
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-list-module.html">
+    List module functions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-options.html">
+    Options
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-match-expressions.html">
+    Match expressions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-map-collection.html">
+    Map collection
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-discriminated-union.html">
+    Dicriminated Union
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-portfolios.html">
+    Portfolios
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-factors.html">
+    Factors
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-folding.html">
+    Fold and Friends
+  </a>
+</li>             
+<li class="nav-header ">
+  Other
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Common.html">
+    Common
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/loading-scripts.html">
+    Loading external scripts
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Portfolio.html">
+    Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/YahooFinance.html">
+    YahooFinance
+  </a>
+</li>
+        
+    </ul>
+</aside>
+<main>
+    <div id="content">
+        
+<p><a href="https://mybinder.org/v2/gh/nhirschey/teaching/gh-pages?filepath=football-1-download-data.ipynb"><img src="img/badge-binder.svg" alt="Binder" /></a>&emsp;
+<a href="/Teaching//football-1-download-data.fsx"><img src="img/badge-script.svg" alt="Script" /></a>&emsp;
+<a href="/Teaching//football-1-download-data.ipynb"><img src="img/badge-notebook.svg" alt="Notebook" /></a></p>
+<h1><a name="Webscraping-HTML-to-CSV" class="anchor" href="#Webscraping-HTML-to-CSV">Webscraping HTML to CSV</a></h1>
+<blockquote>
+<p>Developed with <a href="https://github.com/DavideGCosta">Davide Costa</a></p>
+</blockquote>
+<p>For the <strong>Football Players' Exercises</strong> we are trying to scrape data from <a href="https://www.sports-reference.com/">Sports Reference's</a> <a href="https://fbref.com/en/">Football Reference</a> website. The particular data that we want to scrape is player data from the <a href="https://fbref.com/en/comps/Big5/stats/players/Big-5-European-Leagues-Stats">Big 5 European Leauges table</a>. This data consists on the stats of the players that played in the big 5 football european leagues in the most recent season. Since we need to scrape the data from a webpage and store it in a csv file we will need to use 2 type providers from <a href="https://fsharp.github.io/FSharp.Data/">FSharp.Data</a>:</p>
+<ul>
+<li>We'll use the <a href="https://fsprojects.github.io/FSharp.Data/library/HtmlProvider.html">HTML Type Provider</a> to scrape the html from the webpage and access the players' table.</li>
+<li>We'll use the <a href="https://fsprojects.github.io/FSharp.Data/library/CsvProvider.html">CSV Type Provider</a> to save the data to a csv file.</li>
+</ul>
+<p>Both type providers are located in <code>FSharp.Data</code> assembly. To use it we need to load and open <code>FSharp.Data</code>.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="pp">#r</span> <span class="s">&quot;nuget: FSharp.Data, 5.0.2&quot;</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="id">FSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="id">Data</span>
+</code></pre>
+<h2><a name="Get-the-players-table-using-HTML-type-provider" class="anchor" href="#Get-the-players-table-using-HTML-type-provider">Get the players' table using HTML type provider.</a></h2>
+<p>We need to define the type of data that we're going to access.
+We do this by providing a sample of the data.
+The type provider uses the sample to generate code to read data with that format.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">type</span> <span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="rt">Big5EuropeanLeagues</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="rt">HtmlProvider</span><span class="pn">&lt;</span><span class="s">&quot;https://fbref.com/en/comps/Big5/2021-2022/stats/players/2021-2022-Big-5-European-Leagues-Stats&quot;</span><span class="pn">&gt;</span>
+</code></pre>
+<p>The type <code>Big5EuropeanLeagues</code> contains information about the structure of the web page. It knows what the html is, it knows what the html tables are, etc.</p>
+<p>Now that we have the <code>Big5EuropeanLeagues</code> HTML type defined we can use <code>GetSample()</code> to load the sample webpage
+that we used to define the type.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="id">big5</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs3', 6)" onmouseover="showTip(event, 'fs3', 6)" class="rt">Big5EuropeanLeagues</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs6', 7)" onmouseover="showTip(event, 'fs6', 7)" class="id">GetSample</span><span class="pn">(</span><span class="pn">)</span>
+</code></pre>
+<p>Now, we have the HTML of the webpage stored in the variable <code>big5</code>. Let's observe the first 200 characters of the HTML.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs5', 8)" onmouseover="showTip(event, 'fs5', 8)" class="id">big5</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs7', 9)" onmouseover="showTip(event, 'fs7', 9)" class="prop">Html</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs8', 10)" onmouseover="showTip(event, 'fs8', 10)" class="id">ToString</span><span class="pn">(</span><span class="pn">)</span><span class="pn">[</span><span class="o">..</span><span class="n">200</span><span class="pn">]</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>"&lt;!DOCTYPE html&gt;
+&lt;html data-version="klecko-" data-root="/home/fb/deploy/www/base" lang="en" class="no-js"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8" /&gt;&lt;meta http-equiv="x-ua-compatible" content="ie=edge" /"</code></pre></td></tr></table>
+<p>From the tables available in the webpage, let's assign the player stats table to a variable called <code>footballers</code>.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs9', 14)" onmouseover="showTip(event, 'fs9', 14)" class="id">footballers</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs5', 15)" onmouseover="showTip(event, 'fs5', 15)" class="id">big5</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs10', 16)" onmouseover="showTip(event, 'fs10', 16)" class="prop">Tables</span><span class="pn">.</span><span class="id">``Player Standard Stats 2021-2022 Big 5 European Leagues``</span>
+</code></pre>
+<p>Now let's observe the first 3 table rows. The <code>Rows</code> property gives us an array of rows.
+We can index into the array using <code>[..2]</code> to limit it to the first 3 rows.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs9', 17)" onmouseover="showTip(event, 'fs9', 17)" class="id">footballers</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs11', 18)" onmouseover="showTip(event, 'fs11', 18)" class="id">Rows</span><span class="pn">[</span><span class="o">..</span><span class="n">2</span><span class="pn">]</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>[|("1", "Max Aarons", "eng ENG", "DF", "Norwich City", "engPremier League", "21",
+   "2000", "34", "32", "2,881", "32.0", "0", "2", "2", "0", "0", "0", "8", "0",
+   "0.8", "0.8", "1.7", "2.5", "78", "117", "85", "0.00", "0.06", "0.06", "0.00",
+   "0.06", "0.03", "0.05", "0.08", "0.03", "0.08", "Matches");
+  ("2", "Yunis Abdelhamid", "ma MAR", "DF", "Reims", "frLigue 1", "33", "1987",
+   "34", "34", "2,983", "33.1", "2", "0", "2", "2", "0", "0", "5", "1", "1.2",
+   "1.2", "0.8", "2.0", "23", "119", "14", "0.06", "0.00", "0.06", "0.06",
+   "0.06", "0.04", "0.02", "0.06", "0.04", "0.06", "Matches");
+  ("3", "Salis Abdul Samed", "gh GHA", "MF", "Clermont Foot", "frLigue 1", "21",
+   "2000", "31", "29", "2,462", "27.4", "1", "0", "1", "1", "0", "0", "12", "3",
+   "0.7", "0.7", "0.9", "1.6", "24", "108", "47", "0.04", "0.00", "0.04", "0.04",
+   "0.04", "0.03", "0.03", "0.06", "0.03", "0.06", "Matches")|]</code></pre></td></tr></table>
+<p>Let's look at the header fields in the table using the property <code>Headers</code>.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs9', 21)" onmouseover="showTip(event, 'fs9', 21)" class="id">footballers</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs12', 22)" onmouseover="showTip(event, 'fs12', 22)" class="id">Headers</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>Some
+  [|"Rk"; "Player"; "Nation"; "Pos"; "Squad"; "Comp"; "Age"; "Born";
+    "Playing Time - MP"; "Playing Time - Starts"; "Playing Time - Min";
+    "Playing Time - 90s"; "Performance - Gls"; "Performance - Ast";
+    "Performance - G+A"; "Performance - G-PK"; "Performance - PK";
+    "Performance - PKatt"; "Performance - CrdY"; "Performance - CrdR";
+    "Expected - xG"; "Expected - npxG"; "Expected - xAG"; "Expected - npxG+xAG";
+    "Progression - PrgC"; "Progression - PrgP"; "Progression - PrgR";
+    "Per 90 Minutes - Gls"; "Per 90 Minutes - Ast"; "Per 90 Minutes - G+A";
+    "Per 90 Minutes - G-PK"; "Per 90 Minutes - G+A-PK"; "Per 90 Minutes - xG";
+    "Per 90 Minutes - xAG"; "Per 90 Minutes - xG+xAG"; "Per 90 Minutes - npxG";
+    "Per 90 Minutes - npxG+xAG"; "Matches"|]</code></pre></td></tr></table>
+<p>Let´s look at the first 5 rows of fields <code>Player</code> and <code>Age</code>.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="pn">[</span> <span class="k">for</span> <span onmouseout="hideTip(event, 'fs13', 23)" onmouseover="showTip(event, 'fs13', 23)" class="fn">row</span> <span class="k">in</span> <span onmouseout="hideTip(event, 'fs9', 24)" onmouseover="showTip(event, 'fs9', 24)" class="id">footballers</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs11', 25)" onmouseover="showTip(event, 'fs11', 25)" class="id">Rows</span><span class="pn">[</span><span class="o">..</span><span class="n">4</span><span class="pn">]</span> <span class="k">do</span> <span onmouseout="hideTip(event, 'fs13', 26)" onmouseover="showTip(event, 'fs13', 26)" class="fn">row</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs14', 27)" onmouseover="showTip(event, 'fs14', 27)" class="id">Player</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs13', 28)" onmouseover="showTip(event, 'fs13', 28)" class="fn">row</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs15', 29)" onmouseover="showTip(event, 'fs15', 29)" class="id">Age</span><span class="pn">]</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>[("Max Aarons", "21"); ("Yunis Abdelhamid", "33"); ("Salis Abdul Samed", "21");
+ ("Laurent Abergel", "28"); ("Charles Abi", "21")]</code></pre></td></tr></table>
+<h2><a name="Clean-the-data" class="anchor" href="#Clean-the-data">Clean the data</a></h2>
+<p>The table data is not exactly what we need. To work with it, we need to clean it up.</p>
+<h3><a name="Repeated-headers" class="anchor" href="#Repeated-headers">Repeated headers</a></h3>
+<p>The table header line repeats after every 25 players.
+We can see this if we look at the 26th row of the table.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs9', 37)" onmouseover="showTip(event, 'fs9', 37)" class="id">footballers</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs11', 38)" onmouseover="showTip(event, 'fs11', 38)" class="id">Rows</span><span class="pn">[</span><span class="n">25</span><span class="pn">]</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>("Rk", "Player", "Nation", "Pos", "Squad", "Comp", "Age", "Born", "MP", "Starts",
+ "Min", "90s", "Gls", "Ast", "G+A", "G-PK", "PK", "PKatt", "CrdY", "CrdR", "xG",
+ "npxG", "xAG", "npxG+xAG", "PrgC", "PrgP", "PrgR", "Gls", "Ast", "G+A", "G-PK",
+ "G+A-PK", "xG", "xAG", "xG+xAG", "npxG", "npxG+xAG", "Matches")</code></pre></td></tr></table>
+<p>We can remove these lines by using <a href="https://fsharp.github.io/fsharp-core-docs/reference/fsharp-collections-arraymodule.html#filter">Array.filter</a>. <code>Array.filter</code> applies a function to each element of the array and
+returns only those elements where the function evaluates to <code>true</code>.
+We'll create a function that evaluates to <code>true</code> if the player's name <em>does not</em> equal <code>"Player"</code></p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs16', 41)" onmouseover="showTip(event, 'fs16', 41)" class="id">footballersNoHeaders</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs9', 42)" onmouseover="showTip(event, 'fs9', 42)" class="id">footballers</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs11', 43)" onmouseover="showTip(event, 'fs11', 43)" class="id">Rows</span>
+    <span class="c">// 1. Rows where row.Player does not equal &quot;Player&quot;</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs17', 44)" onmouseover="showTip(event, 'fs17', 44)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs18', 45)" onmouseover="showTip(event, 'fs18', 45)" class="id">filter</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs13', 46)" onmouseover="showTip(event, 'fs13', 46)" class="fn">row</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs13', 47)" onmouseover="showTip(event, 'fs13', 47)" class="fn">row</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs14', 48)" onmouseover="showTip(event, 'fs14', 48)" class="id">Player</span> <span class="o">&lt;&gt;</span> <span class="s">&quot;Player&quot;</span><span class="pn">)</span> 
+</code></pre>
+<h3><a name="Removing-missing-values" class="anchor" href="#Removing-missing-values">Removing missing values</a></h3>
+<p>In order to make some arithmetic operations with age and goals scored, we need to convert the data into integers or floats/decimals. But some players' age and goals scored is missing, and converting empty strings ("") into these types returns an error.<br />
+We remove those lines by removing filtering to rows where age and goals are not "".</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs19', 49)" onmouseover="showTip(event, 'fs19', 49)" class="id">footballersClean</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs16', 50)" onmouseover="showTip(event, 'fs16', 50)" class="id">footballersNoHeaders</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs17', 51)" onmouseover="showTip(event, 'fs17', 51)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs18', 52)" onmouseover="showTip(event, 'fs18', 52)" class="id">filter</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs13', 53)" onmouseover="showTip(event, 'fs13', 53)" class="fn">row</span> <span class="k">-&gt;</span> 
+        <span onmouseout="hideTip(event, 'fs13', 54)" onmouseover="showTip(event, 'fs13', 54)" class="fn">row</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs15', 55)" onmouseover="showTip(event, 'fs15', 55)" class="id">Age</span> <span class="o">&lt;&gt;</span> <span class="s">&quot;&quot;</span> <span class="o">&amp;&amp;</span> 
+        <span onmouseout="hideTip(event, 'fs13', 56)" onmouseover="showTip(event, 'fs13', 56)" class="fn">row</span><span class="pn">.</span><span class="id">``Performance - Gls``</span> <span class="o">&lt;&gt;</span> <span class="s">&quot;&quot;</span><span class="pn">)</span>
+</code></pre>
+<p>Now we have the data we need, but
+there are more than 2500 rows.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs19', 57)" onmouseover="showTip(event, 'fs19', 57)" class="id">footballersClean</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs20', 58)" onmouseover="showTip(event, 'fs20', 58)" class="id">Length</span>
+</code></pre>
+<p>For our exercises we don't need so many observations,
+so let's transform it to get the best players by position!</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs21', 59)" onmouseover="showTip(event, 'fs21', 59)" class="id">playersByPosition</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs19', 60)" onmouseover="showTip(event, 'fs19', 60)" class="id">footballersClean</span>
+    <span class="c">// 1. filter out odd positions with few players</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs17', 61)" onmouseover="showTip(event, 'fs17', 61)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs18', 62)" onmouseover="showTip(event, 'fs18', 62)" class="id">filter</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs22', 63)" onmouseover="showTip(event, 'fs22', 63)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs22', 64)" onmouseover="showTip(event, 'fs22', 64)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 65)" onmouseover="showTip(event, 'fs23', 65)" class="id">Pos</span> <span class="o">&lt;&gt;</span> <span class="s">&quot;GK,FW&quot;</span> <span class="o">&amp;&amp;</span> <span onmouseout="hideTip(event, 'fs22', 66)" onmouseover="showTip(event, 'fs22', 66)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 67)" onmouseover="showTip(event, 'fs23', 67)" class="id">Pos</span> <span class="o">&lt;&gt;</span> <span class="s">&quot;FW,DF&quot;</span> <span class="o">&amp;&amp;</span> <span onmouseout="hideTip(event, 'fs22', 68)" onmouseover="showTip(event, 'fs22', 68)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 69)" onmouseover="showTip(event, 'fs23', 69)" class="id">Pos</span> <span class="o">&lt;&gt;</span> <span class="s">&quot;DF,FW&quot;</span> <span class="pn">)</span>
+    <span class="c">// 2. group players by position</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs17', 70)" onmouseover="showTip(event, 'fs17', 70)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs24', 71)" onmouseover="showTip(event, 'fs24', 71)" class="id">groupBy</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs22', 72)" onmouseover="showTip(event, 'fs22', 72)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs22', 73)" onmouseover="showTip(event, 'fs22', 73)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 74)" onmouseover="showTip(event, 'fs23', 74)" class="id">Pos</span><span class="pn">)</span>
+    <span class="c">// 3. sort positions.</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs17', 75)" onmouseover="showTip(event, 'fs17', 75)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 76)" onmouseover="showTip(event, 'fs25', 76)" class="id">sortBy</span> <span class="pn">(</span><span class="k">fun</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs26', 77)" onmouseover="showTip(event, 'fs26', 77)" class="fn">position</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs27', 78)" onmouseover="showTip(event, 'fs27', 78)" class="id">_players</span><span class="pn">)</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs26', 79)" onmouseover="showTip(event, 'fs26', 79)" class="fn">position</span><span class="pn">)</span>
+
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs28', 80)" onmouseover="showTip(event, 'fs28', 80)" class="id">bestPlayersByPosition</span> <span class="o">=</span>
+    <span class="c">// This will get top 25 players for each position</span>
+    <span class="c">// We create a new list by looping through each position group.</span>
+    <span class="pn">[|</span> <span class="k">for</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs26', 81)" onmouseover="showTip(event, 'fs26', 81)" class="fn">position</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs29', 82)" onmouseover="showTip(event, 'fs29', 82)" class="fn">playersInPosition</span><span class="pn">)</span> <span class="k">in</span> <span onmouseout="hideTip(event, 'fs21', 83)" onmouseover="showTip(event, 'fs21', 83)" class="id">playersByPosition</span> <span class="k">do</span>
+        <span class="c">// 4. Sort best to worst (and convert to list at the end)</span>
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs30', 84)" onmouseover="showTip(event, 'fs30', 84)" class="fn">bestToWorst</span> <span class="o">=</span>
+            <span onmouseout="hideTip(event, 'fs29', 85)" onmouseover="showTip(event, 'fs29', 85)" class="fn">playersInPosition</span>
+            <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs17', 86)" onmouseover="showTip(event, 'fs17', 86)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 87)" onmouseover="showTip(event, 'fs31', 87)" class="id">sortByDescending</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs32', 88)" onmouseover="showTip(event, 'fs32', 88)" class="fn">player</span> <span class="k">-&gt;</span>
+                <span onmouseout="hideTip(event, 'fs33', 89)" onmouseover="showTip(event, 'fs33', 89)" class="fn">int</span> <span onmouseout="hideTip(event, 'fs32', 90)" onmouseover="showTip(event, 'fs32', 90)" class="fn">player</span><span class="pn">.</span><span class="id">``Performance - Gls``</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs32', 91)" onmouseover="showTip(event, 'fs32', 91)" class="fn">player</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs34', 92)" onmouseover="showTip(event, 'fs34', 92)" class="id">Matches</span><span class="pn">)</span>
+        <span class="c">// 5. Truncate to top 25</span>
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs35', 93)" onmouseover="showTip(event, 'fs35', 93)" class="fn">top25</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs30', 94)" onmouseover="showTip(event, 'fs30', 94)" class="fn">bestToWorst</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs17', 95)" onmouseover="showTip(event, 'fs17', 95)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs36', 96)" onmouseover="showTip(event, 'fs36', 96)" class="id">truncate</span> <span class="n">25</span>         
+        <span onmouseout="hideTip(event, 'fs35', 97)" onmouseover="showTip(event, 'fs35', 97)" class="fn">top25</span> <span class="pn">|]</span>
+    <span class="c">// 6. concatenate to a single big array</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs17', 98)" onmouseover="showTip(event, 'fs17', 98)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs37', 99)" onmouseover="showTip(event, 'fs37', 99)" class="id">concat</span>
+    
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs38', 100)" onmouseover="showTip(event, 'fs38', 100)" class="id">bestPlayers</span> <span class="o">=</span> 
+    <span class="c">// sort best by position to overall top goal scorers,</span>
+    <span class="c">// with ties broken by alphabetical sorting on </span>
+    <span class="c">// the players name and squad.</span>
+    <span onmouseout="hideTip(event, 'fs28', 101)" onmouseover="showTip(event, 'fs28', 101)" class="id">bestPlayersByPosition</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs17', 102)" onmouseover="showTip(event, 'fs17', 102)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 103)" onmouseover="showTip(event, 'fs31', 103)" class="id">sortByDescending</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs32', 104)" onmouseover="showTip(event, 'fs32', 104)" class="fn">player</span> <span class="k">-&gt;</span> 
+        <span onmouseout="hideTip(event, 'fs33', 105)" onmouseover="showTip(event, 'fs33', 105)" class="fn">int</span> <span onmouseout="hideTip(event, 'fs32', 106)" onmouseover="showTip(event, 'fs32', 106)" class="fn">player</span><span class="pn">.</span><span class="id">``Performance - Gls``</span><span class="pn">,</span>
+        <span onmouseout="hideTip(event, 'fs32', 107)" onmouseover="showTip(event, 'fs32', 107)" class="fn">player</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs14', 108)" onmouseover="showTip(event, 'fs14', 108)" class="id">Player</span><span class="pn">,</span>
+        <span onmouseout="hideTip(event, 'fs32', 109)" onmouseover="showTip(event, 'fs32', 109)" class="fn">player</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs39', 110)" onmouseover="showTip(event, 'fs39', 110)" class="id">Squad</span><span class="pn">)</span>
+</code></pre>
+<h2><a name="Create-a-Csv-and-store-the-Data-using-Csv-Provider" class="anchor" href="#Create-a-Csv-and-store-the-Data-using-Csv-Provider">Create a Csv and store the Data using Csv Provider.</a></h2>
+<p>Now that the data is scraped from the webpage and stored to <code>FootballPlayersParsedTable</code> variable.
+We need to save the data to a Csv file in order to use it in the Exercises.</p>
+<p>First we need to construct a sample of the data that will be stored in the comma separated (csv) File.
+By running <code>footballers.Headers</code> as done previously, we can easily observe that the table has fields that will not be used.<br />
+The csv file doesn't need to contain all those fields, we only need:</p>
+<ul>
+<li><code>Player</code> (Players' Name)</li>
+<li><code>Nation</code> (Players' Nationality)</li>
+<li><code>Pos</code> (Players' Position)</li>
+<li><code>Squad</code> (Players' Team)</li>
+<li><code>Comp</code> (Players' League)</li>
+<li><code>Age</code> (Players' Age)</li>
+<li><code>Playing Time - MP</code> (Players' Matches Played)</li>
+<li><code>Performance - Gls</code> (Players' Goals Scored)</li>
+</ul>
+<p>The csv type provider will infer csv field types from a sample that you give it.
+It can infer the types from rows of the sample or from explicitly defined types
+added in parentheses after column names.
+We'll use explicit column type definitions in our sample.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="pn">[&lt;</span><span onmouseout="hideTip(event, 'fs40', 111)" onmouseover="showTip(event, 'fs40', 111)" class="rt">Literal</span><span class="pn">&gt;]</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs41', 112)" onmouseover="showTip(event, 'fs41', 112)" class="prop">FootballPlayersCsvSample</span> <span class="o">=</span> 
+    <span class="s">&quot;Player (string),&quot;</span> <span class="o">+</span>
+    <span class="s">&quot;Nation (string),&quot;</span> <span class="o">+</span>
+    <span class="s">&quot;Position (string),&quot;</span> <span class="o">+</span>
+    <span class="s">&quot;Team (string),&quot;</span> <span class="o">+</span>
+    <span class="s">&quot;League (string),&quot;</span> <span class="o">+</span>
+    <span class="s">&quot;Age (int),&quot;</span> <span class="o">+</span>
+    <span class="s">&quot;MatchesPlayed (int),&quot;</span> <span class="o">+</span>
+    <span class="s">&quot;GoalsScored (int)&quot;</span>
+
+<span class="c">// the sample csv file that we&#39;ve created:</span>
+<span onmouseout="hideTip(event, 'fs41', 113)" onmouseover="showTip(event, 'fs41', 113)" class="prop">FootballPlayersCsvSample</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>"Player (string),Nation (string),Position (string),Team (string),League (string),Age (int),MatchesPlayed (int),GoalsScored (int)"</code></pre></td></tr></table>
+<p>With the sample created, now we define the type from the sample.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">type</span> <span onmouseout="hideTip(event, 'fs42', 114)" onmouseover="showTip(event, 'fs42', 114)" class="d">FootballPlayersCsv</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs43', 115)" onmouseover="showTip(event, 'fs43', 115)" class="rt">CsvProvider</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs41', 116)" onmouseover="showTip(event, 'fs41', 116)" class="prop">FootballPlayersCsvSample</span><span class="pn">,</span><span class="fn">ResolutionFolder</span> <span class="o">=</span> <span class="k">__SOURCE_DIRECTORY__</span><span class="pn">&gt;</span>
+</code></pre>
+<p>Now that we have the data and the Csv sample let's create a "list of CSV rows".</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs44', 117)" onmouseover="showTip(event, 'fs44', 117)" class="id">bestPlayersCsvRows</span> <span class="o">=</span> 
+    <span class="pn">[</span> <span class="k">for</span> <span onmouseout="hideTip(event, 'fs32', 118)" onmouseover="showTip(event, 'fs32', 118)" class="fn">player</span> <span class="k">in</span> <span onmouseout="hideTip(event, 'fs38', 119)" onmouseover="showTip(event, 'fs38', 119)" class="id">bestPlayers</span> <span class="k">do</span>
+        <span onmouseout="hideTip(event, 'fs42', 120)" onmouseover="showTip(event, 'fs42', 120)" class="d">FootballPlayersCsv</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs45', 121)" onmouseover="showTip(event, 'fs45', 121)" class="id">Row</span><span class="pn">(</span> 
+            <span onmouseout="hideTip(event, 'fs32', 122)" onmouseover="showTip(event, 'fs32', 122)" class="fn">player</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs32', 123)" onmouseover="showTip(event, 'fs32', 123)" class="fn">player</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs14', 124)" onmouseover="showTip(event, 'fs14', 124)" class="id">Player</span><span class="pn">,</span>
+            <span class="fn">nation</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs32', 125)" onmouseover="showTip(event, 'fs32', 125)" class="fn">player</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs46', 126)" onmouseover="showTip(event, 'fs46', 126)" class="id">Nation</span><span class="pn">,</span>
+            <span class="fn">position</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs32', 127)" onmouseover="showTip(event, 'fs32', 127)" class="fn">player</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 128)" onmouseover="showTip(event, 'fs23', 128)" class="id">Pos</span><span class="pn">,</span>
+            <span class="fn">team</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs32', 129)" onmouseover="showTip(event, 'fs32', 129)" class="fn">player</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs39', 130)" onmouseover="showTip(event, 'fs39', 130)" class="id">Squad</span><span class="pn">,</span>
+            <span class="fn">league</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs32', 131)" onmouseover="showTip(event, 'fs32', 131)" class="fn">player</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs47', 132)" onmouseover="showTip(event, 'fs47', 132)" class="id">Comp</span><span class="pn">,</span>
+            <span class="c">// For the age variable just take the year (first two digits).</span>
+            <span class="c">// Sometimes 29 and 185 days old is given as &quot;29-185&quot; and we</span>
+            <span class="c">// want to throw away the days part.</span>
+            <span class="fn">age</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs33', 133)" onmouseover="showTip(event, 'fs33', 133)" class="fn">int</span> <span onmouseout="hideTip(event, 'fs32', 134)" onmouseover="showTip(event, 'fs32', 134)" class="fn">player</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs15', 135)" onmouseover="showTip(event, 'fs15', 135)" class="id">Age</span><span class="pn">.</span><span class="pn">[</span><span class="n">0..</span><span class="n">1</span><span class="pn">]</span><span class="pn">,</span> 
+            <span class="fn">matchesPlayed</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs33', 136)" onmouseover="showTip(event, 'fs33', 136)" class="fn">int</span> <span onmouseout="hideTip(event, 'fs32', 137)" onmouseover="showTip(event, 'fs32', 137)" class="fn">player</span><span class="pn">.</span><span class="id">``Playing Time - MP``</span><span class="pn">,</span>
+            <span class="fn">goalsScored</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs33', 138)" onmouseover="showTip(event, 'fs33', 138)" class="fn">int</span> <span onmouseout="hideTip(event, 'fs32', 139)" onmouseover="showTip(event, 'fs32', 139)" class="fn">player</span><span class="pn">.</span><span class="id">``Performance - Gls``</span> <span class="pn">)</span> <span class="pn">]</span>
+</code></pre>
+<p>Note that we use <code>int</code> to convert <code>age</code>, <code>matchesPlayed</code> and <code>goalsScored</code> because those fields' values are <code>strings</code> in the html table and we want <code>integers</code> instead.</p>
+<p>Let's look at the first 5 csv rows. We don't need to use <code>bestPlayersCsvRows.Rows</code> because the variable is already a list of csv rows.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs44', 140)" onmouseover="showTip(event, 'fs44', 140)" class="id">bestPlayersCsvRows</span><span class="pn">[</span><span class="n">0..</span><span class="n">4</span><span class="pn">]</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>[("Robert Lewandowski", "pl POL", "FW", "Bayern Munich", "deBundesliga", 32, 34,
+  35); ("Kylian Mbappé", "fr FRA", "FW", "Paris S-G", "frLigue 1", 22, 35, 28);
+ ("Karim Benzema", "fr FRA", "FW", "Real Madrid", "esLa Liga", 33, 32, 27);
+ ("Ciro Immobile", "it ITA", "FW", "Lazio", "itSerie A", 31, 31, 27);
+ ("Wissam Ben Yedder", "fr FRA", "FW", "Monaco", "frLigue 1", 30, 37, 25)]</code></pre></td></tr></table>
+<p>Rather than a "list of Csv rows", we want a "Csv file".  Here's how we do that.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs48', 142)" onmouseover="showTip(event, 'fs48', 142)" class="d">bestPlayersCsvFile</span> <span class="o">=</span> <span class="k">new</span> <span onmouseout="hideTip(event, 'fs42', 143)" onmouseover="showTip(event, 'fs42', 143)" class="d">FootballPlayersCsv</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs44', 144)" onmouseover="showTip(event, 'fs44', 144)" class="id">bestPlayersCsvRows</span><span class="pn">)</span>
+</code></pre>
+<p>Ok, let's write the file. Remember that <code>__SOURCE_DIRECTORY__</code> is a magic variable that points
+to whatever folder this code file (aka the source code file) is contained in.
+So this will write the data to a csv file named "FootballPlayers.csv" in the current directory.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs49', 145)" onmouseover="showTip(event, 'fs49', 145)" class="id">filePath</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs50', 146)" onmouseover="showTip(event, 'fs50', 146)" class="id">System</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs51', 147)" onmouseover="showTip(event, 'fs51', 147)" class="id">IO</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs52', 148)" onmouseover="showTip(event, 'fs52', 148)" class="rt">Path</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs53', 149)" onmouseover="showTip(event, 'fs53', 149)" class="id">Combine</span><span class="pn">(</span><span class="k">__SOURCE_DIRECTORY__</span><span class="pn">,</span><span class="s">&quot;FootballPlayers.csv&quot;</span><span class="pn">)</span>
+<span onmouseout="hideTip(event, 'fs48', 150)" onmouseover="showTip(event, 'fs48', 150)" class="d">bestPlayersCsvFile</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs54', 151)" onmouseover="showTip(event, 'fs54', 151)" class="id">Save</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs49', 152)" onmouseover="showTip(event, 'fs49', 152)" class="id">filePath</span><span class="pn">)</span>
+</code></pre>
+<p>And if you want to read the data back in from the file to see that it works:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs55', 153)" onmouseover="showTip(event, 'fs55', 153)" class="d">backIn</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs42', 154)" onmouseover="showTip(event, 'fs42', 154)" class="d">FootballPlayersCsv</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs56', 155)" onmouseover="showTip(event, 'fs56', 155)" class="id">Load</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs49', 156)" onmouseover="showTip(event, 'fs49', 156)" class="id">filePath</span><span class="pn">)</span>
+
+<span onmouseout="hideTip(event, 'fs55', 157)" onmouseover="showTip(event, 'fs55', 157)" class="d">backIn</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs57', 158)" onmouseover="showTip(event, 'fs57', 158)" class="id">Rows</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs58', 159)" onmouseover="showTip(event, 'fs58', 159)" class="m">Seq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs59', 160)" onmouseover="showTip(event, 'fs59', 160)" class="id">truncate</span> <span class="n">5</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs58', 161)" onmouseover="showTip(event, 'fs58', 161)" class="m">Seq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs60', 162)" onmouseover="showTip(event, 'fs60', 162)" class="id">iter</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs61', 163)" onmouseover="showTip(event, 'fs61', 163)" class="fn">printfn</span> <span class="s">&quot;</span><span class="pf">%A</span><span class="s">&quot;</span><span class="pn">)</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>("Robert Lewandowski", "pl POL", "FW", "Bayern Munich", "deBundesliga", 32, 34,
+ 35)
+("Kylian Mbappé", "fr FRA", "FW", "Paris S-G", "frLigue 1", 22, 35, 28)
+("Karim Benzema", "fr FRA", "FW", "Real Madrid", "esLa Liga", 33, 32, 27)
+("Ciro Immobile", "it ITA", "FW", "Lazio", "itSerie A", 31, 31, 27)
+("Wissam Ben Yedder", "fr FRA", "FW", "Monaco", "frLigue 1", 30, 37, 25)</code></pre></td></tr></table>
+
+        <div class="fsdocs-tip" id="fs1">Multiple items<br />namespace FSharp<br /><br />--------------------<br />namespace Microsoft.FSharp</div>
+<div class="fsdocs-tip" id="fs2">Multiple items<br />namespace FSharp.Data<br /><br />--------------------<br />namespace Microsoft.FSharp.Data</div>
+<div class="fsdocs-tip" id="fs3">type Big5EuropeanLeagues = HtmlProvider&lt;...&gt;</div>
+<div class="fsdocs-tip" id="fs4">type HtmlProvider<br /><em>&lt;summary&gt;Typed representation of an HTML file.&lt;/summary&gt;
+           &lt;param name=&#39;Sample&#39;&gt;Location of an HTML sample file or a string containing a sample HTML document.&lt;/param&gt;
+           &lt;param name=&#39;PreferOptionals&#39;&gt;When set to true, inference will prefer to use the option type instead of nullable types, &lt;c&gt;double.NaN&lt;/c&gt; or &lt;c&gt;&quot;&quot;&lt;/c&gt; for missing values. Defaults to false.&lt;/param&gt;
+           &lt;param name=&#39;IncludeLayoutTables&#39;&gt;Includes tables that are potentially layout tables (with cellpadding=0 and cellspacing=0 attributes)&lt;/param&gt;
+           &lt;param name=&#39;MissingValues&#39;&gt;The set of strings recognized as missing values. Defaults to &lt;c&gt;NaN,NA,N/A,#N/A,:,-,TBA,TBD&lt;/c&gt;.&lt;/param&gt;
+           &lt;param name=&#39;Culture&#39;&gt;The culture used for parsing numbers and dates. Defaults to the invariant culture.&lt;/param&gt;
+           &lt;param name=&#39;Encoding&#39;&gt;The encoding used to read the sample. You can specify either the character set name or the codepage number. Defaults to UTF8 for files, and to ISO-8859-1 the for HTTP requests, unless &lt;c&gt;charset&lt;/c&gt; is specified in the &lt;c&gt;Content-Type&lt;/c&gt; response header.&lt;/param&gt;
+           &lt;param name=&#39;ResolutionFolder&#39;&gt;A directory that is used when resolving relative file references (at design time and in hosted execution).&lt;/param&gt;
+           &lt;param name=&#39;EmbeddedResource&#39;&gt;When specified, the type provider first attempts to load the sample from the specified resource 
+              (e.g. &#39;MyCompany.MyAssembly, resource_name.html&#39;). This is useful when exposing types generated by the type provider.&lt;/param&gt;
+        </em></div>
+<div class="fsdocs-tip" id="fs5">val big5: HtmlProvider&lt;...&gt;</div>
+<div class="fsdocs-tip" id="fs6">HtmlProvider&lt;...&gt;.GetSample() : HtmlProvider&lt;...&gt;</div>
+<div class="fsdocs-tip" id="fs7">property Runtime.BaseTypes.HtmlDocument.Html: HtmlDocument with get</div>
+<div class="fsdocs-tip" id="fs8">override HtmlDocument.ToString: unit -&gt; string</div>
+<div class="fsdocs-tip" id="fs9">val footballers: HtmlProvider&lt;...&gt;.PlayerStandardStats20212022Big5EuropeanLeagues</div>
+<div class="fsdocs-tip" id="fs10">property HtmlProvider&lt;...&gt;.Tables: HtmlProvider&lt;...&gt;.TablesContainer with get</div>
+<div class="fsdocs-tip" id="fs11">property Runtime.BaseTypes.HtmlTable.Rows: HtmlProvider&lt;...&gt;.PlayerStandardStats20212022Big5EuropeanLeagues.Row array with get</div>
+<div class="fsdocs-tip" id="fs12">property Runtime.BaseTypes.HtmlTable.Headers: string array option with get</div>
+<div class="fsdocs-tip" id="fs13">val row: HtmlProvider&lt;...&gt;.PlayerStandardStats20212022Big5EuropeanLeagues.Row</div>
+<div class="fsdocs-tip" id="fs14">property HtmlProvider&lt;...&gt;.PlayerStandardStats20212022Big5EuropeanLeagues.Row.Player: string with get</div>
+<div class="fsdocs-tip" id="fs15">property HtmlProvider&lt;...&gt;.PlayerStandardStats20212022Big5EuropeanLeagues.Row.Age: string with get</div>
+<div class="fsdocs-tip" id="fs16">val footballersNoHeaders: HtmlProvider&lt;...&gt;.PlayerStandardStats20212022Big5EuropeanLeagues.Row array</div>
+<div class="fsdocs-tip" id="fs17">module Array
+
+from Microsoft.FSharp.Collections</div>
+<div class="fsdocs-tip" id="fs18">val filter: predicate: (&#39;T -&gt; bool) -&gt; array: &#39;T array -&gt; &#39;T array</div>
+<div class="fsdocs-tip" id="fs19">val footballersClean: HtmlProvider&lt;...&gt;.PlayerStandardStats20212022Big5EuropeanLeagues.Row array</div>
+<div class="fsdocs-tip" id="fs20">property System.Array.Length: int with get<br /><em>&lt;summary&gt;Gets the total number of elements in all the dimensions of the &lt;see cref=&quot;T:System.Array&quot; /&gt;.&lt;/summary&gt;<br />&lt;exception cref=&quot;T:System.OverflowException&quot;&gt;The array is multidimensional and contains more than &lt;see cref=&quot;F:System.Int32.MaxValue&quot;&gt;Int32.MaxValue&lt;/see&gt; elements.&lt;/exception&gt;<br />&lt;returns&gt;The total number of elements in all the dimensions of the &lt;see cref=&quot;T:System.Array&quot; /&gt;; zero if there are no elements in the array.&lt;/returns&gt;</em></div>
+<div class="fsdocs-tip" id="fs21">val playersByPosition: (string * HtmlProvider&lt;...&gt;.PlayerStandardStats20212022Big5EuropeanLeagues.Row array) array</div>
+<div class="fsdocs-tip" id="fs22">val x: HtmlProvider&lt;...&gt;.PlayerStandardStats20212022Big5EuropeanLeagues.Row</div>
+<div class="fsdocs-tip" id="fs23">property HtmlProvider&lt;...&gt;.PlayerStandardStats20212022Big5EuropeanLeagues.Row.Pos: string with get</div>
+<div class="fsdocs-tip" id="fs24">val groupBy: projection: (&#39;T -&gt; &#39;Key) -&gt; array: &#39;T array -&gt; (&#39;Key * &#39;T array) array (requires equality)</div>
+<div class="fsdocs-tip" id="fs25">val sortBy: projection: (&#39;T -&gt; &#39;Key) -&gt; array: &#39;T array -&gt; &#39;T array (requires comparison)</div>
+<div class="fsdocs-tip" id="fs26">val position: string</div>
+<div class="fsdocs-tip" id="fs27">val _players: HtmlProvider&lt;...&gt;.PlayerStandardStats20212022Big5EuropeanLeagues.Row array</div>
+<div class="fsdocs-tip" id="fs28">val bestPlayersByPosition: HtmlProvider&lt;...&gt;.PlayerStandardStats20212022Big5EuropeanLeagues.Row array</div>
+<div class="fsdocs-tip" id="fs29">val playersInPosition: HtmlProvider&lt;...&gt;.PlayerStandardStats20212022Big5EuropeanLeagues.Row array</div>
+<div class="fsdocs-tip" id="fs30">val bestToWorst: HtmlProvider&lt;...&gt;.PlayerStandardStats20212022Big5EuropeanLeagues.Row array</div>
+<div class="fsdocs-tip" id="fs31">val sortByDescending: projection: (&#39;T -&gt; &#39;Key) -&gt; array: &#39;T array -&gt; &#39;T array (requires comparison)</div>
+<div class="fsdocs-tip" id="fs32">val player: HtmlProvider&lt;...&gt;.PlayerStandardStats20212022Big5EuropeanLeagues.Row</div>
+<div class="fsdocs-tip" id="fs33">Multiple items<br />val int: value: &#39;T -&gt; int (requires member op_Explicit)<br /><br />--------------------<br />type int = int32<br /><br />--------------------<br />type int&lt;&#39;Measure&gt; =
+  int</div>
+<div class="fsdocs-tip" id="fs34">property HtmlProvider&lt;...&gt;.PlayerStandardStats20212022Big5EuropeanLeagues.Row.Matches: string with get</div>
+<div class="fsdocs-tip" id="fs35">val top25: HtmlProvider&lt;...&gt;.PlayerStandardStats20212022Big5EuropeanLeagues.Row array</div>
+<div class="fsdocs-tip" id="fs36">val truncate: count: int -&gt; array: &#39;T array -&gt; &#39;T array</div>
+<div class="fsdocs-tip" id="fs37">val concat: arrays: &#39;T array seq -&gt; &#39;T array</div>
+<div class="fsdocs-tip" id="fs38">val bestPlayers: HtmlProvider&lt;...&gt;.PlayerStandardStats20212022Big5EuropeanLeagues.Row array</div>
+<div class="fsdocs-tip" id="fs39">property HtmlProvider&lt;...&gt;.PlayerStandardStats20212022Big5EuropeanLeagues.Row.Squad: string with get</div>
+<div class="fsdocs-tip" id="fs40">Multiple items<br />type LiteralAttribute =
+  inherit Attribute
+  new: unit -&gt; LiteralAttribute<br /><br />--------------------<br />new: unit -&gt; LiteralAttribute</div>
+<div class="fsdocs-tip" id="fs41">[&lt;Literal&gt;]
+val FootballPlayersCsvSample: string = &quot;Player (string),Nation (string),Position (string),Team (string),League (string),Age (int),MatchesPlayed (int),GoalsScored (int)&quot;</div>
+<div class="fsdocs-tip" id="fs42">type FootballPlayersCsv = CsvProvider&lt;...&gt;</div>
+<div class="fsdocs-tip" id="fs43">type CsvProvider<br /><em>&lt;summary&gt;Typed representation of a CSV file.&lt;/summary&gt;
+           &lt;param name=&#39;Sample&#39;&gt;Location of a CSV sample file or a string containing a sample CSV document.&lt;/param&gt;
+           &lt;param name=&#39;Separators&#39;&gt;Column delimiter(s). Defaults to &lt;c&gt;,&lt;/c&gt;.&lt;/param&gt;
+           &lt;param name=&#39;InferRows&#39;&gt;Number of rows to use for inference. Defaults to &lt;c&gt;1000&lt;/c&gt;. If this is zero, all rows are used.&lt;/param&gt;
+           &lt;param name=&#39;Schema&#39;&gt;Optional column types, in a comma separated list. Valid types are &lt;c&gt;int&lt;/c&gt;, &lt;c&gt;int64&lt;/c&gt;, &lt;c&gt;bool&lt;/c&gt;, &lt;c&gt;float&lt;/c&gt;, &lt;c&gt;decimal&lt;/c&gt;, &lt;c&gt;date&lt;/c&gt;, &lt;c&gt;datetimeoffset&lt;/c&gt;, &lt;c&gt;timespan&lt;/c&gt;, &lt;c&gt;guid&lt;/c&gt;, &lt;c&gt;string&lt;/c&gt;, &lt;c&gt;int?&lt;/c&gt;, &lt;c&gt;int64?&lt;/c&gt;, &lt;c&gt;bool?&lt;/c&gt;, &lt;c&gt;float?&lt;/c&gt;, &lt;c&gt;decimal?&lt;/c&gt;, &lt;c&gt;date?&lt;/c&gt;, &lt;c&gt;datetimeoffset?&lt;/c&gt;, &lt;c&gt;timespan?&lt;/c&gt;, &lt;c&gt;guid?&lt;/c&gt;, &lt;c&gt;int option&lt;/c&gt;, &lt;c&gt;int64 option&lt;/c&gt;, &lt;c&gt;bool option&lt;/c&gt;, &lt;c&gt;float option&lt;/c&gt;, &lt;c&gt;decimal option&lt;/c&gt;, &lt;c&gt;date option&lt;/c&gt;, &lt;c&gt;datetimeoffset option&lt;/c&gt;, &lt;c&gt;timespan option&lt;/c&gt;, &lt;c&gt;guid option&lt;/c&gt; and &lt;c&gt;string option&lt;/c&gt;.
+           You can also specify a unit and the name of the column like this: &lt;c&gt;Name (type&amp;lt;unit&amp;gt;)&lt;/c&gt;, or you can override only the name. If you don&#39;t want to specify all the columns, you can reference the columns by name like this: &lt;c&gt;ColumnName=type&lt;/c&gt;.&lt;/param&gt;
+           &lt;param name=&#39;HasHeaders&#39;&gt;Whether the sample contains the names of the columns as its first line.&lt;/param&gt;
+           &lt;param name=&#39;IgnoreErrors&#39;&gt;Whether to ignore rows that have the wrong number of columns or which can&#39;t be parsed using the inferred or specified schema. Otherwise an exception is thrown when these rows are encountered.&lt;/param&gt;
+           &lt;param name=&#39;SkipRows&#39;&gt;Skips the first n rows of the CSV file.&lt;/param&gt;
+           &lt;param name=&#39;AssumeMissingValues&#39;&gt;When set to true, the type provider will assume all columns can have missing values, even if in the provided sample all values are present. Defaults to false.&lt;/param&gt;
+           &lt;param name=&#39;PreferOptionals&#39;&gt;When set to true, inference will prefer to use the option type instead of nullable types, &lt;c&gt;double.NaN&lt;/c&gt; or &lt;c&gt;&quot;&quot;&lt;/c&gt; for missing values. Defaults to false.&lt;/param&gt;
+           &lt;param name=&#39;Quote&#39;&gt;The quotation mark (for surrounding values containing the delimiter). Defaults to &lt;c&gt;&quot;&lt;/c&gt;.&lt;/param&gt;
+           &lt;param name=&#39;MissingValues&#39;&gt;The set of strings recognized as missing values specified as a comma-separated string (e.g., &quot;NA,N/A&quot;). Defaults to &lt;c&gt;NaN,NA,N/A,#N/A,:,-,TBA,TBD&lt;/c&gt;.&lt;/param&gt;
+           &lt;param name=&#39;CacheRows&#39;&gt;Whether the rows should be caches so they can be iterated multiple times. Defaults to true. Disable for large datasets.&lt;/param&gt;
+           &lt;param name=&#39;Culture&#39;&gt;The culture used for parsing numbers and dates. Defaults to the invariant culture.&lt;/param&gt;
+           &lt;param name=&#39;Encoding&#39;&gt;The encoding used to read the sample. You can specify either the character set name or the codepage number. Defaults to UTF8 for files, and to ISO-8859-1 the for HTTP requests, unless &lt;c&gt;charset&lt;/c&gt; is specified in the &lt;c&gt;Content-Type&lt;/c&gt; response header.&lt;/param&gt;
+           &lt;param name=&#39;ResolutionFolder&#39;&gt;A directory that is used when resolving relative file references (at design time and in hosted execution).&lt;/param&gt;
+           &lt;param name=&#39;EmbeddedResource&#39;&gt;When specified, the type provider first attempts to load the sample from the specified resource 
+              (e.g. &#39;MyCompany.MyAssembly, resource_name.csv&#39;). This is useful when exposing types generated by the type provider.&lt;/param&gt;</em></div>
+<div class="fsdocs-tip" id="fs44">val bestPlayersCsvRows: CsvProvider&lt;...&gt;.Row list</div>
+<div class="fsdocs-tip" id="fs45">type Row =
+  inherit string * string * string * string * string * int * int * int
+  new: player: string * nation: string * position: string * team: string * league: string * age: int * matchesPlayed: int * goalsScored: int -&gt; Row
+  member Age: int
+  member GoalsScored: int
+  member League: string
+  member MatchesPlayed: int
+  member Nation: string
+  member Player: string
+  member Position: string
+  member Team: string</div>
+<div class="fsdocs-tip" id="fs46">property HtmlProvider&lt;...&gt;.PlayerStandardStats20212022Big5EuropeanLeagues.Row.Nation: string with get</div>
+<div class="fsdocs-tip" id="fs47">property HtmlProvider&lt;...&gt;.PlayerStandardStats20212022Big5EuropeanLeagues.Row.Comp: string with get</div>
+<div class="fsdocs-tip" id="fs48">val bestPlayersCsvFile: FootballPlayersCsv</div>
+<div class="fsdocs-tip" id="fs49">val filePath: string</div>
+<div class="fsdocs-tip" id="fs50">namespace System</div>
+<div class="fsdocs-tip" id="fs51">namespace System.IO</div>
+<div class="fsdocs-tip" id="fs52">type Path =
+  static member ChangeExtension: path: string * extension: string -&gt; string
+  static member Combine: path1: string * path2: string -&gt; string + 3 overloads
+  static member EndsInDirectorySeparator: path: ReadOnlySpan&lt;char&gt; -&gt; bool + 1 overload
+  static member Exists: path: string -&gt; bool
+  static member GetDirectoryName: path: ReadOnlySpan&lt;char&gt; -&gt; ReadOnlySpan&lt;char&gt; + 1 overload
+  static member GetExtension: path: ReadOnlySpan&lt;char&gt; -&gt; ReadOnlySpan&lt;char&gt; + 1 overload
+  static member GetFileName: path: ReadOnlySpan&lt;char&gt; -&gt; ReadOnlySpan&lt;char&gt; + 1 overload
+  static member GetFileNameWithoutExtension: path: ReadOnlySpan&lt;char&gt; -&gt; ReadOnlySpan&lt;char&gt; + 1 overload
+  static member GetFullPath: path: string -&gt; string + 1 overload
+  static member GetInvalidFileNameChars: unit -&gt; char array
+  ...<br /><em>&lt;summary&gt;Performs operations on &lt;see cref=&quot;T:System.String&quot; /&gt; instances that contain file or directory path information. These operations are performed in a cross-platform manner.&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs53">System.IO.Path.Combine([&lt;System.ParamArray&gt;] paths: string array) : string<br />System.IO.Path.Combine(path1: string, path2: string) : string<br />System.IO.Path.Combine(path1: string, path2: string, path3: string) : string<br />System.IO.Path.Combine(path1: string, path2: string, path3: string, path4: string) : string</div>
+<div class="fsdocs-tip" id="fs54">member Runtime.CsvFile.Save: path: string * [&lt;System.Runtime.InteropServices.Optional&gt;] ?separator: char * [&lt;System.Runtime.InteropServices.Optional&gt;] ?quote: char -&gt; unit<br />member Runtime.CsvFile.Save: stream: System.IO.Stream * [&lt;System.Runtime.InteropServices.Optional&gt;] ?separator: char * [&lt;System.Runtime.InteropServices.Optional&gt;] ?quote: char -&gt; unit<br />member Runtime.CsvFile.Save: writer: System.IO.TextWriter * [&lt;System.Runtime.InteropServices.Optional&gt;] ?separator: char * [&lt;System.Runtime.InteropServices.Optional&gt;] ?quote: char -&gt; unit</div>
+<div class="fsdocs-tip" id="fs55">val backIn: CsvProvider&lt;...&gt;</div>
+<div class="fsdocs-tip" id="fs56">CsvProvider&lt;...&gt;.Load(uri: string) : CsvProvider&lt;...&gt;<br /><em>Loads CSV from the specified uri</em><br />CsvProvider&lt;...&gt;.Load(reader: System.IO.TextReader) : CsvProvider&lt;...&gt;<br /><em>Loads CSV from the specified reader</em><br />CsvProvider&lt;...&gt;.Load(stream: System.IO.Stream) : CsvProvider&lt;...&gt;<br /><em>Loads CSV from the specified stream</em></div>
+<div class="fsdocs-tip" id="fs57">property Runtime.CsvFile.Rows: CsvProvider&lt;...&gt;.Row seq with get<br /><em>&lt;summary&gt;
+ The rows with data
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs58">module Seq
+
+from Microsoft.FSharp.Collections</div>
+<div class="fsdocs-tip" id="fs59">val truncate: count: int -&gt; source: &#39;T seq -&gt; &#39;T seq</div>
+<div class="fsdocs-tip" id="fs60">val iter: action: (&#39;T -&gt; unit) -&gt; source: &#39;T seq -&gt; unit</div>
+<div class="fsdocs-tip" id="fs61">val printfn: format: Printf.TextWriterFormat&lt;&#39;T&gt; -&gt; &#39;T</div>
+
+    </div>
+</main>
+<aside id="fsdocs-page-menu">
+    <p id="on-this-page">On this page</p>
+    <ul>
+  <li class="level-1">
+    <a href="#Webscraping-HTML-to-CSV">
+      Webscraping HTML to CSV
+    </a>
+  </li>
+  <li class="level-2">
+    <a href="#Get-the-players-table-using-HTML-type-provider">
+      Get the players' table using HTML type provider.
+    </a>
+  </li>
+  <li class="level-2">
+    <a href="#Clean-the-data">
+      Clean the data
+    </a>
+  </li>
+  <li class="level-3">
+    <a href="#Repeated-headers">
+      Repeated headers
+    </a>
+  </li>
+  <li class="level-3">
+    <a href="#Removing-missing-values">
+      Removing missing values
+    </a>
+  </li>
+  <li class="level-2">
+    <a href="#Create-a-Csv-and-store-the-Data-using-Csv-Provider">
+      Create a Csv and store the Data using Csv Provider.
+    </a>
+  </li>
+</ul>
+</aside>
+<dialog>
+    <input type="search" placeholder="Search docs" />
+    <div class="results">
+        <ul></ul>
+        <p class="empty">Type something to start searching.</p>
+    </div>
+</dialog>
+<script type="module" src="/Teaching/content/fsdocs-tips.js"></script>
+<script type="module" src="/Teaching/content/fsdocs-theme-toggle.js"></script>
+<script type="module" src="/Teaching/content/fsdocs-theme.js"></script>
+<script type="module" src="/Teaching/content/fsdocs-search.js"></script>
+
+</body>
+</html>

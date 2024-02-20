@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en" data-root="/Teaching/">
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Nicholas Hirschey; Davide Costa" name="author">
+    <!-- Opengraph properties (https://ogp.me/) -->
+    <meta property="og:site_name" content="Teaching">
+    <meta property="og:title" content="Building a strategy" />
+    <meta property="og:url" content="/Teaching/PortfolioFormation-SimpleExample.html">
+    <meta property="og:type" content="website" />
+    <!-- Twitter cards (https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="/Teaching/">
+    <meta name="twitter:title" content="Building a strategy">
+    
+    <title>Building a strategy | Teaching</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="/Teaching/img/logo.png" rel="icon" sizes="32x32" type="image/png"/>
+    <script type="application/javascript" src="/Teaching/content/fsdocs-theme-set-dark.js"></script>
+    <link href="/Teaching/content/fsdocs-default.css" rel="stylesheet" type="text/css"/>
+    <link href="/Teaching/content/fsdocs-theme.css" rel="stylesheet" type="text/css"/>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js"></script>
+    
+</head>
+<body class="content">
+<header>
+    <div class="start">
+        <div id="menu-toggle">
+            <iconify-icon class="icon closed" height="22" icon="eva:menu-fill" width="22"></iconify-icon>
+            <iconify-icon class="icon open" height="22" icon="mi:close" width="22"></iconify-icon>
+            <input type="checkbox" name="mobile-menu" />
+            <ul class="menu">
+                <li class="nav-header">Links</li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/nhirschey/Teaching/blob/main/LICENSE.md">License</a>
+                </li>
+                <li class="nav-item"><a class="nav-link"
+                                        href="https://github.com/nhirschey/Teaching/blob/main/CHANGELOG.md">Release
+                    Notes</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/nhirschey/Teaching/">Source
+                    Repository</a></li>
+                <li class="nav-header ">
+  Getting Started
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/install.html">
+    Install Software
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/learn-fsharp.html">
+    Learn F#
+  </a>
+</li>             
+<li class="nav-header active">
+  Lectures
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/stockslongrun.html">
+    Stocks for the long run
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/stocksandbonds.html">
+    Stocks and bonds
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/riskyweight.html">
+    Risky Weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolatilityTiming.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolatilityManagedTypes.html">
+    Volatility Managed, but with different vols
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolAndReturnPred.html">
+    Volatility and Return predictions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/mveComparisons.html">
+    More managed portfolio comparisons
+  </a>
+</li>             
+<li class="nav-item active">
+  <a class="nav-link" href="/Teaching/PortfolioFormation-SimpleExample.html">
+    Building a strategy
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Momentum-Class.html">
+    Momentum Signal
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/optimization.html">
+    Optimization
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/revisitRiskyWeights.html">
+    Revisiting Mean-variance optimal risky weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/premiums.html">
+    Premiums
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/calls-nn.html">
+    Calls NN
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/portfolio-statistics.html">
+    Basic Portfolio Statistics
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/sentiment-mlnet.html">
+    Sentiment classification
+  </a>
+</li>             
+<li class="nav-header ">
+  Assignments
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-1-download-data.html">
+    Webscraping HTML to CSV
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-tuples-and-records.html">
+    Tuples and Records (with solutions)
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-collection-functions.html">
+    Collection functions (with solutions)
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignment-risky-weights.html">
+    Risky Weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignment-volatility-timing.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/select-project-signal.html">
+    Select Project Signals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/signal-exploration.html">
+    Signal Exploration
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/assignment-signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/assignment-performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-plotting.html">
+    Plotting (with solutions)
+  </a>
+</li>             
+<li class="nav-header ">
+  Practice Quizzes
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-list-module.html">
+    List module functions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-options.html">
+    Options
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-match-expressions.html">
+    Match expressions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-map-collection.html">
+    Map collection
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-discriminated-union.html">
+    Dicriminated Union
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-portfolios.html">
+    Portfolios
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-factors.html">
+    Factors
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-folding.html">
+    Fold and Friends
+  </a>
+</li>             
+<li class="nav-header ">
+  Other
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Common.html">
+    Common
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/loading-scripts.html">
+    Loading external scripts
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Portfolio.html">
+    Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/YahooFinance.html">
+    YahooFinance
+  </a>
+</li>
+                
+            </ul>
+        </div>
+        <a href="/Teaching/">
+            <img alt="Header menu logo" src="/Teaching/img/logo.png">
+            <strong>Teaching</strong>
+        </a>
+    </div>
+    <div class="end">
+        <a href="https://github.com/nhirschey/Teaching/" target="_blank">
+            <iconify-icon icon="uil:github" width="26" height="26"></iconify-icon>
+        </a>
+        <iconify-icon id="search-btn" icon="carbon:search" class="search" width="24" height="24"></iconify-icon>
+        <fsdocs-theme-toggle></fsdocs-theme-toggle>
+    </div>
+</header>
+<aside id="fsdocs-main-menu">
+    <ul class="menu">
+        <li class="nav-header">Links</li>
+        <li class="nav-item"><a class="nav-link" href="https://github.com/nhirschey/Teaching/blob/main/LICENSE.md">License</a>
+        </li>
+        <li class="nav-item"><a class="nav-link"
+                                href="https://github.com/nhirschey/Teaching/blob/main/CHANGELOG.md">Release
+            Notes</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://github.com/nhirschey/Teaching/">Source
+            Repository</a></li>
+        <li class="nav-header ">
+  Getting Started
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/install.html">
+    Install Software
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/learn-fsharp.html">
+    Learn F#
+  </a>
+</li>             
+<li class="nav-header active">
+  Lectures
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/stockslongrun.html">
+    Stocks for the long run
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/stocksandbonds.html">
+    Stocks and bonds
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/riskyweight.html">
+    Risky Weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolatilityTiming.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolatilityManagedTypes.html">
+    Volatility Managed, but with different vols
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolAndReturnPred.html">
+    Volatility and Return predictions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/mveComparisons.html">
+    More managed portfolio comparisons
+  </a>
+</li>             
+<li class="nav-item active">
+  <a class="nav-link" href="/Teaching/PortfolioFormation-SimpleExample.html">
+    Building a strategy
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Momentum-Class.html">
+    Momentum Signal
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/optimization.html">
+    Optimization
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/revisitRiskyWeights.html">
+    Revisiting Mean-variance optimal risky weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/premiums.html">
+    Premiums
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/calls-nn.html">
+    Calls NN
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/portfolio-statistics.html">
+    Basic Portfolio Statistics
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/sentiment-mlnet.html">
+    Sentiment classification
+  </a>
+</li>             
+<li class="nav-header ">
+  Assignments
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-1-download-data.html">
+    Webscraping HTML to CSV
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-tuples-and-records.html">
+    Tuples and Records (with solutions)
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-collection-functions.html">
+    Collection functions (with solutions)
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignment-risky-weights.html">
+    Risky Weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignment-volatility-timing.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/select-project-signal.html">
+    Select Project Signals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/signal-exploration.html">
+    Signal Exploration
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/assignment-signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/assignment-performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-plotting.html">
+    Plotting (with solutions)
+  </a>
+</li>             
+<li class="nav-header ">
+  Practice Quizzes
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-list-module.html">
+    List module functions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-options.html">
+    Options
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-match-expressions.html">
+    Match expressions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-map-collection.html">
+    Map collection
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-discriminated-union.html">
+    Dicriminated Union
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-portfolios.html">
+    Portfolios
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-factors.html">
+    Factors
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-folding.html">
+    Fold and Friends
+  </a>
+</li>             
+<li class="nav-header ">
+  Other
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Common.html">
+    Common
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/loading-scripts.html">
+    Loading external scripts
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Portfolio.html">
+    Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/YahooFinance.html">
+    YahooFinance
+  </a>
+</li>
+        
+    </ul>
+</aside>
+<main>
+    <div id="content">
+        
+<p><a href="https://mybinder.org/v2/gh/nhirschey/teaching/gh-pages?filepath=PortfolioFormation-SimpleExample.ipynb"><img src="img/badge-binder.svg" alt="Binder" /></a>&emsp;
+<a href="/Teaching//PortfolioFormation-SimpleExample.fsx"><img src="img/badge-script.svg" alt="Script" /></a>&emsp;
+<a href="/Teaching//PortfolioFormation-SimpleExample.ipynb"><img src="img/badge-notebook.svg" alt="Notebook" /></a></p>
+<h1><a name="Building-a-strategy" class="anchor" href="#Building-a-strategy">Building a strategy</a></h1>
+<p>Our objective is to write code that will allow us to do something like</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="id">samplePeriod</span>
+<span class="o">|&gt;</span> <span class="id">filterInvestmentUniverse</span>
+<span class="o">|&gt;</span> <span class="id">constructSignals</span>
+<span class="o">|&gt;</span> <span class="id">assignPortfolioWeights</span>
+<span class="o">|&gt;</span> <span class="id">getPortfolioReturns</span>
+</code></pre>
+<p>Now let's dig in. This is a <em>relatively</em> basic version of a strategy to build intuition with what we're doing. It is simpler than working with real data. But we will next move to real data.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="pp">#r</span> <span class="s">&quot;nuget: FSharp.Stats, 0.5.0&quot;</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="id">FSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="id">Stats</span>
+</code></pre>
+<h2><a name="Workflow-for-using-quantitative-signals" class="anchor" href="#Workflow-for-using-quantitative-signals">Workflow for using quantitative signals</a></h2>
+<p>How do we decide on the position weights for the different securities? An example workflow:</p>
+<ol>
+<li><strong>Define your investment universe.</strong> Your investment universe is the set of securities that you are considering for investment. An investment universe is typically a subset of securities grouped by some common characteristics: small-capitalization stocks, utility stocks, corporate bonds, firms listed on Euronext, etc.</li>
+<li><strong>Get your signal for each security.</strong> The signal is some information that you believe can be used to predict returns or risk. It could be a stock tip from a friend, a stock analyst recommendation, something you read on reddit, revenue growth, ...</li>
+<li><strong>Define a mapping from signals to portfolio weights.</strong></li>
+</ol>
+<p>Let's go through this step by step.</p>
+<h2><a name="1-Investment-universe-modelling-a-security" class="anchor" href="#1-Investment-universe-modelling-a-security">1. Investment universe: modelling a security</a></h2>
+<p>We're going to be forming portfolios consisting of weights on different securities. We need a way to identify those securities. Securities can have different identifiers. Stock exchanges use ticker symbols, but CUSIPs are commonly used by other entities (e.g., ratings agencies, regulators, etc.). Some data providers might also use their own custom identifier. For example, Bloomberg has their own "Bloomberg ticker" and CRSP uses PERMNOs. Thus, if we're trying to identify a security we can use tickers OR CUSIPs OR Bloomberg Tickers OR PERMNOs. How do we model this?</p>
+<p>A good type for modelling "OR" relationships is a Discriminated Union. The pipe (<code>|</code>) symbol indicates an "or" relationship.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">type</span> <span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="rt">SecurityId</span> <span class="o">=</span>
+    <span class="pn">|</span> <span class="uc">Ticker</span> <span class="k">of</span> <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="rt">string</span>
+    <span class="pn">|</span> <span class="uc">Cusip</span> <span class="k">of</span> <span onmouseout="hideTip(event, 'fs4', 5)" onmouseover="showTip(event, 'fs4', 5)" class="rt">string</span>
+    <span class="pn">|</span> <span class="uc">Bloomberg</span> <span class="k">of</span> <span onmouseout="hideTip(event, 'fs4', 6)" onmouseover="showTip(event, 'fs4', 6)" class="rt">string</span>
+    <span class="pn">|</span> <span class="uc">Permno</span> <span class="k">of</span> <span onmouseout="hideTip(event, 'fs5', 7)" onmouseover="showTip(event, 'fs5', 7)" class="vt">int</span>
+
+
+<span class="c">// Defining examples of these ids.</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs6', 8)" onmouseover="showTip(event, 'fs6', 8)" class="id">tickerExample</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs7', 9)" onmouseover="showTip(event, 'fs7', 9)" class="uc">Ticker</span> <span class="s">&quot;KO&quot;</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs8', 10)" onmouseover="showTip(event, 'fs8', 10)" class="id">permnoExample</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs9', 11)" onmouseover="showTip(event, 'fs9', 11)" class="uc">Permno</span> <span class="n">1001</span>
+
+
+<span class="c">// Deconstructing using pattern matching.</span>
+<span class="c">// Think &quot;match what&#39;s on the left side of = to what&#39;s on the right side&quot;</span>
+<span class="k">let</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs7', 12)" onmouseover="showTip(event, 'fs7', 12)" class="uc">Ticker</span> <span onmouseout="hideTip(event, 'fs10', 13)" onmouseover="showTip(event, 'fs10', 13)" class="id">deconTickerExample</span><span class="pn">)</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 14)" onmouseover="showTip(event, 'fs6', 14)" class="id">tickerExample</span>
+<span onmouseout="hideTip(event, 'fs11', 15)" onmouseover="showTip(event, 'fs11', 15)" class="fn">printfn</span> <span class="s">&quot;</span><span class="pf">%s</span><span class="s">&quot;</span> <span onmouseout="hideTip(event, 'fs10', 16)" onmouseover="showTip(event, 'fs10', 16)" class="id">deconTickerExample</span>
+
+<span class="k">let</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs9', 17)" onmouseover="showTip(event, 'fs9', 17)" class="uc">Permno</span> <span onmouseout="hideTip(event, 'fs12', 18)" onmouseover="showTip(event, 'fs12', 18)" class="id">deconPermnoExample</span><span class="pn">)</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs8', 19)" onmouseover="showTip(event, 'fs8', 19)" class="id">permnoExample</span>
+<span onmouseout="hideTip(event, 'fs11', 20)" onmouseover="showTip(event, 'fs11', 20)" class="fn">printfn</span> <span class="s">&quot;</span><span class="pf">%i</span><span class="s">&quot;</span> <span onmouseout="hideTip(event, 'fs12', 21)" onmouseover="showTip(event, 'fs12', 21)" class="id">deconPermnoExample</span>
+
+<span class="c">// Now we can define our investment universe.</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs13', 22)" onmouseover="showTip(event, 'fs13', 22)" class="id">investmentUniverse</span> <span class="o">=</span>
+    <span class="pn">[</span><span class="k">for</span> <span onmouseout="hideTip(event, 'fs14', 23)" onmouseover="showTip(event, 'fs14', 23)" class="fn">tick</span> <span class="k">in</span> <span class="pn">[</span> <span class="s">&quot;AAPL&quot;</span><span class="pn">;</span> <span class="s">&quot;KO&quot;</span><span class="pn">;</span> <span class="s">&quot;GOOG&quot;</span><span class="pn">;</span><span class="s">&quot;DIS&quot;</span><span class="pn">;</span><span class="s">&quot;GME&quot;</span><span class="pn">]</span> <span class="k">do</span> 
+        <span onmouseout="hideTip(event, 'fs7', 24)" onmouseover="showTip(event, 'fs7', 24)" class="uc">Ticker</span> <span onmouseout="hideTip(event, 'fs14', 25)" onmouseover="showTip(event, 'fs14', 25)" class="fn">tick</span> <span class="pn">]</span>
+</code></pre>
+<h2><a name="2-Signals" class="anchor" href="#2-Signals">2. Signals</a></h2>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs15', 26)" onmouseover="showTip(event, 'fs15', 26)" class="id">signals</span> <span class="o">=</span>
+    <span class="pn">[</span> <span onmouseout="hideTip(event, 'fs7', 27)" onmouseover="showTip(event, 'fs7', 27)" class="uc">Ticker</span> <span class="s">&quot;AAPL&quot;</span><span class="pn">,</span> <span class="n">2.0</span>
+      <span onmouseout="hideTip(event, 'fs7', 28)" onmouseover="showTip(event, 'fs7', 28)" class="uc">Ticker</span> <span class="s">&quot;KO&quot;</span><span class="pn">,</span> <span class="o">-</span><span class="n">1.4</span>
+      <span onmouseout="hideTip(event, 'fs7', 29)" onmouseover="showTip(event, 'fs7', 29)" class="uc">Ticker</span> <span class="s">&quot;GOOG&quot;</span><span class="pn">,</span> <span class="n">0.4</span> 
+      <span onmouseout="hideTip(event, 'fs7', 30)" onmouseover="showTip(event, 'fs7', 30)" class="uc">Ticker</span> <span class="s">&quot;DIS&quot;</span><span class="pn">,</span> <span class="n">1.1</span> <span class="pn">]</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs16', 31)" onmouseover="showTip(event, 'fs16', 31)" class="fn">Map</span>
+</code></pre>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs15', 32)" onmouseover="showTip(event, 'fs15', 32)" class="id">signals</span><span class="pn">[</span><span onmouseout="hideTip(event, 'fs7', 33)" onmouseover="showTip(event, 'fs7', 33)" class="uc">Ticker</span> <span class="s">&quot;AAPL&quot;</span><span class="pn">]</span>
+</code></pre>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs16', 34)" onmouseover="showTip(event, 'fs16', 34)" class="m">Map</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs17', 35)" onmouseover="showTip(event, 'fs17', 35)" class="id">find</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs7', 36)" onmouseover="showTip(event, 'fs7', 36)" class="uc">Ticker</span> <span class="s">&quot;AAPL&quot;</span><span class="pn">)</span> <span onmouseout="hideTip(event, 'fs15', 37)" onmouseover="showTip(event, 'fs15', 37)" class="id">signals</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>2.0</code></pre></td></tr></table>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs16', 38)" onmouseover="showTip(event, 'fs16', 38)" class="m">Map</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs18', 39)" onmouseover="showTip(event, 'fs18', 39)" class="id">tryFind</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs7', 40)" onmouseover="showTip(event, 'fs7', 40)" class="uc">Ticker</span> <span class="s">&quot;AAPL&quot;</span><span class="pn">)</span> <span onmouseout="hideTip(event, 'fs15', 41)" onmouseover="showTip(event, 'fs15', 41)" class="id">signals</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>Some 2.0</code></pre></td></tr></table>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs16', 42)" onmouseover="showTip(event, 'fs16', 42)" class="m">Map</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs18', 43)" onmouseover="showTip(event, 'fs18', 43)" class="id">tryFind</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs7', 44)" onmouseover="showTip(event, 'fs7', 44)" class="uc">Ticker</span> <span class="s">&quot;GME&quot;</span><span class="pn">)</span> <span onmouseout="hideTip(event, 'fs15', 45)" onmouseover="showTip(event, 'fs15', 45)" class="id">signals</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val it: float option = None</code></pre></td></tr></table>
+<p>Now a function that gets the signal given a security id.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs19', 46)" onmouseover="showTip(event, 'fs19', 46)" class="fn">getSignal</span> <span onmouseout="hideTip(event, 'fs20', 47)" onmouseover="showTip(event, 'fs20', 47)" class="fn">id</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs16', 48)" onmouseover="showTip(event, 'fs16', 48)" class="m">Map</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs18', 49)" onmouseover="showTip(event, 'fs18', 49)" class="id">tryFind</span> <span onmouseout="hideTip(event, 'fs20', 50)" onmouseover="showTip(event, 'fs20', 50)" class="fn">id</span> <span onmouseout="hideTip(event, 'fs15', 51)" onmouseover="showTip(event, 'fs15', 51)" class="id">signals</span>
+
+<span onmouseout="hideTip(event, 'fs19', 52)" onmouseover="showTip(event, 'fs19', 52)" class="fn">getSignal</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs7', 53)" onmouseover="showTip(event, 'fs7', 53)" class="uc">Ticker</span> <span class="s">&quot;AAPL&quot;</span><span class="pn">)</span>
+<span onmouseout="hideTip(event, 'fs19', 54)" onmouseover="showTip(event, 'fs19', 54)" class="fn">getSignal</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs7', 55)" onmouseover="showTip(event, 'fs7', 55)" class="uc">Ticker</span> <span class="s">&quot;GOOG&quot;</span><span class="pn">)</span>
+</code></pre>
+<p>We can call this function on all signals in our investment universe.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// using a loop.</span>
+<span class="pn">[</span> <span class="k">for</span> <span onmouseout="hideTip(event, 'fs21', 56)" onmouseover="showTip(event, 'fs21', 56)" class="fn">security</span> <span class="k">in</span> <span onmouseout="hideTip(event, 'fs13', 57)" onmouseover="showTip(event, 'fs13', 57)" class="id">investmentUniverse</span> <span class="k">do</span>
+    <span onmouseout="hideTip(event, 'fs21', 58)" onmouseover="showTip(event, 'fs21', 58)" class="fn">security</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs19', 59)" onmouseover="showTip(event, 'fs19', 59)" class="fn">getSignal</span> <span onmouseout="hideTip(event, 'fs21', 60)" onmouseover="showTip(event, 'fs21', 60)" class="fn">security</span> <span class="pn">]</span>
+
+<span class="c">// same thing with List.map</span>
+<span onmouseout="hideTip(event, 'fs13', 61)" onmouseover="showTip(event, 'fs13', 61)" class="id">investmentUniverse</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs22', 62)" onmouseover="showTip(event, 'fs22', 62)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 63)" onmouseover="showTip(event, 'fs23', 63)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs21', 64)" onmouseover="showTip(event, 'fs21', 64)" class="fn">security</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs21', 65)" onmouseover="showTip(event, 'fs21', 65)" class="fn">security</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs19', 66)" onmouseover="showTip(event, 'fs19', 66)" class="fn">getSignal</span> <span onmouseout="hideTip(event, 'fs21', 67)" onmouseover="showTip(event, 'fs21', 67)" class="fn">security</span><span class="pn">)</span>
+</code></pre>
+<p>Let's create a type to hold a security identifier and its signal.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">type</span> <span onmouseout="hideTip(event, 'fs24', 68)" onmouseover="showTip(event, 'fs24', 68)" class="rt">SecuritySignal</span> <span class="o">=</span> 
+    <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs3', 69)" onmouseover="showTip(event, 'fs3', 69)" class="prop">SecurityId</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs3', 70)" onmouseover="showTip(event, 'fs3', 70)" class="rt">SecurityId</span>
+      <span onmouseout="hideTip(event, 'fs25', 71)" onmouseover="showTip(event, 'fs25', 71)" class="prop">Signal</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs26', 72)" onmouseover="showTip(event, 'fs26', 72)" class="vt">float</span> <span class="pn">}</span>
+</code></pre>
+<p>Now a function that gets the signal and puts it in the
+<code>SecuritySignal</code> record type. It's possible that the security signal does not exist, so we'll use an option type to handle the fact that we might
+find the signal and we might not.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs27', 73)" onmouseover="showTip(event, 'fs27', 73)" class="fn">getSecuritySignal</span> <span onmouseout="hideTip(event, 'fs21', 74)" onmouseover="showTip(event, 'fs21', 74)" class="fn">security</span> <span class="o">=</span>
+    <span class="k">match</span> <span onmouseout="hideTip(event, 'fs16', 75)" onmouseover="showTip(event, 'fs16', 75)" class="m">Map</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs18', 76)" onmouseover="showTip(event, 'fs18', 76)" class="id">tryFind</span> <span onmouseout="hideTip(event, 'fs21', 77)" onmouseover="showTip(event, 'fs21', 77)" class="fn">security</span> <span onmouseout="hideTip(event, 'fs15', 78)" onmouseover="showTip(event, 'fs15', 78)" class="id">signals</span> <span class="k">with</span>
+    <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs28', 79)" onmouseover="showTip(event, 'fs28', 79)" class="uc">None</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs28', 80)" onmouseover="showTip(event, 'fs28', 80)" class="uc">None</span>
+    <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs29', 81)" onmouseover="showTip(event, 'fs29', 81)" class="uc">Some</span> <span onmouseout="hideTip(event, 'fs30', 82)" onmouseover="showTip(event, 'fs30', 82)" class="fn">signal</span> <span class="k">-&gt;</span>
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs31', 83)" onmouseover="showTip(event, 'fs31', 83)" class="fn">result</span> <span class="o">=</span> <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs3', 84)" onmouseover="showTip(event, 'fs3', 84)" class="prop">SecurityId</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs21', 85)" onmouseover="showTip(event, 'fs21', 85)" class="fn">security</span><span class="pn">;</span> <span onmouseout="hideTip(event, 'fs25', 86)" onmouseover="showTip(event, 'fs25', 86)" class="prop">Signal</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs30', 87)" onmouseover="showTip(event, 'fs30', 87)" class="fn">signal</span> <span class="pn">}</span>
+        <span onmouseout="hideTip(event, 'fs29', 88)" onmouseover="showTip(event, 'fs29', 88)" class="uc">Some</span> <span onmouseout="hideTip(event, 'fs31', 89)" onmouseover="showTip(event, 'fs31', 89)" class="fn">result</span>
+</code></pre>
+<p>Here we can see that we retured something when there
+was a signal and nothing if there was none.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs27', 90)" onmouseover="showTip(event, 'fs27', 90)" class="fn">getSecuritySignal</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs7', 91)" onmouseover="showTip(event, 'fs7', 91)" class="uc">Ticker</span> <span class="s">&quot;GME&quot;</span><span class="pn">)</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val it: SecuritySignal option = None</code></pre></td></tr></table>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs27', 92)" onmouseover="showTip(event, 'fs27', 92)" class="fn">getSecuritySignal</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs7', 93)" onmouseover="showTip(event, 'fs7', 93)" class="uc">Ticker</span> <span class="s">&quot;GOOG&quot;</span><span class="pn">)</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val it: SecuritySignal option = Some { SecurityId = Ticker "GOOG"
+                                       Signal = 0.4 }</code></pre></td></tr></table>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">for</span> <span onmouseout="hideTip(event, 'fs21', 94)" onmouseover="showTip(event, 'fs21', 94)" class="fn">security</span> <span class="k">in</span> <span onmouseout="hideTip(event, 'fs13', 95)" onmouseover="showTip(event, 'fs13', 95)" class="id">investmentUniverse</span> <span class="k">do</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs32', 96)" onmouseover="showTip(event, 'fs32', 96)" class="fn">securitySignal</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs27', 97)" onmouseover="showTip(event, 'fs27', 97)" class="fn">getSecuritySignal</span> <span onmouseout="hideTip(event, 'fs21', 98)" onmouseover="showTip(event, 'fs21', 98)" class="fn">security</span>
+    <span onmouseout="hideTip(event, 'fs11', 99)" onmouseover="showTip(event, 'fs11', 99)" class="fn">printfn</span> <span class="s">$&quot;{</span><span onmouseout="hideTip(event, 'fs32', 100)" onmouseover="showTip(event, 'fs32', 100)" class="fn">securitySignal</span><span class="s">}&quot;</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>Some({ SecurityId = Ticker "AAPL"
+  Signal = 2.0 })
+Some({ SecurityId = Ticker "KO"
+  Signal = -1.4 })
+Some({ SecurityId = Ticker "GOOG"
+  Signal = 0.4 })
+Some({ SecurityId = Ticker "DIS"
+  Signal = 1.1 })</code></pre></td></tr></table>
+<p>This is equivalent but using a pipeline.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs13', 101)" onmouseover="showTip(event, 'fs13', 101)" class="id">investmentUniverse</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs22', 102)" onmouseover="showTip(event, 'fs22', 102)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 103)" onmouseover="showTip(event, 'fs23', 103)" class="id">map</span> <span onmouseout="hideTip(event, 'fs27', 104)" onmouseover="showTip(event, 'fs27', 104)" class="fn">getSecuritySignal</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs22', 105)" onmouseover="showTip(event, 'fs22', 105)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs33', 106)" onmouseover="showTip(event, 'fs33', 106)" class="id">iter</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs11', 107)" onmouseover="showTip(event, 'fs11', 107)" class="fn">printfn</span> <span class="s">&quot;</span><span class="pf">%A</span><span class="s">&quot;</span><span class="pn">)</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>Some { SecurityId = Ticker "AAPL"
+       Signal = 2.0 }
+Some { SecurityId = Ticker "KO"
+       Signal = -1.4 }
+Some { SecurityId = Ticker "GOOG"
+       Signal = 0.4 }
+Some { SecurityId = Ticker "DIS"
+       Signal = 1.1 }
+None</code></pre></td></tr></table>
+<p>If we do choose instead of map, then we will
+end up with only the results when there was something.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs13', 108)" onmouseover="showTip(event, 'fs13', 108)" class="id">investmentUniverse</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs22', 109)" onmouseover="showTip(event, 'fs22', 109)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs34', 110)" onmouseover="showTip(event, 'fs34', 110)" class="id">choose</span> <span onmouseout="hideTip(event, 'fs27', 111)" onmouseover="showTip(event, 'fs27', 111)" class="fn">getSecuritySignal</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs22', 112)" onmouseover="showTip(event, 'fs22', 112)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs33', 113)" onmouseover="showTip(event, 'fs33', 113)" class="id">iter</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs11', 114)" onmouseover="showTip(event, 'fs11', 114)" class="fn">printfn</span> <span class="s">&quot;</span><span class="pf">%A</span><span class="s">&quot;</span><span class="pn">)</span> 
+</code></pre>
+<table class="pre"><tr><td><pre><code>{ SecurityId = Ticker "AAPL"
+  Signal = 2.0 }
+{ SecurityId = Ticker "KO"
+  Signal = -1.4 }
+{ SecurityId = Ticker "GOOG"
+  Signal = 0.4 }
+{ SecurityId = Ticker "DIS"
+  Signal = 1.1 }</code></pre></td></tr></table>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs35', 115)" onmouseover="showTip(event, 'fs35', 115)" class="id">securitySignals</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs13', 116)" onmouseover="showTip(event, 'fs13', 116)" class="id">investmentUniverse</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs22', 117)" onmouseover="showTip(event, 'fs22', 117)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs34', 118)" onmouseover="showTip(event, 'fs34', 118)" class="id">choose</span> <span onmouseout="hideTip(event, 'fs27', 119)" onmouseover="showTip(event, 'fs27', 119)" class="fn">getSecuritySignal</span>
+
+<span onmouseout="hideTip(event, 'fs35', 120)" onmouseover="showTip(event, 'fs35', 120)" class="id">securitySignals</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs22', 121)" onmouseover="showTip(event, 'fs22', 121)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs33', 122)" onmouseover="showTip(event, 'fs33', 122)" class="id">iter</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs11', 123)" onmouseover="showTip(event, 'fs11', 123)" class="fn">printfn</span> <span class="s">&quot;</span><span class="pf">%A</span><span class="s">&quot;</span><span class="pn">)</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>{ SecurityId = Ticker "AAPL"
+  Signal = 2.0 }
+{ SecurityId = Ticker "KO"
+  Signal = -1.4 }
+{ SecurityId = Ticker "GOOG"
+  Signal = 0.4 }
+{ SecurityId = Ticker "DIS"
+  Signal = 1.1 }</code></pre></td></tr></table>
+<h2><a name="3-Defining-a-mapping-between-signals-and-portfolio-weights" class="anchor" href="#3-Defining-a-mapping-between-signals-and-portfolio-weights">3. Defining a mapping between signals and portfolio weights.</a></h2>
+<p>Now let's look at turning signals into weights.</p>
+<p>Often, you only want stocks with signals above or below a given threshold in a portfolio. For instance, if you have a "value" portfolio you might only want stocks with low price to earnings (P/E) ratios in your portfolio. Or maybe you want to go long value stocks and short growth stocks.</p>
+<p>A typical procedure is to assign securities to portfolios based on signals, and then weight securities within those sub portfolios.</p>
+<p>First, let's represent portfolios Ids.
+A first step is to define portfolio IDs. A simple ID is a string name, but often we will do things like create 10 size portfolios infexed from 1 to 10, like ("Size", 1), ("Size", 2), ... We can model this as a discriminated union.</p>
+<p>Here, <code>Indexed</code> is a tuple where the first element is a string and the second is an integer. I could just say <code>Indexed of string * int</code>, but I am going to name them to give them meaning. Though the names are optional when constructing and deconstructing</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">type</span> <span onmouseout="hideTip(event, 'fs36', 124)" onmouseover="showTip(event, 'fs36', 124)" class="rt">PortfolioId</span> <span class="o">=</span> 
+    <span class="pn">|</span> <span class="uc">Named</span> <span class="k">of</span> <span onmouseout="hideTip(event, 'fs4', 125)" onmouseover="showTip(event, 'fs4', 125)" class="rt">string</span>
+    <span class="pn">|</span> <span class="uc">Indexed</span> <span class="k">of</span> <span class="pn">{|</span> <span class="prop">Name</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs4', 126)" onmouseover="showTip(event, 'fs4', 126)" class="rt">string</span><span class="pn">;</span> <span class="prop">Index</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs5', 127)" onmouseover="showTip(event, 'fs5', 127)" class="vt">int</span> <span class="pn">|}</span><span class="c">// name:string * index:int</span>
+
+<span class="c">// Example portfolio IDs</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs37', 128)" onmouseover="showTip(event, 'fs37', 128)" class="id">portfolioId1</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs38', 129)" onmouseover="showTip(event, 'fs38', 129)" class="uc">Named</span> <span class="s">&quot;Market&quot;</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs39', 130)" onmouseover="showTip(event, 'fs39', 130)" class="id">portfolioId2</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs40', 131)" onmouseover="showTip(event, 'fs40', 131)" class="uc">Indexed</span> <span class="pn">{|</span> <span class="prop">Name</span> <span class="o">=</span> <span class="s">&quot;Size&quot;</span><span class="pn">;</span> <span class="prop">Index</span> <span class="o">=</span> <span class="n">1</span> <span class="pn">|}</span> 
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs41', 132)" onmouseover="showTip(event, 'fs41', 132)" class="id">portfolioId3</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs40', 133)" onmouseover="showTip(event, 'fs40', 133)" class="uc">Indexed</span> <span class="pn">{|</span> <span class="prop">Name</span> <span class="o">=</span> <span class="s">&quot;Size&quot;</span> <span class="pn">;</span> <span class="prop">Index</span> <span class="o">=</span> <span class="n">2</span> <span class="pn">|}</span>    
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs42', 134)" onmouseover="showTip(event, 'fs42', 134)" class="fn">getPortfolioIdString</span> <span onmouseout="hideTip(event, 'fs43', 135)" onmouseover="showTip(event, 'fs43', 135)" class="fn">port</span> <span class="o">=</span>
+    <span class="k">match</span> <span onmouseout="hideTip(event, 'fs43', 136)" onmouseover="showTip(event, 'fs43', 136)" class="fn">port</span> <span class="k">with</span>
+    <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs38', 137)" onmouseover="showTip(event, 'fs38', 137)" class="uc">Named</span> <span onmouseout="hideTip(event, 'fs44', 138)" onmouseover="showTip(event, 'fs44', 138)" class="fn">name</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs44', 139)" onmouseover="showTip(event, 'fs44', 139)" class="fn">name</span>
+    <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs40', 140)" onmouseover="showTip(event, 'fs40', 140)" class="uc">Indexed</span> <span onmouseout="hideTip(event, 'fs45', 141)" onmouseover="showTip(event, 'fs45', 141)" class="fn">p</span> <span class="k">-&gt;</span> <span class="s">$&quot;{</span><span onmouseout="hideTip(event, 'fs45', 142)" onmouseover="showTip(event, 'fs45', 142)" class="fn">p</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs46', 143)" onmouseover="showTip(event, 'fs46', 143)" class="id">Name</span><span class="s">}: {</span><span onmouseout="hideTip(event, 'fs45', 144)" onmouseover="showTip(event, 'fs45', 144)" class="fn">p</span><span class="pn">.</span><span class="id">Index</span><span class="s">}&quot;</span>
+
+
+<span onmouseout="hideTip(event, 'fs42', 145)" onmouseover="showTip(event, 'fs42', 145)" class="fn">getPortfolioIdString</span> <span onmouseout="hideTip(event, 'fs37', 146)" onmouseover="showTip(event, 'fs37', 146)" class="id">portfolioId1</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>"Market"</code></pre></td></tr></table>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs42', 147)" onmouseover="showTip(event, 'fs42', 147)" class="fn">getPortfolioIdString</span> <span onmouseout="hideTip(event, 'fs41', 148)" onmouseover="showTip(event, 'fs41', 148)" class="id">portfolioId3</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>"Size: 2"</code></pre></td></tr></table>
+<p>Let's assign securities to portolios based on whether their signal is above or below the median.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// Model for an assigned portfolio</span>
+<span class="k">type</span> <span onmouseout="hideTip(event, 'fs47', 149)" onmouseover="showTip(event, 'fs47', 149)" class="rt">AssignedPortfolio</span> <span class="o">=</span>
+    <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs36', 150)" onmouseover="showTip(event, 'fs36', 150)" class="prop">PortfolioId</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs36', 151)" onmouseover="showTip(event, 'fs36', 151)" class="rt">PortfolioId</span> 
+      <span class="prop">Signals</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs48', 152)" onmouseover="showTip(event, 'fs48', 152)" class="rt">list</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs24', 153)" onmouseover="showTip(event, 'fs24', 153)" class="rt">SecuritySignal</span><span class="pn">&gt;</span> <span class="pn">}</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs49', 154)" onmouseover="showTip(event, 'fs49', 154)" class="id">medianSignal</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs35', 155)" onmouseover="showTip(event, 'fs35', 155)" class="id">securitySignals</span> 
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs22', 156)" onmouseover="showTip(event, 'fs22', 156)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 157)" onmouseover="showTip(event, 'fs23', 157)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs50', 158)" onmouseover="showTip(event, 'fs50', 158)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs50', 159)" onmouseover="showTip(event, 'fs50', 159)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs51', 160)" onmouseover="showTip(event, 'fs51', 160)" class="id">Signal</span><span class="pn">)</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs52', 161)" onmouseover="showTip(event, 'fs52', 161)" class="m">Seq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs53', 162)" onmouseover="showTip(event, 'fs53', 162)" class="id">median</span>
+</code></pre>
+<p>The median signal is</p>
+<table class="pre"><tr><td><pre><code>0.75</code></pre></td></tr></table>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs54', 163)" onmouseover="showTip(event, 'fs54', 163)" class="id">aboveMedian</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs35', 164)" onmouseover="showTip(event, 'fs35', 164)" class="id">securitySignals</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs22', 165)" onmouseover="showTip(event, 'fs22', 165)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs55', 166)" onmouseover="showTip(event, 'fs55', 166)" class="id">filter</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs50', 167)" onmouseover="showTip(event, 'fs50', 167)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs50', 168)" onmouseover="showTip(event, 'fs50', 168)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs51', 169)" onmouseover="showTip(event, 'fs51', 169)" class="id">Signal</span> <span class="o">&gt;</span><span class="o">=</span> <span onmouseout="hideTip(event, 'fs49', 170)" onmouseover="showTip(event, 'fs49', 170)" class="id">medianSignal</span><span class="pn">)</span>
+</code></pre>
+<p>the above-median securities:</p>
+<table class="pre"><tr><td><pre><code>[{ SecurityId = Ticker "AAPL"
+   Signal = 2.0 }; { SecurityId = Ticker "DIS"
+                     Signal = 1.1 }]</code></pre></td></tr></table>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs56', 171)" onmouseover="showTip(event, 'fs56', 171)" class="id">belowMedian</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs35', 172)" onmouseover="showTip(event, 'fs35', 172)" class="id">securitySignals</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs22', 173)" onmouseover="showTip(event, 'fs22', 173)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs55', 174)" onmouseover="showTip(event, 'fs55', 174)" class="id">filter</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs50', 175)" onmouseover="showTip(event, 'fs50', 175)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs50', 176)" onmouseover="showTip(event, 'fs50', 176)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs51', 177)" onmouseover="showTip(event, 'fs51', 177)" class="id">Signal</span> <span class="o">&lt;</span> <span onmouseout="hideTip(event, 'fs49', 178)" onmouseover="showTip(event, 'fs49', 178)" class="id">medianSignal</span><span class="pn">)</span>
+</code></pre>
+<p>the below-median securities:</p>
+<table class="pre"><tr><td><pre><code>[{ SecurityId = Ticker "KO"
+   Signal = -1.4 }; { SecurityId = Ticker "GOOG"
+                      Signal = 0.4 }]</code></pre></td></tr></table>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs57', 179)" onmouseover="showTip(event, 'fs57', 179)" class="id">assigned</span> <span class="o">=</span>
+    <span class="pn">[</span> <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs36', 180)" onmouseover="showTip(event, 'fs36', 180)" class="prop">PortfolioId</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs38', 181)" onmouseover="showTip(event, 'fs38', 181)" class="uc">Named</span><span class="pn">(</span><span class="s">&quot;Above Median&quot;</span><span class="pn">)</span>
+        <span class="prop">Signals</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs54', 182)" onmouseover="showTip(event, 'fs54', 182)" class="id">aboveMedian</span> <span class="pn">}</span>
+      <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs36', 183)" onmouseover="showTip(event, 'fs36', 183)" class="prop">PortfolioId</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs38', 184)" onmouseover="showTip(event, 'fs38', 184)" class="uc">Named</span><span class="pn">(</span><span class="s">&quot;Below Median&quot;</span><span class="pn">)</span>
+        <span class="prop">Signals</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs56', 185)" onmouseover="showTip(event, 'fs56', 185)" class="id">belowMedian</span><span class="pn">}</span> <span class="pn">]</span>
+</code></pre>
+<p>assigned to portfolios:</p>
+<table class="pre"><tr><td><pre><code>[{ PortfolioId = Named "Above Median"
+   Signals = [{ SecurityId = Ticker "AAPL"
+                Signal = 2.0 }; { SecurityId = Ticker "DIS"
+                                  Signal = 1.1 }] };
+ { PortfolioId = Named "Below Median"
+   Signals = [{ SecurityId = Ticker "KO"
+                Signal = -1.4 }; { SecurityId = Ticker "GOOG"
+                                   Signal = 0.4 }] }]</code></pre></td></tr></table>
+<p>Or create a reusable function to do the same thing</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs58', 186)" onmouseover="showTip(event, 'fs58', 186)" class="fn">assignAboveBelowMedian</span> <span onmouseout="hideTip(event, 'fs35', 187)" onmouseover="showTip(event, 'fs35', 187)" class="fn">securitySignals</span> <span class="o">=</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs49', 188)" onmouseover="showTip(event, 'fs49', 188)" class="fn">medianSignal</span> <span class="o">=</span> 
+        <span onmouseout="hideTip(event, 'fs35', 189)" onmouseover="showTip(event, 'fs35', 189)" class="fn">securitySignals</span> 
+        <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs22', 190)" onmouseover="showTip(event, 'fs22', 190)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 191)" onmouseover="showTip(event, 'fs23', 191)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs50', 192)" onmouseover="showTip(event, 'fs50', 192)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs50', 193)" onmouseover="showTip(event, 'fs50', 193)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs51', 194)" onmouseover="showTip(event, 'fs51', 194)" class="id">Signal</span><span class="pn">)</span>
+        <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs52', 195)" onmouseover="showTip(event, 'fs52', 195)" class="m">Seq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs53', 196)" onmouseover="showTip(event, 'fs53', 196)" class="id">median</span>
+
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs54', 197)" onmouseover="showTip(event, 'fs54', 197)" class="fn">aboveMedian</span> <span class="o">=</span>
+        <span onmouseout="hideTip(event, 'fs35', 198)" onmouseover="showTip(event, 'fs35', 198)" class="fn">securitySignals</span>
+        <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs22', 199)" onmouseover="showTip(event, 'fs22', 199)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs55', 200)" onmouseover="showTip(event, 'fs55', 200)" class="id">filter</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs50', 201)" onmouseover="showTip(event, 'fs50', 201)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs50', 202)" onmouseover="showTip(event, 'fs50', 202)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs51', 203)" onmouseover="showTip(event, 'fs51', 203)" class="id">Signal</span> <span class="o">&gt;</span><span class="o">=</span> <span onmouseout="hideTip(event, 'fs49', 204)" onmouseover="showTip(event, 'fs49', 204)" class="fn">medianSignal</span><span class="pn">)</span>
+
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs56', 205)" onmouseover="showTip(event, 'fs56', 205)" class="fn">belowMedian</span> <span class="o">=</span>
+        <span onmouseout="hideTip(event, 'fs35', 206)" onmouseover="showTip(event, 'fs35', 206)" class="fn">securitySignals</span>
+        <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs22', 207)" onmouseover="showTip(event, 'fs22', 207)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs55', 208)" onmouseover="showTip(event, 'fs55', 208)" class="id">filter</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs50', 209)" onmouseover="showTip(event, 'fs50', 209)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs50', 210)" onmouseover="showTip(event, 'fs50', 210)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs51', 211)" onmouseover="showTip(event, 'fs51', 211)" class="id">Signal</span> <span class="o">&lt;</span> <span onmouseout="hideTip(event, 'fs49', 212)" onmouseover="showTip(event, 'fs49', 212)" class="fn">medianSignal</span><span class="pn">)</span>
+
+    <span class="pn">[</span> <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs36', 213)" onmouseover="showTip(event, 'fs36', 213)" class="prop">PortfolioId</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs38', 214)" onmouseover="showTip(event, 'fs38', 214)" class="uc">Named</span><span class="pn">(</span><span class="s">&quot;Above Median&quot;</span><span class="pn">)</span>
+        <span class="prop">Signals</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs54', 215)" onmouseover="showTip(event, 'fs54', 215)" class="fn">aboveMedian</span> <span class="pn">}</span>
+      <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs36', 216)" onmouseover="showTip(event, 'fs36', 216)" class="prop">PortfolioId</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs38', 217)" onmouseover="showTip(event, 'fs38', 217)" class="uc">Named</span><span class="pn">(</span><span class="s">&quot;Below Median&quot;</span><span class="pn">)</span>
+        <span class="prop">Signals</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs56', 218)" onmouseover="showTip(event, 'fs56', 218)" class="fn">belowMedian</span><span class="pn">}</span> <span class="pn">]</span>
+</code></pre>
+<h2><a name="Modelling-a-position" class="anchor" href="#Modelling-a-position">Modelling a position</a></h2>
+<p>Now we have assigned securities to portfolios based on the trading signal. Now we can form weights. We can think of a portfolio as consisting of positions where positions are symbols and weights.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">type</span> <span onmouseout="hideTip(event, 'fs59', 219)" onmouseover="showTip(event, 'fs59', 219)" class="rt">Position</span> <span class="o">=</span>
+    <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs3', 220)" onmouseover="showTip(event, 'fs3', 220)" class="prop">SecurityId</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs3', 221)" onmouseover="showTip(event, 'fs3', 221)" class="rt">SecurityId</span> 
+      <span class="prop">Weight</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs26', 222)" onmouseover="showTip(event, 'fs26', 222)" class="vt">float</span> <span class="pn">}</span>
+
+<span class="c">// Defining example positions</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs60', 223)" onmouseover="showTip(event, 'fs60', 223)" class="id">koPosition</span> <span class="o">=</span> <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs3', 224)" onmouseover="showTip(event, 'fs3', 224)" class="prop">SecurityId</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs7', 225)" onmouseover="showTip(event, 'fs7', 225)" class="uc">Ticker</span> <span class="s">&quot;KO&quot;</span><span class="pn">;</span> <span class="prop">Weight</span> <span class="o">=</span> <span class="n">0.25</span> <span class="pn">}</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs61', 226)" onmouseover="showTip(event, 'fs61', 226)" class="id">permnoPosition</span> <span class="o">=</span> <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs3', 227)" onmouseover="showTip(event, 'fs3', 227)" class="prop">SecurityId</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs9', 228)" onmouseover="showTip(event, 'fs9', 228)" class="uc">Permno</span> <span class="n">1001</span><span class="pn">;</span> <span class="prop">Weight</span> <span class="o">=</span> <span class="n">0.75</span> <span class="pn">}</span>
+</code></pre>
+<h2><a name="Modelling-a-portfolio" class="anchor" href="#Modelling-a-portfolio">Modelling a portfolio</a></h2>
+<p>And once we have multiple positions, then we can group them into a portfolio.</p>
+<p>And a portfolio can consist of a Portfolio Id and an List of positions</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">type</span> <span onmouseout="hideTip(event, 'fs62', 229)" onmouseover="showTip(event, 'fs62', 229)" class="rt">Portfolio</span> <span class="o">=</span> 
+    <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs36', 230)" onmouseover="showTip(event, 'fs36', 230)" class="prop">PortfolioId</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs36', 231)" onmouseover="showTip(event, 'fs36', 231)" class="rt">PortfolioId</span>
+      <span class="prop">Positions</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs48', 232)" onmouseover="showTip(event, 'fs48', 232)" class="rt">list</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs59', 233)" onmouseover="showTip(event, 'fs59', 233)" class="rt">Position</span><span class="pn">&gt;</span> <span class="pn">}</span>
+</code></pre>
+<p>An example constructing a portfolio</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs63', 234)" onmouseover="showTip(event, 'fs63', 234)" class="id">portfolioExample1</span> <span class="o">=</span>
+    <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs36', 235)" onmouseover="showTip(event, 'fs36', 235)" class="prop">PortfolioId</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs38', 236)" onmouseover="showTip(event, 'fs38', 236)" class="uc">Named</span> <span class="s">&quot;Example 1&quot;</span>
+      <span class="prop">Positions</span> <span class="o">=</span> <span class="pn">[</span> <span onmouseout="hideTip(event, 'fs60', 237)" onmouseover="showTip(event, 'fs60', 237)" class="id">koPosition</span><span class="pn">;</span> <span onmouseout="hideTip(event, 'fs61', 238)" onmouseover="showTip(event, 'fs61', 238)" class="id">permnoPosition</span> <span class="pn">]</span> <span class="pn">}</span>
+</code></pre>
+<h2><a name="Defining-portfolio-position-weights" class="anchor" href="#Defining-portfolio-position-weights">Defining portfolio position weights</a></h2>
+<p>Once you have a portfolio of securities that have met some signal criteria, it is common to weight those securities using either of two simple weighting schemes: equal weight or value weight.</p>
+<p>Equal weight means that every security has the same weight.</p>
+<p>Value-weight means that you weight securities proportional to their market value. This means that your portfolio put more weight on more valuable securities. Or it "tilts" toward more valuable securities. This weighting scheme is utilized when you want to make sure that you are not putting too much weight on small illiquid securities that are hard to purchase.</p>
+<p>Equal-weight is easy:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs64', 239)" onmouseover="showTip(event, 'fs64', 239)" class="id">weightTestPort</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs57', 240)" onmouseover="showTip(event, 'fs57', 240)" class="id">assigned</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs22', 241)" onmouseover="showTip(event, 'fs22', 241)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs65', 242)" onmouseover="showTip(event, 'fs65', 242)" class="id">find</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs66', 243)" onmouseover="showTip(event, 'fs66', 243)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs66', 244)" onmouseover="showTip(event, 'fs66', 244)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs67', 245)" onmouseover="showTip(event, 'fs67', 245)" class="id">PortfolioId</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs38', 246)" onmouseover="showTip(event, 'fs38', 246)" class="uc">Named</span><span class="pn">(</span><span class="s">&quot;Above Median&quot;</span><span class="pn">)</span><span class="pn">)</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs68', 247)" onmouseover="showTip(event, 'fs68', 247)" class="id">nSecurities</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs64', 248)" onmouseover="showTip(event, 'fs64', 248)" class="id">weightTestPort</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs69', 249)" onmouseover="showTip(event, 'fs69', 249)" class="prop">Signals</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs70', 250)" onmouseover="showTip(event, 'fs70', 250)" class="id">Length</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs71', 251)" onmouseover="showTip(event, 'fs71', 251)" class="id">ewTestWeights</span> <span class="o">=</span>
+    <span class="pn">[</span> <span class="k">for</span> <span onmouseout="hideTip(event, 'fs72', 252)" onmouseover="showTip(event, 'fs72', 252)" class="fn">signal</span> <span class="k">in</span> <span onmouseout="hideTip(event, 'fs64', 253)" onmouseover="showTip(event, 'fs64', 253)" class="id">weightTestPort</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs69', 254)" onmouseover="showTip(event, 'fs69', 254)" class="id">Signals</span> <span class="k">do</span> 
+        <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs3', 255)" onmouseover="showTip(event, 'fs3', 255)" class="prop">SecurityId</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs72', 256)" onmouseover="showTip(event, 'fs72', 256)" class="fn">signal</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs73', 257)" onmouseover="showTip(event, 'fs73', 257)" class="id">SecurityId</span>
+          <span class="prop">Weight</span> <span class="o">=</span> <span class="n">1.0</span> <span class="o">/</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs26', 258)" onmouseover="showTip(event, 'fs26', 258)" class="fn">float</span> <span onmouseout="hideTip(event, 'fs68', 259)" onmouseover="showTip(event, 'fs68', 259)" class="id">nSecurities</span><span class="pn">)</span> <span class="pn">}</span> <span class="pn">]</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs74', 260)" onmouseover="showTip(event, 'fs74', 260)" class="fn">giveEqualWeights</span> <span onmouseout="hideTip(event, 'fs66', 261)" onmouseover="showTip(event, 'fs66', 261)" class="fn">x</span> <span class="o">=</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs75', 262)" onmouseover="showTip(event, 'fs75', 262)" class="fn">n</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs66', 263)" onmouseover="showTip(event, 'fs66', 263)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs69', 264)" onmouseover="showTip(event, 'fs69', 264)" class="prop">Signals</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs70', 265)" onmouseover="showTip(event, 'fs70', 265)" class="id">Length</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs76', 266)" onmouseover="showTip(event, 'fs76', 266)" class="fn">pos</span> <span class="o">=</span>
+        <span class="pn">[</span> <span class="k">for</span> <span onmouseout="hideTip(event, 'fs72', 267)" onmouseover="showTip(event, 'fs72', 267)" class="fn">signal</span> <span class="k">in</span> <span onmouseout="hideTip(event, 'fs66', 268)" onmouseover="showTip(event, 'fs66', 268)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs69', 269)" onmouseover="showTip(event, 'fs69', 269)" class="id">Signals</span> <span class="k">do</span> 
+            <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs59', 270)" onmouseover="showTip(event, 'fs59', 270)" class="rt">Position</span><span class="pn">.</span><span class="prop">SecurityId</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs72', 271)" onmouseover="showTip(event, 'fs72', 271)" class="fn">signal</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs73', 272)" onmouseover="showTip(event, 'fs73', 272)" class="id">SecurityId</span>
+              <span class="prop">Weight</span> <span class="o">=</span> <span class="n">1.0</span> <span class="o">/</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs26', 273)" onmouseover="showTip(event, 'fs26', 273)" class="fn">float</span> <span onmouseout="hideTip(event, 'fs75', 274)" onmouseover="showTip(event, 'fs75', 274)" class="fn">n</span><span class="pn">)</span> <span class="pn">}</span> <span class="pn">]</span>
+    <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs36', 275)" onmouseover="showTip(event, 'fs36', 275)" class="prop">PortfolioId</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs66', 276)" onmouseover="showTip(event, 'fs66', 276)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs67', 277)" onmouseover="showTip(event, 'fs67', 277)" class="id">PortfolioId</span> 
+      <span class="prop">Positions</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs76', 278)" onmouseover="showTip(event, 'fs76', 278)" class="fn">pos</span> <span class="pn">}</span>
+</code></pre>
+<p>For one portfolio:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs74', 279)" onmouseover="showTip(event, 'fs74', 279)" class="fn">giveEqualWeights</span> <span onmouseout="hideTip(event, 'fs64', 280)" onmouseover="showTip(event, 'fs64', 280)" class="id">weightTestPort</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val it: Portfolio =
+  { PortfolioId = Named "Above Median"
+    Positions = [{ SecurityId = Ticker "AAPL"
+                   Weight = 0.5 }; { SecurityId = Ticker "DIS"
+                                     Weight = 0.5 }] }</code></pre></td></tr></table>
+<p>For all portfolios:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="pn">[</span> <span class="k">for</span> <span onmouseout="hideTip(event, 'fs77', 281)" onmouseover="showTip(event, 'fs77', 281)" class="fn">portfolio</span> <span class="k">in</span> <span onmouseout="hideTip(event, 'fs57', 282)" onmouseover="showTip(event, 'fs57', 282)" class="id">assigned</span> <span class="k">do</span> <span onmouseout="hideTip(event, 'fs74', 283)" onmouseover="showTip(event, 'fs74', 283)" class="fn">giveEqualWeights</span> <span onmouseout="hideTip(event, 'fs77', 284)" onmouseover="showTip(event, 'fs77', 284)" class="fn">portfolio</span> <span class="pn">]</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val it: Portfolio list =
+  [{ PortfolioId = Named "Above Median"
+     Positions = [{ SecurityId = Ticker "AAPL"
+                    Weight = 0.5 }; { SecurityId = Ticker "DIS"
+                                      Weight = 0.5 }] };
+   { PortfolioId = Named "Below Median"
+     Positions = [{ SecurityId = Ticker "KO"
+                    Weight = 0.5 }; { SecurityId = Ticker "GOOG"
+                                      Weight = 0.5 }] }]</code></pre></td></tr></table>
+<p>or equivalently:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs57', 285)" onmouseover="showTip(event, 'fs57', 285)" class="id">assigned</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs22', 286)" onmouseover="showTip(event, 'fs22', 286)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 287)" onmouseover="showTip(event, 'fs23', 287)" class="id">map</span> <span onmouseout="hideTip(event, 'fs74', 288)" onmouseover="showTip(event, 'fs74', 288)" class="fn">giveEqualWeights</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val it: Portfolio list =
+  [{ PortfolioId = Named "Above Median"
+     Positions = [{ SecurityId = Ticker "AAPL"
+                    Weight = 0.5 }; { SecurityId = Ticker "DIS"
+                                      Weight = 0.5 }] };
+   { PortfolioId = Named "Below Median"
+     Positions = [{ SecurityId = Ticker "KO"
+                    Weight = 0.5 }; { SecurityId = Ticker "GOOG"
+                                      Weight = 0.5 }] }]</code></pre></td></tr></table>
+<p>For value weights, we need the securities' market values
+split into above/below median and for portfolios with those.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs78', 289)" onmouseover="showTip(event, 'fs78', 289)" class="id">marketCapitalizations</span> <span class="o">=</span>
+    <span class="pn">[</span> <span onmouseout="hideTip(event, 'fs7', 290)" onmouseover="showTip(event, 'fs7', 290)" class="uc">Ticker</span> <span class="s">&quot;AAPL&quot;</span><span class="pn">,</span> <span class="n">10.0</span>
+      <span onmouseout="hideTip(event, 'fs7', 291)" onmouseover="showTip(event, 'fs7', 291)" class="uc">Ticker</span> <span class="s">&quot;KO&quot;</span><span class="pn">,</span> <span class="n">4.0</span>
+      <span onmouseout="hideTip(event, 'fs7', 292)" onmouseover="showTip(event, 'fs7', 292)" class="uc">Ticker</span> <span class="s">&quot;GOOG&quot;</span><span class="pn">,</span> <span class="n">7.0</span> 
+      <span onmouseout="hideTip(event, 'fs7', 293)" onmouseover="showTip(event, 'fs7', 293)" class="uc">Ticker</span> <span class="s">&quot;DIS&quot;</span><span class="pn">,</span> <span class="n">5.0</span> <span class="pn">]</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs16', 294)" onmouseover="showTip(event, 'fs16', 294)" class="fn">Map</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs79', 295)" onmouseover="showTip(event, 'fs79', 295)" class="id">mktCaps</span> <span class="o">=</span>
+    <span class="pn">[</span> <span class="k">for</span> <span onmouseout="hideTip(event, 'fs72', 296)" onmouseover="showTip(event, 'fs72', 296)" class="fn">signal</span> <span class="k">in</span> <span onmouseout="hideTip(event, 'fs64', 297)" onmouseover="showTip(event, 'fs64', 297)" class="id">weightTestPort</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs69', 298)" onmouseover="showTip(event, 'fs69', 298)" class="id">Signals</span> <span class="k">do</span> 
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs80', 299)" onmouseover="showTip(event, 'fs80', 299)" class="fn">mktcap</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs16', 300)" onmouseover="showTip(event, 'fs16', 300)" class="m">Map</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs17', 301)" onmouseover="showTip(event, 'fs17', 301)" class="id">find</span> <span onmouseout="hideTip(event, 'fs72', 302)" onmouseover="showTip(event, 'fs72', 302)" class="fn">signal</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs73', 303)" onmouseover="showTip(event, 'fs73', 303)" class="id">SecurityId</span> <span onmouseout="hideTip(event, 'fs78', 304)" onmouseover="showTip(event, 'fs78', 304)" class="id">marketCapitalizations</span>
+        <span onmouseout="hideTip(event, 'fs72', 305)" onmouseover="showTip(event, 'fs72', 305)" class="fn">signal</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs73', 306)" onmouseover="showTip(event, 'fs73', 306)" class="id">SecurityId</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs80', 307)" onmouseover="showTip(event, 'fs80', 307)" class="fn">mktcap</span> <span class="pn">]</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val marketCapitalizations: Map&lt;SecurityId,float&gt; =
+  map
+    [(Ticker "AAPL", 10.0); (Ticker "DIS", 5.0); (Ticker "GOOG", 7.0);
+     (Ticker "KO", 4.0)]
+val mktCaps: (SecurityId * float) list =
+  [(Ticker "AAPL", 10.0); (Ticker "DIS", 5.0)]</code></pre></td></tr></table>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs81', 308)" onmouseover="showTip(event, 'fs81', 308)" class="id">vwTestWeights</span> <span class="o">=</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs82', 309)" onmouseover="showTip(event, 'fs82', 309)" class="fn">totMktCap</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs79', 310)" onmouseover="showTip(event, 'fs79', 310)" class="id">mktCaps</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs22', 311)" onmouseover="showTip(event, 'fs22', 311)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs83', 312)" onmouseover="showTip(event, 'fs83', 312)" class="id">sumBy</span> <span onmouseout="hideTip(event, 'fs84', 313)" onmouseover="showTip(event, 'fs84', 313)" class="fn">snd</span>
+    <span class="pn">[</span> <span class="k">for</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs20', 314)" onmouseover="showTip(event, 'fs20', 314)" class="fn">id</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs85', 315)" onmouseover="showTip(event, 'fs85', 315)" class="fn">mktCap</span><span class="pn">)</span> <span class="k">in</span> <span onmouseout="hideTip(event, 'fs79', 316)" onmouseover="showTip(event, 'fs79', 316)" class="id">mktCaps</span> <span class="k">do</span> 
+        <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs3', 317)" onmouseover="showTip(event, 'fs3', 317)" class="prop">SecurityId</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs20', 318)" onmouseover="showTip(event, 'fs20', 318)" class="fn">id</span> 
+          <span class="prop">Weight</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs85', 319)" onmouseover="showTip(event, 'fs85', 319)" class="fn">mktCap</span> <span class="o">/</span> <span onmouseout="hideTip(event, 'fs82', 320)" onmouseover="showTip(event, 'fs82', 320)" class="fn">totMktCap</span> <span class="pn">}</span> <span class="pn">]</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val vwTestWeights: Position list =
+  [{ SecurityId = Ticker "AAPL"
+     Weight = 0.6666666667 }; { SecurityId = Ticker "DIS"
+                                Weight = 0.3333333333 }]</code></pre></td></tr></table>
+<p>Now a function to do the same as above.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs86', 321)" onmouseover="showTip(event, 'fs86', 321)" class="fn">giveValueWeights</span> <span onmouseout="hideTip(event, 'fs66', 322)" onmouseover="showTip(event, 'fs66', 322)" class="fn">x</span> <span class="o">=</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs79', 323)" onmouseover="showTip(event, 'fs79', 323)" class="fn">mktCaps</span> <span class="o">=</span>
+        <span class="pn">[</span> <span class="k">for</span> <span onmouseout="hideTip(event, 'fs72', 324)" onmouseover="showTip(event, 'fs72', 324)" class="fn">signal</span> <span class="k">in</span> <span onmouseout="hideTip(event, 'fs66', 325)" onmouseover="showTip(event, 'fs66', 325)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs69', 326)" onmouseover="showTip(event, 'fs69', 326)" class="id">Signals</span> <span class="k">do</span> 
+            <span class="k">let</span> <span onmouseout="hideTip(event, 'fs80', 327)" onmouseover="showTip(event, 'fs80', 327)" class="fn">mktcap</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs16', 328)" onmouseover="showTip(event, 'fs16', 328)" class="m">Map</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs17', 329)" onmouseover="showTip(event, 'fs17', 329)" class="id">find</span> <span onmouseout="hideTip(event, 'fs72', 330)" onmouseover="showTip(event, 'fs72', 330)" class="fn">signal</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs73', 331)" onmouseover="showTip(event, 'fs73', 331)" class="id">SecurityId</span> <span onmouseout="hideTip(event, 'fs78', 332)" onmouseover="showTip(event, 'fs78', 332)" class="id">marketCapitalizations</span>
+            <span onmouseout="hideTip(event, 'fs72', 333)" onmouseover="showTip(event, 'fs72', 333)" class="fn">signal</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs73', 334)" onmouseover="showTip(event, 'fs73', 334)" class="id">SecurityId</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs80', 335)" onmouseover="showTip(event, 'fs80', 335)" class="fn">mktcap</span> <span class="pn">]</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs82', 336)" onmouseover="showTip(event, 'fs82', 336)" class="fn">totMktCap</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs79', 337)" onmouseover="showTip(event, 'fs79', 337)" class="fn">mktCaps</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs22', 338)" onmouseover="showTip(event, 'fs22', 338)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs83', 339)" onmouseover="showTip(event, 'fs83', 339)" class="id">sumBy</span> <span onmouseout="hideTip(event, 'fs84', 340)" onmouseover="showTip(event, 'fs84', 340)" class="fn">snd</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs76', 341)" onmouseover="showTip(event, 'fs76', 341)" class="fn">pos</span> <span class="o">=</span>
+        <span class="pn">[</span> <span class="k">for</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs20', 342)" onmouseover="showTip(event, 'fs20', 342)" class="fn">id</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs85', 343)" onmouseover="showTip(event, 'fs85', 343)" class="fn">mktCap</span><span class="pn">)</span> <span class="k">in</span> <span onmouseout="hideTip(event, 'fs79', 344)" onmouseover="showTip(event, 'fs79', 344)" class="fn">mktCaps</span> <span class="k">do</span> 
+            <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs3', 345)" onmouseover="showTip(event, 'fs3', 345)" class="prop">SecurityId</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs20', 346)" onmouseover="showTip(event, 'fs20', 346)" class="fn">id</span> 
+              <span class="prop">Weight</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs85', 347)" onmouseover="showTip(event, 'fs85', 347)" class="fn">mktCap</span> <span class="o">/</span> <span onmouseout="hideTip(event, 'fs82', 348)" onmouseover="showTip(event, 'fs82', 348)" class="fn">totMktCap</span> <span class="pn">}</span> <span class="pn">]</span>
+    <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs36', 349)" onmouseover="showTip(event, 'fs36', 349)" class="prop">PortfolioId</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs66', 350)" onmouseover="showTip(event, 'fs66', 350)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs67', 351)" onmouseover="showTip(event, 'fs67', 351)" class="id">PortfolioId</span><span class="pn">;</span> <span class="prop">Positions</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs76', 352)" onmouseover="showTip(event, 'fs76', 352)" class="fn">pos</span> <span class="pn">}</span>
+</code></pre>
+<p>We can map our function to both of our assigned portfolios.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="pn">[</span> <span class="k">for</span> <span onmouseout="hideTip(event, 'fs66', 353)" onmouseover="showTip(event, 'fs66', 353)" class="fn">x</span> <span class="k">in</span> <span onmouseout="hideTip(event, 'fs57', 354)" onmouseover="showTip(event, 'fs57', 354)" class="id">assigned</span> <span class="k">do</span> <span onmouseout="hideTip(event, 'fs86', 355)" onmouseover="showTip(event, 'fs86', 355)" class="fn">giveValueWeights</span> <span onmouseout="hideTip(event, 'fs66', 356)" onmouseover="showTip(event, 'fs66', 356)" class="fn">x</span> <span class="pn">]</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>[{ PortfolioId = Named "Above Median"
+   Positions = [{ SecurityId = Ticker "AAPL"
+                  Weight = 0.6666666667 }; { SecurityId = Ticker "DIS"
+                                             Weight = 0.3333333333 }] };
+ { PortfolioId = Named "Below Median"
+   Positions = [{ SecurityId = Ticker "KO"
+                  Weight = 0.3636363636 }; { SecurityId = Ticker "GOOG"
+                                             Weight = 0.6363636364 }] }]</code></pre></td></tr></table>
+<p>or equivalently</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs57', 357)" onmouseover="showTip(event, 'fs57', 357)" class="id">assigned</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs22', 358)" onmouseover="showTip(event, 'fs22', 358)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 359)" onmouseover="showTip(event, 'fs23', 359)" class="id">map</span> <span onmouseout="hideTip(event, 'fs86', 360)" onmouseover="showTip(event, 'fs86', 360)" class="fn">giveValueWeights</span>  
+</code></pre>
+<table class="pre"><tr><td><pre><code>[{ PortfolioId = Named "Above Median"
+   Positions = [{ SecurityId = Ticker "AAPL"
+                  Weight = 0.6666666667 }; { SecurityId = Ticker "DIS"
+                                             Weight = 0.3333333333 }] };
+ { PortfolioId = Named "Below Median"
+   Positions = [{ SecurityId = Ticker "KO"
+                  Weight = 0.3636363636 }; { SecurityId = Ticker "GOOG"
+                                             Weight = 0.6363636364 }] }]</code></pre></td></tr></table>
+<p>All together now. This is our workflow.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs87', 361)" onmouseover="showTip(event, 'fs87', 361)" class="id">strategyWeights</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs13', 362)" onmouseover="showTip(event, 'fs13', 362)" class="id">investmentUniverse</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs22', 363)" onmouseover="showTip(event, 'fs22', 363)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs34', 364)" onmouseover="showTip(event, 'fs34', 364)" class="id">choose</span> <span onmouseout="hideTip(event, 'fs27', 365)" onmouseover="showTip(event, 'fs27', 365)" class="fn">getSecuritySignal</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs58', 366)" onmouseover="showTip(event, 'fs58', 366)" class="fn">assignAboveBelowMedian</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs22', 367)" onmouseover="showTip(event, 'fs22', 367)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 368)" onmouseover="showTip(event, 'fs23', 368)" class="id">map</span> <span onmouseout="hideTip(event, 'fs86', 369)" onmouseover="showTip(event, 'fs86', 369)" class="fn">giveValueWeights</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val strategyWeights: Portfolio list =
+  [{ PortfolioId = Named "Above Median"
+     Positions = [{ SecurityId = Ticker "AAPL"
+                    Weight = 0.6666666667 }; { SecurityId = Ticker "DIS"
+                                               Weight = 0.3333333333 }] };
+   { PortfolioId = Named "Below Median"
+     Positions = [{ SecurityId = Ticker "KO"
+                    Weight = 0.3636363636 }; { SecurityId = Ticker "GOOG"
+                                               Weight = 0.6363636364 }] }]</code></pre></td></tr></table>
+<h1><a name="How-do-we-calculate-returns" class="anchor" href="#How-do-we-calculate-returns">How do we calculate returns?</a></h1>
+<p>Take these returns:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs88', 370)" onmouseover="showTip(event, 'fs88', 370)" class="id">returnMap</span> <span class="o">=</span>
+    <span class="pn">[</span> <span onmouseout="hideTip(event, 'fs7', 371)" onmouseover="showTip(event, 'fs7', 371)" class="uc">Ticker</span> <span class="s">&quot;AAPL&quot;</span><span class="pn">,</span> <span class="o">-</span><span class="n">0.4</span>
+      <span onmouseout="hideTip(event, 'fs7', 372)" onmouseover="showTip(event, 'fs7', 372)" class="uc">Ticker</span> <span class="s">&quot;KO&quot;</span><span class="pn">,</span> <span class="o">-</span><span class="n">0.1</span>
+      <span onmouseout="hideTip(event, 'fs7', 373)" onmouseover="showTip(event, 'fs7', 373)" class="uc">Ticker</span> <span class="s">&quot;GOOG&quot;</span><span class="pn">,</span> <span class="n">0.15</span> 
+      <span onmouseout="hideTip(event, 'fs7', 374)" onmouseover="showTip(event, 'fs7', 374)" class="uc">Ticker</span> <span class="s">&quot;DIS&quot;</span><span class="pn">,</span> <span class="n">0.1</span> <span class="pn">]</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs16', 375)" onmouseover="showTip(event, 'fs16', 375)" class="fn">Map</span>
+</code></pre>
+<p>What is the return of the two portfolios?</p>
+<p>Hint: the value-weight assignment code is a good reference for figuring out how to look up the stock returns.</p>
+
+        <div class="fsdocs-tip" id="fs1">Multiple items<br />namespace FSharp<br /><br />--------------------<br />namespace Microsoft.FSharp</div>
+<div class="fsdocs-tip" id="fs2">namespace FSharp.Stats</div>
+<div class="fsdocs-tip" id="fs3">type SecurityId =
+  | Ticker of string
+  | Cusip of string
+  | Bloomberg of string
+  | Permno of int</div>
+<div class="fsdocs-tip" id="fs4">Multiple items<br />val string: value: &#39;T -&gt; string<br /><br />--------------------<br />type string = System.String</div>
+<div class="fsdocs-tip" id="fs5">Multiple items<br />val int: value: &#39;T -&gt; int (requires member op_Explicit)<br /><br />--------------------<br />type int = int32<br /><br />--------------------<br />type int&lt;&#39;Measure&gt; =
+  int</div>
+<div class="fsdocs-tip" id="fs6">val tickerExample: SecurityId</div>
+<div class="fsdocs-tip" id="fs7">union case SecurityId.Ticker: string -&gt; SecurityId</div>
+<div class="fsdocs-tip" id="fs8">val permnoExample: SecurityId</div>
+<div class="fsdocs-tip" id="fs9">union case SecurityId.Permno: int -&gt; SecurityId</div>
+<div class="fsdocs-tip" id="fs10">val deconTickerExample: string</div>
+<div class="fsdocs-tip" id="fs11">val printfn: format: Printf.TextWriterFormat&lt;&#39;T&gt; -&gt; &#39;T</div>
+<div class="fsdocs-tip" id="fs12">val deconPermnoExample: int</div>
+<div class="fsdocs-tip" id="fs13">val investmentUniverse: SecurityId list</div>
+<div class="fsdocs-tip" id="fs14">val tick: string</div>
+<div class="fsdocs-tip" id="fs15">val signals: Map&lt;SecurityId,float&gt;</div>
+<div class="fsdocs-tip" id="fs16">Multiple items<br />module Map
+
+from FSharp.Stats<br /><em>&lt;summary&gt;
+ Module to strore specialised computations on maps
+&lt;/summary&gt;</em><br /><br />--------------------<br />module Map
+
+from Microsoft.FSharp.Collections<br /><br />--------------------<br />type Map&lt;&#39;Key,&#39;Value (requires comparison)&gt; =
+  interface IReadOnlyDictionary&lt;&#39;Key,&#39;Value&gt;
+  interface IReadOnlyCollection&lt;KeyValuePair&lt;&#39;Key,&#39;Value&gt;&gt;
+  interface IEnumerable
+  interface IStructuralEquatable
+  interface IComparable
+  interface IEnumerable&lt;KeyValuePair&lt;&#39;Key,&#39;Value&gt;&gt;
+  interface ICollection&lt;KeyValuePair&lt;&#39;Key,&#39;Value&gt;&gt;
+  interface IDictionary&lt;&#39;Key,&#39;Value&gt;
+  new: elements: (&#39;Key * &#39;Value) seq -&gt; Map&lt;&#39;Key,&#39;Value&gt;
+  member Add: key: &#39;Key * value: &#39;Value -&gt; Map&lt;&#39;Key,&#39;Value&gt;
+  ...<br /><br />--------------------<br />new: elements: (&#39;Key * &#39;Value) seq -&gt; Map&lt;&#39;Key,&#39;Value&gt;</div>
+<div class="fsdocs-tip" id="fs17">val find: key: &#39;Key -&gt; table: Map&lt;&#39;Key,&#39;T&gt; -&gt; &#39;T (requires comparison)</div>
+<div class="fsdocs-tip" id="fs18">val tryFind: key: &#39;Key -&gt; table: Map&lt;&#39;Key,&#39;T&gt; -&gt; &#39;T option (requires comparison)</div>
+<div class="fsdocs-tip" id="fs19">val getSignal: id: SecurityId -&gt; float option</div>
+<div class="fsdocs-tip" id="fs20">val id: SecurityId</div>
+<div class="fsdocs-tip" id="fs21">val security: SecurityId</div>
+<div class="fsdocs-tip" id="fs22">Multiple items<br />module List
+
+from FSharp.Stats<br /><em>&lt;summary&gt;
+ Module to compute common statistical measure on list
+&lt;/summary&gt;</em><br /><br />--------------------<br />module List
+
+from Microsoft.FSharp.Collections<br /><br />--------------------<br />type List =
+  new: unit -&gt; List
+  static member geomspace: start: float * stop: float * num: int * ?IncludeEndpoint: bool -&gt; float list
+  static member linspace: start: float * stop: float * num: int * ?IncludeEndpoint: bool -&gt; float list<br /><br />--------------------<br />type List&lt;&#39;T&gt; =
+  | op_Nil
+  | op_ColonColon of Head: &#39;T * Tail: &#39;T list
+  interface IReadOnlyList&lt;&#39;T&gt;
+  interface IReadOnlyCollection&lt;&#39;T&gt;
+  interface IEnumerable
+  interface IEnumerable&lt;&#39;T&gt;
+  member GetReverseIndex: rank: int * offset: int -&gt; int
+  member GetSlice: startIndex: int option * endIndex: int option -&gt; &#39;T list
+  static member Cons: head: &#39;T * tail: &#39;T list -&gt; &#39;T list
+  member Head: &#39;T
+  member IsEmpty: bool
+  member Item: index: int -&gt; &#39;T with get
+  ...<br /><br />--------------------<br />new: unit -&gt; List</div>
+<div class="fsdocs-tip" id="fs23">val map: mapping: (&#39;T -&gt; &#39;U) -&gt; list: &#39;T list -&gt; &#39;U list</div>
+<div class="fsdocs-tip" id="fs24">type SecuritySignal =
+  {
+    SecurityId: SecurityId
+    Signal: float
+  }</div>
+<div class="fsdocs-tip" id="fs25">namespace FSharp.Stats.Signal</div>
+<div class="fsdocs-tip" id="fs26">Multiple items<br />val float: value: &#39;T -&gt; float (requires member op_Explicit)<br /><br />--------------------<br />type float = System.Double<br /><br />--------------------<br />type float&lt;&#39;Measure&gt; =
+  float</div>
+<div class="fsdocs-tip" id="fs27">val getSecuritySignal: security: SecurityId -&gt; SecuritySignal option</div>
+<div class="fsdocs-tip" id="fs28">union case Option.None: Option&lt;&#39;T&gt;</div>
+<div class="fsdocs-tip" id="fs29">union case Option.Some: Value: &#39;T -&gt; Option&lt;&#39;T&gt;</div>
+<div class="fsdocs-tip" id="fs30">val signal: float</div>
+<div class="fsdocs-tip" id="fs31">val result: SecuritySignal</div>
+<div class="fsdocs-tip" id="fs32">val securitySignal: SecuritySignal option</div>
+<div class="fsdocs-tip" id="fs33">val iter: action: (&#39;T -&gt; unit) -&gt; list: &#39;T list -&gt; unit</div>
+<div class="fsdocs-tip" id="fs34">val choose: chooser: (&#39;T -&gt; &#39;U option) -&gt; list: &#39;T list -&gt; &#39;U list</div>
+<div class="fsdocs-tip" id="fs35">val securitySignals: SecuritySignal list</div>
+<div class="fsdocs-tip" id="fs36">type PortfolioId =
+  | Named of string
+  | Indexed of {| Index: int; Name: string |}</div>
+<div class="fsdocs-tip" id="fs37">val portfolioId1: PortfolioId</div>
+<div class="fsdocs-tip" id="fs38">union case PortfolioId.Named: string -&gt; PortfolioId</div>
+<div class="fsdocs-tip" id="fs39">val portfolioId2: PortfolioId</div>
+<div class="fsdocs-tip" id="fs40">union case PortfolioId.Indexed: {| Index: int; Name: string |} -&gt; PortfolioId</div>
+<div class="fsdocs-tip" id="fs41">val portfolioId3: PortfolioId</div>
+<div class="fsdocs-tip" id="fs42">val getPortfolioIdString: port: PortfolioId -&gt; string</div>
+<div class="fsdocs-tip" id="fs43">val port: PortfolioId</div>
+<div class="fsdocs-tip" id="fs44">val name: string</div>
+<div class="fsdocs-tip" id="fs45">val p: {| Index: int; Name: string |}</div>
+<div class="fsdocs-tip" id="fs46">anonymous record field Name: string</div>
+<div class="fsdocs-tip" id="fs47">type AssignedPortfolio =
+  {
+    PortfolioId: PortfolioId
+    Signals: SecuritySignal list
+  }</div>
+<div class="fsdocs-tip" id="fs48">type &#39;T list = List&lt;&#39;T&gt;</div>
+<div class="fsdocs-tip" id="fs49">val medianSignal: float</div>
+<div class="fsdocs-tip" id="fs50">val x: SecuritySignal</div>
+<div class="fsdocs-tip" id="fs51">SecuritySignal.Signal: float</div>
+<div class="fsdocs-tip" id="fs52">Multiple items<br />module Seq
+
+from FSharp.Stats<br /><em>&lt;summary&gt;
+ Module to compute common statistical measure
+&lt;/summary&gt;</em><br /><br />--------------------<br />module Seq
+
+from Microsoft.FSharp.Collections<br /><br />--------------------<br />type Seq =
+  new: unit -&gt; Seq
+  static member geomspace: start: float * stop: float * num: int * ?IncludeEndpoint: bool -&gt; float seq
+  static member linspace: start: float * stop: float * num: int * ?IncludeEndpoint: bool -&gt; float seq<br /><br />--------------------<br />new: unit -&gt; Seq</div>
+<div class="fsdocs-tip" id="fs53">val median: items: &#39;T seq -&gt; &#39;T (requires comparison and member Zero and member One and member (+) and member (/) and member (/))<br /><em>&lt;summary&gt;
+ Sample Median
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs54">val aboveMedian: SecuritySignal list</div>
+<div class="fsdocs-tip" id="fs55">val filter: predicate: (&#39;T -&gt; bool) -&gt; list: &#39;T list -&gt; &#39;T list</div>
+<div class="fsdocs-tip" id="fs56">val belowMedian: SecuritySignal list</div>
+<div class="fsdocs-tip" id="fs57">val assigned: AssignedPortfolio list</div>
+<div class="fsdocs-tip" id="fs58">val assignAboveBelowMedian: securitySignals: SecuritySignal list -&gt; AssignedPortfolio list</div>
+<div class="fsdocs-tip" id="fs59">type Position =
+  {
+    SecurityId: SecurityId
+    Weight: float
+  }</div>
+<div class="fsdocs-tip" id="fs60">val koPosition: Position</div>
+<div class="fsdocs-tip" id="fs61">val permnoPosition: Position</div>
+<div class="fsdocs-tip" id="fs62">type Portfolio =
+  {
+    PortfolioId: PortfolioId
+    Positions: Position list
+  }</div>
+<div class="fsdocs-tip" id="fs63">val portfolioExample1: Portfolio</div>
+<div class="fsdocs-tip" id="fs64">val weightTestPort: AssignedPortfolio</div>
+<div class="fsdocs-tip" id="fs65">val find: predicate: (&#39;T -&gt; bool) -&gt; list: &#39;T list -&gt; &#39;T</div>
+<div class="fsdocs-tip" id="fs66">val x: AssignedPortfolio</div>
+<div class="fsdocs-tip" id="fs67">AssignedPortfolio.PortfolioId: PortfolioId</div>
+<div class="fsdocs-tip" id="fs68">val nSecurities: int</div>
+<div class="fsdocs-tip" id="fs69">AssignedPortfolio.Signals: SecuritySignal list</div>
+<div class="fsdocs-tip" id="fs70">property List.Length: int with get</div>
+<div class="fsdocs-tip" id="fs71">val ewTestWeights: Position list</div>
+<div class="fsdocs-tip" id="fs72">val signal: SecuritySignal</div>
+<div class="fsdocs-tip" id="fs73">SecuritySignal.SecurityId: SecurityId</div>
+<div class="fsdocs-tip" id="fs74">val giveEqualWeights: x: AssignedPortfolio -&gt; Portfolio</div>
+<div class="fsdocs-tip" id="fs75">val n: int</div>
+<div class="fsdocs-tip" id="fs76">val pos: Position list</div>
+<div class="fsdocs-tip" id="fs77">val portfolio: AssignedPortfolio</div>
+<div class="fsdocs-tip" id="fs78">val marketCapitalizations: Map&lt;SecurityId,float&gt;</div>
+<div class="fsdocs-tip" id="fs79">val mktCaps: (SecurityId * float) list</div>
+<div class="fsdocs-tip" id="fs80">val mktcap: float</div>
+<div class="fsdocs-tip" id="fs81">val vwTestWeights: Position list</div>
+<div class="fsdocs-tip" id="fs82">val totMktCap: float</div>
+<div class="fsdocs-tip" id="fs83">val sumBy: projection: (&#39;T -&gt; &#39;U) -&gt; list: &#39;T list -&gt; &#39;U (requires member (+) and member Zero)</div>
+<div class="fsdocs-tip" id="fs84">val snd: tuple: (&#39;T1 * &#39;T2) -&gt; &#39;T2</div>
+<div class="fsdocs-tip" id="fs85">val mktCap: float</div>
+<div class="fsdocs-tip" id="fs86">val giveValueWeights: x: AssignedPortfolio -&gt; Portfolio</div>
+<div class="fsdocs-tip" id="fs87">val strategyWeights: Portfolio list</div>
+<div class="fsdocs-tip" id="fs88">val returnMap: Map&lt;SecurityId,float&gt;</div>
+
+    </div>
+</main>
+<aside id="fsdocs-page-menu">
+    <p id="on-this-page">On this page</p>
+    <ul>
+  <li class="level-1">
+    <a href="#Building-a-strategy">
+      Building a strategy
+    </a>
+  </li>
+  <li class="level-2">
+    <a href="#Workflow-for-using-quantitative-signals">
+      Workflow for using quantitative signals
+    </a>
+  </li>
+  <li class="level-2">
+    <a href="#1-Investment-universe-modelling-a-security">
+      1. Investment universe: modelling a security
+    </a>
+  </li>
+  <li class="level-2">
+    <a href="#2-Signals">
+      2. Signals
+    </a>
+  </li>
+  <li class="level-2">
+    <a href="#3-Defining-a-mapping-between-signals-and-portfolio-weights">
+      3. Defining a mapping between signals and portfolio weights.
+    </a>
+  </li>
+  <li class="level-2">
+    <a href="#Modelling-a-position">
+      Modelling a position
+    </a>
+  </li>
+  <li class="level-2">
+    <a href="#Modelling-a-portfolio">
+      Modelling a portfolio
+    </a>
+  </li>
+  <li class="level-2">
+    <a href="#Defining-portfolio-position-weights">
+      Defining portfolio position weights
+    </a>
+  </li>
+  <li class="level-1">
+    <a href="#How-do-we-calculate-returns">
+      How do we calculate returns?
+    </a>
+  </li>
+</ul>
+</aside>
+<dialog>
+    <input type="search" placeholder="Search docs" />
+    <div class="results">
+        <ul></ul>
+        <p class="empty">Type something to start searching.</p>
+    </div>
+</dialog>
+<script type="module" src="/Teaching/content/fsdocs-tips.js"></script>
+<script type="module" src="/Teaching/content/fsdocs-theme-toggle.js"></script>
+<script type="module" src="/Teaching/content/fsdocs-theme.js"></script>
+<script type="module" src="/Teaching/content/fsdocs-search.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en" data-root="/Teaching/">
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Nicholas Hirschey; Davide Costa" name="author">
+    <!-- Opengraph properties (https://ogp.me/) -->
+    <meta property="og:site_name" content="Teaching">
+    <meta property="og:title" content="Factors" />
+    <meta property="og:url" content="/Teaching/quizzes/quiz-factors.html">
+    <meta property="og:type" content="website" />
+    <!-- Twitter cards (https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="/Teaching/">
+    <meta name="twitter:title" content="Factors">
+    
+    <title>Factors | Teaching</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="/Teaching/img/logo.png" rel="icon" sizes="32x32" type="image/png"/>
+    <script type="application/javascript" src="/Teaching/content/fsdocs-theme-set-dark.js"></script>
+    <link href="/Teaching/content/fsdocs-default.css" rel="stylesheet" type="text/css"/>
+    <link href="/Teaching/content/fsdocs-theme.css" rel="stylesheet" type="text/css"/>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js"></script>
+    
+</head>
+<body class="content">
+<header>
+    <div class="start">
+        <div id="menu-toggle">
+            <iconify-icon class="icon closed" height="22" icon="eva:menu-fill" width="22"></iconify-icon>
+            <iconify-icon class="icon open" height="22" icon="mi:close" width="22"></iconify-icon>
+            <input type="checkbox" name="mobile-menu" />
+            <ul class="menu">
+                <li class="nav-header">Links</li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/nhirschey/Teaching/blob/main/LICENSE.md">License</a>
+                </li>
+                <li class="nav-item"><a class="nav-link"
+                                        href="https://github.com/nhirschey/Teaching/blob/main/CHANGELOG.md">Release
+                    Notes</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/nhirschey/Teaching/">Source
+                    Repository</a></li>
+                <li class="nav-header ">
+  Getting Started
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/install.html">
+    Install Software
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/learn-fsharp.html">
+    Learn F#
+  </a>
+</li>             
+<li class="nav-header ">
+  Lectures
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/stockslongrun.html">
+    Stocks for the long run
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/stocksandbonds.html">
+    Stocks and bonds
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/riskyweight.html">
+    Risky Weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolatilityTiming.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolatilityManagedTypes.html">
+    Volatility Managed, but with different vols
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolAndReturnPred.html">
+    Volatility and Return predictions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/mveComparisons.html">
+    More managed portfolio comparisons
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/PortfolioFormation-SimpleExample.html">
+    Building a strategy
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Momentum-Class.html">
+    Momentum Signal
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/optimization.html">
+    Optimization
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/revisitRiskyWeights.html">
+    Revisiting Mean-variance optimal risky weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/premiums.html">
+    Premiums
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/calls-nn.html">
+    Calls NN
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/portfolio-statistics.html">
+    Basic Portfolio Statistics
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/sentiment-mlnet.html">
+    Sentiment classification
+  </a>
+</li>             
+<li class="nav-header ">
+  Assignments
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-1-download-data.html">
+    Webscraping HTML to CSV
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-tuples-and-records.html">
+    Tuples and Records (with solutions)
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-collection-functions.html">
+    Collection functions (with solutions)
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignment-risky-weights.html">
+    Risky Weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignment-volatility-timing.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/select-project-signal.html">
+    Select Project Signals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/signal-exploration.html">
+    Signal Exploration
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/assignment-signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/assignment-performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-plotting.html">
+    Plotting (with solutions)
+  </a>
+</li>             
+<li class="nav-header active">
+  Practice Quizzes
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-list-module.html">
+    List module functions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-options.html">
+    Options
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-match-expressions.html">
+    Match expressions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-map-collection.html">
+    Map collection
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-discriminated-union.html">
+    Dicriminated Union
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-portfolios.html">
+    Portfolios
+  </a>
+</li>             
+<li class="nav-item active">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-factors.html">
+    Factors
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-folding.html">
+    Fold and Friends
+  </a>
+</li>             
+<li class="nav-header ">
+  Other
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Common.html">
+    Common
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/loading-scripts.html">
+    Loading external scripts
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Portfolio.html">
+    Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/YahooFinance.html">
+    YahooFinance
+  </a>
+</li>
+                
+            </ul>
+        </div>
+        <a href="/Teaching/">
+            <img alt="Header menu logo" src="/Teaching/img/logo.png">
+            <strong>Teaching</strong>
+        </a>
+    </div>
+    <div class="end">
+        <a href="https://github.com/nhirschey/Teaching/" target="_blank">
+            <iconify-icon icon="uil:github" width="26" height="26"></iconify-icon>
+        </a>
+        <iconify-icon id="search-btn" icon="carbon:search" class="search" width="24" height="24"></iconify-icon>
+        <fsdocs-theme-toggle></fsdocs-theme-toggle>
+    </div>
+</header>
+<aside id="fsdocs-main-menu">
+    <ul class="menu">
+        <li class="nav-header">Links</li>
+        <li class="nav-item"><a class="nav-link" href="https://github.com/nhirschey/Teaching/blob/main/LICENSE.md">License</a>
+        </li>
+        <li class="nav-item"><a class="nav-link"
+                                href="https://github.com/nhirschey/Teaching/blob/main/CHANGELOG.md">Release
+            Notes</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://github.com/nhirschey/Teaching/">Source
+            Repository</a></li>
+        <li class="nav-header ">
+  Getting Started
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/install.html">
+    Install Software
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/learn-fsharp.html">
+    Learn F#
+  </a>
+</li>             
+<li class="nav-header ">
+  Lectures
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/stockslongrun.html">
+    Stocks for the long run
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/stocksandbonds.html">
+    Stocks and bonds
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/riskyweight.html">
+    Risky Weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolatilityTiming.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolatilityManagedTypes.html">
+    Volatility Managed, but with different vols
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolAndReturnPred.html">
+    Volatility and Return predictions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/mveComparisons.html">
+    More managed portfolio comparisons
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/PortfolioFormation-SimpleExample.html">
+    Building a strategy
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Momentum-Class.html">
+    Momentum Signal
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/optimization.html">
+    Optimization
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/revisitRiskyWeights.html">
+    Revisiting Mean-variance optimal risky weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/premiums.html">
+    Premiums
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/calls-nn.html">
+    Calls NN
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/portfolio-statistics.html">
+    Basic Portfolio Statistics
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/sentiment-mlnet.html">
+    Sentiment classification
+  </a>
+</li>             
+<li class="nav-header ">
+  Assignments
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-1-download-data.html">
+    Webscraping HTML to CSV
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-tuples-and-records.html">
+    Tuples and Records (with solutions)
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-collection-functions.html">
+    Collection functions (with solutions)
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignment-risky-weights.html">
+    Risky Weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignment-volatility-timing.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/select-project-signal.html">
+    Select Project Signals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/signal-exploration.html">
+    Signal Exploration
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/assignment-signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/assignment-performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-plotting.html">
+    Plotting (with solutions)
+  </a>
+</li>             
+<li class="nav-header active">
+  Practice Quizzes
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-list-module.html">
+    List module functions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-options.html">
+    Options
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-match-expressions.html">
+    Match expressions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-map-collection.html">
+    Map collection
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-discriminated-union.html">
+    Dicriminated Union
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-portfolios.html">
+    Portfolios
+  </a>
+</li>             
+<li class="nav-item active">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-factors.html">
+    Factors
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-folding.html">
+    Fold and Friends
+  </a>
+</li>             
+<li class="nav-header ">
+  Other
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Common.html">
+    Common
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/loading-scripts.html">
+    Loading external scripts
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Portfolio.html">
+    Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/YahooFinance.html">
+    YahooFinance
+  </a>
+</li>
+        
+    </ul>
+</aside>
+<main>
+    <div id="content">
+        
+<p><a href="https://mybinder.org/v2/gh/nhirschey/teaching/gh-pages?filepath=quizzes/quiz-factors.ipynb"><img src="../img/badge-binder.svg" alt="Binder" /></a>&emsp;
+<a href="/Teaching//quizzes/quiz-factors.fsx"><img src="../img/badge-script.svg" alt="Script" /></a>&emsp;
+<a href="/Teaching//quizzes/quiz-factors.ipynb"><img src="../img/badge-notebook.svg" alt="Notebook" /></a></p>
+<p>On moodle, there is a set of investment lecture notes called "Finance Review".
+Please review the Lecture-08-APT.pdf document, including the appendix.</p>
+<p>In particular,</p>
+<ul>
+<li>What do we mean by a factor?</li>
+<li>The example showing how to hedge Barrick with GLD and SPY.</li>
+<li>Information ratios.</li>
+</ul>
+<p>Imagine you have the below returns for IBM and SPY.
+IBM's factor beta on SPY and the (constant)
+risk-free rate are given below too.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">type</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="rt">ReturnOb</span> <span class="o">=</span> <span class="pn">{</span> <span class="prop">Time</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="vt">int</span><span class="pn">;</span> <span class="prop">Return</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="vt">float</span> <span class="pn">}</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="id">ibm</span> <span class="o">=</span>
+    <span class="pn">[|</span> 
+        <span class="pn">{</span> <span class="prop">Time</span> <span class="o">=</span> <span class="n">0</span><span class="pn">;</span> <span class="prop">Return</span> <span class="o">=</span> <span class="n">0.15</span> <span class="pn">}</span>
+        <span class="pn">{</span> <span class="prop">Time</span> <span class="o">=</span> <span class="n">1</span><span class="pn">;</span> <span class="prop">Return</span> <span class="o">=</span> <span class="n">0.05</span> <span class="pn">}</span>
+        <span class="pn">{</span> <span class="prop">Time</span> <span class="o">=</span> <span class="n">2</span><span class="pn">;</span> <span class="prop">Return</span> <span class="o">=</span> <span class="n">0.01</span> <span class="pn">}</span>
+    <span class="pn">|]</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="id">spy</span> <span class="o">=</span>
+    <span class="pn">[|</span> 
+        <span class="pn">{</span> <span class="prop">Time</span> <span class="o">=</span> <span class="n">0</span><span class="pn">;</span> <span class="prop">Return</span> <span class="o">=</span> <span class="n">0.1</span> <span class="pn">}</span>
+        <span class="pn">{</span> <span class="prop">Time</span> <span class="o">=</span> <span class="n">1</span><span class="pn">;</span> <span class="prop">Return</span> <span class="o">=</span> <span class="n">0.05</span> <span class="pn">}</span>
+        <span class="pn">{</span> <span class="prop">Time</span> <span class="o">=</span> <span class="n">2</span><span class="pn">;</span> <span class="prop">Return</span> <span class="o">=</span> <span class="o">-</span><span class="n">0.02</span> <span class="pn">}</span>
+    <span class="pn">|]</span>    
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs6', 6)" onmouseover="showTip(event, 'fs6', 6)" class="id">riskFreeRate</span> <span class="o">=</span> <span class="n">0.001</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs7', 7)" onmouseover="showTip(event, 'fs7', 7)" class="id">ibmBetaOnSpy</span> <span class="o">=</span> <span class="n">1.2</span>    
+</code></pre>
+<h2><a name="Question-1" class="anchor" href="#Question-1">Question 1</a></h2>
+<p>What are the weights on the risk-free asset and
+SPY in the portfolio that hedges IBM's exposure to
+SPY?</p>
+<ol>
+<li>Report the weight on the risk-free asset as a value named <code>wRf</code> of type <code>float</code>.</li>
+<li>Report the weight on the SPY portfolio as a value named <code>wSpy</code> of type <code>float</code>.</li>
+</ol>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs8', 8)" onmouseover="showTip(event, 'fs8', 8)" class="id">wSpy</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs7', 9)" onmouseover="showTip(event, 'fs7', 9)" class="id">ibmBetaOnSpy</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs9', 10)" onmouseover="showTip(event, 'fs9', 10)" class="id">wRf</span> <span class="o">=</span> <span class="n">1.0</span><span class="o">-</span><span onmouseout="hideTip(event, 'fs8', 11)" onmouseover="showTip(event, 'fs8', 11)" class="id">wSpy</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val wSpy: float = 1.2
+val wRf: float = -0.2</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<h2><a name="Question-2" class="anchor" href="#Question-2">Question 2</a></h2>
+<p>What are the returns for Times [0;1;2] on the portfolio
+that hedges IBM's factor exposure to SPY?</p>
+<ol>
+<li>Report results as a value named <code>hedgePortReturns</code> of type <code>ReturnOb array</code>.</li>
+</ol>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs10', 12)" onmouseover="showTip(event, 'fs10', 12)" class="id">hedgePortReturns</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs5', 13)" onmouseover="showTip(event, 'fs5', 13)" class="id">spy</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs11', 14)" onmouseover="showTip(event, 'fs11', 14)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs12', 15)" onmouseover="showTip(event, 'fs12', 15)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs13', 16)" onmouseover="showTip(event, 'fs13', 16)" class="fn">spy</span> <span class="k">-&gt;</span>
+        <span class="pn">{</span> <span class="prop">Time</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs13', 17)" onmouseover="showTip(event, 'fs13', 17)" class="fn">spy</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs14', 18)" onmouseover="showTip(event, 'fs14', 18)" class="id">Time</span> 
+          <span class="prop">Return</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs8', 19)" onmouseover="showTip(event, 'fs8', 19)" class="id">wSpy</span><span class="o">*</span><span onmouseout="hideTip(event, 'fs13', 20)" onmouseover="showTip(event, 'fs13', 20)" class="fn">spy</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs15', 21)" onmouseover="showTip(event, 'fs15', 21)" class="id">Return</span> <span class="o">+</span> <span onmouseout="hideTip(event, 'fs9', 22)" onmouseover="showTip(event, 'fs9', 22)" class="id">wRf</span><span class="o">*</span><span onmouseout="hideTip(event, 'fs6', 23)" onmouseover="showTip(event, 'fs6', 23)" class="id">riskFreeRate</span> <span class="pn">}</span><span class="pn">)</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val hedgePortReturns: ReturnOb array =
+  [|{ Time = 0
+      Return = 0.1198 }; { Time = 1
+                           Return = 0.0598 }; { Time = 2
+                                                Return = -0.0242 }|]</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<h2><a name="Question-3" class="anchor" href="#Question-3">Question 3</a></h2>
+<p>Call the portfolio that hedges IBM's factor exposure to SPY
+the hedge portfolio. What is the hedge portfolio's factor beta
+on SPY?</p>
+<ol>
+<li>Report the answer as a value named <code>hedgePortBetaOnSpy</code> of type float.</li>
+</ol>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// 3. Hedge portfolio&#39;s factor beta on SPY</span>
+<span class="c">// See the lecture notes for a fuller explanation:</span>
+<span class="c">//</span>
+<span class="c">// From the portfolio return equation, the</span>
+<span class="c">// hedge portfolio return is</span>
+<span class="c">// r_hedgePort = wRf * rf + wSpy * Spy</span>
+<span class="c">// =&gt;</span>
+<span class="c">// r_hedgePort - rf = (wSpy + wRf - 1) * rf + wSpy*(Spy -rf)</span>
+<span class="c">// r_hedgePort - rf = wSpy*(Spy - rf)</span>
+<span class="c">// So the beta is</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs16', 24)" onmouseover="showTip(event, 'fs16', 24)" class="id">hedgePortBetaOnSpy</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs7', 25)" onmouseover="showTip(event, 'fs7', 25)" class="id">ibmBetaOnSpy</span> 
+</code></pre>
+<table class="pre"><tr><td><pre><code>val hedgePortBetaOnSpy: float = 1.2</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<h2><a name="Question-4" class="anchor" href="#Question-4">Question 4</a></h2>
+<p>What are the returns for Times [0;1;2] on the portfolio
+that is long IBM and short the portfolio that hedges
+IBM's factor exposre to SPY?</p>
+<ol>
+<li>Report results as a value named <code>longShortPortReturns</code> of type <code>ReturnOb array</code>.</li>
+</ol>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs17', 26)" onmouseover="showTip(event, 'fs17', 26)" class="id">hedgePortMap</span> <span class="o">=</span>
+    <span class="c">// using map because it&#39;s efficient for lookups.</span>
+    <span class="c">// you could use filter with such a small collection,</span>
+    <span class="c">// but we&#39;ll use a Map collection so that we</span>
+    <span class="c">// practice like it&#39;s the real thing.</span>
+    <span onmouseout="hideTip(event, 'fs10', 27)" onmouseover="showTip(event, 'fs10', 27)" class="id">hedgePortReturns</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs11', 28)" onmouseover="showTip(event, 'fs11', 28)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs12', 29)" onmouseover="showTip(event, 'fs12', 29)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs18', 30)" onmouseover="showTip(event, 'fs18', 30)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs18', 31)" onmouseover="showTip(event, 'fs18', 31)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs14', 32)" onmouseover="showTip(event, 'fs14', 32)" class="id">Time</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs18', 33)" onmouseover="showTip(event, 'fs18', 33)" class="fn">x</span><span class="pn">)</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs19', 34)" onmouseover="showTip(event, 'fs19', 34)" class="m">Map</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs20', 35)" onmouseover="showTip(event, 'fs20', 35)" class="id">ofArray</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs21', 36)" onmouseover="showTip(event, 'fs21', 36)" class="id">longShortPortReturns</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs4', 37)" onmouseover="showTip(event, 'fs4', 37)" class="id">ibm</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs11', 38)" onmouseover="showTip(event, 'fs11', 38)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 39)" onmouseover="showTip(event, 'fs22', 39)" class="id">choose</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs23', 40)" onmouseover="showTip(event, 'fs23', 40)" class="fn">ibmOb</span> <span class="k">-&gt;</span>
+        <span class="c">// We&#39;re using Array.choose instead of Array.map</span>
+        <span class="c">// because we plan to return Some hedgeOb or None, and we</span>
+        <span class="c">// want to throw away all the None cases and return just</span>
+        <span class="c">// an array of the valid hedgeObs. </span>
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs24', 41)" onmouseover="showTip(event, 'fs24', 41)" class="fn">matchingHedgeReturn</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs19', 42)" onmouseover="showTip(event, 'fs19', 42)" class="m">Map</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 43)" onmouseover="showTip(event, 'fs25', 43)" class="id">tryFind</span> <span onmouseout="hideTip(event, 'fs23', 44)" onmouseover="showTip(event, 'fs23', 44)" class="fn">ibmOb</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs14', 45)" onmouseover="showTip(event, 'fs14', 45)" class="id">Time</span> <span onmouseout="hideTip(event, 'fs17', 46)" onmouseover="showTip(event, 'fs17', 46)" class="id">hedgePortMap</span>
+        <span class="c">// in this example matchingHedgeReturn will always be Some hedgeOb.</span>
+        <span class="c">// But, we&#39;re using Map.tryFind and dealing with the possibility</span>
+        <span class="c">// that None could happen because it&#39;s good to practice</span>
+        <span class="c">// as if this were real code where bad things could happen.</span>
+        <span class="k">match</span> <span onmouseout="hideTip(event, 'fs24', 47)" onmouseover="showTip(event, 'fs24', 47)" class="fn">matchingHedgeReturn</span> <span class="k">with</span>
+        <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs26', 48)" onmouseover="showTip(event, 'fs26', 48)" class="uc">None</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs26', 49)" onmouseover="showTip(event, 'fs26', 49)" class="uc">None</span> <span class="c">// if there&#39;s no hedge return for ibmOb.Time return None</span>
+        <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs27', 50)" onmouseover="showTip(event, 'fs27', 50)" class="uc">Some</span> <span onmouseout="hideTip(event, 'fs28', 51)" onmouseover="showTip(event, 'fs28', 51)" class="fn">hedgeOb</span> <span class="k">-&gt;</span> 
+            <span class="c">// if there is a matching hedge return for ibmOb.Time return Some ReturnOb</span>
+            <span class="k">let</span> <span onmouseout="hideTip(event, 'fs29', 52)" onmouseover="showTip(event, 'fs29', 52)" class="fn">longShort</span> <span class="o">=</span>  <span onmouseout="hideTip(event, 'fs23', 53)" onmouseover="showTip(event, 'fs23', 53)" class="fn">ibmOb</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs15', 54)" onmouseover="showTip(event, 'fs15', 54)" class="id">Return</span> <span class="o">-</span> <span onmouseout="hideTip(event, 'fs28', 55)" onmouseover="showTip(event, 'fs28', 55)" class="fn">hedgeOb</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs15', 56)" onmouseover="showTip(event, 'fs15', 56)" class="id">Return</span>
+            <span onmouseout="hideTip(event, 'fs27', 57)" onmouseover="showTip(event, 'fs27', 57)" class="uc">Some</span> <span class="pn">{</span> <span class="prop">Time</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs23', 58)" onmouseover="showTip(event, 'fs23', 58)" class="fn">ibmOb</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs14', 59)" onmouseover="showTip(event, 'fs14', 59)" class="id">Time</span><span class="pn">;</span> <span class="prop">Return</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs29', 60)" onmouseover="showTip(event, 'fs29', 60)" class="fn">longShort</span> <span class="pn">}</span><span class="pn">)</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val hedgePortMap: Map&lt;int,ReturnOb&gt; =
+  map
+    [(0, { Time = 0
+           Return = 0.1198 }); (1, { Time = 1
+                                     Return = 0.0598 });
+     (2, { Time = 2
+           Return = -0.0242 })]
+val longShortPortReturns: ReturnOb array =
+  [|{ Time = 0
+      Return = 0.0302 }; { Time = 1
+                           Return = -0.0098 }; { Time = 2
+                                                 Return = 0.0342 }|]</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<h2><a name="Question-5" class="anchor" href="#Question-5">Question 5</a></h2>
+<p>What is the alpha of IBM from the perspective of
+a factor model that uses SPY as the only risk factor?</p>
+<ol>
+<li>Report the result as a value named <code>alpha</code> of type float.</li>
+</ol>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs30', 61)" onmouseover="showTip(event, 'fs30', 61)" class="id">alpha</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs21', 62)" onmouseover="showTip(event, 'fs21', 62)" class="id">longShortPortReturns</span> 
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs11', 63)" onmouseover="showTip(event, 'fs11', 63)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 64)" onmouseover="showTip(event, 'fs31', 64)" class="id">averageBy</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs18', 65)" onmouseover="showTip(event, 'fs18', 65)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs18', 66)" onmouseover="showTip(event, 'fs18', 66)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs15', 67)" onmouseover="showTip(event, 'fs15', 67)" class="id">Return</span><span class="pn">)</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>val alpha: float = 0.0182</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<h2><a name="Question-6" class="anchor" href="#Question-6">Question 6</a></h2>
+<p>What is the information ratio of IBM from the perspective
+of a factor model that uses SPY as the only risk factor?</p>
+<ol>
+<li>Report the result as a value named <code>io</code> of type float.</li>
+</ol>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="pp">#r</span> <span class="s">&quot;nuget: FSharp.Stats, 0.5.0&quot;</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs32', 68)" onmouseover="showTip(event, 'fs32', 68)" class="id">FSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs33', 69)" onmouseover="showTip(event, 'fs33', 69)" class="id">Stats</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs34', 70)" onmouseover="showTip(event, 'fs34', 70)" class="id">sdHedgeReturns</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs21', 71)" onmouseover="showTip(event, 'fs21', 71)" class="id">longShortPortReturns</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs35', 72)" onmouseover="showTip(event, 'fs35', 72)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs12', 73)" onmouseover="showTip(event, 'fs12', 73)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs18', 74)" onmouseover="showTip(event, 'fs18', 74)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs18', 75)" onmouseover="showTip(event, 'fs18', 75)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs15', 76)" onmouseover="showTip(event, 'fs15', 76)" class="id">Return</span> <span class="pn">)</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs36', 77)" onmouseover="showTip(event, 'fs36', 77)" class="m">Seq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs37', 78)" onmouseover="showTip(event, 'fs37', 78)" class="id">stDev</span>
+
+<span class="c">// Intuitively, you can think of it similar</span>
+<span class="c">// to the sharpe ratio of the portfolio after</span>
+<span class="c">// hedging out the factor risk.</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs38', 79)" onmouseover="showTip(event, 'fs38', 79)" class="id">io</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs30', 80)" onmouseover="showTip(event, 'fs30', 80)" class="id">alpha</span> <span class="o">/</span> <span onmouseout="hideTip(event, 'fs34', 81)" onmouseover="showTip(event, 'fs34', 81)" class="id">sdHedgeReturns</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>[Loading C:\Users\runneradmin\.packagemanagement\nuget\Cache\ec63001b4149383af67dc5083312da4ecf34b844b655d861ca5bad281c016ede.fsx]
+module FSI_0035.
+       Ec63001b4149383af67dc5083312da4ecf34b844b655d861ca5bad281c016ede
+
+val sdHedgeReturns: float = 0.02433105012
+val io: float = 0.7480153922</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+
+        <div class="fsdocs-tip" id="fs1">type ReturnOb =
+  {
+    Time: int
+    Return: float
+  }</div>
+<div class="fsdocs-tip" id="fs2">Multiple items<br />val int: value: &#39;T -&gt; int (requires member op_Explicit)<br /><br />--------------------<br />type int = int32<br /><br />--------------------<br />type int&lt;&#39;Measure&gt; =
+  int</div>
+<div class="fsdocs-tip" id="fs3">Multiple items<br />val float: value: &#39;T -&gt; float (requires member op_Explicit)<br /><br />--------------------<br />type float = System.Double<br /><br />--------------------<br />type float&lt;&#39;Measure&gt; =
+  float</div>
+<div class="fsdocs-tip" id="fs4">val ibm: ReturnOb array</div>
+<div class="fsdocs-tip" id="fs5">val spy: ReturnOb array</div>
+<div class="fsdocs-tip" id="fs6">val riskFreeRate: float</div>
+<div class="fsdocs-tip" id="fs7">val ibmBetaOnSpy: float</div>
+<div class="fsdocs-tip" id="fs8">val wSpy: float</div>
+<div class="fsdocs-tip" id="fs9">val wRf: float</div>
+<div class="fsdocs-tip" id="fs10">val hedgePortReturns: ReturnOb array</div>
+<div class="fsdocs-tip" id="fs11">module Array
+
+from Microsoft.FSharp.Collections</div>
+<div class="fsdocs-tip" id="fs12">val map: mapping: (&#39;T -&gt; &#39;U) -&gt; array: &#39;T array -&gt; &#39;U array</div>
+<div class="fsdocs-tip" id="fs13">val spy: ReturnOb</div>
+<div class="fsdocs-tip" id="fs14">ReturnOb.Time: int</div>
+<div class="fsdocs-tip" id="fs15">ReturnOb.Return: float</div>
+<div class="fsdocs-tip" id="fs16">val hedgePortBetaOnSpy: float</div>
+<div class="fsdocs-tip" id="fs17">val hedgePortMap: Map&lt;int,ReturnOb&gt;</div>
+<div class="fsdocs-tip" id="fs18">val x: ReturnOb</div>
+<div class="fsdocs-tip" id="fs19">Multiple items<br />module Map
+
+from Microsoft.FSharp.Collections<br /><br />--------------------<br />type Map&lt;&#39;Key,&#39;Value (requires comparison)&gt; =
+  interface IReadOnlyDictionary&lt;&#39;Key,&#39;Value&gt;
+  interface IReadOnlyCollection&lt;KeyValuePair&lt;&#39;Key,&#39;Value&gt;&gt;
+  interface IEnumerable
+  interface IStructuralEquatable
+  interface IComparable
+  interface IEnumerable&lt;KeyValuePair&lt;&#39;Key,&#39;Value&gt;&gt;
+  interface ICollection&lt;KeyValuePair&lt;&#39;Key,&#39;Value&gt;&gt;
+  interface IDictionary&lt;&#39;Key,&#39;Value&gt;
+  new: elements: (&#39;Key * &#39;Value) seq -&gt; Map&lt;&#39;Key,&#39;Value&gt;
+  member Add: key: &#39;Key * value: &#39;Value -&gt; Map&lt;&#39;Key,&#39;Value&gt;
+  ...<br /><br />--------------------<br />new: elements: (&#39;Key * &#39;Value) seq -&gt; Map&lt;&#39;Key,&#39;Value&gt;</div>
+<div class="fsdocs-tip" id="fs20">val ofArray: elements: (&#39;Key * &#39;T) array -&gt; Map&lt;&#39;Key,&#39;T&gt; (requires comparison)</div>
+<div class="fsdocs-tip" id="fs21">val longShortPortReturns: ReturnOb array</div>
+<div class="fsdocs-tip" id="fs22">val choose: chooser: (&#39;T -&gt; &#39;U option) -&gt; array: &#39;T array -&gt; &#39;U array</div>
+<div class="fsdocs-tip" id="fs23">val ibmOb: ReturnOb</div>
+<div class="fsdocs-tip" id="fs24">val matchingHedgeReturn: ReturnOb option</div>
+<div class="fsdocs-tip" id="fs25">val tryFind: key: &#39;Key -&gt; table: Map&lt;&#39;Key,&#39;T&gt; -&gt; &#39;T option (requires comparison)</div>
+<div class="fsdocs-tip" id="fs26">union case Option.None: Option&lt;&#39;T&gt;</div>
+<div class="fsdocs-tip" id="fs27">union case Option.Some: Value: &#39;T -&gt; Option&lt;&#39;T&gt;</div>
+<div class="fsdocs-tip" id="fs28">val hedgeOb: ReturnOb</div>
+<div class="fsdocs-tip" id="fs29">val longShort: float</div>
+<div class="fsdocs-tip" id="fs30">val alpha: float</div>
+<div class="fsdocs-tip" id="fs31">val averageBy: projection: (&#39;T -&gt; &#39;U) -&gt; array: &#39;T array -&gt; &#39;U (requires member (+) and member DivideByInt and member Zero)</div>
+<div class="fsdocs-tip" id="fs32">Multiple items<br />namespace FSharp<br /><br />--------------------<br />namespace Microsoft.FSharp</div>
+<div class="fsdocs-tip" id="fs33">namespace FSharp.Stats</div>
+<div class="fsdocs-tip" id="fs34">val sdHedgeReturns: float</div>
+<div class="fsdocs-tip" id="fs35">Multiple items<br />module Array
+
+from FSharp.Stats<br /><em>&lt;summary&gt;
+ Module to compute common statistical measure on array
+&lt;/summary&gt;</em><br /><br />--------------------<br />module Array
+
+from Microsoft.FSharp.Collections<br /><br />--------------------<br />type Array =
+  new: unit -&gt; Array
+  static member geomspace: start: float * stop: float * num: int * ?IncludeEndpoint: bool -&gt; float array
+  static member linspace: start: float * stop: float * num: int * ?IncludeEndpoint: bool -&gt; float array<br /><br />--------------------<br />new: unit -&gt; Array</div>
+<div class="fsdocs-tip" id="fs36">Multiple items<br />module Seq
+
+from FSharp.Stats<br /><em>&lt;summary&gt;
+ Module to compute common statistical measure
+&lt;/summary&gt;</em><br /><br />--------------------<br />module Seq
+
+from Microsoft.FSharp.Collections<br /><br />--------------------<br />type Seq =
+  new: unit -&gt; Seq
+  static member geomspace: start: float * stop: float * num: int * ?IncludeEndpoint: bool -&gt; float seq
+  static member linspace: start: float * stop: float * num: int * ?IncludeEndpoint: bool -&gt; float seq<br /><br />--------------------<br />new: unit -&gt; Seq</div>
+<div class="fsdocs-tip" id="fs37">val stDev: items: &#39;T seq -&gt; &#39;U (requires member (-) and member Zero and member DivideByInt and member (+) and member ( * ) and member (+) and member (/) and member Sqrt)<br /><em>&lt;summary&gt;
+   Computes the sample standard deviation
+ &lt;/summary&gt;<br />&lt;param name=&quot;items&quot;&gt;The input sequence.&lt;/param&gt;<br />&lt;remarks&gt;Returns NaN if data is empty or if any entry is NaN.&lt;/remarks&gt;<br />&lt;returns&gt;standard deviation of a sample (Bessel&#39;s correction by N-1)&lt;/returns&gt;</em></div>
+<div class="fsdocs-tip" id="fs38">val io: float</div>
+
+    </div>
+</main>
+<aside id="fsdocs-page-menu">
+    <p id="on-this-page">On this page</p>
+    <ul>
+  <li class="level-2">
+    <a href="#Question-1">
+      Question 1
+    </a>
+  </li>
+  <li class="level-2">
+    <a href="#Question-2">
+      Question 2
+    </a>
+  </li>
+  <li class="level-2">
+    <a href="#Question-3">
+      Question 3
+    </a>
+  </li>
+  <li class="level-2">
+    <a href="#Question-4">
+      Question 4
+    </a>
+  </li>
+  <li class="level-2">
+    <a href="#Question-5">
+      Question 5
+    </a>
+  </li>
+  <li class="level-2">
+    <a href="#Question-6">
+      Question 6
+    </a>
+  </li>
+</ul>
+</aside>
+<dialog>
+    <input type="search" placeholder="Search docs" />
+    <div class="results">
+        <ul></ul>
+        <p class="empty">Type something to start searching.</p>
+    </div>
+</dialog>
+<script type="module" src="/Teaching/content/fsdocs-tips.js"></script>
+<script type="module" src="/Teaching/content/fsdocs-theme-toggle.js"></script>
+<script type="module" src="/Teaching/content/fsdocs-theme.js"></script>
+<script type="module" src="/Teaching/content/fsdocs-search.js"></script>
+
+</body>
+</html>

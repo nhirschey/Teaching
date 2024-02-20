@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en" data-root="/Teaching/">
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Nicholas Hirschey; Davide Costa" name="author">
+    <!-- Opengraph properties (https://ogp.me/) -->
+    <meta property="og:site_name" content="Teaching">
+    <meta property="og:title" content="Calls NN" />
+    <meta property="og:url" content="/Teaching/calls-nn.html">
+    <meta property="og:type" content="website" />
+    <!-- Twitter cards (https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="/Teaching/">
+    <meta name="twitter:title" content="Calls NN">
+    
+    <title>Calls NN | Teaching</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="/Teaching/img/logo.png" rel="icon" sizes="32x32" type="image/png"/>
+    <script type="application/javascript" src="/Teaching/content/fsdocs-theme-set-dark.js"></script>
+    <link href="/Teaching/content/fsdocs-default.css" rel="stylesheet" type="text/css"/>
+    <link href="/Teaching/content/fsdocs-theme.css" rel="stylesheet" type="text/css"/>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js"></script>
+    
+</head>
+<body class="content">
+<header>
+    <div class="start">
+        <div id="menu-toggle">
+            <iconify-icon class="icon closed" height="22" icon="eva:menu-fill" width="22"></iconify-icon>
+            <iconify-icon class="icon open" height="22" icon="mi:close" width="22"></iconify-icon>
+            <input type="checkbox" name="mobile-menu" />
+            <ul class="menu">
+                <li class="nav-header">Links</li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/nhirschey/Teaching/blob/main/LICENSE.md">License</a>
+                </li>
+                <li class="nav-item"><a class="nav-link"
+                                        href="https://github.com/nhirschey/Teaching/blob/main/CHANGELOG.md">Release
+                    Notes</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/nhirschey/Teaching/">Source
+                    Repository</a></li>
+                <li class="nav-header ">
+  Getting Started
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/install.html">
+    Install Software
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/learn-fsharp.html">
+    Learn F#
+  </a>
+</li>             
+<li class="nav-header active">
+  Lectures
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/stockslongrun.html">
+    Stocks for the long run
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/stocksandbonds.html">
+    Stocks and bonds
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/riskyweight.html">
+    Risky Weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolatilityTiming.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolatilityManagedTypes.html">
+    Volatility Managed, but with different vols
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolAndReturnPred.html">
+    Volatility and Return predictions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/mveComparisons.html">
+    More managed portfolio comparisons
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/PortfolioFormation-SimpleExample.html">
+    Building a strategy
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Momentum-Class.html">
+    Momentum Signal
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/optimization.html">
+    Optimization
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/revisitRiskyWeights.html">
+    Revisiting Mean-variance optimal risky weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/premiums.html">
+    Premiums
+  </a>
+</li>             
+<li class="nav-item active">
+  <a class="nav-link" href="/Teaching/calls-nn.html">
+    Calls NN
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/portfolio-statistics.html">
+    Basic Portfolio Statistics
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/sentiment-mlnet.html">
+    Sentiment classification
+  </a>
+</li>             
+<li class="nav-header ">
+  Assignments
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-1-download-data.html">
+    Webscraping HTML to CSV
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-tuples-and-records.html">
+    Tuples and Records (with solutions)
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-collection-functions.html">
+    Collection functions (with solutions)
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignment-risky-weights.html">
+    Risky Weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignment-volatility-timing.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/select-project-signal.html">
+    Select Project Signals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/signal-exploration.html">
+    Signal Exploration
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/assignment-signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/assignment-performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-plotting.html">
+    Plotting (with solutions)
+  </a>
+</li>             
+<li class="nav-header ">
+  Practice Quizzes
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-list-module.html">
+    List module functions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-options.html">
+    Options
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-match-expressions.html">
+    Match expressions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-map-collection.html">
+    Map collection
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-discriminated-union.html">
+    Dicriminated Union
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-portfolios.html">
+    Portfolios
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-factors.html">
+    Factors
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-folding.html">
+    Fold and Friends
+  </a>
+</li>             
+<li class="nav-header ">
+  Other
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Common.html">
+    Common
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/loading-scripts.html">
+    Loading external scripts
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Portfolio.html">
+    Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/YahooFinance.html">
+    YahooFinance
+  </a>
+</li>
+                
+            </ul>
+        </div>
+        <a href="/Teaching/">
+            <img alt="Header menu logo" src="/Teaching/img/logo.png">
+            <strong>Teaching</strong>
+        </a>
+    </div>
+    <div class="end">
+        <a href="https://github.com/nhirschey/Teaching/" target="_blank">
+            <iconify-icon icon="uil:github" width="26" height="26"></iconify-icon>
+        </a>
+        <iconify-icon id="search-btn" icon="carbon:search" class="search" width="24" height="24"></iconify-icon>
+        <fsdocs-theme-toggle></fsdocs-theme-toggle>
+    </div>
+</header>
+<aside id="fsdocs-main-menu">
+    <ul class="menu">
+        <li class="nav-header">Links</li>
+        <li class="nav-item"><a class="nav-link" href="https://github.com/nhirschey/Teaching/blob/main/LICENSE.md">License</a>
+        </li>
+        <li class="nav-item"><a class="nav-link"
+                                href="https://github.com/nhirschey/Teaching/blob/main/CHANGELOG.md">Release
+            Notes</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://github.com/nhirschey/Teaching/">Source
+            Repository</a></li>
+        <li class="nav-header ">
+  Getting Started
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/install.html">
+    Install Software
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/learn-fsharp.html">
+    Learn F#
+  </a>
+</li>             
+<li class="nav-header active">
+  Lectures
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/stockslongrun.html">
+    Stocks for the long run
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/stocksandbonds.html">
+    Stocks and bonds
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/riskyweight.html">
+    Risky Weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolatilityTiming.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolatilityManagedTypes.html">
+    Volatility Managed, but with different vols
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolAndReturnPred.html">
+    Volatility and Return predictions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/mveComparisons.html">
+    More managed portfolio comparisons
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/PortfolioFormation-SimpleExample.html">
+    Building a strategy
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Momentum-Class.html">
+    Momentum Signal
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/optimization.html">
+    Optimization
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/revisitRiskyWeights.html">
+    Revisiting Mean-variance optimal risky weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/premiums.html">
+    Premiums
+  </a>
+</li>             
+<li class="nav-item active">
+  <a class="nav-link" href="/Teaching/calls-nn.html">
+    Calls NN
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/portfolio-statistics.html">
+    Basic Portfolio Statistics
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/sentiment-mlnet.html">
+    Sentiment classification
+  </a>
+</li>             
+<li class="nav-header ">
+  Assignments
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-1-download-data.html">
+    Webscraping HTML to CSV
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-tuples-and-records.html">
+    Tuples and Records (with solutions)
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-collection-functions.html">
+    Collection functions (with solutions)
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignment-risky-weights.html">
+    Risky Weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignment-volatility-timing.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/select-project-signal.html">
+    Select Project Signals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/signal-exploration.html">
+    Signal Exploration
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/assignment-signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/assignment-performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-plotting.html">
+    Plotting (with solutions)
+  </a>
+</li>             
+<li class="nav-header ">
+  Practice Quizzes
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-list-module.html">
+    List module functions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-options.html">
+    Options
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-match-expressions.html">
+    Match expressions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-map-collection.html">
+    Map collection
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-discriminated-union.html">
+    Dicriminated Union
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-portfolios.html">
+    Portfolios
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-factors.html">
+    Factors
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-folding.html">
+    Fold and Friends
+  </a>
+</li>             
+<li class="nav-header ">
+  Other
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Common.html">
+    Common
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/loading-scripts.html">
+    Loading external scripts
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Portfolio.html">
+    Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/YahooFinance.html">
+    YahooFinance
+  </a>
+</li>
+        
+    </ul>
+</aside>
+<main>
+    <div id="content">
+        
+<p><a href="https://colab.research.google.com/github/nhirschey/teaching/blob/gh-pages/calls-nn.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Binder" /></a>&emsp;
+<a href="https://mybinder.org/v2/gh/nhirschey/teaching/gh-pages?filepath=calls-nn.ipynb"><img src="img/badge-binder.svg" alt="Binder" /></a>&emsp;
+<a href="/Teaching//calls-nn.fsx"><img src="img/badge-script.svg" alt="Script" /></a>&emsp;
+<a href="/Teaching//calls-nn.ipynb"><img src="img/badge-notebook.svg" alt="Notebook" /></a></p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="pp">#r</span> <span class="s">&quot;nuget:FSharp.Stats&quot;</span>
+<span class="c">// Use lite if you&#39;re on Apple Silicon</span>
+<span class="c">//#r &quot;nuget:DiffSharp-lite,1.0.7&quot;</span>
+<span class="c">// Use CPU if you&#39;re on Windows/Linux/Intel Mac</span>
+<span class="pp">#r</span> <span class="s">&quot;nuget: DiffSharp-cpu,1.0.7&quot;</span>
+
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="id">DiffSharp</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 2)" onmouseover="showTip(event, 'fs1', 2)" class="id">DiffSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs2', 3)" onmouseover="showTip(event, 'fs2', 3)" class="m">Compose</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 4)" onmouseover="showTip(event, 'fs1', 4)" class="id">DiffSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs3', 5)" onmouseover="showTip(event, 'fs3', 5)" class="id">Model</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 6)" onmouseover="showTip(event, 'fs1', 6)" class="id">DiffSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs4', 7)" onmouseover="showTip(event, 'fs4', 7)" class="id">Data</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 8)" onmouseover="showTip(event, 'fs1', 8)" class="id">DiffSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs5', 9)" onmouseover="showTip(event, 'fs5', 9)" class="id">Optim</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 10)" onmouseover="showTip(event, 'fs1', 10)" class="id">DiffSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs6', 11)" onmouseover="showTip(event, 'fs6', 11)" class="id">Util</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 12)" onmouseover="showTip(event, 'fs1', 12)" class="id">DiffSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs7', 13)" onmouseover="showTip(event, 'fs7', 13)" class="id">Distributions</span>
+
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs8', 14)" onmouseover="showTip(event, 'fs8', 14)" class="id">System</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs8', 15)" onmouseover="showTip(event, 'fs8', 15)" class="id">System</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs9', 16)" onmouseover="showTip(event, 'fs9', 16)" class="id">IO</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs8', 17)" onmouseover="showTip(event, 'fs8', 17)" class="id">System</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs9', 18)" onmouseover="showTip(event, 'fs9', 18)" class="id">IO</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs10', 19)" onmouseover="showTip(event, 'fs10', 19)" class="id">Compression</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs8', 20)" onmouseover="showTip(event, 'fs8', 20)" class="id">System</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs11', 21)" onmouseover="showTip(event, 'fs11', 21)" class="id">Text</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs12', 22)" onmouseover="showTip(event, 'fs12', 22)" class="id">Json</span>
+
+<span onmouseout="hideTip(event, 'fs13', 23)" onmouseover="showTip(event, 'fs13', 23)" class="rt">Environment</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs14', 24)" onmouseover="showTip(event, 'fs14', 24)" class="id">CurrentDirectory</span> <span class="k">&lt;-</span> <span class="k">__SOURCE_DIRECTORY__</span>
+
+<span onmouseout="hideTip(event, 'fs15', 25)" onmouseover="showTip(event, 'fs15', 25)" class="rt">dsharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs16', 26)" onmouseover="showTip(event, 'fs16', 26)" class="id">seed</span><span class="pn">(</span><span class="n">1</span><span class="pn">)</span>
+</code></pre>
+<p>Below is some temp fixes for rnn state saving until the next DiffSharp release comes out. DiffSharp is in active development and a fix is in process.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">type</span> <span onmouseout="hideTip(event, 'fs17', 27)" onmouseover="showTip(event, 'fs17', 27)" class="rt">ModelBase</span> <span class="k">with</span>
+    <span class="k">member</span> <span onmouseout="hideTip(event, 'fs18', 28)" onmouseover="showTip(event, 'fs18', 28)" class="id">m</span><span class="pn">.</span><span class="fn">saveState2</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs19', 29)" onmouseover="showTip(event, 'fs19', 29)" class="fn">fileName</span><span class="pn">,</span> <span class="o">?</span><span onmouseout="hideTip(event, 'fs20', 30)" onmouseover="showTip(event, 'fs20', 30)" class="fn">noDiff</span><span class="pn">:</span><span onmouseout="hideTip(event, 'fs21', 31)" onmouseover="showTip(event, 'fs21', 31)" class="vt">bool</span><span class="pn">)</span> <span class="o">=</span>
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs22', 32)" onmouseover="showTip(event, 'fs22', 32)" class="fn">noDiff</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs23', 33)" onmouseover="showTip(event, 'fs23', 33)" class="fn">defaultArg</span> <span onmouseout="hideTip(event, 'fs22', 34)" onmouseover="showTip(event, 'fs22', 34)" class="fn">noDiff</span> <span class="k">true</span>
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs24', 35)" onmouseover="showTip(event, 'fs24', 35)" class="fn">ss</span> <span class="o">=</span>
+            <span class="k">if</span> <span onmouseout="hideTip(event, 'fs22', 36)" onmouseover="showTip(event, 'fs22', 36)" class="fn">noDiff</span> <span class="k">then</span> 
+                <span class="k">let</span> <span onmouseout="hideTip(event, 'fs24', 37)" onmouseover="showTip(event, 'fs24', 37)" class="fn">ss</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs18', 38)" onmouseover="showTip(event, 'fs18', 38)" class="fn">m</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 39)" onmouseover="showTip(event, 'fs25', 39)" class="prop">state</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs26', 40)" onmouseover="showTip(event, 'fs26', 40)" class="id">copy</span><span class="pn">(</span><span class="pn">)</span>
+                <span onmouseout="hideTip(event, 'fs24', 41)" onmouseover="showTip(event, 'fs24', 41)" class="fn">ss</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs27', 42)" onmouseover="showTip(event, 'fs27', 42)" class="id">noDiff</span><span class="pn">(</span><span class="pn">)</span>
+                <span onmouseout="hideTip(event, 'fs24', 43)" onmouseover="showTip(event, 'fs24', 43)" class="fn">ss</span>
+            <span class="k">else</span> <span onmouseout="hideTip(event, 'fs18', 44)" onmouseover="showTip(event, 'fs18', 44)" class="fn">m</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 45)" onmouseover="showTip(event, 'fs25', 45)" class="id">state</span>
+        <span onmouseout="hideTip(event, 'fs28', 46)" onmouseover="showTip(event, 'fs28', 46)" class="fn">saveBinary</span> <span onmouseout="hideTip(event, 'fs24', 47)" onmouseover="showTip(event, 'fs24', 47)" class="fn">ss</span> <span onmouseout="hideTip(event, 'fs19', 48)" onmouseover="showTip(event, 'fs19', 48)" class="fn">fileName</span>
+    <span class="k">member</span> <span onmouseout="hideTip(event, 'fs18', 49)" onmouseover="showTip(event, 'fs18', 49)" class="fn">m</span><span class="pn">.</span><span class="fn">loadState2</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs29', 50)" onmouseover="showTip(event, 'fs29', 50)" class="fn">filename</span><span class="pn">)</span> <span class="o">=</span>
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs30', 51)" onmouseover="showTip(event, 'fs30', 51)" class="fn">s</span><span class="pn">:</span><span onmouseout="hideTip(event, 'fs31', 52)" onmouseover="showTip(event, 'fs31', 52)" class="rt">ParameterDict</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs32', 53)" onmouseover="showTip(event, 'fs32', 53)" class="fn">loadBinary</span> <span onmouseout="hideTip(event, 'fs29', 54)" onmouseover="showTip(event, 'fs29', 54)" class="fn">filename</span>
+        <span onmouseout="hideTip(event, 'fs18', 55)" onmouseover="showTip(event, 'fs18', 55)" class="fn">m</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 56)" onmouseover="showTip(event, 'fs25', 56)" class="prop">state</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs33', 57)" onmouseover="showTip(event, 'fs33', 57)" class="id">iter</span><span class="pn">(</span><span class="k">fun</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs34', 58)" onmouseover="showTip(event, 'fs34', 58)" class="fn">n</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs35', 59)" onmouseover="showTip(event, 'fs35', 59)" class="fn">p</span><span class="pn">)</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs35', 60)" onmouseover="showTip(event, 'fs35', 60)" class="fn">p</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs36', 61)" onmouseover="showTip(event, 'fs36', 61)" class="id">value</span> <span class="k">&lt;-</span> <span onmouseout="hideTip(event, 'fs30', 62)" onmouseover="showTip(event, 'fs30', 62)" class="fn">s</span><span class="pn">[</span><span onmouseout="hideTip(event, 'fs34', 63)" onmouseover="showTip(event, 'fs34', 63)" class="fn">n</span><span class="pn">]</span><span class="pn">)</span>
+</code></pre>
+<h2><a name="Data" class="anchor" href="#Data">Data</a></h2>
+<p>We'll use a dataset containing transcripts of quarterly conference calls from NASADAQ100 companies from 2018 to 2021. Let's download that.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs37', 64)" onmouseover="showTip(event, 'fs37', 64)" class="fn">gunzip</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs38', 65)" onmouseover="showTip(event, 'fs38', 65)" class="fn">inputFile</span><span class="pn">:</span><span onmouseout="hideTip(event, 'fs39', 66)" onmouseover="showTip(event, 'fs39', 66)" class="rt">string</span><span class="pn">)</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs40', 67)" onmouseover="showTip(event, 'fs40', 67)" class="fn">outputFile</span><span class="pn">:</span><span onmouseout="hideTip(event, 'fs39', 68)" onmouseover="showTip(event, 'fs39', 68)" class="rt">string</span><span class="pn">)</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs41', 69)" onmouseover="showTip(event, 'fs41', 69)" class="rt">Directory</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs42', 70)" onmouseover="showTip(event, 'fs42', 70)" class="id">CreateDirectory</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs43', 71)" onmouseover="showTip(event, 'fs43', 71)" class="rt">Path</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs44', 72)" onmouseover="showTip(event, 'fs44', 72)" class="id">GetDirectoryName</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs40', 73)" onmouseover="showTip(event, 'fs40', 73)" class="fn">outputFile</span><span class="pn">)</span><span class="pn">)</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs45', 74)" onmouseover="showTip(event, 'fs45', 74)" class="fn">ignore</span>
+    <span class="k">if</span> <span onmouseout="hideTip(event, 'fs46', 75)" onmouseover="showTip(event, 'fs46', 75)" class="rt">File</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs47', 76)" onmouseover="showTip(event, 'fs47', 76)" class="id">Exists</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs40', 77)" onmouseover="showTip(event, 'fs40', 77)" class="fn">outputFile</span><span class="pn">)</span> <span class="k">then</span> <span onmouseout="hideTip(event, 'fs46', 78)" onmouseover="showTip(event, 'fs46', 78)" class="rt">File</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs48', 79)" onmouseover="showTip(event, 'fs48', 79)" class="id">Delete</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs40', 80)" onmouseover="showTip(event, 'fs40', 80)" class="fn">outputFile</span><span class="pn">)</span>
+    <span class="k">use</span> <span onmouseout="hideTip(event, 'fs49', 81)" onmouseover="showTip(event, 'fs49', 81)" class="d">inputStream</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs46', 82)" onmouseover="showTip(event, 'fs46', 82)" class="rt">File</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs50', 83)" onmouseover="showTip(event, 'fs50', 83)" class="id">OpenRead</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs38', 84)" onmouseover="showTip(event, 'fs38', 84)" class="fn">inputFile</span><span class="pn">)</span>
+    <span class="k">use</span> <span onmouseout="hideTip(event, 'fs51', 85)" onmouseover="showTip(event, 'fs51', 85)" class="d">outputStream</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs46', 86)" onmouseover="showTip(event, 'fs46', 86)" class="rt">File</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs52', 87)" onmouseover="showTip(event, 'fs52', 87)" class="id">Create</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs40', 88)" onmouseover="showTip(event, 'fs40', 88)" class="fn">outputFile</span><span class="pn">)</span>
+    <span class="k">use</span> <span onmouseout="hideTip(event, 'fs53', 89)" onmouseover="showTip(event, 'fs53', 89)" class="d">gzipStream</span> <span class="o">=</span> <span class="k">new</span> <span onmouseout="hideTip(event, 'fs54', 90)" onmouseover="showTip(event, 'fs54', 90)" class="d">GZipStream</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs49', 91)" onmouseover="showTip(event, 'fs49', 91)" class="d">inputStream</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs55', 92)" onmouseover="showTip(event, 'fs55', 92)" class="en">CompressionMode</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs56', 93)" onmouseover="showTip(event, 'fs56', 93)" class="id">Decompress</span><span class="pn">)</span>
+    <span onmouseout="hideTip(event, 'fs53', 94)" onmouseover="showTip(event, 'fs53', 94)" class="d">gzipStream</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs57', 95)" onmouseover="showTip(event, 'fs57', 95)" class="id">CopyTo</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs51', 96)" onmouseover="showTip(event, 'fs51', 96)" class="d">outputStream</span><span class="pn">)</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs58', 97)" onmouseover="showTip(event, 'fs58', 97)" class="id">nq100FullUrl</span> <span class="o">=</span> <span class="s">&quot;https://www.dropbox.com/s/izcsjp06lgwbauu/Nasdaq100CallFull.json.gz?dl=1&quot;</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs59', 98)" onmouseover="showTip(event, 'fs59', 98)" class="id">dataFolder</span> <span class="o">=</span> <span class="s">&quot;data&quot;</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs60', 99)" onmouseover="showTip(event, 'fs60', 99)" class="id">nqFullFile</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs43', 100)" onmouseover="showTip(event, 'fs43', 100)" class="rt">Path</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs61', 101)" onmouseover="showTip(event, 'fs61', 101)" class="id">Combine</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs59', 102)" onmouseover="showTip(event, 'fs59', 102)" class="id">dataFolder</span><span class="pn">,</span> <span class="s">&quot;Nasdaq100CallFull.json&quot;</span><span class="pn">)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs62', 103)" onmouseover="showTip(event, 'fs62', 103)" class="id">nq100FullFileGz</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs60', 104)" onmouseover="showTip(event, 'fs60', 104)" class="id">nqFullFile</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs63', 105)" onmouseover="showTip(event, 'fs63', 105)" class="id">Replace</span><span class="pn">(</span><span class="s">&quot;.json&quot;</span><span class="pn">,</span> <span class="s">&quot;.json.gz&quot;</span><span class="pn">)</span>
+
+<span onmouseout="hideTip(event, 'fs64', 106)" onmouseover="showTip(event, 'fs64', 106)" class="fn">download</span> <span onmouseout="hideTip(event, 'fs58', 107)" onmouseover="showTip(event, 'fs58', 107)" class="id">nq100FullUrl</span> <span onmouseout="hideTip(event, 'fs62', 108)" onmouseover="showTip(event, 'fs62', 108)" class="id">nq100FullFileGz</span>
+<span onmouseout="hideTip(event, 'fs37', 109)" onmouseover="showTip(event, 'fs37', 109)" class="fn">gunzip</span> <span onmouseout="hideTip(event, 'fs62', 110)" onmouseover="showTip(event, 'fs62', 110)" class="id">nq100FullFileGz</span> <span onmouseout="hideTip(event, 'fs60', 111)" onmouseover="showTip(event, 'fs60', 111)" class="id">nqFullFile</span>
+</code></pre>
+<p>Read the downloaded data into a list</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// Types - Earnings Announcement</span>
+<span class="k">type</span> <span onmouseout="hideTip(event, 'fs65', 112)" onmouseover="showTip(event, 'fs65', 112)" class="rt">CallId</span> <span class="o">=</span>
+    <span class="pn">{</span> <span class="prop">Ticker</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs39', 113)" onmouseover="showTip(event, 'fs39', 113)" class="rt">string</span>
+      <span class="prop">Exchange</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs39', 114)" onmouseover="showTip(event, 'fs39', 114)" class="rt">string</span>
+      <span class="prop">FiscalQuarter</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs66', 115)" onmouseover="showTip(event, 'fs66', 115)" class="vt">int</span>
+      <span class="prop">Date</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs67', 116)" onmouseover="showTip(event, 'fs67', 116)" class="vt">DateTime</span> <span class="pn">}</span>
+
+<span class="k">type</span> <span onmouseout="hideTip(event, 'fs68', 117)" onmouseover="showTip(event, 'fs68', 117)" class="rt">CallFull</span> <span class="o">=</span> 
+    <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs65', 118)" onmouseover="showTip(event, 'fs65', 118)" class="prop">CallId</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs65', 119)" onmouseover="showTip(event, 'fs65', 119)" class="rt">CallId</span>
+      <span class="prop">Header</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs39', 120)" onmouseover="showTip(event, 'fs39', 120)" class="rt">string</span>
+      <span class="prop">PreparedRemarks</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs39', 121)" onmouseover="showTip(event, 'fs39', 121)" class="rt">string</span>
+      <span class="prop">QuestionsAndAnswers</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs39', 122)" onmouseover="showTip(event, 'fs39', 122)" class="rt">string</span>
+      <span class="prop">Label</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs69', 123)" onmouseover="showTip(event, 'fs69', 123)" class="vt">float</span> <span class="pn">}</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs70', 124)" onmouseover="showTip(event, 'fs70', 124)" class="id">corpus</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs46', 125)" onmouseover="showTip(event, 'fs46', 125)" class="rt">File</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs71', 126)" onmouseover="showTip(event, 'fs71', 126)" class="id">ReadAllText</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs60', 127)" onmouseover="showTip(event, 'fs60', 127)" class="id">nqFullFile</span><span class="pn">)</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs72', 128)" onmouseover="showTip(event, 'fs72', 128)" class="rt">JsonSerializer</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs73', 129)" onmouseover="showTip(event, 'fs73', 129)" class="id">Deserialize</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs74', 130)" onmouseover="showTip(event, 'fs74', 130)" class="rt">List</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs68', 131)" onmouseover="showTip(event, 'fs68', 131)" class="rt">CallFull</span><span class="pn">&gt;</span><span class="pn">&gt;</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs74', 132)" onmouseover="showTip(event, 'fs74', 132)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs75', 133)" onmouseover="showTip(event, 'fs75', 133)" class="id">map</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs76', 134)" onmouseover="showTip(event, 'fs76', 134)" class="fn">x</span> <span class="k">-&gt;</span> 
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs77', 135)" onmouseover="showTip(event, 'fs77', 135)" class="fn">toTake</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs78', 136)" onmouseover="showTip(event, 'fs78', 136)" class="fn">min</span> <span class="n">10_000</span> <span onmouseout="hideTip(event, 'fs76', 137)" onmouseover="showTip(event, 'fs76', 137)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs79', 138)" onmouseover="showTip(event, 'fs79', 138)" class="prop">QuestionsAndAnswers</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs80', 139)" onmouseover="showTip(event, 'fs80', 139)" class="id">Length</span><span class="o">-</span><span class="n">1</span>
+        <span onmouseout="hideTip(event, 'fs76', 140)" onmouseover="showTip(event, 'fs76', 140)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs79', 141)" onmouseover="showTip(event, 'fs79', 141)" class="id">QuestionsAndAnswers</span><span class="pn">[</span><span class="o">..</span><span onmouseout="hideTip(event, 'fs77', 142)" onmouseover="showTip(event, 'fs77', 142)" class="fn">toTake</span><span class="pn">]</span><span class="pn">)</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs81', 143)" onmouseover="showTip(event, 'fs81', 143)" class="m">String</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs82', 144)" onmouseover="showTip(event, 'fs82', 144)" class="id">concat</span> <span class="s">&quot; &quot;</span>
+
+<span onmouseout="hideTip(event, 'fs70', 145)" onmouseover="showTip(event, 'fs70', 145)" class="id">corpus</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs80', 146)" onmouseover="showTip(event, 'fs80', 146)" class="id">Length</span>
+
+<span onmouseout="hideTip(event, 'fs70', 147)" onmouseover="showTip(event, 'fs70', 147)" class="id">corpus</span><span class="pn">[</span><span class="o">..</span><span class="n">500</span><span class="pn">]</span>
+</code></pre>
+<p>Set up the NN model.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs83', 148)" onmouseover="showTip(event, 'fs83', 148)" class="id">seqLen</span> <span class="o">=</span> <span class="n">64</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs84', 149)" onmouseover="showTip(event, 'fs84', 149)" class="id">batchSize</span> <span class="o">=</span> <span class="n">16</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs85', 150)" onmouseover="showTip(event, 'fs85', 150)" class="id">hiddenSize</span> <span class="o">=</span> <span class="n">512</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs86', 151)" onmouseover="showTip(event, 'fs86', 151)" class="id">numLayers</span> <span class="o">=</span> <span class="n">2</span>
+</code></pre>
+<p>Convert the text into tensor datasets.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs87', 152)" onmouseover="showTip(event, 'fs87', 152)" class="id">dataset</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs88', 153)" onmouseover="showTip(event, 'fs88', 153)" class="fn">TextDataset</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs70', 154)" onmouseover="showTip(event, 'fs70', 154)" class="id">corpus</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs83', 155)" onmouseover="showTip(event, 'fs83', 155)" class="id">seqLen</span><span class="pn">)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs89', 156)" onmouseover="showTip(event, 'fs89', 156)" class="id">loader</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs87', 157)" onmouseover="showTip(event, 'fs87', 157)" class="id">dataset</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs90', 158)" onmouseover="showTip(event, 'fs90', 158)" class="id">loader</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs84', 159)" onmouseover="showTip(event, 'fs84', 159)" class="fn">batchSize</span><span class="o">=</span><span onmouseout="hideTip(event, 'fs84', 160)" onmouseover="showTip(event, 'fs84', 160)" class="id">batchSize</span><span class="pn">,</span> <span class="fn">shuffle</span><span class="o">=</span><span class="k">true</span><span class="pn">)</span>
+</code></pre>
+<p>the total number of characters in the dataset:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs87', 161)" onmouseover="showTip(event, 'fs87', 161)" class="id">dataset</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs91', 162)" onmouseover="showTip(event, 'fs91', 162)" class="id">numChars</span>
+</code></pre>
+<p>the unique characters are:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs87', 163)" onmouseover="showTip(event, 'fs87', 163)" class="id">dataset</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs92', 164)" onmouseover="showTip(event, 'fs92', 164)" class="id">chars</span>
+</code></pre>
+<p>Actual model definition</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs93', 165)" onmouseover="showTip(event, 'fs93', 165)" class="id">rnn</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs94', 166)" onmouseover="showTip(event, 'fs94', 166)" class="fn">LSTM</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs87', 167)" onmouseover="showTip(event, 'fs87', 167)" class="id">dataset</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs91', 168)" onmouseover="showTip(event, 'fs91', 168)" class="id">numChars</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs85', 169)" onmouseover="showTip(event, 'fs85', 169)" class="id">hiddenSize</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs86', 170)" onmouseover="showTip(event, 'fs86', 170)" class="fn">numLayers</span><span class="o">=</span><span onmouseout="hideTip(event, 'fs86', 171)" onmouseover="showTip(event, 'fs86', 171)" class="id">numLayers</span><span class="pn">,</span> <span class="fn">batchFirst</span><span class="o">=</span><span class="k">true</span><span class="pn">)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs95', 172)" onmouseover="showTip(event, 'fs95', 172)" class="id">decoder</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs15', 173)" onmouseover="showTip(event, 'fs15', 173)" class="rt">dsharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs96', 174)" onmouseover="showTip(event, 'fs96', 174)" class="id">view</span><span class="pn">(</span><span class="pn">[</span><span class="o">-</span><span class="n">1</span><span class="pn">;</span> <span onmouseout="hideTip(event, 'fs85', 175)" onmouseover="showTip(event, 'fs85', 175)" class="id">hiddenSize</span><span class="pn">]</span><span class="pn">)</span> <span class="pn">--&gt;</span> <span onmouseout="hideTip(event, 'fs97', 176)" onmouseover="showTip(event, 'fs97', 176)" class="fn">Linear</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs85', 177)" onmouseover="showTip(event, 'fs85', 177)" class="id">hiddenSize</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs87', 178)" onmouseover="showTip(event, 'fs87', 178)" class="id">dataset</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs91', 179)" onmouseover="showTip(event, 'fs91', 179)" class="id">numChars</span><span class="pn">)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs98', 180)" onmouseover="showTip(event, 'fs98', 180)" class="id">languageModel</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs93', 181)" onmouseover="showTip(event, 'fs93', 181)" class="id">rnn</span> <span class="pn">--&gt;</span> <span onmouseout="hideTip(event, 'fs95', 182)" onmouseover="showTip(event, 'fs95', 182)" class="id">decoder</span>
+
+<span onmouseout="hideTip(event, 'fs99', 183)" onmouseover="showTip(event, 'fs99', 183)" class="fn">printfn</span> <span class="s">&quot;</span><span class="pf">%s</span><span class="s">&quot;</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs98', 184)" onmouseover="showTip(event, 'fs98', 184)" class="id">languageModel</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs100', 185)" onmouseover="showTip(event, 'fs100', 185)" class="id">summary</span><span class="pn">(</span><span class="pn">)</span><span class="pn">)</span>
+</code></pre>
+<p>If we want to retrain from a saved model.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs101', 186)" onmouseover="showTip(event, 'fs101', 186)" class="id">modelFileName</span> <span class="o">=</span> <span class="s">&quot;data/rnn_language_model_1.07.params&quot;</span>
+
+<span class="c">// You cannot load a model currently in .net notebooks.</span>
+<span class="c">// You will need to use a script to load model state.</span>
+<span class="k">if</span> <span class="k">false</span> <span class="k">then</span> <span class="c">// keep this false to use a local  model.</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs102', 187)" onmouseover="showTip(event, 'fs102', 187)" class="fn">modelUrl</span> <span class="o">=</span> <span class="s">&quot;https://www.dropbox.com/s/zzm2lrzbwwigzc8/rnn_language_model_1.07.params?dl=1&quot;</span>
+    <span onmouseout="hideTip(event, 'fs64', 188)" onmouseover="showTip(event, 'fs64', 188)" class="fn">download</span> <span onmouseout="hideTip(event, 'fs102', 189)" onmouseover="showTip(event, 'fs102', 189)" class="fn">modelUrl</span> <span onmouseout="hideTip(event, 'fs101', 190)" onmouseover="showTip(event, 'fs101', 190)" class="id">modelFileName</span> <span class="c">// downloads pre-trained model.</span>
+
+<span class="k">if</span> <span onmouseout="hideTip(event, 'fs46', 191)" onmouseover="showTip(event, 'fs46', 191)" class="rt">File</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs47', 192)" onmouseover="showTip(event, 'fs47', 192)" class="id">Exists</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs101', 193)" onmouseover="showTip(event, 'fs101', 193)" class="id">modelFileName</span><span class="pn">)</span> <span class="k">then</span> 
+    <span onmouseout="hideTip(event, 'fs99', 194)" onmouseover="showTip(event, 'fs99', 194)" class="fn">printfn</span> <span class="s">&quot;Resuming training from existing model params found: </span><span class="pf">%A</span><span class="s">&quot;</span> <span onmouseout="hideTip(event, 'fs101', 195)" onmouseover="showTip(event, 'fs101', 195)" class="id">modelFileName</span>
+    <span onmouseout="hideTip(event, 'fs98', 196)" onmouseover="showTip(event, 'fs98', 196)" class="id">languageModel</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs103', 197)" onmouseover="showTip(event, 'fs103', 197)" class="id">loadState2</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs101', 198)" onmouseover="showTip(event, 'fs101', 198)" class="id">modelFileName</span><span class="pn">)</span>
+</code></pre>
+<p>Prediction function.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs104', 199)" onmouseover="showTip(event, 'fs104', 199)" class="fn">predict</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs105', 200)" onmouseover="showTip(event, 'fs105', 200)" class="fn">text</span><span class="pn">:</span><span onmouseout="hideTip(event, 'fs39', 201)" onmouseover="showTip(event, 'fs39', 201)" class="rt">string</span><span class="pn">)</span> <span onmouseout="hideTip(event, 'fs106', 202)" onmouseover="showTip(event, 'fs106', 202)" class="fn">len</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs93', 203)" onmouseover="showTip(event, 'fs93', 203)" class="id">rnn</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs107', 204)" onmouseover="showTip(event, 'fs107', 204)" class="id">reset</span><span class="pn">(</span><span class="pn">)</span>
+    <span class="k">let</span> <span class="k">mutable</span> <span onmouseout="hideTip(event, 'fs108', 205)" onmouseover="showTip(event, 'fs108', 205)" class="mv">prediction</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs105', 206)" onmouseover="showTip(event, 'fs105', 206)" class="fn">text</span>
+    <span class="k">let</span> <span class="k">mutable</span> <span onmouseout="hideTip(event, 'fs109', 207)" onmouseover="showTip(event, 'fs109', 207)" class="mv">last</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs105', 208)" onmouseover="showTip(event, 'fs105', 208)" class="fn">text</span>
+    <span class="k">for</span> <span onmouseout="hideTip(event, 'fs110', 209)" onmouseover="showTip(event, 'fs110', 209)" class="fn">i</span> <span class="k">in</span> <span class="n">1..</span><span onmouseout="hideTip(event, 'fs106', 210)" onmouseover="showTip(event, 'fs106', 210)" class="fn">len</span> <span class="k">do</span>
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs111', 211)" onmouseover="showTip(event, 'fs111', 211)" class="fn">lastTensor</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs109', 212)" onmouseover="showTip(event, 'fs109', 212)" class="mv">last</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs87', 213)" onmouseover="showTip(event, 'fs87', 213)" class="id">dataset</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs112', 214)" onmouseover="showTip(event, 'fs112', 214)" class="id">textToTensor</span>
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs113', 215)" onmouseover="showTip(event, 'fs113', 215)" class="fn">nextCharProbs</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs111', 216)" onmouseover="showTip(event, 'fs111', 216)" class="fn">lastTensor</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs114', 217)" onmouseover="showTip(event, 'fs114', 217)" class="id">unsqueeze</span><span class="pn">(</span><span class="n">0</span><span class="pn">)</span> <span class="pn">--&gt;</span> <span onmouseout="hideTip(event, 'fs98', 218)" onmouseover="showTip(event, 'fs98', 218)" class="id">languageModel</span> <span class="pn">--&gt;</span> <span onmouseout="hideTip(event, 'fs15', 219)" onmouseover="showTip(event, 'fs15', 219)" class="rt">dsharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs115', 220)" onmouseover="showTip(event, 'fs115', 220)" class="id">slice</span><span class="pn">(</span><span class="pn">[</span><span class="o">-</span><span class="n">1</span><span class="pn">]</span><span class="pn">)</span> <span class="pn">--&gt;</span> <span onmouseout="hideTip(event, 'fs15', 221)" onmouseover="showTip(event, 'fs15', 221)" class="rt">dsharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs116', 222)" onmouseover="showTip(event, 'fs116', 222)" class="id">softmax</span><span class="pn">(</span><span class="o">-</span><span class="n">1</span><span class="pn">)</span>
+        <span onmouseout="hideTip(event, 'fs109', 223)" onmouseover="showTip(event, 'fs109', 223)" class="mv">last</span> <span class="k">&lt;-</span> <span onmouseout="hideTip(event, 'fs117', 224)" onmouseover="showTip(event, 'fs117', 224)" class="fn">Categorical</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs113', 225)" onmouseover="showTip(event, 'fs113', 225)" class="fn">nextCharProbs</span><span class="pn">)</span><span class="pn">.</span><span class="id">sample</span><span class="pn">(</span><span class="pn">)</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs66', 226)" onmouseover="showTip(event, 'fs66', 226)" class="fn">int</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs87', 227)" onmouseover="showTip(event, 'fs87', 227)" class="id">dataset</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs118', 228)" onmouseover="showTip(event, 'fs118', 228)" class="id">indexToChar</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs39', 229)" onmouseover="showTip(event, 'fs39', 229)" class="fn">string</span>
+        <span onmouseout="hideTip(event, 'fs108', 230)" onmouseover="showTip(event, 'fs108', 230)" class="mv">prediction</span> <span class="k">&lt;-</span> <span onmouseout="hideTip(event, 'fs108', 231)" onmouseover="showTip(event, 'fs108', 231)" class="mv">prediction</span> <span class="o">+</span> <span onmouseout="hideTip(event, 'fs109', 232)" onmouseover="showTip(event, 'fs109', 232)" class="mv">last</span>
+    <span onmouseout="hideTip(event, 'fs108', 233)" onmouseover="showTip(event, 'fs108', 233)" class="mv">prediction</span>
+</code></pre>
+<p>Test a prediction.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs104', 234)" onmouseover="showTip(event, 'fs104', 234)" class="fn">predict</span> <span class="s">&quot;Analyst What do you expect for gross margins next quarter?&quot;</span> <span class="n">512</span>
+</code></pre>
+<p>The actual model training.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs119', 235)" onmouseover="showTip(event, 'fs119', 235)" class="id">optimizer</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs120', 236)" onmouseover="showTip(event, 'fs120', 236)" class="fn">Adam</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs98', 237)" onmouseover="showTip(event, 'fs98', 237)" class="id">languageModel</span><span class="pn">,</span> <span class="fn">lr</span><span class="o">=</span><span onmouseout="hideTip(event, 'fs15', 238)" onmouseover="showTip(event, 'fs15', 238)" class="rt">dsharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs121', 239)" onmouseover="showTip(event, 'fs121', 239)" class="id">tensor</span><span class="pn">(</span><span class="n">0.001</span><span class="pn">)</span><span class="pn">)</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs122', 240)" onmouseover="showTip(event, 'fs122', 240)" class="id">losses</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs123', 241)" onmouseover="showTip(event, 'fs123', 241)" class="fn">ResizeArray</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs69', 242)" onmouseover="showTip(event, 'fs69', 242)" class="vt">float</span><span class="pn">&gt;</span><span class="pn">(</span><span class="pn">)</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs124', 243)" onmouseover="showTip(event, 'fs124', 243)" class="id">epochs</span> <span class="o">=</span> <span class="n">10</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs125', 244)" onmouseover="showTip(event, 'fs125', 244)" class="id">validInterval</span> <span class="o">=</span> <span class="n">100</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs126', 245)" onmouseover="showTip(event, 'fs126', 245)" class="id">start</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs8', 246)" onmouseover="showTip(event, 'fs8', 246)" class="id">System</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs67', 247)" onmouseover="showTip(event, 'fs67', 247)" class="vt">DateTime</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs127', 248)" onmouseover="showTip(event, 'fs127', 248)" class="id">Now</span>
+<span class="k">for</span> <span onmouseout="hideTip(event, 'fs128', 249)" onmouseover="showTip(event, 'fs128', 249)" class="fn">epoch</span> <span class="o">=</span> <span class="n">1</span> <span class="k">to</span> <span onmouseout="hideTip(event, 'fs124', 250)" onmouseover="showTip(event, 'fs124', 250)" class="id">epochs</span> <span class="k">do</span>
+    <span class="k">for</span> <span onmouseout="hideTip(event, 'fs129', 251)" onmouseover="showTip(event, 'fs129', 251)" class="fn">i</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs130', 252)" onmouseover="showTip(event, 'fs130', 252)" class="fn">x</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs131', 253)" onmouseover="showTip(event, 'fs131', 253)" class="fn">t</span> <span class="k">in</span> <span onmouseout="hideTip(event, 'fs89', 254)" onmouseover="showTip(event, 'fs89', 254)" class="id">loader</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs132', 255)" onmouseover="showTip(event, 'fs132', 255)" class="id">epoch</span><span class="pn">(</span><span class="pn">)</span> <span class="k">do</span>
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs133', 256)" onmouseover="showTip(event, 'fs133', 256)" class="fn">input</span> <span class="o">=</span>  <span onmouseout="hideTip(event, 'fs130', 257)" onmouseover="showTip(event, 'fs130', 257)" class="fn">x</span><span class="pn">[</span><span class="pn">*</span><span class="pn">,</span><span class="o">..</span><span onmouseout="hideTip(event, 'fs83', 258)" onmouseover="showTip(event, 'fs83', 258)" class="id">seqLen</span><span class="o">-</span><span class="n">2</span><span class="pn">]</span>
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs134', 259)" onmouseover="showTip(event, 'fs134', 259)" class="fn">target</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs131', 260)" onmouseover="showTip(event, 'fs131', 260)" class="fn">t</span><span class="pn">[</span><span class="pn">*</span><span class="pn">,</span><span class="n">1..</span><span class="pn">]</span>
+        <span onmouseout="hideTip(event, 'fs93', 261)" onmouseover="showTip(event, 'fs93', 261)" class="id">rnn</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs107', 262)" onmouseover="showTip(event, 'fs107', 262)" class="id">reset</span><span class="pn">(</span><span class="pn">)</span>
+        <span onmouseout="hideTip(event, 'fs98', 263)" onmouseover="showTip(event, 'fs98', 263)" class="id">languageModel</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs135', 264)" onmouseover="showTip(event, 'fs135', 264)" class="id">reverseDiff</span><span class="pn">(</span><span class="pn">)</span>
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs136', 265)" onmouseover="showTip(event, 'fs136', 265)" class="fn">output</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs133', 266)" onmouseover="showTip(event, 'fs133', 266)" class="fn">input</span> <span class="pn">--&gt;</span> <span onmouseout="hideTip(event, 'fs98', 267)" onmouseover="showTip(event, 'fs98', 267)" class="id">languageModel</span>
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs137', 268)" onmouseover="showTip(event, 'fs137', 268)" class="fn">loss</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs15', 269)" onmouseover="showTip(event, 'fs15', 269)" class="rt">dsharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs138', 270)" onmouseover="showTip(event, 'fs138', 270)" class="id">crossEntropyLoss</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs136', 271)" onmouseover="showTip(event, 'fs136', 271)" class="fn">output</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs134', 272)" onmouseover="showTip(event, 'fs134', 272)" class="fn">target</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs139', 273)" onmouseover="showTip(event, 'fs139', 273)" class="id">view</span><span class="pn">(</span><span class="o">-</span><span class="n">1</span><span class="pn">)</span><span class="pn">)</span>
+        <span onmouseout="hideTip(event, 'fs137', 274)" onmouseover="showTip(event, 'fs137', 274)" class="fn">loss</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs140', 275)" onmouseover="showTip(event, 'fs140', 275)" class="id">reverse</span><span class="pn">(</span><span class="pn">)</span>
+        <span onmouseout="hideTip(event, 'fs119', 276)" onmouseover="showTip(event, 'fs119', 276)" class="id">optimizer</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs141', 277)" onmouseover="showTip(event, 'fs141', 277)" class="id">step</span><span class="pn">(</span><span class="pn">)</span>
+        <span onmouseout="hideTip(event, 'fs122', 278)" onmouseover="showTip(event, 'fs122', 278)" class="id">losses</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs142', 279)" onmouseover="showTip(event, 'fs142', 279)" class="id">Add</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs69', 280)" onmouseover="showTip(event, 'fs69', 280)" class="fn">float</span> <span onmouseout="hideTip(event, 'fs137', 281)" onmouseover="showTip(event, 'fs137', 281)" class="fn">loss</span><span class="pn">)</span>
+        <span onmouseout="hideTip(event, 'fs99', 282)" onmouseover="showTip(event, 'fs99', 282)" class="fn">printfn</span> <span class="s">&quot;</span><span class="pf">%A</span><span class="s"> Epoch: </span><span class="pf">%A</span><span class="s">/</span><span class="pf">%A</span><span class="s"> minibatch: </span><span class="pf">%A</span><span class="s">/</span><span class="pf">%A</span><span class="s"> loss: </span><span class="pf">%A</span><span class="s">&quot;</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs8', 283)" onmouseover="showTip(event, 'fs8', 283)" class="id">System</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs67', 284)" onmouseover="showTip(event, 'fs67', 284)" class="vt">DateTime</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs127', 285)" onmouseover="showTip(event, 'fs127', 285)" class="id">Now</span> <span class="o">-</span> <span onmouseout="hideTip(event, 'fs126', 286)" onmouseover="showTip(event, 'fs126', 286)" class="id">start</span><span class="pn">)</span> <span onmouseout="hideTip(event, 'fs128', 287)" onmouseover="showTip(event, 'fs128', 287)" class="fn">epoch</span> <span onmouseout="hideTip(event, 'fs124', 288)" onmouseover="showTip(event, 'fs124', 288)" class="id">epochs</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs129', 289)" onmouseover="showTip(event, 'fs129', 289)" class="fn">i</span><span class="o">+</span><span class="n">1</span><span class="pn">)</span> <span onmouseout="hideTip(event, 'fs89', 290)" onmouseover="showTip(event, 'fs89', 290)" class="id">loader</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs143', 291)" onmouseover="showTip(event, 'fs143', 291)" class="id">length</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs69', 292)" onmouseover="showTip(event, 'fs69', 292)" class="fn">float</span> <span onmouseout="hideTip(event, 'fs137', 293)" onmouseover="showTip(event, 'fs137', 293)" class="fn">loss</span><span class="pn">)</span>
+
+        <span class="k">if</span> <span onmouseout="hideTip(event, 'fs129', 294)" onmouseover="showTip(event, 'fs129', 294)" class="fn">i</span> <span class="o">%</span> <span onmouseout="hideTip(event, 'fs125', 295)" onmouseover="showTip(event, 'fs125', 295)" class="id">validInterval</span> <span class="o">=</span> <span class="n">0</span> <span class="k">then</span>
+            <span onmouseout="hideTip(event, 'fs99', 296)" onmouseover="showTip(event, 'fs99', 296)" class="fn">printfn</span> <span class="s">&quot;\nSample from language model:\n</span><span class="pf">%A</span><span class="s">\n&quot;</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs104', 297)" onmouseover="showTip(event, 'fs104', 297)" class="fn">predict</span> <span class="s">&quot;Analyst Yes, I guess the first question,&quot;</span> <span class="n">512</span><span class="pn">)</span>
+
+            <span onmouseout="hideTip(event, 'fs98', 298)" onmouseover="showTip(event, 'fs98', 298)" class="id">languageModel</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs144', 299)" onmouseover="showTip(event, 'fs144', 299)" class="id">saveState2</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs101', 300)" onmouseover="showTip(event, 'fs101', 300)" class="id">modelFileName</span><span class="pn">)</span>
+
+        <span class="c">// free tensor memory, especially useful with GPU.</span>
+        <span onmouseout="hideTip(event, 'fs145', 301)" onmouseover="showTip(event, 'fs145', 301)" class="rt">GC</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs146', 302)" onmouseover="showTip(event, 'fs146', 302)" class="id">Collect</span><span class="pn">(</span><span class="pn">)</span> 
+</code></pre>
+
+        <div class="fsdocs-tip" id="fs1">namespace DiffSharp</div>
+<div class="fsdocs-tip" id="fs2">module Compose
+
+from DiffSharp</div>
+<div class="fsdocs-tip" id="fs3">namespace DiffSharp.Model</div>
+<div class="fsdocs-tip" id="fs4">namespace DiffSharp.Data</div>
+<div class="fsdocs-tip" id="fs5">namespace DiffSharp.Optim</div>
+<div class="fsdocs-tip" id="fs6">namespace DiffSharp.Util</div>
+<div class="fsdocs-tip" id="fs7">namespace DiffSharp.Distributions</div>
+<div class="fsdocs-tip" id="fs8">namespace System</div>
+<div class="fsdocs-tip" id="fs9">namespace System.IO</div>
+<div class="fsdocs-tip" id="fs10">namespace System.IO.Compression</div>
+<div class="fsdocs-tip" id="fs11">namespace System.Text</div>
+<div class="fsdocs-tip" id="fs12">namespace System.Text.Json</div>
+<div class="fsdocs-tip" id="fs13">type Environment =
+  static member Exit: exitCode: int -&gt; unit
+  static member ExpandEnvironmentVariables: name: string -&gt; string
+  static member FailFast: message: string -&gt; unit + 1 overload
+  static member GetCommandLineArgs: unit -&gt; string array
+  static member GetEnvironmentVariable: variable: string -&gt; string + 1 overload
+  static member GetEnvironmentVariables: unit -&gt; IDictionary + 1 overload
+  static member GetFolderPath: folder: SpecialFolder -&gt; string + 1 overload
+  static member GetLogicalDrives: unit -&gt; string array
+  static member SetEnvironmentVariable: variable: string * value: string -&gt; unit + 1 overload
+  static member CommandLine: string
+  ...<br /><em>&lt;summary&gt;Provides information about, and means to manipulate, the current environment and platform. This class cannot be inherited.&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs14">property Environment.CurrentDirectory: string with get, set<br /><em>&lt;summary&gt;Gets or sets the fully qualified path of the current working directory.&lt;/summary&gt;<br />&lt;exception cref=&quot;T:System.ArgumentException&quot;&gt;Attempted to set to an empty string (&quot;&quot;).&lt;/exception&gt;<br />&lt;exception cref=&quot;T:System.ArgumentNullException&quot;&gt;Attempted to set to &lt;see langword=&quot;null&quot; /&gt;.&lt;/exception&gt;<br />&lt;exception cref=&quot;T:System.IO.IOException&quot;&gt;An I/O error occurred.&lt;/exception&gt;<br />&lt;exception cref=&quot;T:System.IO.DirectoryNotFoundException&quot;&gt;Attempted to set a local path that cannot be found.&lt;/exception&gt;<br />&lt;exception cref=&quot;T:System.Security.SecurityException&quot;&gt;The caller does not have the appropriate permission.&lt;/exception&gt;<br />&lt;returns&gt;The directory path.&lt;/returns&gt;</em></div>
+<div class="fsdocs-tip" id="fs15">type dsharp =
+  static member abs: input: Tensor -&gt; Tensor
+  static member acos: input: Tensor -&gt; Tensor
+  static member add: a: Tensor * b: Tensor -&gt; Tensor
+  static member arange: endVal: float * ?startVal: float * ?step: float * ?device: Device * ?dtype: Dtype * ?backend: Backend -&gt; Tensor + 1 overload
+  static member arangeLike: input: Tensor * endVal: float * ?startVal: float * ?step: float * ?device: Device * ?dtype: Dtype * ?backend: Backend -&gt; Tensor + 1 overload
+  static member argmax: input: Tensor -&gt; int array + 1 overload
+  static member argmin: input: Tensor -&gt; int array + 1 overload
+  static member asin: input: Tensor -&gt; Tensor
+  static member atan: input: Tensor -&gt; Tensor
+  static member backends: unit -&gt; Backend list
+  ...<br /><em>&lt;summary&gt;
+ Tensor operations
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs16">static member dsharp.seed: ?seed: int -&gt; unit</div>
+<div class="fsdocs-tip" id="fs17">Multiple items<br />type ModelBase =
+  new: unit -&gt; ModelBase
+  val mutable mode: Mode
+  override ToString: unit -&gt; string
+  member addBuffer: items: Parameter seq * ?names: string seq -&gt; unit
+  member addModel: items: obj seq * ?names: string seq -&gt; unit
+  member addParameter: items: Parameter seq * ?names: string seq -&gt; unit
+  member checkItems: items: &#39;a0 seq * ?names: string seq -&gt; &#39;a0 array * string array
+  member clone: unit -&gt; ModelBase
+  member eval: unit -&gt; unit
+  member forwardDiff: derivatives: ParameterDict * ?nestingTag: uint32 -&gt; unit
+  ...<br /><em>&lt;summary&gt;Represents the base class of all models.&lt;/summary&gt;</em><br /><br />--------------------<br />new: unit -&gt; ModelBase</div>
+<div class="fsdocs-tip" id="fs18">val m: ModelBase</div>
+<div class="fsdocs-tip" id="fs19">val fileName: string</div>
+<div class="fsdocs-tip" id="fs20">val noDiff: bool option</div>
+<div class="fsdocs-tip" id="fs21">type bool = Boolean</div>
+<div class="fsdocs-tip" id="fs22">val noDiff: bool</div>
+<div class="fsdocs-tip" id="fs23">val defaultArg: arg: &#39;T option -&gt; defaultValue: &#39;T -&gt; &#39;T</div>
+<div class="fsdocs-tip" id="fs24">val ss: ParameterDict</div>
+<div class="fsdocs-tip" id="fs25">property ModelBase.state: ParameterDict with get, set<br /><em>&lt;summary&gt;TBD&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs26">member ParameterDict.copy: unit -&gt; ParameterDict</div>
+<div class="fsdocs-tip" id="fs27">member ParameterDict.noDiff: unit -&gt; unit</div>
+<div class="fsdocs-tip" id="fs28">val saveBinary: object: &#39;T -&gt; fileName: string -&gt; unit<br /><em>&lt;summary&gt;
+ Saves the given value to the given local file using binary serialization.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs29">val filename: string</div>
+<div class="fsdocs-tip" id="fs30">val s: ParameterDict</div>
+<div class="fsdocs-tip" id="fs31">Multiple items<br />type ParameterDict =
+  interface IEnumerable
+  interface IEnumerable&lt;string * Parameter&gt;
+  new: unit -&gt; ParameterDict
+  override ToString: unit -&gt; string
+  member add: name: &#39;a0 * parameter: Parameter -&gt; unit + 2 overloads
+  member clear: unit -&gt; unit
+  member copy: unit -&gt; ParameterDict
+  member flatten: unit -&gt; Tensor
+  member forwardDiff: derivatives: ParameterDict * ?nestingTag: uint32 -&gt; unit
+  member iter: f: (string * Parameter -&gt; unit) -&gt; unit
+  ...<br /><em>&lt;summary&gt;Represents a collection of named parameters.&lt;/summary&gt;</em><br /><br />--------------------<br />new: unit -&gt; ParameterDict</div>
+<div class="fsdocs-tip" id="fs32">val loadBinary: fileName: string -&gt; &#39;T<br /><em>&lt;summary&gt;
+ Loads the given value from the given local file using binary serialization.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs33">member ParameterDict.iter: f: (string * Parameter -&gt; unit) -&gt; unit</div>
+<div class="fsdocs-tip" id="fs34">val n: string</div>
+<div class="fsdocs-tip" id="fs35">val p: Parameter</div>
+<div class="fsdocs-tip" id="fs36">Parameter.value: Tensor</div>
+<div class="fsdocs-tip" id="fs37">val gunzip: inputFile: string -&gt; outputFile: string -&gt; unit</div>
+<div class="fsdocs-tip" id="fs38">val inputFile: string</div>
+<div class="fsdocs-tip" id="fs39">Multiple items<br />val string: value: &#39;T -&gt; string<br /><br />--------------------<br />type string = String</div>
+<div class="fsdocs-tip" id="fs40">val outputFile: string</div>
+<div class="fsdocs-tip" id="fs41">type Directory =
+  static member CreateDirectory: path: string -&gt; DirectoryInfo + 1 overload
+  static member CreateSymbolicLink: path: string * pathToTarget: string -&gt; FileSystemInfo
+  static member CreateTempSubdirectory: ?prefix: string -&gt; DirectoryInfo
+  static member Delete: path: string -&gt; unit + 1 overload
+  static member EnumerateDirectories: path: string -&gt; IEnumerable&lt;string&gt; + 3 overloads
+  static member EnumerateFileSystemEntries: path: string -&gt; IEnumerable&lt;string&gt; + 3 overloads
+  static member EnumerateFiles: path: string -&gt; IEnumerable&lt;string&gt; + 3 overloads
+  static member Exists: path: string -&gt; bool
+  static member GetCreationTime: path: string -&gt; DateTime
+  static member GetCreationTimeUtc: path: string -&gt; DateTime
+  ...<br /><em>&lt;summary&gt;Exposes static methods for creating, moving, and enumerating through directories and subdirectories. This class cannot be inherited.&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs42">Directory.CreateDirectory(path: string) : DirectoryInfo<br />Directory.CreateDirectory(path: string, unixCreateMode: UnixFileMode) : DirectoryInfo</div>
+<div class="fsdocs-tip" id="fs43">type Path =
+  static member ChangeExtension: path: string * extension: string -&gt; string
+  static member Combine: path1: string * path2: string -&gt; string + 3 overloads
+  static member EndsInDirectorySeparator: path: ReadOnlySpan&lt;char&gt; -&gt; bool + 1 overload
+  static member Exists: path: string -&gt; bool
+  static member GetDirectoryName: path: ReadOnlySpan&lt;char&gt; -&gt; ReadOnlySpan&lt;char&gt; + 1 overload
+  static member GetExtension: path: ReadOnlySpan&lt;char&gt; -&gt; ReadOnlySpan&lt;char&gt; + 1 overload
+  static member GetFileName: path: ReadOnlySpan&lt;char&gt; -&gt; ReadOnlySpan&lt;char&gt; + 1 overload
+  static member GetFileNameWithoutExtension: path: ReadOnlySpan&lt;char&gt; -&gt; ReadOnlySpan&lt;char&gt; + 1 overload
+  static member GetFullPath: path: string -&gt; string + 1 overload
+  static member GetInvalidFileNameChars: unit -&gt; char array
+  ...<br /><em>&lt;summary&gt;Performs operations on &lt;see cref=&quot;T:System.String&quot; /&gt; instances that contain file or directory path information. These operations are performed in a cross-platform manner.&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs44">Path.GetDirectoryName(path: string) : string<br />Path.GetDirectoryName(path: ReadOnlySpan&lt;char&gt;) : ReadOnlySpan&lt;char&gt;</div>
+<div class="fsdocs-tip" id="fs45">val ignore: value: &#39;T -&gt; unit</div>
+<div class="fsdocs-tip" id="fs46">type File =
+  static member AppendAllLines: path: string * contents: IEnumerable&lt;string&gt; -&gt; unit + 1 overload
+  static member AppendAllLinesAsync: path: string * contents: IEnumerable&lt;string&gt; * encoding: Encoding * ?cancellationToken: CancellationToken -&gt; Task + 1 overload
+  static member AppendAllText: path: string * contents: string -&gt; unit + 1 overload
+  static member AppendAllTextAsync: path: string * contents: string * encoding: Encoding * ?cancellationToken: CancellationToken -&gt; Task + 1 overload
+  static member AppendText: path: string -&gt; StreamWriter
+  static member Copy: sourceFileName: string * destFileName: string -&gt; unit + 1 overload
+  static member Create: path: string -&gt; FileStream + 2 overloads
+  static member CreateSymbolicLink: path: string * pathToTarget: string -&gt; FileSystemInfo
+  static member CreateText: path: string -&gt; StreamWriter
+  static member Decrypt: path: string -&gt; unit
+  ...<br /><em>&lt;summary&gt;Provides static methods for the creation, copying, deletion, moving, and opening of a single file, and aids in the creation of &lt;see cref=&quot;T:System.IO.FileStream&quot; /&gt; objects.&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs47">File.Exists(path: string) : bool</div>
+<div class="fsdocs-tip" id="fs48">File.Delete(path: string) : unit</div>
+<div class="fsdocs-tip" id="fs49">val inputStream: FileStream</div>
+<div class="fsdocs-tip" id="fs50">File.OpenRead(path: string) : FileStream</div>
+<div class="fsdocs-tip" id="fs51">val outputStream: FileStream</div>
+<div class="fsdocs-tip" id="fs52">File.Create(path: string) : FileStream<br />File.Create(path: string, bufferSize: int) : FileStream<br />File.Create(path: string, bufferSize: int, options: FileOptions) : FileStream</div>
+<div class="fsdocs-tip" id="fs53">val gzipStream: GZipStream</div>
+<div class="fsdocs-tip" id="fs54">Multiple items<br />type GZipStream =
+  inherit Stream
+  new: stream: Stream * compressionLevel: CompressionLevel -&gt; unit + 3 overloads
+  member BeginRead: buffer: byte array * offset: int * count: int * asyncCallback: AsyncCallback * asyncState: obj -&gt; IAsyncResult
+  member BeginWrite: buffer: byte array * offset: int * count: int * asyncCallback: AsyncCallback * asyncState: obj -&gt; IAsyncResult
+  member CopyTo: destination: Stream * bufferSize: int -&gt; unit
+  member CopyToAsync: destination: Stream * bufferSize: int * cancellationToken: CancellationToken -&gt; Task
+  member DisposeAsync: unit -&gt; ValueTask
+  member EndRead: asyncResult: IAsyncResult -&gt; int
+  member EndWrite: asyncResult: IAsyncResult -&gt; unit
+  member Flush: unit -&gt; unit
+  ...<br /><em>&lt;summary&gt;Provides methods and properties used to compress and decompress streams by using the GZip data format specification.&lt;/summary&gt;</em><br /><br />--------------------<br />GZipStream(stream: Stream, compressionLevel: CompressionLevel) : GZipStream<br />GZipStream(stream: Stream, mode: CompressionMode) : GZipStream<br />GZipStream(stream: Stream, compressionLevel: CompressionLevel, leaveOpen: bool) : GZipStream<br />GZipStream(stream: Stream, mode: CompressionMode, leaveOpen: bool) : GZipStream</div>
+<div class="fsdocs-tip" id="fs55">[&lt;Struct&gt;]
+type CompressionMode =
+  | Decompress = 0
+  | Compress = 1<br /><em>&lt;summary&gt;Specifies whether to compress data to or decompress data from the underlying stream.&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs56">field CompressionMode.Decompress: CompressionMode = 0</div>
+<div class="fsdocs-tip" id="fs57">Stream.CopyTo(destination: Stream) : unit<br />GZipStream.CopyTo(destination: Stream, bufferSize: int) : unit</div>
+<div class="fsdocs-tip" id="fs58">val nq100FullUrl: string</div>
+<div class="fsdocs-tip" id="fs59">val dataFolder: string</div>
+<div class="fsdocs-tip" id="fs60">val nqFullFile: string</div>
+<div class="fsdocs-tip" id="fs61">Path.Combine([&lt;ParamArray&gt;] paths: string array) : string<br />Path.Combine(path1: string, path2: string) : string<br />Path.Combine(path1: string, path2: string, path3: string) : string<br />Path.Combine(path1: string, path2: string, path3: string, path4: string) : string</div>
+<div class="fsdocs-tip" id="fs62">val nq100FullFileGz: string</div>
+<div class="fsdocs-tip" id="fs63">String.Replace(oldValue: string, newValue: string) : string<br />String.Replace(oldChar: char, newChar: char) : string<br />String.Replace(oldValue: string, newValue: string, comparisonType: StringComparison) : string<br />String.Replace(oldValue: string, newValue: string, ignoreCase: bool, culture: Globalization.CultureInfo) : string</div>
+<div class="fsdocs-tip" id="fs64">val download: url: string -&gt; localFileName: string -&gt; unit<br /><em>&lt;summary&gt;
+ Synchronously downloads the given URL to the given local file.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs65">type CallId =
+  {
+    Ticker: string
+    Exchange: string
+    FiscalQuarter: int
+    Date: DateTime
+  }</div>
+<div class="fsdocs-tip" id="fs66">Multiple items<br />val int: value: &#39;T -&gt; int (requires member op_Explicit)<br /><br />--------------------<br />type int = int32<br /><br />--------------------<br />type int&lt;&#39;Measure&gt; =
+  int</div>
+<div class="fsdocs-tip" id="fs67">Multiple items<br />[&lt;Struct&gt;]
+type DateTime =
+  new: year: int * month: int * day: int -&gt; unit + 16 overloads
+  member Add: value: TimeSpan -&gt; DateTime
+  member AddDays: value: float -&gt; DateTime
+  member AddHours: value: float -&gt; DateTime
+  member AddMicroseconds: value: float -&gt; DateTime
+  member AddMilliseconds: value: float -&gt; DateTime
+  member AddMinutes: value: float -&gt; DateTime
+  member AddMonths: months: int -&gt; DateTime
+  member AddSeconds: value: float -&gt; DateTime
+  member AddTicks: value: int64 -&gt; DateTime
+  ...<br /><em>&lt;summary&gt;Represents an instant in time, typically expressed as a date and time of day.&lt;/summary&gt;</em><br /><br />--------------------<br />DateTime ()<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(ticks: int64) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(ticks: int64, kind: DateTimeKind) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(date: DateOnly, time: TimeOnly) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(date: DateOnly, time: TimeOnly, kind: DateTimeKind) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, calendar: Globalization.Calendar) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int, kind: DateTimeKind) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int, calendar: Globalization.Calendar) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em></div>
+<div class="fsdocs-tip" id="fs68">type CallFull =
+  {
+    CallId: CallId
+    Header: string
+    PreparedRemarks: string
+    QuestionsAndAnswers: string
+    Label: float
+  }</div>
+<div class="fsdocs-tip" id="fs69">Multiple items<br />val float: value: &#39;T -&gt; float (requires member op_Explicit)<br /><br />--------------------<br />type float = Double<br /><br />--------------------<br />type float&lt;&#39;Measure&gt; =
+  float</div>
+<div class="fsdocs-tip" id="fs70">val corpus: string</div>
+<div class="fsdocs-tip" id="fs71">File.ReadAllText(path: string) : string<br />File.ReadAllText(path: string, encoding: Text.Encoding) : string</div>
+<div class="fsdocs-tip" id="fs72">type JsonSerializer =
+  static member Deserialize: utf8Json: Stream * jsonTypeInfo: JsonTypeInfo -&gt; obj + 39 overloads
+  static member DeserializeAsync: utf8Json: Stream * jsonTypeInfo: JsonTypeInfo * ?cancellationToken: CancellationToken -&gt; ValueTask&lt;obj&gt; + 4 overloads
+  static member DeserializeAsyncEnumerable&lt;&#39;TValue&gt; : utf8Json: Stream * ?options: JsonSerializerOptions * ?cancellationToken: CancellationToken -&gt; IAsyncEnumerable&lt;&#39;TValue&gt; + 1 overload
+  static member Serialize: utf8Json: Stream * value: obj * jsonTypeInfo: JsonTypeInfo -&gt; unit + 14 overloads
+  static member SerializeAsync: utf8Json: Stream * value: obj * jsonTypeInfo: JsonTypeInfo * ?cancellationToken: CancellationToken -&gt; Task + 4 overloads
+  static member SerializeToDocument: value: obj * jsonTypeInfo: JsonTypeInfo -&gt; JsonDocument + 4 overloads
+  static member SerializeToElement: value: obj * jsonTypeInfo: JsonTypeInfo -&gt; JsonElement + 4 overloads
+  static member SerializeToNode: value: obj * jsonTypeInfo: JsonTypeInfo -&gt; JsonNode + 4 overloads
+  static member SerializeToUtf8Bytes: value: obj * jsonTypeInfo: JsonTypeInfo -&gt; byte array + 4 overloads
+  static member IsReflectionEnabledByDefault: bool<br /><em>&lt;summary&gt;Provides functionality to serialize objects or value types to JSON and to deserialize JSON into objects or value types.&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs73">JsonSerializer.Deserialize&lt;&#39;TValue&gt;(reader: byref&lt;Utf8JsonReader&gt;, jsonTypeInfo: Serialization.Metadata.JsonTypeInfo&lt;&#39;TValue&gt;) : &#39;TValue<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />JsonSerializer.Deserialize&lt;&#39;TValue&gt;(reader: byref&lt;Utf8JsonReader&gt;, ?options: JsonSerializerOptions) : &#39;TValue<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />JsonSerializer.Deserialize&lt;&#39;TValue&gt;(node: Nodes.JsonNode, jsonTypeInfo: Serialization.Metadata.JsonTypeInfo&lt;&#39;TValue&gt;) : &#39;TValue<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />JsonSerializer.Deserialize&lt;&#39;TValue&gt;(node: Nodes.JsonNode, ?options: JsonSerializerOptions) : &#39;TValue<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />JsonSerializer.Deserialize&lt;&#39;TValue&gt;(element: JsonElement, jsonTypeInfo: Serialization.Metadata.JsonTypeInfo&lt;&#39;TValue&gt;) : &#39;TValue<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />JsonSerializer.Deserialize&lt;&#39;TValue&gt;(element: JsonElement, ?options: JsonSerializerOptions) : &#39;TValue<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />JsonSerializer.Deserialize&lt;&#39;TValue&gt;(document: JsonDocument, jsonTypeInfo: Serialization.Metadata.JsonTypeInfo&lt;&#39;TValue&gt;) : &#39;TValue<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />JsonSerializer.Deserialize&lt;&#39;TValue&gt;(document: JsonDocument, ?options: JsonSerializerOptions) : &#39;TValue<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />JsonSerializer.Deserialize&lt;&#39;TValue&gt;(json: string, jsonTypeInfo: Serialization.Metadata.JsonTypeInfo&lt;&#39;TValue&gt;) : &#39;TValue<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />JsonSerializer.Deserialize&lt;&#39;TValue&gt;(json: string, ?options: JsonSerializerOptions) : &#39;TValue<br />&#160;&#160;&#160;<em>(+0 other overloads)</em></div>
+<div class="fsdocs-tip" id="fs74">Multiple items<br />module List
+
+from Microsoft.FSharp.Collections<br /><br />--------------------<br />type List&lt;&#39;T&gt; =
+  | op_Nil
+  | op_ColonColon of Head: &#39;T * Tail: &#39;T list
+  interface IReadOnlyList&lt;&#39;T&gt;
+  interface IReadOnlyCollection&lt;&#39;T&gt;
+  interface IEnumerable
+  interface IEnumerable&lt;&#39;T&gt;
+  member GetReverseIndex: rank: int * offset: int -&gt; int
+  member GetSlice: startIndex: int option * endIndex: int option -&gt; &#39;T list
+  static member Cons: head: &#39;T * tail: &#39;T list -&gt; &#39;T list
+  member Head: &#39;T
+  member IsEmpty: bool
+  member Item: index: int -&gt; &#39;T with get
+  ...</div>
+<div class="fsdocs-tip" id="fs75">val map: mapping: (&#39;T -&gt; &#39;U) -&gt; list: &#39;T list -&gt; &#39;U list</div>
+<div class="fsdocs-tip" id="fs76">val x: CallFull</div>
+<div class="fsdocs-tip" id="fs77">val toTake: int</div>
+<div class="fsdocs-tip" id="fs78">val min: e1: &#39;T -&gt; e2: &#39;T -&gt; &#39;T (requires comparison)</div>
+<div class="fsdocs-tip" id="fs79">CallFull.QuestionsAndAnswers: string</div>
+<div class="fsdocs-tip" id="fs80">property String.Length: int with get</div>
+<div class="fsdocs-tip" id="fs81">Multiple items<br />type String =
+  interface IEnumerable&lt;char&gt;
+  interface IEnumerable
+  interface ICloneable
+  interface IComparable
+  interface IComparable&lt;string&gt;
+  interface IConvertible
+  interface IEquatable&lt;string&gt;
+  interface IParsable&lt;string&gt;
+  interface ISpanParsable&lt;string&gt;
+  new: value: nativeptr&lt;char&gt; -&gt; unit + 8 overloads
+  ...<br /><em>&lt;summary&gt;Represents text as a sequence of UTF-16 code units.&lt;/summary&gt;</em><br /><br />--------------------<br />String(value: nativeptr&lt;char&gt;) : String<br />String(value: char array) : String<br />String(value: ReadOnlySpan&lt;char&gt;) : String<br />String(value: nativeptr&lt;sbyte&gt;) : String<br />String(c: char, count: int) : String<br />String(value: nativeptr&lt;char&gt;, startIndex: int, length: int) : String<br />String(value: char array, startIndex: int, length: int) : String<br />String(value: nativeptr&lt;sbyte&gt;, startIndex: int, length: int) : String<br />String(value: nativeptr&lt;sbyte&gt;, startIndex: int, length: int, enc: Text.Encoding) : String</div>
+<div class="fsdocs-tip" id="fs82">val concat: sep: string -&gt; strings: string seq -&gt; string</div>
+<div class="fsdocs-tip" id="fs83">val seqLen: int</div>
+<div class="fsdocs-tip" id="fs84">val batchSize: int</div>
+<div class="fsdocs-tip" id="fs85">val hiddenSize: int</div>
+<div class="fsdocs-tip" id="fs86">val numLayers: int</div>
+<div class="fsdocs-tip" id="fs87">val dataset: TextDataset</div>
+<div class="fsdocs-tip" id="fs88">Multiple items<br />type TextDataset =
+  inherit Dataset
+  new: text: string * seqLength: int * ?chars: string -&gt; TextDataset
+  member charToIndex: c: char -&gt; int
+  member indexToChar: i: int -&gt; char
+  override item: i: int -&gt; Tensor * Tensor
+  member tensorToText: tensor: Tensor -&gt; string
+  member textToTensor: text: string -&gt; Tensor
+  member chars: char array
+  override length: int
+  member numChars: int<br /><br />--------------------<br />new: text: string * seqLength: int * ?chars: string -&gt; TextDataset</div>
+<div class="fsdocs-tip" id="fs89">val loader: DataLoader</div>
+<div class="fsdocs-tip" id="fs90">member Dataset.loader: batchSize: int * ?shuffle: bool * ?dropLast: bool * ?device: Device * ?dtype: Dtype * ?backend: Backend * ?targetDevice: Device * ?targetDtype: Dtype * ?targetBackend: Backend -&gt; DataLoader</div>
+<div class="fsdocs-tip" id="fs91">property TextDataset.numChars: int with get</div>
+<div class="fsdocs-tip" id="fs92">property TextDataset.chars: char array with get</div>
+<div class="fsdocs-tip" id="fs93">val rnn: LSTM</div>
+<div class="fsdocs-tip" id="fs94">Multiple items<br />type LSTM =
+  inherit Model
+  new: inFeatures: int * outFeatures: int * ?numLayers: int * ?bias: bool * ?batchFirst: bool * ?dropout: float * ?bidirectional: bool -&gt; LSTM
+  override ToString: unit -&gt; string
+  override forward: value: Tensor -&gt; Tensor
+  member reset: unit -&gt; unit
+  member cell: Tensor with get, set
+  member hidden: Tensor with get, set<br /><em>&lt;summary&gt;Long short-term memory (LSTM) recurrent neural network.&lt;/summary&gt;</em><br /><br />--------------------<br />new: inFeatures: int * outFeatures: int * ?numLayers: int * ?bias: bool * ?batchFirst: bool * ?dropout: float * ?bidirectional: bool -&gt; LSTM</div>
+<div class="fsdocs-tip" id="fs95">val decoder: Model&lt;Tensor,Tensor&gt;</div>
+<div class="fsdocs-tip" id="fs96">static member dsharp.view: shape: int seq -&gt; (Tensor -&gt; Tensor)<br />static member dsharp.view: shape: int -&gt; (Tensor -&gt; Tensor)<br />static member dsharp.view: input: Tensor * shape: int -&gt; Tensor<br />static member dsharp.view: input: Tensor * shape: int seq -&gt; Tensor</div>
+<div class="fsdocs-tip" id="fs97">Multiple items<br />type Linear =
+  inherit Model
+  new: inFeatures: int * outFeatures: int * ?bias: bool -&gt; Linear
+  override ToString: unit -&gt; string
+  override forward: value: Tensor -&gt; Tensor<br /><em>&lt;summary&gt;A model that applies a linear transformation to the incoming data: \(y = xA^T + b\)&lt;/summary&gt;</em><br /><br />--------------------<br />new: inFeatures: int * outFeatures: int * ?bias: bool -&gt; Linear</div>
+<div class="fsdocs-tip" id="fs98">val languageModel: Model&lt;Tensor,Tensor&gt;</div>
+<div class="fsdocs-tip" id="fs99">val printfn: format: Printf.TextWriterFormat&lt;&#39;T&gt; -&gt; &#39;T</div>
+<div class="fsdocs-tip" id="fs100">member ModelBase.summary: unit -&gt; string</div>
+<div class="fsdocs-tip" id="fs101">val modelFileName: string</div>
+<div class="fsdocs-tip" id="fs102">val modelUrl: string</div>
+<div class="fsdocs-tip" id="fs103">member ModelBase.loadState2: filename: string -&gt; unit</div>
+<div class="fsdocs-tip" id="fs104">val predict: text: string -&gt; len: int -&gt; string</div>
+<div class="fsdocs-tip" id="fs105">val text: string</div>
+<div class="fsdocs-tip" id="fs106">val len: int</div>
+<div class="fsdocs-tip" id="fs107">member LSTM.reset: unit -&gt; unit</div>
+<div class="fsdocs-tip" id="fs108">val mutable prediction: string</div>
+<div class="fsdocs-tip" id="fs109">val mutable last: string</div>
+<div class="fsdocs-tip" id="fs110">val i: int32</div>
+<div class="fsdocs-tip" id="fs111">val lastTensor: Tensor</div>
+<div class="fsdocs-tip" id="fs112">member TextDataset.textToTensor: text: string -&gt; Tensor</div>
+<div class="fsdocs-tip" id="fs113">val nextCharProbs: Tensor</div>
+<div class="fsdocs-tip" id="fs114">member Tensor.unsqueeze: dim: int -&gt; Tensor</div>
+<div class="fsdocs-tip" id="fs115">static member dsharp.slice: index: int seq -&gt; (Tensor -&gt; Tensor)<br />static member dsharp.slice: input: Tensor * index: int seq -&gt; Tensor</div>
+<div class="fsdocs-tip" id="fs116">static member dsharp.softmax: dim: int -&gt; (Tensor -&gt; Tensor)<br />static member dsharp.softmax: input: Tensor * dim: int -&gt; Tensor</div>
+<div class="fsdocs-tip" id="fs117">Multiple items<br />type Categorical =
+  inherit TensorDistribution
+  new: ?probs: Tensor * ?logits: Tensor -&gt; Categorical
+  override ToString: unit -&gt; string
+  override logprob: value: Tensor -&gt; Tensor
+  override sample: unit -&gt; Tensor
+  override batchShape: Shape
+  override eventShape: Shape
+  member logits: Tensor
+  override mean: Tensor
+  member probs: Tensor
+  ...<br /><em>&lt;summary&gt;Represents a Categorial distribution.&lt;/summary&gt;</em><br /><br />--------------------<br />new: ?probs: Tensor * ?logits: Tensor -&gt; Categorical</div>
+<div class="fsdocs-tip" id="fs118">member TextDataset.indexToChar: i: int -&gt; char</div>
+<div class="fsdocs-tip" id="fs119">val optimizer: Adam</div>
+<div class="fsdocs-tip" id="fs120">Multiple items<br />type Adam =
+  inherit Optimizer
+  new: model: Model * ?lr: Tensor * ?beta1: Tensor * ?beta2: Tensor * ?eps: Tensor * ?weightDecay: Tensor * ?reversible: bool -&gt; Adam
+  override updateRule: name: string -&gt; t: Tensor -&gt; Tensor<br /><em>&lt;summary&gt;TBD&lt;/summary&gt;</em><br /><br />--------------------<br />new: model: Model * ?lr: Tensor * ?beta1: Tensor * ?beta2: Tensor * ?eps: Tensor * ?weightDecay: Tensor * ?reversible: bool -&gt; Adam</div>
+<div class="fsdocs-tip" id="fs121">static member dsharp.tensor: ?device: Device * ?dtype: Dtype * ?backend: Backend -&gt; (&#39;a -&gt; Tensor)<br />static member dsharp.tensor: value: obj * ?device: Device * ?dtype: Dtype * ?backend: Backend -&gt; Tensor</div>
+<div class="fsdocs-tip" id="fs122">val losses: ResizeArray&lt;float&gt;</div>
+<div class="fsdocs-tip" id="fs123">type ResizeArray&lt;&#39;T&gt; = Collections.Generic.List&lt;&#39;T&gt;</div>
+<div class="fsdocs-tip" id="fs124">val epochs: int</div>
+<div class="fsdocs-tip" id="fs125">val validInterval: int</div>
+<div class="fsdocs-tip" id="fs126">val start: DateTime</div>
+<div class="fsdocs-tip" id="fs127">property DateTime.Now: DateTime with get<br /><em>&lt;summary&gt;Gets a &lt;see cref=&quot;T:System.DateTime&quot; /&gt; object that is set to the current date and time on this computer, expressed as the local time.&lt;/summary&gt;<br />&lt;returns&gt;An object whose value is the current local date and time.&lt;/returns&gt;</em></div>
+<div class="fsdocs-tip" id="fs128">val epoch: int</div>
+<div class="fsdocs-tip" id="fs129">val i: int</div>
+<div class="fsdocs-tip" id="fs130">val x: Tensor</div>
+<div class="fsdocs-tip" id="fs131">val t: Tensor</div>
+<div class="fsdocs-tip" id="fs132">member DataLoader.epoch: ?numBatches: int -&gt; (int * Tensor * Tensor) seq</div>
+<div class="fsdocs-tip" id="fs133">val input: Tensor</div>
+<div class="fsdocs-tip" id="fs134">val target: Tensor</div>
+<div class="fsdocs-tip" id="fs135">member ModelBase.reverseDiff: ?nestingTag: uint32 -&gt; unit</div>
+<div class="fsdocs-tip" id="fs136">val output: Tensor</div>
+<div class="fsdocs-tip" id="fs137">val loss: Tensor</div>
+<div class="fsdocs-tip" id="fs138">static member dsharp.crossEntropyLoss: target: Tensor -&gt; (Tensor -&gt; Tensor)<br />static member dsharp.crossEntropyLoss: input: Tensor * target: Tensor * ?weight: Tensor * ?reduction: string -&gt; Tensor</div>
+<div class="fsdocs-tip" id="fs139">member Tensor.view: shape: int -&gt; Tensor<br />member Tensor.view: shape: int seq -&gt; Tensor</div>
+<div class="fsdocs-tip" id="fs140">member Tensor.reverse: ?value: Tensor * ?zeroDerivatives: bool -&gt; unit</div>
+<div class="fsdocs-tip" id="fs141">member Optimizer.step: unit -&gt; unit</div>
+<div class="fsdocs-tip" id="fs142">Collections.Generic.List.Add(item: float) : unit</div>
+<div class="fsdocs-tip" id="fs143">property DataLoader.length: int with get</div>
+<div class="fsdocs-tip" id="fs144">member ModelBase.saveState2: fileName: string * ?noDiff: bool -&gt; unit</div>
+<div class="fsdocs-tip" id="fs145">type GC =
+  static member AddMemoryPressure: bytesAllocated: int64 -&gt; unit
+  static member AllocateArray&lt;&#39;T&gt; : length: int * ?pinned: bool -&gt; &#39;T array
+  static member AllocateUninitializedArray&lt;&#39;T&gt; : length: int * ?pinned: bool -&gt; &#39;T array
+  static member CancelFullGCNotification: unit -&gt; unit
+  static member Collect: unit -&gt; unit + 4 overloads
+  static member CollectionCount: generation: int -&gt; int
+  static member EndNoGCRegion: unit -&gt; unit
+  static member GetAllocatedBytesForCurrentThread: unit -&gt; int64
+  static member GetConfigurationVariables: unit -&gt; IReadOnlyDictionary&lt;string,obj&gt;
+  static member GetGCMemoryInfo: unit -&gt; GCMemoryInfo + 1 overload
+  ...<br /><em>&lt;summary&gt;Controls the system garbage collector, a service that automatically reclaims unused memory.&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs146">GC.Collect() : unit<br />GC.Collect(generation: int) : unit<br />GC.Collect(generation: int, mode: GCCollectionMode) : unit<br />GC.Collect(generation: int, mode: GCCollectionMode, blocking: bool) : unit<br />GC.Collect(generation: int, mode: GCCollectionMode, blocking: bool, compacting: bool) : unit</div>
+
+    </div>
+</main>
+<aside id="fsdocs-page-menu">
+    <p id="on-this-page">On this page</p>
+    <ul>
+  <li class="level-2">
+    <a href="#Data">
+      Data
+    </a>
+  </li>
+</ul>
+</aside>
+<dialog>
+    <input type="search" placeholder="Search docs" />
+    <div class="results">
+        <ul></ul>
+        <p class="empty">Type something to start searching.</p>
+    </div>
+</dialog>
+<script type="module" src="/Teaching/content/fsdocs-tips.js"></script>
+<script type="module" src="/Teaching/content/fsdocs-theme-toggle.js"></script>
+<script type="module" src="/Teaching/content/fsdocs-theme.js"></script>
+<script type="module" src="/Teaching/content/fsdocs-search.js"></script>
+
+</body>
+</html>

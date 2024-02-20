@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en" data-root="/Teaching/">
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Nicholas Hirschey; Davide Costa" name="author">
+    <!-- Opengraph properties (https://ogp.me/) -->
+    <meta property="og:site_name" content="Teaching">
+    <meta property="og:title" content="Select Project Signals" />
+    <meta property="og:url" content="/Teaching/select-project-signal.html">
+    <meta property="og:type" content="website" />
+    <!-- Twitter cards (https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="/Teaching/">
+    <meta name="twitter:title" content="Select Project Signals">
+    
+    <title>Select Project Signals | Teaching</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="/Teaching/img/logo.png" rel="icon" sizes="32x32" type="image/png"/>
+    <script type="application/javascript" src="/Teaching/content/fsdocs-theme-set-dark.js"></script>
+    <link href="/Teaching/content/fsdocs-default.css" rel="stylesheet" type="text/css"/>
+    <link href="/Teaching/content/fsdocs-theme.css" rel="stylesheet" type="text/css"/>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js"></script>
+    
+</head>
+<body class="content">
+<header>
+    <div class="start">
+        <div id="menu-toggle">
+            <iconify-icon class="icon closed" height="22" icon="eva:menu-fill" width="22"></iconify-icon>
+            <iconify-icon class="icon open" height="22" icon="mi:close" width="22"></iconify-icon>
+            <input type="checkbox" name="mobile-menu" />
+            <ul class="menu">
+                <li class="nav-header">Links</li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/nhirschey/Teaching/blob/main/LICENSE.md">License</a>
+                </li>
+                <li class="nav-item"><a class="nav-link"
+                                        href="https://github.com/nhirschey/Teaching/blob/main/CHANGELOG.md">Release
+                    Notes</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/nhirschey/Teaching/">Source
+                    Repository</a></li>
+                <li class="nav-header ">
+  Getting Started
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/install.html">
+    Install Software
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/learn-fsharp.html">
+    Learn F#
+  </a>
+</li>             
+<li class="nav-header ">
+  Lectures
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/stockslongrun.html">
+    Stocks for the long run
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/stocksandbonds.html">
+    Stocks and bonds
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/riskyweight.html">
+    Risky Weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolatilityTiming.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolatilityManagedTypes.html">
+    Volatility Managed, but with different vols
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolAndReturnPred.html">
+    Volatility and Return predictions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/mveComparisons.html">
+    More managed portfolio comparisons
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/PortfolioFormation-SimpleExample.html">
+    Building a strategy
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Momentum-Class.html">
+    Momentum Signal
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/optimization.html">
+    Optimization
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/revisitRiskyWeights.html">
+    Revisiting Mean-variance optimal risky weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/premiums.html">
+    Premiums
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/calls-nn.html">
+    Calls NN
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/portfolio-statistics.html">
+    Basic Portfolio Statistics
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/sentiment-mlnet.html">
+    Sentiment classification
+  </a>
+</li>             
+<li class="nav-header active">
+  Assignments
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-1-download-data.html">
+    Webscraping HTML to CSV
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-tuples-and-records.html">
+    Tuples and Records (with solutions)
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-collection-functions.html">
+    Collection functions (with solutions)
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignment-risky-weights.html">
+    Risky Weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignment-volatility-timing.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-item active">
+  <a class="nav-link" href="/Teaching/select-project-signal.html">
+    Select Project Signals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/signal-exploration.html">
+    Signal Exploration
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/assignment-signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/assignment-performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-plotting.html">
+    Plotting (with solutions)
+  </a>
+</li>             
+<li class="nav-header ">
+  Practice Quizzes
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-list-module.html">
+    List module functions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-options.html">
+    Options
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-match-expressions.html">
+    Match expressions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-map-collection.html">
+    Map collection
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-discriminated-union.html">
+    Dicriminated Union
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-portfolios.html">
+    Portfolios
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-factors.html">
+    Factors
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-folding.html">
+    Fold and Friends
+  </a>
+</li>             
+<li class="nav-header ">
+  Other
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Common.html">
+    Common
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/loading-scripts.html">
+    Loading external scripts
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Portfolio.html">
+    Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/YahooFinance.html">
+    YahooFinance
+  </a>
+</li>
+                
+            </ul>
+        </div>
+        <a href="/Teaching/">
+            <img alt="Header menu logo" src="/Teaching/img/logo.png">
+            <strong>Teaching</strong>
+        </a>
+    </div>
+    <div class="end">
+        <a href="https://github.com/nhirschey/Teaching/" target="_blank">
+            <iconify-icon icon="uil:github" width="26" height="26"></iconify-icon>
+        </a>
+        <iconify-icon id="search-btn" icon="carbon:search" class="search" width="24" height="24"></iconify-icon>
+        <fsdocs-theme-toggle></fsdocs-theme-toggle>
+    </div>
+</header>
+<aside id="fsdocs-main-menu">
+    <ul class="menu">
+        <li class="nav-header">Links</li>
+        <li class="nav-item"><a class="nav-link" href="https://github.com/nhirschey/Teaching/blob/main/LICENSE.md">License</a>
+        </li>
+        <li class="nav-item"><a class="nav-link"
+                                href="https://github.com/nhirschey/Teaching/blob/main/CHANGELOG.md">Release
+            Notes</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://github.com/nhirschey/Teaching/">Source
+            Repository</a></li>
+        <li class="nav-header ">
+  Getting Started
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/install.html">
+    Install Software
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/learn-fsharp.html">
+    Learn F#
+  </a>
+</li>             
+<li class="nav-header ">
+  Lectures
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/stockslongrun.html">
+    Stocks for the long run
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/stocksandbonds.html">
+    Stocks and bonds
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/riskyweight.html">
+    Risky Weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolatilityTiming.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolatilityManagedTypes.html">
+    Volatility Managed, but with different vols
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/VolAndReturnPred.html">
+    Volatility and Return predictions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/mveComparisons.html">
+    More managed portfolio comparisons
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/PortfolioFormation-SimpleExample.html">
+    Building a strategy
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Momentum-Class.html">
+    Momentum Signal
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/optimization.html">
+    Optimization
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/revisitRiskyWeights.html">
+    Revisiting Mean-variance optimal risky weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/premiums.html">
+    Premiums
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/calls-nn.html">
+    Calls NN
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/portfolio-statistics.html">
+    Basic Portfolio Statistics
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/sentiment-mlnet.html">
+    Sentiment classification
+  </a>
+</li>             
+<li class="nav-header active">
+  Assignments
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-1-download-data.html">
+    Webscraping HTML to CSV
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-tuples-and-records.html">
+    Tuples and Records (with solutions)
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-collection-functions.html">
+    Collection functions (with solutions)
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignment-risky-weights.html">
+    Risky Weights
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignment-volatility-timing.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-item active">
+  <a class="nav-link" href="/Teaching/select-project-signal.html">
+    Select Project Signals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/signal-exploration.html">
+    Signal Exploration
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/assignment-signal-portfolio.html">
+    Signal Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/assignments/assignment-performance-evaluation.html">
+    Performance Evaluation
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/football-plotting.html">
+    Plotting (with solutions)
+  </a>
+</li>             
+<li class="nav-header ">
+  Practice Quizzes
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-list-module.html">
+    List module functions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-options.html">
+    Options
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-match-expressions.html">
+    Match expressions
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-map-collection.html">
+    Map collection
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-discriminated-union.html">
+    Dicriminated Union
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-portfolios.html">
+    Portfolios
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-factors.html">
+    Factors
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/quizzes/quiz-folding.html">
+    Fold and Friends
+  </a>
+</li>             
+<li class="nav-header ">
+  Other
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Common.html">
+    Common
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/loading-scripts.html">
+    Loading external scripts
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/Portfolio.html">
+    Portfolio
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="/Teaching/YahooFinance.html">
+    YahooFinance
+  </a>
+</li>
+        
+    </ul>
+</aside>
+<main>
+    <div id="content">
+        
+<p><a href="https://mybinder.org/v2/gh/nhirschey/teaching/gh-pages?filepath=select-project-signal.ipynb"><img src="img/badge-binder.svg" alt="Binder" /></a>&emsp;
+<a href="/Teaching//select-project-signal.fsx"><img src="img/badge-script.svg" alt="Script" /></a>&emsp;
+<a href="/Teaching//select-project-signal.ipynb"><img src="img/badge-notebook.svg" alt="Notebook" /></a></p>
+<h1><a name="Submitting-your-trading-signal-preferences" class="anchor" href="#Submitting-your-trading-signal-preferences">Submitting your trading signal preferences.</a></h1>
+<p>You need to select your main trading signal.
+Everybody will examine a different signal,
+so you need to give me an ordered list of your preferred signals.</p>
+<p>I will randomly iterate through students and
+assign them their top choice from among the signals remaining.</p>
+<p>The signals are listed in the "Project signals list.xlsx" file
+that you can find on moodle.
+- Use the <strong>VARIABLE</strong> column to identify
+the variable that you want.
+- Do not use any other columns to identify your variable.
+- Only variables from that excel file are valid.</p>
+<p>You will submit your choices as a .csv file. Here's how to do that.</p>
+<p>Use the <a href="https://fsprojects.github.io/FSharp.Data/library/CsvProvider.html">FSharp.Data CsvProvider</a>
+to construct your csv file.
+All the csv related stuff below comes from things discussed somewhere on that webpage.</p>
+<p>First construct a sample, then use the type provider
+to define the type from the sample.</p>
+<p>Below you will find a variable named "signals".
+Do not modify it. This is to check that you
+do not have a typo in your preferred signals.
+The code that you use starts after the
+"Code starts now" section.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">//****************************************</span>
+<span class="c">//*****Code starts below this section*****</span>
+<span class="c">//****************************************</span>
+<span class="c">// Do not modify the signals variable</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="id">signals</span> <span class="o">=</span>
+    <span class="pn">[</span><span class="s">&quot;niq_su&quot;</span>
+     <span class="s">&quot;ret_6_1&quot;</span>
+     <span class="s">&quot;ret_12_1&quot;</span>
+     <span class="s">&quot;saleq_su&quot;</span>
+     <span class="s">&quot;tax_gr1a&quot;</span>
+     <span class="s">&quot;ni_inc8q&quot;</span>
+     <span class="s">&quot;prc_highprc_252d&quot;</span>
+     <span class="s">&quot;resff3_6_1&quot;</span>
+     <span class="s">&quot;resff3_12_1&quot;</span>
+     <span class="s">&quot;be_me&quot;</span>
+     <span class="s">&quot;debt_me&quot;</span>
+     <span class="s">&quot;at_me&quot;</span>
+     <span class="s">&quot;ret_60_12&quot;</span>
+     <span class="s">&quot;ni_me&quot;</span>
+     <span class="s">&quot;fcf_me&quot;</span>
+     <span class="s">&quot;div12m_me&quot;</span>
+     <span class="s">&quot;eqpo_me&quot;</span>
+     <span class="s">&quot;eqnpo_me&quot;</span>
+     <span class="s">&quot;sale_gr3&quot;</span>
+     <span class="s">&quot;sale_gr1&quot;</span>
+     <span class="s">&quot;ebitda_mev&quot;</span>
+     <span class="s">&quot;sale_me&quot;</span>
+     <span class="s">&quot;ocf_me&quot;</span>
+     <span class="s">&quot;intrinsic_value&quot;</span>
+     <span class="s">&quot;bev_mev&quot;</span>
+     <span class="s">&quot;netdebt_me&quot;</span>
+     <span class="s">&quot;eq_dur&quot;</span>
+     <span class="s">&quot;capex_abn&quot;</span>
+     <span class="s">&quot;at_gr1&quot;</span>
+     <span class="s">&quot;ppeinv_gr1a&quot;</span>
+     <span class="s">&quot;noa_at&quot;</span>
+     <span class="s">&quot;noa_gr1a&quot;</span>
+     <span class="s">&quot;lnoa_gr1a&quot;</span>
+     <span class="s">&quot;capx_gr1&quot;</span>
+     <span class="s">&quot;capx_gr2&quot;</span>
+     <span class="s">&quot;capx_gr3&quot;</span>
+     <span class="s">&quot;chcsho_12m&quot;</span>
+     <span class="s">&quot;eqnpo_12m&quot;</span>
+     <span class="s">&quot;debt_gr3&quot;</span>
+     <span class="s">&quot;inv_gr1&quot;</span>
+     <span class="s">&quot;inv_gr1a&quot;</span>
+     <span class="s">&quot;oaccruals_at&quot;</span>
+     <span class="s">&quot;taccruals_at&quot;</span>
+     <span class="s">&quot;cowc_gr1a&quot;</span>
+     <span class="s">&quot;coa_gr1a&quot;</span>
+     <span class="s">&quot;col_gr1a&quot;</span>
+     <span class="s">&quot;nncoa_gr1a&quot;</span>
+     <span class="s">&quot;ncoa_gr1a&quot;</span>
+     <span class="s">&quot;ncol_gr1a&quot;</span>
+     <span class="s">&quot;nfna_gr1a&quot;</span>
+     <span class="s">&quot;sti_gr1a&quot;</span>
+     <span class="s">&quot;lti_gr1a&quot;</span>
+     <span class="s">&quot;fnl_gr1a&quot;</span>
+     <span class="s">&quot;be_gr1a&quot;</span>
+     <span class="s">&quot;oaccruals_ni&quot;</span>
+     <span class="s">&quot;taccruals_ni&quot;</span>
+     <span class="s">&quot;netis_at&quot;</span>
+     <span class="s">&quot;eqnetis_at&quot;</span>
+     <span class="s">&quot;dbnetis_at&quot;</span>
+     <span class="s">&quot;niq_be&quot;</span>
+     <span class="s">&quot;niq_be_chg1&quot;</span>
+     <span class="s">&quot;niq_at&quot;</span>
+     <span class="s">&quot;niq_at_chg1&quot;</span>
+     <span class="s">&quot;ebit_bev&quot;</span>
+     <span class="s">&quot;ebit_sale&quot;</span>
+     <span class="s">&quot;sale_bev&quot;</span>
+     <span class="s">&quot;at_turnover&quot;</span>
+     <span class="s">&quot;gp_at&quot;</span>
+     <span class="s">&quot;gp_atl1&quot;</span>
+     <span class="s">&quot;ope_be&quot;</span>
+     <span class="s">&quot;ope_bel1&quot;</span>
+     <span class="s">&quot;op_at&quot;</span>
+     <span class="s">&quot;op_atl1&quot;</span>
+     <span class="s">&quot;cop_at&quot;</span>
+     <span class="s">&quot;cop_atl1&quot;</span>
+     <span class="s">&quot;f_score&quot;</span>
+     <span class="s">&quot;o_score&quot;</span>
+     <span class="s">&quot;z_score&quot;</span>
+     <span class="s">&quot;pi_nix&quot;</span>
+     <span class="s">&quot;at_be&quot;</span>
+     <span class="s">&quot;saleq_gr1&quot;</span>
+     <span class="s">&quot;rd_me&quot;</span>
+     <span class="s">&quot;rd_sale&quot;</span>
+     <span class="s">&quot;opex_at&quot;</span>
+     <span class="s">&quot;emp_gr1&quot;</span>
+     <span class="s">&quot;rd5_at&quot;</span>
+     <span class="s">&quot;age&quot;</span>
+     <span class="s">&quot;dsale_dinv&quot;</span>
+     <span class="s">&quot;dsale_drec&quot;</span>
+     <span class="s">&quot;dgp_dsale&quot;</span>
+     <span class="s">&quot;dsale_dsga&quot;</span>
+     <span class="s">&quot;sale_emp_gr1&quot;</span>
+     <span class="s">&quot;tangibility&quot;</span>
+     <span class="s">&quot;kz_index&quot;</span>
+     <span class="s">&quot;ocfq_saleq_std&quot;</span>
+     <span class="s">&quot;cash_at&quot;</span>
+     <span class="s">&quot;ni_ar1&quot;</span>
+     <span class="s">&quot;ni_ivol&quot;</span>
+     <span class="s">&quot;earnings_variability&quot;</span>
+     <span class="s">&quot;aliq_at&quot;</span>
+     <span class="s">&quot;aliq_mat&quot;</span>
+     <span class="s">&quot;seas_1_1an&quot;</span>
+     <span class="s">&quot;seas_1_1na&quot;</span>
+     <span class="s">&quot;seas_2_5an&quot;</span>
+     <span class="s">&quot;seas_2_5na&quot;</span>
+     <span class="s">&quot;seas_6_10an&quot;</span>
+     <span class="s">&quot;seas_6_10na&quot;</span>
+     <span class="s">&quot;seas_11_15an&quot;</span>
+     <span class="s">&quot;seas_11_15na&quot;</span>
+     <span class="s">&quot;seas_16_20an&quot;</span>
+     <span class="s">&quot;seas_16_20na&quot;</span>
+     <span class="s">&quot;market_equity&quot;</span>
+     <span class="s">&quot;ivol_ff3_21d&quot;</span>
+     <span class="s">&quot;ivol_capm_252d&quot;</span>
+     <span class="s">&quot;ivol_capm_21d&quot;</span>
+     <span class="s">&quot;ivol_hxz4_21d&quot;</span>
+     <span class="s">&quot;rvol_21d&quot;</span>
+     <span class="s">&quot;beta_60m&quot;</span>
+     <span class="s">&quot;betabab_1260d&quot;</span>
+     <span class="s">&quot;beta_dimson_21d&quot;</span>
+     <span class="s">&quot;turnover_126d&quot;</span>
+     <span class="s">&quot;turnover_var_126d&quot;</span>
+     <span class="s">&quot;dolvol_126d&quot;</span>
+     <span class="s">&quot;dolvol_var_126d&quot;</span>
+     <span class="s">&quot;prc&quot;</span>
+     <span class="s">&quot;ami_126d&quot;</span>
+     <span class="s">&quot;zero_trades_21d&quot;</span>
+     <span class="s">&quot;zero_trades_126d&quot;</span>
+     <span class="s">&quot;zero_trades_252d&quot;</span>
+     <span class="s">&quot;rmax1_21d&quot;</span>
+     <span class="s">&quot;rskew_21d&quot;</span>
+     <span class="s">&quot;iskew_capm_21d&quot;</span>
+     <span class="s">&quot;iskew_ff3_21d&quot;</span>
+     <span class="s">&quot;iskew_hxz4_21d&quot;</span>
+     <span class="s">&quot;coskew_21d&quot;</span>
+     <span class="s">&quot;ret_1_0&quot;</span>
+     <span class="s">&quot;betadown_252d&quot;</span>
+     <span class="s">&quot;bidaskhl_21d&quot;</span>
+     <span class="s">&quot;ret_3_1&quot;</span>
+     <span class="s">&quot;ret_9_1&quot;</span>
+     <span class="s">&quot;ret_12_7&quot;</span>
+     <span class="s">&quot;corr_1260d&quot;</span>
+     <span class="s">&quot;rmax5_21d&quot;</span>
+     <span class="s">&quot;rmax5_rvol_21d&quot;</span>
+     <span class="s">&quot;ni_be&quot;</span>
+     <span class="s">&quot;ocf_at&quot;</span>
+     <span class="s">&quot;ocf_at_chg1&quot;</span>
+     <span class="s">&quot;mispricing_perf&quot;</span>
+     <span class="s">&quot;mispricing_mgmt&quot;</span>
+     <span class="s">&quot;qmj&quot;</span>
+     <span class="s">&quot;qmj_prof&quot;</span>
+     <span class="s">&quot;qmj_growth&quot;</span>
+     <span class="s">&quot;qmj_safety&quot;</span><span class="pn">]</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="fn">set</span> 
+
+<span class="c">//****************************************</span>
+<span class="c">//****Code starts now*********************</span>
+<span class="c">//****************************************</span>
+</code></pre>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="pp">#r</span> <span class="s">&quot;nuget: FSharp.Data, 5.0.2&quot;</span>
+
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="id">FSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="id">Data</span>
+<span class="pn">[&lt;</span><span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="rt">Literal</span><span class="pn">&gt;]</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs6', 6)" onmouseover="showTip(event, 'fs6', 6)" class="prop">submissionCsvSample</span> <span class="o">=</span> <span class="s">&quot;StudentId (int), Preference (int), Signal (string)&quot;</span>
+
+<span class="k">type</span> <span onmouseout="hideTip(event, 'fs7', 7)" onmouseover="showTip(event, 'fs7', 7)" class="d">SubmissionCsv</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs8', 8)" onmouseover="showTip(event, 'fs8', 8)" class="rt">CsvProvider</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs6', 9)" onmouseover="showTip(event, 'fs6', 9)" class="prop">submissionCsvSample</span><span class="pn">&gt;</span>
+</code></pre>
+<p>What are your (ordered) preferences?</p>
+<ol>
+<li>Fill in with your student id so that I know who you are.</li>
+</ol>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs9', 10)" onmouseover="showTip(event, 'fs9', 10)" class="id">myStudentId</span> <span class="o">=</span> <span class="n">007</span>
+
+<span class="c">// check that you are paying attention:</span>
+<span class="k">if</span> <span onmouseout="hideTip(event, 'fs9', 11)" onmouseover="showTip(event, 'fs9', 11)" class="id">myStudentId</span> <span class="o">=</span> <span class="n">007</span> <span class="k">then</span> <span onmouseout="hideTip(event, 'fs10', 12)" onmouseover="showTip(event, 'fs10', 12)" class="fn">failwith</span> <span class="s">&quot;Are you sure that 007 is your student id number?&quot;</span>
+</code></pre>
+<ol>
+<li>Fill in with your preferences</li>
+</ol>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs11', 13)" onmouseover="showTip(event, 'fs11', 13)" class="id">myPreferences</span> <span class="o">=</span>
+    <span class="c">// **Make sure you use the exact string from the VARIABLE column**</span>
+    <span class="c">// do as many choices as you want.</span>
+    <span class="c">// If you give me 3 and you run out of choices because</span>
+    <span class="c">// everybody else already took your top 3 choices,</span>
+    <span class="c">// then I will just randomly assign you something.</span>
+    <span class="c">//</span>
+    <span class="c">// So if you care it&#39;s probably best to give more choices.</span>
+    <span class="pn">[</span>
+        <span class="s">&quot;eqpo_me&quot;</span> <span class="c">// first choice **Use VARIABLE, not the name &quot;Payout Yield&quot;**</span>
+        <span class="s">&quot;eqnpo_me&quot;</span><span class="c">// second choice</span>
+        <span class="s">&quot;sale_gr3&quot;</span><span class="c">// third choice</span>
+        <span class="s">&quot;sale_gr1&quot;</span><span class="c">// fourth choice</span>
+    <span class="pn">]</span>
+</code></pre>
+<p>This code checks if you have a typo in myPreferences
+Run it. If there's typo you will see an exception.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs12', 14)" onmouseover="showTip(event, 'fs12', 14)" class="id">typos</span> <span class="o">=</span>
+    <span class="c">//[|&quot;eqpo_me1&quot;;&quot;eqpo_me2&quot;|]</span>
+    <span onmouseout="hideTip(event, 'fs11', 15)" onmouseover="showTip(event, 'fs11', 15)" class="id">myPreferences</span> 
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs13', 16)" onmouseover="showTip(event, 'fs13', 16)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs14', 17)" onmouseover="showTip(event, 'fs14', 17)" class="id">filter</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs15', 18)" onmouseover="showTip(event, 'fs15', 18)" class="fn">signal</span> <span class="k">-&gt;</span> <span class="fn">not</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs1', 19)" onmouseover="showTip(event, 'fs1', 19)" class="id">signals</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs16', 20)" onmouseover="showTip(event, 'fs16', 20)" class="id">Contains</span> <span onmouseout="hideTip(event, 'fs15', 21)" onmouseover="showTip(event, 'fs15', 21)" class="fn">signal</span><span class="pn">)</span><span class="pn">)</span>
+<span class="k">if</span> <span class="fn">not</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs13', 22)" onmouseover="showTip(event, 'fs13', 22)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs17', 23)" onmouseover="showTip(event, 'fs17', 23)" class="id">isEmpty</span> <span onmouseout="hideTip(event, 'fs12', 24)" onmouseover="showTip(event, 'fs12', 24)" class="id">typos</span><span class="pn">)</span> <span class="k">then</span> 
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs18', 25)" onmouseover="showTip(event, 'fs18', 25)" class="fn">typos</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs18', 26)" onmouseover="showTip(event, 'fs18', 26)" class="id">typos</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs19', 27)" onmouseover="showTip(event, 'fs19', 27)" class="m">String</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs20', 28)" onmouseover="showTip(event, 'fs20', 28)" class="id">concat</span> <span class="s">&quot; and &quot;</span>
+    <span onmouseout="hideTip(event, 'fs10', 29)" onmouseover="showTip(event, 'fs10', 29)" class="fn">failwith</span> <span class="pn">(</span><span class="s">$&quot;{</span><span onmouseout="hideTip(event, 'fs18', 30)" onmouseover="showTip(event, 'fs18', 30)" class="fn">typos</span><span class="s">} is not a signal. Check spelling.&quot;</span><span class="pn">)</span>
+<span class="k">else</span> <span onmouseout="hideTip(event, 'fs21', 31)" onmouseover="showTip(event, 'fs21', 31)" class="fn">printfn</span> <span class="s">&quot;</span><span class="pf">%s</span><span class="s">&quot;</span> <span class="s">&quot;Congrats, no typos&quot;</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs22', 32)" onmouseover="showTip(event, 'fs22', 32)" class="fn">rowCreator</span> <span onmouseout="hideTip(event, 'fs23', 33)" onmouseover="showTip(event, 'fs23', 33)" class="fn">i</span> <span onmouseout="hideTip(event, 'fs15', 34)" onmouseover="showTip(event, 'fs15', 34)" class="fn">signal</span> <span class="o">=</span>
+    <span class="c">// Csv types have a member .Row that constructs a row.</span>
+    <span class="c">// Technically, the Csv is a class and .Row is a member of that</span>
+    <span class="c">// class. But none of this matters. Just think of .Row as a</span>
+    <span class="c">// function that goes with the csv type that allows you to use</span>
+    <span class="c">// named parameters.</span>
+    <span class="c">//</span>
+    <span class="c">// if you hover over &quot;.Row&quot; below, you can see what the columns of the row</span>
+    <span class="c">// are (studentId,preference,signal). Intellisense should also</span>
+    <span class="c">// pop them up for you if you were typing it from scratch. Such</span>
+    <span class="c">// as delete the comma from &quot;myStudentId,&quot; and then retype the comma.</span>
+    <span class="c">// you should see a popup with the column info saying what is in</span>
+    <span class="c">// a row.</span>
+    <span onmouseout="hideTip(event, 'fs7', 35)" onmouseover="showTip(event, 'fs7', 35)" class="d">SubmissionCsv</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs24', 36)" onmouseover="showTip(event, 'fs24', 36)" class="id">Row</span>
+        <span class="pn">(</span><span class="fn">studentId</span><span class="o">=</span><span onmouseout="hideTip(event, 'fs9', 37)" onmouseover="showTip(event, 'fs9', 37)" class="id">myStudentId</span><span class="pn">,</span>
+         <span class="fn">preference</span><span class="o">=</span><span onmouseout="hideTip(event, 'fs23', 38)" onmouseover="showTip(event, 'fs23', 38)" class="fn">i</span><span class="pn">,</span>
+         <span onmouseout="hideTip(event, 'fs15', 39)" onmouseover="showTip(event, 'fs15', 39)" class="fn">signal</span><span class="o">=</span><span onmouseout="hideTip(event, 'fs15', 40)" onmouseover="showTip(event, 'fs15', 40)" class="fn">signal</span><span class="pn">)</span>
+
+<span class="c">// test</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs25', 41)" onmouseover="showTip(event, 'fs25', 41)" class="id">test1</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs22', 42)" onmouseover="showTip(event, 'fs22', 42)" class="fn">rowCreator</span> <span class="n">0</span> <span class="s">&quot;sale_gr1&quot;</span>
+<span onmouseout="hideTip(event, 'fs25', 43)" onmouseover="showTip(event, 'fs25', 43)" class="id">test1</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs26', 44)" onmouseover="showTip(event, 'fs26', 44)" class="id">StudentId</span>
+<span onmouseout="hideTip(event, 'fs25', 45)" onmouseover="showTip(event, 'fs25', 45)" class="id">test1</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs27', 46)" onmouseover="showTip(event, 'fs27', 46)" class="id">Signal</span>
+<span onmouseout="hideTip(event, 'fs25', 47)" onmouseover="showTip(event, 'fs25', 47)" class="id">test1</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs28', 48)" onmouseover="showTip(event, 'fs28', 48)" class="id">Preference</span>
+</code></pre>
+<p>We'll use List.mapi to create our rows.
+List.mapi is like List.map, but it adds
+the index of the list (i)
+as a parameter to the function.
+This is useful when you want to use the index
+of the element in the list
+as part of your function.</p>
+<p>Here, we've ordered our list myPreferences
+based on our first, second, 3rd choice etc.
+So we're using the index of the element in the list as our
+preference column.</p>
+<p>0 is first choice, 1 is second choice, 2 is 3rd choice ...</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs29', 49)" onmouseover="showTip(event, 'fs29', 49)" class="id">mySubmission</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs11', 50)" onmouseover="showTip(event, 'fs11', 50)" class="id">myPreferences</span>
+    <span class="c">// What we have below is the same as</span>
+    <span class="c">// |&gt; List.mapi(fun i x -&gt; rowCreator i x)</span>
+    <span class="c">//</span>
+    <span class="c">// but because we wrote rowCreator to accept i and x</span>
+    <span class="c">// as the first two function inputs, we can </span>
+    <span class="c">// take the shortcut and do below.</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs13', 51)" onmouseover="showTip(event, 'fs13', 51)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs30', 52)" onmouseover="showTip(event, 'fs30', 52)" class="id">mapi</span> <span onmouseout="hideTip(event, 'fs22', 53)" onmouseover="showTip(event, 'fs22', 53)" class="fn">rowCreator</span>
+</code></pre>
+<p>This is an array of rows.</p>
+<p>Check your first preference</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs31', 54)" onmouseover="showTip(event, 'fs31', 54)" class="id">myFirstPreference</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs29', 55)" onmouseover="showTip(event, 'fs29', 55)" class="id">mySubmission</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs13', 56)" onmouseover="showTip(event, 'fs13', 56)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs32', 57)" onmouseover="showTip(event, 'fs32', 57)" class="id">head</span>
+
+<span onmouseout="hideTip(event, 'fs31', 58)" onmouseover="showTip(event, 'fs31', 58)" class="id">myFirstPreference</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs26', 59)" onmouseover="showTip(event, 'fs26', 59)" class="id">StudentId</span> <span class="c">// make sure it&#39;s not 7</span>
+<span onmouseout="hideTip(event, 'fs31', 60)" onmouseover="showTip(event, 'fs31', 60)" class="id">myFirstPreference</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs28', 61)" onmouseover="showTip(event, 'fs28', 61)" class="id">Preference</span> <span class="c">// should be 0</span>
+<span onmouseout="hideTip(event, 'fs31', 62)" onmouseover="showTip(event, 'fs31', 62)" class="id">myFirstPreference</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs27', 63)" onmouseover="showTip(event, 'fs27', 63)" class="id">Signal</span> <span class="c">// choose wisely</span>
+
+<span class="c">(*</span>
+<span class="c">Rather than an &quot;list of csv rows&quot;, we want a &quot;csv file&quot;.</span>
+
+<span class="c">Here&#39;s how we do that. We pass the SubmissionCsv.Rows contained</span>
+<span class="c">in the mySubmission array  to the</span>
+<span class="c">SubmissionCsv type constructor like so.</span>
+<span class="c">*)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs33', 64)" onmouseover="showTip(event, 'fs33', 64)" class="d">mySubmissionFile</span> <span class="o">=</span> <span class="k">new</span> <span onmouseout="hideTip(event, 'fs7', 65)" onmouseover="showTip(event, 'fs7', 65)" class="d">SubmissionCsv</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs29', 66)" onmouseover="showTip(event, 'fs29', 66)" class="id">mySubmission</span><span class="pn">)</span>
+</code></pre>
+<p>Ok, let's write the file. Remember that <code>__SOURCE_DIRECTORY__</code>
+is a magic variable that points to whatever folder this script file
+(aka the source code file) is contained in.</p>
+<p>So this will write a csv file in the current directory.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs34', 67)" onmouseover="showTip(event, 'fs34', 67)" class="id">fileName</span> <span class="o">=</span> <span class="s">$&quot;{</span><span onmouseout="hideTip(event, 'fs9', 68)" onmouseover="showTip(event, 'fs9', 68)" class="id">myStudentId</span><span class="s">}.csv&quot;</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs35', 69)" onmouseover="showTip(event, 'fs35', 69)" class="id">fullFilePath</span> <span class="o">=</span> <span class="k">__SOURCE_DIRECTORY__</span><span class="s">}/{</span><span onmouseout="hideTip(event, 'fs34', 70)" onmouseover="showTip(event, 'fs34', 70)" class="id">fileName</span><span class="s">}&quot;</span>
+
+<span onmouseout="hideTip(event, 'fs33', 71)" onmouseover="showTip(event, 'fs33', 71)" class="d">mySubmissionFile</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs36', 72)" onmouseover="showTip(event, 'fs36', 72)" class="id">Save</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs35', 73)" onmouseover="showTip(event, 'fs35', 73)" class="id">fullFilePath</span><span class="pn">)</span>
+</code></pre>
+<p>Now find that file and submit it. Also click on it in visual studio code;
+you should be able to see what the file looks like. It's just a text file with a .csv extension.</p>
+<p>and if you want to read the data back in from the file to see that it works:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs37', 74)" onmouseover="showTip(event, 'fs37', 74)" class="d">backIn</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs7', 75)" onmouseover="showTip(event, 'fs7', 75)" class="d">SubmissionCsv</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs38', 76)" onmouseover="showTip(event, 'fs38', 76)" class="id">Load</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs35', 77)" onmouseover="showTip(event, 'fs35', 77)" class="id">fullFilePath</span><span class="pn">)</span>
+
+<span onmouseout="hideTip(event, 'fs37', 78)" onmouseover="showTip(event, 'fs37', 78)" class="d">backIn</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs39', 79)" onmouseover="showTip(event, 'fs39', 79)" class="id">Rows</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs40', 80)" onmouseover="showTip(event, 'fs40', 80)" class="m">Seq</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs41', 81)" onmouseover="showTip(event, 'fs41', 81)" class="id">toList</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs13', 82)" onmouseover="showTip(event, 'fs13', 82)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs42', 83)" onmouseover="showTip(event, 'fs42', 83)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs43', 84)" onmouseover="showTip(event, 'fs43', 84)" class="fn">row</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs43', 85)" onmouseover="showTip(event, 'fs43', 85)" class="fn">row</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs28', 86)" onmouseover="showTip(event, 'fs28', 86)" class="id">Preference</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs43', 87)" onmouseover="showTip(event, 'fs43', 87)" class="fn">row</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs27', 88)" onmouseover="showTip(event, 'fs27', 88)" class="id">Signal</span><span class="pn">)</span>
+</code></pre>
+
+        <div class="fsdocs-tip" id="fs1">val signals: Set&lt;string&gt;</div>
+<div class="fsdocs-tip" id="fs2">val set: elements: &#39;T seq -&gt; Set&lt;&#39;T&gt; (requires comparison)</div>
+<div class="fsdocs-tip" id="fs3">Multiple items<br />namespace FSharp<br /><br />--------------------<br />namespace Microsoft.FSharp</div>
+<div class="fsdocs-tip" id="fs4">Multiple items<br />namespace FSharp.Data<br /><br />--------------------<br />namespace Microsoft.FSharp.Data</div>
+<div class="fsdocs-tip" id="fs5">Multiple items<br />type LiteralAttribute =
+  inherit Attribute
+  new: unit -&gt; LiteralAttribute<br /><br />--------------------<br />new: unit -&gt; LiteralAttribute</div>
+<div class="fsdocs-tip" id="fs6">[&lt;Literal&gt;]
+val submissionCsvSample: string = &quot;StudentId (int), Preference (int), Signal (string)&quot;</div>
+<div class="fsdocs-tip" id="fs7">type SubmissionCsv = CsvProvider&lt;...&gt;</div>
+<div class="fsdocs-tip" id="fs8">type CsvProvider<br /><em>&lt;summary&gt;Typed representation of a CSV file.&lt;/summary&gt;
+           &lt;param name=&#39;Sample&#39;&gt;Location of a CSV sample file or a string containing a sample CSV document.&lt;/param&gt;
+           &lt;param name=&#39;Separators&#39;&gt;Column delimiter(s). Defaults to &lt;c&gt;,&lt;/c&gt;.&lt;/param&gt;
+           &lt;param name=&#39;InferRows&#39;&gt;Number of rows to use for inference. Defaults to &lt;c&gt;1000&lt;/c&gt;. If this is zero, all rows are used.&lt;/param&gt;
+           &lt;param name=&#39;Schema&#39;&gt;Optional column types, in a comma separated list. Valid types are &lt;c&gt;int&lt;/c&gt;, &lt;c&gt;int64&lt;/c&gt;, &lt;c&gt;bool&lt;/c&gt;, &lt;c&gt;float&lt;/c&gt;, &lt;c&gt;decimal&lt;/c&gt;, &lt;c&gt;date&lt;/c&gt;, &lt;c&gt;datetimeoffset&lt;/c&gt;, &lt;c&gt;timespan&lt;/c&gt;, &lt;c&gt;guid&lt;/c&gt;, &lt;c&gt;string&lt;/c&gt;, &lt;c&gt;int?&lt;/c&gt;, &lt;c&gt;int64?&lt;/c&gt;, &lt;c&gt;bool?&lt;/c&gt;, &lt;c&gt;float?&lt;/c&gt;, &lt;c&gt;decimal?&lt;/c&gt;, &lt;c&gt;date?&lt;/c&gt;, &lt;c&gt;datetimeoffset?&lt;/c&gt;, &lt;c&gt;timespan?&lt;/c&gt;, &lt;c&gt;guid?&lt;/c&gt;, &lt;c&gt;int option&lt;/c&gt;, &lt;c&gt;int64 option&lt;/c&gt;, &lt;c&gt;bool option&lt;/c&gt;, &lt;c&gt;float option&lt;/c&gt;, &lt;c&gt;decimal option&lt;/c&gt;, &lt;c&gt;date option&lt;/c&gt;, &lt;c&gt;datetimeoffset option&lt;/c&gt;, &lt;c&gt;timespan option&lt;/c&gt;, &lt;c&gt;guid option&lt;/c&gt; and &lt;c&gt;string option&lt;/c&gt;.
+           You can also specify a unit and the name of the column like this: &lt;c&gt;Name (type&amp;lt;unit&amp;gt;)&lt;/c&gt;, or you can override only the name. If you don&#39;t want to specify all the columns, you can reference the columns by name like this: &lt;c&gt;ColumnName=type&lt;/c&gt;.&lt;/param&gt;
+           &lt;param name=&#39;HasHeaders&#39;&gt;Whether the sample contains the names of the columns as its first line.&lt;/param&gt;
+           &lt;param name=&#39;IgnoreErrors&#39;&gt;Whether to ignore rows that have the wrong number of columns or which can&#39;t be parsed using the inferred or specified schema. Otherwise an exception is thrown when these rows are encountered.&lt;/param&gt;
+           &lt;param name=&#39;SkipRows&#39;&gt;Skips the first n rows of the CSV file.&lt;/param&gt;
+           &lt;param name=&#39;AssumeMissingValues&#39;&gt;When set to true, the type provider will assume all columns can have missing values, even if in the provided sample all values are present. Defaults to false.&lt;/param&gt;
+           &lt;param name=&#39;PreferOptionals&#39;&gt;When set to true, inference will prefer to use the option type instead of nullable types, &lt;c&gt;double.NaN&lt;/c&gt; or &lt;c&gt;&quot;&quot;&lt;/c&gt; for missing values. Defaults to false.&lt;/param&gt;
+           &lt;param name=&#39;Quote&#39;&gt;The quotation mark (for surrounding values containing the delimiter). Defaults to &lt;c&gt;&quot;&lt;/c&gt;.&lt;/param&gt;
+           &lt;param name=&#39;MissingValues&#39;&gt;The set of strings recognized as missing values specified as a comma-separated string (e.g., &quot;NA,N/A&quot;). Defaults to &lt;c&gt;NaN,NA,N/A,#N/A,:,-,TBA,TBD&lt;/c&gt;.&lt;/param&gt;
+           &lt;param name=&#39;CacheRows&#39;&gt;Whether the rows should be caches so they can be iterated multiple times. Defaults to true. Disable for large datasets.&lt;/param&gt;
+           &lt;param name=&#39;Culture&#39;&gt;The culture used for parsing numbers and dates. Defaults to the invariant culture.&lt;/param&gt;
+           &lt;param name=&#39;Encoding&#39;&gt;The encoding used to read the sample. You can specify either the character set name or the codepage number. Defaults to UTF8 for files, and to ISO-8859-1 the for HTTP requests, unless &lt;c&gt;charset&lt;/c&gt; is specified in the &lt;c&gt;Content-Type&lt;/c&gt; response header.&lt;/param&gt;
+           &lt;param name=&#39;ResolutionFolder&#39;&gt;A directory that is used when resolving relative file references (at design time and in hosted execution).&lt;/param&gt;
+           &lt;param name=&#39;EmbeddedResource&#39;&gt;When specified, the type provider first attempts to load the sample from the specified resource 
+              (e.g. &#39;MyCompany.MyAssembly, resource_name.csv&#39;). This is useful when exposing types generated by the type provider.&lt;/param&gt;</em></div>
+<div class="fsdocs-tip" id="fs9">val myStudentId: int</div>
+<div class="fsdocs-tip" id="fs10">val failwith: message: string -&gt; &#39;T</div>
+<div class="fsdocs-tip" id="fs11">val myPreferences: string list</div>
+<div class="fsdocs-tip" id="fs12">val typos: string list</div>
+<div class="fsdocs-tip" id="fs13">Multiple items<br />module List
+
+from Microsoft.FSharp.Collections<br /><br />--------------------<br />type List&lt;&#39;T&gt; =
+  | op_Nil
+  | op_ColonColon of Head: &#39;T * Tail: &#39;T list
+  interface IReadOnlyList&lt;&#39;T&gt;
+  interface IReadOnlyCollection&lt;&#39;T&gt;
+  interface IEnumerable
+  interface IEnumerable&lt;&#39;T&gt;
+  member GetReverseIndex: rank: int * offset: int -&gt; int
+  member GetSlice: startIndex: int option * endIndex: int option -&gt; &#39;T list
+  static member Cons: head: &#39;T * tail: &#39;T list -&gt; &#39;T list
+  member Head: &#39;T
+  member IsEmpty: bool
+  member Item: index: int -&gt; &#39;T with get
+  ...</div>
+<div class="fsdocs-tip" id="fs14">val filter: predicate: (&#39;T -&gt; bool) -&gt; list: &#39;T list -&gt; &#39;T list</div>
+<div class="fsdocs-tip" id="fs15">val signal: string</div>
+<div class="fsdocs-tip" id="fs16">member Set.Contains: value: &#39;T -&gt; bool</div>
+<div class="fsdocs-tip" id="fs17">val isEmpty: list: &#39;T list -&gt; bool</div>
+<div class="fsdocs-tip" id="fs18">val typos: string</div>
+<div class="fsdocs-tip" id="fs19">module String
+
+from Microsoft.FSharp.Core</div>
+<div class="fsdocs-tip" id="fs20">val concat: sep: string -&gt; strings: string seq -&gt; string</div>
+<div class="fsdocs-tip" id="fs21">val printfn: format: Printf.TextWriterFormat&lt;&#39;T&gt; -&gt; &#39;T</div>
+<div class="fsdocs-tip" id="fs22">val rowCreator: i: int -&gt; signal: string -&gt; CsvProvider&lt;...&gt;.Row</div>
+<div class="fsdocs-tip" id="fs23">val i: int</div>
+<div class="fsdocs-tip" id="fs24">type Row =
+  inherit int * int * string
+  new: studentId: int * preference: int * signal: string -&gt; Row
+  member Preference: int
+  member Signal: string
+  member StudentId: int</div>
+<div class="fsdocs-tip" id="fs25">val test1: CsvProvider&lt;...&gt;.Row</div>
+<div class="fsdocs-tip" id="fs26">property CsvProvider&lt;...&gt;.Row.StudentId: int with get</div>
+<div class="fsdocs-tip" id="fs27">property CsvProvider&lt;...&gt;.Row.Signal: string with get</div>
+<div class="fsdocs-tip" id="fs28">property CsvProvider&lt;...&gt;.Row.Preference: int with get</div>
+<div class="fsdocs-tip" id="fs29">val mySubmission: CsvProvider&lt;...&gt;.Row list</div>
+<div class="fsdocs-tip" id="fs30">val mapi: mapping: (int -&gt; &#39;T -&gt; &#39;U) -&gt; list: &#39;T list -&gt; &#39;U list</div>
+<div class="fsdocs-tip" id="fs31">val myFirstPreference: CsvProvider&lt;...&gt;.Row</div>
+<div class="fsdocs-tip" id="fs32">val head: list: &#39;T list -&gt; &#39;T</div>
+<div class="fsdocs-tip" id="fs33">val mySubmissionFile: SubmissionCsv</div>
+<div class="fsdocs-tip" id="fs34">val fileName: string</div>
+<div class="fsdocs-tip" id="fs35">val fullFilePath: string</div>
+<div class="fsdocs-tip" id="fs36">member Runtime.CsvFile.Save: path: string * [&lt;System.Runtime.InteropServices.Optional&gt;] ?separator: char * [&lt;System.Runtime.InteropServices.Optional&gt;] ?quote: char -&gt; unit<br />member Runtime.CsvFile.Save: stream: System.IO.Stream * [&lt;System.Runtime.InteropServices.Optional&gt;] ?separator: char * [&lt;System.Runtime.InteropServices.Optional&gt;] ?quote: char -&gt; unit<br />member Runtime.CsvFile.Save: writer: System.IO.TextWriter * [&lt;System.Runtime.InteropServices.Optional&gt;] ?separator: char * [&lt;System.Runtime.InteropServices.Optional&gt;] ?quote: char -&gt; unit</div>
+<div class="fsdocs-tip" id="fs37">val backIn: CsvProvider&lt;...&gt;</div>
+<div class="fsdocs-tip" id="fs38">CsvProvider&lt;...&gt;.Load(uri: string) : CsvProvider&lt;...&gt;<br /><em>Loads CSV from the specified uri</em><br />CsvProvider&lt;...&gt;.Load(reader: System.IO.TextReader) : CsvProvider&lt;...&gt;<br /><em>Loads CSV from the specified reader</em><br />CsvProvider&lt;...&gt;.Load(stream: System.IO.Stream) : CsvProvider&lt;...&gt;<br /><em>Loads CSV from the specified stream</em></div>
+<div class="fsdocs-tip" id="fs39">property Runtime.CsvFile.Rows: CsvProvider&lt;...&gt;.Row seq with get<br /><em>&lt;summary&gt;
+ The rows with data
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs40">module Seq
+
+from Microsoft.FSharp.Collections</div>
+<div class="fsdocs-tip" id="fs41">val toList: source: &#39;T seq -&gt; &#39;T list</div>
+<div class="fsdocs-tip" id="fs42">val map: mapping: (&#39;T -&gt; &#39;U) -&gt; list: &#39;T list -&gt; &#39;U list</div>
+<div class="fsdocs-tip" id="fs43">val row: CsvProvider&lt;...&gt;.Row</div>
+
+    </div>
+</main>
+<aside id="fsdocs-page-menu">
+    <p id="on-this-page">On this page</p>
+    <ul>
+  <li class="level-1">
+    <a href="#Submitting-your-trading-signal-preferences">
+      Submitting your trading signal preferences.
+    </a>
+  </li>
+</ul>
+</aside>
+<dialog>
+    <input type="search" placeholder="Search docs" />
+    <div class="results">
+        <ul></ul>
+        <p class="empty">Type something to start searching.</p>
+    </div>
+</dialog>
+<script type="module" src="/Teaching/content/fsdocs-tips.js"></script>
+<script type="module" src="/Teaching/content/fsdocs-theme-toggle.js"></script>
+<script type="module" src="/Teaching/content/fsdocs-theme.js"></script>
+<script type="module" src="/Teaching/content/fsdocs-search.js"></script>
+
+</body>
+</html>

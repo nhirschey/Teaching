@@ -32,7 +32,7 @@ Environment.CurrentDirectory <- __SOURCE_DIRECTORY__
 
 
 (** Download the excel file from Robert Shiller's website to your current directory. *)
-download "http://www.econ.yale.edu/~shiller/data/ie_data.xls" "shiller_data.xls"
+download "https://img1.wsimg.com/blobby/go/e5e77e0b-59d1-44d9-ab25-4763ac982e53/downloads/dd6fb698-96e0-4cd2-ad91-61447f7087e2/ie_data.xls" "shiller_data.xls"
 
 (** Now loading the excel data.*)
 
